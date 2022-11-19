@@ -8,7 +8,8 @@ Each PR will:
   2. Include a title that provides a one sentence overview of the purpose of the
      PR. Abbreviations can be used when necessary.
   3. Follow the template regardless of the nature of the PR.
-  4. Be reviewed and approved by someone other than the author.
+  4. Be made against the dev branch for first time contributors and breaking changes.
+  5. Be reviewed and approved by someone other than the author.
 
 PRs that contain "low effort" changes **ONLY** such as spelling fixes, code comment additions/edits and formatting will not be accepted.  
 Finally, PRs should be atomic. That is, they should address only one item (task, feature, bug).
@@ -17,7 +18,7 @@ Finally, PRs should be atomic. That is, they should address only one item (task,
 
 Below are some general guidelines on how merging should be handled by the Amper Software development team.
 
-First, a PR should not be merged to main if any of the following apply:
+First, a PR should not be merged to main/dev if any of the following apply:
   * A broken build which breaks the gamemode completely.
   * Comments asking for clarification that have not been addressed.
   * An explicit request to not merge by one of the developers.
