@@ -11,15 +11,12 @@ namespace TFS2.UI;
 partial class TeamFlagDisplay : Panel
 {
 	Dictionary<Flag, TeamFlagCompass> Flags { get; set; } = new();
-
 	Panel ZoneCompassContainer { get; set; }
 	Panel FlagCompassContainer { get; set; }
 	Label Limit { get; set; }
 	Label ScoreBlue { get; set; }
 	Label ScoreRed { get; set; }
-
 	TeamFlagCompass ZoneCompass { get; set; }
-
 	bool IsOutlineShown { get; set; }
 	TimeSince TimeSinceZoneSetup { get; set; }
 
@@ -27,69 +24,57 @@ partial class TeamFlagDisplay : Panel
 	{
 		SetClass( "visible", ShouldDraw() );
 
-		if ( IsVisible )
+		if ( !IsVisible )
+			return;
+
+		TFGameRules.Current.FlagCaptures.TryGetValue( TFTeam.Red, out int redScore );
+		ScoreRed.Text = redScore.ToString();
+
+		TFGameRules.Current.FlagCaptures.TryGetValue( TFTeam.Blue, out int blueScore );
+		ScoreBlue.Text = blueScore.ToString();
+
+		Limit.Text = $"Playing to: {TFGameRules.tf_flag_caps_per_round}";
+
+		var allFlags = Entity.All.OfType<Flag>();
+		var ourFlags = Flags.Keys;
+
+		foreach ( var item in allFlags.Except( ourFlags ) ) AddFlag( item );
+		foreach ( var item in ourFlags.Except( allFlags ) ) RemoveFlag( item );
+
+		// Local Flag
+		var hasFlag = TryGetLocalPlayerPickedFlag( out var flag );
+		if ( hasFlag )
 		{
-			int redScore;
-			TFGameRules.Current.FlagCaptures.TryGetValue( TFTeam.Red, out redScore );
-			ScoreRed.Text = redScore.ToString();
-
-			int blueScore;
-			TFGameRules.Current.FlagCaptures.TryGetValue( TFTeam.Blue, out blueScore );
-			ScoreBlue.Text = blueScore.ToString();
-
-			Limit.Text = $"Playing to: {TFGameRules.tf_flag_caps_per_round}";
-
-			var allFlags = Entity.All.OfType<Flag>();
-			var ourFlags = Flags.Keys;
-
-			foreach ( var item in allFlags.Except( ourFlags ) ) AddFlag( item );
-			foreach ( var item in ourFlags.Except( allFlags ) ) RemoveFlag( item );
-
-
-			//
-			// Local Flag
-			//
-
-			var hasFlag = TryGetLocalPlayerPickedFlag( out var flag );
-			if ( hasFlag )
-			{
-				var sameFlag = ZoneCompass != null && ZoneCompass.Target != flag;
-				if ( !sameFlag )
-				{
-					SetupZoneCompass( flag );
-				}
-			} else
-			{
-				if ( ZoneCompass != null )
-				{
-					DestroyZoneCompass();
-				}
-			}
-
-			//
-			// Outline
-			//
-
-			if ( TimeSinceZoneSetup >= 2 && IsOutlineShown )
-			{
-				SetClass( "show_outline", false );
-				IsOutlineShown = false;
-			} else if( TimeSinceZoneSetup < 2 && !IsOutlineShown )
-			{
-				SetClass( "show_outline", true );
-				IsOutlineShown = true;
-			}
-
-			SetClass( "has_flag", hasFlag );
+			var sameFlag = ZoneCompass != null && ZoneCompass.Target != flag;
+			if ( !sameFlag )
+				SetupZoneCompass( flag );
 		}
+		else
+		{
+			if ( ZoneCompass != null )
+				DestroyZoneCompass();
+		}
+
+		// Outline
+		if ( TimeSinceZoneSetup >= 2 && IsOutlineShown )
+		{
+			SetClass( "show_outline", false );
+			IsOutlineShown = false;
+		}
+		else if ( TimeSinceZoneSetup < 2 && !IsOutlineShown )
+		{
+			SetClass( "show_outline", true );
+			IsOutlineShown = true;
+		}
+
+		SetClass( "has_flag", hasFlag );
 	}
 
 	public bool TryGetLocalPlayerPickedFlag( out Flag flag )
 	{
 		if ( Local.Pawn is TFPlayer player )
 		{
-			var ent = player.PickedItem as Flag;
-			if ( ent != null ) 
+			if ( player.PickedItem is Flag ent )
 			{
 				flag = ent;
 				return true;
@@ -103,7 +88,6 @@ partial class TeamFlagDisplay : Panel
 	public void SetupZoneCompass( Flag flag )
 	{
 		DestroyZoneCompass();
-
 		SetClass( "has_flag_red", flag.Team == TFTeam.Red );
 		SetClass( "has_flag_blue", flag.Team == TFTeam.Blue );
 
@@ -155,30 +139,30 @@ partial class TeamFlagDisplay : Panel
 
 	public void Reorder()
 	{
-		FlagCompassContainer.SortChildren( ( Panel x, Panel y ) => {
-			var x1 = x as TeamFlagCompass;
-			var y1 = y as TeamFlagCompass;
+		FlagCompassContainer.SortChildren( ( Panel x, Panel y ) =>
+		{
+			if ( x is not TeamFlagCompass x1 || y is not TeamFlagCompass y1 )
+				return 0;
 
-			if ( x1 == null || y1 == null ) return 0;
-			if ( x1.Team == y1.Team ) return 0;
+			if ( x1.Team == y1.Team )
+				return 0;
 
 			var sX = -1;
 			var sY = -1;
 
 			// blue gray red
-			switch ( x1.Team )
+			sX = x1.Team switch
 			{
-				case TFTeam.Blue: sX = 0; break;
-				case TFTeam.Red: sX = 2; break;
-				default: sX = 1; break;
-			}
-
-			switch ( y1.Team )
+				TFTeam.Blue => 0,
+				TFTeam.Red => 2,
+				_ => 1,
+			};
+			sY = y1.Team switch
 			{
-				case TFTeam.Blue: sY = 0; break;
-				case TFTeam.Red: sY = 2; break;
-				default: sY = 1; break;
-			}
+				TFTeam.Blue => 0,
+				TFTeam.Red => 2,
+				_ => 1,
+			};
 
 			int diff = sY - sX;
 			var r = diff / Math.Abs( diff );
@@ -190,10 +174,8 @@ partial class TeamFlagDisplay : Panel
 partial class TeamFlagCompass : Panel
 {
 	public Entity Target { get; set; }
-
 	Flag Flag => Target as Flag;
 	public TFTeam Team => (TFTeam)((ITeam)Target).TeamNumber;
-
 	Panel Compass { get; set; }
 	Panel Briefcase { get; set; }
 	Panel Status { get; set; }
@@ -203,7 +185,6 @@ partial class TeamFlagCompass : Panel
 	{
 		BindClass( "red", () => Team == TFTeam.Red );
 		BindClass( "blue", () => Team == TFTeam.Blue );
-
 		BindClass( "hide_briefcase", () => Target is FlagCaptureZone );
 
 		Compass = Add.Panel( "compass" );
@@ -213,8 +194,11 @@ partial class TeamFlagCompass : Panel
 
 	public override void Tick()
 	{
-		if ( !IsVisible ) return;
-		if ( Local.Pawn is not TFPlayer pawn ) return;
+		if ( !IsVisible )
+			return;
+
+		if ( Local.Pawn is not TFPlayer pawn )
+			return;
 
 		// rotation
 		var vecFromEyes = pawn.EyeRotation.Forward.WithZ( 0 ).Normal;
@@ -226,10 +210,7 @@ partial class TeamFlagCompass : Panel
 		var deg = (radToOrigin - radFromEyes).RadianToDegree();
 		Compass.Style.Set( "transform", $"rotate({deg}deg)" );
 
-		//
 		// Flag
-		//
-
 		Status.SetClass( "home", Flag?.State == Flag.FlagState.Home );
 		Status.SetClass( "carried", Flag?.State == Flag.FlagState.Carried );
 		Status.SetClass( "dropped", Flag?.State == Flag.FlagState.Dropped );

@@ -16,7 +16,6 @@ public partial class ObjectivesStatus : Panel
 	{
 		if ( SDKGame.Current.State == GameState.RoundEnd ) return false;
 		if ( Input.Down( InputButton.Score ) ) return false;
-
 		return true;
 	}
 }

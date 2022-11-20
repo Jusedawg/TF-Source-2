@@ -15,16 +15,14 @@ public class DamageIndicators : Panel
 
 	public void OnHurt( PlayerHurtEvent args )
 	{
-		if ( args.Victim != Local.Client ) 
+		if ( args.Victim != Local.Client )
 			return;
-		
+
 		// If local client is not alive
 		if ( !Local.Client.IsAlive() )
 			return;
 
-		var direction = (args.Position - Local.Pawn.EyePosition).Normal;
-		var entry = new DamageIndicatorEntry( direction, args.Damage );
-		AddChild( entry );
+		AddChild( new DamageIndicatorEntry( (args.Position - Local.Pawn.EyePosition).Normal, args.Damage ) );
 	}
 }
 
@@ -32,7 +30,6 @@ public class DamageIndicatorEntry : Panel
 {
 	Vector3 Offset { get; set; }
 	float Damage { get; set; }
-
 	TimeSince TimeSinceCreated { get; set; }
 	float Deviation { get; set; }
 
@@ -44,8 +41,7 @@ public class DamageIndicatorEntry : Panel
 
 	public override void Tick()
 	{
-		var pawn = Local.Pawn as TFPlayer;
-		if ( pawn == null ) return;
+		if ( Local.Pawn is not TFPlayer pawn ) return;
 
 		float time = TimeSinceCreated;
 		var origin = pawn.EyePosition + Offset;

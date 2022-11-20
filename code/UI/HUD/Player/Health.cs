@@ -20,8 +20,8 @@ public class Health : Panel
 
 	public override void Tick()
 	{
-		var player = TFPlayer.LocalPlayer;
-		if ( !player.IsValid() ) return;
+		if ( !TFPlayer.LocalPlayer.IsValid() )
+			return;
 
 		SetClass( "hidden", !ShouldDraw() );
 	}
@@ -40,7 +40,8 @@ public class Health : Panel
 
 	public void OnRegenerate( PlayerRegenerateEvent args )
 	{
-		if ( args.Client != Local.Client ) return;
+		if ( args.Client != Local.Client )
+			return;
 
 		SetupClassPreview();
 	}
@@ -48,14 +49,15 @@ public class Health : Panel
 	public void SetupClassPreview()
 	{
 		var player = TFPlayer.LocalPlayer;
-		if ( player == null ) return;
+		if ( player == null )
+			return;
 
-		var pClass = player.PlayerClass;
-		if ( pClass.IsValid() )
+		var playerClass = player.PlayerClass;
+		if ( playerClass.IsValid() )
 		{
 			var classIcon = player.Team == TFTeam.Blue
-				? pClass.IconBlue
-				: pClass.IconRed;
+				? playerClass.IconBlue
+				: playerClass.IconRed;
 
 			PlayerClassIcon.Style.SetBackgroundImage( Util.JPGToPNG( classIcon ) );
 		}

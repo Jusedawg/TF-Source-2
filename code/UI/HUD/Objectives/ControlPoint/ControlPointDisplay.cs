@@ -9,7 +9,6 @@ namespace TFS2.UI;
 partial class ControlPointDisplay : Panel
 {
 	Dictionary<ControlPoint, ControlPointDisplayEntry> Points { get; set; } = new();
-
 	TimeSince TimeSinceSort { get; set; }
 
 	public override void Tick()
@@ -52,11 +51,8 @@ partial class ControlPointDisplay : Panel
 		var order = TFGameRules.Current.GetControlPointRouteForTeam( TFTeam.Blue ).ToList();
 
 		SortChildren( ( x, y ) => {
-			var x1 = x as ControlPointDisplayEntry;
-			var y1 = y as ControlPointDisplayEntry;
-
 			// If either of the panels are null, dont sort this.
-			if ( x1 == null || y1 == null ) 
+			if ( x is not ControlPointDisplayEntry x1 || y is not ControlPointDisplayEntry y1 )
 				return 0;
 
 			var pointX = x1.Point;

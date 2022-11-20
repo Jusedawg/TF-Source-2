@@ -8,7 +8,6 @@ namespace TFS2.UI;
 partial class ControlPointDisplayEntry : Panel
 {
 	public ControlPoint Point { get; set; }
-
 	Label CappersCount { get; set; }
 	Label Timer { get; set; }
 	Panel ProgressArrow { get; set; }
@@ -22,13 +21,14 @@ partial class ControlPointDisplayEntry : Panel
 	{
 		foreach ( TFTeam team in Enum.GetValues( typeof( TFTeam ) ) )
 		{
-			if ( !team.IsPlayable() ) continue;
-			if ( team == Point.OwnerTeam ) continue;
+			if ( !team.IsPlayable() )
+				continue;
+
+			if ( team == Point.OwnerTeam )
+				continue;
 
 			if ( TFGameRules.Current.TeamMayCapturePoint( team, Point ) )
-			{
 				return false;
-			}
 		}
 
 		return true;
@@ -36,12 +36,12 @@ partial class ControlPointDisplayEntry : Panel
 
 	public Vector2 GetArrowDirectionForTeam( TFTeam team )
 	{
-		switch(team)
+		return team switch
 		{
-			case TFTeam.Red: return Vector2.Left;
-			case TFTeam.Blue: return Vector2.Right;
-			default: return Vector2.Zero;
-		}
+			TFTeam.Red => Vector2.Left,
+			TFTeam.Blue => Vector2.Right,
+			_ => Vector2.Zero,
+		};
 	}
 
 	bool IsPulsing { get; set; }
@@ -54,7 +54,6 @@ partial class ControlPointDisplayEntry : Panel
 	{
 		IsPulsing = true;
 		TimeSincePulseStart = 0;
-
 		PulseTime = time;
 		HalfPulseTime = time / 2;
 	}
@@ -66,8 +65,8 @@ partial class ControlPointDisplayEntry : Panel
 		var iPlayerTeam = player.Team;
 		var bCapBlocked = Point.Blocked;
 
-		PointerMessage.Text = GetPointerText( player ); 
-		
+		PointerMessage.Text = GetPointerText( player );
+
 		if ( !bCapBlocked && iCappingTeam != TFTeam.Unassigned && iCappingTeam != iOwnerTeam && iCappingTeam == iPlayerTeam )
 		{
 			CapperProgressPanel.SetClass( "red", iCappingTeam == TFTeam.Red );
@@ -118,14 +117,14 @@ partial class ControlPointDisplayEntry : Panel
 			if ( playerTeam != TFTeam.Unassigned )
 			{
 				var iEnemyTeam = (playerTeam == TFTeam.Red) ? TFTeam.Blue : TFTeam.Red;
-				if ( !TFGameRules.Current.TeamMayCapturePoint( iEnemyTeam, Point ) ) 
+				if ( !TFGameRules.Current.TeamMayCapturePoint( iEnemyTeam, Point ) )
 					return "Capture Point already owned.";
 			}
 
 			return "Defend this point!";
 		}
 
-		if ( !TFGameRules.Current.TeamMayCapturePoint( playerTeam, Point ) ) 
+		if ( !TFGameRules.Current.TeamMayCapturePoint( playerTeam, Point ) )
 			return "Preceding point not owned!";
 
 		return "";
@@ -133,9 +132,10 @@ partial class ControlPointDisplayEntry : Panel
 
 	public override void Tick()
 	{
-		if ( !IsVisible ) return;
+		if ( !IsVisible )
+			return;
 
-		if ( Local.Pawn is TFPlayer player ) 
+		if ( Local.Pawn is TFPlayer player )
 		{
 			var isPointerVisible = player.ControlPoint == Point;
 			SetClass( "show_pointer", isPointerVisible );
@@ -147,48 +147,42 @@ partial class ControlPointDisplayEntry : Panel
 		// Timer
 		//
 		var showTimer = false;
-		if( Point.IsBeingUnlocked )
+		if ( Point.IsBeingUnlocked )
 		{
 			var seconds = (Point.UnlockTime - Time.Now).CeilToInt();
 			showTimer = seconds > 0;
 
 			if ( showTimer )
-			{
 				Timer.Text = seconds.ToString();
-			}
 		}
 		SetClass( "show_timer", showTimer );
 
 		//
 		// Lock
 		//
-		var showLock = IsPointLocked() && !Point.IsBeingUnlocked;
-		SetClass( "is_locked", showLock );
+		SetClass( "is_locked", IsPointLocked() && !Point.IsBeingUnlocked );
 
 		//
 		// Team color
 		//
-
 		SetClass( "red", Point.OwnerTeam == TFTeam.Red );
 		SetClass( "blue", Point.OwnerTeam == TFTeam.Blue );
 
 		//
 		// Players in area count
 		//
-
 		var capteam = Point.CapturingTeam;
 		int players = Point.GetNumberPlayersInArea( capteam );
 
 		SetClass( "has_cappers", players > 0 );
 		SetClass( "has_multiple_cappers", players > 1 );
 
-		// update if we have players in area
+		// Update if we have players in area
 		if ( players > 0 ) CappersCount.Text = players.ToString();
 
 		//
-		// Progress arrow
+		// Progress Arrow
 		//
-
 		var isCapped = Point.IsBeingCaptured;
 		SetClass( "is_capping", isCapped );
 		if ( isCapped )
@@ -216,24 +210,17 @@ partial class ControlPointDisplayEntry : Panel
 		//
 		// Pulsing 
 		//
-
 		if ( IsPulsing )
 		{
 			float opacity = 0;
 			float time = TimeSincePulseStart;
 
 			if ( time <= HalfPulseTime )
-			{
-				opacity = time.LerpInverse( 0, HalfPulseTime );
-			}
+				opacity = time.LerpInverse(0, HalfPulseTime);
 			else if ( time <= PulseTime )
-			{
 				opacity = 1 - time.LerpInverse( HalfPulseTime, PulseTime );
-			}
 			else
-			{
 				IsPulsing = false;
-			}
 
 			Pulser.Style.Opacity = opacity;
 		}

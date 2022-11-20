@@ -22,13 +22,13 @@ public class ClassSelection : MenuOverlay
 		StyleSheet.Load( "/UI/HUD/Server/ClassSelection.scss" );
 		BackgroundScene = AddChild<ClassSelectionBackgroundScene>();
 		BackgroundMusic = Sound.FromScreen( "music.class_menu.background" );
+
 		PlayerScene = AddChild<ClassSelectionPlayerModel>();
 		PreviewClass( player.PlayerClass ?? PlayerClass.Get( TFPlayerClass.Heavy ) );
-		
-		var footer = Add.Panel( "footer menu" );
 		BackgroundScene.Camera.EnablePostProcessing = false;
 		PlayerScene.Camera.EnablePostProcessing = false;
 
+		var footer = Add.Panel( "footer menu" );
 		footer.Add.Label( "SELECT A CLASS", "title" );
 		footer.Add.ButtonWithIcon( "Edit Loadout", "inventory", "button-dark disabled", HandleCancelClick );
 
@@ -51,7 +51,8 @@ public class ClassSelection : MenuOverlay
 
 	public void OnSelectedPlayerClass( PlayerClass playerClass )
 	{
-		if ( SelectedClass == playerClass ) return;
+		if ( SelectedClass == playerClass )
+			return;
 
 		if ( playerClass == null )
 		{
@@ -59,9 +60,7 @@ public class ClassSelection : MenuOverlay
 			Sound.FromScreen( "ui.button.click" );
 		}
 		else
-		{
 			PlayNote( (int)playerClass.Entry + 1 );
-		}
 
 		PreviewClass( playerClass );
 		SelectedClass = playerClass;
@@ -103,7 +102,6 @@ public class ClassSelectionBackgroundScene : ScenePanel
 		var position = new Vector3( 390, 0, -39 );
 		var rotation = Rotation.From( 0, 180, 0 );
 		var transform = new Transform( position, rotation );
-
 		new SceneModel( World, "models/vgui/ui_class01.vmdl", transform );
 
 		//
@@ -118,13 +116,13 @@ public class ClassSelectionBackgroundScene : ScenePanel
 				// Undefined class is random class. Always add it in the end.
 				if ( value == TFPlayerClass.Undefined ) continue;
 
-				var pclass = PlayerClass.Get( value );
-				if ( pclass == null ) continue;
+				var playerClass = PlayerClass.Get( value );
+				if ( playerClass == null ) continue;
 
 				new ClassSelectionButton
 				{
-					PlayerClass = pclass,
-					Classes = $"class {pclass.ResourceName} {team}",
+					PlayerClass = playerClass,
+					Classes = $"class {playerClass.ResourceName} {team}",
 					Parent = this
 				};
 			}
@@ -132,7 +130,6 @@ public class ClassSelectionBackgroundScene : ScenePanel
 			//
 			// Random class.
 			//
-
 			new ClassSelectionButton
 			{
 				Classes = $"class random {team}",
@@ -299,16 +296,15 @@ public class ClassSelectionButton : Label
 	public void Input( InputBuilder input )
 	{
 		if ( input.Pressed( GetShortcutButton() ) )
-		{
 			HandleClick();
-		}
 	}
 
 	protected override void OnMouseOver( MousePanelEvent e )
 	{
 		base.OnMouseOver( e );
 
-		if ( Parent.Parent is not ClassSelection panel ) return;
+		if ( Parent.Parent is not ClassSelection panel )
+			return;
 
 		panel.OnSelectedPlayerClass( PlayerClass );
 	}
@@ -318,11 +314,8 @@ public class ClassSelectionButton : Label
 		Sound.FromScreen( "ui.button.click" );
 
 		if ( PlayerClass == null )
-		{
-			// just pick a random class
-			var name = Rand.FromList( PlayerClass.All.Select( kv => kv.Key ).ToList() );
-			ConsoleSystem.Run( "tf_join_class", name );
-		}
+			// Pick a random class
+			ConsoleSystem.Run( "tf_join_class", Rand.FromList( PlayerClass.All.Select( kv => kv.Key ).ToList() ) );
 		else
 			ConsoleSystem.Run( "tf_join_class", PlayerClass.ResourceName );
 

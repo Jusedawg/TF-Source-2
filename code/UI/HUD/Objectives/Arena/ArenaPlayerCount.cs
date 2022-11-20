@@ -13,10 +13,11 @@ internal partial class ArenaPlayerCount : Panel
 	public override void Tick()
 	{
 		SetClass( "visible", ShouldDraw() );
-		if ( !IsVisible ) return;
+
+		if ( !IsVisible )
+			return;
 
 		var players = Entity.All.OfType<TFPlayer>().Where( x => x.IsAlive );
-
 		RedCount.Text = players.Where( x => x.Team == TFTeam.Red ).Count().ToString();
 		BlueCount.Text = players.Where( x => x.Team == TFTeam.Blue ).Count().ToString();
 

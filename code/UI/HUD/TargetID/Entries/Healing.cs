@@ -33,9 +33,9 @@ public partial class TargetIDHealing : TargetID
 
 		// Check if we are healed by any medic
 		var healingMediguns = player.Healers.Keys.OfType<Medigun>();
-		// getting medigun that has the most charge
-		var medigunWithMostCharge = healingMediguns.OrderByDescending( x => x.ChargeLevel ).FirstOrDefault();
 
+		// Getting medigun that has the most charge
+		var medigunWithMostCharge = healingMediguns.OrderByDescending( x => x.ChargeLevel ).FirstOrDefault();
 		if ( medigunWithMostCharge.IsValid() )
 		{
 			if ( medigunWithMostCharge.Owner is ITargetID healingMedic )

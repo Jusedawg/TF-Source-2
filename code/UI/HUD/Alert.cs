@@ -11,7 +11,6 @@ partial class Alert : Panel
 
 	Label Text { get; set; }
 	Image ImagePanel { get; set; }
-
 	TimeSince TimeSinceAppeared { get; set; }
 	float ShowTime { get; set; }
 
@@ -23,13 +22,14 @@ partial class Alert : Panel
 	public override void Tick()
 	{
 		base.Tick();
-
 		SetClass( "visible", ShouldDraw() );
 	}
 
 	public bool ShouldDraw()
 	{
-		if ( SDKGame.Current.State == GameState.RoundEnd ) return false;
+		if ( SDKGame.Current.State == GameState.RoundEnd )
+			return false;
+
 		return TimeSinceAppeared < ShowTime;
 	}
 
@@ -37,7 +37,6 @@ partial class Alert : Panel
 	{
 		TimeSinceAppeared = 0;
 		ShowTime = time;
-
 		Text.Text = message;
 		ImagePanel.SetTexture( icon );
 
@@ -45,9 +44,7 @@ partial class Alert : Panel
 		if ( team == TFTeam.Unassigned )
 		{
 			if ( Local.Pawn is TFPlayer player )
-			{
 				team = player.Team;
-			}
 		}
 
 		SetClass( "red", team == TFTeam.Red );

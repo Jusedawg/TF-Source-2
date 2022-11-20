@@ -10,7 +10,6 @@ using Amper.FPS;
 // TODO: Redo the scoreboard entirely.
 // Current implementation is rushed and can be done a lot better.
 //
-
 namespace TFS2.UI;
 
 [UseTemplate]
@@ -141,13 +140,13 @@ public partial class Scoreboard : Panel
 			return;
 
 		var team = player.Team;
-		var pclass = player.PlayerClass;
+		var playerClass = player.PlayerClass;
 
 		PlayerName.Text = Local.DisplayName;
 		PlayerName.Style.Set( "color", team == TFTeam.Red ? "#ea5251" : "#9ccbf5" );
 
-		if ( pclass != null )
-			ClassImage.SetTexture( $"/ui/hud/class/{pclass.ResourceName}_{team}.png" );
+		if ( playerClass != null )
+			ClassImage.SetTexture( $"/ui/hud/class/{playerClass.ResourceName}_{team}.png" );
 	}
 
 	/// <summary>
@@ -185,7 +184,6 @@ public partial class Scoreboard : Panel
 public class ScoreboardPlayerEntry : Panel
 {
 	public Client Client { get; set; }
-
 	private TimeSince TimeSinceUpdate { get; set; }
 	private Image Avatar { get; set; }
 	private Label Name { get; set; }
@@ -209,7 +207,6 @@ public class ScoreboardPlayerEntry : Panel
 		Avatar.SetTexture( $"avatar:{Client.PlayerId}" );
 		Name.Text = Client.Name;
 		Ping.Text = $"{Client.Ping}";
-
 		TimeSinceUpdate = 0;
 	}
 }

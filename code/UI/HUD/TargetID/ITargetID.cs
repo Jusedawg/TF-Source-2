@@ -6,7 +6,6 @@ public interface ITargetID : IValid
 {
 	public string Name { get; }
 	public string Avatar { get; }
-
 	public TFTeam Team { get; }
 	public Entity Entity => this as Entity;
 }

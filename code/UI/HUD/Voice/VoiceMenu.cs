@@ -2,7 +2,6 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace TFS2;
@@ -23,7 +22,7 @@ public partial class VoiceMenu : Panel
 			( TFResponseConcept.VoiceGo,                "Go Go Go!" ),
 			( TFResponseConcept.VoiceMoveUp,            "Move Up!" ),
 			( TFResponseConcept.VoiceGoLeft,            "Go Left" ),
-			( TFResponseConcept.VoiceGoRight,			"Go Right" ),
+			( TFResponseConcept.VoiceGoRight,           "Go Right" ),
 			( TFResponseConcept.VoiceYes,               "Yes" ),
 			( TFResponseConcept.VoiceNo,                "No" )
 		},
@@ -67,7 +66,6 @@ public partial class VoiceMenu : Panel
 	};
 
 	Panel PageContainer { get; set; }
-
 	bool Shown;
 	int ActivePage;
 	public float? AutoDismissTime;
@@ -89,7 +87,6 @@ public partial class VoiceMenu : Panel
 				j++;
 				var concept = pair.Item1;
 				var name = pair.Item2;
-
 				pagePanel.Add.Label( $"{j}. {name}", "option" );
 			}
 
@@ -185,9 +182,8 @@ public partial class VoiceMenu : Panel
 		if ( !Shown )
 			return;
 
-		// If we've pressed Slot0 close the menu right away,
-		// this button means cancel.
-		if ( builder.Pressed( InputButton.Slot0 ) ) 
+		// If we've pressed Slot0 close the menu right away, this button means cancel.
+		if ( builder.Pressed( InputButton.Slot0 ) )
 		{
 			builder.SuppressButton( InputButton.Slot0 );
 			Close();
@@ -212,9 +208,7 @@ public partial class VoiceMenu : Panel
 		if ( !SlotButtons.TryGetValue( button, out var index ) )
 			return;
 
-		var activeMenu = ActivePage;
-
-		ConsoleSystem.Run( "voicemenu", activeMenu, index );
+		ConsoleSystem.Run( "voicemenu", ActivePage, index );
 		Close();
 	}
 

@@ -7,8 +7,8 @@ namespace TFS2.UI;
 [UseTemplate]
 partial class Ubercharge : Panel
 {
-	public Label UberLabel { get; set; }
-	public Panel Bar { get; set; }
+	Label UberLabel { get; set; }
+	Panel Bar { get; set; }
 	TimeSince TimeSinceFlashCycle { get; set; }
 
 	public Ubercharge()
@@ -27,8 +27,7 @@ partial class Ubercharge : Panel
 		if ( !IsVisible )
 			return;
 
-		var medigun = player.ActiveWeapon as Medigun;
-		if ( medigun == null )
+		if ( player.ActiveWeapon is not Medigun medigun )
 			return;
 
 		UberLabel.Text = $"ÜberCharge: {MathF.Floor( medigun.ChargeLevel * 100 )}%";

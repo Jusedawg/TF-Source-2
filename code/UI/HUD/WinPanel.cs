@@ -12,13 +12,10 @@ partial class WinPanel : Panel
 {
 	Label ScoreBlue { get; set; }
 	Label ScoreRed { get; set; }
-
 	Label WinnerName { get; set; }
 	Label WinReason { get; set; }
 	Label LastCapper { get; set; }
-
 	Panel Players { get; set; }
-
 	TimeSince TimeSinceSetup { get; set; }
 	bool WillScoreAnimate { get; set; }
 
@@ -29,9 +26,7 @@ partial class WinPanel : Panel
 		if ( !IsVisible )
 		{
 			if ( shouldDraw )
-			{
 				SetupWinPanel();
-			}
 		}
 		else
 		{
@@ -41,7 +36,7 @@ partial class WinPanel : Panel
 				{
 					Sound.FromScreen( "ui.scored" );
 					WillScoreAnimate = false;
-					
+
 					ScoreRed.Text = GetTeamScore( TFTeam.Red ).ToString();
 					ScoreBlue.Text = GetTeamScore( TFTeam.Blue ).ToString();
 				}
@@ -79,6 +74,7 @@ partial class WinPanel : Panel
 							 .OrderByDescending( cl => cl.GetPoints() )
 							 .Take( 3 );
 		Players.DeleteChildren( true );
+
 		foreach ( var ply in mvps )
 			Players.AddChild( new WinPanelPlayer( ply ) );
 
@@ -107,7 +103,7 @@ partial class WinPanel : Panel
 	{
 		return SDKGame.Current.State == GameState.RoundEnd;
 	}
-	
+
 	/// <summary>
 	/// Get the reason for why the team has won the round.
 	/// </summary>

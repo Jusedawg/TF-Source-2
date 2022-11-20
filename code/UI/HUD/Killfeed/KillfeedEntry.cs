@@ -14,7 +14,6 @@ partial class TFKillFeedEntry : Panel
 	public Image Icon { get; set; }
 	public float LifeTimeMultiplier { get; set; } = 1;
 	public float LifeTime => hud_deathnotice_time * LifeTimeMultiplier;
-
 	TimeSince TimeSinceCreated { get; set; } = 0;
 
 	public override void Tick()

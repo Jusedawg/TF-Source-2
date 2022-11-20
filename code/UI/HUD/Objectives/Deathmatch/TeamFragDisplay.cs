@@ -1,7 +1,6 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using System;
-using System.Collections.Generic;
 
 namespace TFS2.UI;
 
@@ -9,10 +8,8 @@ namespace TFS2.UI;
 partial class TeamFragDisplay : Panel
 {
 	Label LimitLabel { get; set; }
-
 	Panel RedBar { get; set; }
 	Label RedScore { get; set; }
-
 	Panel BlueBar { get; set; }
 	Label BlueScore { get; set; }
 
@@ -27,7 +24,7 @@ partial class TeamFragDisplay : Panel
 		if ( !IsVisible ) return;
 
 		var tdmLogic = TFGameRules.Current.TeamDeathmatchLogic;
-		if ( tdmLogic == null ) 
+		if ( tdmLogic == null )
 			return;
 
 		var limit = tdmLogic.FragLimit;
@@ -38,6 +35,7 @@ partial class TeamFragDisplay : Panel
 
 		var redFraction = 0f;
 		var blueFraction = 0f;
+
 		if ( limit > 0 )
 		{
 			redFraction = Math.Clamp( redCount / limit, 0, 1 );
@@ -57,13 +55,9 @@ partial class TeamFragDisplay : Panel
 			{
 				float pitch = 1f + (4 - seconds) * 0.2f;
 				if ( seconds == 0 )
-				{
 					Sound.FromScreen( "tdm.finale_beep.last" );
-				}
 				else
-				{
 					Sound.FromScreen( "tdm.finale_beep" ).SetRandomPitch( pitch, pitch );
-				}
 
 				Alert.Show( $"{tdmLogic.FirstScorer.GetTitle()} wins in {seconds}s", "/ui/icons/ico_flag_moving.png", 2 );
 				lastBeepTime = seconds;

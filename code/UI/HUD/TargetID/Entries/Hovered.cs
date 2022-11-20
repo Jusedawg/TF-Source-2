@@ -12,29 +12,29 @@ public partial class TargetIDHovered : TargetID
 		if ( !player.IsValid() )
 			return null;
 
-		var hoveredTarget = player.HoveredEntity as ITargetID;
-		if ( !hoveredTarget.IsValid() )
+		var target = player.HoveredEntity as ITargetID;
+		if ( !target.IsValid() )
 			return null;
 
 		// Don't show target in primary if they're already shown in secondary.
-		if ( TargetIDHealing.Current.Target == hoveredTarget )
+		if ( TargetIDHealing.Current.Target == target )
 			return null;
 
 		if ( !CanInspect( player, player.HoveredEntity ) )
 			return null;
 
-		return hoveredTarget;
+		return target;
 	}
 
-	public bool CanInspect( TFPlayer localPlayer, Entity target )
+	public bool CanInspect( TFPlayer player, Entity target )
 	{
 		if ( target is TFWeaponBase )
 			return true;
 
-		var pClass = localPlayer.PlayerClass;
-		if ( pClass.IsValid() )
+		var playerClass = player.PlayerClass;
+		if ( playerClass.IsValid() )
 		{
-			if ( !pClass.Abilities.CanSeeEnemyHealth )
+			if ( !playerClass.Abilities.CanSeeEnemyHealth )
 				return ITeam.IsSame( target, Local.Pawn );
 		}
 

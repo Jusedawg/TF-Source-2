@@ -25,7 +25,7 @@ public class TeamSelection : MenuOverlay
 		footer.Add.Label( "SELECT A TEAM", "title" );
 		footer.Add.ButtonWithIcon( "Cancel", "highlight_off", $"button-dark {(player.Team == TFTeam.Unassigned ? "hidden" : "")}", HandleCancelClick );
 	}
-	
+
 	void HandleCancelClick()
 	{
 		Sound.FromScreen( "ui.button.click" );
@@ -67,7 +67,6 @@ public class TeamSelectionBackground : ScenePanel
 		{
 			// random
 			case TFTeam.Unassigned:
-
 				if ( TFGameRules.Current.IsPlayingArena )
 					return "models/vgui/ui_arenadoor01.vmdl";
 				else
@@ -110,7 +109,7 @@ public class TeamSelectionBackground : ScenePanel
 		World = new SceneWorld();
 		Camera.FieldOfView = 20;
 		Classes = "background";
-		
+
 		Camera.Position = Vector3.Zero;
 		Camera.Rotation = Rotation.Identity;
 
@@ -230,12 +229,11 @@ public class TeamSelectionButton : Label
 	[Event.BuildInput]
 	public void Input( InputBuilder input )
 	{
-		if ( Local.Pawn is not TFPlayer player ) return;
+		if ( Local.Pawn is not TFPlayer player )
+			return;
 
 		if ( input.Pressed( Shortcut ) )
-		{
 			HandleClick();
-		}
 	}
 }
 

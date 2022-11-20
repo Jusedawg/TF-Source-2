@@ -21,9 +21,11 @@ internal partial class Spectator : Panel
 		base.Tick();
 		SetClass( "visible", ShouldDraw() );
 
-		if ( !IsVisible ) return;
+		if ( !IsVisible )
+			return;
 
-		if ( Local.Pawn is not TFPlayer player ) return;
+		if ( Local.Pawn is not TFPlayer player )
+			return;
 
 		UpdateRespawnTimeLabel( player );
 		UpdateObserverLabel( player );

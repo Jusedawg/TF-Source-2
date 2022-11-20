@@ -9,20 +9,14 @@ namespace TFS2.UI;
 public partial class HealthCross : Panel
 {
 	const float DangerHealthFractionThreshold = 0.5f;
-
 	public IHasMaxHealth DesiredTarget { get; set; }
 	public float FlashScale { get; set; }
-
 	IHasMaxHealth Target => DesiredTarget ?? TFPlayer.LocalPlayer;
-
 	Panel ProgressBar { get; set; }
 	Label HealthLabel { get; set; }
 	Label MaxHealthLabel { get; set; }
-
 	private Panel DangerFlash { get; set; }
 	private Panel OverhealFlash { get; set; }
-
-
 	public HealthCross() : this( null ) { }
 
 	public HealthCross( IHasMaxHealth target = null, float flashScale = 1 )
@@ -33,7 +27,8 @@ public partial class HealthCross : Panel
 
 	public override void Tick()
 	{
-		if ( !Target.IsValid() ) return;
+		if ( !Target.IsValid() )
+			return;
 
 		var health = Target.Health;
 		var maxHealth = Target.MaxHealth;
@@ -60,7 +55,7 @@ public partial class HealthCross : Panel
 		//
 		// Opacity
 		//
-		if ( TimeSinceDangerFlash > DangerFlashTime ) 
+		if ( TimeSinceDangerFlash > DangerFlashTime )
 			TimeSinceDangerFlash = 0;
 
 		DangerFlash.Style.Opacity = MathF.Sin( TimeSinceDangerFlash / DangerFlashTime * MathF.PI ) * 0.6f;
@@ -70,7 +65,6 @@ public partial class HealthCross : Panel
 		//
 		var health = Target.Health;
 		var maxHealth = Target.MaxHealth;
-
 		var scale = 0f;
 		var maxDangerHealth = maxHealth * DangerHealthFractionThreshold;
 
@@ -89,7 +83,7 @@ public partial class HealthCross : Panel
 		//
 		// Opacity
 		//
-		if ( TimeSinceOverhealFlash > OverhealFlashTime ) 
+		if ( TimeSinceOverhealFlash > OverhealFlashTime )
 			TimeSinceOverhealFlash = 0;
 
 		OverhealFlash.Style.Opacity = 0.3f + MathF.Sin( TimeSinceOverhealFlash / OverhealFlashTime * MathF.PI ) * 0.3f;

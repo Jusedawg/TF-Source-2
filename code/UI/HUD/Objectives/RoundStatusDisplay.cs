@@ -20,7 +20,6 @@ public partial class RoundStatusDisplay : Panel
 			return;
 
 		UpdateGameStateLabel();
-
 		UpdateTimers();
 	}
 
@@ -33,7 +32,7 @@ public partial class RoundStatusDisplay : Panel
 	{
 		string value = "";
 
-		// show a message for waiting for players, unless we play arena (it has it's own message)
+		// Show a message for waiting for players, unless we play arena (it has it's own message)
 		if ( SDKGame.Current.IsWaitingForPlayers && !TFGameRules.Current.IsPlayingArena )
 			value = $"Waiting For Players";
 
@@ -73,9 +72,7 @@ public partial class RoundStatusDisplay : Panel
 	{
 		TimersContainer.SortChildren( ( x, y ) =>
 		{
-			var entry1 = x as RoundStatusTimerEntry;
-			var entry2 = y as RoundStatusTimerEntry;
-			if ( entry1 == null || entry2 == null )
+			if ( x is not RoundStatusTimerEntry entry1 || y is not RoundStatusTimerEntry entry2 )
 				return 0;
 
 			var timer1 = entry1.Timer;
@@ -83,7 +80,7 @@ public partial class RoundStatusDisplay : Panel
 			if ( timer1 == null || timer2 == null )
 				return 0;
 
-			// sort in DESCENDING order.
+			// Sort in DESCENDING order.
 			return timer1.OwnerTeam < timer2.OwnerTeam ? 1 : -1;
 		} );
 	}
@@ -160,8 +157,8 @@ public class RoundStatusPlayersEntry : Panel
 
 		var ourTeam = local.GetTeam();
 		var theirTeam = Client.GetTeam();
-
 		var anonymous = true;
+
 		if ( ourTeam == theirTeam )
 		{
 			var theirClass = Client.GetPlayerClass();

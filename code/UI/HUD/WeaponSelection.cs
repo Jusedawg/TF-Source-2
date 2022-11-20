@@ -119,9 +119,7 @@ partial class WeaponSelection : Panel
 				Setup();
 
 			foreach ( var pair in Items )
-			{
 				pair.Value.SetClass( "selected", pair.Key == slot );
-			}
 
 			Sound.FromScreen( "ui.weaponlist.moveselect" );
 			TimeSinceInteraction = 0;
@@ -242,13 +240,9 @@ partial class WeaponSelection : Panel
 			if ( AttackInputHeld )
 			{
 				if ( input.Down( InputButton.PrimaryAttack ) )
-				{
 					input.SetButton( InputButton.PrimaryAttack, false );
-				}
 				else
-				{
 					AttackInputHeld = false;
-				}
 			}
 		}
 
@@ -258,9 +252,7 @@ partial class WeaponSelection : Panel
 			if ( weapon.IsValid() )
 			{
 				if ( weapon != player.ActiveWeapon )
-				{
 					input.ActiveChild = weapon;
-				}
 			}
 
 			Close();

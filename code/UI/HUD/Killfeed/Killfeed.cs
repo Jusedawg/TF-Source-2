@@ -67,18 +67,12 @@ internal partial class TFKillFeed : Panel
 		var victim = args.Victim;
 		var assister = args.Assister;
 		var weapon = args.Weapon;
-
 		var is_crit = args.Flags.HasFlag( TFDamageFlags.Critical );
 		var is_mini_crit = args.Flags.HasFlag( TFDamageFlags.MiniCritical );
-
 		var killIcon = DefaultKillIcon;
-
 		var entry = new TFKillFeedEntry();
 
-		//
 		// Local Player Involved?
-		//
-
 		var localPlayerInvolved = local == attacker || local == victim || local == assister;
 		if ( localPlayerInvolved )
 		{
@@ -89,9 +83,7 @@ internal partial class TFKillFeed : Panel
 		//
 		// Victim
 		//
-
 		entry.VictimName.Text = victim.Name;
-
 		var victimTeam = victim.GetTeam();
 		entry.VictimName.SetClass( "red", victimTeam == TFTeam.Red );
 		entry.VictimName.SetClass( "blue", victimTeam == TFTeam.Blue );
@@ -100,19 +92,12 @@ internal partial class TFKillFeed : Panel
 		//
 		// Attacker
 		//
-
 		if ( args.Flags.HasFlag( DamageFlags.Fall ) )
-		{
 			// If there is no attacker that means the world has killed us.
 			entry.PostVictimMessage.Text = " fell to a clumsy, painful death";
-		}
 		else if ( victim == attacker && weapon == null )
-		{
-			// attacker has dealt damage to themselves with no weapon,
-			// they must have suicided.
-
+			// attacker has dealt damage to themselves with no weapon, they must have suicided.
 			entry.PostVictimMessage.Text = " bid farewell, cruel world";
-		}
 		else if ( attacker.IsValid() )
 		{
 			// someone else killed us.
@@ -127,7 +112,6 @@ internal partial class TFKillFeed : Panel
 		//
 		// Weapon Icon
 		//
-
 		if ( weapon != null )
 		{
 			// if we have a weapon, put it's kill icon in the feed.
@@ -156,7 +140,6 @@ internal partial class TFKillFeed : Panel
 		//
 		// Backdrop
 		//
-
 		entry.SetClass( "is_crit", is_crit );
 		entry.SetClass( "is_minicrit", is_mini_crit );
 

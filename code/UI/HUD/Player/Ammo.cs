@@ -55,7 +55,6 @@ partial class Ammo : Panel
 		//
 		// Charge Meter
 		//
-
 		var hasCharge = false;
 		if ( weapon is IChargeable charge )
 		{

@@ -10,13 +10,11 @@ namespace TFS2;
 public partial class TargetID : Panel
 {
 	public ITargetID Target { get; set; }
-
 	public HealthCross Cross { get; set; }
 	public Image Avatar { get; set; }
 	public Label Name { get; set; }
 	public Label Subtext { get; set; }
 	public Label Pretext { get; set; }
-
 	public InputGlyph InteractionButton { get; set; }
 	public Label InteractionText { get; set; }
 
@@ -29,8 +27,7 @@ public partial class TargetID : Panel
 		Target = FindTarget();
 		SetClass( "hidden", !ShouldDraw() );
 
-		// Interactions are always calculated even if the panel is not visible
-		// so that indicator always goes off while it's invisible.
+		// Interactions are always calculated even if the panel is not visible so that indicator always goes off while it's invisible.
 		SetClass( "has_interaction", UpdateInteraction() );
 
 		if ( !IsVisible )
@@ -156,7 +153,7 @@ public partial class TargetID : Panel
 
 	public bool CanSeeAvatarOf( Client client )
 	{
-		switch( hud_target_id_show_avatars )
+		switch ( hud_target_id_show_avatars )
 		{
 			case AvatarVisibility.Everyone:
 				return true;

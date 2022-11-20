@@ -1,6 +1,5 @@
 ﻿using Sandbox;
 using Sandbox.UI;
-using Amper.FPS;
 
 namespace TFS2.UI;
 
@@ -12,13 +11,11 @@ partial class TeamGoalDisplay : Panel
 
 	public override void Tick()
 	{
-		//var canSee = SDKGame.Current.ShouldShowTeamGoal();
 		var canSee = false;
 
 		if ( canSee )
 		{
-			var player = Local.Pawn as TFPlayer;
-			if ( player != null && player.IsAlive && player.Team.IsPlayable() )
+			if ( Local.Pawn is TFPlayer player && player.IsAlive && player.Team.IsPlayable() )
 			{
 				if ( TFGameRules.Current.TeamGoal.ContainsKey( player.Team ) )
 				{
@@ -38,9 +35,7 @@ partial class TeamGoalDisplay : Panel
 			}
 		}
 		else
-		{
 			SetClass( "visible", false );
-		}
 	}
 
 	static string[] TeamRoleIcons { get; set; } = new string[] {

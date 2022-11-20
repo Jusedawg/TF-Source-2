@@ -9,7 +9,6 @@ namespace TFS2.UI;
 public class DamageNumbers : Panel
 {
 	public List<DamageNumberInstance> Instances { get; set; } = new();
-
 	public TimeSince TimeSinceDing { get; set; }
 
 	public DamageNumbers()
@@ -35,11 +34,7 @@ public class DamageNumbers : Panel
 		// Getting the target of the damage.
 		var damage = args.Damage;
 
-		//
-		// Play hit sound
-		//
-
-		// If the player is alive.
+		// Play hit sound, if the player is alive.
 		if ( victim.IsAlive() )
 		{
 			if ( TimeSinceDing > 0.1f )
@@ -49,16 +44,13 @@ public class DamageNumbers : Panel
 			}
 		}
 
-		//
 		// Add a damage number instance
-		//
-
 		AddDamageNumber( damage, victim.Pawn );
 	}
 
 	public void AddDamageNumber( float damage, Entity entity )
 	{
-		// see if we can reuse some other instance.
+		// See if we can reuse some other instance.
 		var current = FindReusableEntryFor( entity );
 		if ( current != null )
 		{
@@ -66,8 +58,7 @@ public class DamageNumbers : Panel
 			return;
 		}
 
-		// make a new entry
-
+		// Make a new entry
 		var entry = new DamageNumberInstance( entity, damage, this );
 		Instances.Add( entry );
 		AddChild( entry );
@@ -104,12 +95,11 @@ public class DamageNumberInstance : Label
 	public float Damage { get; set; }
 	public TimeSince TimeSinceCreated { get; set; }
 	public DamageNumbers Container { get; set; }
+	public bool CanBeReused => TimeSinceCreated < tf_hud_damage_number_reuse_time;
 
 	[ConVar.Client] public static float tf_hud_damage_number_reuse_time { get; set; } = 0.6f;
 	[ConVar.Client] public static float tf_hud_damage_number_lifetime { get; set; } = 2f;
 	[ConVar.Client] public static float tf_hud_damage_number_fade_time { get; set; } = 1;
-
-	public bool CanBeReused => TimeSinceCreated < tf_hud_damage_number_reuse_time;
 
 	public DamageNumberInstance( Entity target, float damage, DamageNumbers container )
 	{
@@ -119,8 +109,7 @@ public class DamageNumberInstance : Label
 		AddClass( "number" );
 		AddDamage( damage );
 
-		Position = Target.WorldSpaceBounds.Center
-			.WithZ( Target.WorldSpaceBounds.Maxs.z + 10 );
+		Position = Target.WorldSpaceBounds.Center.WithZ( Target.WorldSpaceBounds.Maxs.z + 10 );
 	}
 
 	public void AddDamage( float damage )
@@ -138,20 +127,14 @@ public class DamageNumberInstance : Label
 			return;
 		}
 
-		//
 		// Calculate opacity
-		//
 		float time = TimeSinceCreated;
 		float opacityLerp = 1 - time.LerpInverse( tf_hud_damage_number_lifetime - tf_hud_damage_number_fade_time, tf_hud_damage_number_lifetime );
 		Style.Opacity = opacityLerp;
 
-		//
 		// Position 
-		//
-
 		var screenPos = Position.ToScreen();
 		var panelPos = Container.ScreenPositionToPanelPosition( screenPos );
-
 		var left = panelPos.x * 100;
 		Style.Left = Length.Percent( left );
 

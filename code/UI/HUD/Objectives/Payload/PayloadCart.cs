@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Sandbox.UI;
-using TFS2;
+﻿using Sandbox.UI;
 
 namespace TFS2.UI
 {
@@ -15,8 +9,7 @@ namespace TFS2.UI
 
 		public override void Tick()
 		{
-			var status = Cart.GetStatus();
-			Status.Text = $"x{status.CapRate}";
+			Status.Text = $"x{Cart.GetStatus().CapRate}";
 		}
 	}
 }
