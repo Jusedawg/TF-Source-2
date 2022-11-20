@@ -1,0 +1,50 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Title = "Wrench"
+		EngineClass = "tf_weapon_wrench"
+		Hidden = false
+		WorldModel = resource:"models/weapons/c_models/c_wrench/c_wrench.vmdl"
+		Owners = 
+		{
+			"data/playerclass/engineer.tfclass" = 
+			{
+				Slot = "Melee"
+				HoldPose = "Melee"
+				ViewModel = resource:"models/weapons/v_models/v_wrench_engineer.vmdl"
+			}
+		}
+		Damage = 65
+		Range = 0
+		ClipSize = 0
+		BulletsPerShot = 0
+		BulletSpread = 0
+		PunchAngle = 0
+		AmmoPerShot = 0
+		ReloadsEntireClip = false
+		UseFalloff = false
+		FalloffMultiplier = 0
+		UseRampup = false
+		RampupMultiplier = 0
+		DeployTime = 0.5
+		AttackTime = 0.8
+		ReloadTime = 0
+		ReloadStartTime = 0
+		SmackTime = 0.2
+		InventoryIcon = resource:"ui/weapons/renders/wrench.jpg"
+		KillFeedIcon = resource:"ui/deathnotice/wrench.jpg"
+		KillFeedIconSpecial = null
+		Crosshair = resource:"ui/weapons/crosshairs/circle.png"
+		TracerFrequency = 0
+		TracerRed = null
+		TracerBlue = null
+		TracerRedCritical = null
+		TracerBlueCritical = null
+		MuzzleFlash = null
+		SoundSingle = resource:"sounds/weapons/weapon_melee.swing.sound"
+		SoundCrit = resource:"sounds/weapons/weapon_melee.swing.crit.sound"
+		SoundHitWorld = resource:"sounds/weapons/weapon_wrench.hit.world.sound"
+		SoundHitFlesh = resource:"sounds/weapons/weapon_melee.hit.flesh.sound"
+	}
+}

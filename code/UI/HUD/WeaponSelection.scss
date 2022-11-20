@@ -1,0 +1,79 @@
+@import "/UI/styles/colors.scss";
+
+WeaponSelection {
+    position: absolute;
+    width: 280px;
+    right: 20px;
+    bottom: 300px;
+    flex-direction: column;
+    font-family: TF2_Secondary;
+    z-index: 0;
+    opacity: 0;
+
+    &.visible {
+        opacity: 1;
+    }
+
+    &.red .selected .container {
+        background-color: #bd3b3be0;
+    }
+
+    &.blue .selected .container {
+        background-color: #5b7a8ee0;
+    }
+}
+
+WeaponListItem {
+    margin-top: 20px;
+    position: relative;
+    width: 100%;
+    flex-direction: row-reverse;
+
+    .container {
+        background-color: #414141e0;
+        border: 2px solid #f2e2c1;
+        border-radius: 6px;
+        width: 60%;
+        height: 120px;
+
+        .index {
+            color: $panel-text;
+            font-size: 24px;
+            z-index: 2;
+            right: 20px;
+            top: 10px;
+            position: absolute;
+        }
+
+        .image {
+            position: absolute;
+            width: 110%;
+            height: 110%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            left: -5%;
+            top: -5%;
+        }
+
+        .name {
+            position: absolute;
+            z-index: 1;
+            width: 100%;
+            bottom: 0;
+            right: 0;
+            padding: 10px;
+            color: $panel-text;
+            font-family: TF2_Build;
+            text-align: center;
+            font-size: 18px;
+        }
+    }
+
+    &.selected {
+        .container {
+            width: 100%;
+            height: 180px;
+        }
+    }
+}

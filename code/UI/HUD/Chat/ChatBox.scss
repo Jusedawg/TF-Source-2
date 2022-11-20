@@ -1,0 +1,154 @@
+﻿@import "/UI/styles/colors.scss";
+
+TFChatBox {
+    width: 600px;
+    height: 405px;
+    position: absolute;
+    left: 30px;
+    bottom: 210px;
+    z-index: 3;
+    flex-direction: column;
+    pointer-events: all;
+
+    &:not(.focused) {
+        pointer-events: none;
+
+        .header_wrapper {
+            opacity: 0;
+        }
+
+        .chatbox_container {
+            background-color: #1110;
+            border-color: #40404000;
+        }
+
+        .chat_input {
+            opacity: 0;
+        }
+    }
+
+    .header_wrapper {
+        padding: 0 10px;
+        height: 35px;
+        width: 100%;
+        flex-shrink: 0;
+        /* For focused animation */
+        transition: opacity .1s ease;
+
+        .header {
+            height: 100%;
+            width: 100%;
+            background-color: #202020;
+            border-radius: 6px 6px 0 0;
+
+            .header_buttons {
+                width: 100%;
+                height: 100%;
+                padding: 5px 5px 0 5px;
+
+                button {
+                    height: 100%;
+                    width: 110px;
+                    border-radius: 6px 6px 0 0;
+                    background-color: #404040;
+                    color: #d3d3d3;
+                    font-family: TF2_Build;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 20px;
+                    margin-right: 5px;
+                }
+            }
+
+            .header_filter {
+                width: 30px;
+                height: 30px;
+                flex-shrink: 0;
+            }
+        }
+    }
+
+    .chatbox_container {
+        height: 100%;
+        width: 100%;
+        border: 3px transparent solid;
+        border-bottom: 0;
+        padding: 10px;
+        border-radius: 5px 5px 0 0;
+        flex-direction: column-reverse;
+        /* For focused animation */
+        background-color: #111e;
+        border-color: #404040;
+        transition: all .1s ease;
+
+        .chatbox_wrapper {
+            width: 100%;
+            overflow: scroll;
+            flex-direction: column;
+
+            .filler {
+                width: 100%;
+                height: 100%;
+            }
+
+            .messages {
+                width: 100%;
+                flex-shrink: 0;
+                flex-direction: column;
+            }
+        }
+    }
+
+    .chat_input {
+        border: 3px #404040 solid;
+        width: 100%;
+        border-radius: 0 0 5px 5px;
+        background-color: black;
+        color: #fff;
+        font-family: Inter_Bold;
+        font-size: 15px;
+        flex-shrink: 0;
+        cursor: text;
+        /* For focused animation */
+        transition: opacity .1s ease;
+        padding: 10px;
+
+        .channel {
+            padding-right: 5px;
+            border-right: 1px solid #222;
+            flex-shrink: 0;
+            font-family: Inter_Normal;
+            align-items: center;
+            width: 95px;
+
+            .channel_glyph {
+                color: #fff;
+                font-size: 12px;
+                padding: 1px 3px;
+                border-radius: 3px;
+                font-family: Poppins;
+                font-weight: 900;
+                background-color: $tan-light;
+                color: #000;
+                transition: transform .1s ease;
+
+                &.pressed {
+                    transform: scale(0.9);
+                }
+            }
+
+            .channel_name {
+                color: #666;
+                padding-left: 5px;
+                font-size: 15px;
+            }
+        }
+
+        .message_input {
+            width: 100%;
+            height: 100%;
+            padding-left: 10px;
+            align-items: center;
+        }
+    }
+}

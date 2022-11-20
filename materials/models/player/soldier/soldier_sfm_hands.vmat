@@ -1,0 +1,58 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "skin.vfx"
+
+	//---- Shadows ----
+	F_DO_NOT_CAST_SHADOWS 1
+
+	//---- Z-Buffering ----
+	F_DISABLE_Z_PREPASS 1
+
+	//---- Ambient Occlusion ----
+	g_flAmbientOcclusionDirectDiffuse "1.000"
+	g_flAmbientOcclusionDirectSpecular "1.000"
+	g_vAmbientOcclusionColorBleed "[0.400000 0.149020 0.129412 0.000000]"
+	TextureAmbientOcclusion "materials/models/player/soldier/soldier_sfm_hands_ao.tga"
+
+	//---- Color ----
+	g_flModelTintAmount "0.000"
+	g_vColorTint "[0.862745 0.800000 0.788235 1.000000]"
+	TextureColor "materials/models/player/soldier/soldier_sfm_hands_color.tga"
+
+	//---- Curvature ----
+	g_flCurvatureScale "1.000"
+
+	//---- Face Occlusion ----
+	g_flMouthInteriorBrightnessScale "1.000"
+	TextureInsideMouth "materials/default/default_black_mask.tga"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Lookup Textures ----
+	g_vAmbientNormalSoftness "[0.000000 0.000000 0.000000 0.000000]"
+	TextureDiffuseFalloff "materials/models/player/shared/pyro_lightwarp2.tga"
+	TextureShadowFalloff "[0.000000 0.000000 0.000000 0.000000]"
+
+	//---- Normal ----
+	g_flDiffuseNormalBlur "0.503"
+	TextureNormal "materials/default/default_normal.tga"
+
+	//---- Roughness ----
+	TextureRoughness "materials/models/player/soldier/soldier_sfm_hands_rough.png"
+
+	//---- Specular ----
+	g_flSecondSpecularLobeGlossiness "0.272"
+	g_flSecondSpecularLobeRatio "0.538"
+
+	//---- Texture Coordinates ----
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+
+	//---- Transmission ----
+	g_flTransmissionFalloff "0.000"
+	g_vTransmissionColor "[0.000000 0.000000 0.000000 0.000000]"
+	TextureTransmissiveMask "materials/default/default_trans.tga"
+}

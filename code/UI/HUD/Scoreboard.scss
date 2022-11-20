@@ -1,0 +1,249 @@
+﻿@import "/UI/styles/colors.scss";
+
+Scoreboard {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: transform .1s ease, opacity .1s ease;
+    font-family: TF2_Secondary;
+    color: $tan-light;
+    z-index: 100;
+
+    .container {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        padding: 4.5% 0%;
+
+        .limit_container {
+            margin: 0% 14%;
+            z-index: 101;
+
+            .teampanel {
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                background: url(/ui/hud/scoreboard/scoreboard_blu_header.png);
+
+                &.red {
+                    background: url(/ui/hud/scoreboard/scoreboard_red_header.png);
+                }
+
+                .team_logo {
+                    width: 85%;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background: url(/ui/menu/team_blue.png);
+                    margin-top: 10px;
+
+                    &.red {
+                        background: url(/ui/menu/team_red.png);
+                        margin-top: 0px;
+                    }
+                }
+
+                .player_count {
+                    width: 100%;
+                    font-size: 32px;
+                    text-align: start;
+                    margin-top: 6%;
+                    margin-left: 5%;
+
+                    &.red {
+                        text-align: end;
+                    }
+                }
+
+                .team_score {
+                    width: 100%;
+                    font-family: TF2_Build;
+                    font-size: 142px;
+                    margin-left: 15%;
+                    margin-top: -2%;
+                    text-shadow: 5px 5px $tan-darkest;
+
+                    &.red {
+                        margin-left: 10%;
+                    }
+                }
+            }
+
+            .limit_wrapper {
+                flex-shrink: 0;
+                flex-direction: column;
+                text-align: center;
+                font-size: 22px;
+
+                .mode_logo {
+                    padding-top: 40%;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+
+                .mode_label {
+                    font-family: TF2_Build;
+                    margin: 10px 55px;
+                }
+
+                .limit_display {
+                    color: yellow;
+                }
+            }
+        }
+
+        .players_container {
+            flex-direction: column;
+            margin: -50px 15%;
+            border: $panel-border;
+            border-radius: 10px;
+            padding-top: 60px;
+            background-color: rgba(35, 35, 35, 0.9);
+
+            .players_wrapper {
+                width: 100%;
+                height: 100%;
+                padding: 0px 25px;
+
+                .teamcol {
+                    width: 100%;
+                    height: 100%;
+                    flex-direction: column;
+                    font-size: 24px;
+
+                    .avatar {
+                        width: 30px;
+                        flex-shrink: 0;
+                        margin: 0px 10px 2px;
+                        border-radius: 3px;
+                        background-size: contain;
+                        background-position: right;
+                        background-repeat: no-repeat;
+                    }
+
+                    .name {
+                        width: 100%;
+                    }
+
+                    .ping {
+                        width: 50px;
+                        flex-shrink: 0;
+                        padding: 0 2px;
+                        text-align: center;
+                    }
+
+                    .row {
+                        &.header {
+                            border-bottom: 1px solid #f2e2c1;
+                            font-size: 24px;
+                        }
+                    }
+
+                    .players {
+                        width: 100%;
+                        height: 100%;
+                        overflow: scroll;
+                        flex-direction: column;
+                        font-weight: bold;
+                        padding: 3px 0 0 0;
+                    }
+
+                    &.red .players {
+                        color: $team-red;
+                    }
+
+                    &.blue .players {
+                        color: $team-blu;
+                    }
+                }
+
+                .teamcol:not(:last-child) {
+                    margin-right: 40px;
+                }
+            }
+
+            .footer {
+                width: 100%;
+                height: 230px;
+                background-color: rgba(35, 35, 35, 0.9);
+
+                .class_image {
+                    margin-left: 20px;
+                    width: 15%;
+                    background-size: contain;
+                    background-position: left;
+                    background-repeat: no-repeat;
+                }
+
+                .stats {
+                    width: 100%;
+                    height: 100%;
+                    flex-direction: column;
+
+                    .info_container {
+                        margin-top: 5px;
+
+                        .name {
+                            width: 100%;
+                            padding-left: 5%;
+                            font-size: 38px;
+                        }
+
+                        .map {
+                            flex-shrink: 0;
+                            padding-right: 2%;
+                            margin-top: 5px;
+                            align-items: end;
+                            font-size: 24px;
+                        }
+                    }
+
+                    .stats_container {
+                        width: 100%;
+                        height: 100%;
+
+                        .col {
+                            margin-top: 1.5%;
+                            flex-direction: column;
+                            font-family: Inter_Normal;
+                            font-size: 16px;
+
+                            .row {
+                                margin-bottom: 27px;
+
+                                .stat_name {
+                                    width: 100%;
+                                    text-align: right;
+                                    padding: 0 5px;
+                                }
+
+                                .stat_value {
+                                    width: 100%;
+                                    text-align: left;
+                                    padding: 0 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &:not(.visible) {
+        opacity: 0;
+        transform: scale(1.01);
+    }
+}
+
+ScoreboardPlayerEntry {
+    height: 40px;
+    margin-bottom: 5px;
+    background-color: #00000071;
+    padding: 3px 0 3px 40px;
+    border-radius: 3px;
+
+    .name, .ping {
+        align-items: center;
+    }
+}

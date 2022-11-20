@@ -1,0 +1,37 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Entry = "Sniper"
+		Title = "Sniper"
+		MaxHealth = 125
+		MaxSpeed = 300
+		EyeHeight = 75
+		Model = resource:"models/player/sniper/sniper.vmdl"
+		Hands = resource:"models/weapons/arms/c_sniper_arms/c_sniper_arms.vmdl"
+		Responses = resource:"data/talker/sniper.tftalker"
+		DefaultWeapons = 
+		[
+			resource:"data/weapons/sniperrifle.tfweapon",
+			resource:"data/weapons/smg.tfweapon",
+			resource:"data/weapons/kukri.tfweapon",
+		]
+		Buildings = [  ]
+		Abilities = 
+		{
+			CaptureValue = 1
+			BlastJumpDamageMultiplier = 1
+			BlastJumpForceScale = 9
+			BlastJumpForceScaleGrounded = 9
+			DamagePushResistance = 1
+		}
+		IconRed = resource:"ui/hud/class/sniper_red.png"
+		IconBlue = resource:"ui/hud/class/sniper_blue.png"
+		IconPortraitRed = resource:"ui/hud/classportraits/sniper_red.png"
+		IconPortraitBlue = resource:"ui/hud/classportraits/sniper_blue.png"
+		IconPortraitInactive = resource:"ui/hud/classportraits/sniper_inactive.png"
+		IconSelectionRed = resource:"ui/menu/classselection/class_sel_sm_sniper_red.png"
+		IconSelectionBlue = resource:"ui/menu/classselection/class_sel_sm_sniper_blu.png"
+		IconSelectionInactive = resource:"ui/menu/classselection/class_sel_sm_sniper_inactive.png"
+	}
+}

@@ -1,0 +1,39 @@
+@import "/UI/styles/colors.scss";
+
+.footer {
+    width: 100%;
+    background-color: $tan-darker;
+    position: absolute;
+    bottom: 0;
+    padding: 15px 50px;
+
+    &.menu {
+        justify-content: space-between;
+    }
+
+    .playername {
+        color: $tan-light;
+        font-family: TF2_Secondary;
+        font-size: 40px;
+        position: absolute;
+        top: 15px;
+        right: 150px;
+    }
+
+    .playeravatar {
+        width: 110px;
+        height: 110px;
+        margin-top: -60px;
+        border: 2px solid $tan-light;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        border-radius: 12px;
+    }
+
+    .title {
+        font-size: 58px;
+        font-family: TF2_Secondary;
+        color: $tan-light;
+    }
+}

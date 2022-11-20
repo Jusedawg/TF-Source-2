@@ -1,0 +1,29 @@
+<link rel="stylesheet" href="Settings.scss" />
+
+<root>
+    <div class="container">
+        <text class="header">Settings</text>
+
+        <div class="content">
+            <div class="settings">
+                <text class="header">Combat Options</text>
+                <div class="checkbox">
+                    <checkbox @ref="AutoReload">Auto-reload current weapon when you're not firing</checkbox>
+                </div>
+                <div class="slider">
+                    <text class="label">Hit Sound Volume</text>
+                    <SliderEntry min="0.0" max="1.0" step="0.01" @value="HitsoundVolume" />
+                </div>
+                <div class="slider">
+                    <text class="label">Kill Sound Volume</text>
+                    <SliderEntry min="0.0" max="1.0" step="0.01" @value="KillsoundVolume" />
+                </div>
+                <text class="header">Combat Specific Options</text>
+                <div class="checkbox">
+                    <checkbox @ref="AutoScope">Sniper: Sniper rifle will re-zoom after firing a zoomed shot</checkbox>
+                </div>
+            </div>
+            <button class="button-dark" onclick="OnClickClose()">Close</button>
+        </div>
+    </div>
+</root>

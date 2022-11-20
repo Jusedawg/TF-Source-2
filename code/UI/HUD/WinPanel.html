@@ -1,0 +1,69 @@
+﻿<link rel="stylesheet" href="WinPanel.scss" />
+
+<root>
+    <div class="container">
+        <div class="teamscore">
+            <div class="score blue">
+                <text class="teamname">BLU</text>
+                <text class="scorenum" @ref="ScoreBlue">-</text>
+            </div>
+            <div class="score red">
+                <text class="teamname">RED</text>
+                <text class="scorenum" @ref="ScoreRed">-</text>
+            </div>
+        </div>
+
+        <div class="winner">
+            <text class="title" @ref="WinnerName" />
+            <text class="small" @ref="WinReason" />
+            <text class="small" @ref="LastCapper">~</text>
+
+            <div class="players">
+                <div class="header">
+                    <text>RED Team MVPs:</text>
+                    <text>Points this round:</text>
+                </div>
+
+                <div class="list mvps" @ref="Players">
+                    <!--
+                    <div class="player">
+                        <image texture="avatar:76561198104763026" class="avatar"></image>
+                        <text class="name text">KAYA</text>
+                        <text class="pclass text">~</text>
+                        <text class="points text">0</text>
+                    </div>
+                    <div class="player">
+                        <image texture="avatar:76561198104763026" class="avatar"></image>
+                        <text class="name text">KAYA</text>
+                        <text class="pclass text">~</text>
+                        <text class="points text">U</text>
+                    </div>
+                    <div class="player">
+                        <image texture="avatar:76561198104763026" class="avatar"></image>
+                        <text class="name text">KAYA</text>
+                        <text class="pclass text">~</text>
+                        <text class="points text">S</text>
+                    </div>
+                    -->
+                </div>
+
+                <div class="header">
+                    <text>Highest Killstreak:</text>
+                    <text>Count:</text>
+                </div>
+
+                <div class="list killstreak">
+                    <!--
+                    TODO: Re-add this when we actually have killstreaks
+                    <div class="player">
+                        <image texture="avatar:76561198110270421" class="avatar"></image>
+                        <text class="name text">Justyn</text>
+                        <text class="pclass text">Wheatley</text>
+                        <text class="points text">0</text>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+</root>

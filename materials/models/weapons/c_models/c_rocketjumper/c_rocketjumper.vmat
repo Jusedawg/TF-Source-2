@@ -1,0 +1,108 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "complex.vfx"
+
+	//---- Ambient Occlusion ----
+	g_flAmbientOcclusionDirectDiffuse "0.000"
+	g_flAmbientOcclusionDirectSpecular "0.000"
+	TextureAmbientOcclusion "materials/default/default_ao.tga"
+
+	//---- Color ----
+	g_flModelTintAmount "1.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColor "materials/models/weapons/c_models/c_rocketjumper/c_rocketjumper_color.tga"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Lighting ----
+	g_flDirectionalLightmapMinZ "0.050"
+	g_flDirectionalLightmapStrength "1.000"
+
+	//---- Metalness ----
+	g_flMetalness "0.000"
+
+	//---- Normal ----
+	TextureNormal "materials/default/default_normal.tga"
+
+	//---- Roughness ----
+	TextureRoughness "materials/models/weapons/c_models/c_rocketjumper/c_rocketjumper_refl.png"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "0"
+	g_nScaleTexCoordVByModelScaleAxis "0"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
+
+	"legacy_import"
+	{
+		"VertexLitGeneric"
+		{
+			"$basetexture"		"models/weapons/c_models/c_rocketjumper/c_rocketjumper"
+			"$basemapalphaphongmask"		"1"
+			"$phong"		"1"
+			"$phongexponent"		"25"
+			"$phongboost"		"5"
+			"$lightwarptexture"		"models/lightwarps/weapon_lightwarp"
+			"$phongfresnelranges"		"[.25 .5 1]"
+			"$rimlight"		"1"
+			"$rimlightexponent"		"4"
+			"$rimlightboost"		"2"
+			"$tempvar"		"0"
+			"$basephongexponent"		"25"
+			"$basephongboost"		"5"
+			"$commadd_phongexponent"		"30"
+			"$commadd_phongboost"		"22.500000"
+			"$commweapon"		"0"
+			"$glowcolor"		"1"
+			"360?$color2"		"[ 0.8 0.8 0.8 ]"
+			"$cloakPassEnabled"		"1"
+			"$sheenPassEnabled"		"1"
+			"$sheenmap"		"cubemaps/cubemap_sheen001"
+			"$sheenmapmask"		"Effects/AnimatedSheen/animatedsheen0"
+			"$sheenmaptint"		"[ 1 1 1 ]"
+			"$sheenmapmaskframe"		"0"
+			"$sheenindex"		"0"
+			"$yellow"		"0"
+			"Proxies"
+			{
+				"AnimatedWeaponSheen"
+				{
+					"animatedtexturevar"		"$sheenmapmask"
+					"animatedtextureframenumvar"		"$sheenmapmaskframe"
+					"animatedtextureframerate"		"40"
+				}
+				"ModelGlowColor"
+				{
+					"resultVar"		"$glowcolor"
+				}
+				"Equals"
+				{
+					"srcVar1"		"$glowcolor"
+					"resultVar"		"$selfillumtint"
+				}
+				"Equals"
+				{
+					"srcVar1"		"$glowcolor"
+					"resultVar"		"$color2"
+				}
+				"YellowLevel"
+				{
+					"resultVar"		"$yellow"
+				}
+				"Multiply"
+				{
+					"srcVar1"		"$color2"
+					"srcVar2"		"$yellow"
+					"resultVar"		"$color2"
+				}
+			}
+		}
+	}
+}

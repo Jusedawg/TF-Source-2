@@ -1,0 +1,59 @@
+@import "/ui/styles/colors.scss";
+
+VoiceMenu {
+    height: 100%;
+    position: absolute;
+    flex-direction: column;
+    font-family: Inter_Bold;
+    color: $tan-light;
+    opacity: 0;
+    transition: opacity .1s ease;
+    left: 10px;
+
+    &.visible {
+        opacity: 1;
+    }
+
+    .container {
+        position: absolute;
+        top: 50%;
+        margin-top: -200px;
+        padding: 15px;
+        background-color: #000a;
+        border-radius: 10px;
+        flex-direction: column;
+
+        .menus {
+            flex-direction: column;
+        }
+
+        .footer {
+            margin-top: 10px;
+            align-items: center;
+            font-size: 16px;
+
+            InputGlyph {
+                height: 22px;
+                margin-right: 5px;
+            }
+        }
+
+        .hint {
+            max-width: 200px;
+            margin-top: 10px;
+            font-size: 12px;
+            opacity: .5;
+            flex-direction: column;
+
+            div {
+                margin-top: 5px;
+                align-items: center;
+            }
+
+            InputGlyph {
+                height: 16px;
+                margin-right: 5px;
+            }
+        }
+    }
+}

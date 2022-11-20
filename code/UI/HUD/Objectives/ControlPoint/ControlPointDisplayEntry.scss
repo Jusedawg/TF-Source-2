@@ -1,0 +1,211 @@
+﻿@import "/UI/styles/colors.scss";
+
+ControlPointDisplayEntry {
+    width: 70px;
+    height: 70px;
+    border-radius: 6px;
+    margin: 0 5px;
+    background-color: #9a9896aa;
+    border: 1px solid #f2e2c1;
+    box-shadow: 0px 0px 10px #000a;
+
+    &.red {
+        background-color: #bd3b3baa;
+    }
+
+    &.blue {
+        background-color: #5b7a8eaa;
+    }
+
+    .cappers {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 14px;
+        position: absolute;
+        z-index: 2;
+        height: 60%;
+        display: none;
+
+        .player_icon {
+            width: 16px;
+            background-size: contain;
+            background-image: url(/ui/icons/ico_player.png);
+            background-repeat: no-repeat;
+            background-image-tint: #222;
+            margin-right: 3px;
+        }
+
+        .player_count {
+            padding-top: 15px;
+            font-size: 26px;
+            font-family: TF2_Secondary;
+            color: #222;
+            display: none;
+        }
+    }
+
+    .progress_container {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+        overflow: hidden;
+        position: absolute;
+        z-index: 1;
+        display: none;
+
+        .progress {
+            width: 252px;
+            height: 70px;
+            position: absolute;
+            background-image: url(/ui/hud/objectives/controlpoints/capture_progress.png);
+            background-position: top left;
+            background-size: contain;
+            background-repeat: no-repeat;
+            // background-image: url(/ui/hud/objectives/controlpoints/capture_progress_4teams.png);
+            // top: -135%;
+            // height: 252px;
+            // transition: left .1s linear, top .1s linear;
+        }
+    }
+
+    .icon {
+        width: 100%;
+        height: 100%;
+        background-position: center;
+        background-size: contain;
+        position: absolute;
+        background-repeat: no-repeat;
+        z-index: 2;
+    }
+
+    .progress_pointer {
+        position: absolute;
+        background-image: url(/ui/hud/objectives/controlpoints/progress_bar_pointer.png);
+        background-size: contain;
+        width: 120px;
+        height: 240px;
+        left: -25px;
+        bottom: -20px;
+        opacity: 0;
+        transform: scale(.8) translateY(10px);
+        transition: opacity .1s ease, transform .1s ease;
+
+        .background {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            background-size: contain;
+            top: 5px;
+            left: 5px;
+            display: none;
+
+            &.visible {
+                display: flex;
+            }
+
+            &.owner {
+                z-index: 0;
+            }
+
+            &.capper {
+                z-index: 1;
+            }
+
+            &.progress {
+                &.red {
+                    background-image: url(/ui/hud/objectives/controlpoints/progress_bar_red.png);
+                }
+
+                &.blue {
+                    background-image: url(/ui/hud/objectives/controlpoints/progress_bar_blu.png);
+                }
+
+                &.yellow {
+                    background-image: url(/ui/hud/objectives/controlpoints/progress_bar_yellow.png);
+                }
+
+                &.green {
+                    background-image: url(/ui/hud/objectives/controlpoints/progress_bar_green.png);
+                }
+            }
+
+            &.blocked {
+                background-image: url(/ui/hud/objectives/controlpoints/progress_bar_nocap.png);
+                z-index: 2;
+            }
+        }
+
+        .message {
+            z-index: 5;
+            width: 110px;
+            height: 110px;
+            top: 5px;
+            left: 5px;
+            text-align: center;
+            color: $tan-light;
+            font-family: TF2_Secondary;
+            font-size: 16px;
+            align-items: center;
+        }
+    }
+
+    .pulse {
+        width: 100%;
+        height: 100%;
+        border-radius: 6px;
+        position: absolute;
+        z-index: 0;
+        background-image: radial-gradient(#aaaa, #eeea);
+        opacity: 0;
+    }
+
+    .timer {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        z-index: 3;
+        text-align: center;
+        align-items: center;
+        font-family: TF2_Secondary;
+        color: $tan-light;
+        font-size: 48px;
+        text-shadow: 3px 3px 0px $bg_footer;
+        display: none;
+    }
+
+    &.show_pointer .progress_pointer {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+
+    &.is_locked .icon {
+        background-image: url(/ui/hud/objectives/obj_lock.png);
+    }
+
+    &.has_cappers {
+        .cappers {
+            display: flex;
+        }
+
+        &.has_multiple_cappers {
+            .player_count {
+                display: flex;
+            }
+        }
+    }
+
+    &.is_capping {
+        .progress_container {
+            display: flex;
+        }
+    }
+
+    &.show_timer {
+        .timer {
+            display: flex;
+        }
+    }
+}

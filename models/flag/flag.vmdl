@@ -1,0 +1,211 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "MaterialGroup"
+						name = "1"
+						remaps = 
+						[
+							{
+								from = "materials/models/flag/chrome_gold.vmat"
+								to = "materials/models/flag/chrome_gold.vmat"
+							},
+							{
+								from = "materials/models/flag/tfcflag_red.vmat"
+								to = "materials/models/flag/tfcflag_blu.vmat"
+							},
+							{
+								from = "materials/models/flag/chrome_black.vmat"
+								to = "materials/models/flag/chrome_black.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "2"
+						remaps = 
+						[
+							{
+								from = "materials/models/flag/chrome_gold.vmat"
+								to = "materials/models/flag/chrome_gold.vmat"
+							},
+							{
+								from = "materials/models/flag/tfcflag_red.vmat"
+								to = "materials/models/flag/tfcflag_neutral.vmat"
+							},
+							{
+								from = "materials/models/flag/chrome_black.vmat"
+								to = "materials/models/flag/chrome_black.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "flag_return_panel_ur"
+						parent_bone = "fbone07"
+						relative_origin = [ 20.0, 110.0, -0.0 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "flag_return_panel_ll"
+						parent_bone = "fbone07"
+						relative_origin = [ -20.0, 80.0, -0.0 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "default"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								parent_bone = "bone01"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -7.728123, -21.850845, 0.0 ]
+								hitbox_maxs = [ 0.0, 8.760379, 67.721619 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fbone07"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ 0.0, 0.0, -4.600166 ]
+								hitbox_maxs = [ 12.665904, 39.2104, 0.0 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fbone13"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -12.147113, 0.0, -4.69171 ]
+								hitbox_maxs = [ 0.0, 39.27301, 0.0 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fbone12"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -13.301961, 0.0, -4.896923 ]
+								hitbox_maxs = [ 0.0, 45.190937, 0.0 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fbone11"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -13.162702, 0.0, -6.169778 ]
+								hitbox_maxs = [ 0.0, 44.936855, 0.0 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fbone06"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ 0.0, 0.0, -4.825664 ]
+								hitbox_maxs = [ 12.950891, 45.115437, 0.0 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fbone05"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ 0.0, 0.0, -6.147749 ]
+								hitbox_maxs = [ 12.060584, 44.715832, 0.0 ]
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "flag_bg_studio_lod0"
+						filename = "models\\flag\\flag_fbx\\mesh\\flag_bg_studio_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "idle"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\flag\\flag_fbx\\anim\\idle.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 10.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		importer_notes = """
+Imported from compiled VMDL_C
+"""
+	}
+}

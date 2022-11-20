@@ -1,0 +1,91 @@
+﻿@import "/ui/styles/colors.scss";
+
+TFKillFeedEntry {
+    background-color: $tan-darker;
+    color: $tan-light;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    padding: 2px 30px;
+    height: 36px;
+
+    .icon_backdrop {
+        background-position: center;
+        background-repeat: no-repeat;
+        justify-content: center;
+
+        &.crit {
+            background-image: radial-gradient(#b32d1ccc, #b32d1c00, #b32d1c00);
+        }
+    }
+
+    .streak {
+        display: none;
+
+        .streak_icon {
+            width: 20px;
+            background-size: cover;
+            background-position: center;
+            background-image: url(/ui/deathnotice/killstreak.png);
+            margin-right: 10px;
+        }
+    }
+
+    .target {
+        display: none;
+    }
+
+    .attacker {
+        margin-right: 10px;
+    }
+
+    .victim {
+        margin-left: 10px;
+    }
+
+    .label {
+        align-items: center;
+        font-size: 16px;
+        flex-shrink: 0;
+
+        &.red {
+            color: $team-red;
+        }
+
+        &.blue {
+            color: $team-blu;
+        }
+
+        &.monster {
+            color: #835c9c;
+        }
+    }
+
+    &.has_killstreak .streak {
+        display: flex;
+    }
+
+    &.is_crit .icon_backdrop {
+        background-image: radial-gradient(#b32d1ccc, #b32d1c00, #b32d1c00);
+    }
+
+    &.is_minicrit .icon_backdrop {
+        background-image: radial-gradient(#ffb617cc, #ffb61700, #ffb61700);
+    }
+
+    &.has_attacker .attacker {
+        display: flex;
+    }
+
+    &.has_victim .victim {
+        display: flex;
+    }
+
+    &.is_local_player_involved {
+        background-color: $tan-light;
+        color: $tan-dark;
+
+        .streak_icon {
+            background-image: url(/ui/deathnotice/killstreak_neg.png);
+        }
+    }
+}

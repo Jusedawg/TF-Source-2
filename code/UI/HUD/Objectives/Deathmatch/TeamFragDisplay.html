@@ -1,0 +1,22 @@
+﻿<link rel="stylesheet" href="TeamFragDisplay.scss" />
+
+<root>
+    <div class="container">
+        <div class="overlay" />
+        <div class="limit">
+            <text>Playing to: </text>
+            <text @ref="LimitLabel" />
+        </div>
+
+        <div class="bars_container">
+            <div class="progress blue">
+                <div class="bar" @ref="BlueBar" />
+                <text class="score" @ref="BlueScore">0</text>
+            </div>
+            <div class="progress red">
+                <div class="bar" @ref="RedBar" />
+                <text class="score" @ref="RedScore">0</text>
+            </div>
+        </div>
+    </div>
+</root>

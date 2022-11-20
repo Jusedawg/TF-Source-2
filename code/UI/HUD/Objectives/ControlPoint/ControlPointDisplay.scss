@@ -1,0 +1,12 @@
+﻿@import "/UI/styles/colors.scss";
+
+ControlPointDisplay {
+    width: 100%;
+    z-index: 2;
+    display: none;
+    justify-content: center;
+
+    &.visible {
+        display: flex;
+    }
+}

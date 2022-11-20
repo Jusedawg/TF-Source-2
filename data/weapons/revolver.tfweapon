@@ -1,0 +1,49 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Title = "Revolver"
+		EngineClass = "tf_weapon_revolver"
+		Hidden = false
+		WorldModel = resource:"models/weapons/c_models/c_revolver/c_revolver.vmdl"
+		Owners = 
+		{
+			"data/playerclass/spy.tfclass" = 
+			{
+				Reserve = 24
+				ViewModel = resource:"models/weapons/v_models/v_revolver_spy.vmdl"
+			}
+		}
+		Damage = 40
+		Range = 4096
+		ClipSize = 6
+		BulletsPerShot = 1
+		BulletSpread = 0.03
+		PunchAngle = 0
+		AmmoPerShot = 1
+		ReloadsEntireClip = true
+		UseFalloff = true
+		FalloffMultiplier = 0.5
+		UseRampup = true
+		RampupMultiplier = 1.5
+		DeployTime = 0.5
+		AttackTime = 0.5
+		ReloadTime = 1.13
+		ReloadStartTime = 0
+		SmackTime = 0
+		InventoryIcon = resource:"ui/weapons/renders/revolver.jpg"
+		KillFeedIcon = resource:"ui/deathnotice/revolver.jpg"
+		KillFeedIconSpecial = null
+		Crosshair = resource:"ui/weapons/crosshairs/cross.png"
+		TracerFrequency = 2
+		TracerRed = resource:"particles/bullet_tracers/bullet_tracer01_red.vpcf"
+		TracerBlue = resource:"particles/bullet_tracers/bullet_tracer01_blue.vpcf"
+		TracerRedCritical = resource:"particles/bullet_tracers/bullet_tracer01_red_crit.vpcf"
+		TracerBlueCritical = resource:"particles/bullet_tracers/bullet_tracer01_blue_crit.vpcf"
+		MuzzleFlash = resource:"particles/muzzle_flash/muzzle_revolver.vpcf"
+		SoundSingle = resource:"sounds/weapons/weapon_revolver.shoot.sound"
+		SoundCrit = resource:"sounds/weapons/weapon_revolver.shoot.crit.sound"
+		SoundHitWorld = null
+		SoundHitFlesh = null
+	}
+}

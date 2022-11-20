@@ -1,0 +1,19 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "uber_post.vfx"
+
+	invulnOverlayNormalTex "ui/post_processing/invuln_overlay_normal.png"
+	vignetteTex "ui/post_processing/invuln_vignette.png"
+
+	//---- Uber ----
+	g_colorTint "[1.000000 0.450980 0.058824 1.000000]"
+	g_scaleRange "[-0.030 0.030]"
+	g_scaleSpeed "8.100"
+
+	DynamicParams
+	{
+		g_colorTint "colorTint"
+	}
+}

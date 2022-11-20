@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="ItemsPage.scss" />
+
+<root>
+    <div class="content">
+        <div class="class_button">
+            <image class="scout" onclick="OnClickClassButton('Scout')" />
+            <text>Scout</text>
+        </div>
+        <div class="class_button">
+            <image class="soldier" onclick="OnClickClassButton('Soldier')" />
+            <text>Soldier</text>
+        </div>
+        <div class="class_button">
+            <image class="pyro" onclick="OnClickClassButton('Pyro')" />
+            <text>Pyro</text>
+        </div>
+        <div class="class_button">
+            <image class="demoman" onclick="OnClickClassButton('Demoman')" />
+            <text>Demoman</text>
+        </div>
+        <div class="class_button">
+            <image class="heavy" onclick="OnClickClassButton('Heavy')" />
+            <text>Heavy</text>
+        </div>
+        <div class="class_button">
+            <image class="engineer" onclick="OnClickClassButton('Engineer')" />
+            <text>Engineer</text>
+        </div>
+        <div class="class_button">
+            <image class="medic" onclick="OnClickClassButton('Medic')" />
+            <text>Medic</text>
+        </div>
+        <div class="class_button">
+            <image class="sniper" onclick="OnClickClassButton('Sniper')" />
+            <text>Sniper</text>
+        </div>
+        <div class="class_button">
+            <image class="spy" onclick="OnClickClassButton('Spy')" />
+            <text>Spy</text>
+        </div>
+    </div>
+    <div class="footer">
+        <button class="button-dark" icon="undo" onclick="OnClickBack()">Back</button>
+        <text @ref="PlayerName" class="playername" />
+        <image @ref="PlayerAvatar" class="playeravatar" />
+    </div>
+</root>

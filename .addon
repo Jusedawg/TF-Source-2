@@ -1,0 +1,200 @@
+{
+  "Title": "Team Fortress: Source 2",
+  "Type": "game",
+  "Org": "local",
+  "Ident": "tfs2",
+  "Tags": "",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "ResourcePaths": [
+    "/ui/*",
+    "/fonts/*",
+    "/data/*"
+  ],
+  "HasCode": true,
+  "CodePath": "code",
+  "RootNamespace": "TFS2",
+  "Metadata": {
+    "MapList": [
+      "amper.koth_viaduct",
+      "amper.arena_well",
+      "amper.itemtest",
+      "amper.tfs2_spytech"
+    ],
+    "MinPlayers": 1,
+    "MaxPlayers": 24,
+    "MapSelect": "Official",
+    "PerMapRanking": false,
+    "LeaderboardType": "None",
+    "RankType": "None",
+    "GameNetworkType": "Multiplayer",
+    "Collision": {
+      "Defaults": {
+        "solid": "Collide",
+        "trigger": "Trigger",
+        "ladder": "Ignore",
+        "water": "Trigger",
+        "player": "Unset",
+        "weapon": "Unset",
+        "projectile": "Unset",
+        "debris": "Unset",
+        "interactable": "Unset"
+      },
+      "Pairs": [
+        {
+          "a": "solid",
+          "b": "solid",
+          "r": "Collide"
+        },
+        {
+          "a": "trigger",
+          "b": "playerclip",
+          "r": "Ignore"
+        },
+        {
+          "a": "solid",
+          "b": "trigger",
+          "r": "Trigger"
+        },
+        {
+          "a": "playerclip",
+          "b": "solid",
+          "r": "Collide"
+        },
+        {
+          "a": "trigger",
+          "b": "player",
+          "r": "Trigger"
+        },
+        {
+          "a": "ladder",
+          "b": "player"
+        },
+        {
+          "a": "player",
+          "b": "player"
+        },
+        {
+          "a": "solid",
+          "b": "player"
+        },
+        {
+          "a": "debris",
+          "b": "interactable",
+          "r": "Collide"
+        },
+        {
+          "a": "player",
+          "b": "weapon",
+          "r": "Ignore"
+        },
+        {
+          "a": "player",
+          "b": "projectile",
+          "r": "Ignore"
+        },
+        {
+          "a": "debris",
+          "b": "debris",
+          "r": "Collide"
+        },
+        {
+          "a": "player",
+          "b": "interactable",
+          "r": "Trigger"
+        },
+        {
+          "a": "trigger",
+          "b": "trigger"
+        },
+        {
+          "a": "solid",
+          "b": "interactable",
+          "r": "Collide"
+        },
+        {
+          "a": "solid",
+          "b": "debris",
+          "r": "Collide"
+        },
+        {
+          "a": "trigger",
+          "b": "interactable",
+          "r": "Ignore"
+        },
+        {
+          "a": "trigger",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "ladder",
+          "b": "interactable",
+          "r": "Collide"
+        },
+        {
+          "a": "ladder",
+          "b": "debris",
+          "r": "Collide"
+        },
+        {
+          "a": "water",
+          "b": "debris",
+          "r": "Collide"
+        },
+        {
+          "a": "water",
+          "b": "interactable",
+          "r": "Collide"
+        },
+        {
+          "a": "player",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "weapon",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "projectile",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "interactable",
+          "b": "interactable",
+          "r": "Collide"
+        },
+        {
+          "a": "projectile",
+          "b": "interactable",
+          "r": "Ignore"
+        },
+        {
+          "a": "weapon",
+          "b": "interactable",
+          "r": "Ignore"
+        },
+        {
+          "a": "projectile",
+          "b": "projectile",
+          "r": "Ignore"
+        }
+      ]
+    },
+    "Compiler": {
+      "RootNamespace": "TFS2",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;"
+    },
+    "GameCategory": "Shooter",
+    "GameSettings": {},
+    "ControlModes": {
+      "Keyboard": true
+    },
+    "ParentPackage": ""
+  }
+}

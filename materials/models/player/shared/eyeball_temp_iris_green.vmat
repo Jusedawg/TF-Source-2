@@ -1,0 +1,46 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "eyeball.vfx"
+
+	//---- Color ----
+	g_flModelTintAmount "1.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColor "materials/models/player/shared/eye-iris-green.tga"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Iris ----
+	g_flIrisBumpStrength "1.000"
+	g_flParallaxStrength "0.050"
+	IrisNormal "[0.501961 0.501961 1.000000 0.000000]"
+	IrisRoughness "materials/default/default_rough.tga"
+	TextureIrisMask "[0.000000 0.000000 0.000000 0.000000]"
+
+	//---- Lighting ----
+	g_vReflectanceRange "[0.000 1.000]"
+	TextureReflectance "materials/default/default_refl.tga"
+
+	//---- Normal ----
+	g_flCorneaScleraBumpStrength "1.000"
+	g_flScleraDiffuseExponent "1.500"
+	g_flScleraDiffuseWrap "0.300"
+	TextureNormal "materials/default/default_normal.tga"
+
+	//---- Occlusion ----
+	g_flOcclusionStrength "0.750"
+	g_flOcclusionWidth "3.000"
+	TextureOcclusion "materials/default/default_color.tga"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "0"
+	g_nScaleTexCoordVByModelScaleAxis "0"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
+}

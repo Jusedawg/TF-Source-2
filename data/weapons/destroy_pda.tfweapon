@@ -1,0 +1,55 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Title = "Destroy PDA"
+		ClassName = "tf_weapon_pda_engineer_destroy"
+		Hidden = false
+		WorldModel = resource:"models/weapons/c_models/c_pda_engineer/c_pda_engineer.vmdl"
+		ViewModelMode = 1
+		Owners = 
+		[
+			{
+				PlayerClassName = resource:"data/playerclass/engineer.tfclass"
+				Slot = 4
+				HoldPose = 4
+				Reserve = 0
+				ViewModel = resource:"models/weapons/v_models/v_pda_engineer.vmdl"
+			},
+		]
+		Damage = 0
+		ClipSize = 0
+		AttackTime = 0
+		AttackDelay = 0
+		DeployTime = 1
+		BulletsPerShot = 1
+		BulletSpread = 0
+		Range = 4096
+		AmmoPerShot = 1
+		ReloadType = 2
+		ReloadTime = 0
+		ReloadStartTime = 0
+		PunchAngle = 0
+		MuzzleFlash = ""
+		Tracers = 
+		{
+			Frequency = 0
+			Red = resource:"particles/bullet_tracers/bullet_tracer01_red.vpcf"
+			Blue = resource:"particles/bullet_tracers/bullet_tracer01_blue.vpcf"
+			RedCritical = resource:"particles/bullet_tracers/bullet_tracer01_red_crit.vpcf"
+			BlueCritical = null
+		}
+		Icon = ""
+		KillIcon = ""
+		KillIconSpecial = ""
+		TauntName = ""
+		Sounds = 
+		{
+			Single = null
+			Crit = null
+			Reload = null
+			HitWorld = null
+			HitFlesh = null
+		}
+	}
+}

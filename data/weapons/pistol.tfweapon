@@ -1,0 +1,58 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Title = "Pistol"
+		EngineClass = "tf_weapon_pistol"
+		Hidden = false
+		WorldModel = resource:"models/weapons/c_models/c_pistol/c_pistol.vmdl"
+		Owners = 
+		{
+			"data/playerclass/scout.tfclass" = 
+			{
+				Slot = "Secondary"
+				HoldPose = "Secondary"
+				Reserve = 36
+				ViewModel = resource:"models/weapons/v_models/v_pistol_scout.vmdl"
+			}
+			"data/playerclass/engineer.tfclass" = 
+			{
+				Slot = "Secondary"
+				HoldPose = "Secondary"
+				Reserve = 200
+				ViewModel = resource:"models/weapons/v_models/v_pistol_engineer.vmdl"
+			}
+		}
+		Damage = 15
+		Range = 4096
+		ClipSize = 12
+		BulletsPerShot = 1
+		BulletSpread = 0.04
+		PunchAngle = 0
+		AmmoPerShot = 1
+		ReloadsEntireClip = true
+		UseFalloff = true
+		FalloffMultiplier = 0.5
+		UseRampup = true
+		RampupMultiplier = 1.5
+		DeployTime = 0.5
+		AttackTime = 0.15
+		ReloadTime = 1.23
+		ReloadStartTime = 0
+		SmackTime = 0
+		InventoryIcon = resource:"ui/weapons/renders/pistol.png"
+		KillFeedIcon = resource:"ui/deathnotice/pistol.png"
+		KillFeedIconSpecial = null
+		Crosshair = resource:"ui/weapons/crosshairs/dot.png"
+		TracerFrequency = 2
+		TracerRed = resource:"particles/bullet_tracers/bullet_pistol_tracer01_red.vpcf"
+		TracerBlue = resource:"particles/bullet_tracers/bullet_pistol_tracer01_blue.vpcf"
+		TracerRedCritical = resource:"particles/bullet_tracers/bullet_pistol_tracer01_red_crit.vpcf"
+		TracerBlueCritical = resource:"particles/bullet_tracers/bullet_pistol_tracer01_blue_crit.vpcf"
+		MuzzleFlash = resource:"particles/muzzle_flash/muzzle_pistol.vpcf"
+		SoundSingle = resource:"sounds/weapons/weapon_pistol.single.sound"
+		SoundCrit = resource:"sounds/weapons/weapon_pistol.single.crit.sound"
+		SoundHitWorld = null
+		SoundHitFlesh = null
+	}
+}

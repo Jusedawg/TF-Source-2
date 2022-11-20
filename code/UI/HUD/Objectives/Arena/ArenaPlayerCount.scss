@@ -1,0 +1,56 @@
+﻿@import "/UI/styles/colors.scss";
+
+ArenaPlayerCount {
+    width: 100%;
+    flex-direction: column-reverse;
+    align-items: center;
+    display: none;
+
+    &.visible {
+        display: flex;
+    }
+
+    &.if-spectator {
+        margin-top: 1.5%;
+    }
+
+    .container {
+        .team_container {
+            padding: 7px;
+            height: 50px;
+            width: 140px;
+            margin: 0 5px;
+            border: $panel-border;
+            border-radius: 6px;
+
+            .team_icon {
+                height: 100%;
+                width: 20px;
+                background-image: url(/ui/icons/ico_player.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-image-tint: $tan-light;
+                flex-shrink: 0;
+            }
+
+            .team_text {
+                width: 100%;
+                text-align: center;
+                font-family: TF2_Build;
+                color: $tan-light;
+                font-size: 48px;
+                text-shadow: 4px 4px 0px $bg_footer;
+                margin-top: -13px;
+            }
+
+            &.red {
+                background-color: $team-red;
+            }
+
+            &.blue {
+                background-color: $team-blu;
+            }
+        }
+    }
+}

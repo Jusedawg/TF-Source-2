@@ -1,0 +1,37 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Entry = "Demoman"
+		Title = "Demoman"
+		MaxHealth = 175
+		MaxSpeed = 280
+		EyeHeight = 68
+		Model = resource:"models/player/demo/demo.vmdl"
+		Hands = resource:"models/weapons/arms/c_demoman_arms/c_demoman_arms.vmdl"
+		Responses = resource:"data/talker/demoman.tftalker"
+		DefaultWeapons = 
+		[
+			resource:"data/weapons/grenadelauncher.tfweapon",
+			resource:"data/weapons/stickybomblauncher.tfweapon",
+			resource:"data/weapons/bottle.tfweapon",
+		]
+		Buildings = [  ]
+		Abilities = 
+		{
+			CaptureValue = 1
+			BlastJumpDamageMultiplier = 0.75
+			BlastJumpForceScale = 9
+			BlastJumpForceScaleGrounded = 9
+			DamagePushResistance = 1
+		}
+		IconRed = resource:"ui/hud/class/demoman_red.png"
+		IconBlue = resource:"ui/hud/class/demoman_blue.png"
+		IconPortraitRed = resource:"ui/hud/classportraits/demoman_red.png"
+		IconPortraitBlue = resource:"ui/hud/classportraits/demoman_blue.png"
+		IconPortraitInactive = resource:"ui/hud/classportraits/demoman_inactive.png"
+		IconSelectionRed = resource:"ui/menu/classselection/class_sel_sm_demo_red.png"
+		IconSelectionBlue = resource:"ui/menu/classselection/class_sel_sm_demo_blu.png"
+		IconSelectionInactive = resource:"ui/menu/classselection/class_sel_sm_demo_inactive.png"
+	}
+}

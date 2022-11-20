@@ -1,0 +1,186 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Base = resource:"data/talker/general.tftalker"
+		Criteria = null
+		Responses = 
+		[
+			{
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.medic.sound"
+			},
+			{
+				Criteria = 
+				[
+					"IsOnMedic",
+					"IsOnFriend",
+				]
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.followmedic.sound"
+			},
+			{
+				Concept = "VoiceThanks"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.thanks.sound"
+			},
+			{
+				Concept = "VoiceGo"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.gogogo.sound"
+			},
+			{
+				Concept = "VoiceMoveUp"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.moveup.sound"
+			},
+			{
+				Concept = "VoiceGoLeft"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.left.sound"
+			},
+			{
+				Concept = "VoiceGoRight"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.right.sound"
+			},
+			{
+				Concept = "VoiceYes"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.yes.sound"
+			},
+			{
+				Concept = "VoiceNo"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.no.sound"
+			},
+			{
+				Concept = "VoiceIncoming"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.incoming.sound"
+			},
+			{
+				Concept = "VoiceSpy"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.spy.sound"
+			},
+			{
+				Concept = "VoiceSpy"
+				Criteria = 
+				[
+					"IsOnScout",
+				]
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.spy.scout.sound"
+			},
+			{
+				Concept = "VoiceSpy"
+				Criteria = 
+				[
+					"IsOnSoldier",
+				]
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.spy.soldier.sound"
+			},
+			{
+				Concept = "VoiceSpy"
+				Criteria = 
+				[
+					"IsOnPyro",
+				]
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.spy.pyro.sound"
+			},
+			{
+				Concept = "VoiceSpy"
+				Criteria = 
+				[
+					"IsOnDemoman",
+				]
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.spy.demoman.sound"
+			},
+			{
+				Concept = "VoiceSpy"
+				Criteria = 
+				[
+					"IsOnHeavy",
+				]
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.spy.heavy.sound"
+			},
+			{
+				Concept = "VoiceSpy"
+				Criteria = 
+				[
+					"IsOnEngineer",
+				]
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.spy.engineer.sound"
+			},
+			{
+				Concept = "VoiceSpy"
+				Criteria = 
+				[
+					"IsOnMedic",
+				]
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.spy.medic.sound"
+			},
+			{
+				Concept = "VoiceSpy"
+				Criteria = 
+				[
+					"IsOnSniper",
+				]
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.spy.sniper.sound"
+			},
+			{
+				Concept = "VoiceSpy"
+				Criteria = 
+				[
+					"IsOnSpy",
+				]
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.spy.spy.sound"
+			},
+			{
+				Concept = "VoiceSentryAhead"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.sentryahead.sound"
+			},
+			{
+				Concept = "VoiceTeleporterHere"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.need.teleporter.sound"
+			},
+			{
+				Concept = "VoiceDispenserHere"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.need.dispenser.sound"
+			},
+			{
+				Concept = "VoiceSentryHere"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.need.sentry.sound"
+			},
+			{
+				Concept = "VoiceActivateUbercharge"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.activatecharge.sound"
+			},
+			{
+				Concept = "VoiceHelp"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.help.sound"
+			},
+			{
+				Concept = "VoiceBattleCry"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.battlecry.sound"
+			},
+			{
+				Concept = "VoiceCheers"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.cheers.sound"
+			},
+			{
+				Concept = "VoiceJeers"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.jeers.sound"
+			},
+			{
+				Concept = "VoicePositive"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.positive.sound"
+			},
+			{
+				Concept = "VoiceNegative"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.negative.sound"
+			},
+			{
+				Concept = "VoiceNiceShot"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.niceshot.sound"
+			},
+			{
+				Concept = "VoiceGoodJob"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.goodjob.sound"
+			},
+			{
+				Concept = "Pain"
+				SoundEvent = resource:"sounds/vo/engineer/vo.engineer.pain.severe.sound"
+			},
+		]
+	}
+}

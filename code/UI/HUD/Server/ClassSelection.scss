@@ -1,0 +1,179 @@
+@import "/UI/styles/colors.scss";
+@import "/UI/styles/buttons.scss";
+@import "/UI/styles/footer.scss";
+
+ClassSelection {
+    position: absolute;
+    pointer-events: all;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 5;
+
+    .scene {
+        position: absolute;
+
+        &.background {
+            position: absolute;
+            width: 1920px;
+            height: 1080px;
+
+            .class {
+                position: absolute;
+                width: 105px;
+                height: 180px;
+                background-repeat: no-repeat;
+                background-position: center bottom;
+                background-size: 110px 210px;
+                top: 20px;
+                font-family: TF2_Secondary;
+                color: white;
+                padding-left: 10px;
+                flex-direction: column-reverse;
+                font-size: 24px;
+                align-items: flex-end;
+                color: #80796b;
+
+                .label {
+                    color: #766b5e;
+                    font-family: TF2_Secondary;
+                }
+
+                &.random {
+                    width: 80px;
+                    left: 1535px;
+                    background-size: 110px 210px;
+
+                    &.red {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_random_red.png);
+                    }
+
+                    &.blue {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_random_blu.png);
+                    }
+                }
+
+                &.scout {
+                    left: 290px;
+
+                    &.red {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_scout_red.png);
+                    }
+
+                    &.blue {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_scout_blu.png);
+                    }
+                }
+
+                &.soldier {
+                    left: 395px;
+
+                    &.red {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_soldier_red.png);
+                    }
+
+                    &.blue {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_soldier_blu.png);
+                    }
+                }
+
+                &.pyro {
+                    left: 500px;
+
+                    &.red {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_pyro_red.png);
+                    }
+
+                    &.blue {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_pyro_blu.png);
+                    }
+                }
+
+                &.demoman {
+                    left: 715px;
+
+                    &.red {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_demo_red.png);
+                    }
+
+                    &.blue {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_demo_blu.png);
+                    }
+                }
+
+                &.heavy {
+                    left: 820px;
+
+                    &.red {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_heavy_red.png);
+                    }
+
+                    &.blue {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_heavy_blu.png);
+                    }
+                }
+
+                &.engineer {
+                    left: 925px;
+
+                    &.red {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_engineer_red.png);
+                    }
+
+                    &.blue {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_engineer_blu.png);
+                    }
+                }
+
+                &.medic {
+                    left: 1130px;
+
+                    &.red {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_medic_red.png);
+                    }
+
+                    &.blue {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_medic_blu.png);
+                    }
+                }
+
+                &.sniper {
+                    left: 1235px;
+
+                    &.red {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_sniper_red.png);
+                    }
+
+                    &.blue {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_sniper_blu.png);
+                    }
+                }
+
+                &.spy {
+                    left: 1340px;
+
+                    &.red {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_spy_red.png);
+                    }
+
+                    &.blue {
+                        background-image: url(/ui/Menu/ClassSelection/class_sel_sm_spy_blu.png);
+                    }
+                }
+
+                &:not(.active) {
+                    filter: saturate(0);
+                    opacity: .6;
+                }
+            }
+        }
+
+        &.player {
+            pointer-events: none;
+            width: 1920px;
+            height: 1080px;
+        }
+    }
+}

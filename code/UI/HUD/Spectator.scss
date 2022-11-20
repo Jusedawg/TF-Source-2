@@ -1,0 +1,69 @@
+@import "/UI/styles/colors.scss";
+
+Spectator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    flex-direction: column;
+    display: none;
+    font-size: 24px;
+
+    &.visible {
+        display: flex;
+    }
+
+    .header {
+        width: 100%;
+        height: 200px;
+        background-color: rgba(35, 35, 35, 0.9);
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 65px 0;
+        color: $tan-light;
+        font-family: TF2_Secondary;
+
+        .observertarget {
+            color: $tan-dark;
+        }
+
+        .controls {
+            text-align: left;
+            position: absolute;
+            flex-direction: column;
+            margin-left: 2%;
+            top: 30px;
+
+            .control_row {
+                padding: 3px;
+                height: 30px;
+
+                text {
+                    margin: 0px 15px;
+                }
+            }
+        }
+
+        .map {
+            text-align: right;
+            position: absolute;
+            right: 60px;
+            top: 30px;
+            flex-direction: column;
+
+            .hint {
+                color: $tan-dark;
+            }
+
+            .name {
+                color: $tan-light;
+                font-family: TF2_Build;
+                font-size: 52px;
+            }
+
+            .gamemode {
+                color: $tan-dark;
+            }
+        }
+    }
+}

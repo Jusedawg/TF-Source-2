@@ -1,0 +1,49 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Title = "Syringe Gun"
+		EngineClass = "tf_weapon_syringegun"
+		Hidden = false
+		WorldModel = resource:"models/weapons/c_models/c_syringegun/c_syringegun.vmdl"
+		Owners = 
+		{
+			"data/playerclass/medic.tfclass" = 
+			{
+				Reserve = 150
+				ViewModel = resource:"models/weapons/v_models/v_syringegun_medic.vmdl"
+			}
+		}
+		Damage = 10
+		Range = 4096
+		ClipSize = 40
+		BulletsPerShot = 1
+		BulletSpread = 0.05
+		PunchAngle = 0
+		AmmoPerShot = 1
+		ReloadsEntireClip = true
+		UseFalloff = true
+		FalloffMultiplier = 0.5
+		UseRampup = true
+		RampupMultiplier = 1.5
+		DeployTime = 0.5
+		AttackTime = 0.11
+		ReloadTime = 1.6
+		ReloadStartTime = 0
+		SmackTime = 0
+		InventoryIcon = resource:"ui/weapons/renders/syringe_gun.jpg"
+		KillFeedIcon = resource:"ui/deathnotice/syringe_gun.jpg"
+		KillFeedIconSpecial = null
+		Crosshair = resource:"ui/weapons/crosshairs/dot.png"
+		TracerFrequency = 0
+		TracerRed = null
+		TracerBlue = null
+		TracerRedCritical = null
+		TracerBlueCritical = null
+		MuzzleFlash = null
+		SoundSingle = resource:"sounds/weapons/weapon_syringegun.single.sound"
+		SoundCrit = resource:"sounds/weapons/weapon_syringegun.single.crit.sound"
+		SoundHitWorld = null
+		SoundHitFlesh = null
+	}
+}

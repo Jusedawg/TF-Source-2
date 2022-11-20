@@ -1,0 +1,49 @@
+﻿@import "/UI/styles/colors.scss";
+
+Alert {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    margin-top: 170px;
+    justify-content: center;
+    transform: scale(.95);
+    opacity: 0;
+    transition: all .2s ease;
+
+    &.visible {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    .message {
+        font-family: Verdana;
+        border: 2px solid #f2e2c1;
+        background-color: #bd3b3b;
+        color: $panel-text;
+        font-weight: bold;
+        padding: 5px 40px;
+        border-radius: 10px;
+        font-size: 18px;
+        height: 60px;
+
+        .icon {
+            width: 60px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .text {
+            padding: 10px 0;
+        }
+    }
+
+    &.red .message {
+        background-color: #bd3b3b;
+    }
+
+    &.blue .message {
+        background-color: #5b7a8e;
+    }
+}

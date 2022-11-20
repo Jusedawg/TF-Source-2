@@ -1,0 +1,163 @@
+﻿@import "/UI/styles/colors.scss";
+
+WinPanel {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    justify-content: center;
+    display: none;
+    z-index: 1;
+
+    &.visible {
+        display: flex;
+    }
+
+    .container {
+        width: 550px;
+        flex-direction: column;
+
+        .teamscore {
+            height: 80px;
+            margin-bottom: 10px;
+
+            .score {
+                width: 100%;
+                border-radius: 10px;
+                border: 2px solid #e9e0c8;
+                padding: 20px 8px;
+
+                &.red {
+                    margin-left: 15px;
+                    background-color: $team-red;
+                    text-align: right;
+                }
+
+                &.blue {
+                    margin-right: 15px;
+                    background-color: $team-blu;
+                    text-align: left;
+                }
+
+                .teamname {
+                    font-family: TF2_Secondary;
+                    color: #e9e0c8;
+                    font-size: 32px;
+                    width: 100%;
+                }
+
+                .scorenum {
+                    position: absolute;
+                    font-family: TF2_Secondary;
+                    color: #e9e0c8;
+                    font-size: 128px;
+                    text-shadow: 2px 2px 0 black;
+                    top: -55px;
+                }
+
+                &.blue .scorenum {
+                    right: 5px;
+                }
+
+                &.red .scorenum {
+                    left: 5px;
+                }
+            }
+        }
+
+        .winner {
+            padding: 5px 10px 20px 10px;
+            flex-direction: column;
+            color: #e9e0c8;
+            background-color: $team-neutral;
+            border: 2px solid #e9e0c8;
+            border-radius: 10px;
+
+            .title {
+                font-family: TF2_Secondary;
+                text-shadow: 3px 3px 0 black;
+                text-align: center;
+                font-size: 36px;
+                margin-bottom: 10px;
+            }
+
+            .small {
+                text-align: center;
+                font-family: Verdana;
+            }
+
+            .players {
+                padding: 7px;
+                background-color: #000a;
+                flex-direction: column;
+                margin-top: 5px;
+
+                .header {
+                    border-bottom: 1px solid #e9e0c8;
+                    justify-content: space-between;
+                    color: #e9e0c8;
+                    font-family: Verdana;
+                    margin-bottom: 7px;
+                }
+
+                .list {
+                    padding: 5px 20px;
+                    color: #ea5251;
+                    font-family: Verdana;
+                    font-weight: bold;
+                    flex-direction: column;
+
+                    WinPanelPlayer {
+                        margin-bottom: 5px;
+
+                        .avatar {
+                            height: 30px;
+                            width: 30px;
+                            flex-shrink: 0;
+                        }
+
+                        .text {
+                            padding-top: 5px;
+                            padding-left: 5px;
+                        }
+
+                        .name {
+                            width: 240px;
+                            flex-shrink: 0;
+                        }
+
+                        .pclass {
+                            width: 190px;
+                            text-align: center;
+                        }
+
+                        .points {
+                            width: 40px;
+                            flex-shrink: 0;
+                            text-align: center;
+                        }
+                    }
+
+                    &.mvps {
+                        height: 115px;
+                    }
+
+                    &.killstreak {
+                        height: 40px;
+                    }
+                }
+            }
+        }
+    }
+
+    &.red {
+        .winner {
+            background-color: $team-red;
+        }
+    }
+
+    &.blue {
+        .winner {
+            background-color: $team-blu;
+        }
+    }
+}

@@ -1,0 +1,37 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Entry = "Soldier"
+		Title = "Soldier"
+		MaxHealth = 200
+		MaxSpeed = 240
+		EyeHeight = 68
+		Model = resource:"models/player/soldier/soldier.vmdl"
+		Hands = resource:"models/weapons/arms/c_soldier_arms/c_soldier_arms.vmdl"
+		Responses = resource:"data/talker/soldier.tftalker"
+		DefaultWeapons = 
+		[
+			resource:"data/weapons/rocketlauncher.tfweapon",
+			resource:"data/weapons/shotgun.tfweapon",
+			resource:"data/weapons/shovel.tfweapon",
+		]
+		Buildings = [  ]
+		Abilities = 
+		{
+			CaptureValue = 1
+			BlastJumpDamageMultiplier = 0.6
+			BlastJumpForceScale = 10
+			BlastJumpForceScaleGrounded = 5
+			DamagePushResistance = 1
+		}
+		IconRed = resource:"ui/hud/class/soldier_red.png"
+		IconBlue = resource:"ui/hud/class/soldier_blue.png"
+		IconPortraitRed = resource:"ui/hud/classportraits/soldier_red.png"
+		IconPortraitBlue = resource:"ui/hud/classportraits/soldier_blue.png"
+		IconPortraitInactive = resource:"ui/hud/classportraits/soldier_inactive.png"
+		IconSelectionRed = resource:"ui/menu/classselection/class_sel_sm_soldier_red.png"
+		IconSelectionBlue = resource:"ui/menu/classselection/class_sel_sm_soldier_blu.png"
+		IconSelectionInactive = resource:"ui/menu/classselection/class_sel_sm_soldier_inactive.png"
+	}
+}

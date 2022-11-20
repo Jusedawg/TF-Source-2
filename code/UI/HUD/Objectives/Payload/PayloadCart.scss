@@ -1,0 +1,37 @@
+﻿@import "/UI/styles/colors.scss";
+
+PayloadCart {
+    background-image: url(/ui/hud/objectives/payload/blue_top.png);
+    width: 70px;
+    height: 70px;
+    background-size: contain;
+    z-index: 1;
+    position: absolute;
+    margin-top: -55px;
+    margin-left: -35px;
+    left: 20%;
+    top: 0;
+
+    .indicator {
+        width: 100%;
+        justify-content: center;
+        font-family: TF2_Secondary;
+        color: $panel-text;
+        font-size: 16px;
+        padding-top: 7px;
+        padding-bottom: 45px;
+
+        .icon {
+            width: 10px;
+            height: 100%;
+            background-image: url(/ui/icons/ico_player.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image-tint: #f2e2c1;
+        }
+
+        text {
+            align-items: center;
+        }
+    }
+}

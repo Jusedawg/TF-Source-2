@@ -1,0 +1,32 @@
+﻿ObjectivesStatus {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: none;
+
+    .section {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 95px 0 20px 0;
+
+        &.top {
+            z-index: 1;
+            flex-direction: column;
+        }
+
+        &.bottom {
+            z-index: 1;
+            flex-direction: column-reverse;
+        }
+    }
+
+    &.visible {
+        display: flex;
+    }
+}

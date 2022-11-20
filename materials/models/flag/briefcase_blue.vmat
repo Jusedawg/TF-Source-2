@@ -1,0 +1,26 @@
+"Layer0"
+{
+	"Shader"		"complex.vfx"
+	"TextureColor"		"materials/models/flag/briefcase_blue_color.tga"
+	"F_SPECULAR"		"1"
+	"TextureRoughness"		"materials/models/flag/briefcase_blue_refl.png"
+	"F_SPECULAR_CUBE_MAP"		"1"
+	"g_vMetalnessRange"		"[0.000000 0.000000]"
+	"g_vGlossinessRange"		"[1.000000 1.000000]"
+	"g_vReflectanceRange"		"[0.000000 0.100000]"
+	"legacy_import"
+	{
+		"VertexLitGeneric"
+		{
+			"$baseTexture"		"models\flag/briefcase_blue"
+			"$envmap"		"env_cubemap"
+			"$basealphaenvmapmask"		"1"
+			"$envmaptint"		"0.500000"
+			".5"		"0.500000"
+			"$detail"		"models\flag/briefcase_light_blue"
+			"$detailscale"		"1"
+			"$detailblendfactor"		"0.900000"
+			"$detailblendmode"		"6"
+		}
+	}
+}

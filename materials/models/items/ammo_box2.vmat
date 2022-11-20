@@ -1,0 +1,26 @@
+"Layer0"
+{
+	"Shader"		"complex.vfx"
+	"TextureColor"		"materials/models/items/ammo_box2_color.tga"
+	"TextureSelfIllumMask"		"[0.517647 0.517647 0.517647 1.000000]"
+	"F_SELF_ILLUM"		"1"
+	"g_vSelfIllumTint"		"[1.000000 1.000000 1.000000]"
+	"g_flSelfIllumBrightness"		"1.000000"
+	"legacy_import"
+	{
+		"VertexLitGeneric"
+		{
+			"$baseTexture"		"models\items/ammo_box2"
+			"$selfillum"		"1"
+			">=DX90"
+			{
+				"$baseTexture"		"models\items/ammo_box2_noalpha"
+				"$selfillummask"		"models\items/item_selfillum"
+			}
+			"<DX90"
+			{
+				"$baseTexture"		"models\items/ammo_box2"
+			}
+		}
+	}
+}

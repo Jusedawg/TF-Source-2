@@ -1,0 +1,115 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "complex.vfx"
+
+	//---- PBR ----
+	F_SELF_ILLUM 1
+
+	//---- Translucent ----
+	F_TRANSLUCENT 1
+
+	//---- Ambient Occlusion ----
+	g_flAmbientOcclusionDirectDiffuse "0.000"
+	g_flAmbientOcclusionDirectSpecular "0.000"
+	TextureAmbientOcclusion "materials/default/default_ao.tga"
+
+	//---- Color ----
+	g_flModelTintAmount "1.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColor "materials/models/weapons/v_flamethrower/v_pilotlight_color.tga"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Lighting ----
+	g_flDirectionalLightmapMinZ "0.050"
+	g_flDirectionalLightmapStrength "1.000"
+
+	//---- Metalness ----
+	g_flMetalness "0.000"
+
+	//---- Normal ----
+	TextureNormal "materials/default/default_normal.tga"
+
+	//---- Roughness ----
+	TextureRoughness "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Self Illum ----
+	g_flSelfIllumAlbedoFactor "1.000"
+	g_flSelfIllumBrightness "8.000"
+	g_flSelfIllumScale "1.000"
+	g_vSelfIllumScrollSpeed "[0.000 3.000]"
+	g_vSelfIllumTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureSelfIllumMask "materials/models/effects/pyro/pilotlight_motion.tga"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "0"
+	g_nScaleTexCoordVByModelScaleAxis "0"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
+
+	//---- Translucent ----
+	g_flOpacityScale "1.000"
+	TextureTranslucency "materials/models/weapons/v_flamethrower/v_pilotlight_trans.png"
+
+	"legacy_import"
+	{
+		"UnlitTwoTexture"
+		{
+			"$basetexture"		"\models\weapons\v_flamethrower\v_pilotlight"
+			"$texture2"		"models/effects/pyro/pilotlight_motion"
+			"$surfaceprop"		"default"
+			"$additive"		"1"
+			"$model"		"1"
+			"$nodecal"		"1"
+			"$temp"		"[0 0]"
+			"$pilot"		"0.000000"
+			"$pilot2"		"0.000000"
+			"$cloakPassEnabled"		"1"
+			"Proxies"
+			{
+				"Sine"
+				{
+					"sineperiod"		"0.100000"
+					"sinemin"		"-0.020000"
+					"sinemax"		"0.020000"
+					"resultVar"		"$pilot"
+				}
+				"Sine"
+				{
+					"sineperiod"		"7"
+					"sinemin"		"0.005000"
+					"sinemax"		"-0.005000"
+					"resultVar"		"$pilot2"
+				}
+				"Equals"
+				{
+					"srcVar1"		"$pilot2"
+					"resultVar"		"$temp[0]"
+				}
+				"Equals"
+				{
+					"srcVar1"		"$pilot"
+					"resultVar"		"$temp[1]"
+				}
+				"TextureTransform"
+				{
+					"translateVar"		"$temp"
+					"resultVar"		"$basetexturetransform"
+				}
+				"TextureScroll"
+				{
+					"texturescrollvar"		"$texture2transform"
+					"texturescrollrate"		"3"
+					"texturescrollangle"		"87"
+				}
+			}
+		}
+	}
+}

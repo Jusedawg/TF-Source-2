@@ -1,0 +1,57 @@
+﻿@import "/UI/styles/colors.scss";
+
+ArenaWaitingForPlayers {
+    position: absolute;
+    top: 170px;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    display: none;
+    text-align: center;
+
+    &.visible {
+        display: flex;
+    }
+
+    &.if-spectator {
+        margin-top: 1.5%;
+    }
+
+    .message {
+        font-family: TF2_Secondary;
+        font-size: 24px;
+        border: $panel-border;
+        color: $panel-text;
+        padding: 10px 40px;
+        border-radius: 10px;
+
+        .icon {
+            width: 60px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .text {
+            padding: 10px 0;
+        }
+
+        .content {
+            flex-direction: column;
+
+            .header {
+                font-family: TF2_Build;
+                font-size: 32px;
+                margin-bottom: 6px;
+            }
+        }
+    }
+
+    &.red .message {
+        background-color: $team-red;
+    }
+
+    &.blue .message {
+        background-color: $team-blu;
+    }
+}

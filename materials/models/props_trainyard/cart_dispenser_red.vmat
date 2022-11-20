@@ -1,0 +1,30 @@
+"Layer0"
+{
+	"Shader"		"complex.vfx"
+	"TextureColor"		"materials/models/props_trainyard/cart_dispenser_red_color.tga"
+	"TextureSelfIllumMask"		"[0.211765 0.207843 0.211765 1.000000]"
+	"F_SELF_ILLUM"		"1"
+	"g_vSelfIllumTint"		"[1.000000 1.000000 1.000000]"
+	"g_flSelfIllumBrightness"		"1.000000"
+	"F_SPECULAR"		"1"
+	"TextureRoughness"		"materials/models/props_trainyard/cart_dispenser_red_refl.png"
+	"g_vReflectanceRange"		"[0.000000 0.100000]"
+	"legacy_import"
+	{
+		"VertexLitGeneric"
+		{
+			"$baseTexture"		"models\props_trainyard\cart_dispenser_red"
+			"$selfillum"		"1"
+			"$selfillummask"		"models\props_trainyard\cart_selfillum"
+			"$phong"		"1"
+			"$phongexponent"		"7"
+			"$phongboost"		"0.500000"
+			"$lightwarptexture"		"models/player/pyro/pyro_lightwarp"
+			"$phongfresnelranges"		"[2 1 6]"
+			"$basemapalphaphongmask"		"1"
+			"$rimlight"		"1"
+			"$rimlightexponent"		"2"
+			"$rimlightboost"		"0.200000"
+		}
+	}
+}

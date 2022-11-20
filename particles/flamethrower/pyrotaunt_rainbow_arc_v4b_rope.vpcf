@@ -1,0 +1,119 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+_class = "CParticleSystemDefinition"
+m_nBehaviorVersion = 10
+m_bShouldHitboxesFallbackToRenderBounds = false
+m_nMaxParticles = 128
+m_flConstantRadius = 18.0
+m_flMaxDrawDistance = 100000.0
+m_Renderers = 
+[
+{
+_class = "C_OP_RenderRopes"
+m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+m_bAdditive = true
+m_flDiffuseAmount = 0.0
+m_flSelfIllumAmount = 1.0
+m_hTexture = resource:"materials/particle/rainbow_reversed.vtex"
+m_flRadiusScale = 0.5
+m_flFinalTextureScaleU = -1.0
+m_flFinalTextureOffsetU = 1.0
+m_flTextureVWorldSize = 0.5
+m_nMaxTesselation = 2
+m_nMinTesselation = 2
+},
+]
+m_Operators = 
+[
+{
+_class = "C_OP_BasicMovement"
+},
+{
+_class = "C_OP_FadeIn"
+m_bProportional = false
+m_flFadeInTimeMax = 0.0
+m_flFadeInTimeMin = 0.0
+},
+{
+_class = "C_OP_Decay"
+},
+{
+_class = "C_OP_FadeOut"
+m_bEaseInAndOut = false
+m_bProportional = false
+m_flFadeOutTimeMax = 0.5
+m_flFadeOutTimeMin = 0.5
+},
+{
+_class = "C_OP_PositionLock"
+},
+{
+_class = "C_OP_RemapScalar"
+m_bActiveRange = false
+m_bScaleInitialRange = false
+m_flOutputMax = 3.0
+m_flOutputMin = 4.0
+m_nFieldOutput = 1
+m_flInputMax = 1.0
+m_flInputMin = 0.0
+m_nFieldInput = 8
+m_flEndTime = -1.0
+m_flStartTime = -1.0
+m_flOpFadeOscillatePeriod = 0.0
+m_flOpEndFadeOutTime = 0.0
+m_flOpStartFadeOutTime = 0.0
+m_flOpEndFadeInTime = 0.0
+m_flOpStartFadeInTime = 0.0
+m_nSetMethod = "PARTICLE_SET_REPLACE_VALUE"
+m_bNormalizeToStopTime = false
+m_flOpTimeOffsetMin = 0.0
+m_flOpTimeOffsetMax = 0.0
+m_nOpTimeOffsetSeed = 0
+m_nOpTimeScaleSeed = 0
+m_flOpTimeScaleMin = 1.0
+m_flOpTimeScaleMax = 1.0
+m_bDisableOperator = false
+m_nOpEndCapState = -1
+m_flOpStrength = "1.0"
+m_Notes = ""
+},
+]
+m_Initializers = 
+[
+{
+_class = "C_INIT_CreateFromParentParticles"
+},
+{
+_class = "C_INIT_DistanceToCPInit"
+m_flInputMin = 80.0
+m_flInputMax = 130.0
+m_nFieldOutput = "7"
+m_flOutputMin = 1.0
+m_flOutputMax = 0.0
+m_nStartCP = 3
+},
+]
+m_Emitters = 
+[
+{
+_class = "C_OP_ContinuousEmitter"
+m_flEmissionDuration = 1.0
+m_flEmitRate = 32.0
+},
+]
+m_Children = 
+[
+{
+m_ChildRef = resource:"particles/flamethrower/pyrotaunt_rainbow_stars.vpcf"
+},
+{
+m_ChildRef = resource:"particles/flamethrower/pyrotaunt_rainbow_explosion01.vpcf"
+},
+{
+m_ChildRef = resource:"particles/flamethrower/pyrotaunt_rainbow_explosion02.vpcf"
+},
+{
+m_ChildRef = resource:"particles/flamethrower/pyrotaunt_rainbow_explosion03.vpcf"
+},
+]
+}

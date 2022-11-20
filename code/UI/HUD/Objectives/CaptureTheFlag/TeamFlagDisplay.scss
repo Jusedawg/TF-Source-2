@@ -1,0 +1,192 @@
+﻿TeamFlagDisplay {
+    width: 100%;
+    flex-direction: column-reverse;
+    align-items: center;
+    padding-bottom: 40px;
+    height: 240px;
+    display: none;
+
+    &.visible {
+        display: flex;
+    }
+
+    .outline {
+        width: 0;
+        opacity: 0;
+        aspect-ratio: 1;
+        position: absolute;
+        background-image: url(/ui/HUD/Objectives/Flags/carried_outline.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        display: none;
+        transition: width .3s ease, opacity .3s ease;
+    }
+
+    &.show_outline .outline {
+        width: 800px;
+        opacity: 1;
+    }
+
+    .wrapper {
+        height: 100px;
+        width: 650px;
+        background-image: url(/ui/HUD/Objectives/Flags/background.png);
+        background-size: contain;
+        background-position: center bottom;
+        background-repeat: no-repeat;
+        justify-content: center;
+
+        .score {
+            font-family: TF2_Secondary;
+            color: #d3c9ae;
+            font-size: 84px;
+            position: absolute;
+            height: 100%;
+            align-items: center;
+            padding-top: 10px;
+            text-shadow: 2px 2px 0 black;
+            z-index: 0;
+
+            &.blue {
+                left: 30px;
+                text-align: left;
+            }
+
+            &.red {
+                right: 30px;
+                text-align: right;
+            }
+        }
+
+        .limit {
+            background-color: #2f2b28;
+            width: 230px;
+            height: 40px;
+            position: absolute;
+            border: 2px solid #d3c9ae;
+            border-radius: 10px;
+            color: #e9e0c8;
+            font-family: TF2_Secondary;
+            font-size: 22px;
+            text-align: center;
+            padding-top: 7px;
+            left: 210px;
+            bottom: -18px;
+        }
+
+        .compass_container {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            padding: 0 60px;
+            flex-direction: row;
+            justify-content: space-around;
+            z-index: 1;
+
+            &.zone {
+                opacity: 0;
+            }
+        }
+
+        .carried_indicator {
+            width: 240px;
+            height: 240px;
+            background-size: contain;
+            z-index: 2;
+            bottom: 80px;
+            position: absolute;
+            opacity: 0;
+        }
+    }
+
+    &.has_flag {
+        .carried_indicator {
+            opacity: 1;
+        }
+
+        .compass_container.flags {
+            opacity: 0;
+        }
+
+        .compass_container.zone {
+            opacity: 1;
+        }
+
+        .outline {
+            display: flex;
+        }
+    }
+
+    &.has_flag_red .carried_indicator {
+        background-image: url(/ui/HUD/Objectives/Flags/carried_red.png);
+    }
+
+    &.has_flag_blue .carried_indicator {
+        background-image: url(/ui/HUD/Objectives/Flags/carried_blue.png);
+    }
+}
+
+TeamFlagCompass {
+    width: 200px;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+
+    .compass {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-image: url(/ui/HUD/Objectives/Flags/compass_grey.png);
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+    &.red {
+        .compass {
+            background-image: url(/ui/HUD/Objectives/Flags/compass_red.png);
+        }
+    }
+
+    &.blue {
+        .compass {
+            background-image: url(/ui/HUD/Objectives/Flags/compass_blue.png);
+        }
+    }
+
+    .briefcase {
+        width: 40%;
+        height: 100%;
+        background-image: url(/ui/HUD/Objectives/Flags/briefcase.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+    }
+
+    .status {
+        width: 35%;
+        height: 100%;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        position: absolute;
+        transform: translate(35%, -10px);
+
+        &.home {
+            background-image: url(/ui/Icons/ico_flag_home.png);
+        }
+
+        &.carried {
+            background-image: url(/ui/Icons/ico_flag_moving.png);
+        }
+
+        &.dropped {
+            background-image: url(/ui/Icons/ico_flag_dropped.png);
+        }
+    }
+
+    &.hide_briefcase .briefcase {
+        opacity: 0;
+    }
+}

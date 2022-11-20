@@ -1,0 +1,45 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Levels = 
+		[
+			{
+				Models = 
+				{
+					Upgrading = resource:"models/buildables/sentry/lvl1/sentry1_build.vmdl"
+					Finished = resource:"models/buildables/sentry/lvl1/sentry1.vmdl"
+				}
+				Health = 150.0
+				Cost = 100
+				Time = 10.5
+			},
+			{
+				Health = 180.0
+				Models = 
+				{
+					Upgrading = resource:"models/buildables/sentry/lvl2/sentry2_upgrade.vmdl"
+					Finished = resource:"models/buildables/sentry/lvl2/sentry2.vmdl"
+				}
+				Cost = 200
+				Time = 1.6
+			},
+			{
+				Health = 216.0
+				Cost = 200
+				Models = 
+				{
+					Upgrading = resource:"models/buildables/sentry/lvl3/sentry3_upgrade.vmdl"
+					Finished = resource:"models/buildables/sentry/lvl3/sentry3.vmdl"
+				}
+				Time = 1.6
+			},
+		]
+		Blueprint = resource:"models/buildables/sentry/shared/sentry1_blueprint.vmdl"
+		ClassName = "tf_building_sentry"
+		Maxs = [ 20.0, 20.0, 66.0 ]
+		Mins = [ -20.0, -20.0, 0.0 ]
+		Title = "Sentry"
+		Pickable = true
+	}
+}

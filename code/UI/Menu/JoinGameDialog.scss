@@ -1,0 +1,76 @@
+@import "/UI/styles/colors.scss";
+@import "/UI/styles/buttons.scss";
+
+JoinGameDialog {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    z-index: 5;
+    transition: opacity .1s ease, transform .1s ease;
+    visibility: hidden;
+    background-color: #000a;
+
+    &:intro {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+
+    &:outro {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+
+    &.open {
+        pointer-events: all;
+        visibility: visible;
+    }
+
+    .container {
+        max-width: 800px;
+        max-height: 260px;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, #15120fee, #231f19ee, #15120fee);
+        backdrop-filter: blur(50px);
+        border-radius: 6px;
+        transition: transform .2s ease;
+        flex-direction: column;
+
+        > .header {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 48px;
+            background-color: $tan-darkest;
+            border-radius: 6px;
+            font-family: TF2_Build;
+            color: #e6d9bc;
+            text-align: center;
+        }
+
+        .content {
+            padding: 20px;
+            flex-direction: column;
+            color: #a08f82;
+            font-family: TF2_Secondary;
+            font-size: 20px;
+            text-align: center;
+
+            .button_container {
+                flex-direction: row;
+                margin-top: 25px;
+
+                Button {
+                    width: 100%;
+                    text-align: center;
+
+                    &:not(:last-child) {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

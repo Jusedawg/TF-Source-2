@@ -1,0 +1,49 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Title = "Grenade Launcher"
+		EngineClass = "tf_weapon_grenadelauncher"
+		Hidden = false
+		WorldModel = resource:"models/weapons/c_models/c_grenadelauncher/c_grenadelauncher.vmdl"
+		Owners = 
+		{
+			"data/playerclass/demoman.tfclass" = 
+			{
+				Reserve = 16
+				ViewModel = resource:"models/weapons/v_models/v_grenadelauncher_demo.vmdl"
+			}
+		}
+		Damage = 100
+		Range = 4096
+		ClipSize = 4
+		BulletsPerShot = 1
+		BulletSpread = 0
+		PunchAngle = 3
+		AmmoPerShot = 1
+		ReloadsEntireClip = false
+		UseFalloff = false
+		FalloffMultiplier = 0
+		UseRampup = false
+		RampupMultiplier = 0
+		DeployTime = 0.5
+		AttackTime = 0.6
+		ReloadTime = 0.66
+		ReloadStartTime = 0.6
+		SmackTime = 0
+		InventoryIcon = resource:"ui/weapons/renders/grenade_launcher.jpg"
+		KillFeedIcon = resource:"ui/deathnotice/grenade_launcher.jpg"
+		KillFeedIconSpecial = null
+		Crosshair = resource:"ui/weapons/crosshairs/circle.png"
+		TracerFrequency = 0
+		TracerRed = null
+		TracerBlue = null
+		TracerRedCritical = null
+		TracerBlueCritical = null
+		MuzzleFlash = resource:"particles/muzzle_flash/muzzle_grenadelauncher.vpcf"
+		SoundSingle = resource:"sounds/weapons/weapon_grenadelauncher.single.sound"
+		SoundCrit = resource:"sounds/weapons/weapon_grenadelauncher.single.crit.sound"
+		SoundHitWorld = null
+		SoundHitFlesh = null
+	}
+}

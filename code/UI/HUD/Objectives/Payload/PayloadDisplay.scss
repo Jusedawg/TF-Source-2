@@ -1,0 +1,14 @@
+﻿PayloadDisplay {
+    width: 100%;
+    justify-content: center;
+    display: none;
+
+    &.visible {
+        display: flex;
+    }
+
+    .container {
+        width: 600px;
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,14 @@
+﻿TFKillFeed {
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    font-weight: 900;
+    z-index: 0;
+    font-family: Inter_Bold;
+
+    &.if-spectator {
+        top: 210px;
+    }
+}

@@ -1,0 +1,157 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+_class = "CParticleSystemDefinition"
+m_nBehaviorVersion = 10
+m_bShouldHitboxesFallbackToRenderBounds = false
+m_nMaxParticles = 32
+m_flMaxDrawDistance = 100000.0
+m_Renderers = 
+[
+{
+_class = "C_OP_RenderRopes"
+m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+m_bAdditive = true
+m_flDiffuseAmount = 0.0
+m_flSelfIllumAmount = 1.0
+m_hTexture = resource:"materials/particle/rainbow.vtex"
+m_flRadiusScale = 0.5
+m_flFinalTextureScaleU = -1.0
+m_flFinalTextureOffsetU = 1.0
+m_flTextureVWorldSize = 999.999939
+m_nMaxTesselation = 5
+m_nMinTesselation = 5
+},
+]
+m_Operators = 
+[
+{
+_class = "C_OP_PositionLock"
+m_flEndTime_max = 0.9
+m_flEndTime_min = 0.6
+m_flStartTime_max = 0.5
+m_flStartTime_min = 0.3
+},
+{
+_class = "C_OP_BasicMovement"
+m_fDrag = 0.18
+m_Gravity = [ 100.0, 100.0, 1548.0 ]
+},
+{
+_class = "C_OP_Decay"
+},
+{
+_class = "C_OP_InterpolateRadius"
+m_bEaseInAndOut = true
+m_flEndTime = 0.8
+m_flEndScale = 20.0
+m_flStartScale = 0.1
+},
+{
+_class = "C_OP_InterpolateRadius"
+m_flStartTime = 0.95
+m_flStartScale = 0.25
+m_bEaseInAndOut = true
+m_flBias = 0.9
+},
+{
+_class = "C_OP_FadeIn"
+m_flFadeInTimeMin = 0.3
+m_flFadeInTimeMax = 0.3
+},
+{
+_class = "C_OP_FadeOut"
+m_flOpStartFadeOutTime = 0.5
+m_flOpEndFadeOutTime = 1.0
+m_flFadeOutTimeMin = 0.3
+m_flFadeOutTimeMax = 1.0
+m_flFadeBias = 1.0
+},
+{
+_class = "C_OP_SpinUpdate"
+},
+{
+_class = "C_OP_Spin"
+m_nSpinRateDegrees = 1440
+m_fSpinRateStopTime = 1.0
+m_nSpinRateMinDegrees = 1440
+},
+]
+m_Initializers = 
+[
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 0.3
+m_flRandomMax = 0.3
+}
+m_nOutputField = "1"
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_CreateWithinSphere"
+m_LocalCoordinateSystemSpeedMax = [ 800.0, 0.0, 0.0 ]
+m_LocalCoordinateSystemSpeedMin = [ 800.0, 0.0, 0.0 ]
+},
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 2.5
+m_flRandomMax = 0.5
+}
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 1
+m_flRandomMax = 1
+}
+m_nOutputField = "7"
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_PositionOffset"
+m_OffsetMin = [ -5.0, 0.0, 0.0 ]
+m_OffsetMax = [ -5.0, 0.0, 0.0 ]
+m_bLocalCoords = true
+},
+]
+m_Emitters = 
+[
+{
+_class = "C_OP_ContinuousEmitter"
+m_flEmissionDuration = 0.8
+m_flEmitRate = 128.0
+},
+]
+m_Children = 
+[
+{
+m_ChildRef = resource:"particles/flamethrower/flamethrower_fire_1_rainbow.vpcf"
+},
+{
+m_ChildRef = resource:"particles/flamethrower/flamethrower_pilot_rainbow.vpcf"
+},
+{
+m_ChildRef = resource:"particles/flamethrower/flamethrower_drips_rainbow.vpcf"
+},
+]
+}

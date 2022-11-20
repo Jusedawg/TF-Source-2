@@ -1,0 +1,49 @@
+﻿@import "/UI/styles/colors.scss";
+
+TeamGoalDisplay {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 100%;
+    justify-content: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    z-index: 2;
+    display: none;
+
+    &.visible {
+        display: flex;
+    }
+
+    .container {
+        background-color: $team-red;
+        border: 2px solid #f2e2c1;
+        border-radius: 10px;
+        width: 500px;
+        padding: 10px;
+
+        .image {
+            width: 100px;
+            height: 100px;
+            background-size: contain;
+            margin-right: 15px;
+            background-repeat: no-repeat;
+            flex-shrink: 0;
+        }
+
+        .goal {
+            color: $tan-light;
+            font-family: TF2_Secondary;
+            justify-content: center;
+            height: 100%;
+            align-items: center;
+            font-size: 20px;
+        }
+    }
+
+    &.red {
+    }
+
+    &.blue {
+    }
+}

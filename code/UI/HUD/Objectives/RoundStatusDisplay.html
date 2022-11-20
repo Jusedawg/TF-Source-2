@@ -1,0 +1,12 @@
+﻿<link rel="stylesheet" href="RoundStatusDisplay.scss" />
+
+<root>
+    <div class="container">
+        <RoundStatusPlayers Team="Blue" />
+        <div class="round_container">
+            <div class="timers_container" @ref="TimersContainer" />
+        </div>
+        <RoundStatusPlayers Team="Red" />
+        <text class="game_state_label" @ref="GameStateLabel">Waiting For Players</text>
+    </div>
+</root>

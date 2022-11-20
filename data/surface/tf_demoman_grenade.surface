@@ -1,0 +1,40 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		basesurface = "surfaces/metal.surface"
+		description = ""
+		friction = 0.8
+		elasticity = 0.25
+		density = 2700.0
+		thickness = 0.1
+		dampening = 0.0
+		bouncethreshold = 40.0
+		impacteffects = 
+		{
+			bulletdecal = 
+			[
+				"decals/bullet-metal.decal",
+			]
+			bullet = 
+			[
+				resource:"particles/impact.metal-chunks.vpcf",
+			]
+			regular = 
+			[
+				resource:"particles/impact_fx/impact_metal.vpcf",
+			]
+		}
+		sounds = 
+		{
+			footleft = "grenade.impact"
+			footright = "grenade.impact"
+			footlaunch = "grenade.impact"
+			footland = "grenade.impact"
+			smoothscrape = "grenade.scrapesmooth"
+			roughscrape = "grenade.scraperough"
+			impacthard = "grenade.impact"
+			impactsoft = "grenade.impact"
+		}
+	}
+}

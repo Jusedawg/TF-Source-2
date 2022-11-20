@@ -1,0 +1,69 @@
+@import "/UI/styles/colors.scss";
+@import "/UI/styles/buttons.scss";
+
+ItemPickerElement {
+    position: relative;
+    width: 350px;
+    height: 160px;
+    background-color: #292526;
+    margin-bottom: 20px;
+    border: 2px solid $tan-dark;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    justify-content: center;
+
+    &.has_equipped_label .equipped_label {
+        display: flex;
+    }
+
+    .equipped_label {
+        display: none;
+        position: absolute;
+        background-color: #000;
+        color: $button-hover;
+        padding: 4px 7px;
+        border-radius: 5px;
+        font-family: TF2_Secondary;
+        right: 10px;
+        top: 10px;
+    }
+
+    .image {
+        width: 160px;
+        height: 160px;
+        bottom: 10px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .item_name {
+        font-family: TF2_Build;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 6px;
+        font-size: 22px;
+        color: $quality-normal;
+    }
+
+    &:hover {
+        background-color: #40393b;
+    }
+
+    &:active {
+        background-color: #363031;
+        sound-in: ui.button.click;
+        sound-out: ui.button.release;
+    }
+
+    &.q_unique {
+        border-color: $quality-unique;
+
+        .item_name {
+            color: $quality-unique;
+        }
+    }
+}

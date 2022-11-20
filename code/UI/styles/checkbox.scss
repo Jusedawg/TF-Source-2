@@ -1,0 +1,41 @@
+@import "/ui/styles/colors.scss";
+
+.checkbox {
+    width: 100%;
+    flex-direction: row;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    > .checkmark {
+        height: 48px;
+        background-color: #100e0e;
+        border: 3px solid #766b5e;
+        margin-right: 10px;
+        flex-shrink: 0;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image-tint: $tan-light;
+        color: transparent;
+    }
+
+    label {
+        color: #766b5e;
+        font-family: TF2_Secondary;
+        font-size: 24px;
+        flex-direction: column;
+        height: 100%;
+        align-items: center;
+    }
+
+    &.checked {
+        > .checkmark {
+            background-image: url(/ui/menu/checkmark.png);
+        }
+    }
+
+    &.checked:active, &:not(.checked):active {
+        sound-in: ui.button.click;
+        sound-out: ui.button.release;
+    }
+}

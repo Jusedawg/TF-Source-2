@@ -1,0 +1,53 @@
+﻿PayloadPath {
+    width: 100%;
+    height: 100%;
+    border-top: 2px solid #f2e2c1;
+    border-bottom: 2px solid #f2e2c1;
+    background-color: #000a;
+    height: 30px;
+    margin: 20px 0;
+    flex-direction: column;
+
+    &:nth-child(odd) {
+        margin-top: 50px;
+    }
+
+    &:nth-child(even) {
+        margin-bottom: 50px;
+    }
+
+    .point {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        background-image: url(/ui/hud/objectives/payload/point_neutral_opaque.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin: -12px 0 0 -25px;
+
+        &.red {
+            background-image: url(/ui/hud/objectives/payload/point_red_opaque.png);
+
+            &.home {
+                background-image: url(/ui/hud/objectives/payload/home_red_opaque.png);
+            }
+        }
+
+        &.blue {
+            background-image: url(/ui/hud/objectives/payload/point_blue_opaque.png);
+
+            &.home {
+                background-image: url(/ui/hud/objectives/payload/home_blue_opaque.png);
+            }
+        }
+    }
+
+    .rollback {
+        background-image: url(/ui/hud/objectives/payload/track_arrow);
+    }
+
+    .rollforward {
+        background-image: url(/ui/hud/objectives/payload/track_arrow);
+        transform: rotate(180deg);
+    }
+}

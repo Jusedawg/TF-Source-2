@@ -1,0 +1,125 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "complex.vfx"
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+
+	//---- Translucent ----
+	F_ALPHA_TEST 1
+
+	//---- Unlit ----
+	F_DISABLE_TONE_MAPPING 1
+	F_UNLIT 1
+
+	//---- Ambient Occlusion ----
+	TextureAmbientOcclusion "materials/default/default_ao.tga"
+
+	//---- Color ----
+	g_flModelTintAmount "1.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColor "materials/overlays/no_entry_color.png"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Metalness ----
+	g_flMetalness "0.000"
+
+	//---- Normal ----
+	TextureNormal "materials/default/default_normal.tga"
+
+	//---- Roughness ----
+	TextureRoughness "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "0"
+	g_nScaleTexCoordVByModelScaleAxis "0"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
+
+	//---- Translucent ----
+	g_flAlphaTestReference "0.500"
+	g_flAntiAliasedEdgeStrength "1.000"
+	TextureTranslucency "materials/overlays/no_entry_trans.tga"
+
+	"legacy_import"
+	{
+		"UnlitGeneric"
+		{
+			"$baseTexture"		"overlays/no_entry"
+			"$translucent"		"1"
+			"$nodecal"		"1"
+			"%compiletrigger"		"1"
+			"%keywords"		"tf"
+			"$softedges"		"1"
+			"$edgesoftnessstart"		"0.600000"
+			"$edgesoftnessend"		"0.500000"
+			"$outline"		"1"
+			"$outlinecolor"		"[0 0 0]"
+			"$outlinealpha"		"1"
+			"$outlinestart0"		"0.400000"
+			"$outlinestart1"		"0.520000"
+			"$outlineend0"		"0.800000"
+			"$outlineend1"		"0.920000"
+			"$playerdistance"		"0"
+			"$distanceclamped"		"0"
+			"$distanceinverted"		"0"
+			"$teammatch"		"0"
+			"$matchinverted"		"0"
+			"$endalpha"		"0"
+			"$one"		"2"
+			"$fadedistance"		"800"
+			"$distancealpha"		"1"
+			"Proxies"
+			{
+				"PlayerProximity"
+				{
+					"resultVar"		"$playerdistance"
+					"scale"		"1.000000"
+				}
+				"Clamp"
+				{
+					"srcVar1"		"$playerdistance"
+					"min"		"0"
+					"max"		"$fadedistance"
+					"resultVar"		"$distanceclamped"
+				}
+				"Subtract"
+				{
+					"srcVar1"		"$fadedistance"
+					"srcVar2"		"$distanceclamped"
+					"resultVar"		"$distanceinverted"
+				}
+				"PlayerTeamMatch"
+				{
+					"resultVar"		"$teammatch"
+				}
+				"Subtract"
+				{
+					"srcVar1"		"$one"
+					"srcVar2"		"$teammatch"
+					"resultVar"		"$matchinverted"
+				}
+				"Divide"
+				{
+					"srcVar1"		"$distanceinverted"
+					"srcVar2"		"$fadedistance"
+					"resultVar"		"$endalpha"
+				}
+				"Multiply"
+				{
+					"srcVar1"		"$endalpha"
+					"srcVar2"		"$matchinverted"
+					"resultVar"		"$alpha"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,266 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "BoneMarkupList"
+				bone_cull_type = "None"
+			},
+			{
+				_class = "Skeleton"
+				children = 
+				[
+					{
+						_class = "Bone"
+						name = "base"
+						children = 
+						[
+							{
+								_class = "Bone"
+								name = "redx"
+								origin = [ 0.0, -2.0, 0.0 ]
+								angles = [ -0.0, 0.0, 0.0 ]
+								do_not_discard = true
+							},
+							{
+								_class = "Bone"
+								name = "cube"
+								origin = [ 0.0, 5.0, 0.0 ]
+								angles = [ -0.0, 0.0, 0.0 ]
+								do_not_discard = true
+							},
+							{
+								_class = "Bone"
+								name = "cube1"
+								origin = [ 0.0, 15.0, 0.0 ]
+								angles = [ -0.0, 0.0, 0.0 ]
+								do_not_discard = true
+							},
+							{
+								_class = "Bone"
+								name = "cube2"
+								origin = [ 0.0, 25.0, 0.0 ]
+								angles = [ -0.0, 0.0, 0.0 ]
+								do_not_discard = true
+							},
+							{
+								_class = "Bone"
+								name = "cube3"
+								origin = [ 0.0, 35.0, 0.0 ]
+								angles = [ -0.0, 0.0, 0.0 ]
+								do_not_discard = true
+							},
+							{
+								_class = "Bone"
+								name = "cube4"
+								origin = [ 0.0, 51.389343, 0.0 ]
+								angles = [ -0.0, 0.0, 0.0 ]
+								do_not_discard = true
+							},
+							{
+								_class = "Bone"
+								name = "cube5"
+								origin = [ 0.0, 58.0, 0.0 ]
+								angles = [ -0.0, 0.0, 0.0 ]
+								do_not_discard = true
+							},
+							{
+								_class = "Bone"
+								name = "cube6"
+								origin = [ 28.238647, 49.104115, 0.0 ]
+								angles = [ -0.0, 0.0, 0.0 ]
+								do_not_discard = true
+							},
+							{
+								_class = "Bone"
+								name = "cube7"
+								origin = [ 28.398455, 5.489915, 0.0 ]
+								angles = [ -0.0, 0.0, 0.0 ]
+								do_not_discard = true
+							},
+						]
+						origin = [ 0.0, 0.0, 0.0 ]
+						angles = [ -0.0, 0.0, 89.999985 ]
+						do_not_discard = true
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "disp_blueprint_build_is_unused.vmat"
+								to = "materials/models/buildables/dispenser/disp_blueprint_build.vmat"
+							},
+							{
+								from = "disp_blueprint_model_is_unused.vmat"
+								to = "materials/models/buildables/dispenser/disp_blueprint_model.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "default"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -23.597498, -2.0, -29.869791 ]
+								hitbox_maxs = [ 28.398455, 58.0, 29.869791 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -24.590401, -4.236606, -11.659652 ]
+								hitbox_maxs = [ 14.366417, 9.684299, 11.368699 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -24.590401, -5.676349, -11.659652 ]
+								hitbox_maxs = [ 13.669154, 7.631406, 11.368699 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -24.564104, -9.90228, -11.659649 ]
+								hitbox_maxs = [ 19.517693, 10.832836, 11.368707 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -24.235655, -9.278791, -11.659649 ]
+								hitbox_maxs = [ 19.517693, 7.392823, 11.368707 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -23.843927, -9.274804, -11.65964 ]
+								hitbox_maxs = [ 13.787402, 5.75107, 11.554651 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								group_id = 0
+								hitbox_mins = [ -23.843927, -9.15154, -11.65964 ]
+								hitbox_maxs = [ 13.787402, 0.0, 11.554651 ]
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "dispenser_blueprint_lod0"
+						filename = "models/buildables/dispenser/shared/dispenser_blueprint_refs/mesh/dispenser_blueprint_lod0.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "idle"
+						activity_name = "ACT_OBJ_PLACING"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/dispenser/shared/dispenser_blueprint_refs/anim/idle.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "reject"
+						activity_name = "ACT_OBJ_IDLE"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/dispenser/shared/dispenser_blueprint_refs/anim/reject.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 1.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = "models/buildables/shared/blueprint.vanmgrph"
+	}
+}

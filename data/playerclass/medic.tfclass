@@ -1,0 +1,39 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		Entry = "Medic"
+		Title = "Medic"
+		MaxHealth = 150
+		MaxSpeed = 320
+		EyeHeight = 75
+		Model = resource:"models/player/medic/medic.vmdl"
+		Hands = resource:"models/weapons/arms/c_medic_arms/c_medic_arms.vmdl"
+		Responses = resource:"data/talker/medic.tftalker"
+		DefaultWeapons = 
+		[
+			resource:"data/weapons/medigun.tfweapon",
+			resource:"data/weapons/bonesaw.tfweapon",
+			resource:"data/weapons/syringegun.tfweapon",
+		]
+		Buildings = [  ]
+		Abilities = 
+		{
+			CaptureValue = 1
+			AutoRegenHealth = 6
+			AutoRegenPeakTime = 10
+			BlastJumpDamageMultiplier = 1
+			BlastJumpForceScale = 9
+			BlastJumpForceScaleGrounded = 9
+			DamagePushResistance = 1
+		}
+		IconRed = resource:"ui/hud/class/medic_red.png"
+		IconBlue = resource:"ui/hud/class/medic_blue.png"
+		IconPortraitRed = resource:"ui/hud/classportraits/medic_red.png"
+		IconPortraitBlue = resource:"ui/hud/classportraits/medic_blue.png"
+		IconPortraitInactive = resource:"ui/hud/classportraits/medic_inactive.png"
+		IconSelectionRed = resource:"ui/menu/classselection/class_sel_sm_medic_red.png"
+		IconSelectionBlue = resource:"ui/menu/classselection/class_sel_sm_medic_blu.png"
+		IconSelectionInactive = resource:"ui/menu/classselection/class_sel_sm_medic_inactive.png"
+	}
+}

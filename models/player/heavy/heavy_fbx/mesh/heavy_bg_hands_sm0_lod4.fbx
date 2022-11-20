@@ -1,0 +1,2775 @@
+; FBX 7.5.0 project file
+; Copyright (C) 1997-2010 Autodesk Inc. and/or its licensors.
+; All rights reserved.
+; ----------------------------------------------------
+
+FBXHeaderExtension:  {
+	FBXHeaderVersion: 1003
+	FBXVersion: 7500
+	CreationTimeStamp:  {
+		Version: 1000
+		Year: 2021
+		Month: 7
+		Day: 28
+		Hour: 21
+		Minute: 52
+		Second: 16
+		Millisecond: 521
+	}
+	Creator: "FBX SDK/FBX Plugins version 2016.1.2"
+	SceneInfo: "SceneInfo::GlobalInfo", "UserData" {
+		Type: "UserData"
+		Version: 100
+		MetaData:  {
+			Version: 100
+			Title: ""
+			Subject: ""
+			Author: ""
+			Keywords: ""
+			Revision: ""
+			Comment: ""
+		}
+		Properties70:  {
+			P: "DocumentUrl", "KString", "Url", "", "c:\steam\steamapps\common\half-life alyx\content\hlvr_addons\tf_imported\models\player\heavy_fbx\mesh\heavy_bg_hands_sm0_lod4.fbx"
+			P: "SrcDocumentUrl", "KString", "Url", "", "c:\steam\steamapps\common\half-life alyx\content\hlvr_addons\tf_imported\models\player\heavy_fbx\mesh\heavy_bg_hands_sm0_lod4.fbx"
+			P: "Original", "Compound", "", ""
+			P: "Original|ApplicationVendor", "KString", "", "", ""
+			P: "Original|ApplicationName", "KString", "", "", ""
+			P: "Original|ApplicationVersion", "KString", "", "", ""
+			P: "Original|DateTime_GMT", "DateTime", "", "", ""
+			P: "Original|FileName", "KString", "", "", ""
+			P: "LastSaved", "Compound", "", ""
+			P: "LastSaved|ApplicationVendor", "KString", "", "", ""
+			P: "LastSaved|ApplicationName", "KString", "", "", ""
+			P: "LastSaved|ApplicationVersion", "KString", "", "", ""
+			P: "LastSaved|DateTime_GMT", "DateTime", "", "", ""
+		}
+	}
+}
+GlobalSettings:  {
+	Version: 1000
+	Properties70:  {
+		P: "UpAxis", "int", "Integer", "",1
+		P: "UpAxisSign", "int", "Integer", "",1
+		P: "FrontAxis", "int", "Integer", "",2
+		P: "FrontAxisSign", "int", "Integer", "",1
+		P: "CoordAxis", "int", "Integer", "",0
+		P: "CoordAxisSign", "int", "Integer", "",1
+		P: "OriginalUpAxis", "int", "Integer", "",-1
+		P: "OriginalUpAxisSign", "int", "Integer", "",1
+		P: "UnitScaleFactor", "double", "Number", "",1
+		P: "OriginalUnitScaleFactor", "double", "Number", "",1
+		P: "AmbientColor", "ColorRGB", "Color", "",0,0,0
+		P: "DefaultCamera", "KString", "", "", "Producer Perspective"
+		P: "TimeMode", "enum", "", "",0
+		P: "TimeProtocol", "enum", "", "",2
+		P: "SnapOnFrameMode", "enum", "", "",0
+		P: "TimeSpanStart", "KTime", "Time", "",0
+		P: "TimeSpanStop", "KTime", "Time", "",46186158000
+		P: "CustomFrameRate", "double", "Number", "",-1
+		P: "TimeMarker", "Compound", "", ""
+		P: "CurrentTimeMarker", "int", "Integer", "",-1
+	}
+}
+
+; Documents Description
+;------------------------------------------------------------------
+
+Documents:  {
+	Count: 1
+	Document: 2710390346016, "heavy_bg_hands_sm0_lod4", "Scene" {
+		Properties70:  {
+			P: "SourceObject", "object", "", ""
+			P: "ActiveAnimStackName", "KString", "", "", ""
+		}
+		RootNode: 0
+	}
+}
+
+; Document References
+;------------------------------------------------------------------
+
+References:  {
+}
+
+; Object definitions
+;------------------------------------------------------------------
+
+Definitions:  {
+	Version: 100
+	Count: 181
+	ObjectType: "GlobalSettings" {
+		Count: 1
+	}
+	ObjectType: "Pose" {
+		Count: 1
+	}
+	ObjectType: "Model" {
+		Count: 80
+		PropertyTemplate: "FbxNode" {
+			Properties70:  {
+				P: "QuaternionInterpolate", "enum", "", "",0
+				P: "RotationOffset", "Vector3D", "Vector", "",0,0,0
+				P: "RotationPivot", "Vector3D", "Vector", "",0,0,0
+				P: "ScalingOffset", "Vector3D", "Vector", "",0,0,0
+				P: "ScalingPivot", "Vector3D", "Vector", "",0,0,0
+				P: "TranslationActive", "bool", "", "",0
+				P: "TranslationMin", "Vector3D", "Vector", "",0,0,0
+				P: "TranslationMax", "Vector3D", "Vector", "",0,0,0
+				P: "TranslationMinX", "bool", "", "",0
+				P: "TranslationMinY", "bool", "", "",0
+				P: "TranslationMinZ", "bool", "", "",0
+				P: "TranslationMaxX", "bool", "", "",0
+				P: "TranslationMaxY", "bool", "", "",0
+				P: "TranslationMaxZ", "bool", "", "",0
+				P: "RotationOrder", "enum", "", "",0
+				P: "RotationSpaceForLimitOnly", "bool", "", "",0
+				P: "RotationStiffnessX", "double", "Number", "",0
+				P: "RotationStiffnessY", "double", "Number", "",0
+				P: "RotationStiffnessZ", "double", "Number", "",0
+				P: "AxisLen", "double", "Number", "",10
+				P: "PreRotation", "Vector3D", "Vector", "",0,0,0
+				P: "PostRotation", "Vector3D", "Vector", "",0,0,0
+				P: "RotationActive", "bool", "", "",0
+				P: "RotationMin", "Vector3D", "Vector", "",0,0,0
+				P: "RotationMax", "Vector3D", "Vector", "",0,0,0
+				P: "RotationMinX", "bool", "", "",0
+				P: "RotationMinY", "bool", "", "",0
+				P: "RotationMinZ", "bool", "", "",0
+				P: "RotationMaxX", "bool", "", "",0
+				P: "RotationMaxY", "bool", "", "",0
+				P: "RotationMaxZ", "bool", "", "",0
+				P: "InheritType", "enum", "", "",0
+				P: "ScalingActive", "bool", "", "",0
+				P: "ScalingMin", "Vector3D", "Vector", "",0,0,0
+				P: "ScalingMax", "Vector3D", "Vector", "",1,1,1
+				P: "ScalingMinX", "bool", "", "",0
+				P: "ScalingMinY", "bool", "", "",0
+				P: "ScalingMinZ", "bool", "", "",0
+				P: "ScalingMaxX", "bool", "", "",0
+				P: "ScalingMaxY", "bool", "", "",0
+				P: "ScalingMaxZ", "bool", "", "",0
+				P: "GeometricTranslation", "Vector3D", "Vector", "",0,0,0
+				P: "GeometricRotation", "Vector3D", "Vector", "",0,0,0
+				P: "GeometricScaling", "Vector3D", "Vector", "",1,1,1
+				P: "MinDampRangeX", "double", "Number", "",0
+				P: "MinDampRangeY", "double", "Number", "",0
+				P: "MinDampRangeZ", "double", "Number", "",0
+				P: "MaxDampRangeX", "double", "Number", "",0
+				P: "MaxDampRangeY", "double", "Number", "",0
+				P: "MaxDampRangeZ", "double", "Number", "",0
+				P: "MinDampStrengthX", "double", "Number", "",0
+				P: "MinDampStrengthY", "double", "Number", "",0
+				P: "MinDampStrengthZ", "double", "Number", "",0
+				P: "MaxDampStrengthX", "double", "Number", "",0
+				P: "MaxDampStrengthY", "double", "Number", "",0
+				P: "MaxDampStrengthZ", "double", "Number", "",0
+				P: "PreferedAngleX", "double", "Number", "",0
+				P: "PreferedAngleY", "double", "Number", "",0
+				P: "PreferedAngleZ", "double", "Number", "",0
+				P: "LookAtProperty", "object", "", ""
+				P: "UpVectorProperty", "object", "", ""
+				P: "Show", "bool", "", "",1
+				P: "NegativePercentShapeSupport", "bool", "", "",1
+				P: "DefaultAttributeIndex", "int", "Integer", "",-1
+				P: "Freeze", "bool", "", "",0
+				P: "LODBox", "bool", "", "",0
+				P: "Lcl Translation", "Lcl Translation", "", "A",0,0,0
+				P: "Lcl Rotation", "Lcl Rotation", "", "A",0,0,0
+				P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+				P: "Visibility", "Visibility", "", "A",1
+				P: "Visibility Inheritance", "Visibility Inheritance", "", "",1
+			}
+		}
+	}
+	ObjectType: "NodeAttribute" {
+		Count: 80
+		PropertyTemplate: "FbxSkeleton" {
+			Properties70:  {
+				P: "Color", "ColorRGB", "Color", "",0.8,0.8,0.8
+				P: "Size", "double", "Number", "",100
+				P: "LimbLength", "double", "Number", "H",1
+			}
+		}
+	}
+	ObjectType: "Geometry" {
+		Count: 1
+		PropertyTemplate: "FbxMesh" {
+			Properties70:  {
+				P: "Color", "ColorRGB", "Color", "",0.8,0.8,0.8
+				P: "BBoxMin", "Vector3D", "Vector", "",0,0,0
+				P: "BBoxMax", "Vector3D", "Vector", "",0,0,0
+				P: "Primary Visibility", "bool", "", "",1
+				P: "Casts Shadows", "bool", "", "",1
+				P: "Receive Shadows", "bool", "", "",1
+			}
+		}
+	}
+	ObjectType: "Deformer" {
+		Count: 17
+	}
+	ObjectType: "Material" {
+		Count: 1
+		PropertyTemplate: "FbxSurfacePhong" {
+			Properties70:  {
+				P: "ShadingModel", "KString", "", "", "Phong"
+				P: "MultiLayer", "bool", "", "",0
+				P: "EmissiveColor", "Color", "", "A",0,0,0
+				P: "EmissiveFactor", "Number", "", "A",1
+				P: "AmbientColor", "Color", "", "A",0.2,0.2,0.2
+				P: "AmbientFactor", "Number", "", "A",1
+				P: "DiffuseColor", "Color", "", "A",0.8,0.8,0.8
+				P: "DiffuseFactor", "Number", "", "A",1
+				P: "Bump", "Vector3D", "Vector", "",0,0,0
+				P: "NormalMap", "Vector3D", "Vector", "",0,0,0
+				P: "BumpFactor", "double", "Number", "",1
+				P: "TransparentColor", "Color", "", "A",0,0,0
+				P: "TransparencyFactor", "Number", "", "A",0
+				P: "DisplacementColor", "ColorRGB", "Color", "",0,0,0
+				P: "DisplacementFactor", "double", "Number", "",1
+				P: "VectorDisplacementColor", "ColorRGB", "Color", "",0,0,0
+				P: "VectorDisplacementFactor", "double", "Number", "",1
+				P: "SpecularColor", "Color", "", "A",0.2,0.2,0.2
+				P: "SpecularFactor", "Number", "", "A",1
+				P: "ShininessExponent", "Number", "", "A",20
+				P: "ReflectionColor", "Color", "", "A",0,0,0
+				P: "ReflectionFactor", "Number", "", "A",1
+			}
+		}
+	}
+}
+
+; Object properties
+;------------------------------------------------------------------
+
+Objects:  {
+	NodeAttribute: 2709985457808, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294046240, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294043552, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294045664, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294044896, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294046816, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294046432, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294045472, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294046624, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294043168, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294043360, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294043744, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294045856, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294043936, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294044128, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294046048, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294044704, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294044320, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294045088, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294044512, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294045280, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880308496, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880309840, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880307344, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880308880, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880308688, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880309456, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880309072, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880307920, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880310032, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880309264, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880306576, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880309648, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880306384, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880307728, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880306768, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880306960, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880307152, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880307536, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880308112, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2708880308304, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709962779360, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709962779552, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709962780704, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709962779744, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709962778976, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709962779168, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709962779936, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709962780128, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709962780320, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709962780512, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2710397009840, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2710397009072, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2710397010416, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2710397009264, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2710397009456, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2710397010032, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2710397008688, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2710397008880, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2710397010224, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2710397009648, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709976087440, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709976086288, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709976087248, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709976087632, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709976086864, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709976087056, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709976086480, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709976086672, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709976087824, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709976088016, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709224220160, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709224221312, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709224220352, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709224221888, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709224220736, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709224220544, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709224221696, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709224221504, "NodeAttribute::", "LimbNode" {
+		TypeFlags: "Skeleton"
+	}
+	NodeAttribute: 2709294239360, "NodeAttribute::", "Null" {
+		Properties70:  {
+			P: "Look", "enum", "", "",0
+		}
+		TypeFlags: "Null"
+	}
+	Geometry: 2709938051376, "Geometry::renderMeshShape13", "Mesh" {
+		Vertices: *282 {
+			a: 24.6937236785889,36.458927154541,-2.6447925567627,26.8458194732666,38.3342399597168,0.23745848238468,27.0027923583984,35.8461685180664,1.24335193634033,25.2257671356201,39.2774391174316,-4.00579738616944,27.0027923583984,35.8461685180664,1.24335193634033,25.9626350402832,40.169807434082,2.90596842765808,25.5128364562988,29.4915523529053,4.21540212631225,-26.5141334533691,37.2980079650879,4.35887622833252,-26.6078586578369,37.8175811767578,-1.16328167915344,-26.2286758422852,35.3897094726563,-0.194907158613203,-25.7809410095215,39.6724967956543,3.15183186531067,20.9784240722656,39.6636810302734,-0.164811551570894,21.0973377227783,33.2491149902344,6.89700889587402,22.2618064880371,40.7908058166504,4.23196506500244,19.8429107666016,33.997932434082,4.22970151901245,20.6987934112549,32.4123992919922,-4.3366265296936,22.0462455749512,39.0759887695313,-2.76726341247559,25.2257671356201,39.2774391174316,-4.00579738616944,24.6937236785889,36.458927154541,-2.6447925567627,25.5128364562988,29.4915523529053,4.21540212631225,27.0027923583984,35.8461685180664,1.24335193634033,25.9626350402832,40.169807434082,2.90596842765808,26.8458194732666,38.3342399597168,0.23745848238468,25.2257671356201,39.2774391174316,-4.00579738616944,21.0973377227783,33.2491149902344,6.89700889587402,22.2618064880371,40.7908058166504,4.23196506500244,25.5128364562988,29.4915523529053,4.21540212631225,21.6177787780762,28.6547565460205,5.52778482437134,20.6987934112549,32.4123992919922,-4.3366265296936,-24.8094787597656,30.4162292480469,-1.19445490837097,-19.7826442718506,31.8206672668457,6.38782024383545,-26.001314163208,34.0690841674805,8.73056983947754,-19.7826442718506,31.8206672668457,6.38782024383545,-21.532413482666,37.3680801391602,8.39946937561035,-21.3170318603516,35.1624412536621,7.13674020767212,-19.2166862487793,37.621150970459,8.08388996124268,-19.7826442718506,31.8206672668457,6.38782024383545,-23.1849632263184,34.7709312438965,8.4308090209961,-26.001314163208,34.0690841674805,8.73056983947754,21.0973377227783,33.2491149902344,6.89700889587402,
+21.6177787780762,28.6547565460205,5.52778482437134,25.5128364562988,29.4915523529053,4.21540212631225,19.8429107666016,33.997932434082,4.22970151901245,-19.7826442718506,31.8206672668457,6.38782024383545,-23.7281036376953,32.4313926696777,3.93640351295471,-26.001314163208,34.0690841674805,8.73056983947754,-19.7826442718506,31.8206672668457,6.38782024383545,-23.5785293579102,33.4932670593262,6.35487270355225,-26.001314163208,34.0690841674805,8.73056983947754,-19.2166862487793,37.621150970459,8.08388996124268,-19.7826442718506,31.8206672668457,6.38782024383545,-18.8635787963867,35.6293563842773,5.77103710174561,-21.3170318603516,35.1624412536621,7.13674020767212,-23.1849632263184,34.7709312438965,8.4308090209961,-23.5785293579102,33.4932670593262,6.35487270355225,-23.7233409881592,32.4349021911621,3.93798971176148,-18.87109375,35.6307830810547,5.7738561630249,-20.9405689239502,39.5101051330566,-0.437292098999022,-19.2166862487793,37.621150970459,8.08388996124268,-21.3231983184814,41.6849632263184,3.50704908370972,-23.0779056549072,31.5886383056641,-0.663096606731413,-23.3331470489502,31.8566074371338,1.36222207546234,-22.7678565979004,38.0690040588379,-3.10392022132873,-24.8094787597656,30.4162292480469,-1.19445490837097,-26.3246154785156,38.3537635803223,-3.3082902431488,-26.2286758422852,35.3897094726563,-0.194907158613203,-24.8094787597656,30.4162292480469,-1.19445490837097,-26.001314163208,34.0690841674805,8.73056983947754,-26.6078586578369,37.8175811767578,-1.16328167915344,-26.001314163208,34.0690841674805,8.73056983947754,-26.5141334533691,37.2980079650879,4.35887622833252,-25.7809410095215,39.6724967956543,3.15183186531067,-25.3895721435547,41.341121673584,3.52063131332398,-21.3231983184814,41.6849632263184,3.50704908370972,-21.532413482666,37.3680801391602,8.39946937561035,-19.2166862487793,37.621150970459,8.08388996124268,-26.001314163208,34.0690841674805,8.73056983947754,-26.5141334533691,37.2980079650879,4.35887622833252,-23.1849632263184,34.7709312438965,8.4308090209961,-21.3170318603516,35.1624412536621,7.13674020767212,
+-23.7233409881592,32.4349021911621,3.93798971176148,-19.7826442718506,31.8206672668457,6.38782024383545,-23.3331470489502,31.8566074371338,1.36222207546234,-19.7826442718506,31.8206672668457,6.38782024383545,-23.0779056549072,31.5886383056641,-0.663096606731413,-19.7826442718506,31.8206672668457,6.38782024383545,-24.8094787597656,30.4162292480469,-1.19445490837097,-23.5785293579102,33.4932670593262,6.35487270355225,-19.7826442718506,31.8206672668457,6.38782024383545,-19.7826442718506,31.8206672668457,6.38782024383545,-23.1849632263184,34.7709312438965,8.4308090209961,21.6177787780762,28.6547565460205,5.52778482437134,19.8429107666016,33.997932434082,4.22970151901245,20.6987934112549,32.4123992919922,-4.3366265296936
+		} 
+		PolygonVertexIndex: *171 {
+			a: 0,1,-3,1,0,-4,4,5,-7,7,8,-10,8,7,-11,11,12,-14,12,11,-15,14,11,-16,15,11,-17,15,16,-18,15,17,-19,15,18,-20,19,18,-21,21,20,-23,21,22,-24,24,19,-22,24,21,-26,26,27,-29,29,30,-32,32,33,-35,33,32,-36,36,37,-39,39,40,-42,40,39,-43,43,44,-46,46,47,-49,49,50,-52,52,53,-55,52,54,-56,52,55,-57,56,55,-58,56,57,-59,58,57,-60,57,55,-61,60,55,-62,57,60,-63,62,60,-64,62,63,-65,64,63,-66,66,67,-66,64,65,-69,69,70,-66,64,68,-72,64,71,-73,72,71,-74,73,71,-75,73,74,-76,74,71,-77,76,71,-78,74,76,-79,74,78,-80,80,81,-83,83,84,-83,85,86,-85,87,88,-81,89,87,-91,91,92,-94
+		} 
+		GeometryVersion: 124
+		LayerElementNormal: 0 {
+			Version: 102
+			Name: ""
+			MappingInformationType: "ByVertice"
+			ReferenceInformationType: "Direct"
+			Normals: *282 {
+				a: 0.808896258275332,-0.25277996522704,-0.530838141553509,0.839013228129695,-0.330520216294235,-0.43221891402876,0.986071232970142,-0.135343009021328,-0.0966736438632382,0.501727657271385,-0.250863769031046,-0.827850667280341,0.986071232970142,-0.135343009021328,-0.0966736438632382,0.814114976879434,0.279851999087919,0.508821838197905,0.840339134863482,-0.49431708030343,0.222442717428978,-0.986440061052137,0.116051680728436,0.116051770135409,-0.998566722022748,-0.0507745089999301,-0.0169248605476977,-0.975537236636841,-0.18291312383599,-0.121942154579605,-0.949918643179248,0.309756055974025,0.0413008126786096,-0.949918643179248,0.309756055974025,0.0413008126786096,-0.339248457975197,0.158315887450451,0.927279118465539,-0.437627204851222,0.360398776411002,0.823768870215159,-0.981831388083945,0.0188812996314889,0.188813722746466,-0.472866241892383,-0.394055132038233,-0.788110442890402,-0.67020108509293,0.257769503686021,-0.695978008639441,0.501727657271385,-0.250863769031046,-0.827850667280341,0.767690280226497,-0.397081006779566,-0.502969489830833,0.840339134863482,-0.49431708030343,0.222442717428978,0.986071232970142,-0.135343009021328,-0.0966736438632382,0.814114976879434,0.279851999087919,0.508821838197905,0.902651990162593,0.429834259742434,0.0214917148497667,0.766660050566256,0.618274165109327,-0.17311679186061,-0.339248457975197,0.158315887450451,0.927279118465539,-0.437627204851222,0.360398776411002,0.823768870215159,0.840339134863482,-0.49431708030343,0.222442717428978,0.0639456838270531,-0.937870019529338,-0.341043657011723,-0.472866241892383,-0.394055132038233,-0.788110442890402,-0.0225131617792209,-0.810473719743829,-0.585342213710325,0.595697660765893,-0.801900591730481,-0.0458228975551134,-0.2345970360101,-0.914928473221943,0.328435868295532,0.215820509399383,-0.407660937363565,0.88726211903273,-0.121942154911973,0.18291310943338,0.975537239295783,0.284874707452827,-0.751033246497205,0.595647096618068,0.836314526489024,0.304114329919905,0.4561715544845,0.703731620371576,0.541331846026449,0.460132197272472,
+0.530838137554477,-0.252779993125062,0.808896252181569,-0.295836816364062,0.204810039447045,0.933023807748375,-0.339248457975197,0.158315887450451,0.927279118465539,-0.391175848385786,-0.268933313808845,0.880145629065698,0.840339134863482,-0.49431708030343,0.222442717428978,-0.981831388083945,0.0188812996314889,0.188813722746466,0.238848407427328,0.955393629709313,-0.173707946220932,0.238848407427328,0.955393629709313,-0.173707946220932,0.238848407427328,0.955393629709313,-0.173707946220932,0.36658317958047,0.916457844643052,0.160380146654391,0.36658317958047,0.916457844643052,0.160380146654391,0.36658317958047,0.916457844643052,0.160380146654391,0.836314526489024,0.304114329919905,0.4561715544845,0.215820509399383,-0.407660937363565,0.88726211903273,0.914479744939404,-0.404072409398323,0.0212669710724482,0.284874707452827,-0.751033246497205,0.595647096618068,0.530838137554477,-0.252779993125062,0.808896252181569,0.992277876713665,-6.65374112651664e-008,-0.124034734589208,0.991836608516526,-0.126233667270188,-0.0180333927466536,0.847278887402407,-0.526686843734121,-0.068698294007407,0.964846251028964,-0.125849499989876,-0.230724110633569,0.836314526489024,0.304114329919905,0.4561715544845,0.199937530891806,0.599812547971936,0.774757956420134,0.943025552906526,-0.0857295137623916,-0.321486013747728,0.536044659805119,0.839026335931581,-0.0932251591987922,0.608228769402097,-0.228085654415343,-0.7602859319503,-0.0225131617792209,-0.810473719743829,-0.585342213710325,-0.946649900633738,-5.79655885362134e-017,-0.322263813714995,-0.975537236636841,-0.18291312383599,-0.121942154579605,-0.961523979130062,-0.274721017685018,5.88763631672528e-017,-0.961523979130062,-0.274721017685018,5.88763631672528e-017,-0.998566722022748,-0.0507745089999301,-0.0169248605476977,-0.991836608516526,-0.126233667270188,0.0180333927466536,-0.991836608516526,-0.126233667270188,0.0180333927466536,-0.703731594259068,0.460132120594265,0.541331945149199,-0.684508550536385,0.0220810003577608,0.728670346360944,0.199937530891806,0.599812547971936,0.774757956420134,
+-0.121942154911973,0.18291310943338,0.975537239295783,0.836314526489024,0.304114329919905,0.4561715544845,-0.295836816364062,0.204810039447045,0.933023807748375,-0.789200499977225,0.447213535194084,0.420906907492509,0.530838137554477,-0.252779993125062,0.808896252181569,0.284874707452827,-0.751033246497205,0.595647096618068,0.991836608516526,-0.126233667270188,-0.0180333927466536,0.238848407427328,0.955393629709313,-0.173707946220932,0.536044659805119,0.839026335931581,-0.0932251591987922,0.595697660765893,-0.801900591730481,-0.0458228975551134,0.943025552906526,-0.0857295137623916,-0.321486013747728,0.595697660765893,-0.801900591730481,-0.0458228975551134,-0.0225131617792209,-0.810473719743829,-0.585342213710325,0.992277876713665,-6.65374112651664e-008,-0.124034734589208,0.356637269756216,0.840644967451946,-0.407585446892487,0.703731620371576,0.541331846026449,0.460132197272472,0.530838137554477,-0.252779993125062,0.808896252181569,-0.944297779153243,-0.328451361276259,-0.0205282138050564,-0.981831388083945,0.0188812996314889,0.188813722746466,-0.472866241892383,-0.394055132038233,-0.788110442890402
+			} 
+			NormalsW: *94 {
+				a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+			} 
+		}
+		LayerElementUV: 0 {
+			Version: 101
+			Name: "map1"
+			MappingInformationType: "ByVertice"
+			ReferenceInformationType: "Direct"
+			UV: *188 {
+				a: 0.8359375,-0.97265625,0.80908203125,-0.93212890625,0.80615234375,-0.9716796875,0.8291015625,-0.93701171875,0.8349609375,-0.375244140625,0.82763671875,-0.326171875,0.8408203125,-0.41015625,0.8349609375,-0.9638671875,0.8134765625,-0.92578125,0.80615234375,-0.96142578125,0.84228515625,-0.9267578125,0.91796875,-0.325439453125,0.97119140625,-0.381103515625,0.9423828125,-0.317138671875,0.955078125,-0.39453125,0.89453125,-0.392333984375,0.89453125,-0.331298828125,0.86328125,-0.33154296875,0.86474609375,-0.3759765625,0.8408203125,-0.41015625,0.8349609375,-0.375244140625,0.82763671875,-0.326171875,0.837890625,-0.33544921875,0.86328125,-0.33154296875,0.787109375,-0.350830078125,0.79541015625,-0.302734375,0.8525390625,-0.8427734375,0.8720703125,-0.86767578125,0.87646484375,-0.8564453125,0.916015625,-0.82666015625,0.92041015625,-0.9189453125,0.93212890625,-0.83056640625,0.8232421875,-0.955078125,0.7958984375,-0.92822265625,0.79736328125,-0.958984375,0.8056640625,-0.9072265625,0.97021484375,-0.90576171875,0.98046875,-0.8173828125,0.95751953125,-0.8203125,0.8046875,-0.82373046875,0.81396484375,-0.85302734375,0.81982421875,-0.8251953125,0.8037109375,-0.84912109375,0.92041015625,-0.9189453125,0.93212890625,-0.8466796875,0.93212890625,-0.83056640625,0.947265625,-0.93603515625,0.9541015625,-0.8408203125,0.94921875,-0.82373046875,0.802734375,-0.8310546875,0.79833984375,-0.9013671875,0.8203125,-0.83740234375,0.7822265625,-0.406005859375,0.77099609375,-0.427734375,0.787109375,-0.4375,0.8056640625,-0.41357421875,0.78076171875,-0.390625,0.822265625,-0.32177734375,0.7666015625,-0.372802734375,0.79638671875,-0.310546875,0.83984375,-0.396728515625,0.82568359375,-0.42578125,0.8505859375,-0.330322265625,0.857421875,-0.410400390625,0.875,-0.325927734375,0.87158203125,-0.3779296875,0.86181640625,-0.422607421875,0.87646484375,-0.429443359375,0.87890625,-0.342529296875,0.87646484375,-0.429443359375,0.900390625,-0.380126953125,0.912109375,-0.34326171875,0.91748046875,-0.32373046875,0.9404296875,-0.310546875,0.94091796875,-0.367919921875,
+0.955078125,-0.352294921875,0.9140625,-0.40673828125,0.900390625,-0.380126953125,0.92919921875,-0.415771484375,0.94091796875,-0.40869140625,0.86328125,-0.85302734375,0.87451171875,-0.92333984375,0.880859375,-0.8359375,0.8916015625,-0.8994140625,0.892578125,-0.8310546875,0.904296875,-0.90625,0.90966796875,-0.82763671875,0.84521484375,-0.8544921875,0.857421875,-0.9423828125,0.84130859375,-0.927734375,0.828125,-0.85595703125,0.8720703125,-0.86767578125,0.87255859375,-0.88671875,0.88427734375,-0.87255859375
+			} 
+		}
+		LayerElementMaterial: 0 {
+			Version: 101
+			Name: ""
+			MappingInformationType: "AllSame"
+			ReferenceInformationType: "IndexToDirect"
+			Materials: *1 {
+				a: 0
+			} 
+		}
+		Layer: 0 {
+			Version: 100
+			LayerElement:  {
+				Type: "LayerElementNormal"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementMaterial"
+				TypedIndex: 0
+			}
+			LayerElement:  {
+				Type: "LayerElementUV"
+				TypedIndex: 0
+			}
+		}
+	}
+	Model: 2708949369712, "Model::bip_pelvis", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",1.81460995649263e-006,40.8437538146973,-3.09570097923279
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",174.792163928954,-0.000187830202169968,0.000204905675103017
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000000001177,1.00000002693352,1.00000002558198
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710092288816, "Model::bip_spine_0", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",3.75715899281204e-007,-6.06561279296875,-7.15255737304688e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-6.65466350977889,-1.27969019658621e-006,-4.9354588444616e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999940395356,0.999999931732149,0.999999931732149
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388844928, "Model::bip_spine_1", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",3.00802639685571e-006,-7.44617462158203,-3.33786010742188e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-2.46459034863829,-6.48482010517156e-008,4.66719766301444e-008
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999821186066,0.999999768658696,0.999999768658696
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388860928, "Model::bip_spine_2", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-1.77901529241353e-006,-8.1669807434082,9.5367431640625e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",7.81463687367445,2.63164097139834e-007,-1.72708531385379e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999940395355,0.999999921148926,0.999999921148926
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388836928, "Model::bip_spine_3", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",3.74879164155573e-006,-7.05903625488281,-6.19888305664063e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",24.6816025384872,6.12560873720748e-007,-5.34209660138982e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999940395355,0.999999918743243,0.999999918743242
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388848928, "Model::bip_neck", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",3.81188874598593e-006,-7.66764068603516,-9.5367431640625e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",17.3508605446229,2.32616854555394e-007,-5.16914017037861e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999821186066,0.999999869668594,0.999999869668594
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388838928, "Model::bip_head", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-6.4657797338441e-006,-3.88064193725586,3.814697265625e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-35.5197426712256,-2.51595910185085e-007,2.08634221764595e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999940395356,0.999999923528349,0.999999923528349
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388840928, "Model::bip_collar_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",2.13142538070679,-5.80581665039063,-7.19456100463867
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-156.575409471551,-17.6306907843208,-75.5558455544264
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.0000001223743,1.00000015590157,1.00000023038403
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388852928, "Model::bip_collar_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-2.13143134117126,-5.80574798583984,-7.1945858001709
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",23.42458301169,17.6306934133323,75.5558446605935
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000007639144,1.00000016191027,1.00000012322886
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388842928, "Model::bip_upperarm_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",7.62939453125e-006,-14.0618667602539,4.76837158203125e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",123.716039647422,-14.8947471107232,-148.132214915727
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000000630074,0.99999998855877,1.00000001737153
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388850928, "Model::bip_upperarm_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-1.52587890625e-005,14.0618600845337,-1.43051147460938e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",56.2839816710262,14.8947909655503,31.8678914258004
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999911230842,0.999999858794038,0.99999995285325
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388846928, "Model::bip_lowerarm_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",17.6709480285645,-2.00271606445313e-005,2.288818359375e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-90.0000272140376,-1.19528321862712e-005,25.3222604610329
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999904729795,0.999999880790851,0.999999904729886
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388854928, "Model::bip_lowerarm_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",17.6709022521973,2.47955322265625e-005,-1.1444091796875e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",4.86808199344716e-005,-0.000200730076048425,-25.322245191857
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999910517391,0.999999910511615,0.999999880797208
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388856928, "Model::bip_hip_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",6.05743217468262,6.07313537597656,-2.20143508911133
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-110.53308293831,-4.3983204857606,84.0784009724476
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.99999991167317,0.999999866352925,0.999999837554119
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388858928, "Model::bip_hip_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-6.05742979049683,6.07315063476563,-2.2014307975769
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",110.53309716195,-4.39832824166438,95.9215871033837
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999900499069,0.999999934263797,0.999999916648411
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388862928, "Model::bip_knee_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",13.3779182434082,0,-9.5367431640625e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-89.9999983991742,-7.68396400325262e-006,-13.9786182070672
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.99999984552397,0.99999988079072,0.999999841924441
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388832928, "Model::bip_knee_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",13.3779182434082,-1.19209289550781e-006,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-4.72338197402824e-006,-1.73217538990356e-005,13.978633130506
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000009463251,1.00000009463247,1.00000011920934
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388864928, "Model::bip_hand_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",15.1754894256592,7.62939453125e-006,1.04904174804688e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-5.54952814085751e-006,-3.84197983057675e-006,90.00001366038
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999880790741,0.999999880790744,0.999999880790717
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388834928, "Model::bip_hand_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",15.1755409240723,-4.29153442382813e-006,1.1444091796875e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-6.7098368077704,-89.9998830860078,-83.2901631922431
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000011921137,1.00000011920943,1.00000011921146
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388874928, "Model::effect_hand_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-3.25497436523438,-3.32828521728516,0.701508045196533
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-0.398278521119991,-14.6078046597752,176.613650635869
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999981662591,1.00000000983805,1.00000003415247
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388866928, "Model::effect_hand_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",3.2550048828125,3.3282585144043,-0.701513767242432
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",0.398455223568142,14.6082457955531,-3.38637366179498
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000010060802,1.00000004759173,1.00000004538012
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388882928, "Model::bip_foot_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",16.7924118041992,-1.33514404296875e-005,-1.21593475341797e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-69.7829504076124,2.34588812050023,84.2134226224817
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999910276571,0.999999898950136,0.999999885760306
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388890928, "Model::bip_foot_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",16.7924003601074,-1.19209289550781e-007,-2.86102294921875e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-1.77730880117347,-83.7575042271945,-157.88707859145
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000018106105,1.00000015202118,1.00000014588098
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388892928, "Model::prop_bone", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,3.814697265625e-006,2.38418579101563e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",1.28066046937739e-006,-1.19994827111458e-006,-5.6637363634706e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388894928, "Model::prop_bone_1", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,3.814697265625e-006,2.38418579101563e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",1.28066046937739e-006,-1.19994827111458e-006,-5.6637363634706e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388868928, "Model::prop_bone_2", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,3.814697265625e-006,2.38418579101563e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",1.28066046937739e-006,-1.19994827111458e-006,-5.6637363634706e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388872928, "Model::prop_bone_3", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,3.814697265625e-006,2.38418579101563e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",1.28066046937739e-006,-1.19994827111458e-006,-5.6637363634706e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388870928, "Model::prop_bone_4", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,3.814697265625e-006,2.38418579101563e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",1.28066046937739e-006,-1.19994827111458e-006,-5.6637363634706e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388880928, "Model::prop_bone_5", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,3.814697265625e-006,2.38418579101563e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",1.28066046937739e-006,-1.19994827111458e-006,-5.6637363634706e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388876928, "Model::prop_bone_6", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,3.814697265625e-006,2.38418579101563e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",1.28066046937739e-006,-1.19994827111458e-006,-5.6637363634706e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388888928, "Model::hlp_forearm_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",7.58773422241211,1.52587890625e-005,1.04904174804688e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-6.09095705611335e-006,-2.90375527267196,90.0000394543072
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000013664883,1.00000011920953,1.00000007712048
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388878928, "Model::hlp_forearm_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",7.58777618408203,-1.04904174804688e-005,0
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-179.998687934588,-86.4185035351137,89.9985785974643
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999920413047,1.00000000000257,0.999999975247282
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388884928, "Model::bip_toe_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-2.86102294921875e-006,-7.94118404388428,-4.76837158203125e-007
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-31.3002432400257,-1.02407841604319e-006,-8.00013139466322e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999940395365,0.99999997534911,0.999999975349103
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2710388886928, "Model::bip_toe_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-4.29153442382813e-005,7.94119691848755,-7.62939453125e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-31.3002479322955,7.66993356767547e-007,-1.13565231500686e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,0.99999995538549,0.99999995538549
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291860640, "Model::prp_bullet_shoulder", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-6.062744140625,10.2130212783813,1.75712013244629
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",172.830480585028,-27.0198296210821,-74.5233124655544
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000002408615,1.00000004338895,1.00000004513652
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291862640, "Model::prp_bullet_backupper", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-5.74178171157837,-2.86103057861328,7.7005352973938
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-173.487283782973,1.59297298711038e-007,-1.38923973381422e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.99999988079071,0.999999897547459,0.999999897547459
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291864640, "Model::prp_bullet_backlower", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",4.93002319335938,-0.689311981201172,7.04340744018555
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-165.672671276613,3.90360620719621e-007,-2.56196758368818e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1.00000001134036,1.00000001134036
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291866640, "Model::prp_bullet_chestupper", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-5.72606658935547,-7.87407684326172,-15.2999324798584
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-165.672671276613,3.90360620719621e-007,-2.56196758368818e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1.00000001134036,1.00000001134036
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291846640, "Model::prp_bullet_side", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",14.5132894515991,-2.29446792602539,-3.7748851776123
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-168.137250805002,3.1328009511283e-007,-2.25446594499914e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000011920929,1.00000010090343,1.00000010090343
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291868640, "Model::prp_bullet_chestlower", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",5.8663125038147,-4.12490463256836,-15.9393072128296
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-168.137250805002,3.1328009511283e-007,-2.25446594499914e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000011920929,1.00000010090343,1.00000010090343
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291858640, "Model::bip_thumb_0_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-2.44007873535156,-1.97415733337402,3.83657693862915
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-44.8613220461358,11.6628676994052,-29.680051054929
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000001195775,1.00000003416053,1.00000005364677
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291850640, "Model::bip_thumb_0_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",2.44013595581055,1.97409057617188,-3.83658504486084
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-44.8613094944298,11.6628714728678,-29.6800542963812
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999987743517,0.999999981737357,0.999999994063613
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291852640, "Model::bip_index_0_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-0.7515869140625,-6.85973739624023,4.60064458847046
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",172.636737122688,77.6209440979984,163.772444765533
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000008486965,1.00000008878829,1.00000002797126
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291874640, "Model::bip_index_0_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0.751556396484375,6.85968780517578,-4.60063362121582
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",172.636813365811,77.6209589003766,163.772457392704
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999967143306,0.999999879002586,0.999999960510248
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291872640, "Model::bip_middle_0_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-0.713043212890625,-6.78344345092773,1.94720888137817
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",177.162708422671,68.2391870770805,155.918532865272
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000006742065,1.00000009459048,1.00000010982488
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291848640, "Model::bip_middle_0_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0.713039398193359,6.78342437744141,-1.94719362258911
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",177.1627534697,68.2392269782761,155.918549943217
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999917786232,0.999999875605277,0.999999920416481
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291870640, "Model::bip_ring_0_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-1.68107604980469,-6.57666397094727,-0.639774799346924
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-178.818358017566,65.7257402099449,156.981962343103
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000001613999,0.999999975537917,1.00000004760866
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291844640, "Model::bip_ring_0_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",1.68106460571289,6.57661819458008,0.639789581298828
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-178.818304769552,65.7257742260515,156.981970762795
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000000994052,1.00000004663216,1.00000001999708
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291876640, "Model::bip_pinky_0_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-2.63970565795898,-6.55283355712891,-2.64165210723877
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",169.755730863866,58.3053473372529,139.782109203485
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.99999996661278,0.999999925435662,0.999999937648541
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291878640, "Model::bip_pinky_0_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",2.63976669311523,6.55280303955078,2.64163684844971
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",169.755742286331,58.3053410233535,139.782112634215
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000003465846,1.00000006204326,1.00000007835872
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291880640, "Model::bip_thumb_1_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-9.5367431640625e-007,-4.36501693725586,1.1444091796875e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",27.7125724602615,2.77761066686877e-006,1.59086093434915e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,0.999999969072807,0.999999969072808
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291882640, "Model::bip_thumb_1_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-6.4849853515625e-005,4.36502361297607,3.814697265625e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",27.7125769952933,2.56701601452297e-006,2.44463600548924e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1.0000000106503,1.0000000106503
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291884640, "Model::bip_index_1_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-9.5367431640625e-006,-3.60068702697754,-5.7220458984375e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",53.651742702607,5.49149909880543e-006,-7.94407173322462e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000000000001,1.00000003092574,1.00000003092573
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291854640, "Model::bip_index_1_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-1.9073486328125e-006,3.6007137298584,1.9073486328125e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",53.6517557291762,8.2540932729122e-006,-3.86673579244018e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000000000001,0.99999993762437,0.999999937624358
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291886640, "Model::bip_middle_1_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-5.7220458984375e-006,-4.72976493835449,-9.5367431640625e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",47.0210363293977,5.07382477884224e-006,-8.45392327978933e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999761581436,0.999999822653414,0.999999822653402
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291856640, "Model::bip_middle_1_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-1.1444091796875e-005,4.72976303100586,8.20159912109375e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",47.0210406450905,4.23691806206961e-006,-6.9519044540529e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000011920929,1.00000007834993,1.00000007834993
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291888640, "Model::bip_ring_1_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-9.5367431640625e-006,-3.78108787536621,-3.814697265625e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",34.5615256373478,4.52009968576906e-006,-1.07670469822927e-005
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000000000002,0.999999938443862,0.999999938443843
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291894640, "Model::bip_ring_1_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",4.76837158203125e-006,3.78114128112793,5.7220458984375e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",34.561530199814,2.23636507968703e-006,-3.04988634313273e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000011920929,1.0000001380543,1.00000013805429
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291900640, "Model::bip_pinky_1_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-4.76837158203125e-006,-3.01502990722656,-1.04904174804688e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",31.2454247837769,1.501229227129e-006,-3.72261017126758e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999940395358,0.999999925251248,0.999999925251246
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291904640, "Model::bip_pinky_1_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",1.23977661132813e-005,3.01504516601563,-3.62396240234375e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",31.245417172857,-2.53602214224719e-006,-1.62968781350814e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999880790712,0.999999914375989,0.99999991437599
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291902640, "Model::bip_thumb_2_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-1.9073486328125e-006,-1.79321479797363,1.52587890625e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-17.6372660588719,1.61179875481716e-006,1.93575051334307e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,0.99999994798062,0.99999994798062
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291890640, "Model::bip_thumb_2_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",2.86102294921875e-006,1.79326057434082,1.52587890625e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-17.6372633968513,7.75019290978809e-006,-7.6521239353389e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999940395365,0.999999995753678,0.999999995753687
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291892640, "Model::bip_index_2_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-9.5367431640625e-006,-2.26277160644531,-9.29832458496094e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",4.46836172558868,-7.40083709875386e-006,-7.55685344206511e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999940395372,0.999999954769788,0.99999995476979
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291896640, "Model::bip_index_2_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",5.7220458984375e-006,2.26278305053711,7.39097595214844e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",4.46835183049417,-3.5316752839586e-006,2.85497322260162e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000011920929,1.00000006084654,1.00000006084654
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291898640, "Model::bip_middle_2_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0,-2.75843811035156,-7.15255737304688e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",5.24832473398848,-3.62676421394562e-006,-4.87184196065755e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000000000001,1.00000004533877,1.00000004533877
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709291906640, "Model::bip_middle_2_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",1.33514404296875e-005,2.75846862792969,-6.77108764648438e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",5.24833238573662,-1.86406986904261e-006,3.3368348234029e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1.0000000576062,1.0000000576062
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285158144, "Model::bip_ring_2_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-1.33514404296875e-005,-2.3984260559082,-2.62260437011719e-006
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",16.8262798541277,-5.29086321577624e-006,-9.94324766157576e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.99999988079073,0.999999866572933,0.999999866572933
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285170144, "Model::bip_ring_2_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-9.5367431640625e-006,2.39833450317383,7.10487365722656e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",16.8262808031715,-2.97313493693087e-006,-3.49330629818837e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000011920929,1.00000012066476,1.00000012066476
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285152144, "Model::bip_pinky_2_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-3.814697265625e-006,-1.87825393676758,-1.09672546386719e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",20.5468859422809,-3.02822390026833e-006,-2.75342701274321e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999940395358,0.999999912738877,0.999999912738879
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285174144, "Model::bip_pinky_2_r", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-1.52587890625e-005,1.87821578979492,5.00679016113281e-005
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",20.5468819461417,-4.559687159334e-006,-3.85541240710768e-007
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1.00000001390487,1.00000001390488
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285172144, "Model::prp_pack", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",10.0524349212646,2.00986480712891,-4.94887447357178
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-166.503125768799,22.3615123419908,4.93509850119719
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000006834335,1.0000000697405,1.00000006453243
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285156144, "Model::weapon_bone", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",4.49849319458008,6.15616798400879,-2.01942920684814
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-90.000008537737,3.41509417789537e-006,3.41509438145087e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,0.999999940395368,0.999999940395368
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285176144, "Model::weapon_bone_l", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-4.96613502502441,-6.02617454528809,2.17270040512085
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",5.12264187750957e-006,5.12264106328755e-006,-2.56132032808828e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1.00000000000001
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285146144, "Model::weapon_bone_1", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",4.49849510192871,8.35707473754883,-2.01942825317383
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-90.000008537737,3.41509417789537e-006,3.41509438145087e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,0.999999940395368,0.999999940395368
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285160144, "Model::weapon_bone_2", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",0.879673004150391,3.17616271972656,-0.723469257354736
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",-91.4346616225433,17.739403454002,-14.6738232413899
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1.00000000758922,1.00000007810077,0.999999987928464
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285168144, "Model::weapon_bone_3", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-4.96613502502441,-6.02617454528809,2.17270040512085
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",5.12264187750957e-006,5.12264106328755e-006,-2.56132032808828e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1.00000000000001
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285178144, "Model::weapon_bone_4", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-4.96613502502441,-6.02617454528809,2.17270040512085
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",5.12264187750957e-006,5.12264106328755e-006,-2.56132032808828e-006
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",1,1,1.00000000000001
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285154144, "Model::medal_bone", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",7.76800680160522,-4.34455490112305,-11.7137718200684
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",155.130150401841,-16.3499092281842,5.17600920539956
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999979460846,0.999999994132357,0.999999979068395
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285166144, "Model::mvm", "LimbNode" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+			P: "Lcl Translation", "Lcl Translation", "", "A",-3.65691304206848,-1.76976776123047,3.53457856178284
+			P: "Lcl Rotation", "Lcl Rotation", "", "A",2.52129966874468,10.9935296330074,178.564599770429
+			P: "Lcl Scaling", "Lcl Scaling", "", "A",0.999999958777966,1.00000003186281,0.999999978725628
+		}
+		Shading: Y
+		Culling: "CullingOff"
+	}
+	Model: 2709285162144, "Model::renderMesh13", "Mesh" {
+		Version: 232
+		Properties70:  {
+			P: "ScalingMax", "Vector3D", "Vector", "",0,0,0
+			P: "DefaultAttributeIndex", "int", "Integer", "",0
+		}
+		Shading: T
+		Culling: "CullingOff"
+	}
+	Pose: 2709294238656, "Pose::Bind", "BindPose" {
+		Type: "BindPose"
+		Version: 100
+		NbPoseNodes: 80
+		PoseNode:  {
+			Node: 2708949369712
+			Matrix: *16 {
+				a: 1,3.57627868658467e-006,3.27825546258525e-006,0,3.27825546271302e-006,-0.995872020721436,0.0907687842845917,0,3.57627868646802e-006,-0.0907687693834305,-0.995872020721436,0,1.81460995649263e-006,40.8437538146973,-3.09570097923279,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710092288816
+			Matrix: *16 {
+				a: 0.999999940395355,-8.6140001798185e-009,2.23348060046646e-008,0,1.11442286510055e-008,0.993262588977814,-0.115884825587273,0,-2.11860999854707e-008,0.115884825587273,0.993262588977814,0,3.75715899281204e-007,-6.06561279296875,-7.15255737304688e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388844928
+			Matrix: *16 {
+				a: 0.999999821186066,8.14579514951674e-010,1.13181441996346e-009,0,-7.65155716564436e-010,0.999074757099152,-0.0430019423365593,0,-1.16579612630119e-009,0.0430019423365593,0.999074757099152,0,3.00802639685571e-006,-7.44617462158203,-3.33786010742188e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388860928
+			Matrix: *16 {
+				a: 0.999999940395355,-3.0143323392906e-009,-4.5930796943594e-009,0,3.61085339406486e-009,0.990713059902191,0.135968655347824,0,4.14057055309058e-009,-0.135968655347824,0.990713059902191,0,-1.77901529241353e-006,-8.1669807434082,9.5367431640625e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388836928
+			Matrix: *16 {
+				a: 0.999999940395355,-9.32371690964828e-009,-1.06912034780748e-008,0,1.29363080247913e-008,0.90864223241806,0.417575299739838,0,5.82112580360672e-009,-0.417575299739838,0.90864223241806,0,3.74879164155573e-006,-7.05903625488281,-6.19888305664063e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388848928
+			Matrix: *16 {
+				a: 0.999999821186066,-9.02184993378796e-009,-4.05992928165233e-009,0,9.82208447908306e-009,0.954496324062347,0.298222243785858,0,1.18467136100975e-009,-0.298222243785858,0.954496324062347,0,3.81188874598593e-006,-7.66764068603516,-9.5367431640625e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388838928
+			Matrix: *16 {
+				a: 0.999999940395355,3.64135388508657e-008,4.39117675554712e-009,0,-2.70863402818122e-008,0.813915312290192,-0.580983400344849,0,-2.47297116118261e-008,0.580983400344849,0.813915312290192,0,-6.4657797338441e-006,-3.88064193725586,3.814697265625e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388840928
+			Matrix: *16 {
+				a: 0.237719893455505,-0.92290461063385,0.302880465984344,0,-0.858546495437622,-0.345480442047119,-0.378868699073792,0,0.454298913478851,-0.16997230052948,-0.874484062194824,0,2.13142538070679,-5.80581665039063,-7.19456100463867,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388852928
+			Matrix: *16 {
+				a: 0.237719893455505,0.922904551029205,-0.302880495786667,0,-0.858546555042267,0.345480442047119,0.378868579864502,0,0.454298764467239,0.169972375035286,0.874484002590179,0,-2.13143134117126,-5.80574798583984,-7.1945858001709,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388842928
+			Matrix: *16 {
+				a: -0.820732951164246,-0.510221242904663,0.257044196128845,0,-0.111477822065353,0.584292531013489,0.803850054740906,0,-0.560330390930176,0.631091475486755,-0.536426544189453,0,7.62939453125e-006,-14.0618667602539,4.76837158203125e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388850928
+			Matrix: *16 {
+				a: 0.82073175907135,0.510222613811493,-0.257044911384583,0,-0.111478142440319,0.584292411804199,0.803849935531616,0,0.56033194065094,-0.631090402603149,0.536426067352295,0,-1.52587890625e-005,14.0618600845337,-1.43051147460938e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388846928
+			Matrix: *16 {
+				a: 0.903916358947754,0.42770904302597,2.08616256713867e-007,0,4.02331352233887e-007,-3.46451997756958e-007,-0.99999988079071,0,-0.42770904302597,0.903916358947754,-4.74974513053894e-007,0,17.6709480285645,-2.00271606445313e-005,2.288818359375e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388854928
+			Matrix: *16 {
+				a: 0.903916478157043,-0.427708804607391,3.50340042132302e-006,0,0.427708804607391,0.903916478157043,8.49640514388739e-007,0,-3.53018049281673e-006,7.30431224837957e-007,0.99999988079071,0,17.6709022521973,2.47955322265625e-005,-1.1444091796875e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388856928
+			Matrix: *16 {
+				a: 0.102863669395447,0.991734623908997,0.0766897946596146,0,0.356285840272903,0.0352486670017242,-0.933711767196655,0,-0.92869758605957,0.123368501663208,-0.349715143442154,0,6.05743217468262,6.07313537597656,-2.20143508911133,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388858928
+			Matrix: *16 {
+				a: -0.10286346077919,0.991734623908997,0.0766899287700653,0,0.356286019086838,-0.0352487862110138,0.933711767196655,0,0.92869758605957,0.123368382453918,-0.349715411663055,0,-6.05742979049683,6.07315063476563,-2.2014307975769,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388862928
+			Matrix: *16 {
+				a: 0.970385789871216,-0.241559743881226,1.34110450744629e-007,0,1.34110450744629e-007,-1.86264514923096e-008,-0.99999988079071,0,0.241559728980064,0.970385789871216,2.79396772384644e-008,0,13.3779182434082,0,-9.5367431640625e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388832928
+			Matrix: *16 {
+				a: 0.97038596868515,0.241560056805611,3.02321666367789e-007,0,-0.241560056805611,0.97038596868515,-8.24385750775036e-008,0,-3.13282555453043e-007,6.96838853286863e-009,1.00000011920929,0,13.3779182434082,-1.19209289550781e-006,0,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388864928
+			Matrix: *16 {
+				a: -2.38418579101563e-007,0.99999988079071,6.70551898451777e-008,0,-0.99999988079071,-2.38418579101563e-007,-9.68575264437277e-008,0,-9.6857512232873e-008,-6.70552182668871e-008,0.99999988079071,0,15.1754894256592,7.62939453125e-006,1.04904174804688e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388834928
+			Matrix: *16 {
+				a: 2.38418579101563e-007,-2.02655792236328e-006,1.00000011920929,0,1.00000011920929,-4.76837158203125e-007,-2.38418579101563e-007,0,4.76837158203125e-007,1.00000011920929,2.02655792236328e-006,0,15.1755409240723,-4.29153442382813e-006,1.1444091796875e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388874928
+			Matrix: *16 {
+				a: -0.965985178947449,0.0571591407060623,0.252201169729233,0,-0.060817152261734,-0.998126268386841,-0.00672651641070843,0,0.251344114542007,-0.0218358710408211,0.96765148639679,0,-3.25497436523438,-3.32828521728516,0.701508045196533,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388866928
+			Matrix: *16 {
+				a: 0.965983331203461,-0.0571594424545765,-0.252208650112152,0,0.0608184225857258,0.998126208782196,0.00672948732972145,0,0.251351416110992,-0.0218395031988621,0.967649519443512,0,3.2550048828125,3.3282585144043,-0.701513767242432,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388882928
+			Matrix: *16 {
+				a: 0.100738719105721,0.994070470333099,-0.0409320294857025,0,-0.347689092159271,-0.00337226688861847,-0.937603712081909,0,-0.932182252407074,0.108684659004211,0.345287799835205,0,16.7924118041992,-1.33514404296875e-005,-1.21593475341797e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388890928
+			Matrix: *16 {
+				a: -0.100738435983658,-0.0409321039915085,0.994070768356323,0,0.347688853740692,-0.937604069709778,-0.00337246060371399,0,0.932182669639587,0.345287501811981,0.108684420585632,0,16.7924003601074,-1.19209289550781e-007,-2.86102294921875e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388892928
+			Matrix: *16 {
+				a: 1,-9.88508475074923e-009,2.09430481845629e-008,0,9.88508475074923e-009,1,2.23517417907715e-008,0,-2.09430481845629e-008,-2.23517417907715e-008,1,0,0,3.814697265625e-006,2.38418579101563e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388894928
+			Matrix: *16 {
+				a: 1,-9.88508475074923e-009,2.09430481845629e-008,0,9.88508475074923e-009,1,2.23517417907715e-008,0,-2.09430481845629e-008,-2.23517417907715e-008,1,0,0,3.814697265625e-006,2.38418579101563e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388868928
+			Matrix: *16 {
+				a: 1,-9.88508475074923e-009,2.09430481845629e-008,0,9.88508475074923e-009,1,2.23517417907715e-008,0,-2.09430481845629e-008,-2.23517417907715e-008,1,0,0,3.814697265625e-006,2.38418579101563e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388872928
+			Matrix: *16 {
+				a: 1,-9.88508475074923e-009,2.09430481845629e-008,0,9.88508475074923e-009,1,2.23517417907715e-008,0,-2.09430481845629e-008,-2.23517417907715e-008,1,0,0,3.814697265625e-006,2.38418579101563e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388870928
+			Matrix: *16 {
+				a: 1,-9.88508475074923e-009,2.09430481845629e-008,0,9.88508475074923e-009,1,2.23517417907715e-008,0,-2.09430481845629e-008,-2.23517417907715e-008,1,0,0,3.814697265625e-006,2.38418579101563e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388880928
+			Matrix: *16 {
+				a: 1,-9.88508475074923e-009,2.09430481845629e-008,0,9.88508475074923e-009,1,2.23517417907715e-008,0,-2.09430481845629e-008,-2.23517417907715e-008,1,0,0,3.814697265625e-006,2.38418579101563e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388876928
+			Matrix: *16 {
+				a: 1,-9.88508475074923e-009,2.09430481845629e-008,0,9.88508475074923e-009,1,2.23517417907715e-008,0,-2.09430481845629e-008,-2.23517417907715e-008,1,0,0,3.814697265625e-006,2.38418579101563e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388888928
+			Matrix: *16 {
+				a: -6.87723513692617e-007,0.998716175556183,0.0506584048271179,0,-1.00000011920929,-6.83183316141367e-007,-1.06170773506165e-007,0,-7.26431608200073e-008,-0.0506584048271179,0.998716115951538,0,7.58773422241211,1.52587890625e-005,1.04904174804688e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388878928
+			Matrix: *16 {
+				a: 1.54972076416016e-006,0.0624682009220123,0.998046875,0,1,-1.75833702087402e-006,-1.43051147460938e-006,0,1.69873237609863e-006,0.998046934604645,-0.0624681264162064,0,7.58777618408203,-1.04904174804688e-005,0,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388884928
+			Matrix: *16 {
+				a: 0.999999940395355,-1.39628625106525e-007,1.78735390932161e-008,0,1.28592304804442e-007,0.854456603527069,-0.519522726535797,0,5.7268074726835e-008,0.519522726535797,0.854456603527069,0,-2.86102294921875e-006,-7.94118404388428,-4.76837158203125e-007,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2710388886928
+			Matrix: *16 {
+				a: 1,-1.98208720547655e-008,-1.33865594165172e-008,0,9.98145388564353e-009,0.854456543922424,-0.519522786140442,0,2.17356284082371e-008,0.519522786140442,0.854456543922424,0,-4.29153442382813e-005,7.94119691848755,-7.62939453125e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291860640
+			Matrix: *16 {
+				a: 0.237719833850861,-0.858546376228333,0.454298853874207,0,-0.971333801746368,-0.210116893053055,0.11118283867836,0,2.23517417907715e-007,-0.467706143856049,-0.883884072303772,0,-6.062744140625,10.2130212783813,1.75712013244629,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291862640
+			Matrix: *16 {
+				a: 0.99999988079071,-2.42468045641431e-009,-2.78026202060744e-009,0,-2.72438116510898e-009,-0.993546605110168,-0.113423712551594,0,-2.48730391838592e-009,0.113423712551594,-0.993546605110168,0,-5.74178171157837,-2.86103057861328,7.7005352973938,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291864640
+			Matrix: *16 {
+				a: 1,-4.47147696647221e-009,-6.81307810168619e-009,0,-6.01837646385661e-009,-0.968897819519043,-0.247461184859276,0,-5.49465983823438e-009,0.247461184859276,-0.968897819519043,0,4.93002319335938,-0.689311981201172,7.04340744018555,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291866640
+			Matrix: *16 {
+				a: 1,-4.47147696647221e-009,-6.81307810168619e-009,0,-6.01837646385661e-009,-0.968897819519043,-0.247461184859276,0,-5.49465983823438e-009,0.247461184859276,-0.968897819519043,0,-5.72606658935547,-7.87407684326172,-15.2999324798584,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291846640
+			Matrix: *16 {
+				a: 1.00000011920929,-3.934785830495e-009,-5.46776979248875e-009,0,-4.97474772487294e-009,-0.97864294052124,-0.205567985773087,0,-4.54212800704568e-009,0.205567985773087,-0.97864294052124,0,14.5132894515991,-2.29446792602539,-3.7748851776123,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291868640
+			Matrix: *16 {
+				a: 1.00000011920929,-3.934785830495e-009,-5.46776979248875e-009,0,-4.97474772487294e-009,-0.97864294052124,-0.205567985773087,0,-4.54212800704568e-009,0.205567985773087,-0.97864294052124,0,5.8663125038147,-4.12490463256836,-15.9393072128296,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291858640
+			Matrix: *16 {
+				a: 0.850866675376892,-0.484933227300644,-0.202152639627457,0,0.227085798978806,0.686430156230927,-0.690829753875732,0,0.473769932985306,0.541898012161255,0.69418203830719,0,-2.44007873535156,-1.97415733337402,3.83657693862915,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291850640
+			Matrix: *16 {
+				a: 0.850866615772247,-0.484933257102966,-0.202152699232101,0,0.227085933089256,0.686430275440216,-0.690829515457153,0,0.473769992589951,0.541897773742676,0.694182097911835,0,2.44013595581055,1.97409057617188,-3.83658504486084,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291852640
+			Matrix: *16 {
+				a: -0.205837354063988,0.0599086433649063,-0.976750791072845,0,0.156955629587173,0.987223505973816,0.0274746641516685,0,0.96591717004776,-0.147651225328445,-0.212610423564911,0,-0.7515869140625,-6.85973739624023,4.60064458847046,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291874640
+			Matrix: *16 {
+				a: -0.205837100744247,0.0599085204303265,-0.976750731468201,0,0.156956598162651,0.987223148345947,0.027474345639348,0,0.965916991233826,-0.147652238607407,-0.212610214948654,0,0.751556396484375,6.85968780517578,-4.60063362121582,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291872640
+			Matrix: *16 {
+				a: -0.338466465473175,0.151271998882294,-0.928739666938782,0,0.365563631057739,0.930605530738831,0.018351212143898,0,0.867066264152527,-0.333302140235901,-0.370278269052505,0,-0.713043212890625,-6.78344345092773,1.94720888137817,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291848640
+			Matrix: *16 {
+				a: -0.338465869426727,0.151271611452103,-0.928739786148071,0,0.365563958883286,0.930605173110962,0.0183508843183517,0,0.867066144943237,-0.333302676677704,-0.370277553796768,0,0.713039398193359,6.78342437744141,-1.94719362258911,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291870640
+			Matrix: *16 {
+				a: -0.378373444080353,0.160750597715378,-0.911588072776794,0,0.408239871263504,0.912835299968719,-0.0084778368473053,0,0.830767035484314,-0.375354379415512,-0.411017417907715,0,-1.68107604980469,-6.57666397094727,-0.639774799346924,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291844640
+			Matrix: *16 {
+				a: -0.378372967243195,0.160750329494476,-0.911588311195374,0,0.408240437507629,0.912835121154785,-0.00847820937633514,0,0.830766916275024,-0.375355124473572,-0.411016911268234,0,1.68106460571289,6.57661819458008,0.639789581298828,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291876640
+			Matrix: *16 {
+				a: -0.401186585426331,0.339243739843369,-0.850860118865967,0,0.519854605197906,0.849129140377045,0.093438446521759,0,0.754188537597656,-0.404837310314178,-0.517016708850861,0,-2.63970565795898,-6.55283355712891,-2.64165210723877,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291878640
+			Matrix: *16 {
+				a: -0.40118670463562,0.339243799448013,-0.850860118865967,0,0.519854784011841,0.849129199981689,0.0934383720159531,0,0.754188537597656,-0.404837429523468,-0.517016887664795,0,2.63976669311523,6.55280303955078,2.64163684844971,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291880640
+			Matrix: *16 {
+				a: 1,2.7765761245746e-008,-4.84784514753756e-008,0,-2.03655492470034e-009,0.885291576385498,0.465036302804947,0,5.5829655565276e-008,-0.465036302804947,0.885291576385498,0,-9.5367431640625e-007,-4.36501693725586,1.1444091796875e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291882640
+			Matrix: *16 {
+				a: 1,4.26669473085894e-008,-4.48028814048484e-008,0,-1.69377187830833e-008,0.885291576385498,0.465036392211914,0,5.95052895846493e-008,-0.465036392211914,0.885291576385498,0,-6.4849853515625e-005,4.36502361297607,3.814697265625e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291884640
+			Matrix: *16 {
+				a: 1,-1.38650207759383e-007,-9.58447401444573e-008,0,1.59372987695861e-007,0.592691779136658,0.805429399013519,0,-5.48665468613763e-008,-0.805429399013519,0.592691779136658,0,-9.5367431640625e-006,-3.60068702697754,-5.7220458984375e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291854640
+			Matrix: *16 {
+				a: 1,-6.74872708827934e-008,-1.44061104379034e-007,0,1.56030196762913e-007,0.592691540718079,0.805429458618164,0,3.10275680703853e-008,-0.805429458618164,0.592691540718079,0,-1.9073486328125e-006,3.6007137298584,1.9073486328125e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291886640
+			Matrix: *16 {
+				a: 0.999999761581421,-1.47548760764948e-007,-8.85549269469266e-008,0,1.65375539040724e-007,0.681729674339294,0.731603920459747,0,-4.75767478747002e-008,-0.731603920459747,0.681729674339294,0,-5.7220458984375e-006,-4.72976493835449,-9.5367431640625e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291856640
+			Matrix: *16 {
+				a: 1.00000011920929,-1.21333636471377e-008,-7.39481791356411e-008,0,6.23724716319884e-008,0.681729793548584,0.731604158878326,0,4.1535855643815e-008,-0.731604158878326,0.681729793548584,0,-1.1444091796875e-005,4.72976303100586,8.20159912109375e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291888640
+			Matrix: *16 {
+				a: 1,-1.8792042055793e-007,-7.88906220350327e-008,0,1.99509656795271e-007,0.823517441749573,0.567290842533112,0,-4.16377332612683e-008,-0.567290842533112,0.823517441749573,0,-9.5367431640625e-006,-3.78108787536621,-3.814697265625e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291894640
+			Matrix: *16 {
+				a: 1.00000011920929,-5.32305648448528e-008,-3.90319385701332e-008,0,6.59787602330653e-008,0.823517560958862,0.567291021347046,0,1.94626714744572e-009,-0.567291021347046,0.823517560958862,0,4.76837158203125e-006,3.78114128112793,5.7220458984375e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291900640
+			Matrix: *16 {
+				a: 0.999999940395355,-6.49718003842281e-008,-2.62013912788461e-008,0,6.91386503604008e-008,0.854953229427338,0.518704950809479,0,-1.13002300849985e-008,-0.518704950809479,0.854953229427338,0,-4.76837158203125e-006,-3.01502990722656,-1.04904174804688e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291904640
+			Matrix: *16 {
+				a: 0.99999988079071,-2.84434147346246e-008,4.42619310092596e-008,0,1.35891076169514e-009,0.854953289031982,0.518704831600189,0,-5.25956309616049e-008,-0.518704831600189,0.854953289031982,0,1.23977661132813e-005,3.01504516601563,-3.62396240234375e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291902640
+			Matrix: *16 {
+				a: 1,3.37852199550071e-008,-2.81311951511043e-008,0,-4.07205718033765e-008,0.952993750572205,-0.302989780902863,0,1.65722777722976e-008,0.302989780902863,0.952993750572205,0,-1.9073486328125e-006,-1.79321479797363,1.52587890625e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291890640
+			Matrix: *16 {
+				a: 0.999999940395355,-1.33554749481846e-008,-1.35266375878018e-007,0,-2.82566396947459e-008,0.952993810176849,-0.30298975110054,0,1.32954582454659e-007,0.30298975110054,0.952993810176849,0,2.86102294921875e-006,1.79326057434082,1.52587890625e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291892640
+			Matrix: *16 {
+				a: 0.999999940395355,-1.31891965793329e-007,1.29168967077931e-007,0,1.21427717658662e-007,0.996960461139679,0.0779085904359818,0,-1.39051877567908e-007,-0.0779085904359818,0.996960461139679,0,-9.5367431640625e-006,-2.26277160644531,-9.29832458496094e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291896640
+			Matrix: *16 {
+				a: 1.00000011920929,4.98286887307131e-008,6.1639369164368e-008,0,-5.44794609425026e-008,0.996960580348969,0.0779084265232086,0,-5.75699488081227e-008,-0.0779084265232086,0.996960580348969,0,5.7220458984375e-006,2.26278305053711,7.39097595214844e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291898640
+			Matrix: *16 {
+				a: 1,-8.50296828502906e-008,6.32989767268555e-008,0,7.88830902820337e-008,0.995807647705078,0.0914725065231323,0,-7.08114882286282e-008,-0.0914725065231323,0.995807647705078,0,0,-2.75843811035156,-7.15255737304688e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709291906640
+			Matrix: *16 {
+				a: 1,5.82387542635843e-008,3.25341567020132e-008,0,-6.09705850251885e-008,0.995807647705078,0.0914726406335831,0,-2.70705093896595e-008,-0.0914726406335831,0.995807647705078,0,1.33514404296875e-005,2.75846862792969,-6.77108764648438e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285158144
+			Matrix: *16 {
+				a: 0.99999988079071,-1.73542389347858e-007,9.23429723798108e-008,0,1.39381882036105e-007,0.957186698913574,0.289470821619034,0,-1.386249408597e-007,-0.289470821619034,0.957186698913574,0,-1.33514404296875e-005,-2.3984260559082,-2.62260437011719e-006,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285170144
+			Matrix: *16 {
+				a: 1.00000011920929,-6.09697039521961e-008,5.18909999414063e-008,0,4.33384634845879e-008,0.957186937332153,0.289470911026001,0,-6.73183322419391e-008,-0.289470911026001,0.957186937332153,0,-9.5367431640625e-006,2.39833450317383,7.10487365722656e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285152144
+			Matrix: *16 {
+				a: 0.999999940395355,-4.80563642213383e-008,5.28524743970138e-008,0,2.64494417479e-008,0.936385214328766,0.350973725318909,0,-6.63568044956264e-008,-0.350973725318909,0.936385214328766,0,-3.814697265625e-006,-1.87825393676758,-1.09672546386719e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285174144
+			Matrix: *16 {
+				a: 1,-6.72896405262691e-009,7.95815537912858e-008,0,-2.16301305755451e-008,0.936385333538055,0.350973695516586,0,-7.68806955875334e-008,-0.350973695516586,0.936385333538055,0,-1.52587890625e-005,1.87821578979492,5.00679016113281e-005,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285172144
+			Matrix: *16 {
+				a: 0.921373426914215,0.0795581638813019,-0.380449265241623,0,-0.00481333583593369,-0.97641658782959,-0.21584165096283,0,-0.388648897409439,0.200701981782913,-0.899261295795441,0,10.0524349212646,2.00986480712891,-4.94887447357178,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285156144
+			Matrix: *16 {
+				a: 1,5.96046412226769e-008,-5.96046376699633e-008,0,-5.96046270118222e-008,-1.49011611938477e-007,-0.999999940395355,0,-5.96046447753906e-008,0.999999940395355,-1.49011611938477e-007,0,4.49849319458008,6.15616798400879,-2.01942920684814,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285176144
+			Matrix: *16 {
+				a: 1,-4.47034729234019e-008,-8.94069529522312e-008,0,4.47034871342566e-008,1,8.94069671630859e-008,0,8.94069529522312e-008,-8.94069671630859e-008,1,0,-4.96613502502441,-6.02617454528809,2.17270040512085,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285146144
+			Matrix: *16 {
+				a: 1,5.96046412226769e-008,-5.96046376699633e-008,0,-5.96046270118222e-008,-1.49011611938477e-007,-0.999999940395355,0,-5.96046447753906e-008,0.999999940395355,-1.49011611938477e-007,0,4.49849510192871,8.35707473754883,-2.01942825317383,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285160144
+			Matrix: *16 {
+				a: 0.92138659954071,-0.241271376609802,-0.304688155651093,0,-0.30100017786026,0.0529378280043602,-0.95215368270874,0,0.245856940746307,0.96901273727417,-0.0238464996218681,0,0.879673004150391,3.17616271972656,-0.723469257354736,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285168144
+			Matrix: *16 {
+				a: 1,-4.47034729234019e-008,-8.94069529522312e-008,0,4.47034871342566e-008,1,8.94069671630859e-008,0,8.94069529522312e-008,-8.94069671630859e-008,1,0,-4.96613502502441,-6.02617454528809,2.17270040512085,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285178144
+			Matrix: *16 {
+				a: 1,-4.47034729234019e-008,-8.94069529522312e-008,0,4.47034871342566e-008,1,8.94069671630859e-008,0,8.94069529522312e-008,-8.94069671630859e-008,1,0,-4.96613502502441,-6.02617454528809,2.17270040512085,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285154144
+			Matrix: *16 {
+				a: 0.955647587776184,0.086567297577858,0.281502664089203,0,-0.0360560864210129,-0.914246320724487,0.403551250696182,0,0.292297124862671,-0.395802646875381,-0.870576024055481,0,7.76800680160522,-4.34455490112305,-11.7137718200684,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285166144
+			Matrix: *16 {
+				a: -0.981340646743774,0.0245901420712471,-0.190698131918907,0,-0.0334119163453579,-0.998508334159851,0.0431834943592548,0,-0.189351782202721,0.0487493090331554,0.98069840669632,0,-3.65691304206848,-1.76976776123047,3.53457856178284,1
+			} 
+		}
+		PoseNode:  {
+			Node: 2709285162144
+			Matrix: *16 {
+				a: 1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1
+			} 
+		}
+	}
+	Material: 2709187208000, "Material::materials/models/player/hvyweapon/hvyweapon_red_sheen.vmat", "" {
+		Version: 102
+		ShadingModel: "phong"
+		MultiLayer: 0
+		Properties70:  {
+			P: "AmbientColor", "Color", "", "A",0,0,0
+			P: "DiffuseColor", "Color", "", "A",1,1,1
+			P: "DiffuseFactor", "Number", "", "A",0.8
+			P: "TransparencyFactor", "Number", "", "A",1
+			P: "SpecularColor", "Color", "", "A",0.1,0.1,0.1
+			P: "ShininessExponent", "Number", "", "A",5
+			P: "FBX_vmatPath", "KString", "", "U", "materials/models/player/hvyweapon/hvyweapon_red_sheen.vmat"
+			P: "Emissive", "Vector3D", "Vector", "",0,0,0
+			P: "Ambient", "Vector3D", "Vector", "",0,0,0
+			P: "Diffuse", "Vector3D", "Vector", "",0.8,0.8,0.8
+			P: "Specular", "Vector3D", "Vector", "",0.1,0.1,0.1
+			P: "Shininess", "double", "Number", "",5
+			P: "Opacity", "double", "Number", "",1
+			P: "Reflectivity", "double", "Number", "",0
+		}
+	}
+	Deformer: 2709224220928, "Deformer::", "Skin" {
+		Version: 101
+		Link_DeformAcuracy: 50
+	}
+	Deformer: 2708956562320, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 1.00000005958116,2.83715676021062e-006,3.92221133153057e-006,0,3.58283003884813e-006,-0.978643777786406,-0.205563710245765,0,3.25523116507139e-006,0.205563709979582,-0.97864377910778,0,-0.000138501580928909,46.6325963166535,6.0693183571553,1
+		} 
+		TransformLink: *16 {
+			a: 0.999999940395407,3.58282961182585e-006,3.25523077709422e-006,0,2.83715652566667e-006,-0.978643696883236,0.205563692985905,0,3.92221099668457e-006,-0.205563692696434,-0.97864369555926,0,-1.76075494778083e-005,46.8843279487366,-3.64626856534924,1
+		} 
+	}
+	Deformer: 2708956563072, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 1.00000029799978,3.19320049045081e-006,3.64367818261632e-006,0,3.5858582244085e-006,-0.993547577103061,-0.113419200791915,0,3.25799605845761e-006,0.113419200650359,-0.993547578445669,0,-0.000139904929041346,62.5002419089068,-0.109893215737144,1
+		} 
+		TransformLink: *16 {
+			a: 0.999999701976833,3.58585608715534e-006,3.25799411661777e-006,0,3.19319824546089e-006,-0.993546878586226,0.113419120910623,0,3.64367561106746e-006,-0.113419120745598,-0.993546877243199,0,-5.92703602279632e-005,62.0844562680753,-7.19790655487955,1
+		} 
+	}
+	Deformer: 2708956565328, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Indexes: *32 {
+			a: 0,1,2,3,4,5,6,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,39,40,41,42,91,92,93
+		} 
+		Weights: *32 {
+			a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+		} 
+		Transform: *16 {
+			a: 0.255460382878641,0.918719609838102,-0.301156193086697,0,-0.875376679511973,0.352025665220618,0.33135216872681,0,0.410434294581857,0.178977720931675,0.894153930229569,0,43.5972714211524,-36.4247174384323,-5.86402798898001,1
+		} 
+		TransformLink: *16 {
+			a: 0.255460217232408,-0.87537611189813,0.410434028447068,0,0.918718861022523,0.352025378297057,0.17897757505332,0,-0.301156023445684,0.331351982076432,0.894153426553465,0,20.5607191395805,52.9294921787436,-6.13125541979895,1
+		} 
+	}
+	Deformer: 2709972866304, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Indexes: *62 {
+			a: 7,8,9,10,29,30,31,32,33,34,35,36,37,38,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90
+		} 
+		Weights: *62 {
+			a: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1
+		} 
+		Transform: *16 {
+			a: -0.255455459587225,-0.301148465146444,0.918723607353262,0,-0.875379380141328,-0.331353741070653,-0.352017857081589,0,0.41043192851409,-0.894156196284597,-0.178972947954213,0,43.5974027072645,5.86406546556811,36.4244348845872,1
+		} 
+		TransformLink: *16 {
+			a: -0.255455224835795,-0.87537857570927,0.410431551346649,0,-0.301148163053966,-0.331353408678214,-0.894155299325481,0,0.918722730421459,-0.352017521076667,-0.178972777122562,0,-20.5608194174016,52.9293496419277,-6.13138214978339,1
+		} 
+	}
+	Deformer: 2709972867056, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 1.00000059602322,3.57657056473776e-006,3.2494860981398e-006,0,3.57655524601888e-006,-1.00000063956949,4.66625875595079e-006,0,3.24950264136299e-006,-4.66624712763007e-006,-1.00000064092215,0,-0.000140096333486298,79.5418063604667,-3.35334674407502,1
+		} 
+		TransformLink: *16 {
+			a: 0.999999403953786,3.57655098251924e-006,3.24949876773253e-006,0,3.5765659896877e-006,-0.999999360396354,-4.66624115869592e-006,0,3.24948193270354e-006,4.66625277438852e-006,-0.999999359045932,0,-0.000133493629745799,79.541771133302,-3.35297343302786,1
+		} 
+	}
+	Deformer: 2709965550432, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: -0.978023402883438,0.201133769761512,-0.0549213754251634,0,-0.206448606435627,-0.897374566150449,0.389998518387406,0,0.0291568144602575,0.392765997122262,0.919176550826996,0,28.9513355859667,27.1079282497584,-14.142246784722,1
+		} 
+		TransformLink: *16 {
+			a: -0.978022499663638,-0.206448415777133,0.0291567875334866,0,0.201133561828101,-0.897373638438736,0.392765591078198,0,-0.0549213351451326,0.389998232357564,0.919175876691297,0,22.0860323603646,35.8183488179828,1.50802268431909,1
+		} 
+	}
+	Deformer: 2709461780304, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 0.978025371490096,-0.201128192103,-0.0549027368377216,0,-0.206436214317699,-0.897377848288928,-0.389997104504486,0,0.0291709008106601,0.392760890714499,-0.919178205406537,0,28.9508388298647,27.10806402472,14.1423985093261,1
+		} 
+		TransformLink: *16 {
+			a: 0.978024902708805,-0.206436115369924,0.0291708868286378,0,-0.201128057441101,-0.897377247465127,0.392760627748245,0,-0.0549027025054949,-0.38999686062832,-0.919177630618534,0,-22.0859931735641,35.8181496037415,1.50787446657673,1
+		} 
+	}
+	Deformer: 2710382826704, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 0.909409520216094,-0.355372529054823,0.216067954406239,0,5.08518842464492e-006,0.519525363389173,0.854455482018842,0,-0.41590262026558,-0.777048528944092,0.472463000334792,0,-8.52243531891504,-2.91993009974004,-4.40546431363864,1
+		} 
+		TransformLink: *16 {
+			a: 0.909408915432519,5.08518504283716e-006,-0.415902343678335,0,-0.355372296660655,0.519525023648043,-0.777048020796919,0,0.216067777585293,0.854454782768335,0.472462613690901,0,7.66459527806435,5.28129014538245,-3.73200954370843,1
+		} 
+	}
+	Deformer: 2710382825952, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 0.909406227944653,-0.35537387674729,0.216077201466176,0,1.40830580802136e-006,-0.519527778643614,-0.854453317793376,0,0.415908595925595,0.777045609498838,-0.472461380513942,0,8.52218584920891,2.92001995963981,4.40539596178493,1
+		} 
+		TransformLink: *16 {
+			a: 0.909406548427428,1.40830630431765e-006,0.415908742495452,0,-0.355374024476917,-0.519527994612344,0.777045932518241,0,0.216077291060744,-0.854453672085155,-0.472461576416023,0,-7.66433839904845,5.28122686854788,-3.73206091152551,1
+		} 
+	}
+	Deformer: 2710382834976, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 0.999999999976506,3.27383760822232e-006,3.56839405084882e-006,0,3.58422199059217e-006,-0.995871969116696,-0.0907687571249904,0,3.25650161025422e-006,0.0907687570140385,-0.995871970462712,0,-0.000138126535300968,40.956138652829,0.624414697502282,1
+		} 
+		TransformLink: *16 {
+			a: 1.00000000000004,3.58422199067653e-006,3.25650161033087e-006,0,3.27383778457427e-006,-0.995872022761377,0.0907687619034833,0,3.56839423342202e-006,-0.0907687617690802,-0.995872021415474,0,1.81462326324847e-006,40.843749994106,-3.09570087041175,1
+		} 
+	}
+	Deformer: 2710382827456, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 0.999999999976506,3.27383760822232e-006,3.56839405084882e-006,0,3.58422199059217e-006,-0.995871969116696,-0.0907687571249904,0,3.25650161025422e-006,0.0907687570140385,-0.995871970462712,0,-0.000138126535300968,40.956138652829,0.624414697502282,1
+		} 
+		TransformLink: *16 {
+			a: 1.00000000000004,3.58422199067653e-006,3.25650161033087e-006,0,3.27383778457427e-006,-0.995872022761377,0.0907687619034833,0,3.56839423342202e-006,-0.0907687617690802,-0.995872021415474,0,1.81462326324847e-006,40.843749994106,-3.09570087041175,1
+		} 
+	}
+	Deformer: 2710382828208, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 0.999999999976506,3.27383760822232e-006,3.56839405084882e-006,0,3.58422199059217e-006,-0.995871969116696,-0.0907687571249904,0,3.25650161025422e-006,0.0907687570140385,-0.995871970462712,0,-0.000138126535300968,40.956138652829,0.624414697502282,1
+		} 
+		TransformLink: *16 {
+			a: 1.00000000000004,3.58422199067653e-006,3.25650161033087e-006,0,3.27383778457427e-006,-0.995872022761377,0.0907687619034833,0,3.56839423342202e-006,-0.0907687617690802,-0.995872021415474,0,1.81462326324847e-006,40.843749994106,-3.09570087041175,1
+		} 
+	}
+	Deformer: 2710382824448, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 0.999999999976506,3.27383760822232e-006,3.56839405084882e-006,0,3.58422199059217e-006,-0.995871969116696,-0.0907687571249904,0,3.25650161025422e-006,0.0907687570140385,-0.995871970462712,0,-0.000138126535300968,40.956138652829,0.624414697502282,1
+		} 
+		TransformLink: *16 {
+			a: 1.00000000000004,3.58422199067653e-006,3.25650161033087e-006,0,3.27383778457427e-006,-0.995872022761377,0.0907687619034833,0,3.56839423342202e-006,-0.0907687617690802,-0.995872021415474,0,1.81462326324847e-006,40.843749994106,-3.09570087041175,1
+		} 
+	}
+	Deformer: 2710382830464, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 0.999999999976506,3.27383760822232e-006,3.56839405084882e-006,0,3.58422199059217e-006,-0.995871969116696,-0.0907687571249904,0,3.25650161025422e-006,0.0907687570140385,-0.995871970462712,0,-0.000138126535300968,40.956138652829,0.624414697502282,1
+		} 
+		TransformLink: *16 {
+			a: 1.00000000000004,3.58422199067653e-006,3.25650161033087e-006,0,3.27383778457427e-006,-0.995872022761377,0.0907687619034833,0,3.56839423342202e-006,-0.0907687617690802,-0.995872021415474,0,1.81462326324847e-006,40.843749994106,-3.09570087041175,1
+		} 
+	}
+	Deformer: 2710382828960, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 0.999999999976506,3.27383760822232e-006,3.56839405084882e-006,0,3.58422199059217e-006,-0.995871969116696,-0.0907687571249904,0,3.25650161025422e-006,0.0907687570140385,-0.995871970462712,0,-0.000138126535300968,40.956138652829,0.624414697502282,1
+		} 
+		TransformLink: *16 {
+			a: 1.00000000000004,3.58422199067653e-006,3.25650161033087e-006,0,3.27383778457427e-006,-0.995872022761377,0.0907687619034833,0,3.56839423342202e-006,-0.0907687617690802,-0.995872021415474,0,1.81462326324847e-006,40.843749994106,-3.09570087041175,1
+		} 
+	}
+	Deformer: 2710382829712, "SubDeformer::", "Cluster" {
+		Version: 100
+		UserData: "", ""
+		Transform: *16 {
+			a: 0.999999999976506,3.27383760822232e-006,3.56839405084882e-006,0,3.58422199059217e-006,-0.995871969116696,-0.0907687571249904,0,3.25650161025422e-006,0.0907687570140385,-0.995871970462712,0,-0.000138126535300968,40.956138652829,0.624414697502282,1
+		} 
+		TransformLink: *16 {
+			a: 1.00000000000004,3.58422199067653e-006,3.25650161033087e-006,0,3.27383778457427e-006,-0.995872022761377,0.0907687619034833,0,3.56839423342202e-006,-0.0907687617690802,-0.995872021415474,0,1.81462326324847e-006,40.843749994106,-3.09570087041175,1
+		} 
+	}
+}
+
+; Object connections
+;------------------------------------------------------------------
+
+Connections:  {
+	
+	;Model::bip_pelvis, Model::RootNode
+	C: "OO",2708949369712,0
+	
+	;Model::renderMesh13, Model::RootNode
+	C: "OO",2709285162144,0
+	
+	;NodeAttribute::, Model::bip_pelvis
+	C: "OO",2709985457808,2708949369712
+	
+	;Model::bip_spine_0, Model::bip_pelvis
+	C: "OO",2710092288816,2708949369712
+	
+	;Model::bip_hip_l, Model::bip_pelvis
+	C: "OO",2710388856928,2708949369712
+	
+	;Model::bip_hip_r, Model::bip_pelvis
+	C: "OO",2710388858928,2708949369712
+	
+	;Model::prop_bone, Model::bip_pelvis
+	C: "OO",2710388892928,2708949369712
+	
+	;Model::prop_bone_1, Model::bip_pelvis
+	C: "OO",2710388894928,2708949369712
+	
+	;Model::prop_bone_2, Model::bip_pelvis
+	C: "OO",2710388868928,2708949369712
+	
+	;Model::prop_bone_3, Model::bip_pelvis
+	C: "OO",2710388872928,2708949369712
+	
+	;Model::prop_bone_4, Model::bip_pelvis
+	C: "OO",2710388870928,2708949369712
+	
+	;Model::prop_bone_5, Model::bip_pelvis
+	C: "OO",2710388880928,2708949369712
+	
+	;Model::prop_bone_6, Model::bip_pelvis
+	C: "OO",2710388876928,2708949369712
+	
+	;Model::prp_pack, Model::bip_pelvis
+	C: "OO",2709285172144,2708949369712
+	
+	;Model::mvm, Model::bip_pelvis
+	C: "OO",2709285166144,2708949369712
+	
+	;NodeAttribute::, Model::bip_spine_0
+	C: "OO",2709294046240,2710092288816
+	
+	;Model::bip_spine_1, Model::bip_spine_0
+	C: "OO",2710388844928,2710092288816
+	
+	;Model::prp_bullet_side, Model::bip_spine_0
+	C: "OO",2709291846640,2710092288816
+	
+	;Model::prp_bullet_chestlower, Model::bip_spine_0
+	C: "OO",2709291868640,2710092288816
+	
+	;NodeAttribute::, Model::bip_spine_1
+	C: "OO",2709294043552,2710388844928
+	
+	;Model::bip_spine_2, Model::bip_spine_1
+	C: "OO",2710388860928,2710388844928
+	
+	;Model::prp_bullet_backlower, Model::bip_spine_1
+	C: "OO",2709291864640,2710388844928
+	
+	;Model::prp_bullet_chestupper, Model::bip_spine_1
+	C: "OO",2709291866640,2710388844928
+	
+	;NodeAttribute::, Model::bip_spine_2
+	C: "OO",2709294045664,2710388860928
+	
+	;Model::bip_spine_3, Model::bip_spine_2
+	C: "OO",2710388836928,2710388860928
+	
+	;Model::prp_bullet_backupper, Model::bip_spine_2
+	C: "OO",2709291862640,2710388860928
+	
+	;Model::medal_bone, Model::bip_spine_2
+	C: "OO",2709285154144,2710388860928
+	
+	;NodeAttribute::, Model::bip_spine_3
+	C: "OO",2709294044896,2710388836928
+	
+	;Model::bip_neck, Model::bip_spine_3
+	C: "OO",2710388848928,2710388836928
+	
+	;Model::bip_collar_l, Model::bip_spine_3
+	C: "OO",2710388840928,2710388836928
+	
+	;Model::bip_collar_r, Model::bip_spine_3
+	C: "OO",2710388852928,2710388836928
+	
+	;NodeAttribute::, Model::bip_neck
+	C: "OO",2709294046816,2710388848928
+	
+	;Model::bip_head, Model::bip_neck
+	C: "OO",2710388838928,2710388848928
+	
+	;NodeAttribute::, Model::bip_head
+	C: "OO",2709294046432,2710388838928
+	
+	;NodeAttribute::, Model::bip_collar_l
+	C: "OO",2709294045472,2710388840928
+	
+	;Model::bip_upperarm_l, Model::bip_collar_l
+	C: "OO",2710388842928,2710388840928
+	
+	;NodeAttribute::, Model::bip_collar_r
+	C: "OO",2709294046624,2710388852928
+	
+	;Model::bip_upperarm_r, Model::bip_collar_r
+	C: "OO",2710388850928,2710388852928
+	
+	;Model::prp_bullet_shoulder, Model::bip_collar_r
+	C: "OO",2709291860640,2710388852928
+	
+	;NodeAttribute::, Model::bip_upperarm_l
+	C: "OO",2709294043168,2710388842928
+	
+	;Model::bip_lowerarm_l, Model::bip_upperarm_l
+	C: "OO",2710388846928,2710388842928
+	
+	;NodeAttribute::, Model::bip_upperarm_r
+	C: "OO",2709294043360,2710388850928
+	
+	;Model::bip_lowerarm_r, Model::bip_upperarm_r
+	C: "OO",2710388854928,2710388850928
+	
+	;NodeAttribute::, Model::bip_lowerarm_l
+	C: "OO",2709294043744,2710388846928
+	
+	;Model::bip_hand_l, Model::bip_lowerarm_l
+	C: "OO",2710388864928,2710388846928
+	
+	;Model::hlp_forearm_l, Model::bip_lowerarm_l
+	C: "OO",2710388888928,2710388846928
+	
+	;NodeAttribute::, Model::bip_lowerarm_r
+	C: "OO",2709294045856,2710388854928
+	
+	;Model::bip_hand_r, Model::bip_lowerarm_r
+	C: "OO",2710388834928,2710388854928
+	
+	;Model::hlp_forearm_r, Model::bip_lowerarm_r
+	C: "OO",2710388878928,2710388854928
+	
+	;NodeAttribute::, Model::bip_hip_l
+	C: "OO",2709294043936,2710388856928
+	
+	;Model::bip_knee_l, Model::bip_hip_l
+	C: "OO",2710388862928,2710388856928
+	
+	;NodeAttribute::, Model::bip_hip_r
+	C: "OO",2709294044128,2710388858928
+	
+	;Model::bip_knee_r, Model::bip_hip_r
+	C: "OO",2710388832928,2710388858928
+	
+	;NodeAttribute::, Model::bip_knee_l
+	C: "OO",2709294046048,2710388862928
+	
+	;Model::bip_foot_l, Model::bip_knee_l
+	C: "OO",2710388882928,2710388862928
+	
+	;NodeAttribute::, Model::bip_knee_r
+	C: "OO",2709294044704,2710388832928
+	
+	;Model::bip_foot_r, Model::bip_knee_r
+	C: "OO",2710388890928,2710388832928
+	
+	;NodeAttribute::, Model::bip_hand_l
+	C: "OO",2709294044320,2710388864928
+	
+	;Model::effect_hand_l, Model::bip_hand_l
+	C: "OO",2710388874928,2710388864928
+	
+	;Model::bip_thumb_0_l, Model::bip_hand_l
+	C: "OO",2709291858640,2710388864928
+	
+	;Model::bip_index_0_l, Model::bip_hand_l
+	C: "OO",2709291852640,2710388864928
+	
+	;Model::bip_middle_0_l, Model::bip_hand_l
+	C: "OO",2709291872640,2710388864928
+	
+	;Model::bip_ring_0_l, Model::bip_hand_l
+	C: "OO",2709291870640,2710388864928
+	
+	;Model::bip_pinky_0_l, Model::bip_hand_l
+	C: "OO",2709291876640,2710388864928
+	
+	;Model::weapon_bone_l, Model::bip_hand_l
+	C: "OO",2709285176144,2710388864928
+	
+	;Model::weapon_bone_3, Model::bip_hand_l
+	C: "OO",2709285168144,2710388864928
+	
+	;Model::weapon_bone_4, Model::bip_hand_l
+	C: "OO",2709285178144,2710388864928
+	
+	;NodeAttribute::, Model::bip_hand_r
+	C: "OO",2709294045088,2710388834928
+	
+	;Model::effect_hand_r, Model::bip_hand_r
+	C: "OO",2710388866928,2710388834928
+	
+	;Model::bip_thumb_0_r, Model::bip_hand_r
+	C: "OO",2709291850640,2710388834928
+	
+	;Model::bip_index_0_r, Model::bip_hand_r
+	C: "OO",2709291874640,2710388834928
+	
+	;Model::bip_middle_0_r, Model::bip_hand_r
+	C: "OO",2709291848640,2710388834928
+	
+	;Model::bip_ring_0_r, Model::bip_hand_r
+	C: "OO",2709291844640,2710388834928
+	
+	;Model::bip_pinky_0_r, Model::bip_hand_r
+	C: "OO",2709291878640,2710388834928
+	
+	;Model::weapon_bone, Model::bip_hand_r
+	C: "OO",2709285156144,2710388834928
+	
+	;Model::weapon_bone_1, Model::bip_hand_r
+	C: "OO",2709285146144,2710388834928
+	
+	;Model::weapon_bone_2, Model::bip_hand_r
+	C: "OO",2709285160144,2710388834928
+	
+	;NodeAttribute::, Model::effect_hand_l
+	C: "OO",2709294044512,2710388874928
+	
+	;NodeAttribute::, Model::effect_hand_r
+	C: "OO",2709294045280,2710388866928
+	
+	;NodeAttribute::, Model::bip_foot_l
+	C: "OO",2708880308496,2710388882928
+	
+	;Model::bip_toe_l, Model::bip_foot_l
+	C: "OO",2710388884928,2710388882928
+	
+	;NodeAttribute::, Model::bip_foot_r
+	C: "OO",2708880309840,2710388890928
+	
+	;Model::bip_toe_r, Model::bip_foot_r
+	C: "OO",2710388886928,2710388890928
+	
+	;NodeAttribute::, Model::prop_bone
+	C: "OO",2708880307344,2710388892928
+	
+	;NodeAttribute::, Model::prop_bone_1
+	C: "OO",2708880308880,2710388894928
+	
+	;NodeAttribute::, Model::prop_bone_2
+	C: "OO",2708880308688,2710388868928
+	
+	;NodeAttribute::, Model::prop_bone_3
+	C: "OO",2708880309456,2710388872928
+	
+	;NodeAttribute::, Model::prop_bone_4
+	C: "OO",2708880309072,2710388870928
+	
+	;NodeAttribute::, Model::prop_bone_5
+	C: "OO",2708880307920,2710388880928
+	
+	;NodeAttribute::, Model::prop_bone_6
+	C: "OO",2708880310032,2710388876928
+	
+	;NodeAttribute::, Model::hlp_forearm_l
+	C: "OO",2708880309264,2710388888928
+	
+	;NodeAttribute::, Model::hlp_forearm_r
+	C: "OO",2708880306576,2710388878928
+	
+	;NodeAttribute::, Model::bip_toe_l
+	C: "OO",2708880309648,2710388884928
+	
+	;NodeAttribute::, Model::bip_toe_r
+	C: "OO",2708880306384,2710388886928
+	
+	;NodeAttribute::, Model::prp_bullet_shoulder
+	C: "OO",2708880307728,2709291860640
+	
+	;NodeAttribute::, Model::prp_bullet_backupper
+	C: "OO",2708880306768,2709291862640
+	
+	;NodeAttribute::, Model::prp_bullet_backlower
+	C: "OO",2708880306960,2709291864640
+	
+	;NodeAttribute::, Model::prp_bullet_chestupper
+	C: "OO",2708880307152,2709291866640
+	
+	;NodeAttribute::, Model::prp_bullet_side
+	C: "OO",2708880307536,2709291846640
+	
+	;NodeAttribute::, Model::prp_bullet_chestlower
+	C: "OO",2708880308112,2709291868640
+	
+	;NodeAttribute::, Model::bip_thumb_0_l
+	C: "OO",2708880308304,2709291858640
+	
+	;Model::bip_thumb_1_l, Model::bip_thumb_0_l
+	C: "OO",2709291880640,2709291858640
+	
+	;NodeAttribute::, Model::bip_thumb_0_r
+	C: "OO",2709962779360,2709291850640
+	
+	;Model::bip_thumb_1_r, Model::bip_thumb_0_r
+	C: "OO",2709291882640,2709291850640
+	
+	;NodeAttribute::, Model::bip_index_0_l
+	C: "OO",2709962779552,2709291852640
+	
+	;Model::bip_index_1_l, Model::bip_index_0_l
+	C: "OO",2709291884640,2709291852640
+	
+	;NodeAttribute::, Model::bip_index_0_r
+	C: "OO",2709962780704,2709291874640
+	
+	;Model::bip_index_1_r, Model::bip_index_0_r
+	C: "OO",2709291854640,2709291874640
+	
+	;NodeAttribute::, Model::bip_middle_0_l
+	C: "OO",2709962779744,2709291872640
+	
+	;Model::bip_middle_1_l, Model::bip_middle_0_l
+	C: "OO",2709291886640,2709291872640
+	
+	;NodeAttribute::, Model::bip_middle_0_r
+	C: "OO",2709962778976,2709291848640
+	
+	;Model::bip_middle_1_r, Model::bip_middle_0_r
+	C: "OO",2709291856640,2709291848640
+	
+	;NodeAttribute::, Model::bip_ring_0_l
+	C: "OO",2709962779168,2709291870640
+	
+	;Model::bip_ring_1_l, Model::bip_ring_0_l
+	C: "OO",2709291888640,2709291870640
+	
+	;NodeAttribute::, Model::bip_ring_0_r
+	C: "OO",2709962779936,2709291844640
+	
+	;Model::bip_ring_1_r, Model::bip_ring_0_r
+	C: "OO",2709291894640,2709291844640
+	
+	;NodeAttribute::, Model::bip_pinky_0_l
+	C: "OO",2709962780128,2709291876640
+	
+	;Model::bip_pinky_1_l, Model::bip_pinky_0_l
+	C: "OO",2709291900640,2709291876640
+	
+	;NodeAttribute::, Model::bip_pinky_0_r
+	C: "OO",2709962780320,2709291878640
+	
+	;Model::bip_pinky_1_r, Model::bip_pinky_0_r
+	C: "OO",2709291904640,2709291878640
+	
+	;NodeAttribute::, Model::bip_thumb_1_l
+	C: "OO",2709962780512,2709291880640
+	
+	;Model::bip_thumb_2_l, Model::bip_thumb_1_l
+	C: "OO",2709291902640,2709291880640
+	
+	;NodeAttribute::, Model::bip_thumb_1_r
+	C: "OO",2710397009840,2709291882640
+	
+	;Model::bip_thumb_2_r, Model::bip_thumb_1_r
+	C: "OO",2709291890640,2709291882640
+	
+	;NodeAttribute::, Model::bip_index_1_l
+	C: "OO",2710397009072,2709291884640
+	
+	;Model::bip_index_2_l, Model::bip_index_1_l
+	C: "OO",2709291892640,2709291884640
+	
+	;NodeAttribute::, Model::bip_index_1_r
+	C: "OO",2710397010416,2709291854640
+	
+	;Model::bip_index_2_r, Model::bip_index_1_r
+	C: "OO",2709291896640,2709291854640
+	
+	;NodeAttribute::, Model::bip_middle_1_l
+	C: "OO",2710397009264,2709291886640
+	
+	;Model::bip_middle_2_l, Model::bip_middle_1_l
+	C: "OO",2709291898640,2709291886640
+	
+	;NodeAttribute::, Model::bip_middle_1_r
+	C: "OO",2710397009456,2709291856640
+	
+	;Model::bip_middle_2_r, Model::bip_middle_1_r
+	C: "OO",2709291906640,2709291856640
+	
+	;NodeAttribute::, Model::bip_ring_1_l
+	C: "OO",2710397010032,2709291888640
+	
+	;Model::bip_ring_2_l, Model::bip_ring_1_l
+	C: "OO",2709285158144,2709291888640
+	
+	;NodeAttribute::, Model::bip_ring_1_r
+	C: "OO",2710397008688,2709291894640
+	
+	;Model::bip_ring_2_r, Model::bip_ring_1_r
+	C: "OO",2709285170144,2709291894640
+	
+	;NodeAttribute::, Model::bip_pinky_1_l
+	C: "OO",2710397008880,2709291900640
+	
+	;Model::bip_pinky_2_l, Model::bip_pinky_1_l
+	C: "OO",2709285152144,2709291900640
+	
+	;NodeAttribute::, Model::bip_pinky_1_r
+	C: "OO",2710397010224,2709291904640
+	
+	;Model::bip_pinky_2_r, Model::bip_pinky_1_r
+	C: "OO",2709285174144,2709291904640
+	
+	;NodeAttribute::, Model::bip_thumb_2_l
+	C: "OO",2710397009648,2709291902640
+	
+	;NodeAttribute::, Model::bip_thumb_2_r
+	C: "OO",2709976087440,2709291890640
+	
+	;NodeAttribute::, Model::bip_index_2_l
+	C: "OO",2709976086288,2709291892640
+	
+	;NodeAttribute::, Model::bip_index_2_r
+	C: "OO",2709976087248,2709291896640
+	
+	;NodeAttribute::, Model::bip_middle_2_l
+	C: "OO",2709976087632,2709291898640
+	
+	;NodeAttribute::, Model::bip_middle_2_r
+	C: "OO",2709976086864,2709291906640
+	
+	;NodeAttribute::, Model::bip_ring_2_l
+	C: "OO",2709976087056,2709285158144
+	
+	;NodeAttribute::, Model::bip_ring_2_r
+	C: "OO",2709976086480,2709285170144
+	
+	;NodeAttribute::, Model::bip_pinky_2_l
+	C: "OO",2709976086672,2709285152144
+	
+	;NodeAttribute::, Model::bip_pinky_2_r
+	C: "OO",2709976087824,2709285174144
+	
+	;NodeAttribute::, Model::prp_pack
+	C: "OO",2709976088016,2709285172144
+	
+	;NodeAttribute::, Model::weapon_bone
+	C: "OO",2709224220160,2709285156144
+	
+	;NodeAttribute::, Model::weapon_bone_l
+	C: "OO",2709224221312,2709285176144
+	
+	;NodeAttribute::, Model::weapon_bone_1
+	C: "OO",2709224220352,2709285146144
+	
+	;NodeAttribute::, Model::weapon_bone_2
+	C: "OO",2709224221888,2709285160144
+	
+	;NodeAttribute::, Model::weapon_bone_3
+	C: "OO",2709224220736,2709285168144
+	
+	;NodeAttribute::, Model::weapon_bone_4
+	C: "OO",2709224220544,2709285178144
+	
+	;NodeAttribute::, Model::medal_bone
+	C: "OO",2709224221696,2709285154144
+	
+	;NodeAttribute::, Model::mvm
+	C: "OO",2709224221504,2709285166144
+	
+	;Geometry::renderMeshShape13, Model::renderMesh13
+	C: "OO",2709938051376,2709285162144
+	
+	;Material::materials/models/player/hvyweapon/hvyweapon_red_sheen.vmat, Model::renderMesh13
+	C: "OO",2709187208000,2709285162144
+	
+	;Deformer::, Geometry::renderMeshShape13
+	C: "OO",2709224220928,2709938051376
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2708956562320,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2708956563072,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2708956565328,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2709972866304,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2709972867056,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2709965550432,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2709461780304,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2710382826704,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2710382825952,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2710382834976,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2710382827456,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2710382828208,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2710382824448,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2710382830464,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2710382828960,2709224220928
+	
+	;SubDeformer::, Deformer::
+	C: "OO",2710382829712,2709224220928
+	
+	;Model::bip_spine_0, SubDeformer::
+	C: "OO",2710092288816,2708956562320
+	
+	;Model::bip_spine_2, SubDeformer::
+	C: "OO",2710388860928,2708956563072
+	
+	;Model::bip_lowerarm_l, SubDeformer::
+	C: "OO",2710388846928,2708956565328
+	
+	;Model::bip_lowerarm_r, SubDeformer::
+	C: "OO",2710388854928,2709972866304
+	
+	;Model::bip_head, SubDeformer::
+	C: "OO",2710388838928,2709972867056
+	
+	;Model::effect_hand_l, SubDeformer::
+	C: "OO",2710388874928,2709965550432
+	
+	;Model::effect_hand_r, SubDeformer::
+	C: "OO",2710388866928,2709461780304
+	
+	;Model::bip_foot_l, SubDeformer::
+	C: "OO",2710388882928,2710382826704
+	
+	;Model::bip_foot_r, SubDeformer::
+	C: "OO",2710388890928,2710382825952
+	
+	;Model::prop_bone, SubDeformer::
+	C: "OO",2710388892928,2710382834976
+	
+	;Model::prop_bone_1, SubDeformer::
+	C: "OO",2710388894928,2710382827456
+	
+	;Model::prop_bone_2, SubDeformer::
+	C: "OO",2710388868928,2710382828208
+	
+	;Model::prop_bone_3, SubDeformer::
+	C: "OO",2710388872928,2710382824448
+	
+	;Model::prop_bone_4, SubDeformer::
+	C: "OO",2710388870928,2710382830464
+	
+	;Model::prop_bone_5, SubDeformer::
+	C: "OO",2710388880928,2710382828960
+	
+	;Model::prop_bone_6, SubDeformer::
+	C: "OO",2710388876928,2710382829712
+}

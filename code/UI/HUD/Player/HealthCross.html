@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="HealthCross.scss" />
+
+<root>
+    <div class="flash danger" @ref="DangerFlash" />
+    <div class="flash overheal" @ref="OverhealFlash" />
+    <div class="backdrop">
+        <div class="progress_bar" @ref="ProgressBar" />
+        <text class="health" @ref="HealthLabel" />
+        <text class="maxhealth" @ref="MaxHealthLabel" />
+    </div>
+</root>

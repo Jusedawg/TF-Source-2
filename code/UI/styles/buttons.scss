@@ -1,0 +1,107 @@
+@import "/UI/styles/colors.scss";
+
+.icon {
+    color: $tan-light;
+    font-family: MaterialIcons;
+}
+
+.button {
+    background-color: $tan-dark;
+    font-family: TF2;
+    color: $tan-light;
+    padding: 15px 30px;
+    font-size: 38px;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background-color: #924738;
+    }
+
+    &:active {
+        sound-in: ui.button.click;
+        sound-out: ui.button.release;
+    }
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+.button-dark {
+    background: linear-gradient(to right, #606060, #424242);
+    font-family: TF2_Build;
+    color: $tan-light;
+    font-size: 30px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 2px 10px black;
+
+    iconpanel {
+        color: $tan-light;
+        font-family: MaterialIcons;
+        padding: 0px 10px 1px 0px;
+    }
+
+    &:hover {
+        background: linear-gradient(to top, #8c4644, #862c29);
+    }
+
+    &:active {
+        sound-in: ui.button.click;
+        sound-out: ui.button.release;
+    }
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+.button-gradient {
+    background: linear-gradient(to top, #d7cdb6, #a29578);
+    font-family: TF2_Build;
+    color: $tan-darker;
+    padding: 10px;
+    font-size: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        color: $tan-light;
+        background: linear-gradient(to top, #8c4644, #862c29);
+    }
+
+    &:active {
+        sound-in: ui.button.click;
+        sound-out: ui.button.release;
+    }
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}

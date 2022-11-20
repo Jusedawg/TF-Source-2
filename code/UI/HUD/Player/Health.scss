@@ -1,0 +1,50 @@
+@import "/UI/Styles/colors.scss";
+
+Health {
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    bottom: 1%;
+    left: 1%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    flex-direction: column;
+    z-index: 0;
+
+    HealthCross {
+        position: absolute;
+        width: 125px;
+        height: 125px;
+        bottom: 5%;
+        left: 65%;
+
+        .label {
+            font-family: TF2_Secondary;
+            font-size: 45px;
+            top: 35%;
+        }
+    }
+
+    &.red {
+        background-image: url(/ui/HUD/Health/container_red.png);
+    }
+
+    &.blue {
+        background-image: url(/ui/HUD/Health/container_blu.png);
+    }
+
+    &.hidden {
+        display: none;
+    }
+
+    .playerclass {
+        position: absolute;
+        width: 175px;
+        height: 175px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        bottom: 1.8%;
+        left: 8%;
+    }
+}

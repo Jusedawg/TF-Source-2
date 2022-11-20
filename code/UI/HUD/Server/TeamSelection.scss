@@ -1,0 +1,100 @@
+@import "/UI/styles/colors.scss";
+@import "/UI/styles/buttons.scss";
+@import "/UI/styles/footer.scss";
+
+TeamSelection {
+    position: absolute;
+    pointer-events: all;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 5;
+
+    .background {
+        top: -80px;
+        position: absolute;
+        width: 1920px;
+        height: 1080px;
+
+        .label_random {
+            font-family: TF2_Secondary;
+            position: absolute;
+            left: 320px;
+            top: 200px;
+            font-size: 32px;
+            color: $tan-darker;
+            text-align: center;
+            width: 260px;
+        }
+
+        .label_spectate {
+            font-family: TF2_Secondary;
+            position: absolute;
+            left: 720px;
+            top: 645px;
+            font-weight: 900;
+            color: $tan-light;
+            font-size: 20px;
+        }
+
+        .teamcounter {
+            color: black;
+            font-family: TF2_Build;
+            position: absolute;
+            top: 185px;
+            font-size: 64px;
+            color: #111;
+
+            &.blue {
+                left: 1045px;
+            }
+
+            &.red {
+                left: 1465px;
+            }
+        }
+
+        .team {
+            position: absolute;
+            color: $tan-light;
+            font-size: 54px;
+            font-family: TF2_Secondary;
+            flex-direction: column;
+            align-items: flex-end;
+
+            &.door {
+                width: 340px;
+                height: 725px;
+                padding: 0px 0px 0 45px;
+            }
+
+            &.red {
+                left: 1283px;
+                top: 275px;
+            }
+
+            &.blue {
+                left: 863px;
+                top: 275px;
+            }
+
+            &.random {
+                left: 280px;
+                top: 275px;
+            }
+
+            &.tv {
+                width: 200px;
+                height: 200px;
+                padding: 0px 0px 30px 15px;
+            }
+
+            &.spectator {
+                top: 560px;
+                left: 640px;
+            }
+        }
+    }
+}

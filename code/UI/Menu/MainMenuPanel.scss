@@ -1,0 +1,191 @@
+@import "/UI/styles/colors.scss";
+@import "/UI/styles/buttons.scss";
+@import "/UI/styles/footer.scss";
+
+MainMenuPanel {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    flex-direction: column;
+    backdrop-filter: blur(5px);
+    background-color: #100a0194;
+    opacity: 0;
+    transform: scale(1.01);
+    transition: all .05s ease;
+
+    &.visible {
+        opacity: 1;
+        pointer-events: all;
+        transform: scale(1);
+    }
+
+    .container {
+        padding: 0 50px;
+        max-width: 900px;
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+
+        .logotype {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background: url(/ui/menu/tfs2_logotype.png);
+            height: 170px;
+            width: 100%;
+            margin-top: 30px 0;
+        }
+
+        .menublock {
+            flex-direction: column;
+            width: 60%;
+            background: linear-gradient(to right, #231f1c, #3e352f, #231f1c);
+            backdrop-filter: blur(50px);
+            border-radius: 6px;
+            margin-bottom: 15px;
+
+            .header {
+                width: 100%;
+                padding: 5px 20px;
+                background-color: $tan-darkest;
+                border-radius: 6px;
+                font-family: big_noodle_titling;
+                font-size: 40px;
+                color: $tan-light;
+            }
+
+            .content {
+                flex-direction: column;
+                padding-top: 15px;
+            }
+
+            .button-gradient {
+                font-size: 32px;
+                margin: 0 15px 15px 15px;
+            }
+        }
+
+        .news {
+            overflow: hidden;
+            flex-direction: column;
+            width: 75%;
+            background: url(/ui/menu/post_bg.png);
+            background-size: cover;
+            background-position: center center;
+            backdrop-filter: blur(50px);
+            border-radius: 6px;
+
+            .header {
+                width: 100%;
+                padding: 10px 20px;
+                background-color: $tan-darkest;
+                border-radius: 6px 6px 0 0;
+                flex-direction: column;
+
+                .date {
+                    color: $text-highlight;
+                    font-family: TF2_Secondary;
+                    font-size: 18px;
+                    padding: 5px 10px;
+                    background-color: $orange;
+                    border: 1px solid #5e371c;
+                    border-radius: 4px;
+                }
+
+                .date_icon {
+                    height: 20px;
+                    width: 20px;
+                    background: url(/ui/menu/calendar_range.png);
+                    background-size: cover;
+                    background-image-tint: $tan-light;
+                }
+
+                .date_label {
+                    padding-left: 8px;
+                    padding-top: 2px;
+                }
+
+                .title {
+                    padding-top: 8px;
+                    font-family: big_noodle_titling;
+                    color: $tan-light;
+                    font-size: 48px;
+                }
+            }
+
+            .content {
+                width: 100%;
+                background: linear-gradient(to right, #24201d, #3c332def, #3c332d00);
+                border-radius: 0 0 6px 6px;
+                padding: 15px 200px 20px 20px;
+                flex-direction: column;
+
+                .text {
+                    color: #a08f82;
+                    font-family: TF2_Secondary;
+                    font-size: 16px;
+                    margin-bottom: 15px;
+                }
+
+                .button-dark {
+                    width: 110%;
+                    padding: 5px 20px 5px 15px;
+                }
+            }
+        }
+    }
+
+    .disclaimer {
+        flex-direction: column;
+        width: 35%;
+        background: linear-gradient(to right, #231f1ee2, #3e352f90, #231f1ee2);
+        backdrop-filter: blur(50px);
+        border-radius: 6px;
+        margin-bottom: 15px;
+        position: absolute;
+        left: 64%;
+        top: 1%;
+
+        .dev_container {
+            padding: 0px 20px;
+            margin: 3px;
+
+            .dev_text {
+                font-family: TF2_Build;
+                font-size: 21px;
+                color: $tan-light;
+                padding-top: 18px;
+            }
+
+            .dev_logo {
+                width: 75px;
+                height: 75px;
+                background-image: url(ui/menu/indev.png);
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-image-tint: $tan-light;
+            }
+        }
+
+        .build {
+            position: absolute;
+            left: 84%;
+            top: 107%;
+
+            .build_number {
+                font-family: TF2_Secondary;
+                font-size: 20px;
+                color: $tan-light;
+            }
+        }
+    }
+
+    .button-dark {
+        font-size: 24px;
+        margin-right: 10px;
+
+        &:first-child {
+            margin-right: 50px;
+        }
+    }
+}

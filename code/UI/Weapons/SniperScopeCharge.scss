@@ -1,0 +1,67 @@
+SniperScopeCharge {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    display: none;
+
+    &.visible {
+        display: flex;
+    }
+
+    .wrapper {
+        height: 50px;
+        margin-left: 350px;
+        margin-top: 40px;
+
+        .lines_wrapper {
+            position: relative;
+            width: 90px;
+            height: 100%;
+            padding: 5px 0;
+            flex-shrink: 0;
+
+            .lines {
+                left: 0;
+                top: 0;
+                position: absolute;
+                height: 100%;
+                background-image: url(/ui/weapons/scope/sniper_scope_charge.png);
+                background-size: 90px 40px;
+                background-repeat: no-repeat;
+
+                &.background {
+                    width: 100%;
+                    opacity: .2;
+                }
+            }
+        }
+
+        .bolt {
+            flex-shrink: 0;
+            margin-left: 10px;
+            height: 100%;
+            width: 20px;
+            background-image: url(/ui/weapons/scope/sniper_scope_charge_ready.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-image-tint: #f4c050;
+            opacity: .2;
+        }
+
+        .label {
+            width: 80px;
+            margin-left: 10px;
+            flex-shrink: 0;
+            padding-top: 10px;
+            font-family: Inter_Bold;
+            font-weight: 700;
+            color: #f4c050;
+        }
+    }
+
+    &.is_charged .bolt {
+        opacity: 1;
+    }
+}

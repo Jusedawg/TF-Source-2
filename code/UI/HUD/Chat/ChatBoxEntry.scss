@@ -1,0 +1,28 @@
+﻿@import "/UI/styles/colors.scss";
+
+TFChatBoxEntry {
+    font-family: Inter_Bold;
+    color: $tan-light;
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 5px;
+    text-shadow: 1px 1px 0 #000;
+    font-size: 15px;
+    font-weight: 700;
+
+    .wrapper {
+        transition: opacity 0s ease;
+    }
+
+    .red {
+        color: $team-red;
+    }
+
+    .blue {
+        color: $team-blu;
+    }
+
+    .spectator {
+        color: $team-spectator;
+    }
+}

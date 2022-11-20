@@ -1,0 +1,65 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+_class = "CParticleSystemDefinition"
+m_nBehaviorVersion = 10
+m_bShouldHitboxesFallbackToRenderBounds = false
+m_nMaxParticles = 4
+m_flMaxDrawDistance = 100000.0
+m_Renderers = 
+[
+{
+_class = "C_OP_RenderSprites"
+m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+m_bAdditive = true
+m_flDiffuseAmount = 0.0
+m_flSelfIllumAmount = 1.0
+m_hTexture = resource:"materials/effects/brightglow_y.vtex"
+},
+]
+m_Operators = 
+[
+{
+_class = "C_OP_FadeAndKill"
+},
+{
+_class = "C_OP_BasicMovement"
+},
+{
+_class = "C_OP_InterpolateRadius"
+m_flEndScale = 42.0
+},
+{
+_class = "C_OP_ColorInterpolate"
+m_ColorFade = [ 133, 169, 195, null ]
+},
+]
+m_Initializers = 
+[
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 0.1
+m_flRandomMax = 0.1
+}
+m_nOutputField = "1"
+m_flOpStartFadeInTime = 1
+m_flOpEndFadeInTime = 1
+m_flOpStartFadeOutTime = 2
+m_flOpEndFadeOutTime = 2
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_CreateWithinSphere"
+},
+]
+m_Emitters = 
+[
+{
+_class = "C_OP_InstantaneousEmitter"
+m_nParticlesToEmit = 1
+m_nMaxEmittedPerFrame = 100
+},
+]
+}

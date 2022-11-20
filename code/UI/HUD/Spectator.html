@@ -1,0 +1,31 @@
+﻿<link rel="stylesheet" href="Spectator.scss" />
+
+<root>
+    <div class="header">
+        <text class="observertarget" @ref="Target" />
+        <text class="timer" @ref="Timer" />
+
+        <div class="hint controls">
+            <div class="control_row">
+                <InputGlyph Button="PrimaryAttack" />
+                <text>Spectate Next Target</text>
+            </div>
+            <div class="control_row">
+                <InputGlyph Button="SecondaryAttack" />
+                <text>Spectate Previous Target</text>
+            </div>
+            <div class="control_row">
+                <InputGlyph Button="Jump" />
+                <text>Change Spectator Mode</text>
+            </div>
+            <div class="control_row">
+                <InputGlyph Button="Menu" />
+                <text>Open Menu</text>
+            </div>
+        </div>
+        <div class="map">
+            <text class="hint">Playing on:</text>
+            <text class="name" @ref="MapName" />
+        </div>
+    </div>
+</root>
