@@ -11,7 +11,7 @@ This part aims to guide developers with installing and setting up the addon for 
 
 - Navigate to your s&box installation directory. For example, on Windows this would be the ``Steam/steamapps/common/sbox/`` folder.
 - Go into the ``addons`` folder and clone the repository.
-- Initialize submodules. We use our [s&box FPS SDK](https://github.com/AmperSoftware/sbox-FPS-SDK) as the core of the gamemode. If you have cloned the repository using a GUI client such as GitHub Desktop the submodule should have been initialized automatically. If not, navigate to the repository folder and run: ``git submodule update --init --recursive``. You can then navigate to the ``code/Libraries/Source1`` folder and verify that it contains content.
+- Initialize submodules. We use our [s&box FPS SDK](https://github.com/AmperSoftware/sbox-FPS-SDK) as the core of the gamemode. If you have cloned the repository using a GUI client such as GitHub Desktop the submodule should have been initialized automatically. If not, navigate to the repository folder and run: ``git submodule update --init --recursive``. You can then navigate to the ``code/Libraries/FPS`` folder and verify that it contains content.
 - Run the developer version of s&box (sbox-dev.exe). Once loaded, add the addon using the Addon Manager widget (Add -> Add From Disk) by selecting the ``.addon`` file and verify that it is active and enabled by hovering over the checkmark icon.
 
 Congrats! Your local version of TFS2 is ready to be played and modified.  
