@@ -138,6 +138,15 @@ public partial class VoiceMenu : Panel
 		SwitchToPage( menu );
 	}
 
+	public void Toggle(int menu = 0)
+	{
+		// If we're trying to open the currently active page...
+		if (Shown && ActivePage == menu)
+			Close(); // just close the menu.
+		else
+			Show(menu);
+	}
+	
 	public void NextPage()
 	{
 		if ( !Shown )
@@ -215,6 +224,6 @@ public partial class VoiceMenu : Panel
 	[ConCmd.Client( "voice_menu" )]
 	public static void Command_VoiceMenu( int menu )
 	{
-		Current?.Show( menu );
+		Current?.Toggle( menu );
 	}
 }
