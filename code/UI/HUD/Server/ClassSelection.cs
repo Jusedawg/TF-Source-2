@@ -30,11 +30,11 @@ public class ClassSelection : MenuOverlay
 
 		var footer = Add.Panel( "footer menu" );
 		footer.Add.Label( "SELECT A CLASS", "title" );
-		footer.Add.ButtonWithIcon( "Edit Loadout", "inventory", "button-dark disabled", HandleCancelClick );
+		footer.Add.ButtonWithIcon( "Edit Loadout", "inventory", "button-dark", OnClickLoadout );
 
 		// If player has class specified, show Cancel button. Otherwise show the text.
 		if ( SelectedClass != null )
-			footer.Add.ButtonWithIcon( "Cancel", "highlight_off", "button-dark", HandleCancelClick );
+			footer.Add.ButtonWithIcon( "Cancel", "highlight_off", "button-dark", OnClickCancel );
 	}
 
 	public override void OnDeleted()
@@ -79,7 +79,13 @@ public class ClassSelection : MenuOverlay
 		Open<ClassSelection>();
 	}
 
-	private void HandleCancelClick()
+	public void OnClickLoadout()
+	{
+		Sound.FromScreen( "ui.button.click" );
+		Open( new ClassLoadout( SelectedClass ) );
+	}
+
+	private void OnClickCancel()
 	{
 		Sound.FromScreen( "ui.button.click" );
 		Close();

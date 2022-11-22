@@ -17,7 +17,7 @@ partial class ClassLoadout : MenuOverlay
 
 	public ClassLoadout()
 	{
-		PlayerClass = PlayerClass.Get( TFPlayerClass.Scout );   // TODO: Use the player's current class if in-game.
+		PlayerClass = Local.Client.GetPlayerClass();
 		SetupPage();
 	}
 
