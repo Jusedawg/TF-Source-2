@@ -28,17 +28,23 @@ public abstract class AmmoPack : PickupItem
 			if ( !weapon.Data.TryGetOwnerDataForPlayerClass( player.PlayerClass, out var ownerData ) )
 				continue;
 
-			var maxAmmo = ownerData.Reserve;
-			var ammo = weapon.Reserve;
-
 			//
 			// Restocking ammo
 			//
 
-			if ( maxAmmo > 0 )
+			if ( ownerData.Reserve > 0 )
+			{
+				weapon.Reserve = CalculateAmmo( weapon.Reserve, ownerData.Reserve );
+			}
+			else
+			{
+				weapon.Clip = CalculateAmmo( weapon.Clip, weapon.Data.ClipSize );
+			}
+
+			int CalculateAmmo(int currentAmmo, int maxAmmo)
 			{
 				// this is how much we need to fully restock our ammo
-				var need = maxAmmo - ammo;
+				var need = maxAmmo - currentAmmo;
 
 				// this is how much we can give
 				var canGive = maxAmmo * AmmoMultiplier;
@@ -48,9 +54,11 @@ public abstract class AmmoPack : PickupItem
 
 				if ( willGive > 0 )
 				{
-					weapon.Reserve += willGive;
+					currentAmmo += willGive;
 					neededAmmo = true;
 				}
+
+				return currentAmmo;
 			}
 		}
 
