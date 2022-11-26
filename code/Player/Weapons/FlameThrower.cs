@@ -6,7 +6,7 @@ using System;
 namespace TFS2;
 
 [Library( "tf_weapon_flamethrower", Title = "Flame Thrower" )]
-partial class FlameThrower : TFHoldWeaponBase
+public partial class FlameThrower : TFHoldWeaponBase
 {
 	public readonly Vector3 MuzzleOffset = new Vector3( 70, 12, -12 );
 	[Net] public float LastFlameContactTime { get; set; }

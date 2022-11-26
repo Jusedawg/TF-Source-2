@@ -3,7 +3,7 @@ using Amper.FPS;
 
 namespace TFS2;
 
-partial class StickyBomb : TFProjectile
+public partial class StickyBomb : TFProjectile
 {
 	[Net] public bool IsDeployed { get; set; }
 

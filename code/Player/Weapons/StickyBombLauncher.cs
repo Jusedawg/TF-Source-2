@@ -6,7 +6,7 @@ using System.Linq;
 namespace TFS2;
 
 [Library( "tf_weapon_stickybomblauncher", Title = "Sticky Bomb Launcher" )]
-partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChild
+public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChild
 {
 	public readonly Vector3 MuzzleOffset = new Vector3( 16, 8, -6 );
 	public const string DetonationSound = "weapon_stickybomblauncher.detonate";

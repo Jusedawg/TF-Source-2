@@ -3,7 +3,7 @@ using Amper.FPS;
 
 namespace TFS2;
 
-partial class Grenade : TFProjectile
+public partial class Grenade : TFProjectile
 {
 	public override void Spawn()
 	{

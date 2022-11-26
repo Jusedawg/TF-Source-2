@@ -5,7 +5,7 @@ namespace TFS2;
 
 [Library( "tf_weapon_inviswatch", Title = "Invisibility Watch" )]
 
-partial class InvisWatch : TFMeleeBase, IPassiveChild
+public partial class InvisWatch : TFMeleeBase, IPassiveChild
 {
 	public enum InvisWatchTypes
 	{ 

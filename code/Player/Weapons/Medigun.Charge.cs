@@ -5,7 +5,7 @@ using Amper.FPS;
 
 namespace TFS2;
 
-partial class Medigun 
+public partial class Medigun 
 {
 	[Net] public float ChargeLevel { get; set; }
 	[Net] public bool IsReleasingCharge { get; set; }

@@ -3,7 +3,7 @@ using Amper.FPS;
 
 namespace TFS2;
 
-partial class Syringe : TFProjectile
+public partial class Syringe : TFProjectile
 {
 	public override void Spawn()
 	{

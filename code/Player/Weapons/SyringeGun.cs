@@ -3,7 +3,7 @@
 namespace TFS2;
 
 [Library( "tf_weapon_syringegun", Title = "Syringe Gun" )]
-partial class SyringeGun : TFWeaponBase
+public partial class SyringeGun : TFWeaponBase
 {
 	public readonly Vector3 MuzzleOffset = new Vector3( 16, 6, -8 );
 

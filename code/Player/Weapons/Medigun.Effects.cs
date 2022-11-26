@@ -3,7 +3,7 @@ using Amper.FPS;
 
 namespace TFS2;
 
-partial class Medigun
+public partial class Medigun
 {
 	public const string HealSoundEffect = "weapon_medigun.heal";
 	public const string DetachSoundEffect = "weapon_medigun.detach";

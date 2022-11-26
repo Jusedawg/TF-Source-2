@@ -5,7 +5,7 @@ using System;
 namespace TFS2;
 
 [Library( "tf_weapon_medigun", Title = "Medigun" )]
-partial class Medigun : TFHoldWeaponBase //, IPassiveChild
+public partial class Medigun : TFHoldWeaponBase //, IPassiveChild
 {
 	public override bool NeedsAmmo() => false;
 

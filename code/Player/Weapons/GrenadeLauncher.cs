@@ -3,7 +3,7 @@
 namespace TFS2;
 
 [Library( "tf_weapon_grenadelauncher", Title = "Grenade Launcher" )]
-partial class GrenadeLauncher : TFWeaponBase
+public partial class GrenadeLauncher : TFWeaponBase
 {
 	public readonly Vector3 MuzzleOffset = new Vector3( 16, 8, -6 );
 

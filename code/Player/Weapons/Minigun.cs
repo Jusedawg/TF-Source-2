@@ -4,7 +4,7 @@ using Amper.FPS;
 namespace TFS2;
 
 [Library( "tf_weapon_minigun", Title = "Minigun" )]
-partial class Minigun : TFHoldWeaponBase
+public partial class Minigun : TFHoldWeaponBase
 {
 	public const float SpinStopTime = 0.75f;
 	public const float SpinStartTime = 0.75f;
