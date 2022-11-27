@@ -1,7 +1,7 @@
 @import "/UI/styles/colors.scss";
 @import "/UI/styles/buttons.scss";
 
-ItemPickerElement {
+ItemPicker {
     position: relative;
     width: 350px;
     height: 160px;
@@ -11,28 +11,12 @@ ItemPickerElement {
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
-    justify-content: center;
-
-    &.has_equipped_label .equipped_label {
-        display: flex;
-    }
-
-    .equipped_label {
-        display: none;
-        position: absolute;
-        background-color: #000;
-        color: $button-hover;
-        padding: 4px 7px;
-        border-radius: 5px;
-        font-family: TF2_Secondary;
-        right: 10px;
-        top: 10px;
-    }
 
     .image {
         width: 160px;
         height: 160px;
-        bottom: 10px;
+        left: 95px;
+        top: -20px;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;

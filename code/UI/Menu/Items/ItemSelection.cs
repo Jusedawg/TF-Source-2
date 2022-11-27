@@ -65,7 +65,7 @@ partial class ItemSelection : MenuOverlay
 
 	public void AddItem( WeaponData data, bool equipped = false )
 	{
-		var item = new LoadoutSlot
+		var item = new ItemPicker
 		{
 			PlayerClass = PlayerClass,
 			Parent = ItemsContainer,
@@ -74,12 +74,11 @@ partial class ItemSelection : MenuOverlay
 
 		item.SetWeaponData( data );
 
-		// TODO: Change the selected weapon.
-		//item.OnClicked += () =>
-		//{
-		//	Loadout.LocalLoadout.SetLoadoutItem( PlayerClass, Slot, data );
-		//	OnClickBack();
-		//};
+		item.OnClicked += () =>
+		{
+			Loadout.LocalLoadout.SetLoadoutItem( PlayerClass, Slot, data );
+			OnClickBack();
+		};
 	}
 
 	public void OnClickBack()

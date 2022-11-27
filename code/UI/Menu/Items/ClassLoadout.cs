@@ -2,6 +2,7 @@
 using Sandbox.UI;
 using System;
 using System.Collections.Generic;
+using static Sandbox.Clothing;
 
 namespace TFS2.UI;
 
@@ -11,7 +12,7 @@ partial class ClassLoadout : MenuOverlay
 	PlayerClass PlayerClass { get; set; }
 	Label ClassName { get; set; }
 	Panel WeaponSlots { get; set; }
-	List<LoadoutSlot> Slots { get; set; } = new();
+	List<ItemPicker> Slots { get; set; } = new();
 	Label PlayerName { get; set; }
 	Image PlayerAvatar { get; set; }
 
@@ -55,7 +56,13 @@ partial class ClassLoadout : MenuOverlay
 
 			var weapon = await loadout.GetLoadoutItem( PlayerClass, slot );
 			if ( weapon == null )
-				return;
+			{
+				var defaultweapon = PlayerClass.GetDefaultWeaponForSlot( slot );
+				if(defaultweapon == null) // No default weapon for this slot, skipping
+					continue;
+
+				weapon = defaultweapon;
+			}
 
 			AddLoadoutSlot( WeaponSlots, slot, weapon );
 		}
@@ -63,7 +70,7 @@ partial class ClassLoadout : MenuOverlay
 
 	public void AddLoadoutSlot( Panel parent, TFWeaponSlot slot, WeaponData weapon )
 	{
-		var panel = new LoadoutSlot
+		var panel = new ItemPicker
 		{
 			Slot = slot,
 			PlayerClass = PlayerClass,
@@ -72,6 +79,11 @@ partial class ClassLoadout : MenuOverlay
 
 		Slots.Add( panel );
 		panel.SetWeaponData( weapon );
+
+		panel.OnClicked += () =>
+		{
+			Open( new ItemSelection( PlayerClass, slot ) );
+		};
 	}
 
 	protected override void PostTemplateApplied()

@@ -1,13 +1,16 @@
 ﻿using Sandbox.UI;
 using Amper.FPS;
+using System;
 
 namespace TFS2.UI;
 
 [UseTemplate]
-partial class LoadoutSlot : Panel
+partial class ItemPicker : Panel
 {
 	public PlayerClass PlayerClass { get; set; }
 	public TFWeaponSlot Slot { get; set; }
+
+	public event Action OnClicked;
 
 	Panel Image { get; set; }
 	Label Name { get; set; }
@@ -32,7 +35,8 @@ partial class LoadoutSlot : Panel
 
 	protected override void OnClick( MousePanelEvent e )
 	{
-		base.OnClick( e );
-		MenuOverlay.Open( new ItemSelection( PlayerClass, Slot ) );
+		OnClicked?.Invoke();
+		//MenuOverlay.Open( new ItemSelection( PlayerClass, Slot ) );
+		//Loadout.LocalLoadout.SetLoadoutItem( PlayerClass, Slot, Data );
 	}
 }
