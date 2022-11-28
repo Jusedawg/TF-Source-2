@@ -66,6 +66,7 @@ public partial class VoiceMenu : Panel
 	};
 
 	Panel PageContainer { get; set; }
+	Panel InfoContainer { get; set; }
 	bool Shown;
 	int ActivePage;
 	public float? AutoDismissTime;
@@ -133,11 +134,21 @@ public partial class VoiceMenu : Panel
 
 	public void Show( int menu = 0 )
 	{
+		InfoContainer.SetClass("visible", Input.GetButtonOrigin(InputButton.View) != null);
 		Shown = true;
 		AddClass( "visible" );
 		SwitchToPage( menu );
 	}
 
+	public void Toggle(int menu = 0)
+	{
+		// If we're trying to open the currently active page...
+		if (Shown && ActivePage == menu)
+			Close(); // just close the menu.
+		else
+			Show(menu);
+	}
+	
 	public void NextPage()
 	{
 		if ( !Shown )
@@ -215,6 +226,6 @@ public partial class VoiceMenu : Panel
 	[ConCmd.Client( "voice_menu" )]
 	public static void Command_VoiceMenu( int menu )
 	{
-		Current?.Show( menu );
+		Current?.Toggle( menu );
 	}
 }
