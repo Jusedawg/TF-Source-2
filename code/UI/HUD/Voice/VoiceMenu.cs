@@ -66,6 +66,7 @@ public partial class VoiceMenu : Panel
 	};
 
 	Panel PageContainer { get; set; }
+	Panel InfoContainer { get; set; }
 	bool Shown;
 	int ActivePage;
 	public float? AutoDismissTime;
@@ -133,6 +134,7 @@ public partial class VoiceMenu : Panel
 
 	public void Show( int menu = 0 )
 	{
+		InfoContainer.SetClass("visible", Input.GetButtonOrigin(InputButton.View) != null);
 		Shown = true;
 		AddClass( "visible" );
 		SwitchToPage( menu );

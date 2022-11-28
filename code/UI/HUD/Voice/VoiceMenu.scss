@@ -27,6 +27,15 @@ VoiceMenu {
             flex-direction: column;
         }
 
+        .info {
+            display: none;
+            flex-direction: column;
+  
+            &.visible {
+                display: flex;
+            }
+        }
+      
         .footer {
             margin-top: 10px;
             align-items: center;
