@@ -156,7 +156,7 @@ public partial class Medigun
 
 	public void OnReleasedCharge() { }
 
-	public virtual TFCondition GetChargeType() => TFCondition.Invulnerable;
+	public TFCondition GetChargeType() => TFCondition.Invulnerable;
 
 #if DEBUG
 	[ConCmd.Admin( "tf_medigun_set_charge" )]
