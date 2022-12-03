@@ -1,0 +1,120 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+_class = "CParticleSystemDefinition"
+m_nBehaviorVersion = 10
+m_bShouldHitboxesFallbackToRenderBounds = false
+m_nMaxParticles = 160
+m_nInitialParticles = 1
+m_flConstantRadius = 10.0
+m_flMaxDrawDistance = 100000.0
+m_flNoDrawTimeToGoToSleep = 1.0
+m_Renderers = 
+[
+{
+_class = "C_OP_RenderSprites"
+m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+m_flDiffuseAmount = 0.0
+m_flSelfIllumAmount = 1.0
+m_hTexture = resource:"materials/effects/smoke/smokelit.vtex"
+m_flAnimationRate = 0.02
+},
+]
+m_Operators = 
+[
+{
+_class = "C_OP_BasicMovement"
+m_Gravity = [ 0.0, 0.0, 30.0 ]
+m_fDrag = 0.015
+},
+{
+_class = "C_OP_InterpolateRadius"
+m_flStartScale = 0.2
+m_flEndScale = 1.2
+m_flBias = 0.0
+},
+{
+_class = "C_OP_FadeAndKill"
+m_flStartAlpha = 0.0
+m_flEndFadeInTime = 0.04
+m_flStartFadeOutTime = 0.1
+},
+{
+_class = "C_OP_ColorInterpolate"
+m_ColorFade = [ 95, 127, 230, null ]
+m_flFadeEndTime = 0.1
+},
+]
+m_Initializers = 
+[
+{
+_class = "C_INIT_CreateWithinSphere"
+},
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 160
+m_flRandomMax = 200
+}
+m_nOutputField = "4"
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 6
+m_flRandomMax = 8
+}
+m_nOutputField = "1"
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_InitialVelocityNoise"
+m_flNoiseScaleLoc = 0.1
+m_vecOffsetLoc = [ 1.0, 1.0, 1.0 ]
+m_vecOutputMin = [ 20.0, 20.0, 180.0 ]
+m_vecOutputMax = [ 80.0, 80.0, 220.0 ]
+},
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 90
+m_flRandomMax = 150
+}
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+]
+m_Emitters = 
+[
+{
+_class = "C_OP_ContinuousEmitter"
+m_flEmitRate = 12.0
+},
+]
+m_Children = 
+[
+{
+m_ChildRef = resource:"particles/mvm/flare_glow.vpcf"
+},
+{
+m_ChildRef = resource:"particles/mvm/flare_sparks.vpcf"
+},
+]
+}

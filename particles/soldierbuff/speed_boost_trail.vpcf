@@ -1,0 +1,87 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+_class = "CParticleSystemDefinition"
+m_nBehaviorVersion = 10
+m_bShouldHitboxesFallbackToRenderBounds = false
+m_nMaxParticles = 100
+m_flConstantRadius = 4.0
+m_ConstantColor = [ 167, 166, 166, 32 ]
+m_flMaxDrawDistance = 100000.0
+m_Renderers = 
+[
+{
+_class = "C_OP_RenderTrails"
+m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+m_flDiffuseAmount = 0.0
+m_flSelfIllumAmount = 1.0
+m_hTexture = resource:"materials/effects/waterdrop001.vtex"
+m_flLengthFadeInTime = 0.1
+m_flMaxLength = 120.0
+m_flRadiusScale = 0.5
+m_flFinalTextureScaleV = -1.0
+m_flFinalTextureOffsetV = 1.0
+},
+]
+m_Operators = 
+[
+{
+_class = "C_OP_FadeAndKill"
+},
+{
+_class = "C_OP_LockToBone"
+},
+]
+m_Initializers = 
+[
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 0.1
+m_flRandomMax = 0.1
+}
+m_nOutputField = "1"
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_CreateOnModel"
+m_nForceInModel = 1
+m_flHitBoxScale = 0.0
+},
+{
+_class = "C_INIT_VelocityRandom"
+m_LocalCoordinateSystemSpeedMin = [ 1.0, 0.0, 0.0 ]
+m_LocalCoordinateSystemSpeedMax = [ 1.0, 0.0, 0.0 ]
+},
+{
+_class = "C_INIT_InheritVelocity"
+},
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 0.15
+m_flRandomMax = 0.3
+}
+m_nOutputField = "10"
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+]
+m_Emitters = 
+[
+{
+_class = "C_OP_ContinuousEmitter"
+m_flEmitRate = 500.0
+},
+]
+}

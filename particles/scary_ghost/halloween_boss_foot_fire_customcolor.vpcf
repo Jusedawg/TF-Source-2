@@ -1,0 +1,179 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+_class = "CParticleSystemDefinition"
+m_nBehaviorVersion = 10
+m_bShouldHitboxesFallbackToRenderBounds = false
+m_nMaxParticles = 280
+m_flConstantRadius = 3.0
+m_nSkipRenderControlPoint = 0
+m_flMaxDrawDistance = 100000.0
+m_Renderers = 
+[
+{
+_class = "C_OP_RenderSprites"
+m_nSequenceCombineMode = "SEQUENCE_COMBINE_MODE_USE_SEQUENCE_0"
+m_flStartFadeSize = 0.3
+m_flEndFadeSize = 0.5
+m_flMaxSize = 0.4
+m_flAddSelfAmount = 0.5
+m_bSaturateColorPreAlphaBlend = false
+m_flDiffuseAmount = 0.0
+m_flSelfIllumAmount = 1.0
+m_nFeatheringMode = "PARTICLE_DEPTH_FEATHERING_ON_OPTIONAL"
+m_hTexture = resource:"materials/particle/flamethrowerfire/flamethrowerfire102.vtex"
+m_bAnimateInFPS = true
+m_flAnimationRate = 30.0
+m_flOverbrightFactor = 
+{
+m_flLiteralValue = 5.0
+}},
+]
+m_Operators = 
+[
+{
+_class = "C_OP_BasicMovement"
+m_Gravity = [ 0.0, 50.0, 300.0 ]
+m_fDrag = 0.15
+},
+{
+_class = "C_OP_Spin"
+},
+{
+_class = "C_OP_InterpolateRadius"
+m_flBias = 0.75
+m_flStartScale = 15.0
+m_flEndScale = 4.0
+m_flEndTime = 0.5
+},
+{
+_class = "C_OP_FadeAndKill"
+m_flStartFadeOutTime = 0.99
+m_flStartAlpha = 0.0
+m_flEndFadeInTime = 0.33
+},
+{
+_class = "C_OP_Spin"
+m_nSpinRateDegrees = 32
+},
+{
+_class = "C_OP_RemapCPtoVector"
+m_nCPInput = 1
+m_vInputMax = [ 1.0, 1.0, 1.0 ]
+m_nFieldOutput = "6"
+m_vOutputMax = [ 1.0, 1.0, 1.0 ]
+},
+{
+_class = "C_OP_RemapScalar"
+m_bActiveRange = false
+m_bScaleInitialRange = true
+m_flOutputMax = 0.0
+m_flOutputMin = 1.0
+m_nFieldOutput = 7
+m_flInputMax = 2.0
+m_flInputMin = 0.0
+m_nFieldInput = 8
+m_flEndTime = -1.0
+m_flStartTime = -1.0
+m_flOpFadeOscillatePeriod = 0.0
+m_flOpEndFadeOutTime = 0.0
+m_flOpStartFadeOutTime = 0.0
+m_flOpEndFadeInTime = 0.0
+m_flOpStartFadeInTime = 0.0
+m_nSetMethod = "PARTICLE_SET_SCALE_INITIAL_VALUE"
+m_bNormalizeToStopTime = false
+m_flOpTimeOffsetMin = 0.0
+m_flOpTimeOffsetMax = 0.0
+m_nOpTimeOffsetSeed = 0
+m_nOpTimeScaleSeed = 0
+m_flOpTimeScaleMin = 1.0
+m_flOpTimeScaleMax = 1.0
+m_bDisableOperator = false
+m_nOpEndCapState = -1
+m_flOpStrength = "1.0"
+m_Notes = ""
+},
+]
+m_Initializers = 
+[
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 0.3
+m_flRandomMax = 1.5
+}
+m_nOutputField = "1"
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 0.2509804
+m_flRandomMax = 0.5019608
+}
+m_nOutputField = "7"
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 1
+m_flRandomMax = 1.5
+}
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_SequenceLifeTime"
+},
+{
+_class = "C_INIT_InitFloat"
+m_InputValue = 
+{
+m_nType = "PF_TYPE_RANDOM_UNIFORM"
+m_flRandomMin = 0
+m_flRandomMax = 4
+}
+m_nOutputField = "9"
+m_flOpStartFadeInTime = 0
+m_flOpEndFadeInTime = 0
+m_flOpStartFadeOutTime = 0
+m_flOpEndFadeOutTime = 0
+m_flOpFadeOscillatePeriod = 0
+},
+{
+_class = "C_INIT_CreateWithinSphere"
+},
+{
+_class = "C_INIT_InitialVelocityNoise"
+m_vecOutputMax = [ 125.0, 125.0, 125.0 ]
+m_vecOutputMin = [ -125.0, -125.0, -125.0 ]
+m_flNoiseScaleLoc = 0.1
+m_flNoiseScale = 5.0
+},
+]
+m_Emitters = 
+[
+{
+_class = "C_OP_ContinuousEmitter"
+m_flEmitRate = 32.0
+m_flEmissionDuration = 2.0
+},
+]
+}
