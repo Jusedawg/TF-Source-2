@@ -129,7 +129,7 @@ partial class WinPanelPlayer : Panel
 
 	public WinPanelPlayer( Client cl )
 	{
-		PlayerAvatar = Add.Image( $"avatar:{cl.PlayerId}", "avatar" );
+		PlayerAvatar = Add.Image( $"avatar:{cl.SteamId}", "avatar" );
 		NameLabel = Add.Label( cl.Name, "name text" );
 		ClassLabel = Add.Label( cl.GetPlayerClass().Title, "pclass text" );
 		PointsLabel = Add.Label( cl.GetPoints().ToString(), "points text" );

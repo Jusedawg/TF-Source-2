@@ -15,7 +15,7 @@ partial class ItemsPage : MenuOverlay
 		if ( !IsVisible ) return;
 
 		PlayerName.Text = Local.Client.Name;
-		PlayerAvatar.SetTexture( $"avatarbig:{Local.Client.PlayerId}" );
+		PlayerAvatar.SetTexture( $"avatarbig:{Local.Client.SteamId}" );
 	}
 
 	public void OnClickBack()

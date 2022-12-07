@@ -27,7 +27,7 @@ public class MainMenuPanel : Panel
 			return;
 
 		PlayerName.Text = Local.Client.Name;
-		PlayerAvatar.SetTexture( $"avatarbig:{Local.Client.PlayerId}" );
+		PlayerAvatar.SetTexture( $"avatarbig:{Local.Client.SteamId}" );
 	}
 
 	public void OnClickResumeGame()

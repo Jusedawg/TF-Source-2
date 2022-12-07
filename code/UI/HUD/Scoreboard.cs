@@ -204,7 +204,7 @@ public class ScoreboardPlayerEntry : Panel
 		if ( Client == null || !Client.IsValid() )
 			return;
 
-		Avatar.SetTexture( $"avatar:{Client.PlayerId}" );
+		Avatar.SetTexture( $"avatar:{Client.SteamId}" );
 		Name.Text = Client.Name;
 		Ping.Text = $"{Client.Ping}";
 		TimeSinceUpdate = 0;

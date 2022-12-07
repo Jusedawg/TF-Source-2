@@ -54,7 +54,7 @@ public partial class RespawnRoomVisualizer : ModelEntity
 		}
 	}
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public void Frame()
 	{
 		EnableDrawing = IsVisibleForLocalPlayer();

@@ -159,7 +159,7 @@ public partial class TargetID : Panel
 				return true;
 
 			case AvatarVisibility.Friends:
-				var friend = new Friend( client.PlayerId );
+				var friend = new Friend( client.SteamId );
 				return friend.IsFriend;
 
 			default:

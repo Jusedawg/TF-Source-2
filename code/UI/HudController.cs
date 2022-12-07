@@ -15,7 +15,7 @@ public partial class TFHud : HudEntity<RootPanel>
 			RootPanel.SetTemplate( "/ui/HudController.html" );
 	}
 
-	[Event.Frame]
+	[Event.Client.Frame]
 	public void OnHudChangeEnabled()
 	{
 		if ( Enabled )
