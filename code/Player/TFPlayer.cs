@@ -10,7 +10,7 @@ namespace TFS2;
 /// </summary>
 public partial class TFPlayer : SDKPlayer
 {
-	public new static TFPlayer LocalPlayer => Local.Pawn as TFPlayer;
+	public new static TFPlayer LocalPlayer => Game.LocalPawn as TFPlayer;
 	public override float DeathAnimationTime => 2;
 
 	public TFPlayer()
@@ -219,7 +219,7 @@ public partial class TFPlayer : SDKPlayer
 		}
 	}
 
-	public override void Simulate( Client cl )
+	public override void Simulate( IClient cl )
 	{
 		base.Simulate( cl );
 

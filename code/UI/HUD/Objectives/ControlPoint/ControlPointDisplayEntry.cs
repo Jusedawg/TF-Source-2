@@ -135,7 +135,7 @@ partial class ControlPointDisplayEntry : Panel
 		if ( !IsVisible )
 			return;
 
-		if ( Local.Pawn is TFPlayer player )
+		if ( Game.LocalPawn is TFPlayer player )
 		{
 			var isPointerVisible = player.ControlPoint == Point;
 			SetClass( "show_pointer", isPointerVisible );

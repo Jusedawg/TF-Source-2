@@ -18,7 +18,7 @@ partial class ClassLoadout : MenuOverlay
 
 	public ClassLoadout()
 	{
-		PlayerClass = Local.Client.GetPlayerClass();
+		PlayerClass = Game.LocalClient.GetPlayerClass();
 		SetupPage();
 	}
 
@@ -32,8 +32,8 @@ partial class ClassLoadout : MenuOverlay
 	{
 		if ( !IsVisible ) return;
 
-		PlayerName.Text = Local.Client.Name;
-		PlayerAvatar.SetTexture( $"avatarbig:{Local.Client.SteamId}" );
+		PlayerName.Text = Game.LocalClient.Name;
+		PlayerAvatar.SetTexture( $"avatarbig:{Game.LocalClient.SteamId}" );
 	}
 
 	public async void SetupPage()

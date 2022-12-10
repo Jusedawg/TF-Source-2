@@ -157,7 +157,7 @@ partial class TFPlayer : IResponseSpeaker<TFResponseConcept, TFResponseContext>
 			case TFResponseConcept.VoiceSpy:
 
 				// get teammates
-				var clients = Client.All.Where( x => x.GetTeam() == Team );
+				var clients = Game.Clients.Where( x => x.GetTeam() == Team );
 
 				string message = "";
 				bool found = false;

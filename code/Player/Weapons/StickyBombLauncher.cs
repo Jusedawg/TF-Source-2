@@ -48,8 +48,8 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 
 		var velocity = direction * force
 			+ up * 200
-			+ right * Rand.Int( -10, 10 )
-			+ up * Rand.Int( -10, 10 );
+			+ right * Game.Random.Int( -10, 10 )
+			+ up * Game.Random.Int( -10, 10 );
 
 		var bomb = FireProjectile<StickyBomb>( origin, velocity, Data.Damage );
 		Bombs.Add( bomb );
@@ -68,9 +68,9 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 		base.SecondaryAttack();
 
 	}
-
+	
 	float NextDenySoundTime;
-	public void PassiveSimulate( Client cl )
+	public void PassiveSimulate( IClient cl )
 	{
 		if ( !WishSecondaryAttack() )
 			return;

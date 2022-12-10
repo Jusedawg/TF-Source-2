@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Editor;
 using Amper.FPS;
 using System;
 using System.Collections.Generic;
@@ -10,8 +11,8 @@ namespace TFS2;
 [Title( "Team Deathmatch" )]
 [Category("Gamemode")]
 [Icon("groups")]
-[SandboxEditor.EditorSprite( "materials/editor/tf_logic_tdm.vmat" )]
-[SandboxEditor.HammerEntity]
+[EditorSprite( "materials/editor/tf_logic_tdm.vmat" )]
+[HammerEntity]
 
 public partial class TeamDeathmatch : BaseGameLogic
 {

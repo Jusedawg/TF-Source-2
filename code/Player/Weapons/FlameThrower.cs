@@ -2,6 +2,7 @@
 using Amper.FPS;
 using System.Collections.Generic;
 using System;
+using Sandbox.Diagnostics;
 
 namespace TFS2;
 
@@ -240,7 +241,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 				continue;
 
 			// See if we have a line of sight to that entity.
-			var tr = Trace.Ray( player.EyePosition, ent.EyePosition )
+			var tr = Trace.Ray( player.EyePosition, ent.GetEyePosition() )
 				.Ignore( Owner )
 				.Ignore( ent )
 				.WithAnyTags( CollisionTags.Solid )
@@ -278,7 +279,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 			return false;
 
 		var curSpeed = target.Velocity.Length;
-		var startPos = Owner.EyePosition;
+		var startPos = Owner.GetEyePosition();
 		var endPos = startPos + forward * AirblastDeflectTraceRange;
 
 		var tr = Trace.Ray( startPos, endPos )
@@ -358,10 +359,10 @@ public partial class FlameThrower : TFHoldWeaponBase
 		// EXPERIMENTAL: Airblasting reflects from surfaces.
 		if ( tf_flamethrower_airblast_reflective )
 		{
-			var startPos = Owner.EyePosition;
+			var startPos = Owner.GetEyePosition();
 			var endPos = startPos + forward * tf_flamethrower_airblast_reflective_distance;
 
-			var tr = Trace.Ray( Owner.EyePosition, endPos )
+			var tr = Trace.Ray( Owner.GetEyePosition(), endPos )
 				.WithAnyTags( CollisionTags.Solid )
 				.WithoutTags( CollisionTags.Player )
 				.Ignore( Owner )
@@ -390,7 +391,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 
 		force.z = MathF.Max( force.z, tf_flamethrower_airblast_min_z_force );
 
-		target.ApplyViewPunchImpulse( Rand.Float( 10, 15 ) );
+		target.ApplyViewPunchImpulse( Game.Random.Float( 10, 15 ) );
 		target.ApplyAbsoluteImpulse( force );
 		return true;
 	}

@@ -36,7 +36,7 @@ public partial class TFGameRules : SDKGame
 			TickRespawnWaves();
 	}
 
-	public override void ClientJoined( Client client )
+	public override void ClientJoined( IClient client )
 	{
 		var player = new TFPlayer();
 		player.Respawn();
@@ -63,7 +63,7 @@ public partial class TFGameRules : SDKGame
 	[ConVar.Replicated] public static TFPlayerClass tf_bot_force_class { get; set; } = TFPlayerClass.Scout;
 
 
-	public override void ClientDisconnect( Client client, NetworkDisconnectionReason reason )
+	public override void ClientDisconnect( IClient client, NetworkDisconnectionReason reason )
 	{
 		base.ClientDisconnect( client, reason );
 
@@ -127,11 +127,11 @@ public partial class TFGameRules : SDKGame
 		WaitingForPlayersTimer?.Delete();
 	}
 
-	public override void OnChatMessageSent( Client sender, string message, ChatType type )
+	public override void OnChatMessageSent( IClient sender, string message, ChatType type )
 	{
 		base.OnChatMessageSent( sender, message, type );
 
-		var clients = Client.All.ToArray();
+		var clients = Game.Clients;
 
 		switch( type )
 		{

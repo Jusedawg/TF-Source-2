@@ -1,4 +1,5 @@
 using Sandbox;
+using Editor;
 using Amper.FPS;
 using System.Collections.Generic;
 
@@ -8,7 +9,7 @@ namespace TFS2;
 [Title( "Catapult" )]
 [Category("Gameplay")]
 [Icon("fast_forward")]
-[SandboxEditor.HammerEntity]
+[HammerEntity]
 public partial class TriggerCatapult : BaseTrigger
 {
 	[Property] Vector3 Direction { get; set; }
@@ -45,7 +46,7 @@ public partial class TriggerCatapult : BaseTrigger
 		if ( entity is SDKPlayer player )
 		{
 			if ( player.IsGrounded ) player.GroundEntity = null;
-			vecPush += -Map.Physics.Gravity.Normal * GameMovement.sv_gravity * SDKGame.Current.GetGravityMultiplier() * .5f;
+			vecPush += -Game.Gravity.Normal * GameMovement.sv_gravity * SDKGame.Current.GetGravityMultiplier() * .5f;
 			player.Velocity = vecPush;
 		}
 		else
@@ -54,7 +55,7 @@ public partial class TriggerCatapult : BaseTrigger
 			{
 				model.ApplyAbsoluteImpulse( vecPush );
 
-				var angImpulse = new Vector3( Rand.Float( -150, 150 ), Rand.Float( -150, 150 ), Rand.Float( -150, 150 ) );
+				var angImpulse = new Vector3( Game.Random.Float( -150, 150 ), Game.Random.Float( -150, 150 ), Game.Random.Float( -150, 150 ) );
 				model.ApplyLocalAngularImpulse( angImpulse );
 			}
 		}

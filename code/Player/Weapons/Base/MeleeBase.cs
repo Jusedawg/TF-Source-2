@@ -61,7 +61,7 @@ public partial class TFMeleeBase : TFWeaponBase
 
 	public override TraceResult TraceFireBullet( int seedOffset = 0 )
 	{
-		Rand.SetSeed( Time.Tick + seedOffset );
+		Game.Random.SetSeed( Time.Tick + seedOffset );
 
 		var range = GetRange();
 		var spread = GetSpread();

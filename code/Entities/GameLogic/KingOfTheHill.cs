@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Editor;
 using Amper.FPS;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,8 @@ namespace TFS2;
 [Title("King of the Hill")]
 [Category("Gamemode")]
 [Icon( "terrain" )]
-[SandboxEditor.EditorSprite( "materials/editor/tf_logic_koth.vmat" )]
-[SandboxEditor.HammerEntity]
+[EditorSprite( "materials/editor/tf_logic_koth.vmat" )]
+[HammerEntity]
 
 public partial class KingOfTheHill : BaseGameLogic
 {

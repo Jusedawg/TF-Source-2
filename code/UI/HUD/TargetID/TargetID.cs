@@ -151,7 +151,7 @@ public partial class TargetID : Panel
 		Noone
 	}
 
-	public bool CanSeeAvatarOf( Client client )
+	public bool CanSeeAvatarOf( IClient client )
 	{
 		switch ( hud_target_id_show_avatars )
 		{

@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using Editor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace TFS2;
 [Title("Control Point")]
 [Category( "Objectives" )]
 [Icon("my_location")]
-[SandboxEditor.HammerEntity]
+[HammerEntity]
 public partial class ControlPoint : BaseTrigger
 {
 	public new static List<ControlPoint> All = new();
@@ -387,7 +388,7 @@ public partial class ControlPoint : BaseTrigger
 
 	public void StartCapturing( TFTeam team )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		// owner team cannot start contesting this point.
 		if ( team == OwnerTeam ) 
@@ -410,7 +411,7 @@ public partial class ControlPoint : BaseTrigger
 
 	public void FinishCapturing( TFTeam team )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		switch ( team )
 		{
@@ -434,7 +435,7 @@ public partial class ControlPoint : BaseTrigger
 
 	public void BreakCapture( bool bNotEnoughPlayers )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		if ( !IsBeingCaptured )
 			return;
@@ -539,7 +540,7 @@ public partial class ControlPoint : BaseTrigger
 	[Input]
 	public void Reset()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		CapturingTeam = TFTeam.Unassigned;
 		TimeRemaining = 0;
@@ -600,7 +601,7 @@ public partial class ControlPoint : BaseTrigger
 	[Input]
 	public void SetLocked( bool locked )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		if ( locked ) Lock();
 		else Unlock();
@@ -608,7 +609,7 @@ public partial class ControlPoint : BaseTrigger
 
 	public void Lock()
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		if ( !Locked )
 			OnLocked.Fire( this );
@@ -626,7 +627,7 @@ public partial class ControlPoint : BaseTrigger
 
 	public void Unlock( float time = 0 )
 	{
-		Host.AssertServer();
+		Game.AssertServer();
 
 		if ( time > 0 )
 		{

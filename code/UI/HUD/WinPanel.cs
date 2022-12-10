@@ -69,7 +69,7 @@ partial class WinPanel : Panel
 		WinReason.Text = GetWinReasonMessage( winner, (TFWinReason)TFGameRules.Current.WinReason );
 
 		// Get the round MVPs.
-		var mvps = Client.All.Where( cl => cl.GetTeam() == winner )
+		var mvps = Game.Clients.Where( cl => cl.GetTeam() == winner )
 							 .Distinct() // sometimes we get duplicate players
 							 .OrderByDescending( cl => cl.GetPoints() )
 							 .Take( 3 );
@@ -126,8 +126,8 @@ partial class WinPanelPlayer : Panel
 	public Label NameLabel { get; set; }
 	public Label ClassLabel { get; set; }
 	public Label PointsLabel { get; set; }
-
-	public WinPanelPlayer( Client cl )
+	
+	public WinPanelPlayer( IClient cl )
 	{
 		PlayerAvatar = Add.Image( $"avatar:{cl.SteamId}", "avatar" );
 		NameLabel = Add.Label( cl.Name, "name text" );
