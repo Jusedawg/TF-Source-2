@@ -197,7 +197,7 @@ partial class TeamFlagCompass : Panel
 		if ( !IsVisible )
 			return;
 
-		if ( Game.LocalPawn is not TFPlayer pawn )
+		if ( Sandbox.Game.LocalPawn is not TFPlayer pawn )
 			return;
 
 		// rotation

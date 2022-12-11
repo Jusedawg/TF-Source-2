@@ -67,7 +67,7 @@ public partial class Scoreboard : Panel
 		{
 			if ( !Players.ContainsKey( team ) )
 				Players[team] = new();
-			
+
 			var teamClients = Sandbox.Game.Clients.Where( x => x.GetTeam() == team );
 
 			foreach ( var client in teamClients.Except( Players[team].Keys ) )
@@ -80,7 +80,7 @@ public partial class Scoreboard : Panel
 		UpdatePlayerPreview();
 
 		#region Stats
-		
+
 		var cl = Sandbox.Game.LocalClient;
 		Kills.Text = cl.GetKills().ToString();
 		Deaths.Text = cl.GetDeaths().ToString();
@@ -125,7 +125,7 @@ public partial class Scoreboard : Panel
 
 	private void OnRegenerate( PlayerRegenerateEvent args )
 	{
-		if ( args.Client != Game.LocalClient )
+		if ( args.Client != Sandbox.Game.LocalClient )
 			return;
 
 		UpdatePlayerPreview();

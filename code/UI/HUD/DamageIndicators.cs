@@ -15,14 +15,14 @@ public class DamageIndicators : Panel
 
 	public void OnHurt( PlayerHurtEvent args )
 	{
-		if ( args.Victim != Game.LocalClient )
+		if ( args.Victim != Sandbox.Game.LocalClient )
 			return;
 
 		// If local client is not alive
-		if ( !Game.LocalClient.IsAlive() )
+		if ( !Sandbox.Game.LocalClient.IsAlive() )
 			return;
 
-		AddChild( new DamageIndicatorEntry( (args.Position - Game.LocalPawn.EyePosition).Normal, args.Damage ) );
+		AddChild( new DamageIndicatorEntry( (args.Position - Sandbox.Game.LocalPawn.GetEyePosition()).Normal, args.Damage ) );
 	}
 }
 

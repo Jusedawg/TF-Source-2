@@ -60,7 +60,7 @@ internal partial class TFKillFeed : Panel
 
 	public void OnDeath( PlayerDeathEvent args )
 	{
-		var local = Game.LocalClient;
+		var local = Sandbox.Game.LocalClient;
 
 		// Event arguments
 		var attacker = args.Attacker;

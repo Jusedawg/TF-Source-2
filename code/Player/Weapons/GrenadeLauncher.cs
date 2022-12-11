@@ -9,7 +9,7 @@ public partial class GrenadeLauncher : TFWeaponBase
 
 	public override void Attack()
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		var eyeRot = GetAttackRotation();
@@ -19,9 +19,9 @@ public partial class GrenadeLauncher : TFWeaponBase
 
 		GetProjectileFireSetup( MuzzleOffset, out var origin, out var direction );
 
-		Vector3 velocity = direction * tf_projectile_grenade_speed 
-			+ up * 200 
-			+ right * Game.Random.Int( -10, 10 ) 
+		Vector3 velocity = direction * tf_projectile_grenade_speed
+			+ up * 200
+			+ right * Game.Random.Int( -10, 10 )
 			+ up * Game.Random.Int( -10, 10 );
 
 		var grenade = FireProjectile<Grenade>( origin, velocity, Data.Damage );

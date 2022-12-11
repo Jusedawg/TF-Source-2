@@ -11,7 +11,7 @@ public partial class TFHud : HudEntity<RootPanel>
 	{
 		Instance = this;
 
-		if ( IsClient )
+		if ( Game.IsClient )
 			RootPanel.SetTemplate( "/ui/HudController.html" );
 	}
 

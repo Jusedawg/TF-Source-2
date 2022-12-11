@@ -24,7 +24,7 @@ public class DamageNumbers : Panel
 		var victim = args.Victim;
 
 		// If we are not the Attacker, ignore.
-		if ( Game.LocalClient != attacker )
+		if ( Sandbox.Game.LocalClient != attacker )
 			return;
 
 		// If we hit ourselves, ignore.
@@ -72,7 +72,7 @@ public class DamageNumbers : Panel
 	void OnDeath( PlayerDeathEvent args )
 	{
 		// If we're not the damage dealer, ignore.
-		if ( args.Attacker != Game.LocalClient )
+		if ( args.Attacker != Sandbox.Game.LocalClient )
 			return;
 
 		// If we hit ourselves, ignore.

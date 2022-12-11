@@ -15,7 +15,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 
 	public override void Attack()
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		//
@@ -200,7 +200,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 
 	public void DeflectEntities()
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		var player = TFOwner;
@@ -295,7 +295,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 		var vecDir = tr.EndPosition - target.WorldSpaceBounds.Center;
 
 		// If projectile has physics movement and it's currently stationary
-		if ( target.MoveType == ProjectileMoveType.Physics ) 
+		if ( target.MoveType == ProjectileMoveType.Physics )
 		{
 			curSpeed = target.PhysicsBody.Velocity.Length;
 
@@ -310,7 +310,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 		var vecVel = vecDir * curSpeed;
 
 		target.Velocity = vecVel;
-		target.Deflected( this, TFOwner );;
+		target.Deflected( this, TFOwner ); ;
 
 		return true;
 	}
@@ -327,7 +327,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 		// If we're deflecting a teammate.
 		//
 
-		if ( Owner != target && ITeam.IsSame( target, Owner ) ) 
+		if ( Owner != target && ITeam.IsSame( target, Owner ) )
 		{
 			if ( target.Extinguish( this ) )
 			{
@@ -351,7 +351,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 		vecToTarget = vecToTarget.Normal;
 
 		// if we are airblasting ourselves, airblast us in the durection of where we're looking.
-		if ( target == Owner ) 
+		if ( target == Owner )
 			vecToTarget = forward;
 
 		var force = vecToTarget * tf_flamethrower_airblast_force;
@@ -375,8 +375,8 @@ public partial class FlameThrower : TFHoldWeaponBase
 
 				// Reflection power scales by distance
 				var distToTarget = targetPos.Distance( tr.EndPosition );
-				var reflectForce = distToTarget.RemapVal( 
-					0, tf_flamethrower_airblast_reflective_target_range, 
+				var reflectForce = distToTarget.RemapVal(
+					0, tf_flamethrower_airblast_reflective_target_range,
 					tf_flamethrower_airblast_reflective_force, 0 );
 
 				if ( reflectForce > 0 )
@@ -568,7 +568,7 @@ public virtual int AirblastCost => 20;
 
 
 		// This part is calculated server only.
-		if ( IsServer )
+		if ( Game.IsServer )
 		{
 			using ( Prediction.Off() )
 			{

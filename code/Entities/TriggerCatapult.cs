@@ -7,8 +7,8 @@ namespace TFS2;
 
 [Library( "tf_trigger_catapult" )]
 [Title( "Catapult" )]
-[Category("Gameplay")]
-[Icon("fast_forward")]
+[Category( "Gameplay" )]
+[Icon( "fast_forward" )]
 [HammerEntity]
 public partial class TriggerCatapult : BaseTrigger
 {
@@ -46,7 +46,7 @@ public partial class TriggerCatapult : BaseTrigger
 		if ( entity is SDKPlayer player )
 		{
 			if ( player.IsGrounded ) player.GroundEntity = null;
-			vecPush += -Game.Gravity.Normal * GameMovement.sv_gravity * SDKGame.Current.GetGravityMultiplier() * .5f;
+			vecPush += -Game.PhysicsWorld.Gravity.Normal * GameMovement.sv_gravity * SDKGame.Current.GetGravityMultiplier() * .5f;
 			player.Velocity = vecPush;
 		}
 		else

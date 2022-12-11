@@ -7,8 +7,8 @@ using System.Collections.Generic;
 namespace TFS2;
 
 [Library( "tf_logic_koth" )]
-[Title("King of the Hill")]
-[Category("Gamemode")]
+[Title( "King of the Hill" )]
+[Category( "Gamemode" )]
 [Icon( "terrain" )]
 [EditorSprite( "materials/editor/tf_logic_koth.vmat" )]
 [HammerEntity]
@@ -77,15 +77,15 @@ public partial class KingOfTheHill : BaseGameLogic
 			return false;
 
 		// Point is already unlocked
-		if ( !Point.Locked ) 
+		if ( !Point.Locked )
 			return false;
 
 		// Point is already being unlocked.
-		if ( Point.IsBeingUnlocked ) 
+		if ( Point.IsBeingUnlocked )
 			return false;
 
 		// objectives are disabled.
-		if ( !TFGameRules.Current.AreObjectivesActive() ) 
+		if ( !TFGameRules.Current.AreObjectivesActive() )
 			return false;
 
 		// there should be at least 1 second delay after round is active.
@@ -97,7 +97,7 @@ public partial class KingOfTheHill : BaseGameLogic
 	{
 		base.RoundActivate( args );
 
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		foreach ( TFTeam team in Enum.GetValues( typeof( TFTeam ) ) )

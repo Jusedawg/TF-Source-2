@@ -26,7 +26,7 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 
 	public override void Attack()
 	{
-		if ( !IsServer )
+		if ( !Game.IsServer )
 			return;
 
 		var eyeRot = GetAttackRotation();
@@ -68,7 +68,7 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 		base.SecondaryAttack();
 
 	}
-	
+
 	float NextDenySoundTime;
 	public void PassiveSimulate( IClient cl )
 	{
@@ -131,7 +131,7 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 				continue;
 			}
 
-			if ( IsServer )
+			if ( Game.IsServer )
 			{
 				bomb.Explode();
 			}
@@ -142,13 +142,13 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 
 	public virtual void OnStickyDestroyed( StickyBomb bomb )
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 			Bombs.Remove( bomb );
 	}
 
 	protected override void OnDestroy()
 	{
-		if ( IsServer )
+		if ( Game.IsServer )
 			DetonateAllStickyBombs( true );
 
 		base.OnDestroy();
@@ -182,7 +182,7 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 			return;
 
 		var charger = (IChargeable)this;
-		if ( WishPrimaryAttack() && CanPrimaryAttack() ) 
+		if ( WishPrimaryAttack() && CanPrimaryAttack() )
 		{
 			if ( !IsCharging )
 			{
@@ -190,7 +190,7 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 				StopReload();
 			}
 
-			if ( !charger.IsCharged ) 
+			if ( !charger.IsCharged )
 				return;
 		}
 

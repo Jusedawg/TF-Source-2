@@ -9,8 +9,8 @@ namespace TFS2;
 
 [Library( "tf_logic_tdm" )]
 [Title( "Team Deathmatch" )]
-[Category("Gamemode")]
-[Icon("groups")]
+[Category( "Gamemode" )]
+[Icon( "groups" )]
 [EditorSprite( "materials/editor/tf_logic_tdm.vmat" )]
 [HammerEntity]
 
@@ -57,7 +57,7 @@ public partial class TeamDeathmatch : BaseGameLogic
 
 	public override void Tick()
 	{
-		if ( !TFGameRules.Current.AreObjectivesActive() ) 
+		if ( !TFGameRules.Current.AreObjectivesActive() )
 			return;
 
 		if ( HasReachedFragLimit() )
@@ -78,7 +78,7 @@ public partial class TeamDeathmatch : BaseGameLogic
 
 	public float GetTimeUntilRoundEnd()
 	{
-		if ( !HasReachedFragLimit() ) 
+		if ( !HasReachedFragLimit() )
 			return tf_tdm_finale_beep_time;
 
 		float time = tf_tdm_finale_beep_time - TimeSinceReachFragLimit;
@@ -96,7 +96,7 @@ public partial class TeamDeathmatch : BaseGameLogic
 		if ( !TFGameRules.Current.AreObjectivesActive() )
 			return false;
 
-		foreach ( TFTeam team in Enum.GetValues( typeof( TFTeam ) ) ) 
+		foreach ( TFTeam team in Enum.GetValues( typeof( TFTeam ) ) )
 		{
 			if ( !team.IsPlayable() ) continue;
 			if ( HasTeamReachedFragLimit( team ) ) return true;
@@ -143,7 +143,7 @@ public partial class TeamDeathmatch : BaseGameLogic
 	/// <param name="args"></param>
 	public void PlayerKilled( PlayerDeathEvent args )
 	{
-		if ( !IsServer ) 
+		if ( !Game.IsServer )
 			return;
 
 		if ( !TFGameRules.Current.AreObjectivesActive() )
