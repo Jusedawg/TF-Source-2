@@ -72,7 +72,7 @@ partial class TeamFlagDisplay : Panel
 
 	public bool TryGetLocalPlayerPickedFlag( out Flag flag )
 	{
-		if ( Game.LocalPawn is TFPlayer player )
+		if ( Sandbox.Game.LocalPawn is TFPlayer player )
 		{
 			if ( player.PickedItem is Flag ent )
 			{
@@ -91,7 +91,7 @@ partial class TeamFlagDisplay : Panel
 		SetClass( "has_flag_red", flag.Team == TFTeam.Red );
 		SetClass( "has_flag_blue", flag.Team == TFTeam.Blue );
 
-		if ( Game.LocalPawn is TFPlayer player )
+		if ( Sandbox.Game.LocalPawn is TFPlayer player )
 		{
 			var zone = Entity.All.OfType<FlagCaptureZone>().Where( x => x.Team == player.Team ).FirstOrDefault();
 			if ( zone != null )
@@ -201,8 +201,8 @@ partial class TeamFlagCompass : Panel
 			return;
 
 		// rotation
-		var vecFromEyes = pawn.EyeRotation.Forward.WithZ( 0 ).Normal;
-		var vecToOrigin = (Target.Position - pawn.EyePosition).WithZ( 0 ).Normal;
+		var vecFromEyes = pawn.GetEyeRotation().Forward.WithZ( 0 ).Normal;
+		var vecToOrigin = (Target.Position - pawn.GetEyePosition()).WithZ( 0 ).Normal;
 
 		float radFromEyes = MathF.Atan2( vecFromEyes.x, vecFromEyes.y );
 		float radToOrigin = MathF.Atan2( vecToOrigin.x, vecToOrigin.y );

@@ -12,7 +12,7 @@ public partial class Grenade : TFProjectile
 		SetBBox( 4 );
 
 		MoveType = ProjectileMoveType.Physics;
-		DamageFlags |= DamageFlags.Blast;
+		DamageInfo.WithTag(DamageFlags.Blast);
 		FaceVelocity = false;
 
 		AutoExplodeTime = GetExplodeTime();

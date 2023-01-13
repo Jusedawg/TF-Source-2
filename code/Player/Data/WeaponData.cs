@@ -240,7 +240,7 @@ public class WeaponData : GameResource
 		if ( string.IsNullOrEmpty( EngineClass ) )
 			return null;
 
-		var type = TypeLibrary.GetDescription<TFWeaponBase>( EngineClass ).TargetType;
+		var type = TypeLibrary.GetType<TFWeaponBase>( EngineClass ).TargetType;
 		if ( type == null )
 			return null;
 

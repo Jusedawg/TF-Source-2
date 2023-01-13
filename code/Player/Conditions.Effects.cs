@@ -114,7 +114,7 @@ partial class TFPlayer
 			.WithAttacker( BurnAttacker )
 			.WithWeapon( BurnWeapon )
 			.WithAllPositions( WorldSpaceBounds.Center )
-			.WithFlag( TFDamageFlags.Burn | TFDamageFlags.PreventPhysicsForce );
+			.WithTags( TFDamageFlags.Burn, TFDamageFlags.PreventPhysicsForce );
 
 		TakeDamage( dmgInfo );
 

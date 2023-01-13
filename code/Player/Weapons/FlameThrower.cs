@@ -210,8 +210,8 @@ public partial class FlameThrower : TFHoldWeaponBase
 		using var _ = LagCompensation();
 		using var _2 = Prediction.Off();
 
-		var eyePos = player.EyePosition;
-		var eyeRot = player.EyeRotation;
+		var eyePos = player.GetEyePosition();
+		var eyeRot = player.GetEyeRotation();
 		var forward = eyeRot.Forward;
 
 		var boxSize = tf_flamethrower_airblast_boxsize;
@@ -241,7 +241,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 				continue;
 
 			// See if we have a line of sight to that entity.
-			var tr = Trace.Ray( player.EyePosition, ent.GetEyePosition() )
+			var tr = Trace.Ray( player.GetEyePosition(), ent.GetEyePosition() )
 				.Ignore( Owner )
 				.Ignore( ent )
 				.WithAnyTags( CollisionTags.Solid )

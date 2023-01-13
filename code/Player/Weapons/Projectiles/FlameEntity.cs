@@ -19,8 +19,8 @@ public partial class FlameEntity : TFProjectile
 		SetBBox( tf_flamethrower_boxsize );
 		MoveType = ProjectileMoveType.Custom;
 
-		DamageFlags |= TFDamageFlags.Ignite;
-		DamageFlags |= TFDamageFlags.PreventPhysicsForce;
+		DamageInfo.WithTag(TFDamageFlags.Ignite);
+		DamageInfo.WithTag( TFDamageFlags.PreventPhysicsForce);
 
 		AutoDestroyTime = tf_flamethrower_flametime;
 	}
@@ -75,7 +75,7 @@ public partial class FlameEntity : TFProjectile
 		var damage = Damage * distScale;
 		damage = MathF.Max( damage, 1 );
 
-		var dmgInfo = CreateDamageInfo( damage )
+		var dmgInfo = DamageInfo
 			.WithHitPosition( Position )
 			.WithOriginPosition( OriginalPosition )
 			.WithReportPosition( Owner.GetEyePosition() );

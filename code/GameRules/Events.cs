@@ -58,7 +58,7 @@ partial class TFGameRules
 			Attacker = attacker,
 			Assister = null,
 			Weapon = weaponData,
-			Flags = info.Flags,
+			Tags = info.Tags.ToArray(),
 			Position = info.ReportPosition,
 			Damage = info.Damage
 		} );

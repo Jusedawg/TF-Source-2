@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Amper.FPS;
+using Sandbox.ModelEditor.Nodes;
 
 namespace TFS2;
 
@@ -90,19 +91,19 @@ partial class TFPlayer
 			return false;
 
 		// This damage never gibs.
-		if ( info.Flags.HasFlag( TFDamageFlags.DoNotGib ) )
+		if ( info.HasTag( TFDamageFlags.DoNotGib ) )
 			return false;
 
 		// This damage always gibs.
-		if ( info.Flags.HasFlag( TFDamageFlags.AlwaysGib ) )
+		if ( info.HasTag( TFDamageFlags.AlwaysGib ) )
 			return true;
 
 		// Only blast damage can gib.
-		if ( !info.Flags.HasFlag( TFDamageFlags.Blast ) )
+		if ( !info.HasTag( TFDamageFlags.Blast ) )
 			return false;
 
 		// Explosive crits always gib.
-		if ( info.Flags.HasFlag( TFDamageFlags.Critical ) )
+		if ( info.HasTag( TFDamageFlags.Critical ) )
 			return true;
 
 		// Hard hits also gib.

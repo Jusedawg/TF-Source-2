@@ -18,8 +18,8 @@ public partial class TFProjectile : Projectile
 	public override void CreateTrails()
 	{
 		base.CreateTrails();
-
-		if ( DamageFlags.HasFlag( TFDamageFlags.Critical ) )
+		
+		if ( DamageInfo.HasTag( TFDamageFlags.Critical ) )
 		{
 			if ( !string.IsNullOrEmpty( CriticalTrailParticleName ) )
 				CriticalTrail = Particles.Create( CriticalTrailParticleName, this, "criticaltrail" );
@@ -50,11 +50,11 @@ public partial class TFProjectile : Projectile
 
 		// Reflects make projectiles inflict minicritical damage.
 		if ( ShouldMiniCritOnDeflection() )
-			DamageFlags |= TFDamageFlags.MiniCritical;
+			DamageInfo.WithTag(TFDamageFlags.MiniCritical);
 
 		// Pyro was critboosted, projectiles retain the boost.
 		if ( who.IsCritBoosted )
-			DamageFlags |= TFDamageFlags.Critical;
+			DamageInfo.WithTag(TFDamageFlags.Critical);
 
 		CreateTrails();
 		DeflectedEffects();

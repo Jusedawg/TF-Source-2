@@ -57,9 +57,9 @@ partial class TFViewModel : SDKViewModel
 		return true;
 	}
 
-	public override void CalculateView( ref CameraSetup camSetup )
+	public override void CalculateView()
 	{
-		CalculateViewBob( camSetup );
+		CalculateViewBob( );
 		AddViewModelBobHelper();
 	}
 }

@@ -48,7 +48,7 @@ public class DamageNumbers : Panel
 		AddDamageNumber( damage, victim.Pawn );
 	}
 
-	public void AddDamageNumber( float damage, Entity entity )
+	public void AddDamageNumber( float damage, IEntity entity )
 	{
 		// See if we can reuse some other instance.
 		var current = FindReusableEntryFor( entity );
@@ -64,7 +64,7 @@ public class DamageNumbers : Panel
 		AddChild( entry );
 	}
 
-	public DamageNumberInstance FindReusableEntryFor( Entity entity )
+	public DamageNumberInstance FindReusableEntryFor( IEntity entity )
 	{
 		return Instances.Find( x => x.Target == entity && x.CanBeReused );
 	}
@@ -91,7 +91,7 @@ public class DamageNumbers : Panel
 public class DamageNumberInstance : Label
 {
 	public Vector3 Position { get; set; }
-	public Entity Target { get; set; }
+	public IEntity Target { get; set; }
 	public float Damage { get; set; }
 	public TimeSince TimeSinceCreated { get; set; }
 	public DamageNumbers Container { get; set; }
@@ -101,7 +101,7 @@ public class DamageNumberInstance : Label
 	[ConVar.Client] public static float tf_hud_damage_number_lifetime { get; set; } = 2f;
 	[ConVar.Client] public static float tf_hud_damage_number_fade_time { get; set; } = 1;
 
-	public DamageNumberInstance( Entity target, float damage, DamageNumbers container )
+	public DamageNumberInstance( IEntity target, float damage, DamageNumbers container )
 	{
 		Target = target;
 		Container = container;

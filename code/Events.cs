@@ -21,18 +21,7 @@ public class PlayerDeathEvent : DispatchableEventBase
 	public IClient Attacker { get; set; }
 	public IClient Assister { get; set; }
 	public WeaponData Weapon { get; set; }
-	public HashSet<string> Tags { get; set; }
-	public HashSet<string> Flags
-	{
-		get
-		{
-			return Tags;
-		}
-		set
-		{
-			Tags = value;
-		}
-	}
+	public string[] Tags { get; set; }
 	public Vector3 Position { get; set; }
 	public float Damage { get; set; }
 }

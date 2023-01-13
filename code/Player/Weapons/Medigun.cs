@@ -144,7 +144,7 @@ public partial class Medigun : TFHoldWeaponBase //, IPassiveChild
 
 	public bool IsInLOS( TFPlayer target )
 	{
-		var tr = Trace.Ray( Owner.GetEyePosition(), target.EyePosition )
+		var tr = Trace.Ray( Owner.GetEyePosition(), target.GetEyePosition() )
 			.Ignore( this )
 			.Ignore( Owner )
 			.WithoutTags( CollisionTags.Player )

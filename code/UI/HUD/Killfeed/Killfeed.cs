@@ -67,8 +67,8 @@ internal partial class TFKillFeed : Panel
 		var victim = args.Victim;
 		var assister = args.Assister;
 		var weapon = args.Weapon;
-		var is_crit = args.Flags.HasFlag( TFDamageFlags.Critical );
-		var is_mini_crit = args.Flags.HasFlag( TFDamageFlags.MiniCritical );
+		var is_crit = args.Tags.Contains( TFDamageFlags.Critical );
+		var is_mini_crit = args.Tags.Contains( TFDamageFlags.MiniCritical );
 		var killIcon = DefaultKillIcon;
 		var entry = new TFKillFeedEntry();
 
@@ -92,7 +92,7 @@ internal partial class TFKillFeed : Panel
 		//
 		// Attacker
 		//
-		if ( args.Flags.HasFlag( DamageFlags.Fall ) )
+		if ( args.Tags.Contains( DamageFlags.Fall ) )
 			// If there is no attacker that means the world has killed us.
 			entry.PostVictimMessage.Text = " fell to a clumsy, painful death";
 		else if ( victim == attacker && weapon == null )

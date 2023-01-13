@@ -83,7 +83,7 @@ partial class TFPlayer : IResponseSpeaker<TFResponseConcept, TFResponseContext>
 		{
 			ResponseSound = PlaySound( response.SoundEvent )
 				.SetVolume( 1.5f )
-				.SetPosition( EyePosition );
+				.SetPosition( this.GetEyePosition() );
 
 		}
 

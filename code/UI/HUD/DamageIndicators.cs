@@ -44,11 +44,11 @@ public class DamageIndicatorEntry : Panel
 		if ( Sandbox.Game.LocalPawn is not TFPlayer pawn ) return;
 
 		float time = TimeSinceCreated;
-		var origin = pawn.EyePosition + Offset;
+		var origin = pawn.GetEyePosition() + Offset;
 
 		// rotation
-		var vecFromEyes = pawn.EyeRotation.Forward.WithZ( 0 ).Normal;
-		var vecToOrigin = (origin - pawn.EyePosition).WithZ( 0 ).Normal;
+		var vecFromEyes = pawn.GetEyeRotation().Forward.WithZ( 0 ).Normal;
+		var vecToOrigin = (origin - pawn.GetEyePosition()).WithZ( 0 ).Normal;
 
 		float radFromEyes = MathF.Atan2( vecFromEyes.x, vecFromEyes.y );
 		float radToOrigin = MathF.Atan2( vecToOrigin.x, vecToOrigin.y );

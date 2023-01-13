@@ -178,7 +178,7 @@ partial class SniperRifle : TFWeaponBase
 		var hitBox = info.Hitbox;
 		if ( CanHeadshotEntity( victim, hitBox ) )
 		{
-			info = info.WithFlag( TFDamageFlags.Critical );
+			info = info.WithTag( TFDamageFlags.Critical );
 			TFOwner.Headshots++;
 		}
 	}

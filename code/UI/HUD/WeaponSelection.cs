@@ -251,7 +251,7 @@ partial class WeaponSelection : Panel
 			if ( weapon.IsValid() )
 			{
 				if ( weapon != player.ActiveWeapon )
-					Input.ActiveChild = weapon;
+					player.RequestedActiveWeapon = weapon;
 			}
 
 			Close();

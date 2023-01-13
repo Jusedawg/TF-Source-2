@@ -14,7 +14,7 @@ public partial class StickyBomb : TFProjectile
 		Health = 1;
 
 		MoveType = ProjectileMoveType.Physics;
-		DamageFlags |= DamageFlags.Blast;
+		DamageInfo.WithTag(DamageFlags.Blast);
 		AutoDestroyTime = null;
 	}
 
@@ -36,7 +36,7 @@ public partial class StickyBomb : TFProjectile
 	public override void TakeDamage( DamageInfo info )
 	{
 		// Bombs can only be destroyed by bullets.
-		if ( !info.Flags.HasFlag( TFDamageFlags.Bullet ) )
+		if ( !info.HasTag( TFDamageFlags.Bullet ) )
 			return;
 
 		base.TakeDamage( info );
