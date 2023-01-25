@@ -8,13 +8,14 @@ namespace TFS2;
 [Title( "Flag" )]
 [Category( "Objectives" )]
 [Icon( "tour" )]
-[EditorModel( "models/flag/briefcase.vmdl" )]
+[Model(Model = "models/flag/briefcase.vmdl" ), RenderFields]
 [HammerEntity]
 public partial class Flag : Item, ITeam
 {
 	[Property] public HammerTFTeamOption DefaultTeam { get; set; }
 	[Property] public bool StartsDisabled { get; set; }
-
+	[Property, ResourceType( "vpcf" )] public string Trail { get; set; } = "particles/flag_particles/player_intel_papertrail.vpcf";
+	
 	[Net] public TFTeam Team { get; set; }
 	public int TeamNumber => (int)Team;
 
@@ -51,9 +52,7 @@ public partial class Flag : Item, ITeam
 
 		// Always transmit so that players always know where it is.
 		Transmit = TransmitType.Always;
-
-		SetModel( "models/flag/briefcase.vmdl" );
-
+		
 		Disabled = StartsDisabled;
 		StartsDisabled = false;
 		AllowOwnerPickup = true;
@@ -78,6 +77,7 @@ public partial class Flag : Item, ITeam
 		if ( State == FlagState.Dropped && TimeSinceDropped > ReturnTime ) Return();
 	}
 
+	/*
 	public override void OnNewModel( Model model )
 	{
 		base.OnNewModel( model );
@@ -92,6 +92,7 @@ public partial class Flag : Item, ITeam
 
 		SetMaterialGroup( skin );
 	}
+	*/
 
 	public override void StartTouch( Entity other )
 	{
@@ -273,7 +274,7 @@ public partial class Flag : Item, ITeam
 	public void CreateTrails()
 	{
 		DeleteTrails();
-		PapersTrail = Particles.Create( "particles/flag_particles/player_intel_papertrail.vpcf", this );
+		PapersTrail = Particles.Create( Trail, this );
 
 		// create the trail of the team of the current owner.
 		if ( Owner is TFPlayer player && player.Team.IsPlayable() )
