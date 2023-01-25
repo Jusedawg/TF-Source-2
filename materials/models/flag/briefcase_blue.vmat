@@ -1,13 +1,52 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"Shader"		"complex.vfx"
-	"TextureColor"		"materials/models/flag/briefcase_blue_color.tga"
-	"F_SPECULAR"		"1"
-	"TextureRoughness"		"materials/models/flag/briefcase_blue_refl.png"
-	"F_SPECULAR_CUBE_MAP"		"1"
-	"g_vMetalnessRange"		"[0.000000 0.000000]"
-	"g_vGlossinessRange"		"[1.000000 1.000000]"
-	"g_vReflectanceRange"		"[0.000000 0.100000]"
+	shader "complex.shader"
+
+	//---- Color ----
+	F_TINT_MASK 1
+
+	//---- PBR ----
+	F_SPECULAR 1
+
+	//---- Ambient Occlusion ----
+	g_flAmbientOcclusionDirectDiffuse "0.000"
+	g_flAmbientOcclusionDirectSpecular "0.000"
+	TextureAmbientOcclusion "materials/models/flag/briefcase_ao.png"
+
+	//---- Color ----
+	g_flModelTintAmount "1.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColor "materials/models/flag/briefcase_blue_color.tga"
+	TextureTintMask "[0.000000 0.000000 0.000000 0.000000]"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
+
+	//---- Lighting ----
+	g_flDirectionalLightmapMinZ "0.050"
+	g_flDirectionalLightmapStrength "1.000"
+
+	//---- Metalness ----
+	g_flMetalness "0.000"
+
+	//---- Normal ----
+	TextureNormal "materials/default/default_normal.tga"
+
+	//---- Roughness ----
+	TextureRoughness "materials/models/flag/briefcase_refl.png"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "0"
+	g_nScaleTexCoordVByModelScaleAxis "0"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
+
 	"legacy_import"
 	{
 		"VertexLitGeneric"
