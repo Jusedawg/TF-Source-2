@@ -14,7 +14,7 @@ public partial class Flag : Item, ITeam
 {
 	[Property] public HammerTFTeamOption DefaultTeam { get; set; }
 	[Property] public bool StartsDisabled { get; set; }
-	[Property, ResourceType( "vpcf" )] public string Trail { get; set; } = "particles/flag_particles/player_intel_papertrail.vpcf";
+	[Property, ResourceType( "vpcf" ), Net] public string Trail { get; set; } = "particles/flag_particles/player_intel_papertrail.vpcf";
 	
 	[Net] public TFTeam Team { get; set; }
 	public int TeamNumber => (int)Team;
