@@ -10,8 +10,8 @@ partial class TFGameMovement
 	{
 		var oldGround = Player.GroundEntity;
 
-		var vecForward = Player.Rotation.Forward;
-		var vecRight = Player.Rotation.Right;
+		var vecForward = Player.EyeRotation.Forward;
+		var vecRight = Player.EyeRotation.Right;
 
 		// Get the movement angles.
 		vecForward = vecForward.WithZ( 0 );
