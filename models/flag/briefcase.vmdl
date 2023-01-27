@@ -41,7 +41,7 @@
 				[
 					{
 						_class = "MaterialGroup"
-						name = "1"
+						name = "Blue"
 						remaps = 
 						[
 							{
@@ -52,7 +52,7 @@
 					},
 					{
 						_class = "MaterialGroup"
-						name = "2"
+						name = "Neutral"
 						remaps = 
 						[
 							{
@@ -63,34 +63,12 @@
 					},
 					{
 						_class = "MaterialGroup"
-						name = "3"
+						name = "Tintable"
 						remaps = 
 						[
 							{
 								from = "materials/models/flag/briefcase.vmat"
-								to = "materials/models/flag/briefcase_pickedup.vmat"
-							},
-						]
-					},
-					{
-						_class = "MaterialGroup"
-						name = "4"
-						remaps = 
-						[
-							{
-								from = "materials/models/flag/briefcase.vmat"
-								to = "materials/models/flag/briefcase_pickedup_blue.vmat"
-							},
-						]
-					},
-					{
-						_class = "MaterialGroup"
-						name = "5"
-						remaps = 
-						[
-							{
-								from = "materials/models/flag/briefcase.vmat"
-								to = "materials/models/flag/briefcase_pickedup_ntr.vmat"
+								to = "materials/models/flag/briefcase_tint.vmat"
 							},
 						]
 					},
@@ -121,10 +99,7 @@
 						name = "briefcase_physbox_0_mesh"
 						parent_bone = "briefcase_physbox"
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						recenter_on_parent_bone = true
 						offset_origin = [ 0.0, 0.0, 0.0 ]
 						offset_angles = [ 0.0, 0.0, 0.0 ]
@@ -162,7 +137,7 @@
 								parent_bone = "cube"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -22.536118, -5.500003, -12.750001 ]
 								hitbox_maxs = [ 22.536362, 6.100001, 13.348231 ]
 							},
@@ -171,7 +146,7 @@
 								parent_bone = "cube"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -22.536118, -5.500003, -12.750001 ]
 								hitbox_maxs = [ 22.536362, 6.100001, 13.348231 ]
 							},
@@ -180,7 +155,7 @@
 								parent_bone = "cube"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -22.536118, -5.500003, -12.750001 ]
 								hitbox_maxs = [ 22.536362, 6.100001, 13.348231 ]
 							},
@@ -298,6 +273,7 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 		importer_notes = """
 Imported from compiled VMDL_C
 """

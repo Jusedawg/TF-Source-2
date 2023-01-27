@@ -18,8 +18,8 @@ Layer0
 	//---- Color ----
 	g_flModelTintAmount "1.000"
 	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "materials/models/flag/briefcase_color.tga"
-	TextureTintMask "[0.000000 0.000000 0.000000 0.000000]"
+	TextureColor "materials/models/flag/briefcase_tint_color.png"
+	TextureTintMask "materials/models/flag/briefcase_mask.tga"
 
 	//---- Fade ----
 	g_flFadeExponent "1.000"
@@ -46,20 +46,4 @@ Layer0
 	g_vTexCoordOffset "[0.000 0.000]"
 	g_vTexCoordScale "[1.000 1.000]"
 	g_vTexCoordScrollSpeed "[0.000 0.000]"
-
-	"legacy_import"
-	{
-		"VertexLitGeneric"
-		{
-			"$baseTexture"		"models\flag/briefcase"
-			"$envmap"		"env_cubemap"
-			"$basealphaenvmapmask"		"1"
-			"$envmaptint"		"0.500000"
-			".5"		"0.500000"
-			"$detail"		"models\flag/briefcase_light_red"
-			"$detailscale"		"1"
-			"$detailblendfactor"		"0.900000"
-			"$detailblendmode"		"6"
-		}
-	}
 }
