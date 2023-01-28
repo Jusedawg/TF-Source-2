@@ -42,6 +42,18 @@
 				children = 
 				[
 					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "demoman_red_gib.vmat"
+								to = "materials/models/player/demo/demoman_red_gib.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+					{
 						_class = "MaterialGroup"
 						name = "1"
 						remaps = 
@@ -76,20 +88,17 @@
 				[
 					{
 						_class = "PhysicsHullFile"
-						name = "demogib006_reference_0_mesh"
-						parent_bone = "demogib006_reference"
+						name = "demogib006_reference"
+						parent_bone = "polymsh"
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
-						recenter_on_parent_bone = true
+						collision_tags = "solid"
+						recenter_on_parent_bone = false
 						offset_origin = [ 0.0, 0.0, 0.0 ]
 						offset_angles = [ 0.0, 0.0, 0.0 ]
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						filename = "models\\player\\gibs\\demogib006_fbx\\physics\\physmesh.dmx"
+						filename = "models/player/gibs/demogib006_fbx/mesh/demogib006_reference.smd"
 						import_scale = 1.0
 						faceMergeAngle = 10.0
 						maxHullVertices = 0
@@ -97,11 +106,8 @@
 						optimization_algorithm = "QEM"
 						import_filter = 
 						{
-							exclude_by_default = true
-							exception_list = 
-							[
-								"demogib006_reference_0_mesh",
-							]
+							exclude_by_default = false
+							exception_list = [  ]
 						}
 					},
 				]
@@ -135,7 +141,7 @@
 								parent_bone = "polymsh"
 								surface_property = "flesh"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.579677, 0.0, 0.0 ]
 								hitbox_maxs = [ 7.050637, 73.297836, 15.88119 ]
 							},
@@ -150,7 +156,7 @@
 					{
 						_class = "RenderMeshFile"
 						name = "demogib006_bg_body_lod0"
-						filename = "models\\player\\gibs\\demogib006_fbx\\mesh\\demogib006_bg_body_lod0.fbx"
+						filename = "models\\player\\gibs\\demogib006_fbx\\mesh\\demogib006_reference.smd"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -184,7 +190,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models\\player\\gibs\\demogib006_fbx\\anim\\idle.dmx"
+						source_filename = "models\\player\\gibs\\demogib006_fbx\\mesh\\demogib006_reference.smd"
 						start_frame = -1
 						end_frame = -1
 						framerate = 30.0
@@ -198,6 +204,7 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 		importer_notes = """
 Imported from compiled VMDL_C
 """
