@@ -38,15 +38,12 @@ partial class TFWeaponBase
 		var a = Math.Clamp( cl_crosshair_alpha, 0, 255 ) / 255;
 		var color = new Color( r, g, b, a );
 		
-		var mat = Material.UI.Basic;
-		var tex = Texture.Load( FileSystem.Mounted, Util.JPGToPNG( path ) );
-		// TODO: Render crosshair again
+		var attributes = new RenderAttributes();
+		attributes.Set("Texture", Texture.Load( FileSystem.Mounted, Util.JPGToPNG( path )));
 
 		Rect size = new( x, y, imageSize, imageSize );
 		//Vertex
-		Graphics.DrawQuad( size, mat, color);
-
-		//draw.Rect( x, y, imageSize, imageSize );
+		Graphics.DrawQuad( size, Material.UI.Basic, color, attributes);
 	}
 
 	public virtual bool ShouldDrawCrosshair() => true;
