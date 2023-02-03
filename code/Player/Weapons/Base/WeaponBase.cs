@@ -183,11 +183,9 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse
 
 	public override bool ShouldAutoReload()
 	{
-		const float AUTORELOAD_DELAY = 0.5f;
-
 		if(Owner?.Client?.GetClientData<bool>( "cl_autoreload" ) == true)
 		{
-			return LastAttackTime + AUTORELOAD_DELAY < Time.Now;
+			return true;
 		}
 
 		return base.ShouldAutoReload();
