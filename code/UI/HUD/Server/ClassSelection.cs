@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace TFS2.UI;
 
-public class ClassSelection : MenuOverlay
+public partial class ClassSelection : MenuOverlay
 {
 	ClassSelectionBackgroundScene BackgroundScene { get; set; }
 	ClassSelectionPlayerModel PlayerScene { get; set; }

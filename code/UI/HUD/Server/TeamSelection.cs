@@ -8,7 +8,7 @@ namespace TFS2.UI;
 /// <summary>
 /// MotD chalkboard when player joins a server.
 /// </summary>
-public class TeamSelection : MenuOverlay
+public partial class TeamSelection : MenuOverlay
 {
 	TeamSelectionBackground BackgroundScene { get; set; }
 
