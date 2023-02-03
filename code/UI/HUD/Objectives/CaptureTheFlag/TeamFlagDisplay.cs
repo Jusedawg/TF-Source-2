@@ -7,15 +7,9 @@ using System.Linq;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-partial class TeamFlagDisplay : Panel
+public partial class TeamFlagDisplay : Panel
 {
 	Dictionary<Flag, TeamFlagCompass> Flags { get; set; } = new();
-	Panel ZoneCompassContainer { get; set; }
-	Panel FlagCompassContainer { get; set; }
-	Label Limit { get; set; }
-	Label ScoreBlue { get; set; }
-	Label ScoreRed { get; set; }
 	TeamFlagCompass ZoneCompass { get; set; }
 	bool IsOutlineShown { get; set; }
 	TimeSince TimeSinceZoneSetup { get; set; }

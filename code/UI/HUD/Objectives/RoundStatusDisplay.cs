@@ -6,11 +6,8 @@ using System.Linq;
 
 namespace TFS2.UI;
 
-[UseTemplate]
 public partial class RoundStatusDisplay : Panel
 {
-	Label GameStateLabel { get; set; }
-	Panel TimersContainer { get; set; }
 	Dictionary<TFTimer, RoundStatusTimerEntry> Timers { get; set; } = new();
 
 	public override void Tick()
@@ -100,7 +97,7 @@ class RoundStatusTimerEntry : Label
 	}
 }
 
-class RoundStatusPlayers : Panel
+public partial class RoundStatusPlayers : Panel
 {
 	public TFTeam Team { get; set; }
 	public Dictionary<IClient, RoundStatusPlayersEntry> Players { get; set; } = new();
@@ -139,7 +136,7 @@ class RoundStatusPlayers : Panel
 	}
 }
 
-public class RoundStatusPlayersEntry : Panel
+public partial class RoundStatusPlayersEntry : Panel
 {
 	public IClient Client { get; set; }
 	Panel Portrait { get; set; }

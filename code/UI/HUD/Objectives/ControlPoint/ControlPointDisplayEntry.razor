@@ -1,4 +1,8 @@
-﻿<link rel="stylesheet" href="ControlPointDisplayEntry.scss">
+﻿@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/HUD/Objectives/ControlPoint/ControlPointDisplayEntry.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="icon" />
@@ -22,3 +26,14 @@
         <text class="message" @ref="PointerMessage" />
     </div>
 </root>
+
+@code {
+    Label CappersCount { get; set; }
+    Label Timer { get; set; }
+    Panel ProgressArrow { get; set; }
+    Panel Pulser { get; set; }
+    Panel BlockedPanel { get; set; }
+    Panel OwnerProgressPanel { get; set; }
+    Panel CapperProgressPanel { get; set; }
+    Label PointerMessage { get; set; }
+}

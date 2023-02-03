@@ -1,4 +1,7 @@
-﻿<link rel="stylesheet" href="ArenaPlayerCount.scss" />
+﻿@using Sandbox.UI;
+@attribute [StyleSheet("/UI/HUD/Objectives/Arena/ArenaPlayerCount.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="container">
@@ -12,3 +15,8 @@
         </div>
     </div>
 </root>
+
+@code {
+    protected Label RedCount { get; set; }
+    protected Label BlueCount { get; set; }
+}

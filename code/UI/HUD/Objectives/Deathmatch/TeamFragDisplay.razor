@@ -1,4 +1,8 @@
-﻿<link rel="stylesheet" href="TeamFragDisplay.scss" />
+﻿@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/HUD/Objectives/Deathmatch/TeamFragDisplay.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="container">
@@ -20,3 +24,11 @@
         </div>
     </div>
 </root>
+
+@code {
+    Label LimitLabel { get; set; }
+    Panel RedBar { get; set; }
+    Label RedScore { get; set; }
+    Panel BlueBar { get; set; }
+    Label BlueScore { get; set; }
+}

@@ -1,4 +1,8 @@
-﻿<link rel="stylesheet" href="TeamFlagDisplay.scss" />
+﻿@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/HUD/Objectives/CaptureTheFlag/TeamFlagDisplay.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="outline"></div>
@@ -14,3 +18,11 @@
         <text class="score red" @ref="ScoreRed"></text>
     </div>
 </root>
+
+@code {
+    Panel ZoneCompassContainer { get; set; }
+    Panel FlagCompassContainer { get; set; }
+    Label Limit { get; set; }
+    Label ScoreBlue { get; set; }
+    Label ScoreRed { get; set; }
+}

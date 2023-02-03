@@ -1,9 +1,15 @@
-﻿<link rel="stylesheet" href="ObjectivesStatus.scss" />
+﻿@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/Hud/Objectives/ObjectivesStatus.scss")]
+
+@namespace TFS2.UI
 
 <root>
-    <div class="top section">
-        <TeamCountDisplay></TeamCountDisplay>
-    </div>
+    <!--
+        <div class="top section">
+            <TeamCountDisplay></TeamCountDisplay>
+        </div>
+    -->
 
     <div class="bottom section">
         <ControlPointDisplay></ControlPointDisplay>

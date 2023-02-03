@@ -1,0 +1,21 @@
+﻿@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/Hud/Objectives/RoundStatusDisplay.scss")]
+
+@namespace TFS2.UI
+
+<root>
+    <div class="container">
+        <RoundStatusPlayers Team=@TFTeam.Blue />
+        <div class="round_container">
+            <div class="timers_container" @ref="TimersContainer" />
+        </div>
+        <RoundStatusPlayers Team=@TFTeam.Red />
+        <text class="game_state_label" @ref="GameStateLabel">Waiting For Players</text>
+    </div>
+</root>
+
+@code {
+    Label GameStateLabel { get; set; }
+    Panel TimersContainer { get; set; }
+}

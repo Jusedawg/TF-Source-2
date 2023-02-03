@@ -5,7 +5,6 @@ using System.Linq;
 
 namespace TFS2.UI;
 
-[UseTemplate]
 partial class ControlPointDisplay : Panel
 {
 	Dictionary<ControlPoint, ControlPointDisplayEntry> Points { get; set; } = new();

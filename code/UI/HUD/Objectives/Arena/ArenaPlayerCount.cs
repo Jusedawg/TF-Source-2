@@ -4,12 +4,8 @@ using System.Linq;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-internal partial class ArenaPlayerCount : Panel
+public partial class ArenaPlayerCount : Panel
 {
-	private Label RedCount { get; set; }
-	private Label BlueCount { get; set; }
-
 	public override void Tick()
 	{
 		SetClass( "visible", ShouldDraw() );

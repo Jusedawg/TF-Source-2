@@ -3,12 +3,8 @@ using Sandbox.UI;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-partial class TeamGoalDisplay : Panel
+public partial class TeamGoalDisplay : Panel
 {
-	Image Icon { get; set; }
-	Label Goal { get; set; }
-
 	public override void Tick()
 	{
 		var canSee = false;

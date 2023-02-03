@@ -1,6 +1,6 @@
 ﻿@using Sandbox.UI;
 
-@attribute [StyleSheet("WinPanel.scss")]
+@attribute [StyleSheet("/UI/HUD/WinPanel.scss")]
 
 @namespace TFS2
 
@@ -71,3 +71,12 @@
         </div>
     </div>
 </root>
+
+@code {
+    Label ScoreBlue { get; set; }
+    Label ScoreRed { get; set; }
+    Label WinnerName { get; set; }
+    Label WinReason { get; set; }
+    Label LastCapper { get; set; }
+    Panel Players { get; set; }
+}
