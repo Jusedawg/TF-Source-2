@@ -3,14 +3,8 @@ using Sandbox.UI;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-partial class Ammo : Panel
+public partial class Ammo : Panel
 {
-	public Label ClipSize { get; set; }
-	public Label MaxAmmo { get; set; }
-	public Panel Charge { get; set; }
-	public Panel ChargeBar { get; set; }
-
 	public Ammo()
 	{
 		BindClass( "red", () => TFPlayer.LocalPlayer.Team == TFTeam.Red );

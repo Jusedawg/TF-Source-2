@@ -1,4 +1,7 @@
-﻿<link rel="stylesheet" href="KillFeedEntry.scss" />
+﻿@using Sandbox.UI;
+@attribute [StyleSheet("/UI/HUD/Killfeed/TFKillFeedEntry.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="attacker target">
@@ -12,7 +15,7 @@
     </div>
 
     <div class="icon_backdrop">
-        <image @ref="Icon" class="icon_weapon" src="/ui/deathnotice/skull.png" />
+        <image @ref="IconElement" class="icon_weapon" src="/ui/deathnotice/skull.png" />
     </div>
 
     <div class="victim target">
@@ -20,3 +23,12 @@
         <text class="label" @ref="PostVictimMessage" />
     </div>
 </root>
+
+@code{
+    public Label AttackerName { get; set; }
+    public Label PostAttackerMessage { get; set; }
+    public Label VictimName { get; set; }
+    public Label PostVictimMessage { get; set; }
+    public Label StreakCounter { get; set; }
+    public Image IconElement { get; set; }
+}

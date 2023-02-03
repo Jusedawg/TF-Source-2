@@ -7,8 +7,7 @@ using System.Linq;
 
 namespace TFS2;
 
-[UseTemplate]
-partial class WinPanel : Panel
+public partial class WinPanel : Panel
 {
 	Label ScoreBlue { get; set; }
 	Label ScoreRed { get; set; }

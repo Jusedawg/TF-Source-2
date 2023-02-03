@@ -1,4 +1,8 @@
-﻿<link rel="stylesheet" href="ChatBox.scss" />
+﻿@using Sandbox.UI;
+@attribute [StyleSheet("/UI/HUD/Chat/TFChatBox.scss")]
+@namespace TFS2.UI
+
+<link rel="stylesheet" href="ChatBox.scss" />
 
 <root>
     <div class="chatbox_container">
@@ -16,3 +20,11 @@
         <TextEntry class="message_input" @ref="TextField" />
     </div>
 </root>
+
+@code {
+    TextEntry TextField { get; set; }
+    Panel MessagesScroll { get; set; }
+    Panel MessagesContainer { get; set; }
+    Label ChannelNameLabel { get; set; }
+    Panel SwitchGlyph { get; set; }
+}

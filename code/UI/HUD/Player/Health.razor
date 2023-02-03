@@ -1,0 +1,15 @@
+@using Sandbox.UI;
+@attribute [StyleSheet("/UI/HUD/Player/Health.scss")]
+
+@namespace TFS2.UI
+
+<link rel="stylesheet" href="Health.scss" />
+
+<root>
+    <div class="playerclass" @ref="PlayerClassIcon" />
+    <HealthCross />
+</root>
+
+@code{
+    private Panel PlayerClassIcon { get; set; }
+}

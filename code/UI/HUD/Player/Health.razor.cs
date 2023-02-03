@@ -4,10 +4,8 @@ using Amper.FPS;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-public class Health : Panel
+public partial class Health : Panel
 {
-	private Panel PlayerClassIcon { get; set; }
 
 	public Health()
 	{

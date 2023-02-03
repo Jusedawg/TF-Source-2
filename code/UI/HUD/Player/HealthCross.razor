@@ -1,4 +1,7 @@
-<link rel="stylesheet" href="HealthCross.scss" />
+@using Sandbox.UI;
+@attribute [StyleSheet("/UI/HUD/Player/HealthCross.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="flash danger" @ref="DangerFlash" />
@@ -9,3 +12,11 @@
         <text class="maxhealth" @ref="MaxHealthLabel" />
     </div>
 </root>
+
+@code {
+    Panel ProgressBar { get; set; }
+    Label HealthLabel { get; set; }
+    Label MaxHealthLabel { get; set; }
+    private Panel DangerFlash { get; set; }
+    private Panel OverhealFlash { get; set; }
+}

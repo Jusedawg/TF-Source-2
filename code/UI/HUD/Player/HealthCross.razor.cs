@@ -5,18 +5,12 @@ using System;
 
 namespace TFS2.UI;
 
-[UseTemplate]
 public partial class HealthCross : Panel
 {
 	const float DangerHealthFractionThreshold = 0.5f;
 	public IHasMaxHealth DesiredTarget { get; set; }
 	public float FlashScale { get; set; }
 	IHasMaxHealth Target => DesiredTarget ?? TFPlayer.LocalPlayer;
-	Panel ProgressBar { get; set; }
-	Label HealthLabel { get; set; }
-	Label MaxHealthLabel { get; set; }
-	private Panel DangerFlash { get; set; }
-	private Panel OverhealFlash { get; set; }
 	public HealthCross() : this( null ) { }
 
 	public HealthCross( IHasMaxHealth target = null, float flashScale = 1 )

@@ -1,4 +1,7 @@
-<link rel="stylesheet" href="Ammo.scss" />
+@using Sandbox.UI;
+@attribute [StyleSheet("/UI/HUD/Player/Ammo.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="counter_container">
@@ -12,3 +15,10 @@
         </div>
     </div>
 </root>
+
+@code {
+    public Label ClipSize { get; set; }
+    public Label MaxAmmo { get; set; }
+    public Panel Charge { get; set; }
+    public Panel ChargeBar { get; set; }
+}

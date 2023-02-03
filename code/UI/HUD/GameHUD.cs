@@ -2,8 +2,7 @@
 
 namespace TFS2;
 
-[UseTemplate]
-public class GameHUD : Panel
+public partial class GameHUD : Panel
 {
 	public static GameHUD Instance { get; set; }
 
