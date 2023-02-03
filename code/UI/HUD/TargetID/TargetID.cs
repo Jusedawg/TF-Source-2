@@ -6,17 +6,9 @@ using System;
 
 namespace TFS2;
 
-[UseTemplate]
 public partial class TargetID : Panel
 {
 	public ITargetID Target { get; set; }
-	public HealthCross Cross { get; set; }
-	public Image Avatar { get; set; }
-	public Label Name { get; set; }
-	public Label Subtext { get; set; }
-	public Label Pretext { get; set; }
-	public InputGlyph InteractionButton { get; set; }
-	public Label InteractionText { get; set; }
 
 	public override void Tick()
 	{
@@ -34,6 +26,9 @@ public partial class TargetID : Panel
 			return;
 
 		if ( !Target.IsValid() )
+			return;
+
+		if ( Name == null )
 			return;
 
 		UpdateTeam();
@@ -131,8 +126,11 @@ public partial class TargetID : Panel
 				return false;
 		}
 
-		InteractionButton.Button = interactable.InteractButton;
-		InteractionText.Text = interactable.InteractText;
+		if(InteractionButton != null)
+		{
+			InteractionButton.Button = interactable.InteractButton;
+			InteractionText.Text = interactable.InteractText;
+		}
 
 		return true;
 	}

@@ -1,0 +1,41 @@
+﻿@using Amper.FPS;
+@using Sandbox;
+@using Sandbox.UI;
+@using TFS2.UI
+
+@attribute [StyleSheet("/UI/HUD/TargetID/TargetID.scss")]
+
+@namespace TFS2
+
+<root class="targetid">
+
+    <div class="container">
+        <!-- Stupid hack because theres no way to make a float in razor apparently  -->
+        <HealthCross @ref="Cross" FlashScale=@float.Parse("0.5") />
+        <div class="labels">
+            <div class="profile">
+                <text @ref="Pretext" class="pretext" />
+                <image @ref="Avatar" class="avatar" />
+                <text @ref="Name" class="name" />
+            </div>
+            <text @ref="Subtext" class="subtext" />
+        </div>
+    </div>
+
+    <div class="interaction">
+        <div class="slider">
+            <InputGlyph @ref="InteractionButton" />
+            <text @ref="InteractionText" />
+        </div>
+    </div>
+</root>
+
+@code {
+    public HealthCross Cross { get; set; }
+    public Image Avatar { get; set; }
+    public Label Name { get; set; }
+    public Label Subtext { get; set; }
+    public Label Pretext { get; set; }
+    public InputGlyph InteractionButton { get; set; }
+    public Label InteractionText { get; set; }
+}
