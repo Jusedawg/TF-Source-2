@@ -87,14 +87,11 @@ PS
     CreateTexture2D( g_tColorBuffer ) < Attribute( "ColorBuffer" );  	SrgbRead( true ); Filter( MIN_MAG_LINEAR_MIP_POINT ); AddressU( MIRROR ); AddressV( MIRROR ); >;
     CreateTexture2D( g_tDepthBuffer ) < Attribute( "DepthBuffer" ); 	SrgbRead( false ); Filter( MIN_MAG_MIP_POINT ); AddressU( CLAMP ); AddressV( CLAMP ); >;
 
-    DynamicCombo( D_ENABLED, 0..1, Sys( PC ) );
-
     float4 MainPs(PixelInput i) : SV_Target0
     {
         float4 o;
         float2 uv = i.vTexCoord.xy - g_vViewportOffset.xy / g_vRenderTargetSize;
 
-        #if D_ENABLED
         float scale = lerp(g_scaleRange.x, g_scaleRange.y, sin(g_flTime * g_scaleSpeed) * 0.5 + 0.5);
         o = Tex2D(g_tColorBuffer, uv) * Tex2D(vignette, uv);
         float4 overlay = Tex2D(invulnOverlayNormal, uv);
@@ -112,9 +109,6 @@ PS
         //lerp between normal frame and modified frame based on alpha
         o.rgb = lerp(o.rgb, overlayTint, overlay.a);
 
-        #else
-        o = Tex2D(g_tColorBuffer, uv);
-        #endif
         return o;
     }
 }

@@ -73,8 +73,6 @@ PS
     CreateTexture2D( g_tColorBuffer ) < Attribute( "ColorBuffer" );  	SrgbRead( true ); Filter( MIN_MAG_LINEAR_MIP_POINT ); AddressU( MIRROR ); AddressV( MIRROR ); >;
     CreateTexture2D( g_tDepthBuffer ) < Attribute( "DepthBuffer" ); 	SrgbRead( false ); Filter( MIN_MAG_MIP_POINT ); AddressU( CLAMP ); AddressV( CLAMP ); >;
 
-    DynamicCombo( D_ENABLED, 0..1, Sys( PC ) );
-
     struct PixelOutput
     {
         float4 vColor : SV_Target0;
@@ -112,7 +110,7 @@ PS
         float4 o;
        
         float2 uv = i.vTexCoord.xy - g_vViewportOffset.xy / g_vRenderTargetSize;
-        #if D_ENABLED
+
         float2 frameDimensions;
         g_tColorBuffer.GetDimensions(frameDimensions.x, frameDimensions.y);
         float2 scopeDimensions = float2(1024, 1024);
@@ -132,9 +130,6 @@ PS
         o = Tex2D(g_tColorBuffer, uv.xy + (warpSample * g_warpScale));
         //Tint output using overlay texture.
         o.rgb *= Tex2D(scopeoverlay, scaledScopeUV).rgb;
-        #else
-        o = Tex2D(g_tColorBuffer, uv.xy);
-        #endif
         return o;
     }
 }

@@ -6,17 +6,11 @@ namespace TFS2;
 
 public class TFPostProcessingManager : PostProcessingManager
 {
-	public override void Update()
+    public override void Update()
 	{
-		base.Update();
-
-		var player = TFPlayer.LocalPlayer;
-		if ( !player.IsValid() )
-			return;
-
-		// TODO: Reimplement this with new post processing
-
-		//<SniperScope>( (player.ActiveWeapon as SniperRifle)?.IsZoomed ?? false );
-		//SetVisible<MedigunUber>( player.InCondition( TFCondition.Invulnerable ) );
-	}
+        var player = TFPlayer.LocalPlayer;
+        bool playerAlive = player.IsValid() && player.IsAlive;
+        GetOrCreate<SniperScope>().Enabled = playerAlive && ((player.ActiveWeapon as SniperRifle)?.IsZoomed ?? false);
+        GetOrCreate<MedigunUber>().Enabled = playerAlive && player.InCondition(TFCondition.Invulnerable);
+    }
 }
