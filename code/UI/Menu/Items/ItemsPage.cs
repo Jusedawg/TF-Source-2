@@ -2,14 +2,12 @@
 using Sandbox.UI;
 using System;
 
-namespace TFS2.UI.Menu.Items;
+namespace TFS2.UI;
 
-[UseTemplate]
-partial class ItemsPage : MenuOverlay
+public partial class ItemsPage : MenuOverlay
 {
 	Label PlayerName { get; set; }
 	Image PlayerAvatar { get; set; }
-
 	public override void Tick()
 	{
 		if ( !IsVisible ) return;

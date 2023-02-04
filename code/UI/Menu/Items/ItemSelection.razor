@@ -1,4 +1,9 @@
-<link rel="stylesheet" href="ItemSelection.scss" />
+@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/Menu/Items/ItemPicker.scss")]
+
+@namespace TFS2.UI
+@inherits MenuOverlay
 
 <root>
     <div class="content">
@@ -16,9 +21,9 @@
             </div>
         </div>
     </div>
-
+    
     <div class="footer">
-        <button class="button-dark" icon="undo" onclick="OnClickBack()">Back</button>
+        <button class="button-dark" icon="undo" @onclick=@OnClickBack>Back</button>
         <text @ref="PlayerName" class="playername" />
         <image @ref="PlayerAvatar" class="playeravatar" />
     </div>

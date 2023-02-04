@@ -1,4 +1,8 @@
-<link rel="stylesheet" href="MainMenuPanel.scss" />
+@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/Menu/MainMenuPanel.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="disclaimer">
@@ -19,8 +23,8 @@
             </div>
 
             <div class="content">
-                <button class="button-gradient" onclick="OnClickResumeGame()">Resume Game</button>
-                <button class="button-gradient disabled" onclick="OnClickJoinGame()">Join a Game</button>
+                <button class="button-gradient" @onclick=@OnClickResumeGame>Resume Game</button>
+                <button class="button-gradient disabled" @onclick=@OnClickJoinGame>Join a Game</button>
             </div>
         </div>
 
@@ -30,8 +34,8 @@
             </div>
 
             <div class="content">
-                <button class="button-gradient" onclick="OnClickLoadout()">Loadout</button>
-                <button class="button-gradient" onclick="OnClickSettings()">Settings</button>
+                <button class="button-gradient" @onclick=@OnClickLoadout>Loadout</button>
+                <button class="button-gradient" @onclick=@OnClickSettings>Settings</button>
             </div>
         </div>
 
@@ -54,9 +58,9 @@
     </div>
 
     <div class="footer">
-        <button class="button-dark" icon="highlight_off" onclick="OnClickQuit()">Quit</button>
-        <button class="button-dark" onclick="OnClickClassSelection()" icon="people_alt">Change Class</button>
-        <button class="button-dark" onclick="OnClickTeamSelection()" icon="sync_alt">Switch Team</button>
+        <button class="button-dark" icon="highlight_off" @onclick=@OnClickQuit>Quit</button>
+        <button class="button-dark" @onclick=@OnClickClassSelection icon="people_alt">Change Class</button>
+        <button class="button-dark" @onclick=@OnClickTeamSelection icon="sync_alt">Switch Team</button>
         <text @ref="PlayerName" class="playername" />
         <image @ref="PlayerAvatar" class="playeravatar" />
     </div>

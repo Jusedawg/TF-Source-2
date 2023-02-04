@@ -1,0 +1,27 @@
+@using Sandbox.UI;
+@using Amper.FPS;
+
+@attribute [StyleSheet("/UI/Menu/Items/ItemPicker.scss")]
+
+@namespace TFS2.UI
+
+<root>
+    @if (Slot == null || PlayerClass == null)
+        return;
+        
+    <div class="image" style="background-image: url( @( Data == null ? "/ui/icons/unbound.png" : Util.JPGToPNG( Data.InventoryIcon) ) )" />
+
+    @if (Data == null)
+    {
+        <label class="item_name">@Slot.ToString();</label>
+    }
+    else
+        @if(PlayerClass.IsDefaultWeapon(Data))
+        {
+            <label class="item_name">@Data.Title;</label>
+        }
+        else
+        {
+            <label class="item_name q_unique">@Data.Title;</label>
+        } 
+</root>

@@ -1,4 +1,9 @@
-<link rel="stylesheet" href="QuitDialog.scss" />
+@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/Menu/QuitDialog.scss")]
+
+@namespace TFS2.UI
+@inherits MenuOverlay
 
 <root>
     <div class="container">
@@ -7,8 +12,8 @@
         <div class="content">
             <text class="message">Are you really sure you want to quit this gamemode? Think about the consequences of you performing this action. If you quit, you will not be able to play it again. This is your only opportunity to make a choice. Think wisely. :)</text>
             <div class="button_container">
-                <button class="button" onclick="OnClickCancel()">Cancel</button>
-                <button class="button" onclick="OnClickQuit()">Quit</button>
+                <button class="button" @onclick=@OnClickCancel>Cancel</button>
+                <button class="button" @onclick=@OnClickQuit>Quit</button>
             </div>
         </div>
     </div>
