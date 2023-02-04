@@ -3,8 +3,7 @@ using Sandbox.UI;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-partial class ArenaWaitingForPlayers : Panel
+public partial class ArenaWaitingForPlayers : Panel
 {
 	public override void Tick()
 	{

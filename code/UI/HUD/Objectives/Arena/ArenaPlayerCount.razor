@@ -1,0 +1,22 @@
+﻿@using Sandbox.UI;
+@attribute [StyleSheet("/UI/HUD/Objectives/Arena/ArenaPlayerCount.scss")]
+
+@namespace TFS2.UI
+
+<root>
+    <div class="container">
+        <div class="team_container blue">
+            <div class="team_icon" />
+            <text class="team_text" @ref="BlueCount">12</text>
+        </div>
+        <div class="team_container red">
+            <div class="team_icon" />
+            <text class="team_text" @ref="RedCount">12</text>
+        </div>
+    </div>
+</root>
+
+@code {
+    protected Label RedCount { get; set; }
+    protected Label BlueCount { get; set; }
+}

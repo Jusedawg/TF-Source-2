@@ -4,7 +4,6 @@ using Amper.FPS;
 
 namespace TFS2.UI;
 
-[UseTemplate]
 public partial class ObjectivesStatus : Panel
 {
 	public override void Tick()

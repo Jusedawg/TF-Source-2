@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace TFS2;
 
-[UseTemplate]
 public partial class VoiceMenu : Panel
 {
 	[ConVar.Client] public static float hud_voicemenu_dismiss_time { get; set; } = 20;
@@ -65,8 +64,7 @@ public partial class VoiceMenu : Panel
 		{ InputButton.Slot9, 8 }
 	};
 
-	Panel PageContainer { get; set; }
-	Panel InfoContainer { get; set; }
+	
 	bool Shown;
 	int ActivePage;
 	public float? AutoDismissTime;
@@ -75,6 +73,11 @@ public partial class VoiceMenu : Panel
 	public VoiceMenu()
 	{
 		Current = this;
+	}
+
+	protected override void OnAfterTreeRender( bool firstTime )
+	{
+		base.OnAfterTreeRender( firstTime );
 
 		var i = 0;
 		foreach ( var pageDef in PageDefinition )
@@ -97,6 +100,9 @@ public partial class VoiceMenu : Panel
 
 	public VoiceMenuPage AddPage( string name )
 	{
+		if(PageContainer == null)
+			return null;
+
 		var page = PageContainer.AddChild<VoiceMenuPage>();
 		page.Add.Label( name, "header" );
 		return page;

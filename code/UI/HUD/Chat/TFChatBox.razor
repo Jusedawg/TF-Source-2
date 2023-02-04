@@ -1,0 +1,22 @@
+﻿@using Sandbox.UI;
+@attribute [StyleSheet("/UI/HUD/Chat/TFChatBox.scss")]
+@namespace TFS2.UI
+
+<link rel="stylesheet" href="ChatBox.scss" />
+
+<root>
+    <div class="chatbox_container">
+        <div class="chatbox_wrapper" @ref="MessagesScroll">
+            <div class="filler" />
+            <div class="messages" @ref="MessagesContainer" />
+        </div>
+    </div>
+
+    <div class="chat_input">
+        <div class="channel">
+            <text class="channel_glyph" @ref="SwitchGlyph">TAB</text>
+            <text class="channel_name" @ref="ChannelNameLabel"></text>
+        </div>
+        <TextEntry class="message_input" @ref="TextField" @onsubmit=@Submit onblur=@Close />"
+    </div>
+</root>

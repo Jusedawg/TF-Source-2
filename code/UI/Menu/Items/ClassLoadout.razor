@@ -1,0 +1,37 @@
+@using Sandbox.UI;
+@using System;
+
+@attribute [StyleSheet("/UI/Menu/Items/ClassLoadout.scss")]
+
+@namespace TFS2.UI
+@inherits MenuOverlay
+
+<root>
+    <div class="content">
+        <div class="loadout_wrapper">
+            <div class="loadout_header">
+                <div class="loadout_title">
+                    <text class="marker">>></text>
+                    <text class="class_name">@PlayerClass.Title</text>
+                </div>
+                <text class="loadout_subtitle">Current Loadout:</text>
+            </div>
+            <div class="loadout_content">
+                <div class="loadout_slots">
+                    @foreach(var slot in Enum.GetValues<TFWeaponSlot>())
+                    {
+                        @if (PlayerClass.GetDefaultWeaponForSlot(slot) == null)
+                            continue;
+                        <ItemPicker Slot=@slot PlayerClass=@PlayerClass Data=@GetWeaponForSlot(slot)/>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <button class="button-dark" icon="undo" @onclick=@OnClickBack>Back</button>
+        <text class="playername">@Sandbox.Game.LocalClient.Name</text>
+        <image class="playeravatar" Texture="avatarbig:@Sandbox.Game.LocalClient.SteamId" />
+    </div>
+</root>

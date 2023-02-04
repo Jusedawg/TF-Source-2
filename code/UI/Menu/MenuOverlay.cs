@@ -35,6 +35,7 @@ public class MenuOverlay : Panel
 	{
 		if ( CurrentMenu == this )
 			CurrentMenu = null;
+		
 		Delete();
 	}
 }

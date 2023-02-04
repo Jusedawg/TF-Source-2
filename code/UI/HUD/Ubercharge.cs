@@ -4,11 +4,8 @@ using System;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-partial class Ubercharge : Panel
+public partial class Ubercharge : Panel
 {
-	Label UberLabel { get; set; }
-	Panel Bar { get; set; }
 	TimeSince TimeSinceFlashCycle { get; set; }
 
 	public Ubercharge()

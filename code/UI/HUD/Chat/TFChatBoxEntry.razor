@@ -1,0 +1,12 @@
+﻿@using Sandbox.UI;
+@attribute [StyleSheet("/UI/HUD/Chat/TFChatBoxEntry.scss")]
+
+@namespace TFS2.UI
+
+<root>
+    <div class="wrapper" @ref="Wrapper" />
+</root>
+
+@code {
+    Panel Wrapper { get; set; }
+}

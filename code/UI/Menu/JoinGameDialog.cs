@@ -3,8 +3,7 @@ using Sandbox.UI;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-public class JoinGameDialog : MenuOverlay
+public partial class JoinGameDialog : MenuOverlay
 {
 	public string SearchText { get; set; } = "";
 

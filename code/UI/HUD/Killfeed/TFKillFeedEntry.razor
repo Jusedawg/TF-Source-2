@@ -1,0 +1,34 @@
+﻿@using Sandbox.UI;
+@attribute [StyleSheet("/UI/HUD/Killfeed/TFKillFeedEntry.scss")]
+
+@namespace TFS2.UI
+
+<root>
+    <div class="attacker target">
+        <text class="label" @ref="AttackerName" />
+        <text class="label" @ref="PostAttackerMessage" />
+    </div>
+
+    <div class="streak">
+        <text class="label" @ref="StreakCounter" />
+        <div class="streak_icon" />
+    </div>
+
+    <div class="icon_backdrop">
+        <image @ref="IconElement" class="icon_weapon" src="/ui/deathnotice/skull.png" />
+    </div>
+
+    <div class="victim target">
+        <text class="label" @ref="VictimName">Moonly Days</text>
+        <text class="label" @ref="PostVictimMessage" />
+    </div>
+</root>
+
+@code{
+    public Label AttackerName { get; set; }
+    public Label PostAttackerMessage { get; set; }
+    public Label VictimName { get; set; }
+    public Label PostVictimMessage { get; set; }
+    public Label StreakCounter { get; set; }
+    public Image IconElement { get; set; }
+}

@@ -1,0 +1,31 @@
+﻿@using Sandbox.UI
+@using Amper.FPS
+@using Sandbox;
+
+@attribute [StyleSheet("/UI/HUD/Voice/VoiceMenu.scss")]
+
+@namespace TFS2
+
+<root>
+    <div class="container">
+        <div class="menus" @ref="PageContainer" />
+        <div class="info" @ref="InfoContainer">
+            <div class="footer">
+                <InputGlyph Button=@InputButton.View />
+                <text>Next Page</text>
+            </div>
+            <div class="hint">
+                <text>Don't like hitting one key to switch between menus?</text>
+                <div>
+                    <InputGlyph Button=@InputButton.Score />
+                    <text>Learn how to bind ZXC</text>
+                </div>
+            </div>
+        </div>
+    </div>
+</root>
+
+@code {
+    Panel PageContainer { get; set; }
+    Panel InfoContainer { get; set; }
+}

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if false
+
+using System.Collections.Generic;
 using Sandbox.UI;
 
 namespace TFS2.UI
@@ -53,3 +55,5 @@ namespace TFS2.UI
 		}
 	}
 }
+
+#endif

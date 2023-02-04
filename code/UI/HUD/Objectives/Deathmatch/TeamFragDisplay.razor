@@ -1,0 +1,34 @@
+﻿@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/HUD/Objectives/Deathmatch/TeamFragDisplay.scss")]
+
+@namespace TFS2.UI
+
+<root>
+    <div class="container">
+        <div class="overlay" />
+        <div class="limit">
+            <text>Playing to: </text>
+            <text @ref="LimitLabel" />
+        </div>
+
+        <div class="bars_container">
+            <div class="progress blue">
+                <div class="bar" @ref="BlueBar" />
+                <text class="score" @ref="BlueScore">0</text>
+            </div>
+            <div class="progress red">
+                <div class="bar" @ref="RedBar" />
+                <text class="score" @ref="RedScore">0</text>
+            </div>
+        </div>
+    </div>
+</root>
+
+@code {
+    Label LimitLabel { get; set; }
+    Panel RedBar { get; set; }
+    Label RedScore { get; set; }
+    Panel BlueBar { get; set; }
+    Label BlueScore { get; set; }
+}

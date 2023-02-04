@@ -1,4 +1,6 @@
-﻿using Sandbox.UI;
+﻿#if false
+
+using Sandbox.UI;
 
 namespace TFS2.UI
 {
@@ -13,3 +15,5 @@ namespace TFS2.UI
 		}
 	}
 }
+
+#endif

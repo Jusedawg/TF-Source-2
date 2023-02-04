@@ -4,7 +4,6 @@ using System;
 
 namespace TFS2;
 
-[UseTemplate]
 public partial class VoiceWheel : Panel
 {
 	public const int MaxSlices = 8; // 45 degrees each.

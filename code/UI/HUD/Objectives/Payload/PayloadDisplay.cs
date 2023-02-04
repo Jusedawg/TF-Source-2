@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if false
+
+using System.Collections.Generic;
 using System.Linq;
 using Sandbox;
 using Sandbox.UI;
@@ -44,3 +46,5 @@ partial class PayloadDisplay : Panel
 		}
 	}
 }
+
+#endif

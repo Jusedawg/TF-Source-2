@@ -1,0 +1,21 @@
+@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/Menu/JoinGameDialog.scss")]
+
+@namespace TFS2.UI
+@inherits MenuOverlay
+
+<root>
+    <div class="container">
+        <text class="header">Join Game</text>
+
+        <div class="content">
+            <text class="message">Enter the Steam ID of the user you want to join.</text>
+            <textentry @value="SearchText" />
+            <div class="button_container">
+                <button class="button" @onclick=@OnClickCancel>Cancel</button>
+                <button class="button" @onclick=@OnClickConnect>Connect</button>
+            </div>
+        </div>
+    </div>
+</root>

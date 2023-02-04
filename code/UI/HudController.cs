@@ -3,16 +3,13 @@ using Sandbox.UI;
 
 namespace TFS2.UI;
 
-public partial class TFHud : HudEntity<RootPanel>
+public partial class TFHud : HudEntity<TFRootPanel>
 {
 	public static TFHud Instance { get; set; }
 
 	public TFHud()
 	{
 		Instance = this;
-
-		if ( Sandbox.Game.IsClient )
-			RootPanel.SetTemplate( "/ui/HudController.html" );
 	}
 
 	[Event.Client.Frame]

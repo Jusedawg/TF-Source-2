@@ -1,0 +1,24 @@
+﻿@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/HUD/Ubercharge.scss")]
+
+@namespace TFS2.UI
+
+<root>
+    <div class="cluster" />
+    <div class="container">
+        <text @ref="UberLabel" class="title" />
+        <div class="progress_container">
+            <div class="progress">
+                <div @ref="Bar" class="bar">
+                    <div class="flash" />
+                </div>
+            </div>
+        </div>
+    </div>
+</root>
+
+@code {
+    Label UberLabel { get; set; }
+    Panel Bar { get; set; }
+}

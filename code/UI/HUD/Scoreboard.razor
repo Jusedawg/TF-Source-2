@@ -1,0 +1,162 @@
+﻿@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/HUD/Scoreboard.scss")]
+
+@namespace TFS2.UI
+
+<root>
+    <div class="container" @ref="Container">
+        <div class="limit_container">
+            <div class="teampanel blue">
+                <image class="team_logo" />
+                <text class="player_count" @ref="BluePlayerCount">0 players</text>
+                <text class="team_score" @ref="BlueTeamScore">0</text>
+            </div>
+            <div class="limit_wrapper">
+                <image class="mode_logo" @ref="ModeLogo" />
+                <text class="mode_label" @ref="ModeName" />
+                <text class="limit_display" @ref="ServerTimeLeft">No time limit</text>
+            </div>
+            <div class="teampanel red">
+                <text class="team_score red" @ref="RedTeamScore">0</text>
+                <text class="player_count red" @ref="RedPlayerCount">0 players</text>
+                <image class="team_logo red" />
+            </div>
+        </div>
+        <div class="players_container">
+            <div class="players_wrapper">
+                <div class="teamcol blue">
+                    <div class="row header">
+                        <text class="avatar" />
+                        <text class="name">Name</text>
+                        <text class="ping">Ping</text>
+                    </div>
+                    <div class="players" @ref="BluePlayerList" />
+                </div>
+                <div class="teamcol red">
+                    <div class="row header">
+                        <text class="avatar" />
+                        <text class="name">Name</text>
+                        <text class="ping">Ping</text>
+                    </div>
+                    <div class="players" @ref="RedPlayerList" />
+                </div>
+            </div>
+            <div class="footer">
+                <image class="class_image" @ref="ClassImage" />
+                <div class="stats">
+                    <div class="info_container">
+                        <text class="name" @ref="PlayerName" />
+                        <text class="map" @ref="MapName" />
+                    </div>
+                    <div class="stats_container">
+                        <div class="col">
+                            <div class="row">
+                                <text class="stat_name">Kills:</text>
+                                <text class="stat_value" @ref="Kills"/>
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Deaths:</text>
+                                <text class="stat_value" @ref="Deaths"/>
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Assists:</text>
+                                <text class="stat_value" @ref="Assists"/>
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Destruction:</text>
+                                <text class="stat_value" @ref="Destruction"/>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <text class="stat_name">Captures:</text>
+                                <text class="stat_value" @ref="Captures"/>
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Defenses:</text>
+                                <text class="stat_value" @ref="Defenses"/>
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Domination:</text>
+                                <text class="stat_value" @ref="Domination"/>
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Revenge:</text>
+                                <text class="stat_value" @ref="Revenge"/>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <text class="stat_name">Invulns:</text>
+                                <text class="stat_value" @ref="Invulns"/>
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Headshots:</text>
+                                <text class="stat_value" @ref="Headshots"/>
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Teleports:</text>
+                                <text class="stat_value" @ref="Teleports" />
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Healing:</text>
+                                <text class="stat_value" @ref="Healing" />
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="row">
+                                <text class="stat_name">Backstabs:</text>
+                                <text class="stat_value" @ref="Backstabs" />
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Bonus:</text>
+                                <text class="stat_value" @ref="Bonus" />
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Support:</text>
+                                <text class="stat_value" @ref="Support" />
+                            </div>
+                            <div class="row">
+                                <text class="stat_name">Damage:</text>
+                                <text class="stat_value" @ref="Damage" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</root>
+
+@code {
+    private Panel Container { get; set; }
+    private Label BlueTeamScore { get; set; }
+    private Label RedTeamScore { get; set; }
+    private Label BluePlayerCount { get; set; }
+    private Label RedPlayerCount { get; set; }
+    private Label ServerTimeLeft { get; set; }
+    private Panel BluePlayerList { get; set; }
+    private Panel RedPlayerList { get; set; }
+    private Image ClassImage { get; set; }
+    private Label PlayerName { get; set; }
+    private Label Kills { get; set; }
+    private Label Deaths { get; set; }
+    private Label Assists { get; set; }
+    private Label Destruction { get; set; }
+    private Label Captures { get; set; }
+    private Label Defenses { get; set; }
+    private Label Domination { get; set; }
+    private Label Revenge { get; set; }
+    private Label Invulns { get; set; }
+    private Label Headshots { get; set; }
+    private Label Teleports { get; set; }
+    private Label Healing { get; set; }
+    private Label Backstabs { get; set; }
+    private Label Bonus { get; set; }
+    private Label Support { get; set; }
+    private Label Damage { get; set; }
+    private Label MapName { get; set; }
+    private Label ModeName { get; set; }
+    private Image ModeLogo { get; set; }
+}

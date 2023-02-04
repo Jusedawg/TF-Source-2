@@ -4,15 +4,12 @@ using Amper.FPS;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-internal partial class Spectator : Panel
+public partial class Spectator : Panel
 {
-	private Label Timer { get; set; }
-	private Label MapName { get; set; }
-	private Label Target { get; set; }
-
-	public Spectator()
+	protected override void OnAfterTreeRender( bool firstTime )
 	{
+		base.OnAfterTreeRender( firstTime );
+		
 		MapName.Text = Util.GetMapDisplayName( Sandbox.Game.Server.MapIdent );
 	}
 
@@ -40,35 +37,35 @@ internal partial class Spectator : Panel
 		{
 			if ( TFGameRules.Current.State == GameState.RoundEnd )
 			{
-				Timer.Text = "You will be respawned next round.";
+				TimerElement.Text = "You will be respawned next round.";
 				return;
 			}
 
 			if ( !TFGameRules.Current.AreRespawnsAllowed() )
 			{
-				Timer.Text = "Respawns are not allowed right now.";
+				TimerElement.Text = "Respawns are not allowed right now.";
 				return;
 			}
 
 			if ( !TFGameRules.Current.CanTeamRespawn( player.Team ) )
 			{
-				Timer.Text = "Your team cannot respawn right now.";
+				TimerElement.Text = "Your team cannot respawn right now.";
 				return;
 			}
 
 			if ( !TFGameRules.Current.CanPlayerRespawn( player ) )
 			{
-				Timer.Text = "You cannot respawn at the moment.";
+				TimerElement.Text = "You cannot respawn at the moment.";
 				return;
 			}
 
 			// Update the respawn timer.
 			var respawnTime = TFGameRules.Current.GetNextPlayerRespawnWaveTime( player ) - Time.Now;
-			Timer.Text = (respawnTime <= 0) ? "Prepare to respawn." : $"Respawning in: {respawnTime.CeilToInt()} second(s).";
+			TimerElement.Text = (respawnTime <= 0) ? "Prepare to respawn." : $"Respawning in: {respawnTime.CeilToInt()} second(s).";
 			return;
 		}
 
-		Timer.Text = "Spectator Mode";
+		TimerElement.Text = "Spectator Mode";
 		return;
 	}
 

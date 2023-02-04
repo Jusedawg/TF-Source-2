@@ -3,8 +3,7 @@ using Sandbox.UI;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-public class MainMenuPanel : Panel
+public partial class MainMenuPanel : Panel
 {
 	public TimeSince TimeSinceInteraction { get; set; }
 
