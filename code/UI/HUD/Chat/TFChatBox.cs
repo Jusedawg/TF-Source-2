@@ -14,6 +14,11 @@ namespace TFS2.UI
 		public static TFChatBox Instance { get; set; }
 		public bool IsOpen { get; set; }
 		ChatType Type { get; set; }
+		TextEntry TextField { get; set; }
+		Panel MessagesScroll { get; set; }
+		Panel MessagesContainer { get; set; }
+		Label ChannelNameLabel { get; set; }
+		Panel SwitchGlyph { get; set; }
 
 		public TFChatBox() => Instance = this;
 
@@ -22,12 +27,6 @@ namespace TFS2.UI
 		{
 			if ( Input.Pressed( InputButton.Chat ) )
 				Open();
-		}
-
-		protected override void PostTemplateApplied()
-		{
-			TextField.AddEventListener( "onsubmit", () => Submit() );
-			TextField.AddEventListener( "onblur", () => Close() );
 		}
 
 		public override void OnButtonEvent( ButtonEvent e )

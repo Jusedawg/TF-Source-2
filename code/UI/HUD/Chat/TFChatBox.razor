@@ -15,16 +15,8 @@
     <div class="chat_input">
         <div class="channel">
             <text class="channel_glyph" @ref="SwitchGlyph">TAB</text>
-            <text class="channel_name" @ref="ChannelNameLabel">Global:</text>
+            <text class="channel_name" @ref="ChannelNameLabel"></text>
         </div>
-        <TextEntry class="message_input" @ref="TextField" />
+        <TextEntry class="message_input" @ref="TextField" @onsubmit=@Submit onblur=@Close />"
     </div>
 </root>
-
-@code {
-    TextEntry TextField { get; set; }
-    Panel MessagesScroll { get; set; }
-    Panel MessagesContainer { get; set; }
-    Label ChannelNameLabel { get; set; }
-    Panel SwitchGlyph { get; set; }
-}
