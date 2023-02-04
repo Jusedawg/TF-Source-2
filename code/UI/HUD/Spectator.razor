@@ -1,25 +1,31 @@
-﻿<link rel="stylesheet" href="Spectator.scss" />
+﻿@using Sandbox.UI;
+@using Sandbox;
+@using Amper.FPS;
+
+@attribute [StyleSheet("/UI/HUD/Spectator.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="header">
         <text class="observertarget" @ref="Target" />
-        <text class="timer" @ref="Timer" />
+        <text class="timer" @ref="TimerElement" />
 
         <div class="hint controls">
             <div class="control_row">
-                <InputGlyph Button="PrimaryAttack" />
+                <InputGlyph Button=@InputButton.PrimaryAttack />
                 <text>Spectate Next Target</text>
             </div>
             <div class="control_row">
-                <InputGlyph Button="SecondaryAttack" />
+                <InputGlyph Button=@InputButton.SecondaryAttack />
                 <text>Spectate Previous Target</text>
             </div>
             <div class="control_row">
-                <InputGlyph Button="Jump" />
+                <InputGlyph Button=@InputButton.Jump />
                 <text>Change Spectator Mode</text>
             </div>
             <div class="control_row">
-                <InputGlyph Button="Menu" />
+                <InputGlyph Button=@InputButton.Menu />
                 <text>Open Menu</text>
             </div>
         </div>
@@ -29,3 +35,9 @@
         </div>
     </div>
 </root>
+
+@code {
+    private Label TimerElement { get; set; }
+    private Label MapName { get; set; }
+    private Label Target { get; set; }
+}

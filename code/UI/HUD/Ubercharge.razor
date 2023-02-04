@@ -1,4 +1,8 @@
-﻿<link rel="stylesheet" href="Ubercharge.scss" />
+﻿@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/HUD/Ubercharge.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="cluster" />
@@ -13,3 +17,8 @@
         </div>
     </div>
 </root>
+
+@code {
+    Label UberLabel { get; set; }
+    Panel Bar { get; set; }
+}
