@@ -9,7 +9,8 @@ namespace TFS2.UI;
 public partial class RoundStatusDisplay : Panel
 {
 	Dictionary<TFTimer, RoundStatusTimerEntry> Timers { get; set; } = new();
-
+	Label GameStateLabel { get; set; }
+	Panel TimersContainer { get; set; }
 	public override void Tick()
 	{
 		SetClass( "visible", ShouldDraw() );

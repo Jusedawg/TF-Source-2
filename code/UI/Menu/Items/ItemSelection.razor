@@ -24,7 +24,7 @@
     
     <div class="footer">
         <button class="button-dark" icon="undo" @onclick=@OnClickBack>Back</button>
-        <text @ref="PlayerName" class="playername" />
-        <image @ref="PlayerAvatar" class="playeravatar" />
+        <text class="playername">@Sandbox.Game.LocalClient.Name</text>
+        <image class="playeravatar" Texture="avatarbig:@Sandbox.Game.LocalClient.SteamId" />
     </div>
 </root>

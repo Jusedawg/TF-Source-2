@@ -2,7 +2,6 @@
 
 namespace TFS2;
 
-[UseTemplate]
 public partial class VoiceMenuPage : Panel
 {
 	public bool Shown { get; set; }

@@ -6,7 +6,7 @@
 @namespace TFS2.UI
 
 <root>
-    @if (Slot == null || PlayerClass == null)
+    @if (PlayerClass == null)
         return;
         
     <div class="image" style="background-image: url( @( Data == null ? "/ui/icons/unbound.png" : Util.JPGToPNG( Data.InventoryIcon) ) )" />

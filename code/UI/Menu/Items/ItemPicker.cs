@@ -9,8 +9,6 @@ public partial class ItemPicker : Panel
 	public PlayerClass PlayerClass { get; set; }
 	public TFWeaponSlot Slot { get; set; }
 	public event Action OnClicked;
-	Panel Image { get; set; }
-	Label Name { get; set; }
 	public WeaponData Data { get; set; }
 
 	protected override void OnClick( MousePanelEvent e )

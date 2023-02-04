@@ -9,7 +9,6 @@ namespace TFS2.UI;
 public partial class ClassLoadout : MenuOverlay
 {
 	PlayerClass PlayerClass { get; set; }
-	Label ClassName { get; set; }
 	List<ItemPicker> Slots { get; set; } = new();
 
 	public ClassLoadout()
