@@ -3,8 +3,7 @@ using Sandbox.UI;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-partial class SniperScopeCharge : Panel
+public partial class SniperScopeCharge : Panel
 {
 	Panel Lines { get; set; }
 	Label Percentage { get; set; }

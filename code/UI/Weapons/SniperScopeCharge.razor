@@ -1,4 +1,8 @@
-﻿<link rel="stylesheet" href="SniperScopeCharge.scss" />
+﻿@using Sandbox.UI;
+
+@attribute [StyleSheet("/UI/Weapons/SniperScopeCharge.scss")]
+
+@namespace TFS2.UI
 
 <root>
     <div class="wrapper">
@@ -7,6 +11,6 @@
             <div class="lines" @ref="Lines" />
         </div>
         <div class="bolt" />
-        <text class="label" @ref="Percentage">100%</text>
+        <text class="label" @ref="Percentage"/>
     </div>
 </root>
