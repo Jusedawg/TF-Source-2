@@ -181,7 +181,7 @@ public partial class TFPlayer : SDKPlayer
 
 	public override void OnKilled()
 	{
-		AwardKillerPoints();
+		AwardDeathPoints();
 		DropPickedItem();
 		CreateDeathEntities( LastDamageInfo );
 
@@ -205,18 +205,24 @@ public partial class TFPlayer : SDKPlayer
 	}
 
 	/// <summary>
-	/// Gives defense points to the player which killed us if this player was
-	/// the last man standing on a control point or had the intel
+	/// Awards points to all parties on death.
 	/// </summary>
-	protected void AwardKillerPoints()
+	protected void AwardDeathPoints()
 	{
-		if ( LastDamageInfo.Attacker is TFPlayer atk && atk != this )
+		var info = LastDamageInfo;
+		
+		if ( info.Attacker is TFPlayer atk && atk != this )
 		{
+			atk.Kills++;
+			// Gives defense points to the player which killed us if this player was
+			// the last man standing on a control point or had the intel
 			if ( PickedItem is Flag )
 				atk.Defenses++;
 			if ( ControlPoint?.TouchingEntities.OfType<TFPlayer>().Any( ply => ply.Team != ControlPoint.OwnerTeam ) == true )
 				atk.Defenses++;
 		}
+
+		Deaths++;
 	}
 
 	public override void Simulate( IClient cl )
