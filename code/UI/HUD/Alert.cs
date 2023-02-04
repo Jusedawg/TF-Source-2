@@ -4,13 +4,10 @@ using Amper.FPS;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-partial class Alert : Panel
+public partial class Alert : Panel
 {
 	public static Alert Instance { get; set; }
 
-	Label Text { get; set; }
-	Image ImagePanel { get; set; }
 	TimeSince TimeSinceAppeared { get; set; }
 	float ShowTime { get; set; }
 

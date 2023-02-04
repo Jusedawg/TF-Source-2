@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace TFS2.UI.Game;
+namespace TFS2.UI;
 
-partial class WeaponSelection : Panel
+public partial class WeaponSelection : Panel
 {
 	bool IsEnabled { get; set; }
 	TimeSince TimeSinceInteraction { get; set; }

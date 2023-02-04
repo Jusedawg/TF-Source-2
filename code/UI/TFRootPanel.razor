@@ -1,12 +1,16 @@
-﻿<link rel="stylesheet" href="HudController.scss" />
+﻿@using Sandbox.UI;
+@using Amper.FPS;
 
+@attribute [StyleSheet("/UI/TFRootPanel.scss")]
+
+@namespace TFS2.UI
+@inherits RootPanel
 <root>
     <GameHUD>
         <!-- Player Vitals -->
         <Health></Health>
         <Ammo></Ammo>
         <Ubercharge></Ubercharge>
-        <EffectMeterManager></EffectMeterManager>
         <TargetIDContainer></TargetIDContainer>
         <DamageNumbers></DamageNumbers>
         <DamageIndicators></DamageIndicators>
@@ -37,5 +41,12 @@
     <!-- Developer -->
     <MainMenuPanel></MainMenuPanel>
     <DevMenu></DevMenu>
-    <TauntMenu></TauntMenu>
+    
+    <!--
+        UNUSED
+        
+        <EffectMeterManager></EffectMeterManager>
+        <TauntMenu></TauntMenu>
+    -->
+    
 </root>
