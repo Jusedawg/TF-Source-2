@@ -1,4 +1,6 @@
 ﻿@using Sandbox.UI;
+@using TFS2;
+@using System.Linq;
 
 @attribute [StyleSheet("/UI/HUD/Scoreboard.scss")]
 
@@ -9,8 +11,8 @@
         <div class="limit_container">
             <div class="teampanel blue">
                 <image class="team_logo" />
-                <text class="player_count" @ref="BluePlayerCount">0 players</text>
-                <text class="team_score" @ref="BlueTeamScore">0</text>
+                <text class="player_count">@TFTeam.Blue.GetPlayers().Count() players</text>
+                <text class="team_score" @ref="BlueTeamScore"></text>
             </div>
             <div class="limit_wrapper">
                 <image class="mode_logo" @ref="ModeLogo" />
@@ -18,8 +20,8 @@
                 <text class="limit_display" @ref="ServerTimeLeft">No time limit</text>
             </div>
             <div class="teampanel red">
-                <text class="team_score red" @ref="RedTeamScore">0</text>
-                <text class="player_count red" @ref="RedPlayerCount">0 players</text>
+                <text class="team_score red" @ref="RedTeamScore"></text>
+                <text class="player_count red">@TFTeam.Red.GetPlayers().Count() players</text>
                 <image class="team_logo red" />
             </div>
         </div>
@@ -128,35 +130,3 @@
         </div>
     </div>
 </root>
-
-@code {
-    private Panel Container { get; set; }
-    private Label BlueTeamScore { get; set; }
-    private Label RedTeamScore { get; set; }
-    private Label BluePlayerCount { get; set; }
-    private Label RedPlayerCount { get; set; }
-    private Label ServerTimeLeft { get; set; }
-    private Panel BluePlayerList { get; set; }
-    private Panel RedPlayerList { get; set; }
-    private Image ClassImage { get; set; }
-    private Label PlayerName { get; set; }
-    private Label Kills { get; set; }
-    private Label Deaths { get; set; }
-    private Label Assists { get; set; }
-    private Label Destruction { get; set; }
-    private Label Captures { get; set; }
-    private Label Defenses { get; set; }
-    private Label Domination { get; set; }
-    private Label Revenge { get; set; }
-    private Label Invulns { get; set; }
-    private Label Headshots { get; set; }
-    private Label Teleports { get; set; }
-    private Label Healing { get; set; }
-    private Label Backstabs { get; set; }
-    private Label Bonus { get; set; }
-    private Label Support { get; set; }
-    private Label Damage { get; set; }
-    private Label MapName { get; set; }
-    private Label ModeName { get; set; }
-    private Image ModeLogo { get; set; }
-}

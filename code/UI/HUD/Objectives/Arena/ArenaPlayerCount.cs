@@ -6,6 +6,8 @@ namespace TFS2.UI;
 
 public partial class ArenaPlayerCount : Panel
 {
+	protected Label RedCount { get; set; }
+	protected Label BlueCount { get; set; }
 	public override void Tick()
 	{
 		SetClass( "visible", ShouldDraw() );

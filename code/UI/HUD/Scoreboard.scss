@@ -45,12 +45,12 @@ Scoreboard {
                 .player_count {
                     width: 100%;
                     font-size: 32px;
-                    text-align: start;
+                    text-align: left;
                     margin-top: 6%;
                     margin-left: 5%;
 
                     &.red {
-                        text-align: end;
+                        text-align: right;
                     }
                 }
 
@@ -88,6 +88,7 @@ Scoreboard {
 
                 .limit_display {
                     color: yellow;
+                    text-align: center;
                 }
             }
         }
@@ -193,7 +194,7 @@ Scoreboard {
                             flex-shrink: 0;
                             padding-right: 2%;
                             margin-top: 5px;
-                            align-items: end;
+                            align-items: flex-end;
                             font-size: 24px;
                         }
                     }

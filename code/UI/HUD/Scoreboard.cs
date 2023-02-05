@@ -18,6 +18,36 @@ public partial class Scoreboard : Panel
 	private Dictionary<TFTeam, Dictionary<IClient, Panel>> Players { get; set; } = new();
 	private Dictionary<TFTeam, Panel> Lists { get; set; } = new();
 
+	#region Elements
+	private Panel Container { get; set; }
+	private Label BlueTeamScore { get; set; }
+	private Label RedTeamScore { get; set; }
+	private Label ServerTimeLeft { get; set; }
+	private Panel BluePlayerList { get; set; }
+	private Panel RedPlayerList { get; set; }
+	private Image ClassImage { get; set; }
+	private Label PlayerName { get; set; }
+	private Label Kills { get; set; }
+	private Label Deaths { get; set; }
+	private Label Assists { get; set; }
+	private Label Destruction { get; set; }
+	private Label Captures { get; set; }
+	private Label Defenses { get; set; }
+	private Label Domination { get; set; }
+	private Label Revenge { get; set; }
+	private Label Invulns { get; set; }
+	private Label Headshots { get; set; }
+	private Label Teleports { get; set; }
+	private Label Healing { get; set; }
+	private Label Backstabs { get; set; }
+	private Label Bonus { get; set; }
+	private Label Support { get; set; }
+	private Label Damage { get; set; }
+	private Label MapName { get; set; }
+	private Label ModeName { get; set; }
+	private Image ModeLogo { get; set; }
+	#endregion
+
 	public Scoreboard()
 	{
 		EventDispatcher.Subscribe<PlayerRegenerateEvent>( OnRegenerate, this );

@@ -7,6 +7,14 @@ namespace TFS2.UI;
 partial class ControlPointDisplayEntry : Panel
 {
 	public ControlPoint Point { get; set; }
+	Label CappersCount { get; set; }
+	Label Timer { get; set; }
+	Panel ProgressArrow { get; set; }
+	Panel Pulser { get; set; }
+	Panel BlockedPanel { get; set; }
+	Panel OwnerProgressPanel { get; set; }
+	Panel CapperProgressPanel { get; set; }
+	Label PointerMessage { get; set; }
 
 	public bool IsPointLocked()
 	{

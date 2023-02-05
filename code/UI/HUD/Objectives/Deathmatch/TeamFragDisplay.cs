@@ -6,6 +6,11 @@ namespace TFS2.UI;
 
 public partial class TeamFragDisplay : Panel
 {
+	Label LimitLabel { get; set; }
+	Panel RedBar { get; set; }
+	Label RedScore { get; set; }
+	Panel BlueBar { get; set; }
+	Label BlueScore { get; set; }
 	public bool ShouldDraw()
 	{
 		return TFGameRules.Current.GameType == TFGameType.TeamDeathmatch;

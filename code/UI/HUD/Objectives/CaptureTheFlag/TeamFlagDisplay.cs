@@ -13,6 +13,11 @@ public partial class TeamFlagDisplay : Panel
 	TeamFlagCompass ZoneCompass { get; set; }
 	bool IsOutlineShown { get; set; }
 	TimeSince TimeSinceZoneSetup { get; set; }
+	Panel ZoneCompassContainer { get; set; }
+	Panel FlagCompassContainer { get; set; }
+	Label Limit { get; set; }
+	Label ScoreBlue { get; set; }
+	Label ScoreRed { get; set; }
 
 	public override void Tick()
 	{
