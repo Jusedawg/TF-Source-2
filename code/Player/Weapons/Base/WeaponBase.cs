@@ -123,8 +123,8 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse
 
 	public override void ApplyDamageModifications( Entity victim, ref ExtendedDamageInfo info, TraceResult trace )
 	{
-		if ( IsCurrentAttackCritical )
-			info = info.WithTag( TFDamageTags.Critical );
+		//if ( IsCurrentAttackCritical )
+		//	info = info.WithTag( TFDamageTags.Critical );
 
 		//
 		// Whether a weapon's damage is subject to rampup or falloff is defined in the weapon's data asset.
