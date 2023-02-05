@@ -91,19 +91,19 @@ partial class TFPlayer
 			return false;
 
 		// This damage never gibs.
-		if ( info.HasTag( TFDamageFlags.DoNotGib ) )
+		if ( info.HasTag( TFDamageTags.DoNotGib ) )
 			return false;
 
 		// This damage always gibs.
-		if ( info.HasTag( TFDamageFlags.AlwaysGib ) )
+		if ( info.HasTag( TFDamageTags.AlwaysGib ) )
 			return true;
 
 		// Only blast damage can gib.
-		if ( !info.HasTag( TFDamageFlags.Blast ) )
+		if ( !info.HasTag( TFDamageTags.Blast ) )
 			return false;
 
 		// Explosive crits always gib.
-		if ( info.HasTag( TFDamageFlags.Critical ) )
+		if ( info.HasTag( TFDamageTags.Critical ) )
 			return true;
 
 		// Hard hits also gib.

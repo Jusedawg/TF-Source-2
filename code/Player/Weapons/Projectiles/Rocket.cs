@@ -11,7 +11,7 @@ public partial class Rocket : TFProjectile
 		SetModel( "models/weapons/w_models/w_rocket.vmdl" );
 
 		MoveType = ProjectileMoveType.Fly;
-		DamageInfo.WithTag(DamageFlags.Blast);
+		DamageInfo.WithTag(DamageTags.Blast);
 		EnableShadowCasting = false;
 	}
 

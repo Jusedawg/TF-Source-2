@@ -32,7 +32,7 @@ partial class TFPlayer
 		// If we made a blast jump, provide passive resistance to the self inflicted damage.
 		//
 
-		if ( attacker == this && IsInAir && !InWater && info.HasTag( TFDamageFlags.Blast ) )
+		if ( attacker == this && IsInAir && !InWater && info.HasTag( TFDamageTags.Blast ) )
 		{
 			var res = PlayerClass.Abilities.BlastJumpDamageMultiplier;
 			info.Damage *= res;
@@ -42,13 +42,13 @@ partial class TFPlayer
 		// Ignite ourselves, if this damage has Ignite flag.
 		//
 
-		if ( info.HasTag( TFDamageFlags.Ignite ) )
+		if ( info.HasTag( TFDamageTags.Ignite ) )
 			BurnFromDamage( info );
 	}
 
 	public override void ApplyPushFromDamage( ExtendedDamageInfo info )
 	{
-		if ( info.HasTag( TFDamageFlags.PreventPhysicsForce ) )
+		if ( info.HasTag( TFDamageTags.PreventPhysicsForce ) )
 			return;
 
 		// Player can't be pushed by damage if they cant move.
@@ -74,7 +74,7 @@ partial class TFPlayer
 		
 		if ( info.Attacker == this )
 		{
-			if ( info.HasTag( TFDamageFlags.Blast ) )
+			if ( info.HasTag( TFDamageTags.Blast ) )
 			{
 				forceScale = IsGrounded
 					? PlayerClass.Abilities.BlastJumpForceScaleGrounded
@@ -97,7 +97,7 @@ partial class TFPlayer
 		{
 			// For the player that has recieved this damage we play recieve 
 			// sound, to indicate that they have been hit with a crit.
-			if ( tags.Contains( TFDamageFlags.Critical ) )
+			if ( tags.Contains( TFDamageTags.Critical ) )
 			{
 				Sound.FromScreen( CritReceivedSound );
 			}
@@ -108,12 +108,12 @@ partial class TFPlayer
 			// If local player is the attacker, and we dealt crit damage,
 			// play special reaction sounds as well as a particle.
 
-			if ( tags.Contains( TFDamageFlags.Critical ) )
+			if ( tags.Contains( TFDamageTags.Critical ) )
 			{
 				Particles.Create( CritTextParticle, this, "head" );
 				Sound.FromScreen( CritHitSound );
 			}
-			else if ( tags.Contains( TFDamageFlags.MiniCritical ) )
+			else if ( tags.Contains( TFDamageTags.MiniCritical ) )
 			{
 				Particles.Create( MiniCritTextParticle, this, "head" );
 				Sound.FromScreen( MiniCritHitSound );
@@ -138,7 +138,7 @@ partial class TFPlayer
 	public override bool ShouldBleedFromDamage( ExtendedDamageInfo info )
 	{
 		// Dont bleed from burning.
-		if ( info.HasTag( TFDamageFlags.Ignite ) || info.HasTag( TFDamageFlags.Burn ) )
+		if ( info.HasTag( TFDamageTags.Ignite ) || info.HasTag( TFDamageTags.Burn ) )
 			return false;
 
 		return true;

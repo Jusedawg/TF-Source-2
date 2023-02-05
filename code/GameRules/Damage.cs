@@ -17,16 +17,16 @@ partial class TFGameRules
 	{
 		// If damage is critical, it can't be mini-crit.
 		// Remove mini crit flag, if we already have crit.
-		if ( info.HasTag( TFDamageFlags.Critical ) )
+		if ( info.HasTag( TFDamageTags.Critical ) )
 		{
-			info = info.WithoutTags( TFDamageFlags.MiniCritical );
+			info = info.WithoutTags( TFDamageTags.MiniCritical );
 		}
 
 		//
 		// Critical Damage adds 3X to the base damage.
 		//
 		
-		if ( info.HasTag( TFDamageFlags.Critical ) )
+		if ( info.HasTag( TFDamageTags.Critical ) )
 			info.Damage *= CritDamageMultiplier;
 
 		//
@@ -40,7 +40,7 @@ partial class TFGameRules
 		// Mini-Crit adds 1.35X to the falloff'd damage.
 		//
 
-		if ( info.HasTag( TFDamageFlags.MiniCritical ) )
+		if ( info.HasTag( TFDamageTags.MiniCritical ) )
 			info.Damage *= MiniCritDamageMultiplier;
 	}
 
@@ -89,11 +89,11 @@ partial class TFGameRules
 		var distLerp = (distance / optimalDist).RemapClamped( 0, 2, 1, 0 );
 
 		// If damage was set to not use rampup, always treat our damage as on optimal distance if it's closer.
-		if ( !info.HasTag( TFDamageFlags.UseRampup ) )
+		if ( !info.HasTag( TFDamageTags.UseRampup ) )
 			distLerp = MathF.Min( 0.5f, distLerp );
 		
 		// If damage was set to not use falloff, always treat our damage as on optimal distance if it's farther.
-		if ( !info.HasTag( TFDamageFlags.UseFalloff ) )
+		if ( !info.HasTag( TFDamageTags.UseFalloff ) )
 			distLerp = MathF.Max( 0.5f, distLerp );
 
 		// Apply an easing function to make the chart curve.
@@ -106,7 +106,7 @@ partial class TFGameRules
 		// Critical or Mini-Critical damage always deals at least 100% damage regardless of the falloff
 		//
 		
-		if ( info.HasTag( TFDamageFlags.Critical ) || info.HasTag( TFDamageFlags.MiniCritical ) )
+		if ( info.HasTag( TFDamageTags.Critical ) || info.HasTag( TFDamageTags.MiniCritical ) )
 			distMod = Math.Max( distMod, 1 );
 
 		info.Damage *= distMod;
@@ -123,23 +123,23 @@ partial class TFGameRules
 /// Some reuse sbox flags that are not used in TF:S2 as is.
 /// https://wiki.teamfortress.com/wiki/Damage#Damage_types
 /// </summary>
-public static class TFDamageFlags
+public static class TFDamageTags
 {
-	public const string Generic = DamageFlags.Generic;
+	public const string Generic = DamageTags.Generic;
 	public const string Crush = "crush";
-	public const string Bullet = DamageFlags.Bullet;
-	public const string Slash = DamageFlags.Slash;
-	public const string Burn = DamageFlags.Burn;
+	public const string Bullet = DamageTags.Bullet;
+	public const string Slash = DamageTags.Slash;
+	public const string Burn = DamageTags.Burn;
 	public const string Ignite = "ignite";
-	public const string Vehicle = DamageFlags.Vehicle;
-	public const string Fall = DamageFlags.Fall;
-	public const string Blast = DamageFlags.Blast;
-	public const string Melee = DamageFlags.Blunt;
-	public const string Shock = DamageFlags.Shock;
-	public const string Drown = DamageFlags.Drown;
+	public const string Vehicle = DamageTags.Vehicle;
+	public const string Fall = DamageTags.Fall;
+	public const string Blast = DamageTags.Blast;
+	public const string Melee = DamageTags.Blunt;
+	public const string Shock = DamageTags.Shock;
+	public const string Drown = DamageTags.Drown;
 
-	public const string AlwaysGib = DamageFlags.AlwaysGib;
-	public const string DoNotGib = DamageFlags.DoNotGib;
+	public const string AlwaysGib = DamageTags.AlwaysGib;
+	public const string DoNotGib = DamageTags.DoNotGib;
 
 	public const string PreventPhysicsForce = "no_physics";
 

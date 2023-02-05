@@ -19,8 +19,8 @@ public partial class FlameEntity : TFProjectile
 		SetBBox( tf_flamethrower_boxsize );
 		MoveType = ProjectileMoveType.Custom;
 
-		DamageInfo.WithTag(TFDamageFlags.Ignite);
-		DamageInfo.WithTag( TFDamageFlags.PreventPhysicsForce);
+		DamageInfo.WithTag(TFDamageTags.Ignite);
+		DamageInfo.WithTag( TFDamageTags.PreventPhysicsForce);
 
 		AutoDestroyTime = tf_flamethrower_flametime;
 	}

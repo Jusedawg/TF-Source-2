@@ -37,7 +37,7 @@ partial class TFPlayer
 				.WithAttacker( player )
 				.WithInflictor( player )
 				.WithAllPositions( player.Position )
-				.WithTag( TFDamageFlags.PreventPhysicsForce );
+				.WithTag( TFDamageTags.PreventPhysicsForce );
 
 			player.TakeDamage( dmgInfo );
 		}
