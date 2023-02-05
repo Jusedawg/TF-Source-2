@@ -1,49 +1,43 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		Title = "Rocket Launcher"
-		EngineClass = "tf_weapon_rocketlauncher"
-		Hidden = false
-		WorldModel = resource:"models/weapons/c_models/c_rocketlauncher/c_rocketlauncher.vmdl"
-		Owners = 
-		{
-			"data/playerclass/soldier.tfclass" = 
-			{
-				Reserve = 20
-				ViewModel = resource:"models/weapons/v_models/v_rocketlauncher_soldier.vmdl"
-			}
-		}
-		Damage = 90
-		Range = 4096
-		ClipSize = 4
-		BulletsPerShot = 1
-		BulletSpread = 0
-		PunchAngle = 0
-		AmmoPerShot = 1
-		ReloadsEntireClip = false
-		UseFalloff = true
-		FalloffMultiplier = 0.5
-		UseRampup = true
-		RampupMultiplier = 1.25
-		DeployTime = 0.5
-		AttackTime = 0.8
-		ReloadTime = 0.8
-		ReloadStartTime = 0.12
-		SmackTime = 0
-		InventoryIcon = resource:"ui/weapons/renders/rocket_launcher.jpg"
-		KillFeedIcon = resource:"ui/deathnotice/rocket_launcher.jpg"
-		KillFeedIconSpecial = null
-		Crosshair = resource:"ui/weapons/crosshairs/circle.jpg"
-		TracerFrequency = 0
-		TracerRed = null
-		TracerBlue = null
-		TracerRedCritical = null
-		TracerBlueCritical = null
-		MuzzleFlash = null
-		SoundSingle = resource:"sounds/weapons/weapon_rocketlauncher.single.sound"
-		SoundCrit = resource:"sounds/weapons/weapon_rocketlauncher.single.crit.sound"
-		SoundHitWorld = null
-		SoundHitFlesh = null
-	}
+  "Title": "Rocket Launcher",
+  "EngineClass": "tf_weapon_rocketlauncher",
+  "Hidden": false,
+  "WorldModel": "models/weapons/c_models/c_rocketlauncher/c_rocketlauncher.vmdl",
+  "Owners": {
+    "data/playerclass/soldier.tfclass": {
+      "Reserve": 20,
+      "ViewModel": "models/weapons/v_models/v_rocketlauncher_soldier.vmdl"
+    }
+  },
+  "Damage": 90,
+  "Range": 4096,
+  "ClipSize": 4,
+  "BulletsPerShot": 1,
+  "BulletSpread": 0,
+  "PunchAngle": 0,
+  "AmmoPerShot": 1,
+  "ReloadsEntireClip": false,
+  "UseFalloff": true,
+  "FalloffMultiplier": 0.5,
+  "UseRampup": true,
+  "RampupMultiplier": 1.25,
+  "DeployTime": 0.5,
+  "AttackTime": 0.8,
+  "ReloadTime": 0.8,
+  "ReloadStartTime": 0.12,
+  "SmackTime": 0,
+  "InventoryIcon": "ui/weapons/renders/rocket_launcher.png",
+  "KillFeedIcon": "ui/deathnotice/rocket_launcher.png",
+  "KillFeedIconSpecial": null,
+  "Crosshair": "ui/weapons/crosshairs/circle.png",
+  "TracerFrequency": 0,
+  "TracerRed": null,
+  "TracerBlue": null,
+  "TracerRedCritical": null,
+  "TracerBlueCritical": null,
+  "MuzzleFlash": null,
+  "SoundSingle": "sounds/weapons/weapon_rocketlauncher.single.sound",
+  "SoundCrit": "sounds/weapons/weapon_rocketlauncher.single.crit.sound",
+  "SoundHitWorld": null,
+  "SoundHitFlesh": null
 }

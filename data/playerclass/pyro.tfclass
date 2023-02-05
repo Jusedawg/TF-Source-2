@@ -1,38 +1,32 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		Entry = "Pyro"
-		Title = "Pyro"
-		MaxHealth = 175
-		MaxSpeed = 300
-		EyeHeight = 68
-		Model = resource:"models/player/pyro/pyro.vmdl"
-		Hands = resource:"models/weapons/arms/c_pyro_arms/c_pyro_arms.vmdl"
-		Responses = resource:"data/talker/pyro.tftalker"
-		DefaultWeapons = 
-		[
-			resource:"data/weapons/flamethrower.tfweapon",
-			resource:"data/weapons/shotgun.tfweapon",
-			resource:"data/weapons/fireaxe.tfweapon",
-		]
-		Buildings = [  ]
-		Abilities = 
-		{
-			AfterBurnImmune = true
-			CaptureValue = 1
-			BlastJumpDamageMultiplier = 1
-			BlastJumpForceScale = 9
-			BlastJumpForceScaleGrounded = 9
-			DamagePushResistance = 1
-		}
-		IconRed = resource:"ui/hud/class/pyro_red.png"
-		IconBlue = resource:"ui/hud/class/pyro_blue.png"
-		IconPortraitRed = resource:"ui/hud/classportraits/pyro_red.png"
-		IconPortraitBlue = resource:"ui/hud/classportraits/pyro_blue.png"
-		IconPortraitInactive = resource:"ui/hud/classportraits/pyro_inactive.png"
-		IconSelectionRed = resource:"ui/menu/classselection/class_sel_sm_pyro_red.png"
-		IconSelectionBlue = resource:"ui/menu/classselection/class_sel_sm_pyro_blu.png"
-		IconSelectionInactive = resource:"ui/menu/classselection/class_sel_sm_pyro_inactive.png"
-	}
+  "Entry": "Pyro",
+  "Title": "Pyro",
+  "MaxHealth": 175,
+  "MaxSpeed": 300,
+  "EyeHeight": 68,
+  "Model": "models/player/pyro/pyro.vmdl",
+  "Hands": "models/weapons/arms/c_pyro_arms/c_pyro_arms.vmdl",
+  "Responses": "data/talker/pyro.tftalker",
+  "DefaultWeapons": [
+    "data/weapons/flamethrower.tfweapon",
+    "data/weapons/shotgun.tfweapon",
+    null
+  ],
+  "Buildings": [],
+  "Abilities": {
+    "AfterBurnImmune": true,
+    "CaptureValue": 1,
+    "BlastJumpDamageMultiplier": 1,
+    "BlastJumpForceScale": 9,
+    "BlastJumpForceScaleGrounded": 9,
+    "DamagePushResistance": 1
+  },
+  "IconRed": "ui/hud/class/pyro_red.png",
+  "IconBlue": "ui/hud/class/pyro_blue.png",
+  "IconPortraitRed": "ui/hud/classportraits/pyro_red.png",
+  "IconPortraitBlue": "ui/hud/classportraits/pyro_blue.png",
+  "IconPortraitInactive": "ui/hud/classportraits/pyro_inactive.png",
+  "IconSelectionRed": "ui/menu/classselection/class_sel_sm_pyro_red.png",
+  "IconSelectionBlue": "ui/menu/classselection/class_sel_sm_pyro_blu.png",
+  "IconSelectionInactive": "ui/menu/classselection/class_sel_sm_pyro_inactive.png"
 }

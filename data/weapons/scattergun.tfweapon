@@ -1,49 +1,43 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		Title = "Scattergun"
-		EngineClass = "tf_weapon_scattergun"
-		Hidden = false
-		WorldModel = resource:"models/weapons/c_models/c_scattergun/c_scattergun.vmdl"
-		Owners = 
-		{
-			"data/playerclass/scout.tfclass" = 
-			{
-				Reserve = 32
-				ViewModel = resource:"models/weapons/v_models/v_scattergun_scout.vmdl"
-			}
-		}
-		Damage = 6
-		Range = 4096
-		ClipSize = 6
-		BulletsPerShot = 10
-		BulletSpread = 0.07
-		PunchAngle = 3
-		AmmoPerShot = 1
-		ReloadsEntireClip = false
-		UseFalloff = true
-		FalloffMultiplier = 0.5
-		UseRampup = true
-		RampupMultiplier = 1.75
-		DeployTime = 0.5
-		AttackTime = 0.63
-		ReloadTime = 0.49
-		ReloadStartTime = 0.2
-		SmackTime = 0
-		InventoryIcon = resource:"ui/weapons/renders/scattergun.jpg"
-		KillFeedIcon = resource:"ui/deathnotice/scattergun.jpg"
-		KillFeedIconSpecial = null
-		Crosshair = resource:"ui/weapons/crosshairs/dot.png"
-		TracerFrequency = 1
-		TracerRed = resource:"particles/bullet_tracers/bullet_scattergun_tracer01_red.vpcf"
-		TracerBlue = resource:"particles/bullet_tracers/bullet_scattergun_tracer01_blue.vpcf"
-		TracerRedCritical = resource:"particles/bullet_tracers/bullet_scattergun_tracer01_red_crit.vpcf"
-		TracerBlueCritical = resource:"particles/bullet_tracers/bullet_scattergun_tracer01_blue_crit.vpcf"
-		MuzzleFlash = resource:"particles/muzzle_flash/muzzle_scattergun.vpcf"
-		SoundSingle = resource:"sounds/weapons/weapon_scattergun.single.sound"
-		SoundCrit = resource:"sounds/weapons/weapon_scattergun.single.crit.sound"
-		SoundHitWorld = null
-		SoundHitFlesh = null
-	}
+  "Title": "Scattergun",
+  "EngineClass": "tf_weapon_scattergun",
+  "Hidden": false,
+  "WorldModel": "models/weapons/c_models/c_scattergun/c_scattergun.vmdl",
+  "Owners": {
+    "data/playerclass/scout.tfclass": {
+      "Reserve": 32,
+      "ViewModel": "models/weapons/v_models/v_scattergun_scout.vmdl"
+    }
+  },
+  "Damage": 6,
+  "Range": 4096,
+  "ClipSize": 6,
+  "BulletsPerShot": 10,
+  "BulletSpread": 0.07,
+  "PunchAngle": 3,
+  "AmmoPerShot": 1,
+  "ReloadsEntireClip": false,
+  "UseFalloff": true,
+  "FalloffMultiplier": 0.5,
+  "UseRampup": true,
+  "RampupMultiplier": 1.75,
+  "DeployTime": 0.5,
+  "AttackTime": 0.63,
+  "ReloadTime": 0.49,
+  "ReloadStartTime": 0.2,
+  "SmackTime": 0,
+  "InventoryIcon": "ui/weapons/renders/scattergun.png",
+  "KillFeedIcon": "ui/deathnotice/scattergun.png",
+  "KillFeedIconSpecial": null,
+  "Crosshair": "ui/weapons/crosshairs/dot.png",
+  "TracerFrequency": 1,
+  "TracerRed": "particles/bullet_tracers/bullet_scattergun_tracer01_red.vpcf",
+  "TracerBlue": "particles/bullet_tracers/bullet_scattergun_tracer01_blue.vpcf",
+  "TracerRedCritical": "particles/bullet_tracers/bullet_scattergun_tracer01_red_crit.vpcf",
+  "TracerBlueCritical": "particles/bullet_tracers/bullet_scattergun_tracer01_blue_crit.vpcf",
+  "MuzzleFlash": "particles/muzzle_flash/muzzle_scattergun.vpcf",
+  "SoundSingle": "sounds/weapons/weapon_scattergun.single.sound",
+  "SoundCrit": "sounds/weapons/weapon_scattergun.single.crit.sound",
+  "SoundHitWorld": null,
+  "SoundHitFlesh": null
 }

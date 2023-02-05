@@ -1,48 +1,42 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		Title = "Sniper Rifle"
-		EngineClass = "tf_weapon_sniperrifle"
-		Hidden = false
-		WorldModel = resource:"models/weapons/c_models/c_sniperrifle/c_sniperrifle.vmdl"
-		Owners = 
-		{
-			"data/playerclass/sniper.tfclass" = 
-			{
-				ViewModel = resource:"models/weapons/v_models/v_sniperrifle_sniper.vmdl"
-			}
-		}
-		Damage = 50
-		Range = 4096
-		ClipSize = 25
-		BulletsPerShot = 1
-		BulletSpread = 0
-		PunchAngle = 0
-		AmmoPerShot = 1
-		ReloadsEntireClip = false
-		UseFalloff = false
-		FalloffMultiplier = 0
-		UseRampup = false
-		RampupMultiplier = 0
-		DeployTime = 0.5
-		AttackTime = 1.5
-		ReloadTime = 0
-		ReloadStartTime = 0
-		SmackTime = 0
-		InventoryIcon = resource:"ui/weapons/renders/sniper_rifle.jpg"
-		KillFeedIcon = resource:"ui/deathnotice/sniper_rifle.jpg"
-		KillFeedIconSpecial = resource:"ui/deathnotice/sniper_rifle_headshot.jpg"
-		Crosshair = resource:"ui/weapons/crosshairs/cross.jpg"
-		TracerFrequency = 0
-		TracerRed = null
-		TracerBlue = null
-		TracerRedCritical = null
-		TracerBlueCritical = null
-		MuzzleFlash = null
-		SoundSingle = resource:"sounds/weapons/weapon_sniper.single.sound"
-		SoundCrit = resource:"sounds/weapons/weapon_sniper.single.crit.sound"
-		SoundHitWorld = null
-		SoundHitFlesh = null
-	}
+  "Title": "Sniper Rifle",
+  "EngineClass": "tf_weapon_sniperrifle",
+  "Hidden": false,
+  "WorldModel": "models/weapons/c_models/c_sniperrifle/c_sniperrifle.vmdl",
+  "Owners": {
+    "data/playerclass/sniper.tfclass": {
+      "ViewModel": "models/weapons/v_models/v_sniperrifle_sniper.vmdl"
+    }
+  },
+  "Damage": 50,
+  "Range": 4096,
+  "ClipSize": 25,
+  "BulletsPerShot": 1,
+  "BulletSpread": 0,
+  "PunchAngle": 0,
+  "AmmoPerShot": 1,
+  "ReloadsEntireClip": false,
+  "UseFalloff": false,
+  "FalloffMultiplier": 0,
+  "UseRampup": false,
+  "RampupMultiplier": 0,
+  "DeployTime": 0.5,
+  "AttackTime": 1.5,
+  "ReloadTime": 0,
+  "ReloadStartTime": 0,
+  "SmackTime": 0,
+  "InventoryIcon": "ui/weapons/renders/sniper_rifle.png",
+  "KillFeedIcon": "ui/deathnotice/sniper_rifle.png",
+  "KillFeedIconSpecial": "ui/deathnotice/sniper_rifle_headshot.png",
+  "Crosshair": "ui/weapons/crosshairs/cross.png",
+  "TracerFrequency": 0,
+  "TracerRed": null,
+  "TracerBlue": null,
+  "TracerRedCritical": null,
+  "TracerBlueCritical": null,
+  "MuzzleFlash": null,
+  "SoundSingle": "sounds/weapons/weapon_sniper.single.sound",
+  "SoundCrit": "sounds/weapons/weapon_sniper.single.crit.sound",
+  "SoundHitWorld": null,
+  "SoundHitFlesh": null
 }

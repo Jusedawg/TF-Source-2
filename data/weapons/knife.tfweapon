@@ -1,50 +1,44 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		Title = "Knife"
-		EngineClass = "tf_weapon_knife"
-		Hidden = false
-		WorldModel = resource:"models/weapons/c_models/c_knife/c_knife.vmdl"
-		Owners = 
-		{
-			"data/playerclass/spy.tfclass" = 
-			{
-				Slot = "Melee"
-				HoldPose = "Melee"
-				ViewModel = resource:"models/weapons/v_models/v_knife_spy.vmdl"
-			}
-		}
-		Damage = 40
-		Range = 0
-		ClipSize = 0
-		BulletsPerShot = 0
-		BulletSpread = 0
-		PunchAngle = 0
-		AmmoPerShot = 0
-		ReloadsEntireClip = false
-		UseFalloff = false
-		FalloffMultiplier = 0
-		UseRampup = false
-		RampupMultiplier = 0
-		DeployTime = 0.5
-		AttackTime = 0.8
-		ReloadTime = 0
-		ReloadStartTime = 0
-		SmackTime = 0
-		InventoryIcon = resource:"ui/weapons/renders/knife.jpg"
-		KillFeedIcon = resource:"ui/deathnotice/knife.jpg"
-		KillFeedIconSpecial = resource:"ui/deathnotice/knife_backstab.jpg"
-		Crosshair = resource:"ui/weapons/crosshairs/cross.png"
-		TracerFrequency = 0
-		TracerRed = null
-		TracerBlue = null
-		TracerRedCritical = null
-		TracerBlueCritical = null
-		MuzzleFlash = null
-		SoundSingle = resource:"sounds/weapons/weapon_knife.swing.sound"
-		SoundCrit = resource:"sounds/weapons/weapon_knife.swing.crit.sound"
-		SoundHitWorld = resource:"sounds/weapons/weapon_knife.hit.world.sound"
-		SoundHitFlesh = resource:"sounds/weapons/weapon_knife.hit.flesh.sound"
-	}
+  "Title": "Knife",
+  "EngineClass": "tf_weapon_knife",
+  "Hidden": false,
+  "WorldModel": "models/weapons/c_models/c_knife/c_knife.vmdl",
+  "Owners": {
+    "data/playerclass/spy.tfclass": {
+      "Slot": "Melee",
+      "HoldPose": "Melee",
+      "ViewModel": "models/weapons/v_models/v_knife_spy.vmdl"
+    }
+  },
+  "Damage": 40,
+  "Range": 0,
+  "ClipSize": 0,
+  "BulletsPerShot": 0,
+  "BulletSpread": 0,
+  "PunchAngle": 0,
+  "AmmoPerShot": 0,
+  "ReloadsEntireClip": false,
+  "UseFalloff": false,
+  "FalloffMultiplier": 0,
+  "UseRampup": false,
+  "RampupMultiplier": 0,
+  "DeployTime": 0.5,
+  "AttackTime": 0.8,
+  "ReloadTime": 0,
+  "ReloadStartTime": 0,
+  "SmackTime": 0,
+  "InventoryIcon": "ui/weapons/renders/knife.png",
+  "KillFeedIcon": "ui/deathnotice/knife.png",
+  "KillFeedIconSpecial": "ui/deathnotice/knife_backstab.png",
+  "Crosshair": "ui/weapons/crosshairs/cross.png",
+  "TracerFrequency": 0,
+  "TracerRed": null,
+  "TracerBlue": null,
+  "TracerRedCritical": null,
+  "TracerBlueCritical": null,
+  "MuzzleFlash": null,
+  "SoundSingle": "sounds/weapons/weapon_knife.swing.sound",
+  "SoundCrit": "sounds/weapons/weapon_knife.swing.crit.sound",
+  "SoundHitWorld": "sounds/weapons/weapon_knife.hit.world.sound",
+  "SoundHitFlesh": "sounds/weapons/weapon_knife.hit.flesh.sound"
 }

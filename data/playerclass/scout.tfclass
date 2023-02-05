@@ -1,38 +1,32 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		Entry = "Scout"
-		Title = "Scout"
-		MaxHealth = 125
-		MaxSpeed = 400
-		EyeHeight = 65
-		Model = resource:"models/player/scout/scout.vmdl"
-		Hands = resource:"models/weapons/arms/c_scout_arms/c_scout_arms.vmdl"
-		Responses = resource:"data/talker/scout.tftalker"
-		DefaultWeapons = 
-		[
-			resource:"data/weapons/scattergun.tfweapon",
-			resource:"data/weapons/pistol.tfweapon",
-			resource:"data/weapons/bat.tfweapon",
-		]
-		Buildings = [  ]
-		Abilities = 
-		{
-			AirBorneJumps = 1
-			CaptureValue = 2
-			BlastJumpDamageMultiplier = 1
-			BlastJumpForceScale = 9
-			BlastJumpForceScaleGrounded = 9
-			DamagePushResistance = 1
-		}
-		IconRed = resource:"ui/hud/class/scout_red.png"
-		IconBlue = resource:"ui/hud/class/scout_blue.png"
-		IconPortraitRed = resource:"ui/hud/classportraits/scout_red.png"
-		IconPortraitBlue = resource:"ui/hud/classportraits/scout_blue.png"
-		IconPortraitInactive = resource:"ui/hud/classportraits/scout_inactive.png"
-		IconSelectionRed = resource:"ui/menu/classselection/class_sel_sm_scout_red.png"
-		IconSelectionBlue = resource:"ui/menu/classselection/class_sel_sm_scout_blu.png"
-		IconSelectionInactive = resource:"ui/menu/classselection/class_sel_sm_scout_inactive.png"
-	}
+  "Entry": "Scout",
+  "Title": "Scout",
+  "MaxHealth": 125,
+  "MaxSpeed": 400,
+  "EyeHeight": 65,
+  "Model": "models/player/scout/scout.vmdl",
+  "Hands": "models/weapons/arms/c_scout_arms/c_scout_arms.vmdl",
+  "Responses": "data/talker/scout.tftalker",
+  "DefaultWeapons": [
+    "data/weapons/scattergun.tfweapon",
+    "data/weapons/pistol.tfweapon",
+    "data/weapons/bat.tfweapon"
+  ],
+  "Buildings": [],
+  "Abilities": {
+    "AirBorneJumps": 1,
+    "CaptureValue": 2,
+    "BlastJumpDamageMultiplier": 1,
+    "BlastJumpForceScale": 9,
+    "BlastJumpForceScaleGrounded": 9,
+    "DamagePushResistance": 1
+  },
+  "IconRed": "ui/hud/class/scout_red.png",
+  "IconBlue": "ui/hud/class/scout_blue.png",
+  "IconPortraitRed": "ui/hud/classportraits/scout_red.png",
+  "IconPortraitBlue": "ui/hud/classportraits/scout_blue.png",
+  "IconPortraitInactive": "ui/hud/classportraits/scout_inactive.png",
+  "IconSelectionRed": "ui/menu/classselection/class_sel_sm_scout_red.png",
+  "IconSelectionBlue": "ui/menu/classselection/class_sel_sm_scout_blu.png",
+  "IconSelectionInactive": "ui/menu/classselection/class_sel_sm_scout_inactive.png"
 }

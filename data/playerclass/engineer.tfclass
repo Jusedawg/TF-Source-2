@@ -1,47 +1,40 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		Entry = "Engineer"
-		Title = "Engineer"
-		MaxHealth = 125
-		MaxSpeed = 300
-		EyeHeight = 68
-		Model = resource:"models/player/engineer/engineer.vmdl"
-		Hands = resource:"models/weapons/arms/c_engineer_arms/c_engineer_arms.vmdl"
-		Responses = resource:"data/talker/engineer.tftalker"
-		DefaultWeapons = 
-		[
-			resource:"data/weapons/shotgun.tfweapon",
-			resource:"data/weapons/pistol.tfweapon",
-			resource:"data/weapons/wrench.tfweapon",
-			resource:"data/weapons/building_pda.tfweapon",
-			resource:"data/weapons/destroy_pda.tfweapon",
-		]
-		Buildings = 
-		[
-			"data/buildings/sentry.building",
-			"data/buildings/dispenser.building",
-			"data/buildings/teleporter_entrance.building",
-			"data/buildings/teleporter_exit.building",
-		]
-		Abilities = 
-		{
-			Metal = 200
-			CaptureValue = 1
-			BlastJumpDamageMultiplier = 1
-			BlastJumpForceScale = 9
-			BlastJumpForceScaleGrounded = 9
-			DamagePushResistance = 1
-			HasMetal = true
-		}
-		IconRed = resource:"ui/hud/class/engineer_red.png"
-		IconBlue = resource:"ui/hud/class/engineer_blue.png"
-		IconPortraitRed = resource:"ui/hud/classportraits/engineer_red.png"
-		IconPortraitBlue = resource:"ui/hud/classportraits/engineer_blue.png"
-		IconPortraitInactive = resource:"ui/hud/classportraits/engineer_inactive.png"
-		IconSelectionRed = resource:"ui/menu/classselection/class_sel_sm_engineer_red.png"
-		IconSelectionBlue = resource:"ui/menu/classselection/class_sel_sm_engineer_blu.png"
-		IconSelectionInactive = resource:"ui/menu/classselection/class_sel_sm_engineer_inactive.png"
-	}
+  "Entry": "Engineer",
+  "Title": "Engineer",
+  "MaxHealth": 125,
+  "MaxSpeed": 300,
+  "EyeHeight": 68,
+  "Model": "models/player/engineer/engineer.vmdl",
+  "Hands": "models/weapons/arms/c_engineer_arms/c_engineer_arms.vmdl",
+  "Responses": "data/talker/engineer.tftalker",
+  "DefaultWeapons": [
+    "data/weapons/shotgun.tfweapon",
+    "data/weapons/pistol.tfweapon",
+    "data/weapons/wrench.tfweapon",
+    "data/weapons/building_pda.tfweapon",
+    "data/weapons/destroy_pda.tfweapon"
+  ],
+  "Buildings": [
+    "data/buildings/sentry.building",
+    "data/buildings/dispenser.building",
+    "data/buildings/teleporter_entrance.building",
+    "data/buildings/teleporter_exit.building"
+  ],
+  "Abilities": {
+    "Metal": 200,
+    "CaptureValue": 1,
+    "BlastJumpDamageMultiplier": 1,
+    "BlastJumpForceScale": 9,
+    "BlastJumpForceScaleGrounded": 9,
+    "DamagePushResistance": 1,
+    "HasMetal": true
+  },
+  "IconRed": "ui/hud/class/engineer_red.png",
+  "IconBlue": "ui/hud/class/engineer_blue.png",
+  "IconPortraitRed": "ui/hud/classportraits/engineer_red.png",
+  "IconPortraitBlue": "ui/hud/classportraits/engineer_blue.png",
+  "IconPortraitInactive": "ui/hud/classportraits/engineer_inactive.png",
+  "IconSelectionRed": "ui/menu/classselection/class_sel_sm_engineer_red.png",
+  "IconSelectionBlue": "ui/menu/classselection/class_sel_sm_engineer_blu.png",
+  "IconSelectionInactive": "ui/menu/classselection/class_sel_sm_engineer_inactive.png"
 }

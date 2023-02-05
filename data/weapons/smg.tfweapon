@@ -1,51 +1,45 @@
-<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
 {
-	data = 
-	{
-		Title = "SMG"
-		EngineClass = "tf_weapon_smg"
-		Hidden = false
-		WorldModel = resource:"models/weapons/c_models/c_smg/c_smg.vmdl"
-		Owners = 
-		{
-			"data/playerclass/sniper.tfclass" = 
-			{
-				Slot = "Secondary"
-				HoldPose = "Secondary"
-				Reserve = 75
-				ViewModel = resource:"models/weapons/v_models/v_smg_sniper.vmdl"
-			}
-		}
-		Damage = 8
-		Range = 4096
-		ClipSize = 25
-		BulletsPerShot = 1
-		BulletSpread = 0.03
-		PunchAngle = 0
-		AmmoPerShot = 1
-		ReloadsEntireClip = true
-		UseFalloff = true
-		FalloffMultiplier = 0.5
-		UseRampup = true
-		RampupMultiplier = 1.5
-		DeployTime = 0.5
-		AttackTime = 0.11
-		ReloadTime = 1.1
-		ReloadStartTime = 0
-		SmackTime = 0
-		InventoryIcon = resource:"ui/weapons/renders/smg.jpg"
-		KillFeedIcon = resource:"ui/deathnotice/smg.jpg"
-		KillFeedIconSpecial = null
-		Crosshair = resource:"ui/weapons/crosshairs/dot.png"
-		TracerFrequency = 2
-		TracerRed = resource:"particles/bullet_tracers/bullet_tracer01_red.vpcf"
-		TracerBlue = resource:"particles/bullet_tracers/bullet_tracer01_blue.vpcf"
-		TracerRedCritical = resource:"particles/bullet_tracers/bullet_tracer01_red_crit.vpcf"
-		TracerBlueCritical = resource:"particles/bullet_tracers/bullet_tracer01_blue_crit.vpcf"
-		MuzzleFlash = resource:"particles/muzzle_flash/muzzle_smg.vpcf"
-		SoundSingle = resource:"sounds/weapons/weapon_smg.single.sound"
-		SoundCrit = resource:"sounds/weapons/weapon_smg.single.crit.sound"
-		SoundHitWorld = null
-		SoundHitFlesh = null
-	}
+  "Title": "SMG",
+  "EngineClass": "tf_weapon_smg",
+  "Hidden": false,
+  "WorldModel": "models/weapons/c_models/c_smg/c_smg.vmdl",
+  "Owners": {
+    "data/playerclass/sniper.tfclass": {
+      "Slot": "Secondary",
+      "HoldPose": "Secondary",
+      "Reserve": 75,
+      "ViewModel": "models/weapons/v_models/v_smg_sniper.vmdl"
+    }
+  },
+  "Damage": 8,
+  "Range": 4096,
+  "ClipSize": 25,
+  "BulletsPerShot": 1,
+  "BulletSpread": 0.03,
+  "PunchAngle": 0,
+  "AmmoPerShot": 1,
+  "ReloadsEntireClip": true,
+  "UseFalloff": true,
+  "FalloffMultiplier": 0.5,
+  "UseRampup": true,
+  "RampupMultiplier": 1.5,
+  "DeployTime": 0.5,
+  "AttackTime": 0.11,
+  "ReloadTime": 1.1,
+  "ReloadStartTime": 0,
+  "SmackTime": 0,
+  "InventoryIcon": "ui/weapons/renders/smg.png",
+  "KillFeedIcon": "ui/deathnotice/smg.png",
+  "KillFeedIconSpecial": null,
+  "Crosshair": "ui/weapons/crosshairs/dot.png",
+  "TracerFrequency": 2,
+  "TracerRed": "particles/bullet_tracers/bullet_tracer01_red.vpcf",
+  "TracerBlue": "particles/bullet_tracers/bullet_tracer01_blue.vpcf",
+  "TracerRedCritical": "particles/bullet_tracers/bullet_tracer01_red_crit.vpcf",
+  "TracerBlueCritical": "particles/bullet_tracers/bullet_tracer01_blue_crit.vpcf",
+  "MuzzleFlash": "particles/muzzle_flash/muzzle_smg.vpcf",
+  "SoundSingle": "sounds/weapons/weapon_smg.single.sound",
+  "SoundCrit": "sounds/weapons/weapon_smg.single.crit.sound",
+  "SoundHitWorld": null,
+  "SoundHitFlesh": null
 }
