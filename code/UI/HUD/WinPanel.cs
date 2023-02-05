@@ -11,7 +11,12 @@ public partial class WinPanel : Panel
 {
 	TimeSince TimeSinceSetup { get; set; }
 	bool WillScoreAnimate { get; set; }
-
+	Label ScoreBlue { get; set; }
+	Label ScoreRed { get; set; }
+	Label WinnerName { get; set; }
+	Label WinReason { get; set; }
+	Label LastCapper { get; set; }
+	Panel Players { get; set; }
 	public override void Tick()
 	{
 		var shouldDraw = ShouldDraw();
@@ -126,5 +131,10 @@ partial class WinPanelPlayer : Panel
 		NameLabel = Add.Label( cl.Name, "name text" );
 		ClassLabel = Add.Label( cl.GetPlayerClass().Title, "pclass text" );
 		PointsLabel = Add.Label( cl.GetPoints().ToString(), "points text" );
+
+		// Set the text color to the player's team color.
+		TFTeam winner = cl.GetTeam();
+		SetClass( "red", winner == TFTeam.Red );
+		SetClass( "blue", winner == TFTeam.Blue );
 	}
 }
