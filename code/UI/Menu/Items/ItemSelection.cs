@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using Sandbox.UI;
+using System.Threading.Tasks;
 
 namespace TFS2.UI;
 
@@ -14,13 +15,14 @@ public partial class ItemSelection : MenuOverlay
 		Slot = slot;
 	}
 
-	private WeaponData GetEquipped()
+	private WeaponData GetEquipped() => GetEquippedAsync().Result;
+	private async Task<WeaponData> GetEquippedAsync()
 	{
 		var loadout = Loadout.LocalLoadout;
-		loadout.Load().Wait();
+		await loadout.Load();
 
 		// Add the currently equipped weapon.
-		var equipped = loadout.GetLoadoutItem( PlayerClass, Slot ).Result;
+		var equipped = await loadout.GetLoadoutItem( PlayerClass, Slot );
 		return equipped;
 	}
 
