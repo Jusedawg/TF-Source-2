@@ -7,6 +7,18 @@ public partial class StickyBomb : TFProjectile
 {
 	[Net] public bool IsDeployed { get; set; }
 
+	[Net] public float NextRestickTime { get; set; }
+	[Net] public float NextDeflectResetTime { get; set; }
+
+	/// <summary>
+	/// How long after being detached will we re-stick to the world.
+	/// </summary>
+	[ConVar.Replicated] public static float tf_grenade_force_sleeptime { get; set; } = 1.0f;
+	[ConVar.Replicated] public static float tf_pipebomb_deflect_reset_time { get; set; } = 10.0f;
+
+	public override bool ShouldChangeTeamOnDeflect => false;
+	public override bool ShouldApplyBoostOnDeflect => false;
+
 	public override void Spawn()
 	{
 		base.Spawn();
@@ -14,7 +26,8 @@ public partial class StickyBomb : TFProjectile
 		Health = 1;
 
 		MoveType = ProjectileMoveType.Physics;
-		DamageInfo.WithTag(DamageTags.Blast);
+		DamageInfo.WithTag( DamageTags.Blast );
+		FaceVelocity = false;
 		AutoDestroyTime = null;
 	}
 
@@ -30,7 +43,30 @@ public partial class StickyBomb : TFProjectile
 	public bool CanStickOnEntity( Entity entity )
 	{
 		// Only allow sticking to walls for now.
-		return entity.IsWorld;
+		return entity.IsWorld && NextRestickTime < Time.Now;
+	}
+
+	public override void Deflected( TFWeaponBase weapon, TFPlayer who )
+	{
+		if ( !Game.IsServer )
+			return;
+
+		const int DeflectionForce = 500;
+
+		if ( MoveType == ProjectileMoveType.None || NextRestickTime != 0 )
+		{
+			// The sticky bomb has touched a surface at least once, let's apply velocity manually
+			MoveType = ProjectileMoveType.Physics;
+
+			var vecDir = WorldSpaceBounds.Center - who.WorldSpaceBounds.Center;
+			vecDir = vecDir.Normal;
+			PhysicsBody.Velocity = vecDir * DeflectionForce;
+		}
+
+		NextRestickTime = Time.Now + tf_grenade_force_sleeptime;
+		NextDeflectResetTime = Time.Now + tf_pipebomb_deflect_reset_time;
+
+		base.Deflected( weapon, who );
 	}
 
 	public override void TakeDamage( DamageInfo info )
@@ -50,12 +86,18 @@ public partial class StickyBomb : TFProjectile
 		{
 			OnDeployed();
 		}
+
+		if ( Owner != OriginalOwner && NextDeflectResetTime < Time.Now )
+		{
+			Owner = OriginalOwner;
+			Launcher = OriginalLauncher;
+		}
 	}
 
 	protected override void OnDestroy()
 	{
 		// Notify the launcher that we have been destroyed.
-		if ( Launcher is StickyBombLauncher launcher )
+		if ( OriginalLauncher is StickyBombLauncher launcher )
 		{
 			launcher.OnStickyDestroyed( this );
 		}

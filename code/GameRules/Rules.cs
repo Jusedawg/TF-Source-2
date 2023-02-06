@@ -83,6 +83,18 @@ partial class TFGameRules
 		return !TeamWipeCausesRoundEnd();
 	}
 
+	public override bool CanEntityTakeDamage( Entity victim, Entity attacker, ExtendedDamageInfo info )
+	{
+		if ( !mp_friendly_fire && info.Inflictor is TFProjectile projectile )
+		{
+			// reflected stickies shouldn't do damage to demoman's teammates
+			if ( ITeam.IsSame( victim, projectile ) && projectile.OriginalLauncher.Owner != victim )
+				return false;
+		}
+
+		return base.CanEntityTakeDamage( victim, attacker, info );
+	}
+
 	public override float GetPlayerFallDamage( SDKPlayer player, float velocity )
 	{
 		var pawn = player as TFPlayer;

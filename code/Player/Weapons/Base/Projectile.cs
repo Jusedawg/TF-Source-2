@@ -33,6 +33,8 @@ public partial class TFProjectile : Projectile
 	}
 
 	public virtual bool CanBeDeflected => true;
+	public virtual bool ShouldChangeTeamOnDeflect => true;
+	public virtual bool ShouldApplyBoostOnDeflect => true;
 
 	public const string DeflectedSound = "weapon_flamethrower.reflect_projectile";
 	public const string DeflectedEffect = "particles/rocketjumptrail/deflect_fx.vpcf";
@@ -43,18 +45,27 @@ public partial class TFProjectile : Projectile
 		if ( !Game.IsServer )
 			return;
 
-		TeamNumber = who.TeamNumber;
-		SetMaterialGroup( Team == TFTeam.Blue ? 1 : 0 );
 		Owner = who;
 		Launcher = weapon;
 
-		// Reflects make projectiles inflict minicritical damage.
-		if ( ShouldMiniCritOnDeflection() )
-			DamageInfo.WithTag(TFDamageTags.MiniCritical);
+		DamageInfo = DamageInfo.WithAttacker( Owner );
 
-		// Pyro was critboosted, projectiles retain the boost.
-		if ( who.IsCritBoosted )
-			DamageInfo.WithTag(TFDamageTags.Critical);
+		if ( ShouldChangeTeamOnDeflect )
+		{
+			TeamNumber = who.TeamNumber;
+			SetMaterialGroup( Team == TFTeam.Blue ? 1 : 0 );
+		}
+
+		if ( ShouldApplyBoostOnDeflect )
+		{
+			// Reflects make projectiles inflict minicritical damage.
+			if ( ShouldMiniCritOnDeflection() )
+				DamageInfo.WithTag( TFDamageTags.MiniCritical );
+
+			// Pyro was critboosted, projectiles retain the boost.
+			if ( who.IsCritBoosted )
+				DamageInfo.WithTag( TFDamageTags.Critical );
+		}
 
 		CreateTrails();
 		DeflectedEffects();
