@@ -19,10 +19,9 @@
             </div>
             <div class="loadout_content">
                 <div class="items">
-                    <ItemPicker PlayerClass=@PlayerClass Slot=@Slot Data=@GetEquipped() />
-                    @foreach(var weapon in WeaponData.FindAllForClassAndSlot(PlayerClass, Slot).Except(new WeaponData[] { GetEquipped() }))
+                    @foreach(var weapon in WeaponData.FindAllForClassAndSlot(PlayerClass, Slot))
                     {
-                        <ItemPicker PlayerClass=@PlayerClass Slot=@Slot Data=@weapon />
+                        <ItemPicker PlayerClass=@PlayerClass Slot=@Slot Data=@weapon @onclick=@((PanelEvent e) => {OnClickEquip(weapon);}) />
                     }
                 </div>
             </div>

@@ -30,4 +30,10 @@ public partial class ItemSelection : MenuOverlay
 	{
 		Open( new ClassLoadout() );
 	}
+
+	public void OnClickEquip(WeaponData weapon)
+	{
+		Loadout.LocalLoadout.SetLoadoutItem( PlayerClass, Slot, weapon );
+		OnClickBack();
+	}
 }
