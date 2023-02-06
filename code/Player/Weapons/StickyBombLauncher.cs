@@ -53,6 +53,7 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 			+ up * Game.Random.Int( -10, 10 );
 
 		var bomb = FireProjectile<StickyBomb>( origin, velocity, Data.Damage );
+		bomb.ApplyLocalAngularImpulse( new Vector3( 600, Game.Random.Int( -1200, 1200 ), 0 ) );
 		Bombs.Add( bomb );
 
 		// If we overflow the limit of stickies, detonate the oldest one.
