@@ -1,6 +1,7 @@
 ﻿using Amper.FPS;
 using Sandbox;
 using System;
+using System.Collections.Generic;
 
 namespace TFS2;
 
@@ -19,13 +20,13 @@ partial class TFGameRules
 		// Remove mini crit flag, if we already have crit.
 		if ( info.HasTag( TFDamageTags.Critical ) )
 		{
-			info = info.WithoutTags( TFDamageTags.MiniCritical );
+			info = info.WithoutTag( TFDamageTags.MiniCritical );
 		}
 
 		//
 		// Critical Damage adds 3X to the base damage.
 		//
-		
+
 		if ( info.HasTag( TFDamageTags.Critical ) )
 			info.Damage *= CritDamageMultiplier;
 
@@ -33,7 +34,7 @@ partial class TFGameRules
 		// Distance Mod (Damage Falloff / Rampup)
 		//
 
-		if ( info.UsesDistanceMod() ) 
+		if ( info.UsesDistanceMod() )
 			ApplyDamageDistanceMod( ref info, victim );
 
 		//
@@ -55,7 +56,7 @@ partial class TFGameRules
 		var fromWeapon = weapon != null && weapon.IsInitialized;
 
 		// Early out if no attacker, or we're damaging ourselves.
-		if ( attacker == null || attacker == victim ) 
+		if ( attacker == null || attacker == victim )
 			return;
 
 		// The distance at which we will be dealing 100% of damage.
@@ -91,7 +92,7 @@ partial class TFGameRules
 		// If damage was set to not use rampup, always treat our damage as on optimal distance if it's closer.
 		if ( !info.HasTag( TFDamageTags.UseRampup ) )
 			distLerp = MathF.Min( 0.5f, distLerp );
-		
+
 		// If damage was set to not use falloff, always treat our damage as on optimal distance if it's farther.
 		if ( !info.HasTag( TFDamageTags.UseFalloff ) )
 			distLerp = MathF.Max( 0.5f, distLerp );
@@ -105,7 +106,7 @@ partial class TFGameRules
 		//
 		// Critical or Mini-Critical damage always deals at least 100% damage regardless of the falloff
 		//
-		
+
 		if ( info.HasTag( TFDamageTags.Critical ) || info.HasTag( TFDamageTags.MiniCritical ) )
 			distMod = Math.Max( distMod, 1 );
 
@@ -146,15 +147,15 @@ public static class TFDamageTags
 	// Critical Stuff
 	public const string Critical = "critical";
 	public const string MiniCritical = "mini_critical";
-	
+
 	// Distance Mod Stuff
 	public const string UseRampup = "rampup";
 	public const string UseFalloff = "falloff";
-	public static bool UsesDistanceMod(this ExtendedDamageInfo info)
+	public static bool UsesDistanceMod( this ExtendedDamageInfo info )
 	{
 		return info.HasTag( UseRampup ) || info.HasTag( UseFalloff );
 	}
-	public static bool UsesDistanceMod(this DamageInfo info)
+	public static bool UsesDistanceMod( this DamageInfo info )
 	{
 		return info.HasTag( UseRampup ) || info.HasTag( UseFalloff );
 	}

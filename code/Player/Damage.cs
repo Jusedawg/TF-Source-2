@@ -22,7 +22,7 @@ partial class TFPlayer
 		base.ApplyOnPlayerDamageModifyRules( ref info );
 		var attacker = info.Attacker;
 
-		if( IsInvulnerable())
+		if ( IsInvulnerable() )
 		{
 			// Cant take damage while invulnerable
 			info.Damage = 0;
@@ -71,7 +71,7 @@ partial class TFPlayer
 		// Modify the ducked hull size so we propel further.
 		if ( IsDucked )
 			hullSize.z = 55;
-		
+
 		if ( info.Attacker == this )
 		{
 			if ( info.HasTag( TFDamageTags.Blast ) )
@@ -91,11 +91,11 @@ partial class TFPlayer
 		ApplyAbsoluteImpulse( dmgForce );
 	}
 
-	public override void OnTakeDamageEffects( Entity attacker, Entity weapon, float damage, string[] tags, Vector3 position,  Vector3 force )
+	public override void OnTakeDamageEffects( Entity attacker, Entity weapon, float damage, string[] tags, Vector3 position, Vector3 force )
 	{
 		if ( IsLocalPawn )
 		{
-			// For the player that has recieved this damage we play recieve 
+			// For the player that has received this damage we play receive 
 			// sound, to indicate that they have been hit with a crit.
 			if ( tags.Contains( TFDamageTags.Critical ) )
 			{
@@ -150,8 +150,8 @@ partial class TFPlayer
 		// Play Blood Impact
 		//
 
-		var impactEffect = IsUnderwater 
-			? BloodWaterImpactParticle 
+		var impactEffect = IsUnderwater
+			? BloodWaterImpactParticle
 			: BloodImpactParticle;
 
 		var bloodImpact = Particles.Create( impactEffect, origin );
@@ -164,7 +164,7 @@ partial class TFPlayer
 		// if underwater, don't add additional spray
 		if ( IsUnderwater )
 			return;
-		
+
 		var distance = (origin - Game.LocalPawn.GetEyePosition()).Length;
 		var lodDistance = 0.25f * (distance / 512);
 
@@ -179,7 +179,7 @@ partial class TFPlayer
 
 			// If we're up close, randomly move it around. If we're at a distance, always push it to the side
 			// Up close, this can move it back towards the view, but the random chance still looks better
-			if ( (distance >= 512 && rightDot > 0) || (distance < 512 && Game.Random.Float( 0, 1 ) > 0.5f) ) 
+			if ( (distance >= 512 && rightDot > 0) || (distance < 512 && Game.Random.Float( 0, 1 ) > 0.5f) )
 			{
 				// Turn it to the right
 				normal += vecRight * push;
