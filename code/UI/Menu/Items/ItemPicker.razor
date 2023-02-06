@@ -13,15 +13,15 @@
 
     @if (Data == null)
     {
-        <label class="item_name">@Slot.ToString();</label>
+        <label class="item_name">@Slot.ToString()</label>
     }
     else
         @if(PlayerClass.IsDefaultWeapon(Data))
         {
-            <label class="item_name">@Data.Title;</label>
+            <label class="item_name">@Data.Title</label>
         }
         else
         {
-            <label class="item_name q_unique">@Data.Title;</label>
+            <label class="item_name q_unique">@Data.Title</label>
         } 
 </root>

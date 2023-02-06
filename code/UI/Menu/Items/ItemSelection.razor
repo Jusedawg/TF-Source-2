@@ -1,6 +1,7 @@
-@using Sandbox.UI;
+@using Sandbox.UI
+@using System.Linq
 
-@attribute [StyleSheet("/UI/Menu/Items/ItemPicker.scss")]
+@attribute [StyleSheet("/UI/Menu/Items/ItemSelection.scss")]
 
 @namespace TFS2.UI
 @inherits MenuOverlay
@@ -11,13 +12,19 @@
             <div class="loadout_header">
                 <div class="loadout_title">
                     <text class="marker">>></text>
-                    <text class="class_name" @ref="ClassName">Scout</text>
-                    <text class="slot_name" @ref="SlotName">Primary</text>
+                    <text class="class_name">@PlayerClass.Title</text>
+                    <text class="slot_name">@Slot</text>
                 </div>
                 <text class="loadout_subtitle">Select an item:</text>
             </div>
             <div class="loadout_content">
-                <div class="items" @ref="ItemsContainer" />
+                <div class="items">
+                    <ItemPicker PlayerClass=@PlayerClass Slot=@Slot Data=@GetEquipped() />
+                    @foreach(var weapon in WeaponData.FindAllForClassAndSlot(PlayerClass, Slot).Except(new WeaponData[] { GetEquipped() }))
+                    {
+                        <ItemPicker PlayerClass=@PlayerClass Slot=@Slot Data=@weapon />
+                    }
+                </div>
             </div>
         </div>
     </div>

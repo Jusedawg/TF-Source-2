@@ -22,7 +22,7 @@
                     {
                         @if (PlayerClass.GetDefaultWeaponForSlot(slot) == null)
                             continue;
-                        <ItemPicker Slot=@slot PlayerClass=@PlayerClass Data=@GetWeaponForSlot(slot)/>
+                        <ItemPicker Slot=@slot PlayerClass=@PlayerClass Data=@GetWeaponForSlot(slot) @onclick=@((PanelEvent e) => { Open(new ItemSelection(PlayerClass, slot));})/>
                     }
                 </div>
             </div>
