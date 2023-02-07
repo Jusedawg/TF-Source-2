@@ -164,6 +164,7 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 		SendViewModelAnimParameter( "b_charging" );
 	}
 
+	[ClientRpc]
 	public void OnStopCharge()
 	{
 		ChargeUpSound.Stop();
