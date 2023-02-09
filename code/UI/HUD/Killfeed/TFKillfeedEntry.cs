@@ -81,8 +81,15 @@ partial class TFKillFeedEntry : Panel
 	protected virtual void InitKill()
 	{
 		var local = Sandbox.Game.LocalClient;
-		var is_crit = Tags.Contains( TFDamageTags.Critical );
-		var is_mini_crit = Tags.Contains( TFDamageTags.MiniCritical );
+		bool is_crit = false; 
+		bool is_mini_crit = false;
+
+		if(Tags != default)
+		{
+			Tags.Contains( TFDamageTags.Critical );
+			Tags.Contains( TFDamageTags.MiniCritical );
+		}
+		
 		var killIcon = Icon;
 
 		// Local Player Involved?
@@ -105,7 +112,7 @@ partial class TFKillFeedEntry : Panel
 		//
 		// Attacker
 		//
-		if ( Tags.Contains( DamageTags.Fall ) )
+		if ( Tags?.Contains( DamageTags.Fall ) == true )
 			// If there is no attacker that means the world has killed us.
 			PostVictimMessage.Text = " fell to a clumsy, painful death";
 		else if ( Victim == Attacker && Weapon == null )
