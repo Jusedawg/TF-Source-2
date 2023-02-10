@@ -160,10 +160,14 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 
 	public void OnStartCharge()
 	{
+		if ( !Game.IsClient )
+			return;
+
 		ChargeUpSound = PlaySound( "weapon_stickybomblauncher.chargeup" );
 		SendViewModelAnimParameter( "b_charging" );
 	}
 
+	[ClientRpc]
 	public void OnStopCharge()
 	{
 		ChargeUpSound.Stop();
