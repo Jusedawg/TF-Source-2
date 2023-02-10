@@ -119,7 +119,8 @@ namespace Breaker
 		}
 
 		
-		[BRKEvent.PlayerNumberChanged]
+		[BRKEvent.PlayerJoined]
+		[BRKEvent.PlayerLeft]
 		static void Tick()
 		{
 			// Check for new clients

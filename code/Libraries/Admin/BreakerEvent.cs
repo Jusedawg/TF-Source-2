@@ -9,22 +9,20 @@ namespace Breaker
 {
 	public static class BRKEvent
 	{
+		public const string CONFIG_LOADED_EVENT = "breaker.config.loaded";
+		public const string PLAYER_JOINED_EVENT = "breaker.player.joined";
+		public const string PLAYER_LEFT_EVENT = "breaker.player.left";
 		public class ConfigLoadedAttribute : EventAttribute
 		{
-			public ConfigLoadedAttribute() : base( "breaker.config.loaded" ) { }
-		}
-		public class PlayerNumberChangedAttribute : EventAttribute
-		{
-			// TODO: This is stupid, get a way to only check for this if a client joined
-			public PlayerNumberChangedAttribute() : base( "breaker.players.changed" ) { }
+			public ConfigLoadedAttribute() : base( CONFIG_LOADED_EVENT ) { }
 		}
 		public class PlayerJoinedAttribute : EventAttribute
 		{
-			public PlayerJoinedAttribute() : base("breaker.player.joined") {  }
+			public PlayerJoinedAttribute() : base(PLAYER_JOINED_EVENT) {  }
 		}
 		public class PlayerLeftAttribute : EventAttribute
 		{
-			public PlayerLeftAttribute() : base("breaker.player.left") { }
+			public PlayerLeftAttribute() : base(PLAYER_LEFT_EVENT) { }
 		}
 
 		static int lastPlayerCount = 0;
@@ -43,7 +41,7 @@ namespace Breaker
 				if ( !joinedPlayers.Contains( client.SteamId ) )
 				{
 					joinedPlayers.Add( client.SteamId );
-					Event.Run( "Breaker.player.joined", client );
+					Event.Run( PLAYER_JOINED_EVENT, client );
 				}
 			}
 
@@ -52,12 +50,9 @@ namespace Breaker
 				if ( !currentPlayers.Contains( player ) )
 				{
 					joinedPlayers.Remove( player );
-					Event.Run( "Breaker.player.left", player );
+					Event.Run( PLAYER_LEFT_EVENT, player );
 				}
 			}
-
-			lastPlayerCount = clients.Count();
-			Event.Run( "Breaker.players.changed" );
 		}
 	}
 }
