@@ -78,7 +78,7 @@ partial class TFPlayer
 		{
 			var damageForForce = info.Damage;
 			var hullSize = GetPlayerExtents( IsDucked );
-			var forceScale = tf_damage_force_scale_other * info.ForceScale;
+			var forceScale = tf_damage_force_scale_other;
 
 			// Modify the ducked hull size so we propel further.
 			if ( IsDucked )
@@ -93,6 +93,8 @@ partial class TFPlayer
 						: PlayerClass.Abilities.BlastJumpForceScale;
 				}
 			}
+
+			forceScale *= info.ForceScale;
 
 			dmgForce = direction * TFGameRules.Current.DamageForce( hullSize, damageForForce, forceScale );
 			// Class Push Resistance
