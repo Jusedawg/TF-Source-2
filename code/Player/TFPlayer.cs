@@ -12,6 +12,7 @@ public partial class TFPlayer : SDKPlayer
 {
 	public new static TFPlayer LocalPlayer => Game.LocalPawn as TFPlayer;
 	public override float DeathAnimationTime => 2;
+	public override bool IsThirdPerson => InCondition( TFCondition.Humiliated );
 
 	public TFPlayer()
 	{
@@ -375,6 +376,11 @@ public partial class TFPlayer : SDKPlayer
 
 		var maxSpeed = PlayerClass.MaxSpeed;
 		(ActiveWeapon as TFWeaponBase)?.ModifyOwnerMaxSpeed( ref maxSpeed );
+
+		if(InCondition(TFCondition.Humiliated))
+		{
+			maxSpeed *= 0.9f;
+		}
 
 		return maxSpeed;
 	}

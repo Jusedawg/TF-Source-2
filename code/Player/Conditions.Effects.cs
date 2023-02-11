@@ -26,6 +26,10 @@ partial class TFPlayer
 		// TFCondition.Cloaked/CloakedBlink
 		SubscribeToConditionAdded( TFCondition.Cloaked, OnCloakedAdded );
 		SubscribeToConditionRemoved( TFCondition.Cloaked, OnCloakedRemoved );
+
+		// TFCondition.Humiliated
+		SubscribeToConditionAdded(TFCondition.Humiliated, OnHumiliatedAdded);
+		SubscribeToConditionRemoved(TFCondition.Humiliated, OnHumiliatedRemoved);
 	}
 
 	//
@@ -206,5 +210,25 @@ partial class TFPlayer
 		CalculateMaxSpeed();
 
 		UpdateMaterialGroup();
+	}
+
+	//
+	// Humiliation
+	//
+
+	public void OnHumiliatedAdded()
+	{
+		DeleteAllWeapons();
+
+		SetAnimParameter( "b_loser", true );
+		CalculateMaxSpeed();
+	}
+
+	public void OnHumiliatedRemoved()
+	{
+		// This cant happen in normal gameplay, so dont worry about correctly restoring weapons for now
+
+		SetAnimParameter( "b_loser", false );
+		CalculateMaxSpeed();
 	}
 }
