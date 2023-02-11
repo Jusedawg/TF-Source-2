@@ -1,0 +1,56 @@
+@import "/UI/styles/colors.scss";
+@import "/UI/styles/buttons.scss";
+
+DevMenu {
+    width: 400px;
+    pointer-events: none;
+    transition: all 0.1s ease-out;
+    position: absolute;
+    height: 100%;
+    opacity: 1;
+    margin: auto;
+    background-color: #1d1915;
+    flex-direction: column;
+    overflow: hidden;
+    left: -400px;
+    z-index: 100;
+
+    .header {
+        padding: 14px 20px;
+        width: 100%;
+        background-color: #37302b;
+        color: #fdeece;
+        font-family: TF2_Build;
+        font-size: 22px;
+        text-align: center;
+        text-shadow: 2px 2px 0 black;
+        box-shadow: 0px 0 10px 5px #0009;
+        position: relative;
+    }
+
+    &.open {
+        pointer-events: all;
+        left: 0;
+    }
+
+    .button-list {
+        height: 100%;
+        width: 100%;
+        padding: 10px;
+        flex-direction: column;
+
+        .section {
+            color: #808080;
+            font-family: TF2 Secondary;
+            margin-bottom: 20px;
+        }
+    }
+
+    .button {
+        width: 100%;
+        padding: 10px;
+        font-family: TF2_Secondary;
+        margin-bottom: 10px;
+        font-size: 24px;
+    }
+}
