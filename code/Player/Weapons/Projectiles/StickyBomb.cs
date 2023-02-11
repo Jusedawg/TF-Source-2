@@ -26,7 +26,7 @@ public partial class StickyBomb : TFProjectile
 		Health = 1;
 
 		MoveType = ProjectileMoveType.Physics;
-		DamageInfo.WithTag( DamageTags.Blast );
+		DamageInfo = DamageInfo.WithTag( TFDamageTags.Blast );
 		FaceVelocity = false;
 		AutoDestroyTime = null;
 	}
