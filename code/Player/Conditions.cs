@@ -15,7 +15,8 @@ public enum TFCondition
 	// NOT IMPLEMENTED YET
 	Cloaked,
 	CloakedBlink,
-	Taunting
+	Taunting,
+	Humiliated
 }
 
 partial class TFPlayer

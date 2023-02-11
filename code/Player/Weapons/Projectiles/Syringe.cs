@@ -10,7 +10,7 @@ public partial class Syringe : TFProjectile
 		base.Spawn();
 		SetModel( "models/weapons/w_models/w_syringe_proj.vmdl" );
 
-		DamageInfo.WithTag(TFDamageTags.PreventPhysicsForce);
+		DamageInfo = DamageInfo.WithTag(TFDamageTags.PreventPhysicsForce);
 		MoveType = ProjectileMoveType.Fly;
 		Gravity = .3f;
 	}

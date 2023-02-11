@@ -17,6 +17,16 @@ partial class TFGameRules
 		TeamManager.DeclareTeam( (int)TFTeam.Red, "red", "RED", new Color( 0xB8383B ) );
 		TeamManager.DeclareTeam( (int)TFTeam.Blue, "blue", "BLU", new Color( 0x5885A2 ) );
 	}
+	public override void OnTeamLose( int team )
+	{
+		base.OnTeamLose( team );
+
+		TFTeam loser = (TFTeam)team;
+		foreach(var ply in loser.GetPlayers())
+		{
+			ply.AddCondition( TFCondition.Humiliated );
+		}
+	}
 
 	public override void PlayTeamWinSong( int team )
 	{
