@@ -74,7 +74,7 @@ partial class TFPlayer
 		direction = direction.Normal;
 
 		Vector3 dmgForce = default;
-		if ( info.Force != default )
+		if ( info.Force == default )
 		{
 			var damageForForce = info.Damage;
 			var hullSize = GetPlayerExtents( IsDucked );
