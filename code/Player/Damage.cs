@@ -44,6 +44,15 @@ partial class TFPlayer
 
 		if ( info.HasTag( TFDamageTags.Ignite ) )
 			BurnFromDamage( info );
+
+		// Let our passive weapons modify our damage.
+		foreach ( var wpn in Weapons )
+		{
+			if ( wpn is IPassiveDamageModifier passive )
+			{
+				passive.ApplyDamageModifications( ref info );
+			}
+		}
 	}
 
 	public override void ApplyPushFromDamage( ExtendedDamageInfo info )
