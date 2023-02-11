@@ -73,29 +73,34 @@ partial class TFPlayer
 		var direction = WorldSpaceBounds.Center - (inflictor.WorldSpaceBounds.Center + Vector3.Down * 10);
 		direction = direction.Normal;
 
-		var damageForForce = info.Damage;
-		var hullSize = GetPlayerExtents( IsDucked );
-		var forceScale = tf_damage_force_scale_other;
-
-		// Modify the ducked hull size so we propel further.
-		if ( IsDucked )
-			hullSize.z = 55;
-
-		if ( info.Attacker == this )
+		Vector3 dmgForce = default;
+		if ( info.Force != default )
 		{
-			if ( info.HasTag( TFDamageTags.Blast ) )
+			var damageForForce = info.Damage;
+			var hullSize = GetPlayerExtents( IsDucked );
+			var forceScale = tf_damage_force_scale_other * info.ForceScale;
+
+			// Modify the ducked hull size so we propel further.
+			if ( IsDucked )
+				hullSize.z = 55;
+
+			if ( info.Attacker == this )
 			{
-				forceScale = IsGrounded
-					? PlayerClass.Abilities.BlastJumpForceScaleGrounded
-					: PlayerClass.Abilities.BlastJumpForceScale;
+				if ( info.HasTag( TFDamageTags.Blast ) )
+				{
+					forceScale = IsGrounded
+						? PlayerClass.Abilities.BlastJumpForceScaleGrounded
+						: PlayerClass.Abilities.BlastJumpForceScale;
+				}
 			}
+
+			dmgForce = direction * TFGameRules.Current.DamageForce( hullSize, damageForForce, forceScale );
+			// Class Push Resistance
+			var classPushRes = PlayerClass.Abilities.DamagePushResistance;
+			dmgForce *= classPushRes;
 		}
-
-		var dmgForce = direction * TFGameRules.Current.DamageForce( hullSize, damageForForce, forceScale );
-
-		// Class Push Resistance
-		var classPushRes = PlayerClass.Abilities.DamagePushResistance;
-		dmgForce *= classPushRes;
+		else
+			dmgForce = info.Force;
 
 		ApplyAbsoluteImpulse( dmgForce );
 	}
