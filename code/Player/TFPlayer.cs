@@ -248,6 +248,7 @@ public partial class TFPlayer : SDKPlayer
 		TickHealing();
 		TickInvisibility();
 		SimulateGesture();
+		CheckForLaunchedEnd();
 
 		// Check if your weapon is completely empty.
 		// If so, switch off the gun automatically.
