@@ -12,7 +12,7 @@ namespace Breaker.UI
 {
 	public partial class BreakerMenu
 	{
-		internal static IEnumerable<IGrouping<string, Command.CommandClientInfo>> groups => Command.GetAllClientGrouped();
+		internal static IEnumerable<IGrouping<string, Command.ClientInfo>> groups => Command.GetAllClientGrouped();
 		private Dictionary<string, List<Panel>> groupPanels = new();
 		Panel ListPanel { get; set; }
 		bool createdPanels = false;
@@ -23,7 +23,7 @@ namespace Breaker.UI
 			Debug.Log( $"Exiting menu..." );
 			Hide();
 		}
-		public void OnClickCommand( Command.CommandClientInfo cmd )
+		public void OnClickCommand( Command.ClientInfo cmd )
 		{
 			Debug.Log( $"Clicked on command {cmd.Key}" );
 			SetupCommandWizard( cmd );
@@ -96,7 +96,7 @@ namespace Breaker.UI
 				groupPanels.Add( group.Key, commandPanels );
 			}
 		}
-		private void SetupCommandWizard(Command.CommandClientInfo cmd)
+		private void SetupCommandWizard(Command.ClientInfo cmd)
 		{
 			CommandTitleLabel.Text = cmd.Key.ToUpper();
 			foreach(var p in cmd.Parameters)

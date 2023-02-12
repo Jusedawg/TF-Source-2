@@ -29,14 +29,14 @@ namespace Breaker
 				CallTime = DateTime.Now;
 			}
 		}
-		public class CommandInfo
+		public class Info
 		{
 			public string Name = "";
 			public string Group = "";
 			public CommandAttribute Attribute;
 			public MethodDescription Method;
 
-			public CommandInfo( CommandAttribute attribute, MethodDescription method )
+			public Info( CommandAttribute attribute, MethodDescription method )
 			{
 				Attribute = attribute;
 				Method = method;
@@ -44,33 +44,33 @@ namespace Breaker
 
 			public ParameterInfo[] GetParameters() => Method.Parameters;
 		}
-		public class CommandClientInfo
+		public class ClientInfo
 		{
 			public string Key;
 			public string Name;
 			public string Group;
 			public string[] Parameters;
 
-			public CommandClientInfo( string key, string name, string group = "", IEnumerable<string> parameters = default )
+			public ClientInfo( string key, string name, string group = "", params string[] parameters )
 			{
 				Key = key;
 				Name = name;
 				Group = group;
-				Parameters = parameters?.ToArray();
+				Parameters = parameters;
 			}
 
-			public static implicit operator CommandClientInfo( CommandInfo info )
+			public static implicit operator ClientInfo( Info info )
 			{
-				return new CommandClientInfo( info.Attribute.Key, info.Name, info.Group, info.GetParameters().Select(p => p.Name) );
+				return new ClientInfo( info.Attribute.Key, info.Name, info.Group, info.GetParameters().Select(p => p.Name).ToArray() );
 			}
 		}
-		private static Dictionary<string, CommandInfo> commands = new();
-		private static Dictionary<string, CommandInfo> aliasToCommand = new();
-		private static List<CommandClientInfo> clientCommands = new();
+		private static Dictionary<string, Info> commands = new();
+		private static Dictionary<string, Info> aliasToCommand = new();
+		private static List<ClientInfo> clientCommands = new();
 		/// <summary>
 		/// All current commands. Only usable on the server.
 		/// </summary>
-		public static IReadOnlyDictionary<string, CommandInfo> All => commands.AsReadOnly();
+		public static IReadOnlyDictionary<string, Info> All => commands.AsReadOnly();
 		public static ContextInfo Context { get; private set; }
 		public static IClient Caller => Context.Caller;
 		/// <summary>
@@ -114,7 +114,7 @@ namespace Breaker
 						title = titleAttrib.Value;
 					}
 
-					CommandInfo info = new( attribute, method ) { Name = title, Group = group };
+					Info info = new( attribute, method ) { Name = title, Group = group };
 					if ( commands.ContainsKey( name ) )
 					{
 						Logging.Error( $"Tried to register command with duplicate name {name}!" );
@@ -158,7 +158,7 @@ namespace Breaker
 		[ClientRpc]
 		public static void NetworkCommandInfo(string key, string name, string group = "", string[] parameters = default )
 		{
-			CommandClientInfo info = new( key, name, group, parameters );
+			ClientInfo info = new( key, name, group, parameters );
 			clientCommands.Add( info );
 		}
 		[ClientRpc]
@@ -189,12 +189,12 @@ namespace Breaker
 			return cmd.Method.Attributes.OfType<PermissionAttribute>().ToArray();
 		}
 
-		public static IEnumerable<CommandClientInfo> GetAllClient()
+		public static IEnumerable<ClientInfo> GetAllClient()
 		{
 			return clientCommands;
 		}
 
-		public static IEnumerable<IGrouping<string, CommandClientInfo>> GetAllClientGrouped()
+		public static IEnumerable<IGrouping<string, ClientInfo>> GetAllClientGrouped()
 		{
 			return clientCommands.GroupBy( info => info.Group );
 		}
@@ -208,7 +208,7 @@ namespace Breaker
 		public CommandAttribute(string key, params string[] aliases)
 		{
 			if ( string.IsNullOrEmpty( key ) )
-				throw new ArgumentNullException( "name" );
+				throw new ArgumentNullException( nameof(key) );
 
 			Key = key;
 			Aliases = aliases;

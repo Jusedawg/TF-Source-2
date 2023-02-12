@@ -18,7 +18,7 @@ namespace Breaker
 		/// <param name="args">The arguments to pass to the command.</param>
 		public static void Execute( string command, IClient caller, string[] args )
 		{
-			CommandInfo info = null;
+			Info info = null;
 			if ( !commands.TryGetValue( command, out info ) && !aliasToCommand.TryGetValue( command, out info ) )
 			{
 				Log.Error( $"Tried to execute command {command} but it doesn't exist!" );
@@ -56,17 +56,17 @@ namespace Breaker
 					Log.Error( $"Tried to execute command {command} but the parameter count doesn't match the argument count!" );
 					return;
 				}
-				var parameterTypes = parameters.Select( p => p.ParameterType );
+				var parameterTypes = parameters.Select( p => p.ParameterType ).ToList();
 				var parameterValues = new object[parameterCount];
 				for ( int i = 0; i < parameterCount; i++ )
 				{
-					var type = parameterTypes.ElementAt( i );
+					var type = parameterTypes[i];
 
 					Debug.Log( $"Element {i} in {argsCount}" );
 					if ( i >= argsCount )
 					{
 						Debug.Log( $"Using default value" );
-						parameterValues[i] = parameters.ElementAt( i ).DefaultValue;
+						parameterValues[i] = parameters[i].DefaultValue;
 						continue;
 					}
 
@@ -146,12 +146,6 @@ namespace Breaker
 
 			return value;
 		}
-		private static IEnumerable<ICommandParser<T>> GetParsers<T>()
-		{
-			return TypeLibrary.GetTypes<ICommandParser<T>>()
-								.Select( t => t.Create<ICommandParser<T>>() );
-		}
-
 		private static IEnumerable<ICommandParser> GetParsers( Type t )
 		{
 			return TypeLibrary.GetTypes()

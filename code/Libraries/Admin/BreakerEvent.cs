@@ -27,6 +27,7 @@ namespace Breaker
 
 		static int lastPlayerCount = 0;
 		static List<long> joinedPlayers = new();
+
 		[Event.Tick.Server]
 		private static void Tick()
 		{
@@ -34,7 +35,7 @@ namespace Breaker
 			if ( clients == null || clients.Count() == lastPlayerCount )
 				return;
 
-			List<long> currentPlayers = new();
+			List<long> currentPlayers = new(Game.Clients.Count);
 			foreach(var client in clients)
 			{
 				currentPlayers.Add( client.SteamId );
