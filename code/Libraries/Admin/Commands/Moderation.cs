@@ -70,7 +70,7 @@ namespace Breaker.Commands
 			{
 				target.Kick();
 			}
-				Logging.TellAll( $"{Command.Caller} kicked {Logging.FormatClients(targets)} for {reason}" );
+				Logging.TellAll( $"{Command.Caller.Name} kicked {Logging.FormatClients(targets)} for {reason}" );
 		}
 
 		[Command( "ban" ), Permission( "breaker.ban" )]
@@ -91,9 +91,9 @@ namespace Breaker.Commands
 				bans.Add( entry );
 				target.Kick();
 				if(entry.IsPermanent)
-					Logging.TellAll( $"{Command.Caller} banned {Logging.FormatClients(targets)} permanently for {reason}." );
+					Logging.TellAll( $"{Command.Caller.Name} banned {Logging.FormatClients(targets)} permanently for {reason}." );
 				else
-					Logging.TellAll( $"{Command.Caller} banned {Logging.FormatClients(targets)} for {entry.GetDurationString()} for {reason}." );
+					Logging.TellAll( $"{Command.Caller.Name} banned {Logging.FormatClients(targets)} for {entry.GetDurationString()} for {reason}." );
 			}
 			SaveBans();
 		}
@@ -106,7 +106,7 @@ namespace Breaker.Commands
 				bans.RemoveAll( b => b.SteamId == target.SteamId );
 			}
 			SaveBans();
-			Logging.TellAll( $"{Command.Caller} unbanned {Logging.FormatClients( targets )}." );
+			Logging.TellAll( $"{Command.Caller.Name} unbanned {Logging.FormatClients( targets )}." );
 		}
 
 		public static bool IsBanned(IClient cl)

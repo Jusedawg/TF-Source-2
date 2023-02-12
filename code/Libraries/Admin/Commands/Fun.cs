@@ -27,7 +27,7 @@ namespace Breaker.Commands
 					}
 				}
 			}
-			Logging.TellAll( $"{Command.Caller} slayed {Logging.FormatClients( targets )}!" );
+			Logging.TellAll( $"{Command.Caller.Name} slayed {Logging.FormatClients( targets )}!" );
 		}
 
 		[Command( "slap" ), Permission( "breaker.slap" )]
@@ -59,7 +59,7 @@ namespace Breaker.Commands
 					ent.PlaySound( "slap" );
 				}
 			}
-			Logging.TellAll($"{Command.Caller} slapped {Logging.FormatClients(targets)}!" );
+			Logging.TellAll($"{Command.Caller.Name} slapped {Logging.FormatClients(targets)}!" );
 		}
 	}
 }

@@ -23,23 +23,23 @@ namespace Breaker.Commands
 		}
 
 		[Command("usergroup", "ugroup"),Permission("breaker.user.group")]
-		public static void ManageGroup([Title("add/remove")] string mode, IClient target, string group)
+		public static void ManageGroup([Title("add/remove")] string action, IClient target, string group)
 		{
 			var user = User.Get( target );
-			switch(mode)
+			switch(action)
 			{
 				case "add":
 					AddGroup( user, group );
-					Logging.TellCaller( $"Added client {target} to group {group}" );
+					Logging.TellCaller( $"Added client {target.Name} to group {group}" );
 					Logging.TellClient( target, $"You were added to group {group}!" );
 					break;
 				case "remove":
 					RemoveGroup( user, group );
-					Logging.TellCaller( $"Removed client {target} from group {group}" );
+					Logging.TellCaller( $"Removed client {target.Name} from group {group}" );
 					Logging.TellClient( target, $"You were removed from group {group}!" );
 					break;
 				default:
-					Logging.TellCaller( $"Invalid mode {mode}!", MessageType.Error );
+					Logging.TellCaller( $"Invalid action {action}!", MessageType.Error );
 					break;
 			}
 		}
