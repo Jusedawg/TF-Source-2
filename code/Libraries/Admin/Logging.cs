@@ -34,6 +34,12 @@ namespace Breaker
 				_clientLoggers.Add( logger );
 			}
 		}
+		[Event.Hotload]
+		public static void ResetLoggers()
+		{
+			_serverLoggers.Clear();
+			_clientLoggers.Clear();
+		}
 		public static void TellAll(string message, MessageType type = MessageType.Info )
 		{
 			TellClientRPC( message, type );
