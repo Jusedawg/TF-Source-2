@@ -76,7 +76,7 @@ namespace Breaker.Commands
 			return true;
 		}
 		private static IClient SelectSelf( IClient caller, string arg ) => caller;
-		private static IClient SelectRandom( IClient caller, string arg ) => Game.Clients.OrderBy( cl => Game.Random.Int(0, Game.Clients.Count) ).FirstOrDefault();
+		private static IClient SelectRandom( IClient caller, string arg ) => Game.Clients.ElementAt( Game.Random.Int( Game.Clients.Count - 1 ) );
 
 		private static Dictionary<string, Func<IClient, string, IEnumerable<IClient>>> multiSelectors = new()
 		{

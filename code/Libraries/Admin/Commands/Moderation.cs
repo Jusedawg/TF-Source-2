@@ -78,15 +78,15 @@ namespace Breaker.Commands
 		{
 			foreach ( var target in targets )
 			{
-				int miliseconds = duration.Seconds;
+				int seconds = duration.Seconds;
 				if(duration == default)
-					miliseconds = -1;
+					seconds = -1;
 				BanEntry entry = new()
 				{
 					SteamId = target.SteamId,
 					Reason = reason,
 					StartTime = DateTime.Now,
-					Duration = miliseconds
+					Duration = seconds
 				};
 				bans.Add( entry );
 				target.Kick();
