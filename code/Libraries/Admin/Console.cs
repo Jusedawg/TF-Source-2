@@ -78,7 +78,7 @@ namespace Breaker
 				}
 			}
 
-			private static void PrintCommand( KeyValuePair<string, Command.CommandInfo> cmd )
+			private static void PrintCommand( KeyValuePair<string, Command.Info> cmd )
 			{
 				string name = cmd.Key;
 				var p = Command.Parameters( name );
@@ -116,7 +116,7 @@ namespace Breaker
 					return "Vector";
 				if ( t == typeof( IClient ) )
 					return "Client";
-				if ( t == typeof( IEnumerable<IClient> ) )
+				if ( t == typeof( IClient[] ) )
 					return "Clients";
 				return t.Name;
 			}

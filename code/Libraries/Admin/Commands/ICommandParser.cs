@@ -22,6 +22,8 @@ namespace Breaker
 	/// </summary>
 	public interface ICommandParser
 	{
+		// This second interface is required to be able to handle these objects with sbox reflection.
+		// Related issue: https://github.com/sboxgame/issues/issues/2881
 		public object Parse( IClient caller, string input );
 	}
 }

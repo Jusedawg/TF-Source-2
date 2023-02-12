@@ -11,7 +11,7 @@ namespace Breaker.Commands
 	public static class Fun
 	{
 		[Command( "slay" ), Permission( "breaker.slay" )]
-		public static void Slay( IEnumerable<IClient> targets )
+		public static void Slay( IClient[] targets )
 		{
 			foreach ( var target in targets )
 			{
@@ -31,7 +31,7 @@ namespace Breaker.Commands
 		}
 
 		[Command( "slap" ), Permission( "breaker.slap" )]
-		public static void Slap(IEnumerable<IClient> targets, float force, float damage = 1)
+		public static void Slap( IClient[] targets, float force, float damage = 1)
 		{
 			foreach(var target in targets)
 			{

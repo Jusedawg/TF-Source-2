@@ -21,7 +21,7 @@ namespace Breaker.Commands
 		}
 
 		[Command("groupadd", "addgroup"), Permission("breaker.group.create")]
-		public static void Add(string id, int weight, IEnumerable<string> permissions = default)
+		public static void Add(string id, int weight, string[] permissions = default)
 		{
 			UserGroup group = new( id, weight, permissions?.ToList() );
 

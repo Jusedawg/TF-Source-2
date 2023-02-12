@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Breaker.Commands
 {
-	public abstract class SplitListParser<T> : ICommandParser<IEnumerable>
+	public abstract class SplitListParser<T> : ICommandParser<T[]>
 	{
 #pragma warning disable SB3000 // Hotloading not supported
 		const char SPLIT_CHAR = ';';
 #pragma warning restore SB3000 // Hotloading not supported
-		public virtual IEnumerable Parse( IClient caller, string input )
+		public virtual T[] Parse( IClient caller, string input )
 		{
 			if ( !input.Contains( SPLIT_CHAR ) )
-				return new object[] { ParseSingle(caller, input) };
+				return new T[] { ParseSingle(caller, input) };
 
 			var sections = input.Split(SPLIT_CHAR);
 			var results = new List<T>();
@@ -26,7 +26,7 @@ namespace Breaker.Commands
 				if (result != null)
 					results.Add(result);
 			}
-			return results;
+			return results.ToArray();
 		}
 
 		public abstract T ParseSingle(IClient caller, string inputSection );

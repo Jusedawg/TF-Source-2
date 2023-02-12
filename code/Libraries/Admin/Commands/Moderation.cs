@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Breaker.Commands
@@ -19,7 +20,11 @@ namespace Breaker.Commands
 			public long SteamId { get; set; }
 			public string Reason { get; set; }
 			public DateTime StartTime { get; set; }
-			public float Duration { get; set; }
+			/// <summary>
+			/// Duration in seconds
+			/// </summary>
+			public int Duration { get; set; }
+			[JsonIgnore]
 			public bool IsPermanent => Duration < 0;
 			public DateTime GetEndTime()
 			{
@@ -38,13 +43,13 @@ namespace Breaker.Commands
 				var time = TimeSpan.FromSeconds( Duration );
 
 				if (Duration > SECONDS_IN_DAY)
-					return $"{time.TotalDays}d";
+					return $"{time:%d}d";
 				else if(Duration > SECONDS_IN_HOUR )
-					return $"{time.TotalHours}h";
+					return $"{time:%h}h";
 				else if(Duration > SECONDS_IN_MINUTE )
-					return $"{time.TotalMinutes}m";
+					return $"{time:%m}m";
 				else
-					return $"{time.TotalSeconds}s";
+					return $"{time:%s}s";
 			}
 		}
 
@@ -57,8 +62,9 @@ namespace Breaker.Commands
 			fs.WriteJson( BAN_FILE, bans );
 		}
 		#endregion
+
 		[Command("kick"), Permission("breaker.kick")]
-		public static void Kick( IEnumerable<IClient> targets, string reason = "No reason given." )
+		public static void Kick( IClient[] targets, string reason = "No reason given." )
 		{
 			foreach ( var target in targets )
 			{
@@ -68,16 +74,19 @@ namespace Breaker.Commands
 		}
 
 		[Command( "ban" ), Permission( "breaker.ban" )]
-		public static void Ban( IEnumerable<IClient> targets, float duration = -1, string reason = "No reason given." )
+		public static void Ban( IClient[] targets, TimeSpan duration = default, string reason = "No reason given." )
 		{
 			foreach ( var target in targets )
 			{
+				int miliseconds = duration.Seconds;
+				if(duration == default)
+					miliseconds = -1;
 				BanEntry entry = new()
 				{
 					SteamId = target.SteamId,
 					Reason = reason,
 					StartTime = DateTime.Now,
-					Duration = duration
+					Duration = miliseconds
 				};
 				bans.Add( entry );
 				target.Kick();
@@ -90,7 +99,7 @@ namespace Breaker.Commands
 		}
 
 		[Command( "unban" ), Permission( "breaker.unban" )]
-		public static void Unban( IEnumerable<IClient> targets )
+		public static void Unban( IClient[] targets )
 		{
 			foreach ( var target in targets )
 			{

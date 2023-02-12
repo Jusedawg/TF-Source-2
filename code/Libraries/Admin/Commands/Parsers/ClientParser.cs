@@ -34,9 +34,9 @@ namespace Breaker.Commands
 		}
 		object ICommandParser.Parse( IClient caller, string input ) => Parse( caller, input );
 
-		public class MultiParser : ICommandParser<IEnumerable<IClient>>
+		public class MultiParser : ICommandParser<IClient[]>
 		{
-			public IEnumerable<IClient> Parse( IClient caller, string input )
+			public IClient[] Parse( IClient caller, string input )
 			{
 				Debug.Log( $"Multi-Parsing input {input} with caller {caller}" );
 				if ( input.StartsWith( '@' ) )
@@ -45,7 +45,7 @@ namespace Breaker.Commands
 					if ( multiSelectors.TryGetValue( input, out var selector ) )
 					{
 						Debug.Log( $"Using selector {input}" );
-						return selector( caller, input );
+						return selector( caller, input ).ToArray();
 					}
 
 					else if(singleSelectors.TryGetValue(input, out var singleSelector))
@@ -54,7 +54,7 @@ namespace Breaker.Commands
 					}
 				}
 
-				return Game.Clients.Where( c => c.Name.Contains( input ) );
+				return Game.Clients.Where( c => c.Name.Contains( input ) ).ToArray();
 			}
 
 			object ICommandParser.Parse( IClient caller, string input ) => Parse( caller, input );
@@ -76,7 +76,7 @@ namespace Breaker.Commands
 			return true;
 		}
 		private static IClient SelectSelf( IClient caller, string arg ) => caller;
-		private static IClient SelectRandom( IClient caller, string arg ) => Game.Clients.OrderBy( cl => Guid.NewGuid() ).FirstOrDefault();
+		private static IClient SelectRandom( IClient caller, string arg ) => Game.Clients.OrderBy( cl => Game.Random.Int(0, Game.Clients.Count) ).FirstOrDefault();
 
 		private static Dictionary<string, Func<IClient, string, IEnumerable<IClient>>> multiSelectors = new()
 		{
