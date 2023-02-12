@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TFS2
+namespace Breaker.Commands
 {
 	public class TimeSpanParser : ICommandParser<TimeSpan>
 	{

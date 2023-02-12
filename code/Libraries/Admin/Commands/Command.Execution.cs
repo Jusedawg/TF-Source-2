@@ -119,9 +119,10 @@ namespace Breaker
 				bool parsed = false;
 
 				var parsers = GetParsers( type );
-				var parserCount = parsers?.Count();
+				var parserCount = parsers == default ? 0 : parsers.Length;
 				if ( parsers == null || parserCount == 0 )
 				{
+					Debug.Log( $"No parsers found for type {type}!" );
 					return null;
 				}
 
@@ -146,16 +147,17 @@ namespace Breaker
 
 			return value;
 		}
-		private static IEnumerable<ICommandParser> GetParsers( Type t )
+		private static ICommandParser[] GetParsers( Type t )
 		{
 			return TypeLibrary.GetTypes()
 									   .Where( td =>
-										   td.Interfaces.Any(
+											td.Interfaces.Any(
 											   i => i.IsAssignableTo( typeof( ICommandParser ) )
-												   && i.FullName.Contains( t.Name )
+												   && i.FullName?.Contains( t.Name ) == true
 										   )
 									   )
-									   .Select( td => td.Create<ICommandParser>() );
+									   .Select( td => td.Create<ICommandParser>() )
+									   .ToArray();
 		}
 	}
 }
