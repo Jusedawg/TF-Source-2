@@ -76,6 +76,10 @@ namespace Breaker
 				if ( pageEnd > length )
 					pageEnd = length;
 
+				Logging.TellCaller( "============" );
+				Logging.TellCaller( $"{AddonInformation.ADDON_NAME} ({AddonInformation.ADDON_VERSION}/{AddonInformation.BRANCH})" );
+				Logging.TellCaller( "============" );
+
 				Logging.TellCaller( $"{length} commands currently registered." );
 				Logging.TellCaller( $"Page {page} of {pageCount}" );
 				for ( int i = pageStart; i < pageEnd; i++ )

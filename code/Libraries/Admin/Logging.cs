@@ -87,12 +87,12 @@ namespace Breaker
 		}
 		public static void Info(object message)
 		{
-			Log.Info( $"[Breaker] {message}" );
+			Log.Info( $"{AddonInformation.PREFIX} {message}" );
 		}
 
 		public static void Error(object message)
 		{
-			Log.Error( $"[Breaker] {message}" );
+			Log.Error( $"{AddonInformation.PREFIX} {message}" );
 		}
 
 		public static string FormatClients(IEnumerable<IClient> clients)
