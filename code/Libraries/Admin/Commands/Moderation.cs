@@ -99,14 +99,16 @@ namespace Breaker.Commands
 		}
 
 		[Command( "unban" ), Permission( "breaker.unban" )]
-		public static void Unban( IClient[] targets )
+		public static void Unban( long id )
 		{
-			foreach ( var target in targets )
+			if(!bans.Any(e => e.SteamId == id))
 			{
-				bans.RemoveAll( b => b.SteamId == target.SteamId );
+				Logging.TellCaller( $"Couldnt ban entry with SteamID {id}!", MessageType.Error );
+				return;
 			}
+
 			SaveBans();
-			Logging.TellAll( $"{Command.Caller.Name} unbanned {Logging.FormatClients( targets )}." );
+			Logging.TellAll( $"{Command.Caller.Name} unbanned {id}." );
 		}
 
 		public static bool IsBanned(IClient cl)
