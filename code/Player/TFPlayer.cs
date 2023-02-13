@@ -111,8 +111,7 @@ public partial class TFPlayer : SDKPlayer
 		// Abilities + Misc stuff
 		//
 
-		// TODO:
-		// Metal
+		RemoveCondition( TFCondition.Burning );
 
 		// Let SDKGame know about this.
 		TFGameRules.Current.PlayerRegenerate( this, full );
@@ -211,7 +210,7 @@ public partial class TFPlayer : SDKPlayer
 	protected void AwardDeathPoints()
 	{
 		var info = LastDamageInfo;
-		
+
 		if ( info.Attacker is TFPlayer atk && atk != this )
 		{
 			atk.Kills++;
@@ -378,7 +377,7 @@ public partial class TFPlayer : SDKPlayer
 		var maxSpeed = PlayerClass.MaxSpeed;
 		(ActiveWeapon as TFWeaponBase)?.ModifyOwnerMaxSpeed( ref maxSpeed );
 
-		if(InCondition(TFCondition.Humiliated))
+		if ( InCondition( TFCondition.Humiliated ) )
 		{
 			maxSpeed *= 0.9f;
 		}
