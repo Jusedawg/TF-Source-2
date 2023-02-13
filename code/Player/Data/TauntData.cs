@@ -1,5 +1,7 @@
 using Sandbox;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TFS2;
 
@@ -15,7 +17,8 @@ public class TauntData : GameResource
 	/// </summary>
 	/// 
 	// public static List<TauntData> All = new(); Old Method
-	public static List<TauntData> AllTaunts { get; set; } = new();
+	public static List<TauntData> All { get; set; } = new();
+	public static List<TauntData> AllActive { get; set; } = new();
 
 	/// <summary>
 	/// Display Name 
@@ -73,23 +76,28 @@ public class TauntData : GameResource
 		// Get lowercase class name
 		//string tauntname = ResourceName.ToLower();
 
-		if ( Disabled == true ) return;
-		
-		AllTaunts.Add( this );
+		Log.Info( StringName + " " + Disabled );
+
+		if ( !Disabled )
+		{
+			AllActive.Add( this );
+		}
+
+		All.Add( this );
 	}
 
-	public static bool IsValid( TauntData taunt )
-	{
-		//name = name.ToLower(); OLD
-
-		return AllTaunts.Contains( taunt );
-	}
 
 	public static TauntData Get( string taunt_name )
 	{
+		if ( String.IsNullOrEmpty( taunt_name) )
+		{
+			Log.Info("GET TAUNTDATA FAILED: STRING NULL OR EMPTY");
+			return null;
+		}
+
 		taunt_name = taunt_name.ToLower();
 		TauntData tauntCurr = null;
-		foreach (var taunt_data in AllTaunts)
+		foreach (var taunt_data in AllActive)
 		{
 			if (taunt_data.StringName == taunt_name)
 			{
@@ -97,8 +105,6 @@ public class TauntData : GameResource
 				break;
 			}
 		}
-
-		if ( !IsValid( tauntCurr ) ) return null;
 
 		return tauntCurr;
 	}

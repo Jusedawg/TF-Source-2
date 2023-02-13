@@ -115,6 +115,8 @@ public partial class TFPlayer : SDKPlayer
 
 		// Let SDKGame know about this.
 		TFGameRules.Current.PlayerRegenerate( this, full );
+
+		CreateTauntList();
 	}
 
 	public async void RegenerateWeaponsForClass( PlayerClass pclass )
@@ -233,6 +235,9 @@ public partial class TFPlayer : SDKPlayer
 			return;
 
 		SimulateItems();
+
+		SimulateCameraSwitch();
+		SimulateTaunts();
 	}
 
 	public override void Tick()

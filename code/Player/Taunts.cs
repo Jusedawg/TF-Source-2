@@ -1,4 +1,6 @@
 ﻿using Sandbox;
+using System;
+using System.Collections.Generic;
 
 namespace TFS2;
 
@@ -62,13 +64,66 @@ partial class TFPlayer
 	[Net]
 	public bool WaitingForPartner { get; set; }
 
+	//Per-player list of taunts
+	public List<TauntData> TauntList { get; set; } = new();
+	public void CreateTauntList()
+	{
+		Log.Info("creating taunts");
+		//Reset our tauntlist
+		TauntList.Clear();
+
+		var classname = PlayerClass.Title.ToLower();
+		TFPlayerClass classkey = TFPlayerClass.Undefined;
+
+		Log.Info( "Registered Taunts: " + TauntData.AllActive.Count );
+
+		foreach ( KeyValuePair<TFPlayerClass, string> pair in PlayerClass.Names )
+		{
+			if ( pair.Value == classname )
+			{
+				classkey = pair.Key;
+			}
+		}
+
+		// Add taunt to Class' taunt list if Undefined (aka Allclass)
+		foreach ( var taunt in TauntData.AllActive )
+		{
+			if ( taunt.Class == TFPlayerClass.Undefined )
+			{
+				TauntList.Add( taunt );
+
+				Log.Info( "Adding Taunt " + taunt.StringName );
+			}
+		}
+
+		// Separate so ALLCLASS taunts cycle first
+		// Add taunt to Class' taunt list if it belongs to this class
+		foreach ( var taunt in TauntData.AllActive )
+		{
+			if ( taunt.Class == classkey )
+			{
+				TauntList.Add( taunt );
+				Log.Info( "Adding Taunt " + taunt.StringName );
+			}
+		}
+
+		
+		// Logs Final Taunt list for testing purposes
+		foreach ( var Taunt in TauntList )
+		{
+			Log.Info( "FinalList " + Taunt.StringName );
+		}
+
+		Log.Info( "FinalList " + TauntList.Count );
+
+	}
+
 	/// <summary>
 	/// Taunt Logic check called under TFPlayer.Simulate
 	/// </summary>
 	public void SimulateTaunts()
 	{
-		if ( PlayerClass == null )
-			return;
+		if ( PlayerClass == null ) return;
 
 		var animController = Animator as TFPlayerAnimator;
 
@@ -88,7 +143,7 @@ partial class TFPlayer
 		//I believe this code can be rewritten better, I just don't remember how
 		if ( HoveredEntity != null )
 		{
-			if ( HoveredEntity.Position.Distance( Position ) < PartnerDistance ) //player bounds width * 2.5
+			if ( HoveredDistance < PartnerDistance ) //player bounds width * 2.5
 				PartnerTarget = HoveredEntity as TFPlayer;
 			else
 				PartnerTarget = null;
@@ -97,32 +152,7 @@ partial class TFPlayer
 		//If taunt menu button is pressed before certain time elapses, check for Partner/Group taunts, if none play weapon taunt
 		if ( Input.Pressed( InputButton.Drop ) && WeaponTauntAvailable && !InCondition( TFCondition.Taunting ) )
 		{
-			if ( PartnerTarget != null && PartnerTarget.InCondition( TFCondition.Taunting ) )
-			{
-				if ( PartnerTarget.ActiveTaunt.Attributes.TauntType == TauntType.Partner && PartnerTarget.WaitingForPartner == true && IsPartnerTauntAngleValid( PartnerTarget ) )
-				{
-					WeaponTauntAvailable = false;
-					ActiveTaunt = PartnerTarget.ActiveTaunt;
-					PartnerSetLocation( PartnerTarget );
-					AcceptPartnerTaunt( false );
-					PartnerTarget.AcceptPartnerTaunt( true );
-					return;
-				}
-				else if ( PartnerTarget.ActiveTaunt.Attributes.TauntType == TauntType.Looping && PartnerTarget.ActiveTaunt.Attributes.TauntAllowJoin == true )
-				{
-					WeaponTauntAvailable = false;
-					ActiveTaunt = PartnerTarget.ActiveTaunt;
-					PlayTaunt( ActiveTaunt );
-					return;
-				}
-			}
-
-			var weapon = ActiveWeapon as TFWeaponBase;
-			var TauntName = weapon.Data.TauntName;
-			WeaponTauntAvailable = false;
-			TimeSinceTaunt = 0;
-			if ( !String.IsNullOrEmpty( TauntName ) )
-				PlayTaunt( TauntName );
+			if ( TryDoubleTapTaunt() ) return;
 		}
 
 		if ( !InCondition( TFCondition.Taunting ) && !TauntsReset )
@@ -135,17 +165,16 @@ partial class TFPlayer
 		}
 
 		//Check to see if we are somehow in taunt condition without a taunt set
-		if ( ActiveTaunt == null )
-			return;
+		if ( ActiveTaunt == null ) return;
 
 		if ( InCondition( TFCondition.Taunting ) )
 		{
 			//Call a fake partner accept
-			if ( ActiveTaunt.Attributes.TauntType == TauntType.Partner && Input.Pressed( InputButton.Use ) )
+			if ( ActiveTaunt.TauntType == TauntType.Partner && Input.Pressed( InputButton.Use ) )
 			{
 				AcceptPartnerTaunt( true );
 			}
-			if ( ActiveTaunt.Attributes.TauntType == TauntType.Partner && !WaitingForPartner )
+			if ( ActiveTaunt.TauntType == TauntType.Partner && !WaitingForPartner )
 			{
 				if ( TimeSinceTaunt > TauntDuration )
 				{
@@ -153,17 +182,17 @@ partial class TFPlayer
 				}
 			}
 			//Stop Taunt via duration
-			if ( ActiveTaunt.Attributes.TauntType == TauntType.Once && TimeSinceTaunt > TauntDuration )
+			if ( ActiveTaunt.TauntType == TauntType.Once && TimeSinceTaunt > TauntDuration )
 			{
 				StopTaunt();
 			}
 			//Stop Taunt via button press
-			if ( Input.Pressed( InputButton.Drop ) && (ActiveTaunt.Attributes.TauntType == TauntType.Looping || (ActiveTaunt.Attributes.TauntType == TauntType.Partner && WaitingForPartner)) )
+			if ( Input.Pressed( InputButton.Drop ) && (ActiveTaunt.TauntType == TauntType.Looping || (ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner)) )
 			{
 				StopTaunt();
 			}
 			//Stop Taunt via loss of grounded state
-			if ( ActiveTaunt.Attributes.TauntType != TauntType.Looping && GroundEntity == null )
+			if ( ActiveTaunt.TauntType != TauntType.Looping && GroundEntity == null )
 			{
 				StopTaunt();
 			}
@@ -179,13 +208,82 @@ partial class TFPlayer
 		}
 	}
 
-	public void TauntConds()
+	public bool CanTaunt()
 	{
-		var animcontroller = Animator as TFPlayerAnimator;
-		animcontroller?.SetAnimParameter( "b_taunt", true );
+		if ( !IsGrounded ) return false;
+		if ( InCondition( TFCondition.Taunting ) ) return false;
+
+		return true;
+	}
+
+	public bool TryDoubleTapTaunt()
+	{
+		if ( TryJoinPartnerTaunt() ) return true;
+		if ( TryWeaponTaunt() ) return true;
+		return false;
+	}
+
+	/// <summary>
+	/// Attempt to join a partner or party taunt
+	/// </summary>
+	/// <returns></returns>
+	public bool TryJoinPartnerTaunt()
+	{
+		if ( PartnerTarget != null && PartnerTarget.InCondition( TFCondition.Taunting ) )
+		{
+			if ( PartnerTarget.ActiveTaunt.TauntType == TauntType.Partner && PartnerTarget.WaitingForPartner == true && IsPartnerTauntAngleValid( PartnerTarget ) )
+			{
+				WeaponTauntAvailable = false;
+				ActiveTaunt = PartnerTarget.ActiveTaunt;
+				PartnerSetLocation( PartnerTarget );
+				AcceptPartnerTaunt( false );
+				PartnerTarget.AcceptPartnerTaunt( true );
+				return true;
+			}
+			else if ( PartnerTarget.ActiveTaunt.TauntType == TauntType.Looping && PartnerTarget.ActiveTaunt.TauntAllowJoin == true )
+			{
+				WeaponTauntAvailable = false;
+				ActiveTaunt = PartnerTarget.ActiveTaunt;
+				PlayTaunt( ActiveTaunt );
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	/// <summary>
+	/// Attempt to start a weapon-specific taunt
+	/// </summary>
+	/// <returns></returns>
+	public bool TryWeaponTaunt()
+	{
+		Log.Info("weapon taunt");
+		var weapon = ActiveWeapon as TFWeaponBase;
+		var Tauntdata = TauntData.Get(weapon.Data.TauntData);
+		var TauntName = weapon.Data.TauntString; 
+		WeaponTauntAvailable = false;
+		TimeSinceTaunt = 0;
+		if ( Tauntdata != null )
+		{
+			PlayTaunt( Tauntdata );
+			return true;
+		}
+		if ( !String.IsNullOrEmpty( TauntName ) )
+		{
+			PlayTaunt( TauntName );
+			return true;
+		}
+		return false;
+	}
+
+	public void ApplyTauntConds()
+	{
+		(Animator as TFPlayerAnimator)?.SetAnimParameter( "b_taunt", true );
+
 		Velocity = 0f;
-		if ( IsClient )
-			Rotation = Rotation.LookAt( Input.Rotation.Forward.WithZ( 0 ), Vector3.Up ); //Set rotation towards player's camera for the taunt
+		if ( Game.IsClient ) //INVESTIGATE
+			Rotation = Rotation.LookAt( Camera.Rotation.Forward.WithZ( 0 ), Vector3.Up ); //Set rotation towards player's camera for the taunt
 		AddCondition( TFCondition.Taunting );
 		TauntEnableMove = false;
 		TauntsReset = false;
@@ -199,49 +297,37 @@ partial class TFPlayer
 		ActiveTaunt = taunt;
 
 		var animcontroller = Animator as TFPlayerAnimator;
+		var TauntType = taunt.TauntType;
+		var TauntIndex = TauntList.IndexOf( ActiveTaunt );  //Find way to dynamically assign, right now it MUST line up to animgraph
 
-		var TauntType = taunt.Attributes.TauntType;
-		var TauntIndex = PlayerClass.ClassTauntList.IndexOf( ActiveTaunt );
+		if ( !CanTaunt() ) return;
 
-		//Can't taunt if already taunting or not on ground
-		if ( InCondition( TFCondition.Taunting ) || GroundEntity == null )
-		{
-			return;
-		}
-
-		if ( taunt.Attributes.TauntUseProp == true )
+		if ( taunt.TauntUseProp == true )
 		{
 			CreateTauntProp( ActiveTaunt, this );
 		}
-
 		animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
 		animcontroller?.SetAnimParameter( "taunt_type", (int)TauntType );
 
-		if ( TauntType == TauntType.Once )
-		{
-			TimeSinceTaunt = 0;
-			TauntDuration = GetSequenceDuration( ActiveTaunt.AnimName );
-			TauntConds();
-		}
-		else if ( TauntType == TauntType.Looping )
-		{
-			TauntConds();
-		}
-		else if ( TauntType == TauntType.Partner )
+		if ( TauntType == TauntType.Partner )
 		{
 			//If we are starting the partner taunt, we need to check for valid spacing
 			if ( initiator )
 			{
-				if ( CanInitiatePartnerTaunt() )
+				if ( !CanInitiatePartnerTaunt() )
 				{
-					TauntConds();
+					Log.Info("Not enough space for a partner");
+					return;
 				}
 			}
-			else
-			{
-				TauntConds();
-			}
 		}
+		if ( TauntType == TauntType.Once )
+		{
+			TimeSinceTaunt = 0;
+			TauntDuration = GetSequenceDuration( ActiveTaunt.StringName );
+		}
+
+		ApplyTauntConds();
 	}
 
 	/// <summary>
@@ -253,9 +339,9 @@ partial class TFPlayer
 		TauntData taunt = null;
 
 		//Searches through enabled taunts to find the appropriate taunt data and assigns it
-		foreach ( TauntData data in PlayerClass.ClassTauntList )
+		foreach ( TauntData data in TauntList )
 		{
-			if ( data.Name == taunt_name )
+			if ( data.StringName == taunt_name )
 				taunt = data;
 		}
 
@@ -269,12 +355,12 @@ partial class TFPlayer
 			var slot = "secondary";
 
 			//Special Case for engineer, since shotgun is his primary
-			if ( PlayerClass.Name == "engineer" )
+			if ( PlayerClass.Title == "engineer" )
 			{
 				slot = "primary";
 			}
 
-			taunt = TauntData.Get( $"weapon_{PlayerClass.Name}_{slot}" );
+			taunt = TauntData.Get( $"weapon_{PlayerClass.Title}_{slot}" );
 
 		}
 
@@ -303,11 +389,11 @@ partial class TFPlayer
 		TauntEnableMove = false;
 		WaitingForPartner = false;
 
-		if ( TauntPropModel != null && Host.IsServer )
+		if ( TauntPropModel != null && Game.IsServer )
 			TauntPropModel.Delete();
 		if ( weapon != null && weapon.EnableDrawing == false )
 			weapon.EnableDrawing = true;
-		ForceThirdpersonCamera( false );
+		ThirdpersonSet(false);
 	}
 
 	#region Partner Taunt Logic
@@ -817,7 +903,7 @@ partial class TFPlayer
 	/// </summary>
 	public void GetPartnerDuration( TFPlayer player, bool initiator )
 	{
-		var taunt = ActiveTaunt.AnimName;
+		var taunt = ActiveTaunt.StringName;
 		var tauntDurationVar = 0f;
 		if ( taunt == "taunt_highfive" )
 		{
@@ -853,13 +939,11 @@ partial class TFPlayer
 			Owner = player,
 			EnableHideInFirstPerson = false,
 		};
-		player.TauntPropModel.SetModel( taunt.Attributes.TauntPropModel );
+		player.TauntPropModel.SetModel( taunt.TauntPropModel );
 		player.TauntPropModel.SetParent( player, true );
 	}
 
-	[ConVar.Replicated] public static bool tf_dev_thirdperson_enabled { get; set; }
 	bool WasFirstPerson { get; set; }
-	bool IsDevThirdPersonEnabled { get; set; } = false;
 
 	/// <summary>
 	/// Camera Checks, called in TFPlayer.Simulate
@@ -867,14 +951,16 @@ partial class TFPlayer
 	public void SimulateCameraSwitch()
 	{
 		if ( InCondition( TFCondition.Taunting ) )
-			ForceThirdpersonCamera( true );
-		else if ( Input.Pressed( InputButton.View ) && tf_dev_thirdperson_enabled )
+			ThirdpersonSet( true );
+
+		else if ( Input.Pressed( InputButton.Grenade ) )
 		{
-			ChangeCamera();
-			IsDevThirdPersonEnabled = !IsDevThirdPersonEnabled;
+			SwapCamera();
+			//IsDevThirdPersonEnabled = !IsDevThirdPersonEnabled;
 		}
-		else if ( !IsDevThirdPersonEnabled )
-			ForceThirdpersonCamera( false );
+
+		//else if ( !IsDevThirdPersonEnabled )
+		//	ForceThirdpersonCamera( false );
 
 		if ( WasFirstPerson && !IsFirstPersonMode ) OnSwitchedViewMode( false );
 		if ( !WasFirstPerson && IsFirstPersonMode ) OnSwitchedViewMode( true );
@@ -885,37 +971,22 @@ partial class TFPlayer
 	/// <summary>
 	/// Changes camera from firstperson to thirdperson and vice-versa
 	/// </summary>
-	public void ChangeCamera()
+	public void SwapCamera()
 	{
-		// TODO: Make Thirdperson mode part of Source 1 camera
-		// and uncomment this.
-
-		/*
-		if ( CameraMode is not TFCamera )
-			CameraMode = new TFCamera();
-		else
-			CameraMode = new TFThirdPersonCamera();*/
+		ThirdpersonSet( !IsThirdPerson );
+		Log.Info("taunt Cam");
 	}
 
 	/// <summary>
 	/// Forces camera to thirdperson if true, firstperson if false
 	/// </summary>
 	/// <param name="enabled"></param>
-	public void ForceThirdpersonCamera( bool enabled )
+	public void ThirdpersonSet( bool enabled )
 	{
-		// TODO: Make Thirdperson mode part of Source 1 camera
-		// and uncomment this.
-
-		/*
-		if ( enabled == false )
-		{
-			CameraMode = new TFCamera();
-		}
-		if ( enabled == true )
-		{
-			CameraMode = new TFThirdPersonCamera();
-		}*/
+		IsThirdPerson = enabled;
 	}
+
+	//*/
 
 	/// <summary>
 	/// Console command for playing taunts by their animation name
@@ -929,16 +1000,16 @@ partial class TFPlayer
 			TauntData taunt = null;
 
 			//Finds the appropriate taunt data and assigns it
-			foreach ( TauntData data in player.PlayerClass.ClassTauntList )
+			foreach ( TauntData data in player.TauntList )
 			{
-				if ( data.AnimName == taunt_name )
+				if ( data.StringName == taunt_name )
 					taunt = data;
 
 			}
 
 			if ( taunt != null )
 			{
-				if ( tf_disable_movement_taunts && (taunt.AnimName == "taunt_conga" || taunt.AnimName == "taunt_aerobic" || taunt.AnimName == "taunt_russian") )
+				if ( tf_disable_movement_taunts && (taunt.StringName == "taunt_conga" || taunt.StringName == "taunt_aerobic" || taunt.StringName == "taunt_russian") )
 				{
 					Log.Info( $"{taunt_name} is currently disabled." );
 				}

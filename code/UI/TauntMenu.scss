@@ -1,11 +1,12 @@
 @import "/UI/styles/colors.scss";
 @import "/UI/styles/buttons.scss";
 
-DevMenu {
+TauntMenu {
     width: 400px;
     pointer-events: none;
     transition: all 0.1s ease-out;
     position: absolute;
+    font-family: poppins;
     height: 100%;
     opacity: 1;
     margin: auto;
@@ -13,14 +14,14 @@ DevMenu {
     flex-direction: column;
     overflow: hidden;
     left: -400px;
-    z-index: 100;
+    z-index: 4;
 
     .header {
         padding: 14px 20px;
         width: 100%;
         background-color: #37302b;
         color: #fdeece;
-        font-family: TF2_Build;
+        font-family: TF2 Build;
         font-size: 22px;
         text-align: center;
         text-shadow: 2px 2px 0 black;
@@ -33,16 +34,18 @@ DevMenu {
         left: 0;
     }
 
-    .button-list {
+    TauntMenuButtons {
         height: 100%;
+        box-sizing: border-box;
         width: 100%;
         padding: 10px;
         flex-direction: column;
+        display: grid;
 
         .section {
             color: #808080;
             font-family: TF2 Secondary;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
     }
 

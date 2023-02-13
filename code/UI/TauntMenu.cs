@@ -4,41 +4,74 @@ using Sandbox.UI.Construct;
 
 namespace TFS2.UI;
 
-public class TauntMenu: Panel
+public class TauntMenu : Panel
 {
 	public TauntMenu()
 	{
-		StyleSheet.Load( "/ui/DevMenu.scss" );
-		Add.Label( "Placeholder Taunt Menu", "header" );
+		StyleSheet.Load( "/ui/TauntMenu.scss" );
 
-		var panel = Add.Panel( "button-list" );
-		//
-		// General
-		//
-		panel.Add.Label( "General", "section" );
-		panel.Add.Button( "Change Team", "button", () => ConsoleSystem.Run( "tf_open_menu_team" ) );
-		panel.Add.Button( "Change Class", "button", () => ConsoleSystem.Run( "tf_open_menu_class" ) );
-		panel.Add.Button( "Suicide", "button", () => ConsoleSystem.Run( "kill" ) );
-		panel.Add.Button( "Regenerate", "button", () => ConsoleSystem.Run( "tf_regenerate" ) );
-		panel.Add.Button( "Respawn", "button", () => ConsoleSystem.Run( "respawn" ) );
+		Add.Label( "Taunt Menu", "header" );
 
-		//
-		// Teamplay
-		//
-		panel.Add.Label( "Teamplay", "section" );
-		panel.Add.Button( "Restart Round", "button", () => ConsoleSystem.Run( "mp_restartround" ) );
-		panel.Add.Button( "Restart Game", "button", () => ConsoleSystem.Run( "mp_restartgame" ) );
-
-		//
-		// Entities
-		//
-		panel.Add.Label( "Entities", "section" );
-		panel.Add.Button( "Spawn a Mimic Bot", "button", () => ConsoleSystem.Run( "bot_add" ) );
-		panel.Add.Button( "Spawn a Dummy Bot", "button", () => ConsoleSystem.Run( "tf_bot_add" ) );
+		//AddChild<TauntMenuButtons>();
 	}
 
 	public override void Tick()
 	{
-		SetClass( "open", Input.Down( InputButton.Grenade ) );
+		if ( Game.LocalPawn is not TFPlayer player ) return; //FIX THIS, prevents Non-tf2 entities from ticking tauntmenu code
+
+		SetClass( "open", Input.Down( InputButton.Drop ) );
+		if(Input.Pressed( InputButton.Drop ) )
+		{
+			OnPlayerUpdated(); //FIX: Temp method to regen taunt buttons until I can figure out howw to get it to generate AFTER class generates
+		}
+		if ( Input.Down( InputButton.Drop ) )
+		{
+			Log.Info("OPEN");
+		}
+
+		if ( LastTeam != player.Team || LastPlayerClass != player.PlayerClass )
+		{
+			OnPlayerUpdated();
+		}
+	}
+
+	TFTeam LastTeam { get; set; }
+	PlayerClass LastPlayerClass { get; set; }
+
+	//If the player changes class or team, delete our existing taunt buttons and regenerate them
+	public void OnPlayerUpdated()
+	{
+		if ( Game.LocalPawn is not TFPlayer player ) return; //FIX THIS, prevents Non-tf2 entities from ticking tauntmenu code
+
+		LastTeam = player.Team;
+		LastPlayerClass = player.PlayerClass;
+
+		if ( player.PlayerClass == null ) return;
+
+		foreach ( var child in Children )
+		{
+			if ( child is TauntMenuButtons )
+			{
+				child.Delete();
+			}
+		}
+		AddChild<TauntMenuButtons>();
+	}
+}
+public class TauntMenuButtons : Panel
+{
+	public TauntMenuButtons()
+	{
+		//Add.Label( "General", "section" );
+		
+		if ( Game.LocalPawn is not TFPlayer player ) return;
+
+		if ( player.PlayerClass == null ) return;
+
+		foreach ( var taunt in player.TauntList ) //FIX INVESTIGATE: Tauntlist is returning 0, even though tauntlist is populated
+		{
+			Log.Info("WE adding shit");
+			Add.Button( taunt.DisplayName, "button", () => ConsoleSystem.Run( "tf_playtaunt", taunt.StringName ) );
+		}
 	}
 }
