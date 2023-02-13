@@ -1,0 +1,31 @@
+﻿@using Sandbox.UI
+@using Breaker
+@using System.Linq
+
+@attribute [StyleSheet("/UI/BreakerMenu.scss")]
+
+@namespace Breaker.UI
+
+<root>
+    <div class="controls">
+        <img src="https://cdn.discordapp.com/icons/834153880115085363/af4a52605f67eebab9d70884191a92e9.webp?size=64" />
+        <div class="title">
+            <label class="name">Breaker</label>
+            <label>Admin System</label>
+        </div>
+        <button @onclick=@OnClickExit icon="close" />
+    </div>
+    <div class="main">
+        <div class="commands">
+            <row class="title">Commands</row>
+            <column class="list" @ref=ListPanel />    
+        </div>
+        <div class="interact">
+            <label class="title" @ref=CommandTitleLabel />
+            <div class="wizard">
+                <div class="parameters" @ref=ParameterPanel />
+                <button Text="Run Command" class="run" icon="play_arrow" />
+            </div>
+        </div>
+    </div>
+</root>

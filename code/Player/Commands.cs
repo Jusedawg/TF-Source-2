@@ -1,13 +1,14 @@
 using Sandbox;
 using Amper.FPS;
 using System.Linq;
+using Breaker;
 
 namespace TFS2;
 
 partial class TFPlayer
 {
-	[ConCmd.Admin( "tf_give_ammo" )]
-	private static void Command_GiveAmmo( int count )
+	[Command("giveammo"), Permission("tfs2.ammo")]
+	public static void Command_GiveAmmo( int count )
 	{
 		if ( ConsoleSystem.Caller.Pawn is TFPlayer player )
 		{
@@ -16,19 +17,19 @@ partial class TFPlayer
 		}
 	}
 
-	[ConCmd.Admin( "tf_regenerate" )]
+	[Command( "tf_regenerate" ), Permission( "tfs2.ammo" )]
 	public static void Command_Regenerate()
 	{
 		(ConsoleSystem.Caller.Pawn as TFPlayer)?.Regenerate();
 	}
 
-	[ConCmd.Admin( "tf_deleteweapons" )]
+	[Command( "tf_deleteweapons" ), Permission( "tfs2.ammo" )]
 	public static void Command_DeleteWeapons()
 	{
 		(ConsoleSystem.Caller.Pawn as TFPlayer)?.DeleteAllWeapons();
 	}
 
-	[ConCmd.Admin( "hurtme" )]
+	[Command( "hurtme" ), Permission( "tfs2.health" )]
 	public static void Command_HurtMe( int damage = 10 )
 	{
 		if ( ConsoleSystem.Caller.Pawn is TFPlayer player )
@@ -43,14 +44,14 @@ partial class TFPlayer
 		}
 	}
 
-	[ConCmd.Admin( "burn" )]
+	[Command( "burn" ), Permission( "tfs2.health" )]
 	public static void Command_Burn( int time = 5 )
 	{
 		if ( ConsoleSystem.Caller.Pawn is TFPlayer player )
 			player.Burn( player, null, time );
 	}
 
-	[ConCmd.Admin( "bot_voicecommand" )]
+	[Command( "bot_voicecommand" ), Permission( "tfs2.bots" )]
 	public static void Command_BotCommand( string botname, int menu = -1, int concept = -1 )
 	{
 		var bot = Game.Clients.FirstOrDefault( x => x.IsBot && x.Name == botname );
