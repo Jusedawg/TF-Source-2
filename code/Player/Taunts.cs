@@ -943,51 +943,6 @@ partial class TFPlayer
 		player.TauntPropModel.SetParent( player, true );
 	}
 
-	bool WasFirstPerson { get; set; }
-
-	/// <summary>
-	/// Camera Checks, called in TFPlayer.Simulate
-	/// </summary>
-	public void SimulateCameraSwitch()
-	{
-		if ( InCondition( TFCondition.Taunting ) )
-			ThirdpersonSet( true );
-
-		else if ( Input.Pressed( InputButton.Grenade ) )
-		{
-			SwapCamera();
-			//IsDevThirdPersonEnabled = !IsDevThirdPersonEnabled;
-		}
-
-		//else if ( !IsDevThirdPersonEnabled )
-		//	ForceThirdpersonCamera( false );
-
-		if ( WasFirstPerson && !IsFirstPersonMode ) OnSwitchedViewMode( false );
-		if ( !WasFirstPerson && IsFirstPersonMode ) OnSwitchedViewMode( true );
-
-		WasFirstPerson = IsFirstPersonMode;
-	}
-
-	/// <summary>
-	/// Changes camera from firstperson to thirdperson and vice-versa
-	/// </summary>
-	public void SwapCamera()
-	{
-		ThirdpersonSet( !IsThirdPerson );
-		Log.Info("taunt Cam");
-	}
-
-	/// <summary>
-	/// Forces camera to thirdperson if true, firstperson if false
-	/// </summary>
-	/// <param name="enabled"></param>
-	public void ThirdpersonSet( bool enabled )
-	{
-		IsThirdPerson = enabled;
-	}
-
-	//*/
-
 	/// <summary>
 	/// Console command for playing taunts by their animation name
 	/// </summary>
@@ -1024,6 +979,64 @@ partial class TFPlayer
 			{
 				Log.Info( $"{taunt_name} is not a valid taunt name." );
 			}
+		}
+	}
+
+	/// <summary>
+	/// Logic for re-implementing animation events in ModelDoc sequences (currently only on playermodels)
+	/// </summary>
+	public override void OnAnimEventGeneric( string name, int intData, float floatData, Vector3 vectorData, string stringData )
+	{
+		if ( name == "TF_TAUNT_ENABLE_MOVE" )
+		{
+			if ( intData == 0 && TauntEnableMove == true )
+			{
+				TauntEnableMove = false;
+			}
+			if ( intData == 1 && TauntEnableMove == false )
+			{
+				TauntEnableMove = true;
+			}
+		}
+
+		if ( name == "TF_HIDE_WEAPON" )
+		{
+			var weapon = ActiveWeapon as TFWeaponBase;
+			if ( weapon == null ) return;
+
+			if ( intData == 0 )
+			{
+				weapon.EnableDrawing = true;
+			}
+			if ( intData == 1 )
+			{
+				weapon.EnableDrawing = false;
+			}
+		}
+
+		if ( name == "TF_HIDE_TAUNTPROP" )
+		{
+			if ( intData == 0 && TauntPropModel.EnableDrawing == false )
+			{
+				TauntPropModel.EnableDrawing = true;
+			}
+			if ( intData == 1 && TauntPropModel.EnableDrawing == true )
+			{
+				TauntPropModel.EnableDrawing = false;
+			}
+		}
+
+		if ( name == "TF_SET_BODYGROUP_PLAYER" )
+		{
+			SetBodyGroup( stringData, intData );
+		}
+
+		if ( name == "TF_SET_BODYGROUP_WEAPON" )
+		{
+			var weapon = ActiveWeapon as TFWeaponBase;
+			if ( weapon == null ) return;
+
+			weapon.SetBodyGroup( stringData, intData );
 		}
 	}
 

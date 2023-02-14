@@ -236,7 +236,7 @@ public partial class TFPlayer : SDKPlayer
 
 		SimulateItems();
 
-		SimulateCameraSwitch();
+		SimulateCameraLogic();
 		SimulateTaunts();
 	}
 
@@ -270,68 +270,6 @@ public partial class TFPlayer : SDKPlayer
 	public virtual void OnSwitchedViewMode( bool is_first_person )
 	{
 		(ActiveWeapon as TFWeaponBase)?.OnSwitchedViewMode( is_first_person );
-	}
-
-	/// <summary>
-	/// Logic for re-implementing animation events in ModelDoc sequences (currently only on playermodels)
-	/// </summary>
-	public override void OnAnimEventGeneric( string name, int intData, float floatData, Vector3 vectorData, string stringData )
-	{
-		/*
-		if ( name == "TF_TAUNT_ENABLE_MOVE" )
-		{
-			if ( intData == 0 && TauntEnableMove == true )
-			{
-				TauntEnableMove = false;
-			}
-			if ( intData == 1 && TauntEnableMove == false )
-			{
-				TauntEnableMove = true;
-			}
-		}*/
-
-		if ( name == "TF_HIDE_WEAPON" )
-		{
-			var weapon = ActiveWeapon as TFWeaponBase;
-			if ( weapon == null ) return;
-
-			if ( intData == 0 )
-			{
-				weapon.EnableDrawing = true;
-			}
-			if ( intData == 1 )
-			{
-				weapon.EnableDrawing = false;
-			}
-		}
-
-		/*
-		if ( name == "TF_HIDE_TAUNTPROP" )
-		{
-			if ( TauntPropModel == null ) return;
-
-			if ( intData == 0 && TauntPropModel.EnableDrawing == false )
-			{
-				TauntPropModel.EnableDrawing = true;
-			}
-			if ( intData == 1 && TauntPropModel.EnableDrawing == true )
-			{
-				TauntPropModel.EnableDrawing = false;
-			}
-		}*/
-
-		if ( name == "TF_SET_BODYGROUP_PLAYER" )
-		{
-			SetBodyGroup( stringData, intData );
-		}
-
-		if ( name == "TF_SET_BODYGROUP_WEAPON" )
-		{
-			var weapon = ActiveWeapon as TFWeaponBase;
-			if ( weapon == null ) return;
-
-			weapon.SetBodyGroup( stringData, intData );
-		}
 	}
 
 	protected override void OnDestroy()
