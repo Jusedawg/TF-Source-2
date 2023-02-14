@@ -16,7 +16,19 @@ partial class TFPlayer
 
 	[ConVar.Replicated] public static bool tf_preround_push_from_damage_enable { get; set; } = true;
 	[ConVar.Replicated] public static float tf_damage_force_scale_other { get; set; } = 6;
-
+	/// <summary>
+	/// Is this player launched into the air by explosions / other?
+	/// </summary>
+	public virtual bool IsLaunched { get; private set; } = false;
+	public virtual bool IsBlastJumping { get; private set; } = false;
+	public void CheckForLaunchedEnd()
+	{
+		if (IsLaunched && IsGrounded)
+		{
+			IsLaunched = false;
+			IsBlastJumping = false;
+		}
+	}
 	public override void ApplyOnPlayerDamageModifyRules( ref ExtendedDamageInfo info )
 	{
 		base.ApplyOnPlayerDamageModifyRules( ref info );
@@ -44,6 +56,15 @@ partial class TFPlayer
 
 		if ( info.HasTag( TFDamageTags.Ignite ) )
 			BurnFromDamage( info );
+
+		// Let our passive weapons modify our damage.
+		foreach ( var wpn in Weapons )
+		{
+			if ( wpn is IPassiveDamageModifier passive )
+			{
+				passive.ApplyDamageModifications( ref info );
+			}
+		}
 	}
 
 	public override void ApplyPushFromDamage( ExtendedDamageInfo info )
@@ -64,31 +85,48 @@ partial class TFPlayer
 		var direction = WorldSpaceBounds.Center - (inflictor.WorldSpaceBounds.Center + Vector3.Down * 10);
 		direction = direction.Normal;
 
-		var damageForForce = info.Damage;
-		var hullSize = GetPlayerExtents( IsDucked );
-		var forceScale = tf_damage_force_scale_other;
-
-		// Modify the ducked hull size so we propel further.
-		if ( IsDucked )
-			hullSize.z = 55;
-
-		if ( info.Attacker == this )
+		Vector3 dmgForce = default;
+		bool wasInAir = IsInAir;
+		bool isSelfDamage = info.Attacker == this;
+		if ( info.Force == default )
 		{
+			var damageForForce = info.Damage;
+			var hullSize = GetPlayerExtents( IsDucked );
+			var forceScale = tf_damage_force_scale_other;
+
+			// Modify the ducked hull size so we propel further.
+			if ( IsDucked )
+				hullSize.z = 55;
+			
 			if ( info.HasTag( TFDamageTags.Blast ) )
 			{
-				forceScale = IsGrounded
-					? PlayerClass.Abilities.BlastJumpForceScaleGrounded
-					: PlayerClass.Abilities.BlastJumpForceScale;
+				if ( isSelfDamage )
+				{
+					forceScale = IsGrounded
+						? PlayerClass.Abilities.BlastJumpForceScaleGrounded
+						: PlayerClass.Abilities.BlastJumpForceScale;
+
+				}
+				
 			}
+			
+
+			forceScale *= info.ForceScale;
+
+			dmgForce = direction * TFGameRules.Current.DamageForce( hullSize, damageForForce, forceScale );
+			// Class Push Resistance
+			var classPushRes = PlayerClass.Abilities.DamagePushResistance;
+			dmgForce *= classPushRes;
 		}
-
-		var dmgForce = direction * TFGameRules.Current.DamageForce( hullSize, damageForForce, forceScale );
-
-		// Class Push Resistance
-		var classPushRes = PlayerClass.Abilities.DamagePushResistance;
-		dmgForce *= classPushRes;
+		else
+			dmgForce = info.Force;
 
 		ApplyAbsoluteImpulse( dmgForce );
+		if(IsInAir && !wasInAir)
+		{
+			IsLaunched= true;
+			IsBlastJumping = isSelfDamage;
+		}
 	}
 
 	public override void OnTakeDamageEffects( Entity attacker, Entity weapon, float damage, string[] tags, Vector3 position, Vector3 force )

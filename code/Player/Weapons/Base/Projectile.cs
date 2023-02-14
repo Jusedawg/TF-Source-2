@@ -60,11 +60,11 @@ public partial class TFProjectile : Projectile
 		{
 			// Reflects make projectiles inflict minicritical damage.
 			if ( ShouldMiniCritOnDeflection() )
-				DamageInfo.WithTag( TFDamageTags.MiniCritical );
+				DamageInfo = DamageInfo.WithTag( TFDamageTags.MiniCritical );
 
 			// Pyro was critboosted, projectiles retain the boost.
 			if ( who.IsCritBoosted )
-				DamageInfo.WithTag( TFDamageTags.Critical );
+				DamageInfo = DamageInfo.WithTag( TFDamageTags.Critical );
 		}
 
 		CreateTrails();

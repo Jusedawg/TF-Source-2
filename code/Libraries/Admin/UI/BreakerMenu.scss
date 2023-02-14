@@ -1,0 +1,194 @@
+﻿BreakerMenu {
+    width: 45%;
+    height: 60%;
+    margin: auto;
+    font-family: 'Segoe UI';
+    pointer-events: all;
+    flex-direction: column;
+
+    .controls {
+        background-color: #444;
+        width: 100%;
+        height: 15%;
+        text-align: center;
+        font-size: 36px;
+        color: #FFFFFF;
+        align-items: center;
+        flex-direction: row;
+        border-radius: 20px 20px 0 0;
+
+        img {
+            height: 100%;
+            width: 24px;
+            aspect-ratio: 1;
+            margin-left: 15px;
+            flex-grow: 1;
+        }
+
+        .title {
+            flex-grow: 8;
+            justify-content: center;
+
+            .name {
+                color: #EE2;
+                padding-right: 10px;
+                font-weight: bold;
+            }
+        }
+
+        button {
+            flex-grow: 1;
+            cursor: pointer;
+        }
+    }
+
+    .main {
+        background-color: #77776A;
+        height: 100%;
+        border-radius: 0 0 20px 20px;
+
+        .commands {
+            flex-direction: column;
+            overflow: scroll;
+            width:40%;
+
+            .title {
+                color: #FF2;
+                text-align: center;
+                font-size: 28px;
+                margin: 5px;
+                flex-basis: 24px;
+                font-weight: bolder;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .list {
+                border-top: 5px solid black;
+                border-bottom: 5px solid black;
+                flex-direction: column;
+                margin: 10px;
+                padding: 5px;
+                flex-wrap: nowrap;
+                flex-shrink: 0;
+
+                .group {
+                    flex-direction: column;
+                    padding-bottom: 10px;
+                    margin-bottom: 10px;
+
+                    .header {
+                        align-items: center;
+                        width: 90%;
+                        color: #FFF;
+                        text-align: center;
+                        font-size: 24px;
+                        font-weight: bold;
+                        margin-left: 10px;
+                        margin-right: 10px;
+                        margin-top: 5px;
+                        flex-basis: 24px;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: #888;
+                        }
+                    }
+
+                    .command {
+                        align-items: center;
+                        width: 85%;
+                        background-color: #333;
+                        color: #FFF;
+                        text-align: center;
+                        font-size: 18px;
+                        margin-left: 10px;
+                        margin-right: 10px;
+                        margin-top: 5px;
+                        flex-basis: 24px;
+                        cursor: pointer;
+
+
+                        &:hover {
+                            background-color: #999;
+                        }
+
+                        &.hidden {
+                            display: none;
+                        }
+                    }
+
+                    .iconpanel {
+                        flex-grow: 1;
+                    }
+
+                    .text {
+                        flex-grow: 10;
+                        justify-content: center;
+                    }
+
+                    &.valid {
+                        background-color: #222;
+                    }
+                }
+            }
+        }
+
+        .interact {
+            flex-direction: column;
+            width:60%;
+            color: #FFF;
+            border: 5px solid black;
+            border-radius: 10px;
+            margin: 20px;
+
+            .title {
+                text-align: center;
+                font-size: 24px;
+                font-weight: bold;
+                margin: 5px;
+                //flex-basis: 24px;
+                justify-content: center;
+                flex-shrink: 0;
+                flex-grow: 0;
+            }
+
+            .wizard {
+                flex-direction: column;
+                height: 100%;
+
+                .parameters {
+                    flex-grow: 99;
+                }
+
+                .run {
+                    flex-grow: 1;
+                    width: 100%;
+                    height: 5%;
+                    background-color: #222;
+                    align-items: center;
+
+                    iconpanel {
+                        flex-grow: 1;
+                        font-size: 28px;
+                        justify-content: center;
+                    }
+
+                    label {
+                        text-align: center;
+                        font-size: 24px;
+                        font-weight: bold;
+                        flex-basis: 24px;
+                        justify-content: center;
+                        flex-shrink: 0;
+                        flex-grow: 9;
+                    }
+                }
+            }
+        }
+    }
+
+    &.hidden {
+        display: none;
+    }
+}

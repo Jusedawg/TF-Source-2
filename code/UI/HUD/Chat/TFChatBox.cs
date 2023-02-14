@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Breaker;
 
 namespace TFS2.UI
 {
-	public partial class TFChatBox : Panel
+	public partial class TFChatBox : Panel, Logging.ILogger
 	{
 		public static TFChatBox Instance { get; set; }
 		public bool IsOpen { get; set; }
@@ -44,6 +45,7 @@ namespace TFS2.UI
 		}
 
 		TimeSince TimeSinceInteraction { get; set; }
+
 
 		public void CycleChatType()
 		{
@@ -222,5 +224,41 @@ namespace TFS2.UI
 					SwitchGlyph.RemoveClass( "pressed" );
 			}
 		}
+
+		#region ILogger
+		bool Logging.ILogger.Server => false;
+
+		bool Logging.ILogger.Client => true;
+
+		void Logging.ILogger.Log( string message, MessageType type )
+		{
+			const string ERROR_COLOR = "#FF2222";
+			const string ANNOUNCE_PREFIX_COLOR = "#FFDD33";
+			const string ANNOUNCE_COLOR = "#FFBB22";
+
+			ColorFormattedString msg = new();
+			switch(type)
+			{
+				case MessageType.Error:
+					msg.AddColoredText( message, ERROR_COLOR );
+					break;
+				case MessageType.Announcement:
+					msg.AddColoredText("[ANNOUNCEMENT] ", ANNOUNCE_PREFIX_COLOR );
+					msg.AddColoredText( message, ANNOUNCE_COLOR );
+					break;
+				default:
+					msg.AddText( message );
+					break;
+			}
+
+			AddString( msg );
+		}
+
+		[BRKEvent.ConfigLoaded]
+		void OnConfigLoaded()
+		{
+			Logging.RegisterLogger( this );
+		}
+		#endregion
 	}
 }
