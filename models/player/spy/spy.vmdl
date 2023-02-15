@@ -10492,6 +10492,14 @@
 											{
 												_class = "AnimFile"
 												name = "armslayer_MELEE_ALLCLASS_swing"
+												children = 
+												[
+													{
+														_class = "AnimSubtract"
+														anim_name = "stand_MELEE_ALLCLASS"
+														frame = 0
+													},
+												]
 												activity_name = ""
 												activity_weight = 1
 												weight_list_name = "weights_Meleeswing_Arms"
@@ -10519,7 +10527,7 @@
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
-												delta = true
+												delta = false
 												worldSpace = false
 												hidden = true
 												anim_markup_ordered = false
