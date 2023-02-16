@@ -414,4 +414,15 @@ public partial class TFPlayer : SDKPlayer
 		// Apply spy touched effects.
 		player.OnSpyTouchedWhileCloaked();
 	}
+
+	// Temporary fix for rotation errors caused by inherited code in SDK, which causes the playermodel to constantly try to face 0 global rotation, causing stuttering and other issues
+	public override void SimulateMovement()
+	{
+		EyeRotation = ViewAngles.ToRotation();
+		//Rotation = Transform.RotationToLocal( ViewAngles.WithPitch( 0 ).WithRoll( 0 ).ToRotation() ); // Offending code, leaving it here so that we know what to look at in the SDK library
+
+		StartInterpolating();
+		SDKGame.Current.Movement?.Simulate( this );
+		StopInterpolating();
+	}
 }
