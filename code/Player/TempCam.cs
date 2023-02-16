@@ -10,17 +10,17 @@ partial class TFPlayer
 	bool WasFirstPerson { get; set; }
 
 	[Net, Predicted]
-	public bool ThirdPersonCamera { get; set; }
+	public bool IsThirdperson { get; set; } //Cannot override base Thirdperson
+	bool StayThirdperson { get; set; }
 
 	/// <summary>
 	/// Camera Checks, called in TFPlayer.Simulate
 	/// </summary>
 	public void SimulateCameraLogic()
 	{
-		if ( InCondition( TFCondition.Taunting ) )
-			ThirdpersonSet( true );
+		if ( InCondition( TFCondition.Taunting ) ) return;
 
-		else if (Input.Pressed( InputButton.Grenade ) )
+		else if ( Input.Pressed( InputButton.Grenade ) )
 		{
 			SwapCamera();
 		}
@@ -40,7 +40,7 @@ partial class TFPlayer
 
 		Camera.Rotation = ViewAngles.ToRotation();
 
-		if ( ThirdPersonCamera )
+		if ( IsThirdperson )
 		{
 			Camera.FirstPersonViewer = null;
 
@@ -81,7 +81,7 @@ partial class TFPlayer
 	/// </summary>
 	public void SwapCamera()
 	{
-		ThirdPersonCamera = !ThirdPersonCamera;
+		IsThirdperson = !IsThirdperson;
 	}
 
 	/// <summary>
@@ -90,7 +90,7 @@ partial class TFPlayer
 	/// <param name="enabled"></param>
 	public void ThirdpersonSet( bool enabled )
 	{
-		ThirdPersonCamera = enabled;
+		IsThirdperson = enabled;
 	}    
 	
 	/*

@@ -232,8 +232,8 @@ public class WeaponData : GameResource
 	/// Taunt Data associated with this weapon, THIS DOES NOT WORK WITH MULTICLASS WEAPONS, DO NOT SET THIS FOR THOSE
 	/// </summary>
 	[Category( "Taunts" )]
-	[ResourceType( "tauntdata" )]
-	[Title( "Taunt String Name" )]
+	[ResourceType( "taunt" )]
+	[Title( "Taunt Data Asset" )]
 	public string TauntData { get; set; }
 
 	/// <summary>

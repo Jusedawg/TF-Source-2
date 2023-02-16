@@ -51,6 +51,18 @@ partial class TFGameMovement
 			flAccelerate = (flControl * sv_friction) / flWishSpeed + 1;
 		}
 
+		DebugOverlay.ScreenText($"{Input.AnalogMove}", 1);
+
+		if ( Player.InCondition( TFCondition.Taunting ) )
+		{
+			vecWishDirection = Player.Rotation.Forward * Input.AnalogMove.x;
+			flWishSpeed = Math.Clamp( flWishSpeed, 0.0f, Player.ActiveTaunt.TauntMovespeed );
+			if ( !Player.TauntEnableMove )
+			{
+				flWishSpeed = 0;
+			}
+		}
+
 		Accelerate( vecWishDirection, flWishSpeed, flAccelerate );
 
 		// Clamp the players speed in x,y.

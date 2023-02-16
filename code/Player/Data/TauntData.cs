@@ -31,36 +31,53 @@ public class TauntData : GameResource
 	//[Category( "Images" )]
 	[ResourceType( "png" )]
 	public string Icon { get; set; }
-	public string StringName { get; set; }
+
+	/// <summary>
+	/// Sequence name of taunt, used to get duration of Once taunts
+	/// </summary>
+	public string SequenceName { get; set; }
+
+	/// <summary>
+	/// Is this taunt disabled? If so, it will not generate in any taunt lists
+	/// </summary>
 	public bool Disabled { get; set; }
 
-	/*
-	public string ClassUseChoice { get; set; } = "-1"; // Defaults to Undefined, doesn't set if asset itself is undefined for some reason
-	public TFPlayerClass ClassUse => (TFPlayerClass)ClassUseChoice.ToInt();
-	*/
 	/// <summary>
-	/// Which class can use this taunt? Used to generate the taunt list dynamically
+	/// Which class can use this taunt? Used to generate the taunt list
 	/// </summary>
 	[Category( "Attributes" )]
 	public TFPlayerClass Class { get; set; } = TFPlayerClass.Undefined;
 
-
-	//[Category("Attributes")]
-	//public string TauntTypeChoice { get; set; }
-	//public TauntType TauntType => (TauntType)TauntTypeChoice.ToInt();
 	[Category( "Attributes" )]
 	public TauntType TauntType { get; set; }
 
+	/// <summary>
+	/// If the taunt allows movement, this limits how fast the player can move
+	/// </summary>
 	[Category( "Attributes" )]
-	public bool TauntForceMove { get; set; } = false;
+	[Title( "Maximum Movmement Speed" )]
+	public float TauntMovespeed { get; set; }
 
+	/// <summary>
+	/// Forces the player to move forward
+	/// </summary>
 	[Category( "Attributes" )]
-	public bool TauntAllowJoin { get; set; } = false;
+	[Title( "Force Movement" )]
+	public bool TauntForceMove { get; set; }
 
+	/// <summary>
+	/// Allows players to join into the taunt by double-tapping the taunt button while looking at a player performing the taunt
+	/// </summary>
 	[Category( "Attributes" )]
-	public bool TauntUseProp { get; set; }
+	[Title( "Group Taunt" )]
+	public bool TauntAllowJoin { get; set; }
 
+	/// <summary>
+	/// If assigned, taunt will spawn this prop
+	/// </summary>
 	[Category( "Attributes" )]
+	[ResourceType( "vmdl" )]
+	[Title( "Prop Model" )]
 	public string TauntPropModel { get; set; }
 	
 
@@ -68,7 +85,7 @@ public class TauntData : GameResource
 	{
 		base.PostLoad();
 
-		if (TauntUseProp == true )
+		if ( !string.IsNullOrEmpty( TauntPropModel ) )
 		{
 			Precache.Add( TauntPropModel );
 		}
@@ -76,7 +93,7 @@ public class TauntData : GameResource
 		// Get lowercase class name
 		//string tauntname = ResourceName.ToLower();
 
-		Log.Info( StringName + " " + Disabled );
+		Log.Info( ResourceName + " " + Disabled );
 
 		if ( !Disabled )
 		{
@@ -89,24 +106,26 @@ public class TauntData : GameResource
 
 	public static TauntData Get( string taunt_name )
 	{
+		TauntData taunt = null;
+
 		if ( String.IsNullOrEmpty( taunt_name) )
 		{
-			Log.Info("GET TAUNTDATA FAILED: STRING NULL OR EMPTY");
+			Log.Warning("GET TAUNTDATA FAILED: STRING NULL OR EMPTY");
 			return null;
 		}
 
 		taunt_name = taunt_name.ToLower();
-		TauntData tauntCurr = null;
+		
 		foreach (var taunt_data in AllActive)
 		{
-			if (taunt_data.StringName == taunt_name)
+			if (taunt_data.ResourceName == taunt_name)
 			{
-				tauntCurr = taunt_data;
+				taunt = taunt_data;
 				break;
 			}
 		}
 
-		return tauntCurr;
+		return taunt;
 	}
 }
 

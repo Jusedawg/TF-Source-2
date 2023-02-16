@@ -24,7 +24,7 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse
 
 	public override bool CanAttack()
 	{
-		if ( TFOwner.InCondition( TFCondition.Cloaked ) )
+		if ( TFOwner.InCondition( TFCondition.Cloaked ) || TFOwner.InCondition( TFCondition.Taunting ) )
 			return false;
 
 		return base.CanAttack();
@@ -32,7 +32,7 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse
 
 	public override bool CanReload()
 	{
-		if ( TFOwner.InCondition( TFCondition.Cloaked ) )
+		if ( TFOwner.InCondition( TFCondition.Cloaked ) || TFOwner.InCondition( TFCondition.Taunting ) )
 			return false;
 
 		return base.CanReload();

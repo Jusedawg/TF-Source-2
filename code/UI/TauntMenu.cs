@@ -14,34 +14,33 @@ public class TauntMenu : Panel
 
 		//AddChild<TauntMenuButtons>();
 	}
+	TFTeam LastTeam { get; set; }
+	PlayerClass LastPlayerClass { get; set; }
 
 	public override void Tick()
 	{
-		if ( Game.LocalPawn is not TFPlayer player ) return; //FIX THIS, prevents Non-tf2 entities from ticking tauntmenu code
-
-		SetClass( "open", Input.Down( InputButton.Drop ) );
-		if(Input.Pressed( InputButton.Drop ) )
-		{
-			OnPlayerUpdated(); //FIX: Temp method to regen taunt buttons until I can figure out howw to get it to generate AFTER class generates
-		}
-		if ( Input.Down( InputButton.Drop ) )
-		{
-			Log.Info("OPEN");
-		}
+		if ( Game.LocalPawn is not TFPlayer player ) return;
 
 		if ( LastTeam != player.Team || LastPlayerClass != player.PlayerClass )
 		{
 			OnPlayerUpdated();
 		}
-	}
 
-	TFTeam LastTeam { get; set; }
-	PlayerClass LastPlayerClass { get; set; }
+		if ( !player.IsAlive ) return;
+
+		SetClass( "open", Input.Down( InputButton.Drop ) );
+
+		if ( Input.Released( InputButton.Drop ) )
+		{
+			Mouse.Position = Screen.Size * .5f;
+		}
+
+	}
 
 	//If the player changes class or team, delete our existing taunt buttons and regenerate them
 	public void OnPlayerUpdated()
 	{
-		if ( Game.LocalPawn is not TFPlayer player ) return; //FIX THIS, prevents Non-tf2 entities from ticking tauntmenu code
+		if ( Game.LocalPawn is not TFPlayer player ) return;
 
 		LastTeam = player.Team;
 		LastPlayerClass = player.PlayerClass;
@@ -70,8 +69,7 @@ public class TauntMenuButtons : Panel
 
 		foreach ( var taunt in player.TauntList ) //FIX INVESTIGATE: Tauntlist is returning 0, even though tauntlist is populated
 		{
-			Log.Info("WE adding shit");
-			Add.Button( taunt.DisplayName, "button", () => ConsoleSystem.Run( "tf_playtaunt", taunt.StringName ) );
+			Add.Button( taunt.DisplayName, "button", () => ConsoleSystem.Run( "tf_playtaunt", taunt.ResourceName ) );
 		}
 	}
 }

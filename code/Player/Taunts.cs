@@ -14,9 +14,6 @@ partial class TFPlayer
 	[Net]
 	public AnimatedEntity TauntPropModel { get; set; }
 
-	[Net, Predicted]
-	public float TauntDuration { get; set; } = 1f;
-
 	/// <summary>
 	/// Currently unused, for taunts with win-lose conditions instead of initiator-partner conditions, like RPS
 	/// </summary>
@@ -31,6 +28,9 @@ partial class TFPlayer
 	/// </summary>
 	[Net, Predicted]
 	public TimeSince TimeSinceTaunt { get; set; }
+
+	[Net, Predicted]
+	public float TauntDuration { get; set; } = 1f;
 
 	[Net]
 	public bool TauntsReset { get; set; }
@@ -65,17 +65,17 @@ partial class TFPlayer
 	public bool WaitingForPartner { get; set; }
 
 	//Per-player list of taunts
-	public List<TauntData> TauntList { get; set; } = new();
+	[Net]
+	public IList<TauntData> TauntList { get; set; }
 	public void CreateTauntList()
 	{
-		Log.Info("creating taunts");
+		Log.Info($"creating tauntlist for {PlayerClass.Title.ToLower()}");
+
 		//Reset our tauntlist
 		TauntList.Clear();
 
 		var classname = PlayerClass.Title.ToLower();
 		TFPlayerClass classkey = TFPlayerClass.Undefined;
-
-		Log.Info( "Registered Taunts: " + TauntData.AllActive.Count );
 
 		foreach ( KeyValuePair<TFPlayerClass, string> pair in PlayerClass.Names )
 		{
@@ -91,31 +91,20 @@ partial class TFPlayer
 			if ( taunt.Class == TFPlayerClass.Undefined )
 			{
 				TauntList.Add( taunt );
-
-				Log.Info( "Adding Taunt " + taunt.StringName );
 			}
 		}
 
-		// Separate so ALLCLASS taunts cycle first
+		// Separate so ALLCLASS taunts cycle first, this is important because we cannot dynamically match a playermodel's tauntlist enum, so it MUST match up
+		// Sorting alphabetically in separated groups is the only way to do this
+
 		// Add taunt to Class' taunt list if it belongs to this class
 		foreach ( var taunt in TauntData.AllActive )
 		{
 			if ( taunt.Class == classkey )
 			{
 				TauntList.Add( taunt );
-				Log.Info( "Adding Taunt " + taunt.StringName );
 			}
 		}
-
-		
-		// Logs Final Taunt list for testing purposes
-		foreach ( var Taunt in TauntList )
-		{
-			Log.Info( "FinalList " + Taunt.StringName );
-		}
-
-		Log.Info( "FinalList " + TauntList.Count );
-
 	}
 
 	/// <summary>
@@ -281,9 +270,11 @@ partial class TFPlayer
 	{
 		(Animator as TFPlayerAnimator)?.SetAnimParameter( "b_taunt", true );
 
+		StayThirdperson = IsThirdperson;
+		ThirdpersonSet( true );
+
 		Velocity = 0f;
-		if ( Game.IsClient ) //INVESTIGATE
-			Rotation = Rotation.LookAt( Camera.Rotation.Forward.WithZ( 0 ), Vector3.Up ); //Set rotation towards player's camera for the taunt
+		Rotation = Animator.GetIdealRotation();
 		AddCondition( TFCondition.Taunting );
 		TauntEnableMove = false;
 		TauntsReset = false;
@@ -295,14 +286,14 @@ partial class TFPlayer
 	public void PlayTaunt( TauntData taunt, bool initiator = true )
 	{
 		ActiveTaunt = taunt;
-
+		Log.Info($"Active Taunt: {ActiveTaunt.ResourceName}");
 		var animcontroller = Animator as TFPlayerAnimator;
 		var TauntType = taunt.TauntType;
 		var TauntIndex = TauntList.IndexOf( ActiveTaunt );  //Find way to dynamically assign, right now it MUST line up to animgraph
 
 		if ( !CanTaunt() ) return;
 
-		if ( taunt.TauntUseProp == true )
+		if ( !string.IsNullOrEmpty( ActiveTaunt.TauntPropModel ) )
 		{
 			CreateTauntProp( ActiveTaunt, this );
 		}
@@ -324,7 +315,7 @@ partial class TFPlayer
 		if ( TauntType == TauntType.Once )
 		{
 			TimeSinceTaunt = 0;
-			TauntDuration = GetSequenceDuration( ActiveTaunt.StringName );
+			TauntDuration = GetSequenceDuration( ActiveTaunt.SequenceName );
 		}
 
 		ApplyTauntConds();
@@ -336,12 +327,13 @@ partial class TFPlayer
 	/// <param name="taunt_name"></param>
 	public void PlayTaunt( string taunt_name )
 	{
+		Log.Info($"Attempting {taunt_name} via string");
 		TauntData taunt = null;
 
 		//Searches through enabled taunts to find the appropriate taunt data and assigns it
 		foreach ( TauntData data in TauntList )
 		{
-			if ( data.StringName == taunt_name )
+			if ( data.ResourceName == taunt_name )
 				taunt = data;
 		}
 
@@ -350,7 +342,7 @@ partial class TFPlayer
 		{
 			taunt = TauntData.Get( $"weapon_{PlayerClass.Title}_secondary" );
 		}
-		if ( taunt_name == "weapon_shared_shotgun" )
+		else if ( taunt_name == "weapon_shared_shotgun" )
 		{
 			var slot = "secondary";
 
@@ -363,6 +355,11 @@ partial class TFPlayer
 			taunt = TauntData.Get( $"weapon_{PlayerClass.Title}_{slot}" );
 
 		}
+		else
+		{
+			taunt = TauntData.Get( taunt_name );
+		}
+		
 
 		//Because the string-to-tauntdata assignment can possibly fail, we need to check before running taunt code
 		if ( taunt != null )
@@ -383,6 +380,7 @@ partial class TFPlayer
 		var weapon = ActiveWeapon as TFWeaponBase;
 
 		RemoveCondition( TFCondition.Taunting );
+		Rotation = Animator.GetIdealRotation();
 		animcontroller.SetAnimParameter( "b_taunt", false );
 		animcontroller.SetAnimParameter( "b_taunt_partner", false );
 		animcontroller.SetAnimParameter( "b_taunt_initiator", false );
@@ -393,7 +391,8 @@ partial class TFPlayer
 			TauntPropModel.Delete();
 		if ( weapon != null && weapon.EnableDrawing == false )
 			weapon.EnableDrawing = true;
-		ThirdpersonSet(false);
+		if ( !StayThirdperson )
+			ThirdpersonSet(false);
 	}
 
 	#region Partner Taunt Logic
@@ -903,7 +902,7 @@ partial class TFPlayer
 	/// </summary>
 	public void GetPartnerDuration( TFPlayer player, bool initiator )
 	{
-		var taunt = ActiveTaunt.StringName;
+		var taunt = ActiveTaunt.ResourceName;
 		var tauntDurationVar = 0f;
 		if ( taunt == "taunt_highfive" )
 		{
@@ -957,14 +956,14 @@ partial class TFPlayer
 			//Finds the appropriate taunt data and assigns it
 			foreach ( TauntData data in player.TauntList )
 			{
-				if ( data.StringName == taunt_name )
+				if ( data.ResourceName == taunt_name )
 					taunt = data;
 
 			}
 
 			if ( taunt != null )
 			{
-				if ( tf_disable_movement_taunts && (taunt.StringName == "taunt_conga" || taunt.StringName == "taunt_aerobic" || taunt.StringName == "taunt_russian") )
+				if ( tf_disable_movement_taunts && (taunt.ResourceName == "taunt_conga" || taunt.ResourceName == "taunt_aerobic" || taunt.ResourceName == "taunt_russian") )
 				{
 					Log.Info( $"{taunt_name} is currently disabled." );
 				}
@@ -989,11 +988,11 @@ partial class TFPlayer
 	{
 		if ( name == "TF_TAUNT_ENABLE_MOVE" )
 		{
-			if ( intData == 0 && TauntEnableMove == true )
+			if ( intData == 0 )
 			{
 				TauntEnableMove = false;
 			}
-			if ( intData == 1 && TauntEnableMove == false )
+			if ( intData == 1 )
 			{
 				TauntEnableMove = true;
 			}
