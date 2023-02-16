@@ -270,8 +270,7 @@ partial class TFPlayer
 	{
 		(Animator as TFPlayerAnimator)?.SetAnimParameter( "b_taunt", true );
 
-		StayThirdperson = IsThirdperson;
-		ThirdpersonSet( true );
+		
 
 		Velocity = 0f;
 		Rotation = Animator.GetIdealRotation();
@@ -317,6 +316,9 @@ partial class TFPlayer
 			TimeSinceTaunt = 0;
 			TauntDuration = GetSequenceDuration( ActiveTaunt.SequenceName );
 		}
+
+		StayThirdperson = IsThirdperson;
+		ThirdpersonSet( true );
 
 		ApplyTauntConds();
 	}
