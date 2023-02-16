@@ -4864,14 +4864,13 @@
 														anim_name = "layer_AttackStandMelee_allclass_runS_arms"
 													},
 												]
-												disabled = true
 												activity_name = ""
 												activity_weight = 1
 												weight_list_name = ""
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
-												delta = true
+												delta = false
 												worldSpace = false
 												hidden = false
 												anim_markup_ordered = false
@@ -6211,7 +6210,6 @@
 										anim_name = "layer_gesture_ITEM1_go_armL"
 									},
 								]
-								disabled = true
 								activity_name = "ACT_MP_GESTURE_VC_FINGERPOINT_ITEM1"
 								activity_weight = 1
 								weight_list_name = ""
@@ -6241,7 +6239,6 @@
 										anim_name = "layer_gesture_ITEM1_help_armL"
 									},
 								]
-								disabled = true
 								activity_name = "ACT_MP_GESTURE_VC_HANDMOUTH_ITEM1"
 								activity_weight = 1
 								weight_list_name = ""
@@ -6271,7 +6268,6 @@
 										anim_name = "layer_gesture_ITEM1_cheer_armL"
 									},
 								]
-								disabled = true
 								activity_name = "ACT_MP_GESTURE_VC_FISTPUMP_ITEM1"
 								activity_weight = 1
 								weight_list_name = ""
@@ -6301,7 +6297,6 @@
 										anim_name = "layer_gesture_ITEM1_positive_armL"
 									},
 								]
-								disabled = true
 								activity_name = "ACT_MP_GESTURE_VC_THUMBSUP_ITEM1"
 								activity_weight = 1
 								weight_list_name = ""
@@ -6322,6 +6317,35 @@
 							},
 							{
 								_class = "AnimFile"
+								name = "gesture_ITEM2_go"
+								children = 
+								[
+									{
+										_class = "AnimAddLayer"
+										disabled = true
+										anim_name = "layer_gesture_ITEM2_go_armL"
+									},
+								]
+								activity_name = "ACT_MP_GESTURE_VC_FINGERPOINT_ITEM2"
+								activity_weight = 1
+								weight_list_name = ""
+								fade_in_time = 0.2
+								fade_out_time = 0.2
+								looping = false
+								delta = false
+								worldSpace = false
+								hidden = false
+								anim_markup_ordered = false
+								disable_compression = false
+								source_filename = "models/player/scout/scout_fbx/anim/gesture_item2_go.dmx"
+								start_frame = -1
+								end_frame = -1
+								framerate = 30.0
+								take = 0
+								reverse = false
+							},
+							{
+								_class = "AnimFile"
 								name = "gesture_ITEM2_help"
 								children = 
 								[
@@ -6331,7 +6355,6 @@
 										anim_name = "layer_gesture_ITEM2_help_armL"
 									},
 								]
-								disabled = true
 								activity_name = "ACT_MP_GESTURE_VC_HANDMOUTH_ITEM2"
 								activity_weight = 1
 								weight_list_name = ""
@@ -6361,7 +6384,6 @@
 										anim_name = "layer_gesture_ITEM2_cheer_armL"
 									},
 								]
-								disabled = true
 								activity_name = "ACT_MP_GESTURE_VC_FISTPUMP_ITEM2"
 								activity_weight = 1
 								weight_list_name = ""
@@ -6391,7 +6413,6 @@
 										anim_name = "layer_gesture_ITEM2_positive_armL"
 									},
 								]
-								disabled = true
 								activity_name = "ACT_MP_GESTURE_VC_THUMBSUP_ITEM2"
 								activity_weight = 1
 								weight_list_name = ""
@@ -6785,7 +6806,6 @@
 									{
 										_class = "AnimFile"
 										name = "layer_gesture_ITEM1_go_armL"
-										disabled = true
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = ""
@@ -6807,7 +6827,6 @@
 									{
 										_class = "AnimFile"
 										name = "layer_gesture_ITEM1_help_armL"
-										disabled = true
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = ""
@@ -6829,7 +6848,6 @@
 									{
 										_class = "AnimFile"
 										name = "layer_gesture_ITEM1_cheer_armL"
-										disabled = true
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = ""
@@ -6851,7 +6869,6 @@
 									{
 										_class = "AnimFile"
 										name = "layer_gesture_ITEM1_positive_armL"
-										disabled = true
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = ""
@@ -6873,7 +6890,6 @@
 									{
 										_class = "AnimFile"
 										name = "layer_gesture_ITEM2_go_armL"
-										disabled = true
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = ""
@@ -6917,7 +6933,6 @@
 									{
 										_class = "AnimFile"
 										name = "layer_gesture_ITEM2_help_armL"
-										disabled = true
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = ""
@@ -6939,7 +6954,6 @@
 									{
 										_class = "AnimFile"
 										name = "layer_gesture_ITEM2_cheer_armL"
-										disabled = true
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = ""
@@ -6961,7 +6975,6 @@
 									{
 										_class = "AnimFile"
 										name = "layer_gesture_ITEM2_positive_armL"
-										disabled = true
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = ""

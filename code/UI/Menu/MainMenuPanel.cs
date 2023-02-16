@@ -87,6 +87,7 @@ public partial class MainMenuPanel : Panel
 		SetClass( "visible", false );
 		GameHUD.Enabled = true;
 		MenuOverlay.CloseActive();
+		Mouse.Position = Screen.Size * .5f;
 	}
 
 	public void Show()
@@ -94,5 +95,6 @@ public partial class MainMenuPanel : Panel
 		Enabled = true;
 		SetClass( "visible", true );
 		GameHUD.Enabled = false;
+		Mouse.Position = Screen.Size * .5f;
 	}
 }

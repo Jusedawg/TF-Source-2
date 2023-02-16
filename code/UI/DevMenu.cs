@@ -39,6 +39,8 @@ public class DevMenu : Panel
 
 	public override void Tick()
 	{
+		if ( Input.Released( InputButton.Slot0 ) )
+			Mouse.Position = Screen.Size * .5f;
 		SetClass( "open", Input.Down( InputButton.Slot0 ) );
 	}
 }

@@ -3127,7 +3127,6 @@
 												reverse = false
 											},
 										]
-										disabled = true
 									},
 									{
 										_class = "AnimFile"
@@ -3565,6 +3564,14 @@
 											{
 												_class = "AnimFile"
 												name = "armslayer_melee_allclass_swing"
+												children = 
+												[
+													{
+														_class = "AnimSubtract"
+														anim_name = "stand_MELEE_ALLCLASS"
+														frame = 0
+													},
+												]
 												activity_name = ""
 												activity_weight = 1
 												weight_list_name = "weights_MeleeSwing_Arms"
@@ -3592,7 +3599,7 @@
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
-												delta = true
+												delta = false
 												worldSpace = false
 												hidden = true
 												anim_markup_ordered = false
@@ -3632,10 +3639,6 @@
 														peak_frame = 5
 														tail_frame = 21
 														end_frame = 26
-													},
-													{
-														_class = "AnimAddLayer"
-														anim_name = "r_handposes"
 													},
 												]
 												activity_name = "ACT_MP_ATTACK_STAND_MELEE_ALLCLASS"
@@ -3988,7 +3991,6 @@
 												reverse = false
 											},
 										]
-										disabled = true
 									},
 									{
 										_class = "Folder"
@@ -4025,7 +4027,7 @@
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
-												delta = true
+												delta = false
 												worldSpace = false
 												hidden = true
 												anim_markup_ordered = false
@@ -4562,7 +4564,6 @@
 												reverse = false
 											},
 										]
-										disabled = true
 									},
 									{
 										_class = "AnimFile"
