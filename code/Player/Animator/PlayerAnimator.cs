@@ -1,5 +1,6 @@
 ﻿using System;
 using Amper.FPS;
+using Sandbox;
 
 namespace TFS2;
 
@@ -25,12 +26,84 @@ partial class TFPlayerAnimator : PlayerAnimator
 		// Yes I know, magic numbers bad, bla bla bla, but this is the easiest workaround atm.
 		// When moving diagonally, we only get 0.7 for both x and y, so we just multiply that
 		// so it is always above 1, even when moving diagonally, and clamp it
+
+		// FIX, make it so that playermodels either use 0.7 as corner values for diagonal movement OR use code below to avoid having to adjust EVERY single move-matrix
+		// Or just keep using magic numbers idk
+		/*
+		var movevector = new Vector2(forward/speed, sideward/speed);
+		var adjustvector = AdjustToSquare( movevector );
+		*/
+
 		SetAnimParameter( "move_y", Math.Clamp( 1.5f * forward / speed, -1f, 1f ) );
 		SetAnimParameter( "move_x", Math.Clamp( 1.5f * sideward / speed, -1f, 1f ) );
 	}
 
-	public void UpdateTauntMovement()
+public override void UpdateRotation()
 	{
 
+		var idealRotation = GetIdealRotation();
+
+		// If we're moving, rotate to our ideal rotation
+		if ( Player.Velocity.Length > 10 )
+		{
+			Player.Rotation = Rotation.Slerp( Player.Rotation, idealRotation, Time.Delta * 5 ); 
+		}
+		// Clamp the foot rotation to within 90 degrees of the ideal rotation
+		Player.Rotation = Player.Rotation.Clamp( idealRotation, 45 );
 	}
+	
+
+	public override void UpdateLookAt()
+	{
+		Vector3 lookAtPos = Player.GetEyePosition() + Player.GetEyeRotation().Forward * 200;
+
+		float pitch = -Player.GetEyeRotation().Pitch();
+		float yaw = Player.GetEyeRotation().Yaw() - Player.Rotation.Yaw();
+		if ( yaw > 180 )
+		{
+			yaw -= 360;
+		}
+		else if ( yaw < -180 )
+		{
+			yaw += 360;
+		}
+
+		SetLookAt( "aim_body", lookAtPos );
+		SetAnimParameter( "body_pitch", pitch );
+		SetAnimParameter( "body_yaw", yaw );
+	}
+
+	public void UpdateTauntMovement()
+	{
+	}
+
+	//Helper function for move_x and move_y, solves issue of diagonal movement returning 0.7 and causing the playermodels to not animate at full speed
+	//This is only useful if you want to be rid of magic numbers, but it feels bloaty so I have it disabled until further review
+	/*
+	public static Vector2 AdjustToSquare( Vector2 vector )
+	{
+		float x = vector.x;
+		float y = vector.y;
+		float absX = Math.Abs( x );
+		float absY = Math.Abs( y );
+
+		if ( absX > absY )
+		{
+			y /= absX;
+			x = Math.Sign( x );
+		}
+		else if ( absY > absX )
+		{
+			x /= absY;
+			y = Math.Sign( y );
+		}
+		else
+		{
+			x = Math.Sign( x );
+			y = Math.Sign( y );
+		}
+
+		return new Vector2( x, y );
+	}
+	*/
 }
