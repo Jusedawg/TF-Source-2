@@ -61,5 +61,21 @@ namespace Breaker.Commands
 			}
 			Logging.TellAll($"{Command.Caller.Name} slapped {Logging.FormatClients(targets)}!" );
 		}
+
+		[Command("launch"), Permission("breaker.launch")]
+		public static void Launch( IClient[] targets, float force = 768f)
+		{
+			foreach ( var target in targets )
+			{
+				var pawn = target.Pawn;
+				var speed = Vector3.Up * force;
+
+				if ( pawn is ModelEntity ent && ent.PhysicsEnabled )
+				{
+					pawn.Velocity = pawn.Velocity += speed;
+				}
+			}
+			Logging.TellAll( $"{Command.Caller.Name} slapped {Logging.FormatClients( targets )}!" );
+		}
 	}
 }
