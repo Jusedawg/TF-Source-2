@@ -42,16 +42,10 @@ public override void UpdateRotation()
 	{
 		if ( Player.InCondition( TFCondition.Taunting ) )
 		{
-			if (Player.TauntEnableMove )
-			{
-				var LRinput = Input.AnalogMove.y;
-				var TargetRot = (QAngle)Player.Rotation;
-				TargetRot.y += LRinput * 10;
-
-				Player.Rotation = Rotation.Lerp( Player.Rotation, TargetRot, Time.Delta * 5 );
-			}
+			UpdateTauntRotation();
 			return;
 		}
+
 		var idealRotation = GetIdealRotation();
 
 		// If we're moving, rotate to our ideal rotation
@@ -86,8 +80,23 @@ public override void UpdateRotation()
 
 	public void UpdateTauntMovement()
 	{
-		//if ( TauntEnableMove )
-		//if (Player.ActiveTaunt.TauntForceMove)
+		var LRinput = Input.AnalogMove.y;
+		var currX = Player.GetAnimParameterFloat("move_x");
+		var targetX = MathX.Lerp( currX, -LRinput, Time.Delta * 5 );
+
+		SetAnimParameter( "move_x", targetX );
+	}
+
+	public void UpdateTauntRotation()
+	{
+		if ( Player.TauntEnableMove )
+		{
+			var LRinput = Input.AnalogMove.y;
+			var targetRot = (QAngle)Player.Rotation;
+			targetRot.y += LRinput * 10;
+
+			Player.Rotation = Rotation.Lerp( Player.Rotation, targetRot, Time.Delta * 5 );
+		}
 	}
 
 	//Helper function for move_x and move_y, solves issue of diagonal movement returning 0.7 and causing the playermodels to not animate at full speed

@@ -52,20 +52,6 @@ public class TauntData : GameResource
 	public TauntType TauntType { get; set; }
 
 	/// <summary>
-	/// If the taunt allows movement, this limits how fast the player can move
-	/// </summary>
-	[Category( "Attributes" )]
-	[Title( "Maximum Movmement Speed" )]
-	public float TauntMovespeed { get; set; }
-
-	/// <summary>
-	/// Forces the player to move forward
-	/// </summary>
-	[Category( "Attributes" )]
-	[Title( "Force Movement" )]
-	public bool TauntForceMove { get; set; }
-
-	/// <summary>
 	/// Allows players to join into the taunt by double-tapping the taunt button while looking at a player performing the taunt
 	/// </summary>
 	[Category( "Attributes" )]
@@ -79,7 +65,22 @@ public class TauntData : GameResource
 	[ResourceType( "vmdl" )]
 	[Title( "Prop Model" )]
 	public string TauntPropModel { get; set; }
-	
+
+	/// <summary>
+	/// If the taunt enables movement, this limits how fast the player can move
+	/// </summary>
+	[Category( "Movement" )]
+	[Title( "Maximum Movmement Speed" )]
+	public float TauntMovespeed { get; set; }
+
+	/// <summary>
+	/// Forces the player to move forward
+	/// </summary>
+	[Category( "Movement" )]
+	[Title( "Force Movement" )]
+	public bool TauntForceMove { get; set; }
+
+
 
 	protected override void PostLoad()
 	{
@@ -89,7 +90,7 @@ public class TauntData : GameResource
 		{
 			Precache.Add( TauntPropModel );
 		}
-
+		
 		// Get lowercase class name
 		//string tauntname = ResourceName.ToLower();
 

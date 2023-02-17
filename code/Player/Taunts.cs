@@ -1042,5 +1042,5 @@ partial class TFPlayer
 	}
 
 	[ConVar.Replicated] public static bool tf_sv_debug_taunts { get; set; } = false;
-	[ConVar.Replicated] public static bool tf_disable_movement_taunts { get; set; } = true;
+	[ConVar.Replicated] public static bool tf_disable_movement_taunts { get; set; } = false;
 }
