@@ -3,11 +3,11 @@ using Amper.FPS;
 
 namespace TFS2;
 
-public abstract partial class Gamemode : Entity
+public abstract partial class GamemodeEntity : Entity, IGamemode
 {
 	public virtual string Title => ToString();
 	public virtual string Icon => "/ui/icons/empty.png";
-	public Gamemode()
+	public GamemodeEntity()
 	{
 		EventDispatcher.Subscribe<RoundEndEvent>( RoundEnd, this );
 		EventDispatcher.Subscribe<RoundActiveEvent>( RoundActivate, this );
