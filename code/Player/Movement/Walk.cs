@@ -51,7 +51,6 @@ partial class TFGameMovement
 			flAccelerate = (flControl * sv_friction) / flWishSpeed + 1;
 		}
 
-		DebugOverlay.ScreenText($"{Input.AnalogMove}", 1);
 
 		if ( Player.InCondition( TFCondition.Taunting ) )
 		{

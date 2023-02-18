@@ -64,14 +64,12 @@ partial class TFPlayer
 	[Net]
 	public bool WaitingForPartner { get; set; }
 
-	//Per-player list of taunts
 	[Net]
 	public IList<TauntData> TauntList { get; set; }
+
 	public void CreateTauntList()
 	{
-		Log.Info($"creating tauntlist for {PlayerClass.Title.ToLower()}");
-
-		//Reset our tauntlist
+		// Reset our tauntlist, incase we have one
 		TauntList.Clear();
 
 		var classname = PlayerClass.Title.ToLower();
@@ -171,6 +169,7 @@ partial class TFPlayer
 			{
 				AcceptPartnerTaunt( true );
 			}
+
 			if ( ActiveTaunt.TauntType == TauntType.Partner && !WaitingForPartner )
 			{
 				if ( TimeSinceTaunt > TauntDuration )
@@ -287,6 +286,7 @@ partial class TFPlayer
 	/// </summary>
 	public void PlayTaunt( TauntData taunt, bool initiator = true )
 	{
+
 		ActiveTaunt = taunt;
 		Log.Info($"Active Taunt: {ActiveTaunt.ResourceName}");
 		var animcontroller = Animator as TFPlayerAnimator;
@@ -310,7 +310,6 @@ partial class TFPlayer
 
 		if ( TauntType == TauntType.Once )
 		{
-			TimeSinceTaunt = 0;
 			TauntDuration = GetSequenceDuration( ActiveTaunt.SequenceName );
 		}
 
@@ -327,6 +326,7 @@ partial class TFPlayer
 		animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
 		animcontroller?.SetAnimParameter( "taunt_type", (int)TauntType );
 
+		TimeSinceTaunt = 0;
 		StayThirdperson = IsThirdperson;
 		ThirdpersonSet( true );
 
@@ -432,10 +432,10 @@ partial class TFPlayer
 	/// </summary>
 	public bool PartnerTauntIsSpaceValid()
 	{
-		var positionShiftUp = this.Position;
+		var positionShiftUp = Position;
 		positionShiftUp.z += 42;
-		var validateFrom = positionShiftUp + this.Rotation.Forward * 24;
-		var validateTo = positionShiftUp + this.Rotation.Forward * 68;
+		var validateFrom = positionShiftUp + Rotation.Forward * 24;
+		var validateTo = positionShiftUp + Rotation.Forward * 68;
 		var tr = PartnerValidateTrace( validateFrom, validateTo ).Run();
 
 		/*
@@ -446,16 +446,19 @@ partial class TFPlayer
 			DebugOverlay.Sphere( tr.EndPosition, 2f, Color.Red, true, 15f );
 			DebugOverlay.Sphere( tr.StartPosition, 2f, Color.Green, true, 15f );
 			DebugOverlay.Text( tr.EndPosition, $"{tr.Distance}", 15f );
-		}*/
+		}
+		*/
 
 		// Did we hit something?
 		if ( tr.Hit )
 		{
 			return false;
 		}
+
 		var validateToDown = validateTo;
 		validateToDown.z -= 10;
 		var trDown = PartnerValidateTrace( validateTo, validateToDown ).Run();
+
 		// If no ground or ground height is too low, no need to check if height is too high because of first trace
 		if ( !trDown.Hit || (trDown.Hit && validateTo.Distance( trDown.EndPosition ) > 5f) )
 		{
@@ -504,7 +507,7 @@ partial class TFPlayer
 	}
 
 	/// <summary>
-	/// Sets player location for partner taunts
+	/// Sets our transform to the proper spot across from target
 	/// </summary>
 	public void PartnerSetLocation( TFPlayer target )
 	{
@@ -956,11 +959,23 @@ partial class TFPlayer
 		player.TauntPropModel.SetParent( player, true );
 	}
 
-	#region music
+	#region Music
+
 	Sound TauntMusic { get; set; }
+
 	public void StartMusic()
 	{
-		if ( Game.LocalClient?.Pawn == this )
+		var tauntMusic = ActiveTaunt.TauntMusic;
+		var tauntMusicLength = ActiveTaunt.TauntMusic.Length;
+		var format = ".sound";
+		var tauntMusicNoFormat = tauntMusic.Remove( tauntMusicLength - format.Length );
+
+		Log.Info( $"{tauntMusicNoFormat}" );
+		Log.Info( $"{tauntMusic}.ui{format}" );
+		TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
+
+		/*
+		if ( Game.LocalClient?.Pawn == this || Game.IsServerHost )
 		{
 			Log.Info("local music");
 			TauntMusic = Sound.FromScreen( To.Single( this ), ActiveTaunt.TauntMusic ); //FIX, not working
@@ -969,8 +984,9 @@ partial class TFPlayer
 		{
 			Log.Info( "nonlocal music" );
 			TauntMusic = Sound.FromEntity( ActiveTaunt.TauntMusic, this, "head" ); ; //INVESTIGATE, not playing from attachment
-		}
+		}*/
 	}
+
 	public void StopMusic()
 	{
 		TauntMusic.Stop();

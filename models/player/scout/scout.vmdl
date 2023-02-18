@@ -8771,15 +8771,16 @@
 								[
 									{
 										_class = "AnimEvent"
-										event_class = "AE_WPN_HIDE"
+										event_class = "AE_GENERIC_EVENT"
 										event_frame = 1
-										event_keys = null
-									},
-									{
-										_class = "AnimEvent"
-										event_class = "AE_WPN_UNHIDE"
-										event_frame = 85
-										event_keys = null
+										event_keys = 
+										{
+											TypeName = "TF_HIDE_WEAPON"
+											Int = 1
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
 									},
 								]
 								activity_name = ""
