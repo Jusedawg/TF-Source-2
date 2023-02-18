@@ -147,8 +147,8 @@ public partial class Flag : Item, ITeam
 		TimeSincePickup = 0;
 		State = FlagState.Carried;
 
-		// Let SDKGame know about this.
-		TFGameRules.Current.FlagPickedUp( this, player );
+		// Let Gamemode know about this.
+		EventDispatcher.InvokeEvent( new FlagPickedUpEvent() { Flag = this, Capper = player } );
 
 		StopSpinning();
 		CreateTrails();
@@ -161,7 +161,7 @@ public partial class Flag : Item, ITeam
 		base.Drop( player, false, false );
 		Reset();
 
-		TFGameRules.Current.FlagCaptured( this, player, zone );
+		EventDispatcher.InvokeEvent( new FlagCapturedEvent() { Flag = this, Capper = player, Zone = zone } );
 	}
 
 	public void StartSpinning()
@@ -205,7 +205,7 @@ public partial class Flag : Item, ITeam
 		Reset();
 
 		// Let SDKGame know about this.
-		TFGameRules.Current.FlagReturned( this );
+		EventDispatcher.InvokeEvent(new FlagReturnedEvent() { Flag = this } );
 	}
 
 	public override void Drop( TFPlayer player, bool dropped, bool message )
@@ -250,7 +250,7 @@ public partial class Flag : Item, ITeam
 		if ( message )
 		{
 			// Let SDKGame know about this.
-			TFGameRules.Current.FlagDropped( this, player );
+			EventDispatcher.InvokeEvent( new FlagDroppedEvent() { Flag = this, Capper = player } );
 		}
 
 		StartSpinning();
