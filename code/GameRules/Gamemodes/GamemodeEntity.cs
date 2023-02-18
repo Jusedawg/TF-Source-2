@@ -21,7 +21,7 @@ public abstract partial class GamemodeEntity : Entity, IGamemode
 	}
 
 	public virtual void Reset() { }
-	public abstract bool IsActive();
+	public virtual bool IsActive() => true;
 	public abstract bool HasWon( out TFTeam team, out TFWinReason reason );
 
 	[Event.Tick.Server] public virtual void Tick() { }
