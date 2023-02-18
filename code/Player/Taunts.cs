@@ -114,8 +114,6 @@ partial class TFPlayer
 	{
 		if ( PlayerClass == null ) return;
 
-		var animController = Animator as TFPlayerAnimator;
-
 		//When taunt menu is closed via release, set bool that allows doublepress taunt
 		if ( Input.Released( InputButton.Drop ) && !WeaponTauntAvailable && !InCondition( TFCondition.Taunting ) )
 		{
@@ -147,9 +145,9 @@ partial class TFPlayer
 		if ( !InCondition( TFCondition.Taunting ) && !TauntsReset )
 		{
 			ActiveTaunt = null;
-			animController?.SetAnimParameter( "b_taunt", false );
-			animController?.SetAnimParameter( "b_taunt_partner", false );
-			animController?.SetAnimParameter( "b_taunt_initiator", false );
+			Animator?.SetAnimParameter( "b_taunt", false );
+			Animator?.SetAnimParameter( "b_taunt_partner", false );
+			Animator?.SetAnimParameter( "b_taunt_initiator", false );
 			TauntsReset = true;
 		}
 
@@ -158,6 +156,16 @@ partial class TFPlayer
 
 		if ( InCondition( TFCondition.Taunting ) )
 		{
+			if ( Input.Pressed( InputButton.PrimaryAttack ) )
+			{
+				Animator?.SetAnimParameter( "b_fire", true );
+			}
+
+			if ( Input.Pressed( InputButton.SecondaryAttack ) )
+			{
+				Animator?.SetAnimParameter( "b_fire_secondary", true );
+			}
+
 			//Call a fake partner accept
 			if ( ActiveTaunt.TauntType == TauntType.Partner && Input.Pressed( InputButton.Use ) )
 			{
@@ -175,24 +183,17 @@ partial class TFPlayer
 			{
 				StopTaunt();
 			}
-			//Stop Taunt via button press
-			if ( Input.Pressed( InputButton.Drop ) && (ActiveTaunt.TauntType == TauntType.Looping || (ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner)) )
-			{
-				StopTaunt();
-			}
+			
 			//Stop Taunt via loss of grounded state
 			if ( ActiveTaunt.TauntType != TauntType.Looping && GroundEntity == null )
 			{
 				StopTaunt();
 			}
 
-			if ( Input.Pressed( InputButton.PrimaryAttack ) )
+			//Stop Taunt via button press
+			if ( Input.Pressed( InputButton.Drop ) && (ActiveTaunt.TauntType == TauntType.Looping || (ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner)) )
 			{
-				animController?.SetAnimParameter( "b_fire", true );
-			}
-			if ( Input.Pressed( InputButton.SecondaryAttack ) )
-			{
-				animController?.SetAnimParameter( "b_fire_secondary", true );
+				StopTaunt();
 			}
 		}
 	}
@@ -207,19 +208,20 @@ partial class TFPlayer
 
 	public bool TryDoubleTapTaunt()
 	{
-		if ( TryJoinPartnerTaunt() ) return true;
+		if ( TryJoinTaunt() ) return true;
 		if ( TryWeaponTaunt() ) return true;
 		return false;
 	}
 
 	/// <summary>
-	/// Attempt to join a partner or party taunt
+	/// Attempt to join a partner or group taunt
 	/// </summary>
 	/// <returns></returns>
-	public bool TryJoinPartnerTaunt()
+	public bool TryJoinTaunt()
 	{
 		if ( PartnerTarget != null && PartnerTarget.InCondition( TFCondition.Taunting ) )
 		{
+			// Partner Taunt
 			if ( PartnerTarget.ActiveTaunt.TauntType == TauntType.Partner && PartnerTarget.WaitingForPartner == true && IsPartnerTauntAngleValid( PartnerTarget ) )
 			{
 				WeaponTauntAvailable = false;
@@ -229,6 +231,7 @@ partial class TFPlayer
 				PartnerTarget.AcceptPartnerTaunt( true );
 				return true;
 			}
+			// Group taunt
 			else if ( PartnerTarget.ActiveTaunt.TauntType == TauntType.Looping && PartnerTarget.ActiveTaunt.TauntAllowJoin == true )
 			{
 				WeaponTauntAvailable = false;
@@ -247,12 +250,13 @@ partial class TFPlayer
 	/// <returns></returns>
 	public bool TryWeaponTaunt()
 	{
-		Log.Info("weapon taunt");
 		var weapon = ActiveWeapon as TFWeaponBase;
 		var Tauntdata = TauntData.Get(weapon.Data.TauntData);
 		var TauntName = weapon.Data.TauntString; 
+
 		WeaponTauntAvailable = false;
 		TimeSinceTaunt = 0;
+
 		if ( Tauntdata != null )
 		{
 			PlayTaunt( Tauntdata );
@@ -270,10 +274,9 @@ partial class TFPlayer
 	{
 		(Animator as TFPlayerAnimator)?.SetAnimParameter( "b_taunt", true );
 
-		
-
 		Velocity = 0f;
 		Rotation = Animator.GetIdealRotation();
+
 		AddCondition( TFCondition.Taunting );
 		TauntEnableMove = false;
 		TauntsReset = false;
@@ -292,13 +295,6 @@ partial class TFPlayer
 
 		if ( !CanTaunt() ) return;
 
-		if ( !string.IsNullOrEmpty( ActiveTaunt.TauntPropModel ) )
-		{
-			CreateTauntProp( ActiveTaunt, this );
-		}
-		animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
-		animcontroller?.SetAnimParameter( "taunt_type", (int)TauntType );
-
 		if ( TauntType == TauntType.Partner )
 		{
 			//If we are starting the partner taunt, we need to check for valid spacing
@@ -306,16 +302,30 @@ partial class TFPlayer
 			{
 				if ( !CanInitiatePartnerTaunt() )
 				{
-					Log.Info("Not enough space for a partner");
+					Log.Info( "Not enough space for a partner" );
 					return;
 				}
 			}
 		}
+
 		if ( TauntType == TauntType.Once )
 		{
 			TimeSinceTaunt = 0;
 			TauntDuration = GetSequenceDuration( ActiveTaunt.SequenceName );
 		}
+
+		if ( !string.IsNullOrEmpty( ActiveTaunt.TauntPropModel ) )
+		{
+			CreateTauntProp( ActiveTaunt, this );
+		}
+
+		if ( !string.IsNullOrEmpty( taunt.TauntMusic ) )
+		{
+			StartMusic();
+		}
+
+		animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
+		animcontroller?.SetAnimParameter( "taunt_type", (int)TauntType );
 
 		StayThirdperson = IsThirdperson;
 		ThirdpersonSet( true );
@@ -378,16 +388,18 @@ partial class TFPlayer
 	/// </summary>
 	public void StopTaunt()
 	{
-		var animcontroller = Animator as TFPlayerAnimator;
 		var weapon = ActiveWeapon as TFWeaponBase;
 
 		RemoveCondition( TFCondition.Taunting );
+
 		Rotation = Animator.GetIdealRotation();
-		animcontroller.SetAnimParameter( "b_taunt", false );
-		animcontroller.SetAnimParameter( "b_taunt_partner", false );
-		animcontroller.SetAnimParameter( "b_taunt_initiator", false );
+		Animator.SetAnimParameter( "b_taunt", false );
+		Animator.SetAnimParameter( "b_taunt_partner", false );
+		Animator.SetAnimParameter( "b_taunt_initiator", false );
 		TauntEnableMove = false;
 		WaitingForPartner = false;
+
+		StopMusic();
 
 		if ( TauntPropModel != null && Game.IsServer )
 			TauntPropModel.Delete();
@@ -944,6 +956,28 @@ partial class TFPlayer
 		player.TauntPropModel.SetParent( player, true );
 	}
 
+	#region music
+	Sound TauntMusic { get; set; }
+	public void StartMusic()
+	{
+		if ( Game.LocalClient?.Pawn == this )
+		{
+			Log.Info("local music");
+			TauntMusic = Sound.FromScreen( To.Single( this ), ActiveTaunt.TauntMusic ); //FIX, not working
+		}
+		if ( Game.LocalClient?.Pawn != this )
+		{
+			Log.Info( "nonlocal music" );
+			TauntMusic = Sound.FromEntity( ActiveTaunt.TauntMusic, this, "head" ); ; //INVESTIGATE, not playing from attachment
+		}
+	}
+	public void StopMusic()
+	{
+		TauntMusic.Stop();
+	}
+
+	#endregion
+
 	/// <summary>
 	/// Console command for playing taunts by their animation name
 	/// </summary>
@@ -955,6 +989,8 @@ partial class TFPlayer
 		{
 			TauntData taunt = null;
 
+			if ( !player.CanTaunt() ) return;
+
 			//Finds the appropriate taunt data and assigns it
 			foreach ( TauntData data in player.TauntList )
 			{
@@ -965,9 +1001,9 @@ partial class TFPlayer
 
 			if ( taunt != null )
 			{
-				if ( tf_disable_movement_taunts && (taunt.ResourceName == "taunt_conga" || taunt.ResourceName == "taunt_aerobic" || taunt.ResourceName == "taunt_russian") )
+				if ( tf_disable_movement_taunts && (taunt.TauntMovespeed != 0) )
 				{
-					Log.Info( $"{taunt_name} is currently disabled." );
+					Log.Info( $"{taunt_name} is currently disabled by tf_disable_movement_taunts" );
 				}
 				else
 				{

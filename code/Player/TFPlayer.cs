@@ -35,6 +35,12 @@ public partial class TFPlayer : SDKPlayer
 			DesiredPlayerClass = null;
 		}
 
+		// We need to stop taunting to prevent lingering variables
+		if ( InCondition( TFCondition.Taunting ) )
+		{
+			StopTaunt();
+		}
+
 		base.Respawn();
 		RemoveAllConditions();
 		ResponseController.Reset();
@@ -199,6 +205,11 @@ public partial class TFPlayer : SDKPlayer
 
 			ActiveWeapon.OnHolster( this );
 			DropWeapon( ActiveWeapon, WorldSpaceBounds.Center, force );
+		}
+
+		if ( InCondition( TFCondition.Taunting ) )
+		{
+			StopTaunt();
 		}
 
 		base.OnKilled();

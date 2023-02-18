@@ -80,6 +80,14 @@ public class TauntData : GameResource
 	[Title( "Force Movement" )]
 	public bool TauntForceMove { get; set; }
 
+	/// <summary>
+	/// Music that will play during the taunt
+	/// </summary>
+	[Category( "Audio" )]
+	[Title( "Music" )]
+	[ResourceType( "sound" )]
+	public string TauntMusic { get; set; }
+
 
 
 	protected override void PostLoad()
