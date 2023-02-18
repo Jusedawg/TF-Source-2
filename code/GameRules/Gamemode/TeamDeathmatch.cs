@@ -14,7 +14,7 @@ namespace TFS2;
 [EditorSprite( "materials/editor/tf_logic_tdm.vmat" )]
 [HammerEntity]
 
-public partial class TeamDeathmatch : BaseGameLogic
+public partial class TeamDeathmatch : Gamemode
 {
 	/// <summary>
 	/// How many frags every team has collected.

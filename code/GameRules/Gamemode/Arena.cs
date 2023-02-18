@@ -12,7 +12,7 @@ namespace TFS2;
 [EditorSprite( "materials/editor/tf_logic_arena.vmat" )]
 [HammerEntity]
 
-public partial class Arena : BaseGameLogic
+public partial class Arena : Gamemode
 {
 	[Property, FGDType( "target_destination" )]
 	public string PointName { get; set; }

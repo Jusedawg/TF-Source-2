@@ -13,7 +13,7 @@ namespace TFS2;
 [EditorSprite( "materials/editor/tf_logic_koth.vmat" )]
 [HammerEntity]
 
-public partial class KingOfTheHill : BaseGameLogic
+public partial class KingOfTheHill : Gamemode
 {
 	[Property] public float TimerLength { get; set; } = 180;
 	[Property] public float ControlPointEnableTime { get; set; } = 30;

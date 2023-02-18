@@ -3,9 +3,11 @@ using Amper.FPS;
 
 namespace TFS2;
 
-public partial class BaseGameLogic : Entity
+public abstract partial class Gamemode : Entity
 {
-	public BaseGameLogic()
+	public virtual string Title => ToString();
+	public virtual string Icon => "/ui/icons/empty.png";
+	public Gamemode()
 	{
 		EventDispatcher.Subscribe<RoundEndEvent>( RoundEnd, this );
 		EventDispatcher.Subscribe<RoundActiveEvent>( RoundActivate, this );
@@ -19,6 +21,8 @@ public partial class BaseGameLogic : Entity
 	}
 
 	public virtual void Reset() { }
+
+	public abstract bool IsActive();
 
 	[Event.Tick.Server] public virtual void Tick() { }
 	[Event.Entity.PostSpawn] public virtual void PostLevelSetup() { }
