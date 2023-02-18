@@ -8,8 +8,11 @@ namespace TFS2
 {
 	public interface IGamemode
 	{
+		public const string DEFAULT_ICON = "/ui/icons/empty.png";
+
 		public string Title { get; }
 		public string Icon { get; }
 		public bool IsActive();
+		public bool HasWon( out TFTeam team, out TFWinReason reason );
 	}
 }
