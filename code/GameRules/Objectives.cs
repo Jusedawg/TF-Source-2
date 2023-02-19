@@ -9,6 +9,17 @@ partial class TFGameRules
 	[Net] public IGamemode GameMode { get; set; }
 
 	public bool IsPlaying<T>() where T : IGamemode => GameMode is T;
+	public bool TryGetGamemode<T>(out T instance) where T : IGamemode
+	{
+		if(GameMode is T mode)
+		{
+			instance = mode;
+			return true;
+		}
+
+		instance = default;
+		return false;
+	}
 
 	public override void ResetObjectives()
 	{
@@ -82,6 +93,14 @@ partial class TFGameRules
 			return;
 
 		CheckWinConditions();
+	}
+
+	public void CheckWinConditions()
+	{
+		if ( GameMode.HasWon( out var team, out var reason ) )
+		{
+			DeclareWinner( team, reason );
+		}
 	}
 
 	public void DeclareWinner( TFTeam team, TFWinReason reason )

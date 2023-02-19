@@ -31,7 +31,7 @@ public partial class RoundStatusDisplay : Panel
 		string value = "";
 
 		// Show a message for waiting for players, unless we play arena (it has it's own message)
-		if ( SDKGame.Current.IsWaitingForPlayers && !TFGameRules.Current.IsPlayingArena )
+		if ( SDKGame.Current.IsWaitingForPlayers && !TFGameRules.Current.IsPlaying<Arena>() )
 			value = $"Waiting For Players";
 
 		GameStateLabel.Text = value;

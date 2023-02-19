@@ -20,6 +20,6 @@ public partial class ArenaWaitingForPlayers : Panel
 
 	public bool ShouldDraw()
 	{
-		return TFGameRules.Current.GameType == TFGameType.Arena && TFGameRules.Current.IsWaitingForPlayers && !Input.Down( InputButton.Score );
+		return TFGameRules.Current.IsPlaying<Arena>() && TFGameRules.Current.IsWaitingForPlayers && !Input.Down( InputButton.Score );
 	}
 }
