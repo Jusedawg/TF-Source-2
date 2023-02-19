@@ -7,23 +7,23 @@ namespace TFS2.UI;
 
 partial class ControlPointDisplay : Panel
 {
-	Dictionary<ControlPoint, ControlPointDisplayEntry> Points { get; set; } = new();
+	Dictionary<ControlPoint, ControlPointDisplayEntry> PointEntries { get; set; } = new();
 	TimeSince TimeSinceSort { get; set; }
-
+	IEnumerable<ControlPoint> points;
 	public override void Tick()
 	{
+		points = ControlPoint.All;
 		SetClass( "visible", ShouldDraw() );
 
-		var allPoints = ControlPoint.All;
-		var ourPoints = Points.Keys;
+		var ourPoints = PointEntries.Keys;
 
-		foreach ( var item in allPoints.Except( ourPoints ) ) AddPoint( item );
-		foreach ( var item in ourPoints.Except( allPoints ) ) RemovePoint( item );
+		foreach ( var item in points.Except( ourPoints ) ) AddPoint( item );
+		foreach ( var item in ourPoints.Except( points ) ) RemovePoint( item );
 	}
 
 	public void AddPoint( ControlPoint point )
 	{
-		Points[point] = new ControlPointDisplayEntry
+		PointEntries[point] = new ControlPointDisplayEntry
 		{
 			Point = point,
 			Parent = this
@@ -34,16 +34,16 @@ partial class ControlPointDisplay : Panel
 
 	public void RemovePoint( ControlPoint point )
 	{
-		if ( Points.TryGetValue( point, out var entry ) )
+		if ( PointEntries.TryGetValue( point, out var entry ) )
 		{
 			entry?.Delete();
-			Points.Remove( point );
+			PointEntries.Remove( point );
 		}
 
 		ReorderEntries();
 	}
 
-	public bool ShouldDraw() => TFGameRules.Current.MapHasControlPoints && !TFGameRules.Current.MapHasCarts;
+	public bool ShouldDraw() => points.Any() && !TFGameRules.Current.MapHasCarts;
 
 	public void ReorderEntries()
 	{

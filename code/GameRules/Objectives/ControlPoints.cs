@@ -8,8 +8,6 @@ namespace TFS2;
 
 partial class TFGameRules
 {
-	[Net] public bool MapHasControlPoints { get; set; }
-
 	/// <summary>
 	/// Are points allowed to be captured right now?
 	/// </summary>
