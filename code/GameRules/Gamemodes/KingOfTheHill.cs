@@ -27,6 +27,25 @@ public partial class KingOfTheHill : GamemodeEntity
 		EventDispatcher.Subscribe<ControlPointCapturedEvent>( OnPointCapture, this );
 	}
 
+	public override bool HasWon( out TFTeam team, out TFWinReason reason )
+	{
+		team = TFTeam.Unassigned;
+		reason = TFWinReason.AllPointsCaptured;
+
+		foreach ( var pair in Timers )
+		{
+			team = pair.Key;
+			var timer = pair.Value;
+
+			if ( timer.GetRemainingTime() == 0 )
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public override void PostLevelSetup()
 	{
 		// try to find our previous points
@@ -57,18 +76,6 @@ public partial class KingOfTheHill : GamemodeEntity
 	{
 		if ( CanUnlockPoint() )
 			Point.Unlock( 5 );
-
-		foreach ( var pair in Timers )
-		{
-			var team = pair.Key;
-			var timer = pair.Value;
-
-			if ( timer.GetRemainingTime() == 0 )
-			{
-				TFGameRules.Current.DeclareWinner( team, TFWinReason.AllPointsCaptured );
-				break;
-			}
-		}
 	}
 
 	public bool CanUnlockPoint()

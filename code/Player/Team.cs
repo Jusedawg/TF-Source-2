@@ -30,7 +30,7 @@ public partial class TFPlayer
 			return TFTeam.Red;
 
 		// AutoTeam should give new players to the attackers on A/D maps if the teams are even
-		if ( TFGameRules.Current.IsAttackDefenseGameType() )
+		if ( TFGameRules.Current.IsAttackDefense() )
 			return TFTeam.Blue;
 
 		// we don't have a preferred team, pick a random one.

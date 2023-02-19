@@ -37,6 +37,19 @@ public partial class TeamDeathmatch : GamemodeEntity
 		EventDispatcher.Subscribe<PlayerDeathEvent>( PlayerKilled, this );
 	}
 
+	public override bool HasWon( out TFTeam team, out TFWinReason reason )
+	{
+		team = FirstScorer;
+		reason = TFWinReason.FragLimit;
+
+		if ( HasReachedFragLimit() && GetTimeUntilRoundEnd() == 0 )
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 	public override void Reset()
 	{
 		// reset frags
@@ -54,21 +67,6 @@ public partial class TeamDeathmatch : GamemodeEntity
 		limit = Math.Max( limit, 1 );
 		FragLimit = limit;
 	}
-
-	public override void Tick()
-	{
-		if ( !TFGameRules.Current.AreObjectivesActive() )
-			return;
-
-		if ( HasReachedFragLimit() )
-		{
-			if ( GetTimeUntilRoundEnd() == 0 )
-			{
-				TFGameRules.Current.DeclareWinner( FirstScorer, TFWinReason.FragLimit );
-			}
-		}
-	}
-
 	public int GetTeamFragCount( TFTeam team )
 	{
 		var count = 0;

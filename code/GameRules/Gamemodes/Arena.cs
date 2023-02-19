@@ -2,6 +2,7 @@
 using Editor;
 using Amper.FPS;
 using System;
+using System.Linq;
 
 namespace TFS2;
 
@@ -18,6 +19,33 @@ public partial class Arena : GamemodeEntity
 	public string PointName { get; set; }
 	[Property] public float ControlPointEnableTime { get; set; } = 60;
 	ControlPoint Point { get; set; }
+
+	public override bool HasWon( out TFTeam winner, out TFWinReason reason )
+	{
+		winner = TFTeam.Unassigned;
+		reason = TFWinReason.OpponentsDead;
+
+		// don't call All.OfType for every team, call it once and then use it for each team.
+		var allPlayers = All.OfType<TFPlayer>();
+
+		// check if any team has no alive players.
+		foreach ( TFTeam team in Enum.GetValues( typeof( TFTeam ) ) )
+		{
+			if ( !team.IsPlayable() )
+				continue;
+
+			// If there are no alive players in this team.
+			if ( !allPlayers.Where( x => x.Team == team && x.IsAlive ).Any() )
+			{
+				// get the opposite team
+				winner = team == TFTeam.Red ? TFTeam.Blue : TFTeam.Red;
+
+				return true;
+			}
+		}
+
+		return false;
+	}
 
 	public override void PostLevelSetup()
 	{

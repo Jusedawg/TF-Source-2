@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace TFS2
 {
-	public partial class CaptureTheFlag : IGamemode
+	public partial class CaptureTheFlag : BaseNetworkable, IGamemode
 	{
 		public string Title => "Capture The Flag";
 
 		public string Icon => IGamemode.DEFAULT_ICON;
+		public GamemodeProperties Properties => default;
 
 		public CaptureTheFlag()
 		{
@@ -42,21 +43,6 @@ namespace TFS2
 		public bool IsActive() => Entity.All.OfType<Flag>().Any();
 
 		[Net] public IDictionary<TFTeam, int> FlagCaptures { get; set; }
-
-		public bool FlagsCanBePickedUp()
-		{
-			return TFGameRules.Current.AreObjectivesActive();
-		}
-
-		public bool FlagsCanBeCapped()
-		{
-			return TFGameRules.Current.AreObjectivesActive();
-		}
-
-		public bool CanFlagBeCaptured( Flag flag )
-		{
-			return true;
-		}
 
 		public void FlagReturned( Flag flag )
 		{

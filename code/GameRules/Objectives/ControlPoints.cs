@@ -87,35 +87,6 @@ partial class TFGameRules
 	}
 
 	/// <summary>
-	/// Will the round end if a team captures all the control points?
-	/// </summary>
-	/// <returns></returns>
-	public bool TeamOwnsAllControlPointsCausesRoundEnd()
-	{
-		// yea, unless we play koth.
-		return !IsPlayingKingOfTheHill;
-	}
-
-	public bool TeamOwnsAllControlPoints( TFTeam team )
-	{
-		var points = ControlPoint.All;
-		
-		// team can't own all points if there is none.
-		if ( points.Count == 0 ) 
-			return false;
-
-		// points that by default dont belong to us.
-		var enemyPoints = points.Where( x => x.GetDefaultTeamOwner() != team );
-
-		// if we don't have any enemy points we own all points.
-		if ( enemyPoints.Count() == 0 )
-			return false;
-
-		// team owns all the points if no other team owns all the points.
-		return !enemyPoints.Where( x => x.OwnerTeam != team ).Any();
-	}
-
-	/// <summary>
 	/// Returns the first point that belongs to this team by default.
 	/// </summary>
 	/// <param name="team"></param>
