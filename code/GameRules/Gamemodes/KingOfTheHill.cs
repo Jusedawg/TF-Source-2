@@ -18,7 +18,7 @@ public partial class KingOfTheHill : GamemodeEntity
 	[Property] public float TimerLength { get; set; } = 180;
 	[Property] public float ControlPointEnableTime { get; set; } = 30;
 	[Property, FGDType( "target_destination" )] public string PointName { get; set; }
-	ControlPoint Point { get; set; }
+	protected ControlPoint Point { get; set; }
 
 	Dictionary<TFTeam, TFTimer> Timers { get; set; } = new();
 
@@ -78,7 +78,7 @@ public partial class KingOfTheHill : GamemodeEntity
 			Point.Unlock( 5 );
 	}
 
-	public bool CanUnlockPoint()
+	public virtual bool CanUnlockPoint()
 	{
 		if ( Point == null )
 			return false;
@@ -122,7 +122,7 @@ public partial class KingOfTheHill : GamemodeEntity
 		}
 	}
 
-	public void OnPointCapture( ControlPointCapturedEvent args )
+	public virtual void OnPointCapture( ControlPointCapturedEvent args )
 	{
 		var point = args.Point;
 		if ( Point != point )
@@ -131,7 +131,7 @@ public partial class KingOfTheHill : GamemodeEntity
 		SetTeamTimerActive( args.NewTeam );
 	}
 
-	public void SetTeamTimerActive( TFTeam team )
+	public virtual void SetTeamTimerActive( TFTeam team )
 	{
 		foreach ( var pair in Timers )
 		{

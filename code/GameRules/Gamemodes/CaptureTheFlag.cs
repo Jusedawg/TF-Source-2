@@ -44,7 +44,7 @@ namespace TFS2
 
 		[Net] public IDictionary<TFTeam, int> FlagCaptures { get; set; }
 
-		public void FlagReturned( Flag flag )
+		public virtual void FlagReturned( Flag flag )
 		{
 			TFGameRules.SendHUDAlertToTeam( flag.Team, "Your INTELLIGENCE was RETURNED!", "/ui/icons/ico_flag_home.png", 5, flag.Team );
 			TFGameRules.PlaySoundToTeam( flag.Team, "announcer.intel.teamreturned", SoundBroadcastChannel.Announcer );
@@ -59,7 +59,7 @@ namespace TFS2
 			}
 		}
 
-		public void FlagPickedUp( Flag flag, TFPlayer picker )
+		public virtual void FlagPickedUp( Flag flag, TFPlayer picker )
 		{
 			TFGameRules.SendHUDAlertToTeam( picker.Team, "Your team has PICKED the enemy INTELLIGENCE!", "/ui/icons/ico_flag_moving.png", 5, flag.Team );
 			TFGameRules.PlaySoundToTeam( picker.Team, "announcer.intel.teamstolen", SoundBroadcastChannel.Announcer );
@@ -68,7 +68,7 @@ namespace TFS2
 			TFGameRules.PlaySoundToTeam( flag.Team, "announcer.intel.enemystolen", SoundBroadcastChannel.Announcer );
 		}
 
-		public void FlagDropped( Flag flag, TFPlayer dropper )
+		public virtual void FlagDropped( Flag flag, TFPlayer dropper )
 		{
 			TFGameRules.SendHUDAlertToTeam( dropper.Team, "Your team DROPPED the enemy INTELLIGENCE!", "/ui/icons/ico_flag_dropped.png", 5, flag.Team );
 			TFGameRules.PlaySoundToTeam( dropper.Team, "announcer.intel.teamdropped", SoundBroadcastChannel.Announcer );
@@ -77,7 +77,7 @@ namespace TFS2
 			TFGameRules.PlaySoundToTeam( flag.Team, "announcer.intel.enemydropped", SoundBroadcastChannel.Announcer );
 		}
 
-		public void FlagCaptured( FlagCapturedEvent args )
+		public virtual void FlagCaptured( FlagCapturedEvent args )
 		{
 			Flag flag = args.Flag;
 			TFPlayer capper = args.Capper;

@@ -67,14 +67,13 @@ public partial class TeamDeathmatch : GamemodeEntity
 		limit = Math.Max( limit, 1 );
 		FragLimit = limit;
 	}
-	public int GetTeamFragCount( TFTeam team )
+	public virtual int GetTeamFragCount( TFTeam team )
 	{
-		var count = 0;
-		Frags.TryGetValue( team, out count );
+		Frags.TryGetValue( team, out var count );
 		return count;
 	}
 
-	public float GetTimeUntilRoundEnd()
+	public virtual float GetTimeUntilRoundEnd()
 	{
 		if ( !HasReachedFragLimit() )
 			return tf_tdm_finale_beep_time;
@@ -89,7 +88,7 @@ public partial class TeamDeathmatch : GamemodeEntity
 	/// Are we currently in beep time?
 	/// </summary>
 	/// <returns></returns>
-	public bool HasReachedFragLimit()
+	public virtual bool HasReachedFragLimit()
 	{
 		if ( !TFGameRules.Current.AreObjectivesActive() )
 			return false;
@@ -103,12 +102,12 @@ public partial class TeamDeathmatch : GamemodeEntity
 		return false;
 	}
 
-	public bool HasTeamReachedFragLimit( TFTeam team )
+	public virtual bool HasTeamReachedFragLimit( TFTeam team )
 	{
 		return GetTeamFragCount( team ) >= FragLimit;
 	}
 
-	public void SetTeamFragCount( TFTeam team, int count )
+	public virtual void SetTeamFragCount( TFTeam team, int count )
 	{
 		count = Math.Min( count, FragLimit );
 		Frags[team] = count;
@@ -117,7 +116,7 @@ public partial class TeamDeathmatch : GamemodeEntity
 	/// <summary>
 	/// Add points to the team's frag score.
 	/// </summary>
-	public void AddTeamFragCount( TFTeam team, int count )
+	public virtual void AddTeamFragCount( TFTeam team, int count )
 	{
 		// Remember 
 		bool wasNotInBeepTime = !HasReachedFragLimit();
@@ -130,7 +129,7 @@ public partial class TeamDeathmatch : GamemodeEntity
 		}
 	}
 
-	public void OnReachedFragLimit()
+	public virtual void OnReachedFragLimit()
 	{
 		TimeSinceReachFragLimit = 0;
 	}
@@ -139,7 +138,7 @@ public partial class TeamDeathmatch : GamemodeEntity
 	/// This is fired when a player dies.
 	/// </summary>
 	/// <param name="args"></param>
-	public void PlayerKilled( PlayerDeathEvent args )
+	public virtual void PlayerKilled( PlayerDeathEvent args )
 	{
 		if ( !Game.IsServer )
 			return;

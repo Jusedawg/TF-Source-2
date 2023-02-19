@@ -18,7 +18,7 @@ public partial class Arena : GamemodeEntity
 	[Property, FGDType( "target_destination" )]
 	public string PointName { get; set; }
 	[Property] public float ControlPointEnableTime { get; set; } = 60;
-	ControlPoint Point { get; set; }
+	protected ControlPoint Point { get; set; }
 	public override GamemodeProperties Properties => new() { DisablePlayerRespawn = true, RequireBothTeams = true, ShouldAnnounceFirstBlood = true, ShouldPlayGameStartSong = false };
 
 	public override bool HasWon( out TFTeam winner, out TFWinReason reason )
@@ -74,7 +74,7 @@ public partial class Arena : GamemodeEntity
 			Point.Unlock( 5 );
 	}
 
-	public bool CanUnlockPoint()
+	public virtual bool CanUnlockPoint()
 	{
 		if ( Point == null )
 			return false;
