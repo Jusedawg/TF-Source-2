@@ -16,6 +16,8 @@ namespace TFS2;
 
 public partial class TeamDeathmatch : GamemodeEntity
 {
+	public override string Title => "Team Deathmatch";
+
 	/// <summary>
 	/// How many frags every team has collected.
 	/// </summary>

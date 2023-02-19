@@ -12,7 +12,7 @@ namespace TFS2
 	/// </summary>
 	public interface IGamemode
 	{
-		public const string DEFAULT_ICON = "/ui/icons/empty.png";
+		public const string DEFAULT_ICON = "ui/icons/empty.png";
 
 		public string Title { get; }
 		public string Icon { get; }

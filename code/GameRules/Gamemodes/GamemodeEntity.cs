@@ -5,7 +5,7 @@ namespace TFS2;
 
 public abstract partial class GamemodeEntity : Entity, IGamemode
 {
-	public virtual string Title => ToString();
+	public virtual string Title => ClassName;
 	public virtual string Icon => IGamemode.DEFAULT_ICON;
 
 	public virtual GamemodeProperties Properties => default;

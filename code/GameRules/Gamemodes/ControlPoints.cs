@@ -11,7 +11,7 @@ namespace TFS2
 	{
 		public override string Title => "Control Points";
 
-		public override string Icon => "/ui/hud/scoreboard/icon_mode_control.png";
+		public override string Icon => "ui/hud/scoreboard/icon_mode_control.png";
 
 		public override GamemodeProperties Properties => default;
 

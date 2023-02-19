@@ -15,6 +15,8 @@ namespace TFS2;
 
 public partial class KingOfTheHill : GamemodeEntity
 {
+	public override string Title => "King of the Hill";
+	public override string Icon => "ui/hud/scoreboard/icon_mode_koth.png";
 	[Property] public float TimerLength { get; set; } = 180;
 	[Property] public float ControlPointEnableTime { get; set; } = 30;
 	[Property, FGDType( "target_destination" )] public string PointName { get; set; }

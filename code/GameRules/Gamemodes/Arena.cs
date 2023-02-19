@@ -15,11 +15,13 @@ namespace TFS2;
 
 public partial class Arena : GamemodeEntity
 {
+	public override string Title => "Arena";
+
 	[Property, FGDType( "target_destination" )]
 	public string PointName { get; set; }
 	[Property] public float ControlPointEnableTime { get; set; } = 60;
 	protected ControlPoint Point { get; set; }
-	public override GamemodeProperties Properties => new() { DisablePlayerRespawn = true, RequireBothTeams = true, ShouldAnnounceFirstBlood = true, ShouldPlayGameStartSong = false };
+	public override GamemodeProperties Properties => new() { DisablePlayerRespawn = true, RequireBothTeams = true, ShouldAnnounceFirstBlood = true, ShouldPlayGameStartSong = false, AllowTeamSelection = false };
 
 	public override bool HasWon( out TFTeam winner, out TFWinReason reason )
 	{
