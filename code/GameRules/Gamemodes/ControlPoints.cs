@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sandbox;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace TFS2
 {
-	public class ControlPoints : IGamemode
+	public class ControlPoints : GamemodeNetworkable
 	{
-		public string Title => "Control Points";
+		public override string Title => "Control Points";
 
-		public string Icon => "/ui/hud/scoreboard/icon_mode_control.png";
+		public override string Icon => "/ui/hud/scoreboard/icon_mode_control.png";
 
-		public GamemodeProperties Properties => default;
+		public override GamemodeProperties Properties => default;
 
 		public ControlPoints()
 		{
 			//EventDispatcher.Subscribe<>
 		}
 
-		public bool HasWon( out TFTeam winnerTeam, out TFWinReason reason )
+		public override bool HasWon( out TFTeam winnerTeam, out TFWinReason reason )
 		{
 			winnerTeam = TFTeam.Unassigned;
 			reason = TFWinReason.AllPointsCaptured;
@@ -38,7 +39,7 @@ namespace TFS2
 			return false;
 		}
 
-		public bool IsActive() => true;
+		public override bool IsActive() => Entity.All.OfType<ControlPoint>().Any();
 
 		public static bool TeamOwnsAllControlPoints( TFTeam team )
 		{

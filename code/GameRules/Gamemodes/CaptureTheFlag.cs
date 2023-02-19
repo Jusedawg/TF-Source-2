@@ -8,19 +8,19 @@ using System.Threading.Tasks;
 
 namespace TFS2
 {
-	public partial class CaptureTheFlag : BaseNetworkable, IGamemode
+	public partial class CaptureTheFlag : GamemodeNetworkable
 	{
-		public string Title => "Capture The Flag";
+		public override string Title => "Capture The Flag";
 
-		public string Icon => IGamemode.DEFAULT_ICON;
-		public GamemodeProperties Properties => default;
+		public override string Icon => IGamemode.DEFAULT_ICON;
+		public override GamemodeProperties Properties => default;
 
 		public CaptureTheFlag()
 		{
 			EventDispatcher.Subscribe<FlagCapturedEvent>( FlagCaptured, this );
 		}
 
-		public bool HasWon( out TFTeam team, out TFWinReason reason  )
+		public override bool HasWon( out TFTeam team, out TFWinReason reason  )
 		{
 			// if there is a team that has flag count > limit
 			team = TFTeam.Unassigned;
@@ -40,7 +40,7 @@ namespace TFS2
 			return false;
 		}
 
-		public bool IsActive() => Entity.All.OfType<Flag>().Any();
+		public override bool IsActive() => Entity.All.OfType<Flag>().Any();
 
 		[Net] public IDictionary<TFTeam, int> FlagCaptures { get; set; }
 

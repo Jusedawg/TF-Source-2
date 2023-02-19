@@ -156,14 +156,14 @@ public partial class Scoreboard : Panel
 	{
 		// Set the game mode label.
 
-		if ( TFGameRules.Current.GameMode != null )
-			ModeName.Text = TFGameRules.Current.GameMode.Title;
+		if ( TFGameRules.Current.HasGamemode() )
+			ModeName.Text = TFGameRules.Current.GetGamemode().Title;
 		else
 			ModeName.Text = string.Empty;
 
 		// Set the game mode icon.
-		if ( TFGameRules.Current.GameMode != null )
-			ModeLogo.SetTexture( TFGameRules.Current.GameMode.Icon );
+		if ( TFGameRules.Current.HasGamemode() )
+			ModeLogo.SetTexture( TFGameRules.Current.GetGamemode().Icon );
 		else
 			ModeLogo.SetTexture( "/ui/icons/empty.png" );
 	}

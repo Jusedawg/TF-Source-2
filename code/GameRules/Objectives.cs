@@ -6,12 +6,28 @@ namespace TFS2;
 
 partial class TFGameRules
 {
-	[Net] public IGamemode GameMode { get; set; }
+	public IGamemode GetGamemode()
+	{
+		if(EntityGamemode != null)
+		{
+			return EntityGamemode;
+		}
 
-	public bool IsPlaying<T>() where T : IGamemode => GameMode is T;
+		if ( ClassGamemode != null )
+		{
+			return ClassGamemode;
+		}
+
+		return default;
+	}
+	[Net] private GamemodeEntity EntityGamemode { get; set; }
+	[Net] private GamemodeNetworkable ClassGamemode { get; set; }
+
+	public bool HasGamemode() => GetGamemode() != default;
+	public bool IsPlaying<T>() where T : IGamemode => GetGamemode() is T;
 	public bool TryGetGamemode<T>(out T instance) where T : IGamemode
 	{
-		if(GameMode is T mode)
+		if( GetGamemode() is T mode)
 		{
 			instance = mode;
 			return true;
@@ -33,43 +49,45 @@ partial class TFGameRules
 	{
 		// This function helps define what game type are we currently playing.
 
-		GameMode = FindGamemode();
+		FindGamemode();
 
-		if( GameMode == null )
+		if( GetGamemode() == default )
 		{
 			Log.Info( "No gamemode found for this map, running without gamemode..." );
 			return;
 		}
 
-		Log.Info( $"We're playing: {GameMode.Title}" );
+		Log.Info( $"We're playing: {GetGamemode().Title}" );
 	}
 
 	/// <summary>
 	/// Checks all gamemodes if they would be playable on the current map.
 	/// </summary>
 	/// <returns></returns>
-	public virtual IGamemode FindGamemode()
+	public virtual void FindGamemode()
 	{
 		// Check entities first
-		foreach ( var mode in Entity.All.OfType<IGamemode>() )
+		foreach ( var mode in Entity.All.OfType<GamemodeEntity>() )
 		{
 			if ( mode.IsActive() )
 			{
-				return mode;
+				EntityGamemode = mode;
+				return;
 			}
 		}
 
 		// Check non-entity gamemodes after
-		var gamemodes = TypeLibrary.GetTypes<IGamemode>();
+		var gamemodes = TypeLibrary.GetTypes<GamemodeNetworkable>().Where(g => !g.IsAbstract);
+
+		// Skip gamemodes which require entities to spawn
 		foreach ( var mode in gamemodes.Select( g => TypeLibrary.Create<IGamemode>( g.TargetType ) ) )
 		{
 			if ( mode.IsActive() )
 			{
-				return mode;
+				ClassGamemode = (GamemodeNetworkable)mode;
+				return;
 			}
 		}
-
-		return null;
 	}
 
 	public bool AreObjectivesActive()
@@ -97,7 +115,11 @@ partial class TFGameRules
 
 	public void CheckWinConditions()
 	{
-		if ( GameMode.HasWon( out var team, out var reason ) )
+		var mode = GetGamemode();
+		if ( mode == default )
+			return;
+
+		if ( mode.HasWon( out var team, out var reason ) )
 		{
 			DeclareWinner( team, reason );
 		}

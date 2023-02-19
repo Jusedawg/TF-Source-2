@@ -48,6 +48,10 @@ partial class TFGameRules
 		RespawnPlayers( force, true, (int)team );
 	}
 
+	public override bool AreRespawnsAllowed()
+	{
+		return base.AreRespawnsAllowed() && (!HasGamemode() || GetGamemode()?.Properties.DisablePlayerRespawn == false);
+	}
 	public override bool AreRespawnConditionsMet( SDKPlayer player )
 	{
 		var ply = player as TFPlayer;

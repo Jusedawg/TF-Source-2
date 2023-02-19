@@ -1,14 +1,22 @@
 ﻿namespace TFS2
 {
-	public class GamemodeProperties
+	public struct GamemodeProperties
 	{
-		public bool DisablePlayerRespawn { get; init; } = false;
+		public bool DisablePlayerRespawn { get; init; }
 		/// <summary>
 		/// Do you need players in both teams to start the round?
 		/// </summary>
-		public bool RequireBothTeams { get; init; } = false;
-		public bool ShouldAnnounceFirstBlood { get; init; } = false;
-		public bool ShouldPlayGameStartSong { get; init; } = true;
-		public bool IsAttackDefense { get; init; } = false;
+		public bool RequireBothTeams { get; init; }
+		public bool ShouldAnnounceFirstBlood { get; init; }
+		public bool ShouldPlayGameStartSong { get; init; }
+		public bool IsAttackDefense { get; init; }
+		public GamemodeProperties()
+		{
+			DisablePlayerRespawn = false;
+			RequireBothTeams = false;
+			ShouldAnnounceFirstBlood = false;
+			ShouldPlayGameStartSong = true;
+			IsAttackDefense = false;
+		}
 	}
 }

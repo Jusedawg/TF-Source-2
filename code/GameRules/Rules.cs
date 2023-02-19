@@ -52,25 +52,25 @@ partial class TFGameRules
 	public bool ShouldAnnounceFirstBlood()
 	{
 		// Only announce first blood when round is active.
-		if ( !IsRoundActive || GameMode == null ) 
+		if ( !IsRoundActive || !HasGamemode() ) 
 			return false;
 
 		// announce first blood on all gamemodes that cause team wipe to end the round.
-		return GameMode.Properties.ShouldAnnounceFirstBlood;
+		return GetGamemode().Properties.ShouldAnnounceFirstBlood;
 	}
 
 	public bool IsAttackDefense()
 	{
-		return GameMode != null && GameMode.Properties.IsAttackDefense;
+		return HasGamemode() && GetGamemode().Properties.IsAttackDefense;
 	}
 
 	public bool ShouldPlayGameStartSong()
 	{
-		if ( GameMode == null )
+		if ( !HasGamemode() )
 			return true;
 
 		// Play start music only when the gamemode wants it.
-		return GameMode.Properties.ShouldAnnounceFirstBlood;
+		return GetGamemode().Properties.ShouldAnnounceFirstBlood;
 	}
 
 	public override bool CanEntityTakeDamage( Entity victim, Entity attacker, ExtendedDamageInfo info )
