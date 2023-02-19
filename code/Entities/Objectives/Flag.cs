@@ -119,7 +119,7 @@ public partial class Flag : Item, ITeam
 		if ( ITeam.IsSame( player, this ) )
 			return false;
 
-		if ( !TFGameRules.Current.FlagsCanBePickedUp() )
+		if ( !TFGameRules.Current.AreObjectivesActive() )
 			return false;
 
 		if ( player == LastOwner && !AllowOwnerPickup )
