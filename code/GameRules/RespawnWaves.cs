@@ -48,6 +48,10 @@ partial class TFGameRules
 		RespawnPlayers( force, true, (int)team );
 	}
 
+	public virtual bool IsTeamSelectionAllowed()
+	{
+		return !HasGamemode() || GetGamemode()?.Properties.AllowTeamSelection == true;
+	}
 	public override bool AreRespawnsAllowed()
 	{
 		return base.AreRespawnsAllowed() && (!HasGamemode() || GetGamemode()?.Properties.DisablePlayerRespawn == false);

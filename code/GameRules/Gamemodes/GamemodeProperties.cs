@@ -1,4 +1,6 @@
-﻿namespace TFS2
+﻿using System;
+
+namespace TFS2
 {
 	public struct GamemodeProperties
 	{
@@ -10,6 +12,11 @@
 		public bool ShouldAnnounceFirstBlood { get; init; }
 		public bool ShouldPlayGameStartSong { get; init; }
 		public bool IsAttackDefense { get; init; }
+		/// <summary>
+		/// If false, shows the arena selection screen.
+		/// </summary>
+		public bool AllowTeamSelection { get; init; }
+		public Func<TFPlayer, TFTeam> AutoTeamOverride;
 		public GamemodeProperties()
 		{
 			DisablePlayerRespawn = false;
@@ -17,6 +24,7 @@
 			ShouldAnnounceFirstBlood = false;
 			ShouldPlayGameStartSong = true;
 			IsAttackDefense = false;
+			AllowTeamSelection = true;
 		}
 	}
 }

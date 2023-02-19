@@ -25,7 +25,6 @@ partial class TFGameRules
 
 	public virtual TFTeam GetTeamAssignmentOverride( TFPlayer player, TFTeam team, bool autoBalance ) => team;
 	public virtual bool CanChangeTeamFrom( TFTeam currentTeam ) => true;
-
 	public virtual PlayerClass GetPlayerClassAssignmentOverride( TFPlayer player, PlayerClass pclass, bool autoBalance ) => pclass;
 	public virtual bool CanChangePlayerClassFrom( PlayerClass currentTeam ) => true;
 

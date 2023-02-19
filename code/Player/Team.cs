@@ -53,9 +53,12 @@ public partial class TFPlayer
 		//
 
 		var autoTeamed = false;
-		if ( team == TFTeam.Unassigned )
+		if ( team == TFTeam.Unassigned || !TFGameRules.Current.IsTeamSelectionAllowed() )
 		{
-			team = player.GetAutoTeam();
+			if ( TFGameRules.Current.HasGamemode() && TFGameRules.Current.GetGamemode().Properties.AutoTeamOverride != default )
+				team = TFGameRules.Current.GetGamemode().Properties.AutoTeamOverride.Invoke( player );
+			else
+				team = player.GetAutoTeam();
 			autoTeamed = true;
 		}
 
