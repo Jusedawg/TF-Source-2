@@ -35,13 +35,14 @@ public partial class TFPlayer : SDKPlayer
 			DesiredPlayerClass = null;
 		}
 
+		base.Respawn();
+
 		// We need to stop taunting to prevent lingering variables
 		if ( InCondition( TFCondition.Taunting ) )
 		{
 			StopTaunt();
 		}
 
-		base.Respawn();
 		RemoveAllConditions();
 		ResponseController.Reset();
 

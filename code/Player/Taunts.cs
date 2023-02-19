@@ -274,7 +274,6 @@ partial class TFPlayer
 		(Animator as TFPlayerAnimator)?.SetAnimParameter( "b_taunt", true );
 
 		Velocity = 0f;
-		Rotation = Animator.GetIdealRotation();
 
 		AddCondition( TFCondition.Taunting );
 		TauntEnableMove = false;
@@ -306,6 +305,12 @@ partial class TFPlayer
 					return;
 				}
 			}
+		}
+
+		// prevents conflicting rotation issues when joining partner taunt
+		if ( initiator )
+		{
+			Rotation = Animator.GetIdealRotation();
 		}
 
 		if ( TauntType == TauntType.Once )
@@ -357,14 +362,15 @@ partial class TFPlayer
 		else if ( taunt_name == "weapon_shared_shotgun" )
 		{
 			var slot = "secondary";
+			var playerClass = PlayerClass.Title.ToLower();
 
 			//Special Case for engineer, since shotgun is his primary
-			if ( PlayerClass.Title == "engineer" )
+			if ( playerClass == "engineer" )
 			{
 				slot = "primary";
 			}
 
-			taunt = TauntData.Get( $"weapon_{PlayerClass.Title}_{slot}" );
+			taunt = TauntData.Get( $"weapon_{playerClass}_{slot}" );
 
 		}
 		else
@@ -968,23 +974,24 @@ partial class TFPlayer
 		var tauntMusic = ActiveTaunt.TauntMusic;
 		var tauntMusicLength = ActiveTaunt.TauntMusic.Length;
 		var format = ".sound";
-		var tauntMusicNoFormat = tauntMusic.Remove( tauntMusicLength - format.Length );
+		var tauntMusicNoFormat = tauntMusic.Remove( tauntMusicLength - format.Length ); //Lets us assign a UI variant without having to manually do so
 
-		Log.Info( $"{tauntMusicNoFormat}" );
-		Log.Info( $"{tauntMusic}.ui{format}" );
-		TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
+		//TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
 
-		/*
-		if ( Game.LocalClient?.Pawn == this || Game.IsServerHost )
+		using ( Prediction.Off() ) //INVESTIGATE, joining taunt plays sound from UI as expected, but not when starting taunt from button (has to do with tauntmenu call?)
 		{
-			Log.Info("local music");
-			TauntMusic = Sound.FromScreen( To.Single( this ), ActiveTaunt.TauntMusic ); //FIX, not working
+			if ( Game.LocalClient?.Pawn == this )
+			{
+				Log.Info( "local music" );
+				TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" ); //FIX, not working
+			}
+			if ( Game.LocalClient?.Pawn != this )
+			{
+				Log.Info( "nonlocal music" );
+				TauntMusic = Sound.FromEntity( ActiveTaunt.TauntMusic, this, "head" ); ; //INVESTIGATE, not playing from attachment
+				TauntMusic.SetVolume(0.5f);
+			}
 		}
-		if ( Game.LocalClient?.Pawn != this )
-		{
-			Log.Info( "nonlocal music" );
-			TauntMusic = Sound.FromEntity( ActiveTaunt.TauntMusic, this, "head" ); ; //INVESTIGATE, not playing from attachment
-		}*/
 	}
 
 	public void StopMusic()
