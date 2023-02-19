@@ -10,48 +10,10 @@ partial class TFGameRules
 {
 	public void CheckWinConditions()
 	{
-		if ( !AreObjectivesActive() ) 
-			return;
-
-		//
-		// End the round when we wipe the other team, if game type says so.
-		//
-		if ( TeamWipeRoundEndCheck() )
-			return;
-
-		//
-		// End the round when we have captured enough flags.
-		//
-		if ( FlagCapturesRoundEndCheck() )
-			return;
-
-		//
-		// End the round when we have captured enough flags.
-		//
-		if ( ControlPointsRoundEndCheck() )
-			return;
-	}
-
-	public bool FlagCapturesRoundEndCheck()
-	{
-		if ( !MapHasFlags )
-			return false;
-
-		// if there is a team that has flag count > limit
-		foreach ( var pair in FlagCaptures )
+		if(GameMode.HasWon(out var team, out var reason))
 		{
-			var team = pair.Key;
-			var captures = pair.Value;
-
-			if ( captures >= tf_flag_caps_per_round )
-			{
-				DeclareWinner( team, TFWinReason.FlagCaptureLimit );
-
-				return true;
-			}
+			DeclareWinner(team, reason);
 		}
-
-		return false;
 	}
 
 	public bool ControlPointsRoundEndCheck()
