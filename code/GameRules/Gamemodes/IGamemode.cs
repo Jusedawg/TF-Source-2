@@ -12,6 +12,7 @@ namespace TFS2
 
 		public string Title { get; }
 		public string Icon { get; }
+		public GamemodeProperties Properties { get; }
 		public bool IsActive();
 		public bool HasWon( out TFTeam team, out TFWinReason reason );
 	}

@@ -7,6 +7,9 @@ public abstract partial class GamemodeEntity : Entity, IGamemode
 {
 	public virtual string Title => ToString();
 	public virtual string Icon => IGamemode.DEFAULT_ICON;
+
+	public virtual GamemodeProperties Properties => default;
+
 	public GamemodeEntity()
 	{
 		EventDispatcher.Subscribe<RoundEndEvent>( RoundEnd, this );
