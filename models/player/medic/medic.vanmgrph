@@ -2909,7 +2909,7 @@
 					}
 					m_networkMode = "ServerAuthoritative"
 					m_sNote = ""
-					m_weightListName = "weights_Foot_IK"
+					m_weightListName = "weights_FootIK"
 					m_inputConnection1 = 
 					{
 						m_nodeID = 
@@ -8824,7 +8824,7 @@
 											{
 												m_nodeID = 
 												{
-													m_id = 1569932053
+													m_id = 1142143384
 												}
 												m_outputID = 
 												{
@@ -9868,7 +9868,7 @@
 												{
 													_class = "CGroupOutputAnimNode"
 													m_sName = "Unnamed"
-													m_vecPosition = [ 392.0, 0.0 ]
+													m_vecPosition = [ 704.0, 0.0 ]
 													m_nNodeID = 
 													{
 														m_id = 279254653
@@ -9887,7 +9887,7 @@
 															{
 																m_nodeID = 
 																{
-																	m_id = 263932605
+																	m_id = 1572260352
 																}
 																m_outputID = 
 																{
@@ -9945,13 +9945,35 @@
 											{
 												key = 
 												{
+													m_id = 755043922
+												}
+												value = 
+												{
+													_class = "CSequenceAnimNode"
+													m_sName = "Unnamed"
+													m_vecPosition = [ 408.0, 64.0 ]
+													m_nNodeID = 
+													{
+														m_id = 755043922
+													}
+													m_networkMode = "ServerAuthoritative"
+													m_sNote = ""
+													m_tagSpans = [  ]
+													m_sequenceName = "layer_PRIMARY_jump_floatNoise"
+													m_playbackSpeed = 1.0
+													m_bLoop = true
+												}
+											},
+											{
+												key = 
+												{
 													m_id = 1356572615
 												}
 												value = 
 												{
 													_class = "CGroupInputAnimNode"
 													m_sName = "Unnamed"
-													m_vecPosition = [ 392.0, 48.0 ]
+													m_vecPosition = [ 704.0, 48.0 ]
 													m_nNodeID = 
 													{
 														m_id = 1356572615
@@ -9981,6 +10003,52 @@
 													m_sequenceName = "a_jumpfloat_SECONDARY"
 													m_playbackSpeed = 1.0
 													m_bLoop = true
+												}
+											},
+											{
+												key = 
+												{
+													m_id = 1572260352
+												}
+												value = 
+												{
+													_class = "CAddAnimNode"
+													m_sName = "Unnamed"
+													m_vecPosition = [ 448.0, 0.0 ]
+													m_nNodeID = 
+													{
+														m_id = 1572260352
+													}
+													m_networkMode = "ServerAuthoritative"
+													m_sNote = ""
+													m_baseInput = 
+													{
+														m_nodeID = 
+														{
+															m_id = 263932605
+														}
+														m_outputID = 
+														{
+															m_id = 4294967295
+														}
+													}
+													m_additiveInput = 
+													{
+														m_nodeID = 
+														{
+															m_id = 755043922
+														}
+														m_outputID = 
+														{
+															m_id = 4294967295
+														}
+													}
+													m_timingBehavior = "UseChild2"
+													m_flTimingBlend = 0.5
+													m_footMotionTiming = "Child1"
+													m_bResetBase = true
+													m_bResetAdditive = true
+													m_bApplyChannelsSeparately = true
 												}
 											},
 											{
@@ -14532,6 +14600,27 @@
 							{
 								key = 
 								{
+									m_id = 1817535472
+								}
+								value = 
+								{
+									_class = "CCommentAnimNode"
+									m_sName = "Note"
+									m_vecPosition = [ -360.0, -592.0 ]
+									m_nNodeID = 
+									{
+										m_id = 1817535472
+									}
+									m_networkMode = "ServerAuthoritative"
+									m_sNote = ""
+									m_commentText = "Medic does not have Airwalk or Swim aimmatricies, so we supply replacements"
+									m_size = [ 368.0, 216.0 ]
+									m_color = [ 49, 139, 146, 255 ]
+								}
+							},
+							{
+								key = 
+								{
 									m_id = 1820338117
 								}
 								value = 
@@ -15514,7 +15603,7 @@
 											{
 												m_nodeID = 
 												{
-													m_id = 1820338117
+													m_id = 1700605840
 												}
 												m_outputID = 
 												{
