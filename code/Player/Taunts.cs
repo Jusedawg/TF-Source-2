@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Amper.FPS;
+using Sandbox;
 using System;
 using System.Collections.Generic;
 
@@ -287,7 +288,7 @@ partial class TFPlayer
 	{
 
 		ActiveTaunt = taunt;
-		Log.Info($"Active Taunt: {ActiveTaunt.ResourceName}");
+
 		var animcontroller = Animator as TFPlayerAnimator;
 		var TauntType = taunt.TauntType;
 		var TauntIndex = TauntList.IndexOf( ActiveTaunt );  //Find way to dynamically assign, right now it MUST line up to animgraph
@@ -339,12 +340,11 @@ partial class TFPlayer
 	}
 
 	/// <summary>
-	/// Play the selected taunt (by string)
+	/// Play the selected taunt (by string, matching file name of taunt asset)
 	/// </summary>
 	/// <param name="taunt_name"></param>
 	public void PlayTaunt( string taunt_name )
 	{
-		Log.Info($"Attempting {taunt_name} via string");
 		TauntData taunt = null;
 
 		//Searches through enabled taunts to find the appropriate taunt data and assigns it
@@ -444,16 +444,16 @@ partial class TFPlayer
 		var validateTo = positionShiftUp + Rotation.Forward * 68;
 		var tr = PartnerValidateTrace( validateFrom, validateTo ).Run();
 
-		/*
+		
 		if ( tf_sv_debug_taunts )
 		{
-			DebugOverlay.Line( tr.StartPosition, tr.EndPosition, IsServer ? Color.Yellow : Color.Green, 15f, true );
+			DebugOverlay.Line( tr.StartPosition, tr.EndPosition, Game.IsServer ? Color.Yellow : Color.Green, 15f, true );
 			DebugOverlay.Box( tr.EndPosition, new Vector3( -24, -24, -41f ), new Vector3( 24, 24, 41 ), Color.Cyan, 15f, true );
-			DebugOverlay.Sphere( tr.EndPosition, 2f, Color.Red, true, 15f );
-			DebugOverlay.Sphere( tr.StartPosition, 2f, Color.Green, true, 15f );
-			DebugOverlay.Text( tr.EndPosition, $"{tr.Distance}", 15f );
+			DebugOverlay.Sphere( tr.EndPosition, 2f, Color.Red, 15f );
+			DebugOverlay.Sphere( tr.StartPosition, 2f, Color.Green, 15f );
+			DebugOverlay.Text(  $"{tr.Distance}", tr.EndPosition, 15f );
 		}
-		*/
+		
 
 		// Did we hit something?
 		if ( tr.Hit )
@@ -1001,6 +1001,112 @@ partial class TFPlayer
 
 	#endregion
 
+	#region Taunt Kills
+
+	public virtual void Tauntkill_HeavyPOW()
+	{
+		if ( !Game.IsServer ) return;
+
+		var damage = 500f;
+		var hurtbox = 5f;
+		var range = 500f;
+		var forceAngle = new QAngle( -45, Rotation.Yaw(), 0 );
+		var force = 500;
+		List<string> tags = new() { TFDamageTags.Bullet };
+
+		Tauntkill_Volume( range, hurtbox, damage, forceAngle.Forward * force, tags );
+	}
+
+	public virtual void Tauntkill_SpyFencing( int phase )
+	{
+		if ( !Game.IsServer ) return;
+
+		var damage = 500f;
+		var hurtbox = 24f;
+		var range = 64f;
+		var forceAngle = new QAngle( -45, Rotation.Yaw(), 0 );
+		var force = 350f;
+		List<string> tags = new() { TFDamageTags.Slash };
+
+		if ( phase == 1 || phase == 2 )
+		{
+			damage = 25f;
+			tags.Add( TFDamageTags.PreventPhysicsForce );
+		}
+
+		Tauntkill_Volume( range, hurtbox, damage, forceAngle.Forward * force, tags );
+	}
+
+	public virtual void Tauntkill_PyroHadouken()
+	{
+		if ( !Game.IsServer ) return;
+
+		var damage = 500f;
+		var hurtbox = 24f;
+		var range = 64f;
+		var forceAngle = new QAngle(-45, Rotation.Yaw(), 0);
+		var force = 350f;
+		List<string> tags = new() { TFDamageTags.Burn, TFDamageTags.Ignite };
+
+		Tauntkill_Volume(range, hurtbox, damage, forceAngle.Forward * force, tags );
+	}
+
+	public virtual void Tauntkill_Volume(float range, float extents, float damage , Vector3 force, IEnumerable<string> tags, bool singleTarget = true )
+	{
+		var startPoint = WorldSpaceBounds.Center;
+		var endPoint = ((Rotation.Forward * range) + Position).WithZ( startPoint.z );
+
+		var tr = Trace.Box( new Vector3( extents ), startPoint, endPoint )
+			.Ignore( this )
+			.WithTag( "player" )
+			.RunAll();
+
+		
+
+		if ( tf_sv_debug_taunts )
+		{
+			//Draws approximate corners of box trace, not exact because these respect rotation while the box trace does not
+			var RU = ( Rotation.Right + Rotation.Up) * (extents);
+			var RL = ( Rotation.Right - Rotation.Up) * (extents);
+			var LU = (-Rotation.Right + Rotation.Up) * (extents);
+			var LL = (-Rotation.Right - Rotation.Up) * (extents);
+			DebugOverlay.Line( startPoint + RU, endPoint + RU, 5f );
+			DebugOverlay.Line( startPoint + RL, endPoint + RL, 5f );
+			DebugOverlay.Line( startPoint + LU, endPoint + LU, 5f );
+			DebugOverlay.Line( startPoint + LL, endPoint + LL, 5f );
+
+			DebugOverlay.Box( endPoint, new Vector3( extents ), new Vector3( -extents ), Color.Cyan, 5f );
+			DebugOverlay.Axis( endPoint, Rotation, 10, 5f );
+			DebugOverlay.Text( "End Point", endPoint, 5f );
+		}
+
+		if ( tr != null )
+		{
+			foreach ( var trHit in tr )
+			{
+				var ent = trHit.Entity;
+				if ( ent is TFPlayer )
+				{
+					var damageInf = ExtendedDamageInfo.Create( damage )
+						.UsingTraceResult( trHit )
+						.WithInflictor( this )
+						.WithAttacker( this )
+						.WithWeapon( ActiveWeapon )
+						.WithForce( force )
+						.WithTags( tags ); //FIX, make dependant on attack
+
+					(ent as TFPlayer).TakeDamage( damageInf );
+				}
+			}
+			if( singleTarget )
+			{
+				return;
+			}
+		}
+	}
+
+	#endregion
+
 	/// <summary>
 	/// Console command for playing taunts by their animation name
 	/// </summary>
@@ -1097,6 +1203,21 @@ partial class TFPlayer
 			if ( weapon == null ) return;
 
 			weapon.SetBodyGroup( stringData, intData );
+		}
+
+		if ( name == "TF_TAUNTKILL_HEAVYPOW" )
+		{
+			Tauntkill_HeavyPOW();
+		}
+
+		if ( name == "TF_TAUNTKILL_PYROHADOUKEN" )
+		{
+			Tauntkill_PyroHadouken();
+		}
+
+		if ( name == "TF_TAUNTKILL_SPYFENCING" )
+		{
+			Tauntkill_SpyFencing( intData );
 		}
 	}
 

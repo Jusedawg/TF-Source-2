@@ -88,8 +88,6 @@ public class TauntData : GameResource
 	[ResourceType( "sound" )]
 	public string TauntMusic { get; set; }
 
-
-
 	protected override void PostLoad()
 	{
 		base.PostLoad();
@@ -119,7 +117,7 @@ public class TauntData : GameResource
 
 		if ( String.IsNullOrEmpty( taunt_name) )
 		{
-			Log.Warning("GET TAUNTDATA FAILED: STRING NULL OR EMPTY");
+			//Log.Warning("GET TAUNTDATA FAILED: STRING NULL OR EMPTY");
 			return null;
 		}
 
