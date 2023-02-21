@@ -58,6 +58,7 @@
 						poseparam_loop = 0.0
 					},
 				]
+				disabled = true
 			},
 			{
 				_class = "LODGroupList"
@@ -3244,6 +3245,14 @@
 									{
 										_class = "AnimFile"
 										name = "layer_reload_crouch_arms_SECONDARY"
+										children = 
+										[
+											{
+												_class = "AnimSubtract"
+												anim_name = "crouch_SECONDARY"
+												frame = 0
+											},
+										]
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = "weights_Reload_Secondary"
@@ -4000,9 +4009,17 @@
 											{
 												_class = "AnimFile"
 												name = "armslayer_ITEM2_swing"
+												children = 
+												[
+													{
+														_class = "AnimSubtract"
+														anim_name = "stand_ITEM2"
+														frame = 0
+													},
+												]
 												activity_name = ""
 												activity_weight = 1
-												weight_list_name = "weightlist_8"
+												weight_list_name = "weights_MeleeSwing_Arms"
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
@@ -4023,7 +4040,7 @@
 												name = "bodylayer_ITEM2_swing"
 												activity_name = ""
 												activity_weight = 1
-												weight_list_name = "weightlist_9"
+												weight_list_name = "weights_MeleeSwing_Body"
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
@@ -4033,6 +4050,156 @@
 												anim_markup_ordered = false
 												disable_compression = false
 												source_filename = "models/player/engineer/engineer_fbx/anim/bodylayer_item2_swing.dmx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 30.0
+												take = 0
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "armslayer_ITEM2_swing_hard"
+												children = 
+												[
+													{
+														_class = "AnimSubtract"
+														anim_name = "stand_ITEM2"
+														frame = 0
+													},
+												]
+												activity_name = ""
+												activity_weight = 1
+												weight_list_name = "weights_MeleeSwing_Arms"
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = false
+												delta = false
+												worldSpace = false
+												hidden = true
+												anim_markup_ordered = false
+												disable_compression = false
+												source_filename = "models/player/engineer/engineer_fbx/anim/armslayer_item2_swing_hard.dmx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 30.0
+												take = 0
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "bodylayer_ITEM2_swing_hard"
+												activity_name = ""
+												activity_weight = 1
+												weight_list_name = "weights_MeleeSwing_Body"
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = false
+												delta = false
+												worldSpace = false
+												hidden = true
+												anim_markup_ordered = false
+												disable_compression = false
+												source_filename = "models/player/engineer/engineer_fbx/anim/bodylayer_item2_swing_hard.dmx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 30.0
+												take = 0
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "armslayer_ITEM2_crouch_swing"
+												children = 
+												[
+													{
+														_class = "AnimSubtract"
+														anim_name = "stand_ITEM2"
+														frame = 0
+													},
+												]
+												activity_name = ""
+												activity_weight = 1
+												weight_list_name = "weights_MeleeSwing_Arms"
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = false
+												delta = false
+												worldSpace = false
+												hidden = true
+												anim_markup_ordered = false
+												disable_compression = false
+												source_filename = "models/player/engineer/engineer_fbx/anim/armslayer_item2_crouch_swing.dmx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 30.0
+												take = 0
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "bodylayer_ITEM2_crouch_swing"
+												activity_name = ""
+												activity_weight = 1
+												weight_list_name = "weights_Upperbody"
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = false
+												delta = false
+												worldSpace = false
+												hidden = true
+												anim_markup_ordered = false
+												disable_compression = false
+												source_filename = "models/player/engineer/engineer_fbx/anim/bodylayer_item2_crouch_swing.dmx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 30.0
+												take = 0
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "armslayer_ITEM2_crouch_swing_hard"
+												children = 
+												[
+													{
+														_class = "AnimSubtract"
+														anim_name = "stand_ITEM2"
+														frame = 0
+													},
+												]
+												activity_name = ""
+												activity_weight = 1
+												weight_list_name = "weights_MeleeSwing_Arms"
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = false
+												delta = false
+												worldSpace = false
+												hidden = true
+												anim_markup_ordered = false
+												disable_compression = false
+												source_filename = "models/player/engineer/engineer_fbx/anim/armslayer_item2_crouch_swing_hard.dmx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 30.0
+												take = 0
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "bodylayer_ITEM2_crouch_swing_hard"
+												activity_name = ""
+												activity_weight = 1
+												weight_list_name = "weights_MeleeSwing_Body"
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = false
+												delta = false
+												worldSpace = false
+												hidden = true
+												anim_markup_ordered = false
+												disable_compression = false
+												source_filename = "models/player/engineer/engineer_fbx/anim/bodylayer_item2_crouch_swing_hard.dmx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 30.0
@@ -4071,7 +4238,7 @@
 												]
 												activity_name = "ACT_MP_ATTACK_STAND_ITEM2"
 												activity_weight = 1
-												weight_list_name = "weightlist_10"
+												weight_list_name = ""
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
@@ -4081,143 +4248,6 @@
 												anim_markup_ordered = false
 												disable_compression = false
 												source_filename = "models/player/engineer/engineer_fbx/anim/item2_swing.dmx"
-												start_frame = -1
-												end_frame = -1
-												framerate = 30.0
-												take = 0
-												reverse = false
-											},
-											{
-												_class = "AnimFile"
-												name = "armslayer_ITEM2_crouch_swing"
-												activity_name = ""
-												activity_weight = 1
-												weight_list_name = "weightlist_8"
-												fade_in_time = 0.2
-												fade_out_time = 0.2
-												looping = false
-												delta = false
-												worldSpace = false
-												hidden = true
-												anim_markup_ordered = false
-												disable_compression = false
-												source_filename = "models/player/engineer/engineer_fbx/anim/armslayer_item2_crouch_swing.dmx"
-												start_frame = -1
-												end_frame = -1
-												framerate = 30.0
-												take = 0
-												reverse = false
-											},
-											{
-												_class = "AnimFile"
-												name = "bodylayer_ITEM2_crouch_swing"
-												activity_name = ""
-												activity_weight = 1
-												weight_list_name = "weightlist_9"
-												fade_in_time = 0.2
-												fade_out_time = 0.2
-												looping = false
-												delta = true
-												worldSpace = false
-												hidden = true
-												anim_markup_ordered = false
-												disable_compression = false
-												source_filename = "models/player/engineer/engineer_fbx/anim/bodylayer_item2_crouch_swing.dmx"
-												start_frame = -1
-												end_frame = -1
-												framerate = 30.0
-												take = 0
-												reverse = false
-											},
-											{
-												_class = "AnimFile"
-												name = "ITEM2_crouch_swing"
-												children = 
-												[
-													{
-														_class = "AnimAddLayer"
-														anim_name = "bodylayer_ITEM2_crouch_swing"
-													},
-													{
-														_class = "AnimAddLayer"
-														anim_name = "armslayer_ITEM2_crouch_swing"
-													},
-												]
-												activity_name = "ACT_MP_ATTACK_CROUCH_ITEM2"
-												activity_weight = 1
-												weight_list_name = "weightlist_10"
-												fade_in_time = 0.2
-												fade_out_time = 0.2
-												looping = false
-												delta = false
-												worldSpace = false
-												hidden = false
-												anim_markup_ordered = false
-												disable_compression = false
-												source_filename = "models/player/engineer/engineer_fbx/anim/item2_crouch_swing.dmx"
-												start_frame = -1
-												end_frame = -1
-												framerate = 30.0
-												take = 0
-												reverse = false
-											},
-											{
-												_class = "AnimFile"
-												name = "AttackSwim_ITEM2"
-												activity_name = "ACT_MP_ATTACK_SWIM_ITEM2"
-												activity_weight = 1
-												weight_list_name = "weightlist_3"
-												fade_in_time = 0.2
-												fade_out_time = 0.2
-												looping = false
-												delta = true
-												worldSpace = false
-												hidden = false
-												anim_markup_ordered = false
-												disable_compression = false
-												source_filename = "models/player/engineer/engineer_fbx/anim/attackswim_item2.dmx"
-												start_frame = -1
-												end_frame = -1
-												framerate = 30.0
-												take = 0
-												reverse = false
-											},
-											{
-												_class = "AnimFile"
-												name = "armslayer_ITEM2_swing_hard"
-												activity_name = ""
-												activity_weight = 1
-												weight_list_name = "weightlist_8"
-												fade_in_time = 0.2
-												fade_out_time = 0.2
-												looping = false
-												delta = false
-												worldSpace = false
-												hidden = true
-												anim_markup_ordered = false
-												disable_compression = false
-												source_filename = "models/player/engineer/engineer_fbx/anim/armslayer_item2_swing_hard.dmx"
-												start_frame = -1
-												end_frame = -1
-												framerate = 30.0
-												take = 0
-												reverse = false
-											},
-											{
-												_class = "AnimFile"
-												name = "bodylayer_ITEM2_swing_hard"
-												activity_name = ""
-												activity_weight = 1
-												weight_list_name = "weightlist_9"
-												fade_in_time = 0.2
-												fade_out_time = 0.2
-												looping = false
-												delta = true
-												worldSpace = false
-												hidden = true
-												anim_markup_ordered = false
-												disable_compression = false
-												source_filename = "models/player/engineer/engineer_fbx/anim/bodylayer_item2_swing_hard.dmx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 30.0
@@ -4256,7 +4286,7 @@
 												]
 												activity_name = "ACT_MP_ATTACK_STAND_HARD_ITEM2"
 												activity_weight = 1
-												weight_list_name = "weightlist_10"
+												weight_list_name = ""
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
@@ -4274,40 +4304,30 @@
 											},
 											{
 												_class = "AnimFile"
-												name = "armslayer_ITEM2_crouch_swing_hard"
-												activity_name = ""
+												name = "ITEM2_crouch_swing"
+												children = 
+												[
+													{
+														_class = "AnimAddLayer"
+														anim_name = "bodylayer_ITEM2_crouch_swing"
+													},
+													{
+														_class = "AnimAddLayer"
+														anim_name = "armslayer_ITEM2_crouch_swing"
+													},
+												]
+												activity_name = "ACT_MP_ATTACK_CROUCH_ITEM2"
 												activity_weight = 1
-												weight_list_name = "weightlist_8"
+												weight_list_name = ""
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
 												delta = false
 												worldSpace = false
-												hidden = true
+												hidden = false
 												anim_markup_ordered = false
 												disable_compression = false
-												source_filename = "models/player/engineer/engineer_fbx/anim/armslayer_item2_crouch_swing_hard.dmx"
-												start_frame = -1
-												end_frame = -1
-												framerate = 30.0
-												take = 0
-												reverse = false
-											},
-											{
-												_class = "AnimFile"
-												name = "bodylayer_ITEM2_crouch_swing_hard"
-												activity_name = ""
-												activity_weight = 1
-												weight_list_name = "weightlist_9"
-												fade_in_time = 0.2
-												fade_out_time = 0.2
-												looping = false
-												delta = true
-												worldSpace = false
-												hidden = true
-												anim_markup_ordered = false
-												disable_compression = false
-												source_filename = "models/player/engineer/engineer_fbx/anim/bodylayer_item2_crouch_swing_hard.dmx"
+												source_filename = "models/player/engineer/engineer_fbx/anim/item2_crouch_swing.dmx"
 												start_frame = -1
 												end_frame = -1
 												framerate = 30.0
@@ -4330,7 +4350,7 @@
 												]
 												activity_name = "ACT_MP_ATTACK_CROUCH_HARD_ITEM2"
 												activity_weight = 1
-												weight_list_name = "weightlist_10"
+												weight_list_name = ""
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
@@ -4348,14 +4368,35 @@
 											},
 											{
 												_class = "AnimFile"
-												name = "AttackSwim_ITEM2_hard"
-												activity_name = "ACT_MP_ATTACK_SWIM_HARD_ITEM2"
+												name = "AttackSwim_ITEM2"
+												activity_name = "ACT_MP_ATTACK_SWIM_ITEM2"
 												activity_weight = 1
-												weight_list_name = "weightlist_3"
+												weight_list_name = ""
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
-												delta = true
+												delta = false
+												worldSpace = false
+												hidden = false
+												anim_markup_ordered = false
+												disable_compression = false
+												source_filename = "models/player/engineer/engineer_fbx/anim/attackswim_item2.dmx"
+												start_frame = -1
+												end_frame = -1
+												framerate = 30.0
+												take = 0
+												reverse = false
+											},
+											{
+												_class = "AnimFile"
+												name = "AttackSwim_ITEM2_hard"
+												activity_name = "ACT_MP_ATTACK_SWIM_HARD_ITEM2"
+												activity_weight = 1
+												weight_list_name = ""
+												fade_in_time = 0.2
+												fade_out_time = 0.2
+												looping = false
+												delta = false
 												worldSpace = false
 												hidden = false
 												anim_markup_ordered = false
@@ -10915,7 +10956,7 @@
 								fade_in_time = 0.2
 								fade_out_time = 0.2
 								looping = false
-								delta = true
+								delta = false
 								worldSpace = false
 								hidden = false
 								anim_markup_ordered = false
@@ -45580,7 +45621,7 @@
 					},
 					{
 						_class = "WeightList"
-						name = "weights_Hand_IK"
+						name = "weights_HandL_IK"
 						default_weight = 0.0
 						weights = 
 						[
@@ -45604,6 +45645,28 @@
 							},
 							{
 								bone = "bip_foot_R_IK"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "weights_IK"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "bip_foot_L_IK"
+								weight = 1.0
+							},
+							{
+								bone = "bip_foot_R_IK"
+								weight = 1.0
+							},
+							{
+								bone = "bip_hand_L_IK"
 								weight = 1.0
 							},
 						]
@@ -46343,6 +46406,141 @@
 						tilt_bone = ""
 						animgraph_master_blend_parameter_name = ""
 						system = "IKSYSTEMTYPE_Animgraph"
+					},
+					{
+						_class = "IKChain"
+						name = "IK_FootR"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "bip_hip_r"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "bip_knee_r"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "bip_foot_r"
+												bone = "bip_foot_r"
+											},
+										]
+										bone = "bip_knee_r"
+									},
+								]
+								bone = "bip_hip_r"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "bip_foot_R_IK"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
+					{
+						_class = "IKChain"
+						name = "IK_FootL"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "bip_hip_l"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "bip_knee_l"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "bip_foot_l"
+												bone = "bip_foot_l"
+											},
+										]
+										bone = "bip_knee_l"
+									},
+								]
+								bone = "bip_hip_l"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "bip_foot_L_IK"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
+					{
+						_class = "IKChain"
+						name = "IK_HandL"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "bip_upperarm_l"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "bip_lowerarm_l"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "bip_hand_l"
+												bone = "bip_hand_l"
+											},
+										]
+										bone = "bip_lowerarm_l"
+									},
+								]
+								bone = "bip_upperarm_l"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "bip_hand_L_IK"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
 					},
 				]
 			},

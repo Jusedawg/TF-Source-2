@@ -17025,7 +17025,7 @@
 									}
 									m_blendDuration = 0.2
 									m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
-									m_bResetOnChange = true
+									m_bResetOnChange = false
 									m_bSyncCyclesOnChange = false
 									m_blendCurve = 
 									{
@@ -17043,7 +17043,7 @@
 								{
 									_class = "CStateMachineAnimNode"
 									m_sName = "Hand IK SM"
-									m_vecPosition = [ 160.0, -224.0 ]
+									m_vecPosition = [ 160.0, -320.0 ]
 									m_nNodeID = 
 									{
 										m_id = 236072051
@@ -17256,57 +17256,8 @@
 											[
 												{
 													_class = "CAnimStateTransition"
-													m_conditions = 
-													[
-														{
-															_class = "CParameterAnimCondition"
-															m_comparisonOp = 0
-															m_paramID = 
-															{
-																m_id = 434753920
-															}
-															m_comparisonValue = 
-															{
-																m_nType = 2
-																m_data = 1
-															}
-														},
-													]
-													m_blendDuration = 0.0
-													m_destState = 
-													{
-														m_id = 1361706289
-													}
-													m_bReset = false
-													m_resetCycleOption = "Beginning"
-													m_flFixedCycleValue = 0.0
-													m_blendCurve = 
-													{
-														m_vControlPoint1 = [ 0.5, 0.0 ]
-														m_vControlPoint2 = [ 0.5, 1.0 ]
-													}
-													m_bForceFootPlant = false
-													m_bDisabled = false
-												},
-												{
-													_class = "CAnimStateTransition"
-													m_conditions = 
-													[
-														{
-															_class = "CParameterAnimCondition"
-															m_comparisonOp = 0
-															m_paramID = 
-															{
-																m_id = 434753920
-															}
-															m_comparisonValue = 
-															{
-																m_nType = 2
-																m_data = 0
-															}
-														},
-													]
-													m_blendDuration = 0.0
+													m_conditions = [  ]
+													m_blendDuration = 0.2
 													m_destState = 
 													{
 														m_id = 1361706289
@@ -17325,7 +17276,7 @@
 											]
 											m_tags = [  ]
 											m_tagBehaviors = [  ]
-											m_name = "Weapons"
+											m_name = "WeaponStart"
 											m_inputConnection = 
 											{
 												m_nodeID = 
