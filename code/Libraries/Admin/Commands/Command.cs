@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design;
 using System.Linq;
 using System.Reflection;
@@ -66,6 +67,7 @@ namespace Breaker
 		}
 		private static Dictionary<string, Info> commands = new();
 		private static Dictionary<string, Info> aliasToCommand = new();
+
 		private static List<ClientInfo> clientCommands = new();
 		/// <summary>
 		/// All current commands. Only usable on the server.
@@ -77,8 +79,6 @@ namespace Breaker
 		/// <summary>
 		/// Deletes the current list of commands and generates a new one.
 		/// </summary>
-		//[Event.Hotload]
-		//[Event.Entity.PostSpawn]
 		[BRKEvent.ConfigLoaded]
 		public static void LoadAll()
 		{
@@ -91,58 +91,68 @@ namespace Breaker
 			{
 				foreach ( var method in type.Methods )
 				{
-					if ( !method.IsStatic || method.IsProperty )
-						continue;
-
-					var attribute = method.GetCustomAttribute<CommandAttribute>();
-					if ( attribute == null )
-						continue;
-					
-					var name = attribute.Key;
-
-					string group = null;
-					var groupMethodAttrib = method.GetCustomAttribute<CategoryAttribute>();
-					var groupTypeAttrib = type.GetAttribute<CategoryAttribute>();
-					if ( groupMethodAttrib != null )
-						group = groupMethodAttrib.Value;
-					else if(groupTypeAttrib != null )
-						group = groupTypeAttrib.Value;
-
-					var title = name;
-					var titleAttrib = method.GetCustomAttribute<TitleAttribute>();
-					if (titleAttrib != null)
-					{
-						title = titleAttrib.Value;
-					}
-
-					Info info = new( attribute, method ) { Name = title, Group = group };
-					if ( commands.ContainsKey( name ) )
-					{
-						Logging.Error( $"Tried to register command with duplicate name {name}!" );
-						continue;
-					}
-
-					foreach(var alias in attribute.Aliases)
-					{
-						if(commands.ContainsKey(alias))
-						{
-							Logging.Error( $"Tried to register command with alias {alias} which already exists as a command!" );
-						}
-						else if ( aliasToCommand.ContainsKey( alias ) )
-						{
-							Logging.Error( $"Tried to register command alias {alias} which already exists!" );
-							continue;
-						}
-
-						Debug.Log( $"Alias for {name}: {alias}" );
-						aliasToCommand.Add( alias, info );
-					}
-
-					Debug.Log( $"Registering command {name}." );
-					commands.Add( name, info );
-					NetworkCommandInfo( name, title, group, method.Parameters.Select(p => p.Name).ToArray() );
+					if ( method.IsStatic && method.IsMethod )
+						LoadMethod( method, type );
 				}
 			}
+		}
+
+		private static void LoadMethod(MethodDescription method, TypeDescription type)
+		{
+			var attribute = method.GetCustomAttribute<CommandAttribute>();
+
+			if ( attribute == null )
+			{
+				var builtinAttrib = method.GetCustomAttribute<ConCmd.AdminAttribute>();
+				if ( builtinAttrib == null )
+					return;
+
+				string attributeName = builtinAttrib.Name ?? method.Name.ToLower();
+				attribute = new CommandAttribute( attributeName ) { Description = builtinAttrib.Help, GeneratedFrom = type.Namespace };
+			}
+
+			var name = attribute.Key;
+
+			// Get group from method or type
+			string group = null;
+
+			if ( !string.IsNullOrWhiteSpace( method.Group ) )
+				group = method.Group;
+			else if ( !string.IsNullOrWhiteSpace( type.Group ) )
+				group = type.Group;
+
+			string title = name;
+			if ( !string.IsNullOrWhiteSpace(method.Title) )
+			{
+				title = method.Title;
+			}
+
+			Info info = new( attribute, method ) { Name = title, Group = group };
+			if ( commands.ContainsKey( name ) )
+			{
+				Logging.Error( $"Tried to register command with duplicate name {name}!" );
+				return;
+			}
+
+			foreach ( var alias in attribute.Aliases )
+			{
+				if ( commands.ContainsKey( alias ) )
+				{
+					Logging.Error( $"Tried to register command with alias {alias} which already exists as a command!" );
+				}
+				else if ( aliasToCommand.ContainsKey( alias ) )
+				{
+					Logging.Error( $"Tried to register command alias {alias} which already exists!" );
+					continue;
+				}
+
+				Debug.Log( $"Alias for {name}: {alias}" );
+				aliasToCommand.Add( alias, info );
+			}
+
+			Debug.Log( $"Registering command {name}." );
+			commands.Add( name, info );
+			NetworkCommandInfo( name, title, group, method.Parameters.Select( p => p.Name ).ToArray() );
 		}
 
 		#region Networking
@@ -187,6 +197,11 @@ namespace Breaker
 				return default;
 			}
 
+			if ( cmd.Attribute.IsGenerated )
+			{
+				return new PermissionAttribute[] { new($"other.{cmd.Attribute.GeneratedFrom.ToLowerInvariant()}.{name}") };
+			}
+
 			return cmd.Method.Attributes.OfType<PermissionAttribute>().ToArray();
 		}
 
@@ -206,6 +221,8 @@ namespace Breaker
 		public string Key { get; set; }
 		public string[] Aliases { get; }
 		public string Description { get; set; }
+		internal string GeneratedFrom = "";
+		internal bool IsGenerated => !string.IsNullOrWhiteSpace( GeneratedFrom );
 		public CommandAttribute(string key, params string[] aliases)
 		{
 			if ( string.IsNullOrEmpty( key ) )

@@ -42,7 +42,6 @@ namespace Breaker
 		}
 		public static void TellAll(string message, MessageType type = MessageType.Info )
 		{
-			Debug.Log( $"TellAll {message} ({type})" );
 			Print( message, type );
 
 			TellClientRPC( message, type );
@@ -53,7 +52,6 @@ namespace Breaker
 		}
 		public static void TellClient( IClient client, string message, MessageType type = MessageType.Info )
 		{
-			Debug.Log($"TellClient {client} {message} ({type})");
 			if ( client == null )
 			{
 				if ( Game.IsDedicatedServer )
