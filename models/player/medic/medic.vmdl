@@ -5047,7 +5047,7 @@
 					},
 					{
 						_class = "WeightList"
-						name = "weights_Foot_IK"
+						name = "weights_FootIK"
 						default_weight = 0.0
 						weights = 
 						[
@@ -7919,7 +7919,7 @@
 									},
 									{
 										_class = "AnimFile"
-										name = "jumpland_PRIMARY"
+										name = "a_jumpland_PRIMARY"
 										activity_name = "ACT_MP_JUMP_LAND_PRIMARY"
 										activity_weight = 1
 										weight_list_name = ""
@@ -8150,7 +8150,7 @@
 									},
 									{
 										_class = "AnimFile"
-										name = "jumpland_SECONDARY"
+										name = "a_jumpland_SECONDARY"
 										activity_name = "ACT_MP_JUMP_LAND_SECONDARY"
 										activity_weight = 1
 										weight_list_name = ""
@@ -8528,7 +8528,7 @@
 											},
 											{
 												_class = "AnimFile"
-												name = "jumpland_MELEE_ALLCLASS"
+												name = "a_jumpland_MELEE_ALLCLASS"
 												children = 
 												[
 													{
@@ -8546,7 +8546,7 @@
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = false
-												delta = true
+												delta = false
 												worldSpace = false
 												hidden = false
 												anim_markup_ordered = false
@@ -8888,7 +8888,7 @@
 									},
 									{
 										_class = "AnimFile"
-										name = "jumpland_MELEE"
+										name = "a_jumpland_MELEE"
 										activity_name = "ACT_MP_JUMP_LAND_MELEE"
 										activity_weight = 1
 										weight_list_name = ""
@@ -12895,7 +12895,7 @@
 								fade_in_time = 0.2
 								fade_out_time = 0.2
 								looping = false
-								delta = true
+								delta = false
 								worldSpace = false
 								hidden = false
 								anim_markup_ordered = false
@@ -13564,14 +13564,14 @@
 							},
 							{
 								_class = "AnimFile"
-								name = "jumpland_LOSER"
+								name = "a_jumpland_LOSER"
 								activity_name = "ACT_MP_JUMP_LAND_LOSERSTATE"
 								activity_weight = 1
 								weight_list_name = ""
 								fade_in_time = 0.2
 								fade_out_time = 0.2
 								looping = false
-								delta = true
+								delta = false
 								worldSpace = false
 								hidden = false
 								anim_markup_ordered = false
@@ -24424,7 +24424,7 @@
 									{
 										_class = "ExtractMotion"
 										extract_tx = true
-										extract_ty = false
+										extract_ty = true
 										extract_tz = false
 										extract_rz = false
 										linear = false
