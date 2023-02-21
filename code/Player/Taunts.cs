@@ -1003,7 +1003,7 @@ partial class TFPlayer
 
 	#region Taunt Kills
 
-	public virtual void Tauntkill_HeavyPOW()
+	public virtual void Tauntkill_HeavyHighNoon()
 	{
 		if ( !Game.IsServer ) return;
 
@@ -1205,9 +1205,9 @@ partial class TFPlayer
 			weapon.SetBodyGroup( stringData, intData );
 		}
 
-		if ( name == "TF_TAUNTKILL_HEAVYPOW" )
+		if ( name == "TF_TAUNTKILL_HEAVYHIGHNOON" )
 		{
-			Tauntkill_HeavyPOW();
+			Tauntkill_HeavyHighNoon();
 		}
 
 		if ( name == "TF_TAUNTKILL_PYROHADOUKEN" )
