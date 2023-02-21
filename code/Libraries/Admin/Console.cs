@@ -91,16 +91,30 @@ namespace Breaker
 			private static void PrintCommand( KeyValuePair<string, Command.Info> cmd )
 			{
 				string name = cmd.Key;
-				var p = Command.Parameters( name );
-				if ( p.Length > 0 )
-				{
-					name += $" ({string.Join( ", ", p.Select( x => $"{PrettyParamName( x )}: {PrettyTypeName( x.ParameterType )}" ) )})";
-				}
-				string desc = cmd.Value.Method.Description;
-				if ( !string.IsNullOrEmpty( desc ) )
-					name += $"| {desc}";
+				string msg = name;
 
-				Logging.TellCaller( $"- {name}" );
+				string desc = cmd.Value.Attribute.Description;
+				if ( !string.IsNullOrEmpty( desc ) )
+					msg += $" | {desc}";
+
+				var parameters = Command.Parameters( name );
+				if ( parameters.Length > 0 )
+				{
+					msg += $" ({string.Join( ", ", parameters.Select( x => $"{PrettyParamName( x )}: {PrettyTypeName( x.ParameterType )}" ) )})";
+				}
+				var perms = Command.Permissions( name );
+				if(perms.Length > 0)
+				{
+					msg += $" [{string.Join( ", ",  perms.Select( x => x.Permission ))}]";
+				}
+
+				if(cmd.Value.Attribute.IsGenerated)
+				{
+					msg += " [GENERATED]";
+				}
+
+
+				Logging.TellCaller( $"- {msg}" );
 			}
 			private static string PrettyParamName( ParameterInfo p )
 			{

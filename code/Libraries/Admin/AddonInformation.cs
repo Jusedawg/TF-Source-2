@@ -9,7 +9,7 @@ namespace Breaker
 	public static class AddonInformation
 	{
 		public const string ADDON_NAME = "Breaker Admin System";
-		public const string ADDON_VERSION = "0.1.1";
+		public const string ADDON_VERSION = "0.1.3";
 		public const string BRANCH = "tfs2";
 		public const string PREFIX = "[Breaker]";
 	}

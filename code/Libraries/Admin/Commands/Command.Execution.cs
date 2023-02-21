@@ -21,7 +21,7 @@ namespace Breaker
 			Info info = null;
 			if ( !commands.TryGetValue( command, out info ) && !aliasToCommand.TryGetValue( command, out info ) )
 			{
-				Log.Error( $"Tried to execute command {command} but it doesn't exist!" );
+				Logging.TellClient( caller, $"Tried to execute command {command} but it doesn't exist!", MessageType.Error );
 				return;
 			}
 
@@ -33,11 +33,13 @@ namespace Breaker
 				{
 					if ( !caller.HasPermission( perm ) )
 					{
-						Log.Error( $"Tried to execute command {command} but the client doesn't have the permission {perm.Permission}!" );
+						Logging.TellClient( caller, $"Tried to execute command {command} but the client doesn't have the permission {perm.Permission}!", MessageType.Error );
 						return;
 					}
+
 				}
 			}
+			Debug.Log( "Client has all required permissions" );
 			ParameterInfo[] parameters = method.Parameters;
 
 			int parameterCount = parameters.Length;
@@ -46,14 +48,14 @@ namespace Breaker
 			{
 				if ( args == default )
 				{
-					Log.Error( $"Tried to execute command {command} but it requires arguments!" );
+					Logging.TellClient( caller, $"Tried to execute command {command} but it requires arguments!", MessageType.Error );
 					return;
 				}
 
 				int argsCount = args.Length;
 				if ( parameterCount < argsCount || argsCount < requiredParameters )
 				{
-					Log.Error( $"Tried to execute command {command} but the parameter count doesn't match the argument count!" );
+					Logging.TellClient(caller, $"Tried to execute command {command} but the parameter count doesn't match the argument count!", MessageType.Error);
 					return;
 				}
 				var parameterTypes = parameters.Select( p => p.ParameterType ).ToList();
@@ -74,7 +76,7 @@ namespace Breaker
 					var value = ParseType( caller, type, arg );
 					if ( value == null )
 					{
-						Logging.Error( $"Tried to execute command {command} but the argument {arg} couldn't be converted to {type}!" );
+						Logging.TellClient(caller, $"Tried to execute command {command} but the argument {arg} couldn't be converted to {type}!", MessageType.Error);
 						return;
 					}
 

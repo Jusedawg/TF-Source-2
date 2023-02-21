@@ -9,9 +9,15 @@ namespace Breaker
 	{
 		public static bool Has( IClient cl, string permission )
 		{
-			if ( cl.IsListenServerHost )
-				return true;
+			Debug.Log( $"Checking permission {permission} for client {cl}" );
 
+			if ( Game.IsDedicatedServer && cl == default || cl.IsListenServerHost )
+			{
+				Debug.Log( "Command was called by host, always allowing..." );
+				return true;
+			}
+
+			Debug.Log( $"Checking after exceptions..." );
 			return Has( User.Get( cl ), permission );
 		}
 		public static bool Has( User user, string permission )

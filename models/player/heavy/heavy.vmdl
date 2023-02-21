@@ -2159,6 +2159,20 @@
 									{
 										_class = "AnimFile"
 										name = "layer_attackCrouch_PRIMARY_spoolup"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Uniform"
+											},
+										]
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = "weightlist_7"
@@ -2195,6 +2209,7 @@
 												end_frame = 16
 											},
 										]
+										disabled = true
 										activity_name = "ACT_MP_ATTACK_CROUCH_PREFIRE"
 										activity_weight = 1
 										weight_list_name = "weightlist_5"
@@ -2216,6 +2231,20 @@
 									{
 										_class = "AnimFile"
 										name = "layer_attackCrouch_PRIMARY_spooldown"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Uniform"
+											},
+										]
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = "weightlist_7"
@@ -2252,6 +2281,7 @@
 												end_frame = 16
 											},
 										]
+										disabled = true
 										activity_name = "ACT_MP_ATTACK_CROUCH_POSTFIRE"
 										activity_weight = 1
 										weight_list_name = "weightlist_5"
@@ -2294,6 +2324,20 @@
 									{
 										_class = "AnimFile"
 										name = "layer_attackStand_PRIMARY_spoolup"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Uniform"
+											},
+										]
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = "weightlist_7"
@@ -2331,6 +2375,7 @@
 												end_frame = 16
 											},
 										]
+										disabled = true
 										activity_name = "ACT_MP_ATTACK_STAND_PREFIRE"
 										activity_weight = 1
 										weight_list_name = "weightlist_5"
@@ -2352,6 +2397,20 @@
 									{
 										_class = "AnimFile"
 										name = "layer_attackStand_PRIMARY_spooldown"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Uniform"
+											},
+										]
 										activity_name = ""
 										activity_weight = 1
 										weight_list_name = "weightlist_7"
@@ -2389,6 +2448,7 @@
 												end_frame = 31
 											},
 										]
+										disabled = true
 										activity_name = "ACT_MP_ATTACK_STAND_POSTFIRE"
 										activity_weight = 1
 										weight_list_name = "weightlist_5"
@@ -2431,6 +2491,20 @@
 									{
 										_class = "AnimFile"
 										name = "attackSwim_PRIMARY_spoolup"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Uniform"
+											},
+										]
 										activity_name = "ACT_MP_ATTACK_SWIM_PREFIRE"
 										activity_weight = 1
 										weight_list_name = ""
@@ -2452,6 +2526,20 @@
 									{
 										_class = "AnimFile"
 										name = "attackSwim_PRIMARY_spooldown"
+										children = 
+										[
+											{
+												_class = "ExtractMotion"
+												extract_tx = true
+												extract_ty = true
+												extract_tz = false
+												extract_rz = false
+												linear = false
+												quadratic = false
+												root_bone_name = ""
+												motion_type = "Uniform"
+											},
+										]
 										activity_name = "ACT_MP_ATTACK_SWIM_POSTFIRE"
 										activity_weight = 1
 										weight_list_name = ""
@@ -31947,6 +32035,28 @@
 						master_morph_weight = -1.0
 						morph_weights = [  ]
 					},
+					{
+						_class = "WeightList"
+						name = "weights_IK"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "bip_foot_l_IK"
+								weight = 1.0
+							},
+							{
+								bone = "bip_foot_r_IK"
+								weight = 1.0
+							},
+							{
+								bone = "bip_hand_l_IK"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
 				]
 			},
 			{
@@ -31975,71 +32085,139 @@
 				children = 
 				[
 					{
-						_class = "IKRigSimple"
+						_class = "IKChain"
+						name = "IK_HandL"
 						children = 
 						[
 							{
-								_class = "IKChainOld"
-								name = "FootL"
-								end_effector_bone = "bip_foot_l"
-								root_bone = ""
-								end_effector_target_bone = "bip_foot_l_IK"
-								reverse_footlock_bone = ""
-								max_lock_distance_to_target = 6.0
-								footstep_footstep_sound_type = "Left"
-								footstep_sound = ""
-								footstep_attachment = ""
-								solver = "IKSOLVER_TwoBone"
-								hyperextension_release_dot_threshold = 0.937995
-								use_target_instead_of_lock_threshold = 0.01
-								break_restoration_time = 0.15
-								soften_time = 0.5
-								soften_percentage = 0.1
-							},
-							{
-								_class = "IKChainOld"
-								name = "FootR"
-								end_effector_bone = "bip_foot_r"
-								root_bone = ""
-								end_effector_target_bone = "bip_foot_r_IK"
-								reverse_footlock_bone = ""
-								max_lock_distance_to_target = 6.0
-								footstep_footstep_sound_type = "Left"
-								footstep_sound = ""
-								footstep_attachment = ""
-								solver = "IKSOLVER_TwoBone"
-								hyperextension_release_dot_threshold = 0.937995
-								use_target_instead_of_lock_threshold = 0.01
-								break_restoration_time = 0.15
-								soften_time = 0.5
-								soften_percentage = 0.1
-							},
-							{
-								_class = "IKChainOld"
-								name = "HandL"
-								end_effector_bone = "bip_hand_l"
-								root_bone = ""
-								end_effector_target_bone = "bip_hand_l"
-								reverse_footlock_bone = ""
-								max_lock_distance_to_target = 6.0
-								footstep_footstep_sound_type = "Left"
-								footstep_sound = ""
-								footstep_attachment = ""
-								solver = "IKSOLVER_TwoBone"
-								hyperextension_release_dot_threshold = 0.937995
-								use_target_instead_of_lock_threshold = 0.01
-								break_restoration_time = 0.15
-								soften_time = 0.5
-								soften_percentage = 0.1
+								_class = "IKChainJoint"
+								name = "bip_upperarm_l"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "bip_lowerarm_l"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "bip_hand_l"
+												bone = "bip_hand_l"
+											},
+										]
+										bone = "bip_lowerarm_l"
+									},
+								]
+								bone = "bip_upperarm_l"
 							},
 						]
-						initial_master_blend_amount = 1.0
-						abs_origin_drop_height = 24.0
-						abs_origin_drop_height_spring_strength = 500.0
-						default_tilt_spring_strength = 5.0
-						tilt_bone = ""
-						animgraph_master_blend_parameter_name = ""
-						system = "IKSYSTEMTYPE_Animgraph"
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "bip_hand_l_IK"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
+					{
+						_class = "IKChain"
+						name = "IK_FootL"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "bip_hip_l"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "bip_knee_l"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "bip_foot_l"
+												bone = "bip_foot_l"
+											},
+										]
+										bone = "bip_knee_l"
+									},
+								]
+								bone = "bip_hip_l"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "bip_foot_l_IK"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
+					{
+						_class = "IKChain"
+						name = "IK_FootR"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "bip_hip_r"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "bip_knee_r"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "bip_foot_r"
+												bone = "bip_foot_r"
+											},
+										]
+										bone = "bip_knee_r"
+									},
+								]
+								bone = "bip_hip_r"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "bip_foot_r_IK"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
 					},
 				]
 			},

@@ -16,7 +16,7 @@ namespace TFS2
 		{
 			ClientParser.RegisterMultiSelector( "blu", SelectBlue );
 			ClientParser.RegisterMultiSelector( "blue", SelectBlue );
-			ClientParser.RegisterMultiSelector("red", SelectRed);
+			ClientParser.RegisterMultiSelector( "red", SelectRed);
 		}
 
 		static IEnumerable<IClient> SelectBlue(IClient caller, string input )
