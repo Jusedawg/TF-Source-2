@@ -73,6 +73,7 @@ namespace Breaker
 		public static IReadOnlyDictionary<string, Info> All => commands.AsReadOnly();
 		public static ContextInfo Context { get; private set; }
 		public static IClient Caller => Context.Caller;
+		public static string CallerName => Caller?.Name ?? "Console";
 		/// <summary>
 		/// Deletes the current list of commands and generates a new one.
 		/// </summary>

@@ -20,6 +20,9 @@ namespace Breaker
 		}
 		public static bool CanTarget(this IClient client, User other, string command = "")
 		{
+			if ( client == default && Game.IsDedicatedServer || client.IsListenServerHost )
+				return true;
+
 			var user = User.Get( client );
 			if ( user == null )
 			{
@@ -29,6 +32,9 @@ namespace Breaker
 		}
 		public static bool CanTarget(this IClient client, UserGroup group, string command = "")
 		{
+			if ( client == default && Game.IsDedicatedServer || client.IsListenServerHost )
+				return true;
+
 			var user = User.Get( client );
 			if ( user == null )
 			{

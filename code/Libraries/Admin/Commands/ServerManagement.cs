@@ -13,7 +13,7 @@ namespace Breaker
 		[Command("map", "changelevel"), Permission("breaker.map")]
 		public static void ChangeMap(string map)
 		{
-			Logging.TellAll( $"{Command.Caller.Name} changed map to {map}..." );
+			Logging.TellAll( $"{Command.CallerName} changed map to {map}..." );
 			Game.ChangeLevel( map );
 		}
 	}

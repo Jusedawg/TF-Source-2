@@ -27,7 +27,7 @@ namespace Breaker.Commands
 					}
 				}
 			}
-			Logging.TellAll( $"{Command.Caller.Name} slayed {Logging.FormatClients( targets )}!" );
+			Logging.TellAll( $"{Command.CallerName} slayed {Logging.FormatClients( targets )}!" );
 		}
 
 		[Command( "slap" ), Permission( "breaker.slap" )]
@@ -59,7 +59,7 @@ namespace Breaker.Commands
 					ent.PlaySound( "slap" );
 				}
 			}
-			Logging.TellAll($"{Command.Caller.Name} slapped {Logging.FormatClients(targets)}!" );
+			Logging.TellAll($"{Command.CallerName} slapped {Logging.FormatClients(targets)}!" );
 		}
 
 		[Command("launch"), Permission("breaker.launch")]
@@ -75,7 +75,7 @@ namespace Breaker.Commands
 					pawn.Velocity = pawn.Velocity += speed;
 				}
 			}
-			Logging.TellAll( $"{Command.Caller.Name} slapped {Logging.FormatClients( targets )}!" );
+			Logging.TellAll( $"{Command.CallerName} slapped {Logging.FormatClients( targets )}!" );
 		}
 	}
 }

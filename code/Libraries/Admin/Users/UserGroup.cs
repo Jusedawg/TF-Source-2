@@ -17,7 +17,7 @@ namespace Breaker
 		private static readonly Dictionary<string, UserGroup> defaultGroups = new()
 		{
 			{ "user", new() {Id = "user", Weight = 0 } },
-			{ "admin", new() {Id = "admin", Weight = 100} }
+			{ "admin", new() {Id = "admin", Weight = 100, Permissions = new() { "*" } } }
 		};
 		
 		[BRKEvent.ConfigLoaded]
