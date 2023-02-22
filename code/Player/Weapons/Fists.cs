@@ -11,6 +11,7 @@ public partial class Fists : TFMeleeBase
 	{
 		return CanPrimaryAttack();
 	}
+
 	public override void SecondaryAttack()
 	{
 		base.SecondaryAttack();
