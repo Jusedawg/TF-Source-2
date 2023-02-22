@@ -271,6 +271,55 @@
         "DefaultValue": "true",
         "Description": "",
         "Group": ""
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "tf_avoidteammates_pushaway",
+        "DisplayName": "Avoid Teammates Pushaway",
+        "DefaultValue": "false",
+        "Description": "",
+        "Group": "Gameplay"
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "tf_collide_with_teammates",
+        "DisplayName": "Collide With Teammates",
+        "DefaultValue": "false",
+        "Description": "",
+        "Group": "Gameplay"
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "tf_flag_caps_per_round",
+        "DisplayName": "Flag Captures Per Round",
+        "DefaultValue": "3",
+        "Description": "",
+        "Group": "Capture The Flag",
+        "Minimum": 1,
+        "Maximum": 10
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "tf_tdm_frag_limit_min",
+        "DisplayName": "Min Frag Limit",
+        "DefaultValue": "15",
+        "Description": "",
+        "Group": "Team Deathmatch",
+        "Maximum": 50
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "tf_tdm_frag_limit_max",
+        "DisplayName": "Max Frag Limit",
+        "DefaultValue": "75",
+        "Description": "",
+        "Group": "Team Deathmatch",
+        "Maximum": 100
       }
     ],
     "DefaultLeaderboards": null,
