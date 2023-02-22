@@ -14,7 +14,7 @@ namespace TFS2
 
 		protected virtual void StartMoveSounds()
 		{
-			if ( !RollingSound.Finished )
+			if ( RollingSound.IsPlaying )
 				RollingSound.Stop();
 
 			RollingSound = PlaySound( StartMoveSound );
@@ -22,7 +22,7 @@ namespace TFS2
 
 		protected virtual void MoveSounds()
 		{
-			if ( RollingSound.Finished )
+			if ( !RollingSound.IsPlaying )
 			{
 				//Log.Info( $"MoveSound {MoveSound}" );
 				RollingSound = PlaySound( MoveSound );

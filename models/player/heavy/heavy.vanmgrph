@@ -80,7 +80,7 @@
 				{
 					_class = "CSelectorAnimNode"
 					m_sName = "Unnamed"
-					m_vecPosition = [ -128.0, 448.0 ]
+					m_vecPosition = [ 128.0, 384.0 ]
 					m_nNodeID = 
 					{
 						m_id = 263932605
@@ -1513,7 +1513,7 @@
 				{
 					_class = "CGroupAnimNode"
 					m_sName = "Weapoon Animations"
-					m_vecPosition = [ -512.0, 456.0 ]
+					m_vecPosition = [ -64.0, 448.0 ]
 					m_nNodeID = 
 					{
 						m_id = 595505765
@@ -4059,7 +4059,7 @@
 							{
 								m_nodeID = 
 								{
-									m_id = 2000447908
+									m_id = 263932605
 								}
 								m_outputID = 
 								{
@@ -6743,7 +6743,7 @@
 									}
 									m_blendDuration = 0.2
 									m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
-									m_bResetOnChange = true
+									m_bResetOnChange = false
 									m_bSyncCyclesOnChange = false
 									m_blendCurve = 
 									{
@@ -6761,7 +6761,7 @@
 								{
 									_class = "CStateMachineAnimNode"
 									m_sName = "Hand IK SM"
-									m_vecPosition = [ 160.0, -224.0 ]
+									m_vecPosition = [ 160.0, -328.0 ]
 									m_nNodeID = 
 									{
 										m_id = 236072051
@@ -6974,56 +6974,7 @@
 											[
 												{
 													_class = "CAnimStateTransition"
-													m_conditions = 
-													[
-														{
-															_class = "CParameterAnimCondition"
-															m_comparisonOp = 0
-															m_paramID = 
-															{
-																m_id = 434753920
-															}
-															m_comparisonValue = 
-															{
-																m_nType = 2
-																m_data = 1
-															}
-														},
-													]
-													m_blendDuration = 0.0
-													m_destState = 
-													{
-														m_id = 1361706289
-													}
-													m_bReset = false
-													m_resetCycleOption = "Beginning"
-													m_flFixedCycleValue = 0.0
-													m_blendCurve = 
-													{
-														m_vControlPoint1 = [ 0.5, 0.0 ]
-														m_vControlPoint2 = [ 0.5, 1.0 ]
-													}
-													m_bForceFootPlant = false
-													m_bDisabled = false
-												},
-												{
-													_class = "CAnimStateTransition"
-													m_conditions = 
-													[
-														{
-															_class = "CParameterAnimCondition"
-															m_comparisonOp = 0
-															m_paramID = 
-															{
-																m_id = 434753920
-															}
-															m_comparisonValue = 
-															{
-																m_nType = 2
-																m_data = 0
-															}
-														},
-													]
+													m_conditions = [  ]
 													m_blendDuration = 0.0
 													m_destState = 
 													{
@@ -7043,7 +6994,7 @@
 											]
 											m_tags = [  ]
 											m_tagBehaviors = [  ]
-											m_name = "Weapons"
+											m_name = "WeaponStart"
 											m_inputConnection = 
 											{
 												m_nodeID = 
@@ -21491,7 +21442,7 @@
 				{
 					_class = "CAddAnimNode"
 					m_sName = "Add Weapon Animations"
-					m_vecPosition = [ -320.0, 384.0 ]
+					m_vecPosition = [ -64.0, 384.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1690608374
@@ -21603,7 +21554,7 @@
 				{
 					_class = "CGroupAnimNode"
 					m_sName = "Base Animations"
-					m_vecPosition = [ -736.0, 384.0 ]
+					m_vecPosition = [ -480.0, 384.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1780128767
@@ -35212,7 +35163,7 @@
 				{
 					_class = "CAddAnimNode"
 					m_sName = "Add Aimmatrix"
-					m_vecPosition = [ -512.0, 384.0 ]
+					m_vecPosition = [ -256.0, 384.0 ]
 					m_nNodeID = 
 					{
 						m_id = 1867601730
@@ -35655,60 +35606,6 @@
 					m_commentText = "TODO:\n- r_Handposes and r_Armposes for melee_allclass\n- Other Unimplemented animations\n- Find way to blend taunts out better"
 					m_size = [ 448.0, 240.0 ]
 					m_color = [ 89, 48, 146, 255 ]
-				}
-			},
-			{
-				key = 
-				{
-					m_id = 2000447908
-				}
-				value = 
-				{
-					_class = "CBoneMaskAnimNode"
-					m_sName = "Mask combined upperbody animations"
-					m_vecPosition = [ 64.0, 384.0 ]
-					m_nNodeID = 
-					{
-						m_id = 2000447908
-					}
-					m_networkMode = "ServerAuthoritative"
-					m_sNote = "Isolates movement animations for lower body so that they aren\'t affected by any changes accidentally made by Aimmatrix or Weapon Animations"
-					m_weightListName = "weights_UpperBody"
-					m_inputConnection1 = 
-					{
-						m_nodeID = 
-						{
-							m_id = 1780128767
-						}
-						m_outputID = 
-						{
-							m_id = 165077527
-						}
-					}
-					m_inputConnection2 = 
-					{
-						m_nodeID = 
-						{
-							m_id = 263932605
-						}
-						m_outputID = 
-						{
-							m_id = 4294967295
-						}
-					}
-					m_blendSpace = "BlendSpace_Parent"
-					m_bUseBlendScale = false
-					m_blendValueSource = "Parameter"
-					m_blendParameter = 
-					{
-						m_id = 4294967295
-					}
-					m_timingBehavior = "UseChild1"
-					m_flTimingBlend = 0.5
-					m_flRootMotionBlend = 0.0
-					m_footMotionTiming = "Child1"
-					m_bResetChild1 = false
-					m_bResetChild2 = true
 				}
 			},
 			{

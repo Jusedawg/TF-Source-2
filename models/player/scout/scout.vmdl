@@ -4359,10 +4359,9 @@
 											{
 												_class = "AnimFile"
 												name = "layer_swim_ITEM1_wepGrip"
-												disabled = true
 												activity_name = ""
 												activity_weight = 1
-												weight_list_name = "weightlist_13"
+												weight_list_name = "weights_SwimMeleeGrip"
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = true
@@ -4947,10 +4946,9 @@
 											{
 												_class = "AnimFile"
 												name = "layer_MELEE_allclass_WepGrip"
-												disabled = true
 												activity_name = ""
 												activity_weight = 1
-												weight_list_name = "weightlist_1"
+												weight_list_name = "weights_Handposes"
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = true
@@ -5011,10 +5009,9 @@
 											{
 												_class = "AnimFile"
 												name = "layer_swim_MELEE_ALLCLASS_wepGrip"
-												disabled = true
 												activity_name = ""
 												activity_weight = 1
-												weight_list_name = "weightlist_13"
+												weight_list_name = "weights_SwimMeleeGrip"
 												fade_in_time = 0.2
 												fade_out_time = 0.2
 												looping = true
@@ -5054,6 +5051,13 @@
 											{
 												_class = "AnimFile"
 												name = "airwalk_MELEE_ALLCLASS"
+												children = 
+												[
+													{
+														_class = "AnimAddLayer"
+														anim_name = "layer_swim_MELEE_ALLCLASS_wepGrip"
+													},
+												]
 												activity_name = "ACT_MP_AIRWALK_MELEE_ALLCLASS"
 												activity_weight = 1
 												weight_list_name = ""
@@ -21665,6 +21669,13 @@
 							{
 								_class = "AnimFile"
 								name = "a_swimCenter_SECONDARY"
+								children = 
+								[
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_SECONDARY_WepGrip"
+									},
+								]
 								activity_name = ""
 								activity_weight = 1
 								weight_list_name = ""
@@ -21698,6 +21709,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_SECONDARY_WepGrip"
 									},
 								]
 								activity_name = ""
@@ -21734,6 +21749,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_SECONDARY_WepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -21768,6 +21787,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_SECONDARY_WepGrip"
 									},
 								]
 								activity_name = ""
@@ -21804,6 +21827,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_SECONDARY_WepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -21838,6 +21865,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_SECONDARY_WepGrip"
 									},
 								]
 								activity_name = ""
@@ -21874,6 +21905,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_SECONDARY_WepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -21908,6 +21943,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_SECONDARY_WepGrip"
 									},
 								]
 								activity_name = ""
@@ -21944,6 +21983,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_SECONDARY_WepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -21966,6 +22009,13 @@
 							{
 								_class = "AnimFile"
 								name = "a_swimCenter_MELEE"
+								children = 
+								[
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_wepGrip"
+									},
+								]
 								activity_name = ""
 								activity_weight = 1
 								weight_list_name = ""
@@ -21999,6 +22049,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22035,6 +22089,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22069,6 +22127,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22105,6 +22167,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22139,6 +22205,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22175,6 +22245,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22209,6 +22283,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22245,6 +22323,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22267,6 +22349,13 @@
 							{
 								_class = "AnimFile"
 								name = "a_swimCenter_MELEE_ALLCLASS"
+								children = 
+								[
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_ALLCLASS_wepGrip"
+									},
+								]
 								activity_name = ""
 								activity_weight = 1
 								weight_list_name = ""
@@ -22300,6 +22389,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_ALLCLASS_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22336,6 +22429,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_ALLCLASS_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22370,6 +22467,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_ALLCLASS_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22406,6 +22507,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_ALLCLASS_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22440,6 +22545,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_ALLCLASS_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22476,6 +22585,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_ALLCLASS_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22510,6 +22623,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_ALLCLASS_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22546,6 +22663,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_MELEE_ALLCLASS_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22568,6 +22689,13 @@
 							{
 								_class = "AnimFile"
 								name = "a_swimCenter_ITEM1"
+								children = 
+								[
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_ITEM1_wepGrip"
+									},
+								]
 								activity_name = ""
 								activity_weight = 1
 								weight_list_name = ""
@@ -22601,6 +22729,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_ITEM1_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22637,6 +22769,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_ITEM1_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22671,6 +22807,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_ITEM1_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22707,6 +22847,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_ITEM1_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22741,6 +22885,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_ITEM1_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -22777,6 +22925,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_ITEM1_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22812,6 +22964,10 @@
 										root_bone_name = ""
 										motion_type = "Uniform"
 									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_ITEM1_wepGrip"
+									},
 								]
 								activity_name = ""
 								activity_weight = 1
@@ -22846,6 +23002,10 @@
 										quadratic = false
 										root_bone_name = ""
 										motion_type = "Uniform"
+									},
+									{
+										_class = "AnimAddLayer"
+										anim_name = "layer_swim_ITEM1_wepGrip"
 									},
 								]
 								activity_name = ""
@@ -47070,7 +47230,7 @@
 					},
 					{
 						_class = "WeightList"
-						name = "weights_FootIK"
+						name = "weights_Foot_IK"
 						default_weight = 0.0
 						weights = 
 						[
@@ -47121,109 +47281,184 @@
 				children = 
 				[
 					{
-						_class = "IKRigBiped"
+						_class = "IKChain"
+						name = "IK_FootR"
 						children = 
 						[
 							{
-								_class = "IKChainOld"
-								name = "FootRIK"
+								_class = "IKChainJoint"
+								name = "bip_hip_r"
 								children = 
 								[
 									{
-										_class = "IKRuleGround"
-										trace_height = -1.0
-										trace_radius = -1.0
-										z_spring_strength = -1.0
-										normal_spring_strength = -1.0
+										_class = "IKChainJoint"
+										name = "bip_knee_r"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "bip_foot_r"
+												bone = "bip_foot_r"
+											},
+										]
+										bone = "bip_knee_r"
 									},
 								]
-								end_effector_bone = "bip_foot_r"
-								root_bone = ""
-								end_effector_target_bone = "bip_foot_r_ik"
-								reverse_footlock_bone = ""
-								max_lock_distance_to_target = 6.0
-								footstep_footstep_sound_type = "Right"
-								footstep_sound = ""
-								footstep_attachment = ""
-								solver = "IKSOLVER_TwoBone"
-								hyperextension_release_dot_threshold = 0.937995
-								use_target_instead_of_lock_threshold = 0.01
-								break_restoration_time = 0.15
-								soften_time = 0.5
-								soften_percentage = 0.1
-							},
-							{
-								_class = "IKChainOld"
-								name = "FootLIK"
-								children = 
-								[
-									{
-										_class = "IKRuleGround"
-										trace_height = -1.0
-										trace_radius = -1.0
-										z_spring_strength = -1.0
-										normal_spring_strength = -1.0
-									},
-								]
-								end_effector_bone = "bip_foot_l"
-								root_bone = ""
-								end_effector_target_bone = "bip_foot_l_ik"
-								reverse_footlock_bone = ""
-								max_lock_distance_to_target = 6.0
-								footstep_footstep_sound_type = "Left"
-								footstep_sound = ""
-								footstep_attachment = ""
-								solver = "IKSOLVER_TwoBone"
-								hyperextension_release_dot_threshold = 0.937995
-								use_target_instead_of_lock_threshold = 0.01
-								break_restoration_time = 0.15
-								soften_time = 0.5
-								soften_percentage = 0.1
-							},
-							{
-								_class = "IKChainOld"
-								name = "HandL"
-								end_effector_bone = "bip_hand_l"
-								root_bone = ""
-								end_effector_target_bone = "bip_hand_l_IK"
-								reverse_footlock_bone = ""
-								max_lock_distance_to_target = 6.0
-								footstep_footstep_sound_type = "Left"
-								footstep_sound = ""
-								footstep_attachment = ""
-								solver = "IKSOLVER_TwoBone"
-								hyperextension_release_dot_threshold = 0.937995
-								use_target_instead_of_lock_threshold = 0.01
-								break_restoration_time = 0.15
-								soften_time = 0.5
-								soften_percentage = 0.1
-							},
-							{
-								_class = "IKChainOld"
-								name = "HandR"
-								end_effector_bone = "bip_hand_r"
-								root_bone = ""
-								end_effector_target_bone = "bip_hand_r_IK"
-								reverse_footlock_bone = ""
-								max_lock_distance_to_target = 6.0
-								footstep_footstep_sound_type = "Left"
-								footstep_sound = ""
-								footstep_attachment = ""
-								solver = "IKSOLVER_TwoBone"
-								hyperextension_release_dot_threshold = 0.937995
-								use_target_instead_of_lock_threshold = 0.01
-								break_restoration_time = 0.15
-								soften_time = 0.5
-								soften_percentage = 0.1
+								bone = "bip_hip_r"
 							},
 						]
-						initial_master_blend_amount = 1.0
-						abs_origin_drop_height = 24.0
-						abs_origin_drop_height_spring_strength = 500.0
-						default_tilt_spring_strength = 5.0
-						tilt_bone = ""
-						animgraph_master_blend_parameter_name = ""
-						system = "IKSYSTEMTYPE_Animgraph"
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "bip_foot_r_ik"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
+					{
+						_class = "IKChain"
+						name = "IK_FootL"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "bip_hip_l"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "bip_knee_l"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "bip_foot_l"
+												bone = "bip_foot_l"
+											},
+										]
+										bone = "bip_knee_l"
+									},
+								]
+								bone = "bip_hip_l"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "bip_foot_l_ik"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
+					{
+						_class = "IKChain"
+						name = "IK_HandL"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "bip_upperarm_l"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "bip_lowerarm_l"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "bip_hand_l"
+												bone = "bip_hand_l"
+											},
+										]
+										bone = "bip_lowerarm_l"
+									},
+								]
+								bone = "bip_upperarm_l"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "bip_hand_l_IK"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
+					},
+					{
+						_class = "IKChain"
+						name = "IK_HandR"
+						children = 
+						[
+							{
+								_class = "IKChainJoint"
+								name = "bip_upperarm_r"
+								children = 
+								[
+									{
+										_class = "IKChainJoint"
+										name = "bip_lowerarm_r"
+										children = 
+										[
+											{
+												_class = "IKChainJoint"
+												name = "bip_hand_r"
+												bone = "bip_hand_r"
+											},
+										]
+										bone = "bip_lowerarm_r"
+									},
+								]
+								bone = "bip_upperarm_r"
+							},
+						]
+						m_bDoBonesOrientAlongPositiveX = true
+						"m_DefaultSolverSettings.m_nNumIterations" = 6
+						"m_DefaultSolverSettings.m_SolverType " = "IKSOLVER_TwoBone"
+						"m_DefaultTargetSettings.m_Bone" = 
+						{
+							m_Name = "bip_hand_r_IK"
+						}
+						"m_DefaultTargetSettings.m_TargetSource" = "Bone"
+						"m_Data.m_DefaultTargetSettings.m_AnimgraphParameterNamePosition" = 
+						{
+							m_id = 4294967295
+						}
+						"m_Data.m_EndEffectorFixedOffsetAttachment" = 
+						{
+							m_Name = ""
+						}
+						"m_Data.m_bParentJointRequiresAlignment" = true
 					},
 				]
 			},

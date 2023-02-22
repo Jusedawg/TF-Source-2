@@ -7,6 +7,7 @@ namespace TFS2;
 partial class TFPlayer : IResponseSpeaker<TFResponseConcept, TFResponseContext>
 {
 	public ResponseController<TFResponseConcept, TFResponseContext> ResponseController { get; set; }
+	[ConVar.Replicated] public static bool tf_print_responses { get; set; } = false;
 
 	public void ModifyResponseCriteria( ResponseCriteria<TFResponseContext> criteriaSet )
 	{
@@ -142,7 +143,7 @@ partial class TFPlayer : IResponseSpeaker<TFResponseConcept, TFResponseContext>
 
 	public void SendResponseChatNotification( TFResponseConcept concept )
 	{
-		return;
+		if ( !tf_print_responses ) return;
 
 		switch ( concept )
 		{
@@ -152,7 +153,6 @@ partial class TFPlayer : IResponseSpeaker<TFResponseConcept, TFResponseContext>
 			case TFResponseConcept.VoiceMoveUp:
 			case TFResponseConcept.VoiceYes:
 			case TFResponseConcept.VoiceNo:
-
 			case TFResponseConcept.VoiceIncoming:
 			case TFResponseConcept.VoiceSpy:
 
