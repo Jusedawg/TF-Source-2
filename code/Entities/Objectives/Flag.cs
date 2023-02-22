@@ -66,15 +66,25 @@ public partial class Flag : Item, ITeam
 	{
 		base.Tick();
 
-		if ( !AllowOwnerPickup )
+		if(State == FlagState.Dropped)
 		{
-			if ( State == FlagState.Dropped && TimeSinceDropped > OwnerPickupTime )
+			if ( !AllowOwnerPickup )
 			{
-				AllowOwnerPickup = true;
+				if ( TimeSinceDropped > OwnerPickupTime )
+				{
+					AllowOwnerPickup = true;
+				}
+			}
+
+			if ( TimeSinceDropped > ReturnTime ) Return();
+		}
+		else if(State == FlagState.Carried)
+		{
+			if(RespawnRoom.IsInsideTeamRoom(TFOwner))
+			{
+				Drop();
 			}
 		}
-
-		if ( State == FlagState.Dropped && TimeSinceDropped > ReturnTime ) Return();
 	}
 
 	/*
@@ -158,7 +168,7 @@ public partial class Flag : Item, ITeam
 	{
 		if ( !Game.IsServer ) return;
 
-		base.Drop( player, false, false );
+		base.Drop();
 		Reset();
 
 		EventDispatcher.InvokeEvent( new FlagCapturedEvent() { Flag = this, Capper = player, Zone = zone } );
@@ -180,7 +190,7 @@ public partial class Flag : Item, ITeam
 
 		if ( Owner is TFPlayer player )
 		{
-			Drop( player, false, false );
+			Drop( );
 		}
 
 		Transform = SpawnState;
@@ -207,14 +217,12 @@ public partial class Flag : Item, ITeam
 		// Let SDKGame know about this.
 		EventDispatcher.InvokeEvent(new FlagReturnedEvent() { Flag = this } );
 	}
-
-	public override void Drop( TFPlayer player, bool dropped, bool message )
+	public override bool Drop()
 	{
-		if ( !Game.IsServer ) return;
-		if ( Disabled ) return;
+		if ( Disabled ) return false;
+		if ( !Drop() ) return false;
 
-		base.Drop( player, dropped, message );
-		// GlowActive = true;
+		var player = TFOwner;
 
 		var origin = player.Position;
 		var target = origin + Vector3.Down * 8000;
@@ -247,14 +255,12 @@ public partial class Flag : Item, ITeam
 		TimeSinceDropped = 0;
 		AllowOwnerPickup = false;
 
-		if ( message )
-		{
-			// Let SDKGame know about this.
-			EventDispatcher.InvokeEvent( new FlagDroppedEvent() { Flag = this, Capper = player } );
-		}
-
 		StartSpinning();
 		DeleteTrails();
+
+		EventDispatcher.InvokeEvent( new FlagDroppedEvent() { Flag = this, Capper = player } );
+
+		return true;
 	}
 
 	public override void OnDropped()
