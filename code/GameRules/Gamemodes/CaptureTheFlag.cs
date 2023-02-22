@@ -18,6 +18,12 @@ namespace TFS2
 		public CaptureTheFlag()
 		{
 			EventDispatcher.Subscribe<FlagCapturedEvent>( FlagCaptured, this );
+			EventDispatcher.Subscribe<RoundRestartEvent>( Reset, this );
+		}
+
+		private void Reset(RoundRestartEvent args)
+		{
+			FlagCaptures.Clear();
 		}
 
 		public override bool HasWon( out TFTeam team, out TFWinReason reason  )
