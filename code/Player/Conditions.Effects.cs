@@ -218,6 +218,8 @@ partial class TFPlayer
 
 	public void OnHumiliatedAdded()
 	{
+		if ( !Game.IsServer ) return;
+
 		DeleteAllWeapons();
 
 		SetAnimParameter( "b_loser", true );
@@ -226,6 +228,8 @@ partial class TFPlayer
 
 	public void OnHumiliatedRemoved()
 	{
+		if ( !Game.IsServer ) return;
+
 		// This cant happen in normal gameplay, so dont worry about correctly restoring weapons for now
 
 		SetAnimParameter( "b_loser", false );
