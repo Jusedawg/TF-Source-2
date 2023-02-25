@@ -37,7 +37,7 @@ public partial class Flag : Item, ITeam
 	[Net] public TimeSince TimeSincePickup { get; set; }
 	[Net] public TimeSince TimeSinceDropped { get; set; }
 
-	public float OwnerPickupTime => 3;
+	public const float OWNER_PICKUP_TIME = 3;
 
 	public override void Spawn()
 	{
@@ -70,7 +70,7 @@ public partial class Flag : Item, ITeam
 		{
 			if ( !AllowOwnerPickup )
 			{
-				if ( TimeSinceDropped > OwnerPickupTime )
+				if ( TimeSinceDropped > OWNER_PICKUP_TIME )
 				{
 					AllowOwnerPickup = true;
 				}
@@ -188,7 +188,7 @@ public partial class Flag : Item, ITeam
 	{
 		if ( !Game.IsServer ) return;
 
-		if ( Owner is TFPlayer player )
+		if ( Owner is TFPlayer)
 		{
 			Drop( );
 		}
@@ -219,8 +219,7 @@ public partial class Flag : Item, ITeam
 	}
 	public override bool Drop()
 	{
-		if ( Disabled ) return false;
-		if ( !Drop() ) return false;
+		if ( Disabled || !Drop() ) return false;
 
 		var player = TFOwner;
 

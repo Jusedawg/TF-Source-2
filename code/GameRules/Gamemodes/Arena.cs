@@ -21,7 +21,8 @@ public partial class Arena : GamemodeEntity
 	public string PointName { get; set; }
 	[Property] public float ControlPointEnableTime { get; set; } = 60;
 	protected ControlPoint Point { get; set; }
-	public override GamemodeProperties Properties => new() { DisablePlayerRespawn = true, RequireBothTeams = true, ShouldAnnounceFirstBlood = true, ShouldPlayGameStartSong = false, AllowTeamSelection = false };
+	private readonly GamemodeProperties _properties = new() { DisablePlayerRespawn = true, RequireBothTeams = true, ShouldAnnounceFirstBlood = true, ShouldPlayGameStartSong = false, AllowTeamSelection = false };
+	public override GamemodeProperties Properties => _properties;
 
 	public override bool HasWon( out TFTeam winner, out TFWinReason reason )
 	{

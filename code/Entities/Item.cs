@@ -50,8 +50,7 @@ public abstract partial class Item : AnimatedEntity
 
 	public virtual bool Drop()
 	{
-		if ( !Game.IsServer ) return false;
-		if ( Owner == null ) return false;
+		if ( !Game.IsServer || Owner == null ) return false;
 
 		TFOwner.PickedItem = null;
 
