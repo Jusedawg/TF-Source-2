@@ -6,32 +6,39 @@ namespace TFS2;
 
 partial class TFGameRules
 {
-	[Net] public TFGameType GameType { get; set; }
+	public IGamemode GetGamemode()
+	{
+		if(EntityGamemode != null)
+		{
+			return EntityGamemode;
+		}
 
-	//
-	// Shortcuts to check what game type we're playing.
-	//
+		if ( ClassGamemode != null )
+		{
+			return ClassGamemode;
+		}
 
-	public bool IsPlayingClassic => GameType == TFGameType.None;
-	public bool IsPlayingArena => GameType == TFGameType.Arena;
-	public bool IsPlayingTDM => GameType == TFGameType.TeamDeathmatch;
-	public bool IsPlayingKingOfTheHill => GameType == TFGameType.KingOfTheHill;
+		return default;
+	}
+	[Net] private GamemodeEntity EntityGamemode { get; set; }
+	[Net] private GamemodeNetworkable ClassGamemode { get; set; }
 
+	public bool HasGamemode() => GetGamemode() != default;
+	public bool IsPlaying<T>() where T : IGamemode => GetGamemode() is T;
+	public bool TryGetGamemode<T>(out T instance) where T : IGamemode
+	{
+		if( GetGamemode() is T mode)
+		{
+			instance = mode;
+			return true;
+		}
 
-	//
-	// GameType entities 
-	// for further references
-	//
-
-	[Net] public Arena ArenaLogic { get; set; }
-	[Net] public TeamDeathmatch TeamDeathmatchLogic { get; set; }
-	[Net] public KingOfTheHill KingOfTheHillLogic { get; set; }
+		instance = default;
+		return false;
+	}
 
 	public override void ResetObjectives()
 	{
-		FlagCaptures.Clear();
-
-
 		// reset all objectives ents
 		foreach ( var flag in All.OfType<Flag>() ) flag.Reset();
 		foreach ( var point in ControlPoint.All ) point.Reset();
@@ -42,25 +49,45 @@ partial class TFGameRules
 	{
 		// This function helps define what game type are we currently playing.
 
-		//
-		// Objectives
-		//
+		FindGamemode();
 
-		MapHasFlags = All.OfType<Flag>().Any();
-		MapHasControlPoints = All.OfType<ControlPoint>().Any();
-		MapHasCarts = All.OfType<Cart>().Any();
+		if( GetGamemode() == default )
+		{
+			Log.Info( "No gamemode found for this map, running without gamemode..." );
+			return;
+		}
 
-		//
-		// Logic Entities
-		// 
+		Log.Info( $"We're playing: {GetGamemode().Title}" );
+	}
 
-		ArenaLogic = All.OfType<Arena>().FirstOrDefault();
-		KingOfTheHillLogic = All.OfType<KingOfTheHill>().FirstOrDefault();
-		TeamDeathmatchLogic = All.OfType<TeamDeathmatch>().FirstOrDefault();
+	/// <summary>
+	/// Checks all gamemodes if they would be playable on the current map.
+	/// </summary>
+	/// <returns></returns>
+	public virtual void FindGamemode()
+	{
+		// Check entities first
+		foreach ( var mode in Entity.All.OfType<GamemodeEntity>() )
+		{
+			if ( mode.IsActive() )
+			{
+				EntityGamemode = mode;
+				return;
+			}
+		}
 
-		GameType = CalculateAutomaticGameType();
+		// Check non-entity gamemodes after
+		var gamemodes = TypeLibrary.GetTypes<GamemodeNetworkable>().Where(g => !g.IsAbstract);
 
-		Log.Info( $"We're playing: {GameType}" );
+		// Skip gamemodes which require entities to spawn
+		foreach ( var mode in gamemodes.Select( g => TypeLibrary.Create<IGamemode>( g.TargetType ) ) )
+		{
+			if ( mode.IsActive() )
+			{
+				ClassGamemode = (GamemodeNetworkable)mode;
+				return;
+			}
+		}
 	}
 
 	public bool AreObjectivesActive()
@@ -76,49 +103,6 @@ partial class TFGameRules
 		return true;
 	}
 
-	/// <summary>
-	/// A map can support multiple game types, this function decides which one we're playing by default.
-	/// Player can override this with their own value using tf_game_type convar.
-	/// </summary>
-	/// <returns></returns>
-	public TFGameType CalculateAutomaticGameType()
-	{
-		var types = Enum.GetValues( typeof( TFGameType ) ).Cast<TFGameType>();
-
-		// we reverse so that game types that game types from logic entities 
-		// have priority over general objectives game types.
-		types = types.Reverse();
-
-		foreach ( var type in types )
-		{
-			// classic gamemode is always checked last.
-			if ( type == TFGameType.None ) continue;
-
-			if ( MapSupportsGameType( type ) )
-				return type;
-		}
-
-		// If map supports none of the game types, we're playing classic.
-		return TFGameType.None;
-	}
-
-	public virtual bool MapSupportsGameType( TFGameType type )
-	{
-		switch ( type )
-		{
-			case TFGameType.Arena:
-				return ArenaLogic != null;
-
-			case TFGameType.TeamDeathmatch:
-				return TeamDeathmatchLogic != null;
-
-			case TFGameType.KingOfTheHill:
-				return KingOfTheHillLogic != null;
-
-			default: return false;
-		}
-	}
-
 	public override void SimulateGameplay()
 	{
 		base.SimulateGameplay();
@@ -127,6 +111,18 @@ partial class TFGameRules
 			return;
 
 		CheckWinConditions();
+	}
+
+	public void CheckWinConditions()
+	{
+		var mode = GetGamemode();
+		if ( mode == default )
+			return;
+
+		if ( mode.HasWon( out var team, out var reason ) )
+		{
+			DeclareWinner( team, reason );
+		}
 	}
 
 	public void DeclareWinner( TFTeam team, TFWinReason reason )

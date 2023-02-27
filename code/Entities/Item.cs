@@ -19,6 +19,7 @@ public abstract partial class Item : AnimatedEntity
 	/// </summary>
 	[Property, Net] public int ReturnTime { get; set; } = 60;
 	public Transform SpawnState { get; set; }
+	public TFPlayer TFOwner => Owner as TFPlayer;
 
 	public override void Spawn()
 	{
@@ -47,14 +48,18 @@ public abstract partial class Item : AnimatedEntity
 		player.PickedItem = this;
 	}
 
-	public virtual void Drop( TFPlayer player, bool dropped, bool message )
+	public virtual bool Drop()
 	{
-		player.PickedItem = null;
+		if ( !Game.IsServer || Owner == null ) return false;
+
+		TFOwner.PickedItem = null;
 
 		// Clear the parent.
 		SetParent( null );
 		Parent = null;
 		Owner = null;
+
+		return true;
 	}
 
 	/// <summary>

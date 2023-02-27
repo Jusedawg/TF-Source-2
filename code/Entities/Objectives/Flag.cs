@@ -37,7 +37,7 @@ public partial class Flag : Item, ITeam
 	[Net] public TimeSince TimeSincePickup { get; set; }
 	[Net] public TimeSince TimeSinceDropped { get; set; }
 
-	public float OwnerPickupTime => 3;
+	public const float OWNER_PICKUP_TIME = 3;
 
 	public override void Spawn()
 	{
@@ -66,15 +66,25 @@ public partial class Flag : Item, ITeam
 	{
 		base.Tick();
 
-		if ( !AllowOwnerPickup )
+		if(State == FlagState.Dropped)
 		{
-			if ( State == FlagState.Dropped && TimeSinceDropped > OwnerPickupTime )
+			if ( !AllowOwnerPickup )
 			{
-				AllowOwnerPickup = true;
+				if ( TimeSinceDropped > OWNER_PICKUP_TIME )
+				{
+					AllowOwnerPickup = true;
+				}
+			}
+
+			if ( TimeSinceDropped > ReturnTime ) Return();
+		}
+		else if(State == FlagState.Carried)
+		{
+			if(RespawnRoom.IsInsideTeamRoom(TFOwner))
+			{
+				Drop();
 			}
 		}
-
-		if ( State == FlagState.Dropped && TimeSinceDropped > ReturnTime ) Return();
 	}
 
 	/*
@@ -119,7 +129,7 @@ public partial class Flag : Item, ITeam
 		if ( ITeam.IsSame( player, this ) )
 			return false;
 
-		if ( !TFGameRules.Current.FlagsCanBePickedUp() )
+		if ( !TFGameRules.Current.AreObjectivesActive() )
 			return false;
 
 		if ( player == LastOwner && !AllowOwnerPickup )
@@ -147,8 +157,8 @@ public partial class Flag : Item, ITeam
 		TimeSincePickup = 0;
 		State = FlagState.Carried;
 
-		// Let SDKGame know about this.
-		TFGameRules.Current.FlagPickedUp( this, player );
+		// Let Gamemode know about this.
+		EventDispatcher.InvokeEvent( new FlagPickedUpEvent() { Flag = this, Capper = player } );
 
 		StopSpinning();
 		CreateTrails();
@@ -158,10 +168,10 @@ public partial class Flag : Item, ITeam
 	{
 		if ( !Game.IsServer ) return;
 
-		base.Drop( player, false, false );
+		base.Drop();
 		Reset();
 
-		TFGameRules.Current.FlagCaptured( this, player, zone );
+		EventDispatcher.InvokeEvent( new FlagCapturedEvent() { Flag = this, Capper = player, Zone = zone } );
 	}
 
 	public void StartSpinning()
@@ -178,9 +188,9 @@ public partial class Flag : Item, ITeam
 	{
 		if ( !Game.IsServer ) return;
 
-		if ( Owner is TFPlayer player )
+		if ( Owner is TFPlayer)
 		{
-			Drop( player, false, false );
+			Drop( );
 		}
 
 		Transform = SpawnState;
@@ -205,16 +215,13 @@ public partial class Flag : Item, ITeam
 		Reset();
 
 		// Let SDKGame know about this.
-		TFGameRules.Current.FlagReturned( this );
+		EventDispatcher.InvokeEvent(new FlagReturnedEvent() { Flag = this } );
 	}
-
-	public override void Drop( TFPlayer player, bool dropped, bool message )
+	public override bool Drop()
 	{
-		if ( !Game.IsServer ) return;
-		if ( Disabled ) return;
+		if ( Disabled || !Drop() ) return false;
 
-		base.Drop( player, dropped, message );
-		// GlowActive = true;
+		var player = TFOwner;
 
 		var origin = player.Position;
 		var target = origin + Vector3.Down * 8000;
@@ -247,14 +254,12 @@ public partial class Flag : Item, ITeam
 		TimeSinceDropped = 0;
 		AllowOwnerPickup = false;
 
-		if ( message )
-		{
-			// Let SDKGame know about this.
-			TFGameRules.Current.FlagDropped( this, player );
-		}
-
 		StartSpinning();
 		DeleteTrails();
+
+		EventDispatcher.InvokeEvent( new FlagDroppedEvent() { Flag = this, Capper = player } );
+
+		return true;
 	}
 
 	public override void OnDropped()

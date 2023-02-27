@@ -25,6 +25,6 @@ public partial class ArenaPlayerCount : Panel
 
 	public bool ShouldDraw()
 	{
-		return TFGameRules.Current.IsPlayingArena;
+		return TFGameRules.Current.IsPlaying<Arena>();
 	}
 }

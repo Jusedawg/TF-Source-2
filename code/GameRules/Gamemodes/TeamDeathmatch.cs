@@ -14,8 +14,10 @@ namespace TFS2;
 [EditorSprite( "materials/editor/tf_logic_tdm.vmat" )]
 [HammerEntity]
 
-public partial class TeamDeathmatch : BaseGameLogic
+public partial class TeamDeathmatch : GamemodeEntity
 {
+	public override string Title => "Team Deathmatch";
+
 	/// <summary>
 	/// How many frags every team has collected.
 	/// </summary>
@@ -37,6 +39,19 @@ public partial class TeamDeathmatch : BaseGameLogic
 		EventDispatcher.Subscribe<PlayerDeathEvent>( PlayerKilled, this );
 	}
 
+	public override bool HasWon( out TFTeam team, out TFWinReason reason )
+	{
+		team = FirstScorer;
+		reason = TFWinReason.FragLimit;
+
+		if ( HasReachedFragLimit() && GetTimeUntilRoundEnd() == 0 )
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 	public override void Reset()
 	{
 		// reset frags
@@ -54,29 +69,13 @@ public partial class TeamDeathmatch : BaseGameLogic
 		limit = Math.Max( limit, 1 );
 		FragLimit = limit;
 	}
-
-	public override void Tick()
+	public virtual int GetTeamFragCount( TFTeam team )
 	{
-		if ( !TFGameRules.Current.AreObjectivesActive() )
-			return;
-
-		if ( HasReachedFragLimit() )
-		{
-			if ( GetTimeUntilRoundEnd() == 0 )
-			{
-				TFGameRules.Current.DeclareWinner( FirstScorer, TFWinReason.FragLimit );
-			}
-		}
-	}
-
-	public int GetTeamFragCount( TFTeam team )
-	{
-		var count = 0;
-		Frags.TryGetValue( team, out count );
+		Frags.TryGetValue( team, out var count );
 		return count;
 	}
 
-	public float GetTimeUntilRoundEnd()
+	public virtual float GetTimeUntilRoundEnd()
 	{
 		if ( !HasReachedFragLimit() )
 			return tf_tdm_finale_beep_time;
@@ -91,7 +90,7 @@ public partial class TeamDeathmatch : BaseGameLogic
 	/// Are we currently in beep time?
 	/// </summary>
 	/// <returns></returns>
-	public bool HasReachedFragLimit()
+	public virtual bool HasReachedFragLimit()
 	{
 		if ( !TFGameRules.Current.AreObjectivesActive() )
 			return false;
@@ -105,12 +104,12 @@ public partial class TeamDeathmatch : BaseGameLogic
 		return false;
 	}
 
-	public bool HasTeamReachedFragLimit( TFTeam team )
+	public virtual bool HasTeamReachedFragLimit( TFTeam team )
 	{
 		return GetTeamFragCount( team ) >= FragLimit;
 	}
 
-	public void SetTeamFragCount( TFTeam team, int count )
+	public virtual void SetTeamFragCount( TFTeam team, int count )
 	{
 		count = Math.Min( count, FragLimit );
 		Frags[team] = count;
@@ -119,7 +118,7 @@ public partial class TeamDeathmatch : BaseGameLogic
 	/// <summary>
 	/// Add points to the team's frag score.
 	/// </summary>
-	public void AddTeamFragCount( TFTeam team, int count )
+	public virtual void AddTeamFragCount( TFTeam team, int count )
 	{
 		// Remember 
 		bool wasNotInBeepTime = !HasReachedFragLimit();
@@ -132,7 +131,7 @@ public partial class TeamDeathmatch : BaseGameLogic
 		}
 	}
 
-	public void OnReachedFragLimit()
+	public virtual void OnReachedFragLimit()
 	{
 		TimeSinceReachFragLimit = 0;
 	}
@@ -141,7 +140,7 @@ public partial class TeamDeathmatch : BaseGameLogic
 	/// This is fired when a player dies.
 	/// </summary>
 	/// <param name="args"></param>
-	public void PlayerKilled( PlayerDeathEvent args )
+	public virtual void PlayerKilled( PlayerDeathEvent args )
 	{
 		if ( !Game.IsServer )
 			return;

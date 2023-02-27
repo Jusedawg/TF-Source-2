@@ -13,17 +13,16 @@ public partial class TeamFragDisplay : Panel
 	Label BlueScore { get; set; }
 	public bool ShouldDraw()
 	{
-		return TFGameRules.Current.GameType == TFGameType.TeamDeathmatch;
+		return TFGameRules.Current.IsPlaying<TeamDeathmatch>();
 	}
 
 	public override void Tick()
 	{
+		var visible = ShouldDraw();
 		SetClass( "visible", ShouldDraw() );
-		if ( !IsVisible ) return;
+		if ( !visible ) return;
 
-		var tdmLogic = TFGameRules.Current.TeamDeathmatchLogic;
-		if ( tdmLogic == null )
-			return;
+		var tdmLogic = TFGameRules.Current.GetGamemode() as TeamDeathmatch;
 
 		var limit = tdmLogic.FragLimit;
 		LimitLabel.Text = $"{limit}";

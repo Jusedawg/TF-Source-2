@@ -53,7 +53,7 @@ public partial class FlagCaptureZone : BaseTrigger, ITeam
 				}
 			}
 
-			if ( TFGameRules.Current.FlagsCanBeCapped() )
+			if ( TFGameRules.Current.AreObjectivesActive() )
 			{
 				Capture( player );
 			}
@@ -62,7 +62,7 @@ public partial class FlagCaptureZone : BaseTrigger, ITeam
 
 	public void Capture( TFPlayer player )
 	{
-		if ( player.PickedItem is Flag flag && TFGameRules.Current.CanFlagBeCaptured( flag ) ) 
+		if ( player.PickedItem is Flag flag ) 
 		{
 			flag.Capture( player, this );
 		}

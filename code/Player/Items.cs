@@ -43,7 +43,7 @@ namespace TFS2
 
 			using ( Prediction.Off() )
 			{
-				PickedItem.Drop( this, true, true );
+				PickedItem.Drop();
 			}
 		}
 	}

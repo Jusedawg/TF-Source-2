@@ -25,7 +25,6 @@ partial class TFGameRules
 
 	public virtual TFTeam GetTeamAssignmentOverride( TFPlayer player, TFTeam team, bool autoBalance ) => team;
 	public virtual bool CanChangeTeamFrom( TFTeam currentTeam ) => true;
-
 	public virtual PlayerClass GetPlayerClassAssignmentOverride( TFPlayer player, PlayerClass pclass, bool autoBalance ) => pclass;
 	public virtual bool CanChangePlayerClassFrom( PlayerClass currentTeam ) => true;
 
@@ -45,24 +44,6 @@ partial class TFGameRules
 		return true;
 	}
 
-	public bool IsAttackDefenseGameType()
-	{
-		// escort
-		// cps
-		return false;
-	}
-
-	public override bool TeamWipeCausesRoundEnd()
-	{
-		// Only in arena.
-		if ( GameType == TFGameType.Arena )
-			return true;
-
-		// TODO: More logic?
-
-		return false;
-	}
-
 	/// <summary>
 	/// If the kill was done now, would it force "first blood" announcement?
 	/// </summary>
@@ -70,17 +51,25 @@ partial class TFGameRules
 	public bool ShouldAnnounceFirstBlood()
 	{
 		// Only announce first blood when round is active.
-		if ( !IsRoundActive ) 
+		if ( !IsRoundActive || !HasGamemode() ) 
 			return false;
 
 		// announce first blood on all gamemodes that cause team wipe to end the round.
-		return TeamWipeCausesRoundEnd();
+		return GetGamemode().Properties.ShouldAnnounceFirstBlood;
+	}
+
+	public bool IsAttackDefense()
+	{
+		return HasGamemode() && GetGamemode().Properties.IsAttackDefense;
 	}
 
 	public bool ShouldPlayGameStartSong()
 	{
-		// announce first blood on all gamemodes that cause team wipe to end the round.
-		return !TeamWipeCausesRoundEnd();
+		if ( !HasGamemode() )
+			return true;
+
+		// Play start music only when the gamemode wants it.
+		return GetGamemode().Properties.ShouldAnnounceFirstBlood;
 	}
 
 	public override bool CanEntityTakeDamage( Entity victim, Entity attacker, ExtendedDamageInfo info )

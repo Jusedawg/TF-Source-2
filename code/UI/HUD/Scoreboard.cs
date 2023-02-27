@@ -156,26 +156,14 @@ public partial class Scoreboard : Panel
 	{
 		// Set the game mode label.
 
-		if ( !TFGameRules.Current.GameType.ToString().Equals( "None" ) )
-		{
-			ModeName.Text = TFGameRules.Current.GameType switch
-			{
-				TFGameType.CaptureTheFlag => "Capture The Flag",
-				TFGameType.ControlPoints => "Control Points",
-				TFGameType.TeamDeathmatch => "Team Deathmatch",
-				TFGameType.KingOfTheHill => "King of the Hill",
-				_ => TFGameRules.Current.GameType.ToString()
-			};
-		}
-		else ModeName.Text = string.Empty;
+		if ( TFGameRules.Current.HasGamemode() )
+			ModeName.Text = TFGameRules.Current.GetGamemode().Title;
+		else
+			ModeName.Text = string.Empty;
 
 		// Set the game mode icon.
-		if ( TFGameRules.Current.GameType == TFGameType.KingOfTheHill )
-			ModeLogo.SetTexture( "/ui/hud/scoreboard/icon_mode_koth.png" );
-		else if ( TFGameRules.Current.GameType == TFGameType.Payload )
-			ModeLogo.SetTexture( "/ui/hud/scoreboard/icon_mode_payload.png" );
-		else if ( TFGameRules.Current.GameType == TFGameType.ControlPoints )
-			ModeLogo.SetTexture( "/ui/hud/scoreboard/icon_mode_control.png" );
+		if ( TFGameRules.Current.HasGamemode() )
+			ModeLogo.SetTexture( TFGameRules.Current.GetGamemode().Icon );
 		else
 			ModeLogo.SetTexture( "/ui/icons/empty.png" );
 	}

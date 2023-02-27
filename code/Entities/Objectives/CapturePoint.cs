@@ -14,7 +14,8 @@ namespace TFS2;
 [HammerEntity]
 public partial class ControlPoint : BaseTrigger
 {
-	public new static List<ControlPoint> All = new();
+	public new static IReadOnlyList<ControlPoint> All => _all;
+	private static List<ControlPoint> _all = new();
 
 	[Property] public bool StartLocked { get; set; }
 	public enum ControlPointOwner
@@ -85,12 +86,12 @@ public partial class ControlPoint : BaseTrigger
 
 	public ControlPoint()
 	{
-		All.Add( this );
+		_all.Add( this );
 	}
 
 	protected override void OnDestroy()
 	{
-		All.Remove( this );
+		_all.Remove( this );
 		base.OnDestroy();
 	}
 

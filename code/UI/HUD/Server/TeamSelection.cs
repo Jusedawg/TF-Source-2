@@ -47,7 +47,7 @@ public class TeamSelectionBackground : ScenePanel
 	public bool ShowTeamDoors()
 	{
 		// show them, unless we're playing arena.
-		return !TFGameRules.Current.IsPlayingArena;
+		return TFGameRules.Current.IsTeamSelectionAllowed();
 	}
 
 	public bool ShowSpectatorTV() { return true; }
@@ -55,7 +55,7 @@ public class TeamSelectionBackground : ScenePanel
 
 	public string GetBackgroundModelPath()
 	{
-		if ( TFGameRules.Current.IsPlayingArena )
+		if ( !ShowTeamDoors() )
 			return "models/vgui/ui_arena01.vmdl";
 		else
 			return "models/vgui/ui_team01.vmdl";
@@ -67,7 +67,7 @@ public class TeamSelectionBackground : ScenePanel
 		{
 			// random
 			case TFTeam.Unassigned:
-				if ( TFGameRules.Current.IsPlayingArena )
+				if ( !ShowTeamDoors() )
 					return "models/vgui/ui_arenadoor01.vmdl";
 				else
 					return "models/vgui/ui_team01_random.vmdl";
@@ -91,7 +91,7 @@ public class TeamSelectionBackground : ScenePanel
 		{
 			case TFTeam.Unassigned:
 
-				if ( TFGameRules.Current.IsPlayingArena )
+				if ( !ShowTeamDoors() )
 					return "FIGHT!";
 				else
 					return "RANDOM";

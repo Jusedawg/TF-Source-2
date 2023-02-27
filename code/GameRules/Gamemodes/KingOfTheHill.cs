@@ -13,18 +13,39 @@ namespace TFS2;
 [EditorSprite( "materials/editor/tf_logic_koth.vmat" )]
 [HammerEntity]
 
-public partial class KingOfTheHill : BaseGameLogic
+public partial class KingOfTheHill : GamemodeEntity
 {
+	public override string Title => "King of the Hill";
+	public override string Icon => "ui/hud/scoreboard/icon_mode_koth.png";
 	[Property] public float TimerLength { get; set; } = 180;
 	[Property] public float ControlPointEnableTime { get; set; } = 30;
 	[Property, FGDType( "target_destination" )] public string PointName { get; set; }
-	ControlPoint Point { get; set; }
+	protected ControlPoint Point { get; set; }
 
 	Dictionary<TFTeam, TFTimer> Timers { get; set; } = new();
 
 	public KingOfTheHill()
 	{
 		EventDispatcher.Subscribe<ControlPointCapturedEvent>( OnPointCapture, this );
+	}
+
+	public override bool HasWon( out TFTeam team, out TFWinReason reason )
+	{
+		team = TFTeam.Unassigned;
+		reason = TFWinReason.AllPointsCaptured;
+
+		foreach ( var pair in Timers )
+		{
+			team = pair.Key;
+			var timer = pair.Value;
+
+			if ( timer.GetRemainingTime() == 0 )
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public override void PostLevelSetup()
@@ -57,21 +78,9 @@ public partial class KingOfTheHill : BaseGameLogic
 	{
 		if ( CanUnlockPoint() )
 			Point.Unlock( 5 );
-
-		foreach ( var pair in Timers )
-		{
-			var team = pair.Key;
-			var timer = pair.Value;
-
-			if ( timer.GetRemainingTime() == 0 )
-			{
-				TFGameRules.Current.DeclareWinner( team, TFWinReason.AllPointsCaptured );
-				break;
-			}
-		}
 	}
 
-	public bool CanUnlockPoint()
+	public virtual bool CanUnlockPoint()
 	{
 		if ( Point == null )
 			return false;
@@ -115,7 +124,7 @@ public partial class KingOfTheHill : BaseGameLogic
 		}
 	}
 
-	public void OnPointCapture( ControlPointCapturedEvent args )
+	public virtual void OnPointCapture( ControlPointCapturedEvent args )
 	{
 		var point = args.Point;
 		if ( Point != point )
@@ -124,7 +133,7 @@ public partial class KingOfTheHill : BaseGameLogic
 		SetTeamTimerActive( args.NewTeam );
 	}
 
-	public void SetTeamTimerActive( TFTeam team )
+	public virtual void SetTeamTimerActive( TFTeam team )
 	{
 		foreach ( var pair in Timers )
 		{

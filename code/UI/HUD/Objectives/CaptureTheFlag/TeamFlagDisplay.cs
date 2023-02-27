@@ -18,27 +18,36 @@ public partial class TeamFlagDisplay : Panel
 	Label Limit { get; set; }
 	Label ScoreBlue { get; set; }
 	Label ScoreRed { get; set; }
-
+	IEnumerable<Flag> flags;
 	public override void Tick()
 	{
+		flags = Entity.All.OfType<Flag>();
 		SetClass( "visible", ShouldDraw() );
 
 		if ( !IsVisible )
 			return;
 
-		TFGameRules.Current.FlagCaptures.TryGetValue( TFTeam.Red, out int redScore );
-		ScoreRed.Text = redScore.ToString();
+		if(TFGameRules.Current.TryGetGamemode<CaptureTheFlag>(out var ctf))
+		{
+			ctf.FlagCaptures.TryGetValue( TFTeam.Red, out int redScore );
+			ScoreRed.Text = redScore.ToString();
 
-		TFGameRules.Current.FlagCaptures.TryGetValue( TFTeam.Blue, out int blueScore );
-		ScoreBlue.Text = blueScore.ToString();
+			ctf.FlagCaptures.TryGetValue( TFTeam.Blue, out int blueScore );
+			ScoreBlue.Text = blueScore.ToString();
 
-		Limit.Text = $"Playing to: {TFGameRules.tf_flag_caps_per_round}";
+			Limit.Text = $"Playing to: {CaptureTheFlag.tf_flag_caps_per_round}";
+		}
+		else
+		{
+			ScoreRed.Text = "";
+			ScoreBlue.Text = "";
+			Limit.Text = "";
+		}
 
-		var allFlags = Entity.All.OfType<Flag>();
 		var ourFlags = Flags.Keys;
 
-		foreach ( var item in allFlags.Except( ourFlags ) ) AddFlag( item );
-		foreach ( var item in ourFlags.Except( allFlags ) ) RemoveFlag( item );
+		foreach ( var item in flags.Except( flags ) ) AddFlag( item );
+		foreach ( var item in ourFlags.Except( flags ) ) RemoveFlag( item );
 
 		// Local Flag
 		var hasFlag = TryGetLocalPlayerPickedFlag( out var flag );
@@ -112,7 +121,7 @@ public partial class TeamFlagDisplay : Panel
 		ZoneCompass = null;
 	}
 
-	public bool ShouldDraw() => TFGameRules.Current.MapHasFlags;
+	public bool ShouldDraw() => flags.Any();
 
 	public void AddFlag( Flag flag )
 	{

@@ -109,7 +109,7 @@ public partial class WinPanel : Panel
 	{
 		return reason switch
 		{
-			TFWinReason.FlagCaptureLimit => $"{winner.GetTitle()} captured the enemy intelligence {TFGameRules.tf_flag_caps_per_round} times",
+			TFWinReason.FlagCaptureLimit => $"{winner.GetTitle()} captured the enemy intelligence {CaptureTheFlag.tf_flag_caps_per_round} times",
 			TFWinReason.AllPointsCaptured => $"{winner.GetTitle()} captured all the control points",
 			TFWinReason.OpponentsDead => $"{winner.GetTitle()} killed all opponents",
 			TFWinReason.FragLimit => $"{winner.GetTitle()} reached the frag limit first",

@@ -63,7 +63,7 @@ public class PlayerRegenerateEvent : DispatchableEventBase
 #region Game
 
 [EventDispatcherEvent]
-public class GameRestartEvent : DispatchableEventBase { }
+public class GameResetEvent : DispatchableEventBase { }
 
 [EventDispatcherEvent]
 public class GameOverEvent : DispatchableEventBase { }
@@ -80,4 +80,34 @@ public class ControlPointCapturedEvent : DispatchableEventBase
 	public IClient[] Cappers { get; set; }
 }
 
+#endregion
+
+#region Flags
+[EventDispatcherEvent]
+public class FlagCapturedEvent : DispatchableEventBase
+{
+	public Flag Flag { get; set; }
+	public TFPlayer Capper { get; set; }
+	public FlagCaptureZone Zone { get; set; }
+}
+
+[EventDispatcherEvent]
+public class FlagPickedUpEvent : DispatchableEventBase
+{
+	public Flag Flag { get; set; }
+	public TFPlayer Capper { get; set; }
+}
+
+[EventDispatcherEvent]
+public class FlagDroppedEvent : DispatchableEventBase
+{
+	public Flag Flag { get; set; }
+	public TFPlayer Capper { get; set; }
+}
+
+[EventDispatcherEvent]
+public class FlagReturnedEvent : DispatchableEventBase
+{
+	public Flag Flag { get; set; }
+}
 #endregion

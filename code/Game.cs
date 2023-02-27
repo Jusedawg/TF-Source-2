@@ -149,21 +149,6 @@ public partial class TFGameRules : SDKGame
 	}
 }
 
-public enum TFGameType
-{
-	None,
-
-	// Derived from objective ents
-	CaptureTheFlag,
-	ControlPoints,
-	Payload,
-
-	// Derived from logic entities
-	Arena,
-	TeamDeathmatch,
-	KingOfTheHill
-}
-
 public enum TFWinReason
 {
 	None,
