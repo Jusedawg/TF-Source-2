@@ -43,6 +43,9 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse
 		if ( !HasAmmo() && Reserve <= 0 )
 			return false;
 
+		if ( TFOwner.InCondition( TFCondition.Taunting ) )
+			return false;
+
 		return base.CanDeploy( player );
 	}
 
@@ -183,7 +186,7 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse
 
 	public override bool ShouldAutoReload()
 	{
-		if(Owner?.Client?.GetClientData<bool>( "cl_autoreload" ) == true)
+		if ( Owner?.Client?.GetClientData<bool>( "cl_autoreload" ) == true )
 		{
 			return true;
 		}
