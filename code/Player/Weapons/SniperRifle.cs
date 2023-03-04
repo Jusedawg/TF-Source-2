@@ -13,6 +13,10 @@ partial class SniperRifle : TFWeaponBase
 	public const float ScopedMaxSpeed = 80;
 
 	/// <summary>
+	/// Field of view when zoomed.
+	/// </summary>
+	public virtual float ZoomedFieldOfView => 30;
+	/// <summary>
 	/// Cooldown for scoping.
 	/// </summary>
 	public virtual float ZoomTime => 0.3f;
@@ -136,7 +140,8 @@ partial class SniperRifle : TFWeaponBase
 		TimeSinceChangedZoomLevel = 0;
 		WillAutoZoomIn = false;
 
-		TFOwner?.SetFieldOfView( this, 30, 0.1f );
+		TFOwner?.SetFieldOfView( this, ZoomedFieldOfView, 0.1f);
+		SendPlayerAnimParameter("b_deployed", true);
 	}
 
 	public void ZoomOut()
@@ -153,6 +158,7 @@ partial class SniperRifle : TFWeaponBase
 		ResetCharge();
 
 		TFOwner?.ResetFieldOfViewFromRequester( this, 0.1f );
+		SendPlayerAnimParameter("b_deployed", false);
 	}
 
 	public override void ApplyDamageModifications( Entity victim, ref ExtendedDamageInfo info, TraceResult trace )
