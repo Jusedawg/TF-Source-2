@@ -178,20 +178,20 @@ partial class TFPlayer
 					StopTaunt();
 				}
 			}
-			//Stop Taunt via duration
+			// Stop single taunts via duration.
 			if ( ActiveTaunt.TauntType == TauntType.Once && TimeSinceTaunt > TauntDuration )
 			{
 				StopTaunt();
 			}
-			
-			//Stop Taunt via loss of grounded state
+
+			// Stop single taunts via loss of grounded state.
 			if ( ActiveTaunt.TauntType != TauntType.Looping && GroundEntity == null )
 			{
 				StopTaunt();
 			}
 
-			//Stop Taunt via button press
-			if ( Input.Pressed( InputButton.Drop ) && (ActiveTaunt.TauntType == TauntType.Looping || (ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner)) )
+			// Stop looping/partner taunts via key press.
+			if ( (ActiveTaunt.TauntType == TauntType.Looping || ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner) && (Input.Pressed( InputButton.Jump ) || Input.Pressed( InputButton.Drop )) )
 			{
 				StopTaunt();
 			}
@@ -251,8 +251,8 @@ partial class TFPlayer
 	public bool TryWeaponTaunt()
 	{
 		var weapon = ActiveWeapon as TFWeaponBase;
-		var Tauntdata = TauntData.Get(weapon.Data.TauntData);
-		var TauntName = weapon.Data.TauntString; 
+		var Tauntdata = TauntData.Get( weapon.Data.TauntData );
+		var TauntName = weapon.Data.TauntString;
 
 		WeaponTauntAvailable = false;
 		TimeSinceTaunt = 0;
@@ -377,7 +377,7 @@ partial class TFPlayer
 		{
 			taunt = TauntData.Get( taunt_name );
 		}
-		
+
 
 		//Because the string-to-tauntdata assignment can possibly fail, we need to check before running taunt code
 		if ( taunt != null )
@@ -412,7 +412,7 @@ partial class TFPlayer
 		if ( weapon != null && weapon.EnableDrawing == false )
 			weapon.EnableDrawing = true;
 		if ( !StayThirdperson )
-			ThirdpersonSet(false);
+			ThirdpersonSet( false );
 	}
 
 	#region Partner Taunt Logic
@@ -444,16 +444,16 @@ partial class TFPlayer
 		var validateTo = positionShiftUp + Rotation.Forward * 68;
 		var tr = PartnerValidateTrace( validateFrom, validateTo ).Run();
 
-		
+
 		if ( tf_sv_debug_taunts )
 		{
 			DebugOverlay.Line( tr.StartPosition, tr.EndPosition, Game.IsServer ? Color.Yellow : Color.Green, 15f, true );
 			DebugOverlay.Box( tr.EndPosition, new Vector3( -24, -24, -41f ), new Vector3( 24, 24, 41 ), Color.Cyan, 15f, true );
 			DebugOverlay.Sphere( tr.EndPosition, 2f, Color.Red, 15f );
 			DebugOverlay.Sphere( tr.StartPosition, 2f, Color.Green, 15f );
-			DebugOverlay.Text(  $"{tr.Distance}", tr.EndPosition, 15f );
+			DebugOverlay.Text( $"{tr.Distance}", tr.EndPosition, 15f );
 		}
-		
+
 
 		// Did we hit something?
 		if ( tr.Hit )
@@ -989,7 +989,7 @@ partial class TFPlayer
 			{
 				Log.Info( "nonlocal music" );
 				TauntMusic = Sound.FromEntity( ActiveTaunt.TauntMusic, this, "head" ); ; //INVESTIGATE, not playing from attachment
-				TauntMusic.SetVolume(0.5f);
+				TauntMusic.SetVolume( 0.5f );
 			}
 		}
 	}
@@ -1044,14 +1044,14 @@ partial class TFPlayer
 		var damage = 500f;
 		var hurtbox = 24f;
 		var range = 64f;
-		var forceAngle = new QAngle(-45, Rotation.Yaw(), 0);
+		var forceAngle = new QAngle( -45, Rotation.Yaw(), 0 );
 		var force = 350f;
 		List<string> tags = new() { TFDamageTags.Burn, TFDamageTags.Ignite };
 
-		Tauntkill_Volume(range, hurtbox, damage, forceAngle.Forward * force, tags );
+		Tauntkill_Volume( range, hurtbox, damage, forceAngle.Forward * force, tags );
 	}
 
-	public virtual void Tauntkill_Volume(float range, float extents, float damage , Vector3 force, IEnumerable<string> tags, bool singleTarget = true )
+	public virtual void Tauntkill_Volume( float range, float extents, float damage, Vector3 force, IEnumerable<string> tags, bool singleTarget = true )
 	{
 		var startPoint = WorldSpaceBounds.Center;
 		var endPoint = ((Rotation.Forward * range) + Position).WithZ( startPoint.z );
@@ -1061,13 +1061,13 @@ partial class TFPlayer
 			.WithTag( "player" )
 			.RunAll();
 
-		
+
 
 		if ( tf_sv_debug_taunts )
 		{
 			//Draws approximate corners of box trace, not exact because these respect rotation while the box trace does not
-			var RU = ( Rotation.Right + Rotation.Up) * (extents);
-			var RL = ( Rotation.Right - Rotation.Up) * (extents);
+			var RU = (Rotation.Right + Rotation.Up) * (extents);
+			var RL = (Rotation.Right - Rotation.Up) * (extents);
 			var LU = (-Rotation.Right + Rotation.Up) * (extents);
 			var LL = (-Rotation.Right - Rotation.Up) * (extents);
 			DebugOverlay.Line( startPoint + RU, endPoint + RU, 5f );
@@ -1098,7 +1098,7 @@ partial class TFPlayer
 					(ent as TFPlayer).TakeDamage( damageInf );
 				}
 			}
-			if( singleTarget )
+			if ( singleTarget )
 			{
 				return;
 			}
