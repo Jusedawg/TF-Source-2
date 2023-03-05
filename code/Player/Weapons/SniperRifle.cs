@@ -5,7 +5,7 @@ using Amper.FPS;
 namespace TFS2;
 
 [Library( "tf_weapon_sniperrifle", Title = "Sniper Rifle" )]
-partial class SniperRifle : TFWeaponBase
+public partial class SniperRifle : TFWeaponBase
 {
 	[ConVar.Replicated] public static float tf_sniperrifle_charge_time { get; set; } = 2;
 	[ConVar.Client] public static float tf_sniperrifle_zoom_sensitivity { get; set; } = 0.3f;
