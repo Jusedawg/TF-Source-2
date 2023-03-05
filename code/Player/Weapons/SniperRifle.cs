@@ -5,17 +5,21 @@ using Amper.FPS;
 namespace TFS2;
 
 [Library( "tf_weapon_sniperrifle", Title = "Sniper Rifle" )]
-partial class SniperRifle : TFWeaponBase
+public partial class SniperRifle : TFWeaponBase
 {
-	[ConVar.Replicated] public static float tf_sniperrifle_charge_time { get; set; } = 4;
+	[ConVar.Replicated] public static float tf_sniperrifle_charge_time { get; set; } = 2;
 	[ConVar.Client] public static float tf_sniperrifle_zoom_sensitivity { get; set; } = 0.3f;
 
 	public const float ScopedMaxSpeed = 80;
 
 	/// <summary>
+	/// Field of view when zoomed.
+	/// </summary>
+	public virtual float ZoomedFieldOfView => 30;
+	/// <summary>
 	/// Cooldown for scoping.
 	/// </summary>
-	public virtual float ZoomTime => 0.3f;
+	public virtual float ZoomLevelCooldown => 0.3f;
 	/// <summary>
 	/// How much is damage multiplied when we're fully charged?
 	/// </summary>
@@ -27,7 +31,7 @@ partial class SniperRifle : TFWeaponBase
 	/// <summary>
 	/// Are we ready to change zoom level?
 	/// </summary>
-	public bool CanChangeZoomLevel => TimeSinceChangedZoomLevel >= ZoomTime;
+	public bool CanChangeZoomLevel => TimeSinceChangedZoomLevel >= ZoomLevelCooldown;
 	/// <summary>
 	/// Are we zoomed right now?
 	/// </summary>
@@ -136,7 +140,8 @@ partial class SniperRifle : TFWeaponBase
 		TimeSinceChangedZoomLevel = 0;
 		WillAutoZoomIn = false;
 
-		TFOwner?.SetFieldOfView( this, 30, 0.1f );
+		TFOwner?.SetFieldOfView( this, ZoomedFieldOfView, 0.1f );
+		SendPlayerAnimParameter("b_deployed", true);
 	}
 
 	public void ZoomOut()
@@ -153,6 +158,7 @@ partial class SniperRifle : TFWeaponBase
 		ResetCharge();
 
 		TFOwner?.ResetFieldOfViewFromRequester( this, 0.1f );
+		SendPlayerAnimParameter("b_deployed", false);
 	}
 
 	public override void ApplyDamageModifications( Entity victim, ref ExtendedDamageInfo info, TraceResult trace )
