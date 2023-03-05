@@ -11,14 +11,13 @@ public partial class TFProjectile : Projectile
 	{
 		base.OnInitialized();
 		SetMaterialGroup( Team == TFTeam.Blue ? 1 : 0 );
-	}
+		var Data = ((TFWeaponBase)Launcher).Data;
 
-	public override void Spawn()
-	{
-		base.Spawn();
+		if ( Data.UseFalloff )
+			DamageInfo.WithTag( TFDamageTags.UseFalloff );
 
-		DamageInfo = DamageInfo.WithTag( TFDamageTags.UseFalloff );
-		DamageInfo = DamageInfo.WithTag( TFDamageTags.UseRampup );
+		if ( Data.UseRampup )
+			DamageInfo.WithTag( TFDamageTags.UseRampup );
 	}
 
 	Particles CriticalTrail { get; set; }
