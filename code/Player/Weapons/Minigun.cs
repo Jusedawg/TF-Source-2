@@ -11,6 +11,14 @@ public partial class Minigun : TFHoldWeaponBase
 	public const float SpinnedMaxSpeed = 110;
 
 	[Net, Predicted] public float NextSpinChangeTime { get; set; }
+	[Net, Predicted] private bool IsFiring { get; set; }
+
+	public override void SimulateAttack()
+	{
+		base.SimulateAttack();
+
+		IsFiring = WishPrimaryAttack();
+	}
 
 	public override bool WishHold()
 	{
@@ -149,7 +157,7 @@ public partial class Minigun : TFHoldWeaponBase
 
 		if ( IsHolding )
 		{
-			if ( WishPrimaryAttack() )
+			if ( IsFiring )
 			{
 				if ( HasEnoughAmmoToAttack() )
 				{
