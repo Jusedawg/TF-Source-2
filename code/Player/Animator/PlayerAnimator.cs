@@ -7,7 +7,7 @@ namespace TFS2;
 partial class TFPlayerAnimator : PlayerAnimator
 {
 	new TFPlayer Player => (TFPlayer)base.Player;
-
+	const float DeltaMultiplier = 5f;
 	public override void UpdateMovement()
 	{
 		if ( Player.InCondition( TFCondition.Taunting ) )
@@ -51,7 +51,7 @@ public override void UpdateRotation()
 		// If we're moving, rotate to our ideal rotation
 		if ( Player.Velocity.Length > 10 )
 		{
-			Player.Rotation = Rotation.Slerp( Player.Rotation, idealRotation, Time.Delta * 5 ); 
+			Player.Rotation = Rotation.Slerp( Player.Rotation, idealRotation, Time.Delta * DeltaMultiplier ); 
 		}
 		// Clamp the foot rotation to within 90 degrees of the ideal rotation
 		Player.Rotation = Player.Rotation.Clamp( idealRotation, 45 );
@@ -82,7 +82,7 @@ public override void UpdateRotation()
 	{
 		var LRinput = Input.AnalogMove.y;
 		var currX = Player.GetAnimParameterFloat("move_x");
-		var targetX = MathX.Lerp( currX, -LRinput, Time.Delta * 5 );
+		var targetX = MathX.Lerp( currX, -LRinput, Time.Delta * DeltaMultiplier );
 
 		SetAnimParameter( "move_x", targetX );
 	}

@@ -57,15 +57,14 @@ partial class TFGameMovement
 			var input = Input.AnalogMove.x;
 			flWishSpeed = Math.Clamp( flWishSpeed, 0.0f, Player.ActiveTaunt.TauntMovespeed );
 
-			if ( !Player.TauntEnableMove )
-			{
-				flWishSpeed = 0;
-			}
-
 			if ( Player.ActiveTaunt.TauntForceMove)
 			{
 				input = 1f;
 				flWishSpeed = Player.ActiveTaunt.TauntMovespeed;
+			}
+			else if ( !Player.TauntEnableMove )
+			{
+				flWishSpeed = 0;
 			}
 
 			vecWishDirection = Player.Rotation.Forward * input ;

@@ -113,26 +113,26 @@ public class TauntData : GameResource
 
 	public static TauntData Get( string taunt_name )
 	{
-		TauntData taunt = null;
-
-		if ( String.IsNullOrEmpty( taunt_name) )
-		{
-			//Log.Warning("GET TAUNTDATA FAILED: STRING NULL OR EMPTY");
-			return null;
-		}
-
 		taunt_name = taunt_name.ToLower();
 		
 		foreach (var taunt_data in AllActive)
 		{
 			if (taunt_data.ResourceName == taunt_name)
 			{
-				taunt = taunt_data;
-				break;
+				return taunt_data;
 			}
 		}
 
-		return taunt;
+		//We have a string, but it didn't match any existing taunts
+		if ( String.IsNullOrEmpty( taunt_name ) )
+		{
+			Log.Warning( "GET TAUNTDATA FAILED: STRING NULL OR EMPTY" );
+		}
+		else
+		{
+			Log.Warning( "GET TAUNTDATA FAILED: STRING DOES NOT MATCH ANY EXISTING FILES" );
+		}
+		return null;
 	}
 }
 

@@ -150,7 +150,7 @@ partial class TFPlayer
 			TauntsReset = true;
 		}
 
-		//Check to see if we are somehow in taunt condition without a taunt set
+		//Failsafe, check to see if we are somehow in taunt condition without a taunt set
 		if ( ActiveTaunt == null ) return;
 
 		if ( InCondition( TFCondition.Taunting ) )
@@ -178,19 +178,19 @@ partial class TFPlayer
 					StopTaunt();
 				}
 			}
-			// Stop single taunts via duration.
+			// Stop single taunts via duration
 			if ( ActiveTaunt.TauntType == TauntType.Once && TimeSinceTaunt > TauntDuration )
 			{
 				StopTaunt();
 			}
 
-			// Stop single taunts via loss of grounded state.
+			// Stop single taunts via loss of grounded state
 			if ( ActiveTaunt.TauntType != TauntType.Looping && GroundEntity == null )
 			{
 				StopTaunt();
 			}
 
-			// Stop looping/partner taunts via key press.
+			// Stop looping/partner taunts via key press
 			if ( (ActiveTaunt.TauntType == TauntType.Looping || ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner) && (Input.Pressed( InputButton.Jump ) || Input.Pressed( InputButton.Drop )) )
 			{
 				StopTaunt();
@@ -242,7 +242,6 @@ partial class TFPlayer
 		}
 		return false;
 	}
-
 
 	/// <summary>
 	/// Attempt to start a weapon-specific taunt
@@ -942,7 +941,7 @@ partial class TFPlayer
 	public bool PartnerTauntGenerateWinner()
 	{
 		var random = new Random();
-		var randomBool = random.Next( 2 ) == 1;
+		var randomBool = random.Next( 1 ) == 1;
 		return randomBool;
 	}
 
@@ -983,7 +982,7 @@ partial class TFPlayer
 			if ( Game.LocalClient?.Pawn == this )
 			{
 				Log.Info( "local music" );
-				TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" ); //FIX, not working
+				TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
 			}
 			if ( Game.LocalClient?.Pawn != this )
 			{
@@ -1014,7 +1013,21 @@ partial class TFPlayer
 		var force = 500;
 		List<string> tags = new() { TFDamageTags.Bullet };
 
-		Tauntkill_Volume( range, hurtbox, damage, forceAngle.Forward * force, tags );
+		Tauntkill_BoxTrace( range, hurtbox, damage, forceAngle.Forward * force, tags );
+	}
+
+	public virtual void Tauntkill_PyroHadouken()
+	{
+		if ( !Game.IsServer ) return;
+
+		var damage = 500f;
+		var hurtbox = 24f;
+		var range = 64f;
+		var forceAngle = new QAngle(-45, Rotation.Yaw(), 0);
+		var force = 350f;
+		List<string> tags = new() { TFDamageTags.Burn, TFDamageTags.Ignite };
+
+		Tauntkill_BoxTrace( range, hurtbox, damage, forceAngle.Forward * force, tags, false );
 	}
 
 	public virtual void Tauntkill_SpyFencing( int phase )
@@ -1034,24 +1047,10 @@ partial class TFPlayer
 			tags.Add( TFDamageTags.PreventPhysicsForce );
 		}
 
-		Tauntkill_Volume( range, hurtbox, damage, forceAngle.Forward * force, tags );
+		Tauntkill_BoxTrace( range, hurtbox, damage, forceAngle.Forward * force, tags );
 	}
 
-	public virtual void Tauntkill_PyroHadouken()
-	{
-		if ( !Game.IsServer ) return;
-
-		var damage = 500f;
-		var hurtbox = 24f;
-		var range = 64f;
-		var forceAngle = new QAngle( -45, Rotation.Yaw(), 0 );
-		var force = 350f;
-		List<string> tags = new() { TFDamageTags.Burn, TFDamageTags.Ignite };
-
-		Tauntkill_Volume( range, hurtbox, damage, forceAngle.Forward * force, tags );
-	}
-
-	public virtual void Tauntkill_Volume( float range, float extents, float damage, Vector3 force, IEnumerable<string> tags, bool singleTarget = true )
+	public virtual void Tauntkill_BoxTrace(float range, float extents, float damage , Vector3 force, IEnumerable<string> tags, bool singleTarget = true )
 	{
 		var startPoint = WorldSpaceBounds.Center;
 		var endPoint = ((Rotation.Forward * range) + Position).WithZ( startPoint.z );
@@ -1093,14 +1092,18 @@ partial class TFPlayer
 						.WithAttacker( this )
 						.WithWeapon( ActiveWeapon )
 						.WithForce( force )
-						.WithTags( tags ); //FIX, make dependant on attack
+						.WithTags( tags );
 
-					(ent as TFPlayer).TakeDamage( damageInf );
+					
+					if ( (ent as TFPlayer).CanTakeDamage( this, damageInf ) )
+					{
+						(ent as TFPlayer).TakeDamage( damageInf );
+						if ( singleTarget )
+						{
+							break;
+						}
+					}
 				}
-			}
-			if ( singleTarget )
-			{
-				return;
 			}
 		}
 	}
@@ -1147,7 +1150,7 @@ partial class TFPlayer
 			}
 		}
 	}
-
+	[ClientRpc]
 	/// <summary>
 	/// Logic for re-implementing animation events in ModelDoc sequences (currently only on playermodels)
 	/// </summary>
