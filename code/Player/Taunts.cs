@@ -250,22 +250,26 @@ partial class TFPlayer
 	public bool TryWeaponTaunt()
 	{
 		var weapon = ActiveWeapon as TFWeaponBase;
-		var Tauntdata = TauntData.Get( weapon.Data.TauntData );
-		var TauntName = weapon.Data.TauntString;
 
 		WeaponTauntAvailable = false;
 		TimeSinceTaunt = 0;
 
+		//If we have a tauntdata set, use that
+		var Tauntdata = ResourceLibrary.Get<TauntData>( weapon.Data.TauntData );
 		if ( Tauntdata != null )
 		{
 			PlayTaunt( Tauntdata );
 			return true;
 		}
+
+		//attempt via string instead
+		var TauntName = weapon.Data.TauntString;
 		if ( !String.IsNullOrEmpty( TauntName ) )
 		{
 			PlayTaunt( TauntName );
 			return true;
 		}
+
 		return false;
 	}
 
@@ -1150,7 +1154,7 @@ partial class TFPlayer
 			}
 		}
 	}
-	[ClientRpc]
+
 	/// <summary>
 	/// Logic for re-implementing animation events in ModelDoc sequences (currently only on playermodels)
 	/// </summary>

@@ -110,9 +110,19 @@ public class TauntData : GameResource
 		All.Add( this );
 	}
 
-
+	/// <summary>
+	/// Returns a TauntData via a string
+	/// </summary>
+	/// <param name="taunt_name"></param>
+	/// <returns></returns>
 	public static TauntData Get( string taunt_name )
 	{
+		if ( String.IsNullOrEmpty( taunt_name ) )
+		{
+			Log.Warning( "GET TAUNTDATA FAILED: STRING NULL OR EMPTY" );
+			return null;
+		}
+
 		taunt_name = taunt_name.ToLower();
 		
 		foreach (var taunt_data in AllActive)
@@ -124,14 +134,7 @@ public class TauntData : GameResource
 		}
 
 		//We have a string, but it didn't match any existing taunts
-		if ( String.IsNullOrEmpty( taunt_name ) )
-		{
-			Log.Warning( "GET TAUNTDATA FAILED: STRING NULL OR EMPTY" );
-		}
-		else
-		{
-			Log.Warning( "GET TAUNTDATA FAILED: STRING DOES NOT MATCH ANY EXISTING FILES" );
-		}
+		Log.Warning( "GET TAUNTDATA FAILED: STRING DOES NOT MATCH ANY EXISTING FILES" );
 		return null;
 	}
 }
