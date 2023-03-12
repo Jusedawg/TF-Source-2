@@ -223,6 +223,28 @@ public class WeaponData : GameResource
 	[Title( "Melee Hits Flesh" )]
 	public string SoundHitFlesh { get; set; }
 
+
+	//
+	// Taunts
+	//
+
+	/// <summary>
+	/// Taunt Data associated with this weapon, THIS DOES NOT WORK WITH MULTICLASS WEAPONS, DO NOT SET THIS FOR THOSE
+	/// </summary>
+	[Category( "Taunts" )]
+	[ResourceType( "taunt" )]
+	[Title( "Taunt Data Asset" )]
+	public string TauntData { get; set; }
+
+	/// <summary>
+	/// Taunt string associated with this weapon, redundancy/fallback as well as support for multiclass
+	/// </summary>
+	[Category( "Taunts" )]
+	[Title( "Taunt String Name" )]
+	public string TauntString { get; set; }
+
+	
+
 	protected override void PostLoad()
 	{
 		Precache.Add( WorldModel );

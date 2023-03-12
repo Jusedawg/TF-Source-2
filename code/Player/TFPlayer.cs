@@ -36,6 +36,13 @@ public partial class TFPlayer : SDKPlayer
 		}
 
 		base.Respawn();
+
+		// We need to stop taunting to prevent lingering variables
+		if ( InCondition( TFCondition.Taunting ) )
+		{
+			StopTaunt();
+		}
+
 		RemoveAllConditions();
 		ResponseController.Reset();
 
@@ -115,6 +122,8 @@ public partial class TFPlayer : SDKPlayer
 
 		// Let SDKGame know about this.
 		TFGameRules.Current.PlayerRegenerate( this, full );
+
+		CreateTauntList();
 	}
 
 	public async void RegenerateWeaponsForClass( PlayerClass pclass )
@@ -199,6 +208,11 @@ public partial class TFPlayer : SDKPlayer
 			DropWeapon( ActiveWeapon, WorldSpaceBounds.Center, force );
 		}
 
+		if ( InCondition( TFCondition.Taunting ) )
+		{
+			StopTaunt();
+		}
+
 		base.OnKilled();
 
 		RemoveAllConditions();
@@ -233,6 +247,9 @@ public partial class TFPlayer : SDKPlayer
 			return;
 
 		SimulateItems();
+
+		SimulateCameraLogic();
+		SimulateTaunts();
 	}
 
 	public override void Tick()
@@ -266,68 +283,6 @@ public partial class TFPlayer : SDKPlayer
 	public virtual void OnSwitchedViewMode( bool is_first_person )
 	{
 		(ActiveWeapon as TFWeaponBase)?.OnSwitchedViewMode( is_first_person );
-	}
-
-	/// <summary>
-	/// Logic for re-implementing animation events in ModelDoc sequences (currently only on playermodels)
-	/// </summary>
-	public override void OnAnimEventGeneric( string name, int intData, float floatData, Vector3 vectorData, string stringData )
-	{
-		/*
-		if ( name == "TF_TAUNT_ENABLE_MOVE" )
-		{
-			if ( intData == 0 && TauntEnableMove == true )
-			{
-				TauntEnableMove = false;
-			}
-			if ( intData == 1 && TauntEnableMove == false )
-			{
-				TauntEnableMove = true;
-			}
-		}*/
-
-		if ( name == "TF_HIDE_WEAPON" )
-		{
-			var weapon = ActiveWeapon as TFWeaponBase;
-			if ( weapon == null ) return;
-
-			if ( intData == 0 )
-			{
-				weapon.EnableDrawing = true;
-			}
-			if ( intData == 1 )
-			{
-				weapon.EnableDrawing = false;
-			}
-		}
-
-		/*
-		if ( name == "TF_HIDE_TAUNTPROP" )
-		{
-			if ( TauntPropModel == null ) return;
-
-			if ( intData == 0 && TauntPropModel.EnableDrawing == false )
-			{
-				TauntPropModel.EnableDrawing = true;
-			}
-			if ( intData == 1 && TauntPropModel.EnableDrawing == true )
-			{
-				TauntPropModel.EnableDrawing = false;
-			}
-		}*/
-
-		if ( name == "TF_SET_BODYGROUP_PLAYER" )
-		{
-			SetBodyGroup( stringData, intData );
-		}
-
-		if ( name == "TF_SET_BODYGROUP_WEAPON" )
-		{
-			var weapon = ActiveWeapon as TFWeaponBase;
-			if ( weapon == null ) return;
-
-			weapon.SetBodyGroup( stringData, intData );
-		}
 	}
 
 	protected override void OnDestroy()

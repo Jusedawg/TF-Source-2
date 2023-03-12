@@ -14,6 +14,15 @@ public partial class TFGameMovement : GameMovement
 		base.Simulate( player );
 	}
 
+	public override bool CanJump()
+	{
+		// Prevent the player from jumping while doing looping taunts (e.g. conga)
+		// The taunt system will make the player stop taunting upon jumping.
+		if ( Player.InCondition( TFCondition.Taunting ) ) return false;
+
+		return base.CanJump();
+	}
+
 	public override Trace SetupBBoxTrace( Vector3 start, Vector3 end, Vector3 mins, Vector3 maxs )
 	{
 		var tr = base.SetupBBoxTrace( start, end, mins, maxs );

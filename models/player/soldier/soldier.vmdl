@@ -7865,20 +7865,6 @@
 								[
 									{
 										_class = "AnimEvent"
-										disabled = true
-										event_class = "AE_WPN_HIDE"
-										event_frame = 1
-										event_keys = null
-									},
-									{
-										_class = "AnimEvent"
-										disabled = true
-										event_class = "AE_WPN_UNHIDE"
-										event_frame = 84
-										event_keys = null
-									},
-									{
-										_class = "AnimEvent"
 										event_class = "AE_CL_PLAYSOUND"
 										event_frame = 17
 										event_keys = 
@@ -7928,7 +7914,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -8189,19 +8175,6 @@
 											stop_on_seq_change = false
 											use_layer_sequence = false
 											tags = ""
-										}
-									},
-									{
-										_class = "AnimEvent"
-										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
-										event_keys = 
-										{
-											TypeName = "TF_HIDE_WEAPON"
-											Int = 1
-											Float = 0.0
-											Vector = [ 0.0, 0.0, 0.0 ]
-											StringData = ""
 										}
 									},
 								]

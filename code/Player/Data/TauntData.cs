@@ -1,73 +1,141 @@
 using Sandbox;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TFS2;
 
 /// <summary>
-/// This represents taunts.
+/// This represents the Team Fortress player class. TFPlayer.PlayerClass is set to this when player chooses the class they want to play.
 /// These are defined by creating .taunt assets in the gamemode working directory.
 /// </summary>
-[Library( "taunt" )]
+[GameResource( "TF:S2 Taunt Data", "taunt", "Team Fortress: Source 2 taunt definition", Icon = "accessibility_new", IconBgColor = "#ffc84f", IconFgColor = "#0e0e0e" )]
 public class TauntData : GameResource
 {
 	/// <summary>
 	/// All registered and enabled Player Taunts are here.
 	/// </summary>
-	// public static List<TauntData> All = new();
-	public static Dictionary<string, TauntData> All = new();
+	/// 
+	// public static List<TauntData> All = new(); Old Method
+	public static List<TauntData> All { get; set; } = new();
+	public static List<TauntData> AllActive { get; set; } = new();
 
+	/// <summary>
+	/// Display Name 
+	/// </summary>
 	public string DisplayName { get; set; }
+
+	/// <summary>
+	/// Icon for taunt in taunt menu
+	/// </summary>
+	//[Category( "Images" )]
+	[ResourceType( "png" )]
 	public string Icon { get; set; }
-	public string AnimName { get; set; }
+
+	/// <summary>
+	/// Sequence name of taunt, used to get duration of Once taunts
+	/// </summary>
+	public string SequenceName { get; set; }
+
+	/// <summary>
+	/// Is this taunt disabled? If so, it will not generate in any taunt lists
+	/// </summary>
 	public bool Disabled { get; set; }
-	public string ClassUseChoice { get; set; } = "-1"; // Defaults to Undefined, doesn't set if asset itself is undefined for some reason
-	public TFPlayerClass ClassUse => (TFPlayerClass)ClassUseChoice.ToInt();
 
-	public TauntAttributes Attributes { get; set; }
+	/// <summary>
+	/// Which class can use this taunt? Used to generate the taunt list
+	/// </summary>
+	[Category( "Attributes" )]
+	public TFPlayerClass Class { get; set; } = TFPlayerClass.Undefined;
 
-	public class TauntAttributes
-	{
-		public string TauntTypeChoice { get; set; }
-		public TauntType TauntType => (TauntType)TauntTypeChoice.ToInt();
-		public bool TauntForceMove { get; set; } = false;
-		public bool TauntAllowJoin { get; set; } = false;
-		public bool TauntUseProp { get; set; }
-		public string TauntPropModel { get; set; }
-	}
+	[Category( "Attributes" )]
+	public TauntType TauntType { get; set; }
+
+	/// <summary>
+	/// Allows players to join into the taunt by double-tapping the taunt button while looking at a player performing the taunt
+	/// </summary>
+	[Category( "Attributes" )]
+	[Title( "Group Taunt" )]
+	public bool TauntAllowJoin { get; set; }
+
+	/// <summary>
+	/// If assigned, taunt will spawn this prop
+	/// </summary>
+	[Category( "Attributes" )]
+	[ResourceType( "vmdl" )]
+	[Title( "Prop Model" )]
+	public string TauntPropModel { get; set; }
+
+	/// <summary>
+	/// If the taunt enables movement, this limits how fast the player can move
+	/// </summary>
+	[Category( "Movement" )]
+	[Title( "Maximum Movmement Speed" )]
+	public float TauntMovespeed { get; set; }
+
+	/// <summary>
+	/// Forces the player to move forward
+	/// </summary>
+	[Category( "Movement" )]
+	[Title( "Force Movement" )]
+	public bool TauntForceMove { get; set; }
+
+	/// <summary>
+	/// Music that will play during the taunt
+	/// </summary>
+	[Category( "Audio" )]
+	[Title( "Music" )]
+	[ResourceType( "sound" )]
+	public string TauntMusic { get; set; }
 
 	protected override void PostLoad()
 	{
 		base.PostLoad();
 
-		// Caches prop model if it uses one
-		if ( Attributes.TauntUseProp == true )
+		if ( !string.IsNullOrEmpty( TauntPropModel ) )
 		{
-			Precache.Add( Attributes.TauntPropModel );
-			//TFGame.Log.Info( "PrecacheTauntModel " + Attributes.TauntPropModel );
+			Precache.Add( TauntPropModel );
 		}
-
+		
 		// Get lowercase class name
-		string tauntname = ResourceName.ToLower();
+		//string tauntname = ResourceName.ToLower();
 
-		if ( Disabled == false )
+		Log.Info( ResourceName + " " + Disabled );
+
+		if ( !Disabled )
 		{
-			All[tauntname] = this;
-			// TFGame.Log.Info( "Taunt Loaded: " + tauntname );
+			AllActive.Add( this );
 		}
+
+		All.Add( this );
 	}
 
-	public static bool IsValid( string name )
+	/// <summary>
+	/// Returns a TauntData via a string
+	/// </summary>
+	/// <param name="taunt_name"></param>
+	/// <returns></returns>
+	public static TauntData Get( string taunt_name )
 	{
-		name = name.ToLower();
+		if ( String.IsNullOrEmpty( taunt_name ) )
+		{
+			Log.Warning( "GET TAUNTDATA FAILED: STRING NULL OR EMPTY" );
+			return null;
+		}
 
-		return All.ContainsKey( name );
-	}
-	public static TauntData Get( string name )
-	{
-		name = name.ToLower();
+		taunt_name = taunt_name.ToLower();
+		
+		foreach (var taunt_data in AllActive)
+		{
+			if (taunt_data.ResourceName == taunt_name)
+			{
+				return taunt_data;
+			}
+		}
 
-		if ( !IsValid( name ) ) return null;
-		return All[name];
+		//We have a string, but it didn't match any existing taunts
+		Log.Warning( "GET TAUNTDATA FAILED: STRING DOES NOT MATCH ANY EXISTING FILES" );
+		return null;
 	}
 }
 

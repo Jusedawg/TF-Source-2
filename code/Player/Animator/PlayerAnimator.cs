@@ -7,7 +7,7 @@ namespace TFS2;
 partial class TFPlayerAnimator : PlayerAnimator
 {
 	new TFPlayer Player => (TFPlayer)base.Player;
-
+	const float DeltaMultiplier = 5f;
 	public override void UpdateMovement()
 	{
 		if ( Player.InCondition( TFCondition.Taunting ) )
@@ -40,13 +40,18 @@ partial class TFPlayerAnimator : PlayerAnimator
 
 public override void UpdateRotation()
 	{
+		if ( Player.InCondition( TFCondition.Taunting ) )
+		{
+			UpdateTauntRotation();
+			return;
+		}
 
 		var idealRotation = GetIdealRotation();
 
 		// If we're moving, rotate to our ideal rotation
 		if ( Player.Velocity.Length > 10 )
 		{
-			Player.Rotation = Rotation.Slerp( Player.Rotation, idealRotation, Time.Delta * 5 ); 
+			Player.Rotation = Rotation.Slerp( Player.Rotation, idealRotation, Time.Delta * DeltaMultiplier ); 
 		}
 		// Clamp the foot rotation to within 90 degrees of the ideal rotation
 		Player.Rotation = Player.Rotation.Clamp( idealRotation, 45 );
@@ -75,6 +80,23 @@ public override void UpdateRotation()
 
 	public void UpdateTauntMovement()
 	{
+		var LRinput = Input.AnalogMove.y;
+		var currX = Player.GetAnimParameterFloat("move_x");
+		var targetX = MathX.Lerp( currX, -LRinput, Time.Delta * DeltaMultiplier );
+
+		SetAnimParameter( "move_x", targetX );
+	}
+
+	public void UpdateTauntRotation()
+	{
+		if ( Player.TauntEnableMove )
+		{
+			var LRinput = Input.AnalogMove.y;
+			var targetRot = (QAngle)Player.Rotation;
+			targetRot.y += LRinput * 10;
+
+			Player.Rotation = Rotation.Lerp( Player.Rotation, targetRot, Time.Delta * 5 );
+		}
 	}
 
 	//Helper function for move_x and move_y, solves issue of diagonal movement returning 0.7 and causing the playermodels to not animate at full speed
