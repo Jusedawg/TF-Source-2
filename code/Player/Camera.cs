@@ -37,7 +37,7 @@ partial class TFPlayer
 
 			Vector3 targetPos;
 			var center = Position + Vector3.Up * 64;
-			DebugOverlay.Axis( center, Rotation );
+			// DebugOverlay.Axis( center, Rotation );
 
 			var pos = center;
 			var rot = ViewAngles.ToRotation();
@@ -70,17 +70,11 @@ partial class TFPlayer
 	/// <summary>
 	/// Changes camera from firstperson to thirdperson and vice-versa
 	/// </summary>
-	public void SwapCamera()
-	{
-		IsThirdperson = !IsThirdperson;
-	}
+	public void SwapCamera() => IsThirdperson = !IsThirdperson;
 
 	/// <summary>
 	/// Forces camera to thirdperson if true, firstperson if false
 	/// </summary>
 	/// <param name="enabled"></param>
-	public void ThirdpersonSet( bool enabled )
-	{
-		IsThirdperson = enabled;
-	}
+	public void ThirdpersonSet( bool enabled ) => IsThirdperson = enabled;
 }
