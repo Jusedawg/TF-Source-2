@@ -21,7 +21,7 @@ public partial class Arena : GamemodeEntity
 	public string PointName { get; set; }
 	[Property] public float ControlPointEnableTime { get; set; } = 60;
 	protected ControlPoint Point { get; set; }
-	private readonly GamemodeProperties _properties = new() { DisablePlayerRespawn = true, RequireBothTeams = true, ShouldAnnounceFirstBlood = true, ShouldPlayGameStartSong = false, AllowTeamSelection = false };
+	private readonly GamemodeProperties _properties = new() { DisablePlayerRespawn = true, RequireBothTeams = true, ShouldAnnounceFirstBlood = true, DisableGameStartSong = true, DisableTeamSelection = true };
 	public override GamemodeProperties Properties => _properties;
 
 	public override bool HasWon( out TFTeam winner, out TFWinReason reason )
@@ -39,7 +39,7 @@ public partial class Arena : GamemodeEntity
 				continue;
 
 			// If there are no alive players in this team.
-			if ( !allPlayers.Where( x => x.Team == team && x.IsAlive ).Any() )
+			if ( !allPlayers.Any( x => x.Team == team && x.IsAlive ) )
 			{
 				// get the opposite team
 				winner = team == TFTeam.Red ? TFTeam.Blue : TFTeam.Red;

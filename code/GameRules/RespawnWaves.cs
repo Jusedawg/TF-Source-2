@@ -50,7 +50,7 @@ partial class TFGameRules
 
 	public virtual bool IsTeamSelectionAllowed()
 	{
-		return !HasGamemode() || GetGamemode()?.Properties.AllowTeamSelection == true;
+		return !HasGamemode() || GetGamemode()?.Properties.DisableTeamSelection == false;
 	}
 	public override bool AreRespawnsAllowed()
 	{

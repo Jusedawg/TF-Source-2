@@ -10,21 +10,21 @@ namespace TFS2
 		/// </summary>
 		public bool RequireBothTeams { get; init; }
 		public bool ShouldAnnounceFirstBlood { get; init; }
-		public bool ShouldPlayGameStartSong { get; init; }
+		public bool DisableGameStartSong { get; init; }
 		public bool IsAttackDefense { get; init; }
 		/// <summary>
 		/// If false, shows the arena selection screen.
 		/// </summary>
-		public bool AllowTeamSelection { get; init; }
+		public bool DisableTeamSelection { get; init; }
 		public Func<TFPlayer, TFTeam> AutoTeamOverride;
 		public GamemodeProperties()
 		{
 			DisablePlayerRespawn = false;
 			RequireBothTeams = false;
 			ShouldAnnounceFirstBlood = false;
-			ShouldPlayGameStartSong = true;
+			DisableGameStartSong = false;
 			IsAttackDefense = false;
-			AllowTeamSelection = true;
+			DisableTeamSelection = false;
 		}
 	}
 }

@@ -1,9 +1,4 @@
 ﻿using Sandbox;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TFS2
 {
@@ -17,10 +12,5 @@ namespace TFS2
 		public abstract bool HasWon( out TFTeam team, out TFWinReason reason );
 
 		public abstract bool IsActive();
-
-		public GamemodeNetworkable()
-		{
-
-		}
 	}
 }

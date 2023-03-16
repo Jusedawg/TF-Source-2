@@ -34,10 +34,9 @@ public partial class KingOfTheHill : GamemodeEntity
 		team = TFTeam.Unassigned;
 		reason = TFWinReason.AllPointsCaptured;
 
-		foreach ( var pair in Timers )
+		foreach ( var (key, timer) in Timers )
 		{
-			team = pair.Key;
-			var timer = pair.Value;
+			team = key;
 
 			if ( timer.GetRemainingTime() == 0 )
 			{
@@ -135,11 +134,8 @@ public partial class KingOfTheHill : GamemodeEntity
 
 	public virtual void SetTeamTimerActive( TFTeam team )
 	{
-		foreach ( var pair in Timers )
+		foreach ( var ( timerTeam, timer ) in Timers )
 		{
-			var timerTeam = pair.Key;
-			var timer = pair.Value;
-
 			if ( timerTeam == team ) timer.Start();
 			else timer.Pause();
 		}
