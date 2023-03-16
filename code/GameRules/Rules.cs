@@ -63,13 +63,13 @@ partial class TFGameRules
 		return HasGamemode() && GetGamemode().Properties.IsAttackDefense;
 	}
 
+	/// <summary>
+	/// Play start music only when the gamemode wants it.
+	/// </summary>
+	/// <returns></returns>
 	public bool ShouldPlayGameStartSong()
 	{
-		if ( !HasGamemode() )
-			return true;
-
-		// Play start music only when the gamemode wants it.
-		return GetGamemode().Properties.ShouldAnnounceFirstBlood;
+		return !HasGamemode() || GetGamemode().Properties.DisableGameStartSong == false;
 	}
 
 	public override bool CanEntityTakeDamage( Entity victim, Entity attacker, ExtendedDamageInfo info )
