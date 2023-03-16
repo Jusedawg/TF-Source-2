@@ -44,12 +44,7 @@ public partial class TeamDeathmatch : GamemodeEntity
 		team = FirstScorer;
 		reason = TFWinReason.FragLimit;
 
-		if ( HasReachedFragLimit() && GetTimeUntilRoundEnd() == 0 )
-		{
-			return true;
-		}
-
-		return false;
+		return HasReachedFragLimit() && GetTimeUntilRoundEnd() == 0;
 	}
 
 	public override void Reset()
@@ -59,7 +54,7 @@ public partial class TeamDeathmatch : GamemodeEntity
 		FirstScorer = TFTeam.Unassigned;
 
 		// calculate the frag limit, based on the player count.
-		float count = MathF.Ceiling( All.OfType<TFPlayer>().Count() / 2 ) * 2;
+		float count = MathF.Ceiling( All.OfType<TFPlayer>().Count() );
 		var lerp = count.Remap( 4, 24 ).Clamp( 0, 1 );
 
 		float min = tf_tdm_frag_limit_min;
@@ -95,13 +90,9 @@ public partial class TeamDeathmatch : GamemodeEntity
 		if ( !TFGameRules.Current.AreObjectivesActive() )
 			return false;
 
-		foreach ( TFTeam team in Enum.GetValues( typeof( TFTeam ) ) )
-		{
-			if ( !team.IsPlayable() ) continue;
-			if ( HasTeamReachedFragLimit( team ) ) return true;
-		}
-
-		return false;
+		return Enum.GetValues( typeof( TFTeam ) ).Cast<TFTeam>()
+			.Where( team => team.IsPlayable() )
+			.Any( HasTeamReachedFragLimit );
 	}
 
 	public virtual bool HasTeamReachedFragLimit( TFTeam team )

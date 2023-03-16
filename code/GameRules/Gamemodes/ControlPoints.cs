@@ -1,9 +1,6 @@
-﻿using Sandbox;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Sandbox;
 
 namespace TFS2
 {
@@ -14,11 +11,6 @@ namespace TFS2
 		public override string Icon => "ui/hud/scoreboard/icon_mode_control.png";
 
 		public override GamemodeProperties Properties => default;
-
-		public ControlPoints()
-		{
-			//EventDispatcher.Subscribe<>
-		}
 
 		public override bool HasWon( out TFTeam winnerTeam, out TFWinReason reason )
 		{
@@ -53,11 +45,11 @@ namespace TFS2
 			var enemyPoints = points.Where( x => x.GetDefaultTeamOwner() != team );
 
 			// if we don't have any enemy points we own all points.
-			if ( enemyPoints.Count() == 0 )
+			if ( !enemyPoints.Any() )
 				return false;
 
 			// team owns all the points if no other team owns all the points.
-			return !enemyPoints.Where( x => x.OwnerTeam != team ).Any();
+			return !enemyPoints.Any( x => x.OwnerTeam != team );
 		}
 	}
 }

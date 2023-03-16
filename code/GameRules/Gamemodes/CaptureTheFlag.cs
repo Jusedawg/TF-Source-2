@@ -3,8 +3,6 @@ using Sandbox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TFS2
 {
@@ -32,10 +30,9 @@ namespace TFS2
 			team = TFTeam.Unassigned;
 			reason = TFWinReason.FlagCaptureLimit;
 
-			foreach ( var pair in FlagCaptures )
+			foreach ( var ( key, captures ) in FlagCaptures )
 			{
-				team = pair.Key;
-				var captures = pair.Value;
+				team =  key;
 
 				if ( captures >= tf_flag_caps_per_round )
 				{

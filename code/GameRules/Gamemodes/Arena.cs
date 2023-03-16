@@ -39,7 +39,7 @@ public partial class Arena : GamemodeEntity
 				continue;
 
 			// If there are no alive players in this team.
-			if ( !allPlayers.Where( x => x.Team == team && x.IsAlive ).Any() )
+			if ( !allPlayers.Any( x => x.Team == team && x.IsAlive ) )
 			{
 				// get the opposite team
 				winner = team == TFTeam.Red ? TFTeam.Blue : TFTeam.Red;
