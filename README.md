@@ -32,16 +32,16 @@ Sometimes s&box decides to recompile the assets and change the compiled files, t
 # Contributing
 
 Interested in fixing a bug or implementing a feature? Whether it's a major change or a small hotfix, you are welcome to submit it through a pull request! But before that happens you must follow:
-- [The Pull Request Guidelines](https://github.com/AmperSoftware/TF-Source-2/blob/main/.github/CONTRIBUTING.md)
-- [The Pull Request Template](https://github.com/AmperSoftware/TF-Source-2/blob/main/.github/PULL_REQUEST_TEMPLATE.md)
+- [The Pull Request Guidelines](https://github.com/AmperSoftware/TF-Source-2/blob/dev/.github/CONTRIBUTING.md)
+- [The Pull Request Template](https://github.com/AmperSoftware/TF-Source-2/blob/dev/.github/PULL_REQUEST_TEMPLATE.md)
 
 As long as you abide by these guidelines, you can submit a pull request and an Amper developer will try to review it as soon as possible.  
 Also, feel free to join our [Discord](https://discord.gg/tMnTsUsVjP) and chat with other developers about your ideas in the special channels.
 
 # License & Disclaimer
 
-This repository is licensed under the [MIT license](https://github.com/AmperSoftware/TF-Source-2/blob/main/LICENSE.md).
+This repository is licensed under the [MIT license](https://github.com/AmperSoftware/TF-Source-2/blob/dev/LICENSE.md).
 
 However, some assets included such as models, sounds, animations, shaders and more were originally created by Valve Corporation and therefore are under Valve's intellectual property.
 
-**[Third Part Licenses](https://github.com/AmperSoftware/TF-Source-2/blob/main/thirdpartylicenses.md)**
+**[Third Part Licenses](https://github.com/AmperSoftware/TF-Source-2/blob/dev/thirdpartylicenses.md)**
