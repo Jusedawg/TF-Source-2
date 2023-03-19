@@ -62,36 +62,29 @@ public partial class TFMeleeBase : TFWeaponBase
 	public override TraceResult TraceFireBullet( int seedOffset = 0 )
 	{
 		Game.SetRandomSeed( Time.Tick + seedOffset );
-
-		var range = GetRange();
-		var spread = GetSpread();
-
 		Vector3 origin = GetAttackOrigin();
-		Vector3 direction = GetAttackDirectionWithSpread( spread );
-		var target = origin + direction * range;
-
+		Vector3 target = origin + GetAttackDirectionWithSpread( GetSpread() ) * GetRange();
+		
 		TraceResult tr = default;
-		var all = SetupFireBulletTrace( origin, target ).RunAll();
-
-		if ( all != null )
+		
+		if ( SetupFireBulletTrace( origin, target ).Size( 32 ).RunAll() is {} results )
 		{
 			// Try to find non teammate hits first.
-			var enemyHit = all.Where( x => x.Entity != null && !ITeam.IsSame( x.Entity, TFOwner ) ).FirstOrDefault();
-			if ( enemyHit.Hit )
-			{
-				tr = enemyHit;
-			}
-			else
-			{
+			tr = results.FirstOrDefault( x => x.Entity is var entity && ITeam.IsEnemy( entity, TFOwner ),
 				// If we didn't hit an enemy, get the first trace.
-				// Those would be our teammates.
+				results.First());
+			
+			/*
+			 * Due to the trace having a size of 32, the decal will be offset from the wall and not render.
+			 */
 
-				var teammateHit = all.FirstOrDefault();
-				if ( teammateHit.Hit )
-				{
-					tr = teammateHit;
-				}
-			}
+			// See if we reach the wall.
+			if ( SetupFireBulletTrace( origin, target ).Run() is var decal && decal.Hit == false ) 
+				// Otherwise snap HitPosition to surface.
+				decal = SetupFireBulletTrace( tr.EndPosition, tr.EndPosition - tr.Normal * GetRange() ).Run();
+
+			tr.HitPosition = decal.HitPosition;
+			tr.Surface = decal.Surface;
 		}
 		else
 		{
@@ -99,15 +92,20 @@ public partial class TFMeleeBase : TFWeaponBase
 			tr.EndPosition = target;
 		}
 
+		DrawDebugTrace( tr );
+		return tr;
+	}
+
+
+	protected override void DrawDebugTrace( TraceResult tr, float time = 5 )
+	{
 		if ( sv_debug_hitscan_hits )
 		{
-			DebugOverlay.Line( tr.StartPosition, tr.EndPosition, Game.IsServer ? Color.Yellow : Color.Green, 5f, true );
-			DebugOverlay.Sphere( tr.StartPosition, 2f, Color.Cyan, 5, true );
-			DebugOverlay.Sphere( tr.EndPosition, 2f, Color.Red, 5, true );
+			DebugOverlay.Line( tr.StartPosition, tr.EndPosition, Game.IsServer ? Color.Yellow : Color.Green, 5f );
+			DebugOverlay.Sphere( tr.StartPosition, 2f, Color.Cyan, 5 );
+			DebugOverlay.Sphere( tr.EndPosition, 2f, Color.Red, 5 );
 			DebugOverlay.Text( $"{tr.Distance}", tr.EndPosition, 5f );
 		}
-
-		return tr;
 	}
 
 	public override void OnHitEntity( Entity entity, TraceResult tr )
@@ -127,8 +125,6 @@ public partial class TFMeleeBase : TFWeaponBase
 	public override Trace SetupFireBulletTrace( Vector3 Origin, Vector3 Target )
 	{
 		return base.SetupFireBulletTrace( Origin, Target )
-			.Size( 32 )
 			.UseHitboxes( false );
 	}
-
 }
