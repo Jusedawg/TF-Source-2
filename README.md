@@ -40,4 +40,8 @@ Also, feel free to join our [Discord](https://discord.gg/tMnTsUsVjP) and chat wi
 
 # License & Disclaimer
 
-This repository is licensed under the [MIT license](https://github.com/AmperSoftware/TF-Source-2/blob/main/LICENSE.md) but some assets included (such as models, sounds, animations and more) were originally created by Valve Corporation and therefore are under Valve's intellectual property.
+This repository is licensed under the [MIT license](https://github.com/AmperSoftware/TF-Source-2/blob/main/LICENSE.md).
+
+However, some assets included such as models, sounds, animations, shaders and more were originally created by Valve Corporation and therefore are under Valve's intellectual property.
+
+**[Third Part Licenses](https://github.com/AmperSoftware/TF-Source-2/blob/main/thirdpartylicenses.md)**
