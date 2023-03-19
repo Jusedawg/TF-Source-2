@@ -187,6 +187,10 @@ partial class TFPlayer
 		//
 		// Play Blood Impact
 		//
+		
+		// Cant take damage while invulnerable don't even try to do effects.
+		if (IsInvulnerable())
+			return;
 
 		var impactEffect = IsUnderwater
 			? BloodWaterImpactParticle
@@ -240,6 +244,10 @@ partial class TFPlayer
 
 	public override void OnTakeDamageReaction( ExtendedDamageInfo info )
 	{
+		// Cant take damage while invulnerable don't even try to do anything.
+		if (IsInvulnerable())
+			return;
+		
 		base.OnTakeDamageReaction( info );
 		PainSound( info );
 	}

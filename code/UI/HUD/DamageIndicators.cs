@@ -21,6 +21,10 @@ public class DamageIndicators : Panel
 		// If local client is not alive
 		if ( !Sandbox.Game.LocalClient.IsAlive() )
 			return;
+		
+		//If we are invlun or damage is 0 don't make indicators.
+		if (TFPlayer.LocalPlayer.InCondition(TFCondition.Invulnerable) || args.Damage == 0)
+			return;
 
 		AddChild( new DamageIndicatorEntry( (args.Position - Sandbox.Game.LocalPawn.GetEyePosition()).Normal, args.Damage ) );
 	}
