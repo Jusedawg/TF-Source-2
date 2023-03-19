@@ -78,12 +78,13 @@ public partial class TFMeleeBase : TFWeaponBase
 			 * Due to the trace having a size of 32, the decal will be offset from the wall and not render.
 			 */
 
-			// See if we reach can reach the wall
-			if ( ( SetupFireBulletTrace( origin, target ).RunAll() ?? 
-			       // Otherwise, snap the end position to the wall.
-			       SetupFireBulletTrace( tr.EndPosition, tr.EndPosition - tr.Normal * GetRange() ).RunAll() ) is { } hit )
-				
-				tr = hit.FirstOrDefault();
+			// See if we reach the wall.
+			if ( SetupFireBulletTrace( origin, target ).Run() is var decal && decal.Hit == false ) 
+				// Otherwise snap HitPosition to surface.
+				decal = SetupFireBulletTrace( tr.EndPosition, tr.EndPosition - tr.Normal * GetRange() ).Run();
+
+			tr.HitPosition = decal.HitPosition;
+			tr.Surface = decal.Surface;
 		}
 		else
 		{
