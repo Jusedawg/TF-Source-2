@@ -678,11 +678,8 @@ class ShadingModelLegacy : ShadingModel
 
     float4 PostProcess( float4 vColor )
     {
-        #if (USE_MANUAL_CUBEMAP)
-            float3 envMapColor = shadeParams.EnvMapColor;
-        #else // !USE_MANUAL_CUBEMAP
-            float3 envMapColor = GetAllCubemaps(shadeParams, 0);
-        #endif // !USE_MANUAL_CUBEMAP
+        // add in (optional) envmap color
+        float3 envMapColor = shadeParams.EnvMapColor;
 
         if ( config.DoIrisLighting )
         {
