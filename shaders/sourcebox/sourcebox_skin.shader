@@ -211,22 +211,6 @@ PS
         // Break down reflect so that we can share dot(worldSpaceNormal,vEyeDir) with fresnel terms
         float3 vReflect = 2 * worldSpaceNormal * dot(worldSpaceNormal, vEyeDir) - vEyeDir;
 
-	    float3 envMapColor = float3( 0.0f, 0.0f, 0.0f );
-		#if S_CUSTOM_CUBEMAP
-			// Mask is either normal map alpha or base map alpha
-            #if ( S_SELFILLUMFRESNEL == 1 ) // This is to match the 2.0 version of vertexlitgeneric
-                float fEnvMapMask = lerp( baseColor.a, g_fInvertPhongMask, g_flEnvMapShadowTweaks );
-            #else
-                float fEnvMapMask = lerp( baseColor.a, fSpecMask, g_flEnvMapShadowTweaks );
-            #endif
-
-			envMapColor = (g_flEnvMapScale *
-							lerp(1, fFresnelRanges, g_flEnvMapFresnel) *
-							lerp(fEnvMapMask, 1-fEnvMapMask, g_fInvertPhongMask)) *
-							CONVERT_ENVMAP(Tex3D( g_tEnvMap, vReflect )).rgb *
-							g_vEnvMapTint.xyz;
-		#endif // S_CUSTOM_CUBEMAP
-
         float3 vSpecularTint = float3(1.0, 1.0, 1.0);
         float fRimMask = 0;
         float fSpecExp = 1;
@@ -267,7 +251,6 @@ PS
         m.SpecularExponent = fSpecExp;
         m.SpecularTint = vSpecularTint;
         m.Fresnel = fFresnelRanges;
-        m.EnvMapColor = envMapColor;
         m.RimMask = fRimMask;
         m.RimFresnel = fRimFresnel;
         m.RimExponent = g_flRimExponent;
@@ -282,6 +265,33 @@ PS
             m.SelfIllumMask = vSelfIllumMask;
         #endif
         
-        return FinalizeLegacyOutput(FinalizePixelMaterial( i, m, sm ));
+        // set our envmap color to 0
+        m.EnvMapColor = float3(0.0f, 0.0f, 0.0f);
+
+        float4 output = FinalizePixelMaterial( i, m, sm );
+
+	    float3 envMapColor = float3( 0.0f, 0.0f, 0.0f );
+		#if S_CUBEMAP
+			// Mask is either normal map alpha or base map alpha
+            #if ( S_SELFILLUMFRESNEL == 1 ) // This is to match the 2.0 version of vertexlitgeneric
+                float fEnvMapMask = lerp( baseColor.a, g_fInvertPhongMask, g_flEnvMapShadowTweaks );
+            #else
+                float fEnvMapMask = lerp( baseColor.a, fSpecMask, g_flEnvMapShadowTweaks );
+            #endif
+
+			envMapColor = (g_flEnvMapScale *
+							lerp(1, fFresnelRanges, g_flEnvMapFresnel) *
+							lerp(fEnvMapMask, 1-fEnvMapMask, g_fInvertPhongMask)) *
+                            #if S_CUSTOM_CUBEMAP
+							    CONVERT_ENVMAP(Tex3D( g_tEnvMap, vReflect )).rgb *
+                            #else // !S_CUSTOM_CUBEMAP
+                                sm.GetAllCubemaps(sm.shadeParams, 0) *
+                            #endif // !S_CUSTOM_CUBEMAP
+							g_vEnvMapTint.xyz;
+		#endif // S_CUBEMAP
+        // add the envmap color
+        output.rgb += envMapColor;
+
+        return FinalizeLegacyOutput(output);
 	}
 }

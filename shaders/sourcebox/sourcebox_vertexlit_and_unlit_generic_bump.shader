@@ -189,25 +189,36 @@ PS
         m.Opacity = alpha;
         m.SelfIllumMask = baseColor.aaa;
 
+        // set our envmap color to 0
+        m.EnvMapColor = float3(0.0f, 0.0f, 0.0f);
+
+        float4 output = FinalizePixelMaterial( i, m, sm );
+
         float3 specularLighting = float3( 0.0f, 0.0f, 0.0f );
-        #if S_CUSTOM_CUBEMAP
+        #if S_CUBEMAP
             float3 positionWs = i.vPositionWithOffsetWs.xyz + g_vCameraPositionWs;
             // View ray in World Space
             float3 viewRayWs = normalize(CalculatePositionToCameraDirWs( positionWs ));
             float3 reflectVect = reflect( -viewRayWs, m.Normal );
             // float3 reflectVect = CalcReflectionVectorUnnormalized( worldSpaceNormal, i.worldVertToEyeVectorXYZ_tangentSpaceVertToEyeVectorZ.xyz );
 
-            specularLighting = g_flEnvMapScale * CONVERT_ENVMAP(Tex3D( g_tEnvMap, reflectVect )).rgb;
+            #if S_CUSTOM_CUBEMAP
+                specularLighting = g_flEnvMapScale * CONVERT_ENVMAP(Tex3D( g_tEnvMap, reflectVect )).rgb;
+            #else // !S_CUSTOM_CUBEMAP
+                specularLighting = float3(g_flEnvMapScale, g_flEnvMapScale, g_flEnvMapScale) * sm.GetAllCubemaps(sm.shadeParams, 0);
+            #endif // !S_CUSTOM_CUBEMAP
+            
             specularLighting *= specularFactor;
             specularLighting *= g_vEnvMapTint.rgb;
             float3 specularLightingSquared = specularLighting * specularLighting;
             specularLighting = lerp( specularLighting, specularLightingSquared, g_vEnvMapContrast );
             float3 greyScale = dot( specularLighting, float3( 0.299f, 0.587f, 0.114f ) );
             specularLighting = lerp( greyScale, specularLighting, g_vEnvMapSaturation );
-        #endif // S_CUSTOM_CUBEMAP
-        m.EnvMapColor = specularLighting;
+        #endif // S_CUBEMAP
+        // add the envmap color
+        output.rgb += specularLighting;
 
         // PixelInput, Material, Shading Model
-        return FinalizeLegacyOutput(FinalizePixelMaterial( i, m, sm ));
+        return FinalizeLegacyOutput(output);
 	}
 }
