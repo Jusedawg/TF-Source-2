@@ -31,7 +31,7 @@ namespace TFS2
 			return false;
 		}
 
-		public override bool IsActive() => Entity.All.OfType<ControlPoint>().Any();
+		public override bool IsActive() => Entity.All.OfType<ControlPoint>().Any() && !Entity.All.OfType<Payload>().Any();
 
 		public static bool TeamOwnsAllControlPoints( TFTeam team )
 		{
