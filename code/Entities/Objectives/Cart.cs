@@ -211,54 +211,94 @@ namespace TFS2
 				CurrentSpeed = MathF.Max( minSpeed, CurrentSpeed );
 			}
 
-			if ( CurrentSpeed < 0 && CurrentNode.GetIndex() == 0 )
+			if ( CurrentSpeed < 0 && CurrentNode.GetIndex() == 0 && CurrentFraction <= 0 )
 			{
 				CurrentSpeed = 0;
 				return;
 			}
-			
-			if (CurrentSpeed != 0)
+
+			if ( CurrentSpeed == 0 )
+				return;
+
+			if(isRolling)
 			{
-				if(isRolling)
-				{
-					RollbackSounds();
-				}
-				MoveSounds();
-
-				float remainingDistance = CurrentSpeed * Time.Delta;
-				while ( !remainingDistance.AlmostEqual(0.01f) )
-				{
-					float usedDistance = MathF.Min( remainingDistance * Time.Delta, remainingDistance );
-					CurrentFraction += GetSpeedFraction( remainingDistance * Time.Delta );
-					remainingDistance -= usedDistance;
-					
-					if(CurrentFraction >= 1)
-					{
-						CurrentNode = CurrentNode.GetNextNode();
-						CurrentFraction -= 1;
-						OnNodeChanged( CurrentNode );
-
-						if ( CurrentNode.GetNextNode() == null )
-						{
-							IsAtEnd = true;
-							StopMoveSounds();
-							OnReachEnd.Fire( this );
-							Log.Info( $"Reached end at: {CurrentNode.GetIndex()+1}" );
-							break;
-						}
-					}
-				}
-
-				var newpos = GetPathPosition();
-
-				var dir = Position - newpos;
-				Rotation = Rotation.LookAt( dir ).Angles().WithRoll( 0 ).ToRotation();
-				//Position = Position.LerpTo( newpos, Time.Delta );
-				Position = newpos;
-				if(!IsAtEnd)
-					NodeDistance = Path.GetCurveLength( CurrentNode, CurrentNode.GetNextNode(), 10 );
+				RollingSounds();
 			}
+			MoveSounds();
+			bool isMovingReverse = CurrentSpeed < 0;
+
+			if ( isMovingReverse )
+			{
+				float remainingDistance = MathF.Abs(CurrentSpeed) * Time.Delta;
+				while ( remainingDistance > 0.01f )
+				{
+					remainingDistance = DoMoveBackwards( remainingDistance );
+				}
+			} 
+			else
+			{
+				float remainingDistance = CurrentSpeed * Time.Delta;
+				while ( remainingDistance > 0.01f )
+				{
+					remainingDistance = DoMoveForwards( remainingDistance );
+				}
+			}
+			var newpos = GetPathPosition();
+
+			Vector3 dir = isMovingReverse ? newpos - Position : Position - newpos;
+			Rotation = Rotation.LookAt( dir );
+				
+			Position = newpos;
+			if(!IsAtEnd)
+				NodeDistance = Path.GetCurveLength( CurrentNode, CurrentNode.GetNextNode(), 10 );
 		}
+		
+		protected virtual float DoMoveForwards(float distance)
+		{
+			float usedDistance = MathF.Min( distance * Time.Delta, distance );
+			CurrentFraction += GetSpeedFraction( usedDistance );
+
+			if ( CurrentFraction >= 1 )
+			{
+				CurrentNode = CurrentNode.GetNextNode();
+				CurrentFraction -= 1;
+				OnNodeChanged( CurrentNode );
+
+				if ( CurrentNode.GetNextNode() == null )
+				{
+					IsAtEnd = true;
+					StopMoveSounds();
+					OnReachEnd.Fire( this );
+					Log.Info( $"Reached end at: {CurrentNode.GetIndex() + 1}" );
+					return 0;
+				}
+			}
+
+			return distance - usedDistance;
+		}
+
+		protected virtual float DoMoveBackwards(float distance)
+		{
+			distance = MathF.Abs( distance );
+			float usedDistance = MathF.Min( distance * Time.Delta, distance );
+			CurrentFraction -= MathF.Abs(GetSpeedFraction( usedDistance ));
+
+			if ( CurrentFraction < 0 )
+			{
+				if ( CurrentNode.GetPreviousNode() == null )
+				{
+					StopMoveSounds();
+					return 0;
+				}
+
+				CurrentNode = CurrentNode.GetPreviousNode();
+				CurrentFraction += 1;
+				OnNodeChanged( CurrentNode );
+			}
+
+			return distance - usedDistance;
+		}
+
 		/// <summary>
 		/// Returns the position according to the current node and fraction
 		/// </summary>
@@ -290,7 +330,7 @@ namespace TFS2
 
 		public int GetCapRate()
 		{
-			return pushers.Sum( ply => TFGameRules.Current.GetCaptureValueForPlayer(ply) );
+			return pushers.Sum( TFGameRules.Current.GetCaptureValueForPlayer );
 		}
 
 		public bool CanMove()
@@ -349,11 +389,12 @@ namespace TFS2
 		protected virtual void StopPush(TFPlayer ply)
 		{
 			pushers.Remove( ply );
-			if ( CanMove() )
-				StopMoveSounds();
 
-			if ( !pushers.Any() )
-				OnStopPush.Fire(ply);
+			if ( !CanPush() )
+			{
+				OnStopPush.Fire( ply );
+				StopMoveSounds();
+			}
 		}
 
 		protected virtual void StartBlock(TFPlayer ply)
