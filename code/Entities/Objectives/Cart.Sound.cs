@@ -24,22 +24,25 @@ namespace TFS2
 		{
 			if ( !RollingSound.IsPlaying )
 			{
-				//Log.Info( $"MoveSound {MoveSound}" );
 				RollingSound = PlaySound( MoveSound );
 			}
 		}
 
 		protected virtual void StopMoveSounds()
 		{
-			RollingSound = RollingSound.Stop();
+			RollingSound.Stop();
 			RollingSound = PlaySound( StopMoveSound );
+			GrindingSound = GrindingSound.Stop();
 		}
 
 		/// <summary>
 		/// Plays rollback/rollforward sounds (grinding)
 		/// </summary>
-		protected virtual void RollbackSounds()
+		protected virtual void RollingSounds()
 		{
+			//if ( GrindingSound.IsPlaying )
+			//	return;
+
 			GrindingSound = PlaySound( RollbackSound );
 		}
 	}

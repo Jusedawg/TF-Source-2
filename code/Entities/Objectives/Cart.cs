@@ -160,6 +160,7 @@ namespace TFS2
 			}
 		}
 
+		bool wasMoving = false;
 		protected virtual void DoMovement()
 		{
 			if ( !CanMove() )
@@ -218,13 +219,16 @@ namespace TFS2
 			}
 
 			if ( CurrentSpeed == 0 )
-				return;
-
-			if(isRolling)
 			{
-				RollingSounds();
+				if(wasMoving)
+				{
+					StopMoveSounds();
+					wasMoving = false;
+				}
+
+				return;
 			}
-			MoveSounds();
+
 			bool isMovingReverse = CurrentSpeed < 0;
 
 			if ( isMovingReverse )
@@ -251,6 +255,17 @@ namespace TFS2
 			Position = newpos;
 			if(!IsAtEnd)
 				NodeDistance = Path.GetCurveLength( CurrentNode, CurrentNode.GetNextNode(), 10 );
+
+			if ( isRolling )
+				RollingSounds();
+
+			if ( !wasMoving )
+			{
+				StartMoveSounds();
+				wasMoving = true;
+			}
+			else
+				MoveSounds();
 		}
 		
 		protected virtual float DoMoveForwards(float distance)
@@ -376,8 +391,6 @@ namespace TFS2
 			if ( !pushers.Any() )
 			{
 				OnStartPush.Fire( ply );
-				if ( CanMove() )
-					StartMoveSounds();
 
 				if ( blockers.Any() )
 					OnStartBlock.Fire( ply );
@@ -393,7 +406,6 @@ namespace TFS2
 			if ( !CanPush() )
 			{
 				OnStopPush.Fire( ply );
-				StopMoveSounds();
 			}
 		}
 
@@ -401,9 +413,6 @@ namespace TFS2
 		{
 			if ( pushers.Any() )
 			{
-				if ( CanMove() )
-					StartMoveSounds();
-				
 				OnStartBlock.Fire( ply );
 			}
 
@@ -416,8 +425,6 @@ namespace TFS2
 
 			if ( !blockers.Any() )
 			{
-				if ( CanMove() )
-					StopMoveSounds();
 				OnStopBlock.Fire( ply );
 			}
 		}
