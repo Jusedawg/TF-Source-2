@@ -421,6 +421,8 @@ public partial class ControlPoint : BaseTrigger
 			case TFTeam.Blue: OnBlueCaptured.Fire( this ); break;
 		}
 
+		OnCaptured.Fire( this );
+
 		var lastTeam = OwnerTeam;
 
 		SetOwnerTeam( team );
