@@ -40,8 +40,8 @@ namespace TFS2
 		/// </summary>
 		protected virtual void RollingSounds()
 		{
-			//if ( GrindingSound.IsPlaying )
-			//	return;
+			if ( GrindingSound.IsPlaying )
+				return;
 
 			GrindingSound = PlaySound( RollbackSound );
 		}
