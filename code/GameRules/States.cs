@@ -6,7 +6,9 @@ namespace TFS2;
 
 partial class TFGameRules
 {
-	public override bool WaitingForPlayersEnabled() => true;
+	[ConVar.Replicated] public static bool mp_tournament_readymode { get; set; } = false;
+	public override bool WaitingForPlayersEnabled() => !ReadyUpEnabled();
+	public override bool ReadyUpEnabled() => mp_tournament_readymode || GetGamemode()?.Properties.RequireReadyUp == true;
 	public override void OnRoundRestart()
 	{
 		FirstBloodAnnounced = false;

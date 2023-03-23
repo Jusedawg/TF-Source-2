@@ -12,6 +12,7 @@ namespace TFS2
 		public bool ShouldAnnounceFirstBlood { get; init; }
 		public bool DisableGameStartSong { get; init; }
 		public bool IsAttackDefense { get; init; }
+		public bool RequireReadyUp { get; init; }
 		/// <summary>
 		/// If false, shows the arena selection screen.
 		/// </summary>
@@ -24,6 +25,7 @@ namespace TFS2
 			ShouldAnnounceFirstBlood = false;
 			DisableGameStartSong = false;
 			IsAttackDefense = false;
+			RequireReadyUp = false;
 			DisableTeamSelection = false;
 		}
 	}
