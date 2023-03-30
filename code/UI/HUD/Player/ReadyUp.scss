@@ -1,0 +1,61 @@
+﻿@import "/UI/styles/colors.scss";
+@import "/UI/styles/checkbox.scss";
+
+ReadyUp {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    width: 30%;
+    margin-top: 170px;
+    justify-content: center;
+    transform: scale(.95);
+    opacity: 0;
+    transition: all .2s ease;
+
+    &.visible {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    border: 2px solid #f2e2c1;
+    background-color: #bd3b3b;
+    padding: 5px 40px;
+    border-radius: 10px;
+    flex-direction: column;
+
+    .title {
+        width: 100%;
+        padding: 15px;
+        font-family: Verdana;
+        font-size: 32px;
+        color: $panel-text;
+        font-weight: bolder;
+        text-align: center;
+    }
+
+    .player {
+        height: 60px;
+        padding-bottom: 5px;
+
+        .status {
+            flex-direction: row-reverse;
+
+            .iconpanel {
+                margin-right: 0;
+                aspect-ratio: 1;
+            }
+
+            label {
+                flex-direction: row;
+                padding: 10px 0;
+                font-family: Verdana;
+                font-size: 18px;
+                color: $panel-text;
+                font-weight: bold;
+                width: 100%;
+                height: 45px;
+                text-align: center;
+            }
+        }
+    }
+}

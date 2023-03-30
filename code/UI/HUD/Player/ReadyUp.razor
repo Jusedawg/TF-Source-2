@@ -1,0 +1,46 @@
+﻿@using Sandbox;
+@using Sandbox.UI;
+@using Amper.FPS;
+@attribute [StyleSheet("/UI/HUD/Player/ReadyUp.scss")]
+
+@namespace TFS2.UI
+
+<root>
+    <label class="title">Ready?</label>
+
+    @foreach (var cl in Game.Clients)
+    {
+        <div class="player">
+            <image class="avatar" Texture="avatar:@cl.SteamId" />
+            <checkbox class="status checkbox" Checked=@TFGameRules.Current.IsReady(cl)>@cl.Name</checkbox>
+        </div>
+    }
+</root>
+
+@code {
+    public ReadyUp()
+    {
+        EventDispatcher.Subscribe<ClientReadyToggleEvent>(OnClientReadyToggle, this);
+    }
+
+    int lastClientCount = 0;
+    public override void Tick()
+    {
+        if(Game.Clients.Count != lastClientCount)
+        {
+            lastClientCount = Game.Clients.Count;
+            StateHasChanged();
+            foreach (var cl in Game.Clients)
+            {
+                Log.NetInfo($"{cl.Name} ready: {TFGameRules.Current.IsReady(cl)}");
+            }
+        }
+
+        SetClass("visible", TFGameRules.Current?.State == GameState.ReadyUp);
+    }
+
+    private void OnClientReadyToggle(ClientReadyToggleEvent ev)
+    {
+        StateHasChanged();
+    }
+}
