@@ -1,28 +1,20 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "shaders/tf2_water.shader"
-
-	//---- Rendering ----
-	F_DO_NOT_CAST_SHADOWS 1
-
-	//---- Material ----
-	TextureAmbientOcclusion "materials/default/default_ao.tga"
-	TextureBlendMask "materials/default/default_blend.tga"
-	TextureColor "[0.925490 0.925490 0.925490 1.000000]"
-	TextureMetalness "materials/default/default_metal.tga"
-	TextureNormal "materials/invun/invun_anim_normal.png"
-	TextureRoughness "materials/default/default_rough.tga"
-	TextureTranslucency "materials/default/default_trans.tga"
-
-	//---- TF:S2 ----
-	flAlphaFade "0.000"
-	flRefraction "5.214"
-	g_fAnimatedGrid "[8.000 8.000]"
-	g_fAnimationTimePerFrame "0.015"
-	g_fDepthScale "[0.000 48.193]"
-	g_fNormalScroll "[0.000 0.000]"
-	g_fNumAnimationCells "61.000"
-	g_FogColorTint "[0.015686 0.317647 0.000000 1.000000]"
+	"shader"		"shaders/tf2_water.shader_c"
+	"F_DO_NOT_CAST_SHADOWS"		"1"
+	"TextureAmbientOcclusion"		"materials/default/default_ao.tga"
+	"TextureBlendMask"		"materials/default/default_blend.tga"
+	"TextureColor"		"[0.925490 0.925490 0.925490 1.000000]"
+	"TextureMetalness"		"materials/default/default_metal.tga"
+	"TextureNormal"		"materials/invun/invun_anim_normal.png"
+	"TextureRoughness"		"materials/default/default_rough.tga"
+	"TextureTranslucency"		"materials/default/default_trans.tga"
+	"flAlphaFade"		"0.000000"
+	"flRefraction"		"5.214000"
+	"g_fAnimatedGrid"		"[8.000 8.000]"
+	"g_fAnimationTimePerFrame"		"0.015000"
+	"g_fDepthScale"		"[0.000 48.193]"
+	"g_fNormalScroll"		"[0.000 0.000]"
+	"g_fNumAnimationCells"		"61.000000"
+	"g_FogColorTint"		"[0.015686 0.317647 0.000000 1.000000]"
 }

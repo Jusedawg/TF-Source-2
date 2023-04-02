@@ -1,18 +1,9 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "projected_decals.vfx"
-
-	//---- Decal ----
-	F_BLEND_MODE 1 // Mod2X
-
-	//---- Color ----
-	TextureColor "materials/decals/blood01_color.tga"
-
-	//---- Translucent ----
-	TextureTranslucency "materials/decals/blood01_trans.tga"
-
+	"shader"		"shaders/projected_decals.shader_c"
+	"F_BLEND_MODE"		"1"
+	"TextureColor"		"materials/decals/blood01_color.tga"
+	"TextureTranslucency"		"materials/decals/blood01_trans.tga"
 	"legacy_import"
 	{
 		"DecalModulate"

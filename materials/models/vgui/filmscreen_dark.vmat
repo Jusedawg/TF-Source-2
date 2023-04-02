@@ -1,16 +1,8 @@
-// THIS FILE IS AUTO-GENERATED
-
-Layer0
+"Layer0"
 {
-	shader "generic.vfx"
-
-	//---- Lighting ----
-	F_UNLIT 1
-
-	//---- Color ----
-	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
-	TextureColor "materials/models/vgui/filmscreen_dark.tga"
-
-	//---- Fog ----
-	g_bFogEnabled "1"
+	"shader"		"shaders/generic.shader_c"
+	"F_UNLIT"		"1"
+	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
+	"TextureColor"		"materials/models/vgui/filmscreen_dark.tga"
+	"g_bFogEnabled"		"1"
 }
