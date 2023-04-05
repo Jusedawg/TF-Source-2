@@ -18,18 +18,21 @@ partial class TFGameRules
 	/// </summary>
 	public bool TeamMayCapturePoint( TFTeam team, ControlPoint point )
 	{
-		var prevPoint = point.GetPreviousPointForTeam( team );
+		var prevPoints = point.GetPreviousPointsForTeam( team );
 
 		// we can't set ourselves as previous point, assume null.
-		if ( prevPoint == point ) 
-			prevPoint = null;
+		foreach(var prevPoint in prevPoints)
+		{
+			if ( prevPoint == point )
+				continue;
 
-		if ( prevPoint != null && prevPoint.OwnerTeam != team ) 
-			return false;
+			if ( prevPoint != null && prevPoint.OwnerTeam != team )
+				return false;
 
-		// can't cap if it's locked
-		if ( point.Locked )
-			return false;
+			// can't cap if it's locked
+			if ( point.Locked )
+				return false;
+		}
 
 		return true;
 	}
@@ -104,10 +107,10 @@ partial class TFGameRules
 		switch ( team )
 		{
 			case TFTeam.Red:
-				teamPoints = teamPoints.Where( x => x.PreviousRedPoint == null ); break;
+				teamPoints = teamPoints.Where( x => !x.PreviousRedPoints.Any() ); break;
 
 			case TFTeam.Blue:
-				teamPoints = teamPoints.Where( x => x.PreviousBluePoint == null ); break;
+				teamPoints = teamPoints.Where( x => !x.PreviousBluePoints.Any() ); break;
 		}
 
 		// If we have multiple "first" points, that means the cp layout is asymetrical. Return null.
@@ -139,10 +142,10 @@ partial class TFGameRules
 		switch ( team )
 		{
 			case TFTeam.Red:
-				teamPoints = teamPoints.Where( x => x.PreviousRedPoint == null ); break;
+				teamPoints = teamPoints.Where( x => !x.PreviousRedPoints.Any() ); break;
 
 			case TFTeam.Blue:
-				teamPoints = teamPoints.Where( x => x.PreviousBluePoint == null ); break;
+				teamPoints = teamPoints.Where( x => !x.PreviousBluePoints.Any() ); break;
 		}
 
 		// If we have multiple "first" points, that means the cp layout is asymetrical. Return null.

@@ -31,15 +31,15 @@ public partial class ControlPoint : BaseTrigger
 	[Property, Net] public string PrintName { get; set; }
 
 	/// <summary>
-	/// The point that RED are supposed to own to be able to capture this one.
+	/// The points that RED are supposed to own to be able to capture this one. Can specify multiple points seperated by space.
 	/// </summary>
 	[Property, FGDType( "target_destination" )]
-	public string PreviousRedPointName { get; set; }
+	public string PreviousRedPointNames { get; set; }
 	/// <summary>
-	/// The point that BLUE are supposed to own to be able to capture this one.
+	/// The points that BLU are supposed to own to be able to capture this one. Can specify multiple points seperated by space.
 	/// </summary>
 	[Property, FGDType( "target_destination" )]
-	public string PreviousBluePointName { get; set; }
+	public string PreviousBluePointNames { get; set; }
 
 	[Property] public bool CanRedCapture { get; set; } = true;
 	[Property] public bool CanBlueCapture { get; set; } = true;
@@ -51,8 +51,8 @@ public partial class ControlPoint : BaseTrigger
 
 	[Property, Net] public float TimeToCapture { get; set; } = 5;
 
-	[Net] public ControlPoint PreviousRedPoint { get; private set; }
-	[Net] public ControlPoint PreviousBluePoint { get; private set; }
+	[Net] public IList<ControlPoint> PreviousRedPoints { get; private set; }
+	[Net] public IList<ControlPoint> PreviousBluePoints { get; private set; }
 
 	/// <summary>
 	/// The team that currently owns this point.
@@ -80,8 +80,8 @@ public partial class ControlPoint : BaseTrigger
 	public void PostLevelSetup()
 	{
 		// try to find our previous points
-		PreviousRedPoint = FindByName( PreviousRedPointName ) as ControlPoint;
-		PreviousBluePoint = FindByName( PreviousBluePointName ) as ControlPoint;
+		PreviousRedPoints = EntityUtils.ResolveTargetNames<ControlPoint>( PreviousRedPointNames ).ToList();
+		PreviousBluePoints = EntityUtils.ResolveTargetNames<ControlPoint>( PreviousBluePointNames ).ToList();
 	}
 
 	public ControlPoint()
@@ -421,8 +421,6 @@ public partial class ControlPoint : BaseTrigger
 			case TFTeam.Blue: OnBlueCaptured.Fire( this ); break;
 		}
 
-		OnCaptured.Fire( this );
-
 		var lastTeam = OwnerTeam;
 
 		SetOwnerTeam( team );
@@ -516,12 +514,12 @@ public partial class ControlPoint : BaseTrigger
 		}
 	}
 
-	public ControlPoint GetPreviousPointForTeam( TFTeam team )
+	public IList<ControlPoint> GetPreviousPointsForTeam( TFTeam team )
 	{
 		switch ( team )
 		{
-			case TFTeam.Red: return PreviousRedPoint;
-			case TFTeam.Blue: return PreviousBluePoint;
+			case TFTeam.Red: return PreviousRedPoints;
+			case TFTeam.Blue: return PreviousBluePoints;
 			default: return null;
 		}
 	}
@@ -530,8 +528,8 @@ public partial class ControlPoint : BaseTrigger
 	{
 		switch ( team )
 		{
-			case TFTeam.Red: return All.FirstOrDefault( x => x.PreviousRedPoint == this );
-			case TFTeam.Blue: return All.FirstOrDefault( x => x.PreviousBluePoint == this );
+			case TFTeam.Red: return All.FirstOrDefault( x => x.PreviousRedPoints.Contains(this) );
+			case TFTeam.Blue: return All.FirstOrDefault( x => x.PreviousBluePoints.Contains( this ) );
 			default: return null;
 		}
 	}
