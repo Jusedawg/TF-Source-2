@@ -100,7 +100,7 @@ public class TauntData : GameResource
 		// Get lowercase class name
 		//string tauntname = ResourceName.ToLower();
 
-		Log.Info( ResourceName + " " + Disabled );
+		//Log.Info( ResourceName + " " + Disabled );
 
 		if ( !Disabled )
 		{
