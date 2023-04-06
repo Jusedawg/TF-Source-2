@@ -78,7 +78,7 @@
 					},
 					{
 						_class = "LODGroup"
-						switch_threshold = 20.0
+						switch_threshold = 25.0
 						meshes = 
 						[
 							"scout_lod_01_low",
@@ -90,32 +90,31 @@
 					},
 					{
 						_class = "LODGroup"
-						disabled = true
-						switch_threshold = 30.0
+						switch_threshold = 35.0
 						meshes = 
 						[
-							"scout_bg_scout_lod2",
-							"scout_bg_hat_sm0_lod2",
-							"scout_bg_headphones_sm0_lod2",
-							"scout_bg_shoes_socks_sm0_lod2",
-							"scout_bg_dogtags_sm0_lod2",
+							"scout_lod_02_low",
+							"hat_lod",
+							"headphones_lod",
+							"shoes_socks_lod_02",
+							"dogtags_lod_02",
 						]
 					},
 					{
 						_class = "LODGroup"
-						disabled = true
 						switch_threshold = 40.0
 						meshes = 
 						[
-							"scout_bg_scout_lod3",
-							"scout_bg_hat_sm0_lod3",
-							"scout_bg_headphones_sm0_lod3",
-							"scout_bg_shoes_socks_sm0_lod3",
-							"scout_bg_dogtags_sm0_lod3",
+							"scout_lod_03_low",
+							"hat_lod",
+							"headphones_lod",
+							"shoes_socks_lod_03",
+							"dogtags_lod_03",
 						]
 					},
 					{
 						_class = "LODGroup"
+						note = "Overkill"
 						disabled = true
 						switch_threshold = 50.0
 						meshes = 
@@ -129,6 +128,7 @@
 					},
 					{
 						_class = "LODGroup"
+						note = "Overkill"
 						disabled = true
 						switch_threshold = 60.0
 						meshes = 
@@ -143,6 +143,7 @@
 					{
 						_class = "LODGroup"
 						name = "SHADOW_LOD"
+						note = "For Source1 shadows. I don\'t think this is needed anymore. Disabled!"
 						disabled = true
 						switch_threshold = -1.0
 						meshes = 
@@ -171,11 +172,8 @@
 								[
 									"scout_morphs_low",
 									"scout_lod_01_low",
-									"scout_bg_scout_lod2",
-									"scout_bg_scout_lod3",
-									"scout_bg_scout_lod4",
-									"scout_bg_scout_lod5",
-									"scout_bg_scout_lod6",
+									"scout_lod_02_low",
+									"scout_lod_03_low",
 								]
 							},
 						]
@@ -232,11 +230,8 @@
 								[
 									"shoes_socks",
 									"shoes_socks_lod_01",
-									"scout_bg_shoes_socks_sm0_lod2",
-									"scout_bg_shoes_socks_sm0_lod3",
-									"scout_bg_shoes_socks_sm0_lod4",
-									"scout_bg_shoes_socks_sm0_lod5",
-									"scout_bg_shoes_socks_sm0_lod6",
+									"shoes_socks_lod_02",
+									"shoes_socks_lod_03",
 								]
 							},
 							{
@@ -257,11 +252,8 @@
 								[
 									"dogtags",
 									"dogtags_lod_01",
-									"scout_bg_dogtags_sm0_lod2",
-									"scout_bg_dogtags_sm0_lod3",
-									"scout_bg_dogtags_sm0_lod4",
-									"scout_bg_dogtags_sm0_lod5",
-									"scout_bg_dogtags_sm0_lod6",
+									"dogtags_lod_02",
+									"dogtags_lod_03",
 								]
 							},
 							{
@@ -280,7 +272,7 @@
 					{
 						_class = "DefaultMaterialGroup"
 						name = "0"
-						note = "RED"
+						note = "Red Team (Leave this numbered)"
 						remaps = 
 						[
 							{
@@ -298,7 +290,7 @@
 					{
 						_class = "MaterialGroup"
 						name = "1"
-						note = "BLU"
+						note = "Blue Team (Leave this numbered)"
 						remaps = 
 						[
 							{
@@ -322,7 +314,7 @@
 					{
 						_class = "MaterialGroup"
 						name = "2"
-						note = "RED UBER"
+						note = "RED UBER (Leave this numbered)"
 						remaps = 
 						[
 							{
@@ -350,7 +342,7 @@
 					{
 						_class = "MaterialGroup"
 						name = "3"
-						note = "BLU UBER"
+						note = "BLU UBER (Leave this numbered)"
 						remaps = 
 						[
 							{
@@ -2349,6 +2341,18 @@
 					{
 						_class = "RenderMeshFile"
 						name = "scout_lod_01_low"
+						children = 
+						[
+							{
+								_class = "RemoveBoneAndChildren"
+								note = "These bones uses $proceduralbones. No idea if S2 has this. Disabled.\n"
+								bone_names = 
+								[
+									"hlp_forearm_l",
+									"hlp_forearm_r",
+								]
+							},
+						]
 						filename = "models/player/scout/parts/dmx/scout_lod_01_low.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -2367,6 +2371,132 @@
 						_class = "RenderMeshFile"
 						name = "shoes_socks_lod_01"
 						filename = "models/player/scout/parts/dmx/shoes_socks_lod_01.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "dogtags_lod_02"
+						filename = "models/player/scout/parts/dmx/dogtags_lod_02.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "scout_lod_02_low"
+						children = 
+						[
+							{
+								_class = "RemoveBoneAndChildren"
+								note = "These bones uses $proceduralbones. No idea if S2 has this. Disabled.\n"
+								bone_names = 
+								[
+									"hlp_forearm_l",
+									"hlp_forearm_r",
+								]
+							},
+						]
+						filename = "models/player/scout/parts/dmx/scout_lod_02_low.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "shoes_socks_lod_02"
+						filename = "models/player/scout/parts/dmx/shoes_socks_lod_02.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "dogtags_lod_03"
+						filename = "models/player/scout/parts/dmx/dogtags_lod_03.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "scout_lod_03_low"
+						children = 
+						[
+							{
+								_class = "RemoveBoneAndChildren"
+								note = "These bones uses $proceduralbones. No idea if S2 has this. Disabled.\n"
+								bone_names = 
+								[
+									"hlp_forearm_l",
+									"hlp_forearm_r",
+								]
+							},
+						]
+						filename = "models/player/scout/parts/dmx/scout_lod_03_low.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "shoes_socks_lod_03"
+						filename = "models/player/scout/parts/dmx/shoes_socks_lod_03.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
