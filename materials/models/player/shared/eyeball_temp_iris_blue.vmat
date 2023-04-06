@@ -1,28 +1,27 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/eyeball.shader_c"
-	"g_flModelTintAmount"		"1.000000"
-	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
-	"TextureColor"		"materials/models/player/shared/eye-iris-blue.tga"
-	"g_flFadeExponent"		"1.000000"
-	"g_bFogEnabled"		"1"
-	"g_flIrisBumpStrength"		"1.000000"
-	"g_flParallaxStrength"		"0.000000"
-	"IrisNormal"		"[0.501961 0.501961 1.000000 0.000000]"
-	"IrisRoughness"		"[0.809000 0.809000 0.809000 0.000000]"
-	"TextureIrisMask"		"[0.500000 0.500000 0.500000 0.000000]"
-	"g_vReflectanceRange"		"[0.000 1.000]"
-	"TextureReflectance"		"materials/default/default_refl.tga"
-	"g_flCorneaScleraBumpStrength"		"1.000000"
-	"g_flScleraDiffuseExponent"		"1.500000"
-	"g_flScleraDiffuseWrap"		"0.300000"
-	"TextureNormal"		"materials/default/default_normal.tga"
-	"g_flOcclusionStrength"		"0.750000"
-	"g_flOcclusionWidth"		"3.000000"
-	"TextureOcclusion"		"materials/default/default_color.tga"
-	"g_nScaleTexCoordUByModelScaleAxis"		"0"
-	"g_nScaleTexCoordVByModelScaleAxis"		"0"
-	"g_vTexCoordOffset"		"[0.000 0.000]"
-	"g_vTexCoordScale"		"[1.000 1.000]"
-	"g_vTexCoordScrollSpeed"		"[0.000 0.000]"
+	shader "shaders/sourcebox/sourcebox_skin.shader_c"
+
+	//---- Rendering ----
+	F_LIGHTWARPTEXTURE 1
+	F_RIMLIGHT 1
+
+	//---- Attributes ----
+	g_flBaseMapAlphaPhongMask "0.000"
+	g_flRimBoost "2.000"
+	g_flRimExponent "4.000"
+	g_flRimMask "0.000"
+	g_flSpecularBoost "0.300"
+	g_flSpecularExponent "20.000"
+	g_vDiffuseModulation "[1.000000 1.000000 1.000000 1.000000]"
+	g_vSourceFresnelRanges "[0.300 1.000 8.000]"
+	g_vSpecularTint "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Material ----
+	Color "materials/models/player/shared/eye-iris-blue.tga"
+	LightWarpTexture "materials/models/player/shared/eye_lightwarp.tga"
+	Normal "materials/default/default_normal.tga"
+	SpecularExponentTexture ""
 }
