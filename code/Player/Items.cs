@@ -9,7 +9,7 @@ namespace TFS2
 
 		public virtual bool WishDrop()
 		{
-			return Input.Pressed( InputButton.Drop );
+			return Input.Pressed( "DropItem" );
 		}
 
 		public virtual void SimulateItems()

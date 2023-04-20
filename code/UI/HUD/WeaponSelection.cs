@@ -199,12 +199,12 @@ public partial class WeaponSelection : Panel
 		//
 		// Keyboard Switch
 		//
-		if ( Input.Pressed( InputButton.Slot1 ) ) SelectSlot( TFWeaponSlot.Primary );
-		if ( Input.Pressed( InputButton.Slot2 ) ) SelectSlot( TFWeaponSlot.Secondary );
-		if ( Input.Pressed( InputButton.Slot3 ) ) SelectSlot( TFWeaponSlot.Melee );
-		if ( Input.Pressed( InputButton.Slot4 ) ) SelectSlot( TFWeaponSlot.PDA );
-		if ( Input.Pressed( InputButton.Slot5 ) ) SelectSlot( TFWeaponSlot.PDA2 );
-		if ( Input.Pressed( InputButton.Slot6 ) ) SelectSlot( TFWeaponSlot.Action );
+		if ( Input.Pressed( "Slot1" ) ) SelectSlot( TFWeaponSlot.Primary );
+		if ( Input.Pressed( "Slot2" ) ) SelectSlot( TFWeaponSlot.Secondary );
+		if ( Input.Pressed( "Slot3" ) ) SelectSlot( TFWeaponSlot.Melee );
+		if ( Input.Pressed( "Slot4" ) ) SelectSlot( TFWeaponSlot.PDA );
+		if ( Input.Pressed( "Slot5" ) ) SelectSlot( TFWeaponSlot.PDA2 );
+		if ( Input.Pressed( "Slot6" ) ) SelectSlot( TFWeaponSlot.Action );
 
 		/*
 		// NO SLOTS THAT CAN THEORETICALLY USE THIS YET, SO DON'T NEED TO CHECK.
@@ -228,7 +228,7 @@ public partial class WeaponSelection : Panel
 			// Otherwise see if weapon list menu is both visible and we're pressing attack to confirm.
 			if ( IsEnabled )
 			{
-				if ( Input.Pressed( InputButton.PrimaryAttack ) )
+				if ( Input.Pressed( "Attack1" ) )
 				{
 					confirmChoice = true;
 					AttackInputHeld = true;
@@ -238,8 +238,9 @@ public partial class WeaponSelection : Panel
 			// Don't allow player to use attack button if they press it to confirm selection and didn't release since then.
 			if ( AttackInputHeld )
 			{
-				if ( Input.Down( InputButton.PrimaryAttack ) )
-					Input.SetButton( InputButton.PrimaryAttack, false );
+				if ( Input.Down( "Attack1" ) )
+					// TODO: Fix this when SetAction gets a better parameter option
+					Input.SetAction( new InputAction( "Attack1", "mouse1" ), false );
 				else
 					AttackInputHeld = false;
 			}

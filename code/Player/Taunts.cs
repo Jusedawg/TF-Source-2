@@ -136,7 +136,7 @@ partial class TFPlayer
 		}
 
 		//If taunt menu button is pressed before certain time elapses, check for Partner/Group taunts, if none play weapon taunt
-		if ( Input.Pressed( InputButton.Drop ) && WeaponTauntAvailable && !InCondition( TFCondition.Taunting ) )
+		if ( Input.Pressed( "Taunt" ) && WeaponTauntAvailable && !InCondition( TFCondition.Taunting ) )
 		{
 			if ( TryDoubleTapTaunt() ) return;
 		}
@@ -155,18 +155,18 @@ partial class TFPlayer
 
 		if ( InCondition( TFCondition.Taunting ) )
 		{
-			if ( Input.Pressed( InputButton.PrimaryAttack ) )
+			if ( Input.Pressed( "Attack1" ) )
 			{
 				Animator?.SetAnimParameter( "b_fire", true );
 			}
 
-			if ( Input.Pressed( InputButton.SecondaryAttack ) )
+			if ( Input.Pressed( "Attack2" ) )
 			{
 				Animator?.SetAnimParameter( "b_fire_secondary", true );
 			}
 
 			//Call a fake partner accept
-			if ( ActiveTaunt.TauntType == TauntType.Partner && Input.Pressed( InputButton.Use ) )
+			if ( ActiveTaunt.TauntType == TauntType.Partner && Input.Pressed( "Taunt" ) )
 			{
 				AcceptPartnerTaunt( true );
 			}
@@ -191,7 +191,7 @@ partial class TFPlayer
 			}
 
 			// Stop looping/partner taunts via key press
-			if ( (ActiveTaunt.TauntType == TauntType.Looping || ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner) && (Input.Pressed( InputButton.Jump ) || Input.Pressed( InputButton.Drop )) )
+			if ( (ActiveTaunt.TauntType == TauntType.Looping || ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner) && (Input.Pressed( "Jump" ) || Input.Pressed( "Taunt" )) )
 			{
 				StopTaunt();
 			}

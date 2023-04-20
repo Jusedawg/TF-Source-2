@@ -15,7 +15,7 @@ public partial class MainMenuPanel : Panel
 	{
 		if ( TimeSinceInteraction > 0.1f )
 		{
-			if ( Input.Pressed( InputButton.Menu ) )
+			if ( Input.Pressed( "Menu" ) )
 			{
 				TimeSinceInteraction = 0;
 				Toggle();

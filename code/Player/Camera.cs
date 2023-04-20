@@ -20,7 +20,7 @@ partial class TFPlayer
 	{
 		if ( InCondition( TFCondition.Taunting ) ) return;
 
-		else if ( Input.Pressed( InputButton.Grenade ) )
+		else if ( Input.Pressed( "Taunt" ) )
 		{
 			SwapCamera();
 		}

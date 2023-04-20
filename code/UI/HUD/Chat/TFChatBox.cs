@@ -26,7 +26,7 @@ namespace TFS2.UI
 		[Event.Client.BuildInput]
 		public void ProcessClientInput()
 		{
-			if ( Input.Pressed( InputButton.Chat ) )
+			if ( Input.Pressed( "Chat" ) )
 				Open();
 		}
 
