@@ -20,14 +20,20 @@ namespace TFS2.UI
 		Panel MessagesContainer { get; set; }
 		Label ChannelNameLabel { get; set; }
 		Panel SwitchGlyph { get; set; }
+		[ConVar.Client( "cl_enable_text_chat" )] public static bool Enabled { get; set; } = true;
 
 		public TFChatBox() => Instance = this;
 
 		[Event.Client.BuildInput]
 		public void ProcessClientInput()
 		{
-			if ( Input.Pressed( "Chat" ) )
-				Open();
+			if ( Input.Pressed( "Chat" ))
+			{
+				if ( Enabled )
+					Open();
+				else
+					AddInformation( "Text chat is currently disabled. You can toggle this option in your settings." ); //TODO: Add this in settings
+			}
 		}
 
 		public override void OnButtonEvent( ButtonEvent e )
