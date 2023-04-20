@@ -32,11 +32,9 @@ public partial class ServerMessage : MenuOverlay
 		board.Add.Label( "\n BUGS ARE TO BE EXPECTED AND ESSENTIAL FEATURES MAY BE MISSING.", "content" );
 		board.Add.Label( " Please report bugs on our issue tracker: github.com/AmperSoftware/TF-Source-2", "content" );
 
-		board.Add.Label( "\n Our current map rotation is:", "content" );
-		board.Add.Label( " - (KOTH) Viaduct (Day/Snowstorm)\n - (KOTH) Overgrowth\n - (ARENA) Well\n - (CTF) Shipyard\n - (TEST) Spytech\n - (TEST) Itemtest (Regular/Rustic)", "content" );
+		board.Add.Label( "\n Join our official Discord Community: discord.gg/tfs2", "content" );
 
-		board.Add.Label( "\nOfficial Discord Community: discord.gg/tfs2", "content" );
-		board.Add.Label( "We are not affiliated with Valve Software.", "content" );
+		board.Add.Label( "\n We are not affiliated with Valve Software.", "content" );
 
 		var footer = Add.Panel( "footer menu" );
 		footer.Add.ButtonWithIcon( "Back", "undo", "button-dark disabled" );
