@@ -114,7 +114,7 @@ partial class TFPlayer
 		if ( PlayerClass == null ) return;
 
 		//When taunt menu is closed via release, set bool that allows doublepress taunt
-		if ( Input.Released( InputButton.Drop ) && !WeaponTauntAvailable && !InCondition( TFCondition.Taunting ) )
+		if ( Input.Released( "Taunt" ) && !WeaponTauntAvailable && !InCondition( TFCondition.Taunting ) )
 		{
 			TimeSinceTauntMenuClose = 0;
 			WeaponTauntAvailable = true;
