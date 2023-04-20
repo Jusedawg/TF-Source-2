@@ -1,19 +1,18 @@
 ﻿
+using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
-using System.Reflection;
+using System;
 
 namespace TFS2.UI;
 
 internal class SettingRow : Panel
 {
-
 	public Label Label { get; }
 	public Panel ValueArea { get; }
 
 	public SettingRow( object target, PropertyDescription property ) : this()
 	{
-		
 		Label.Text = property.GetDisplayInfo().Name;
 
 		var typeDesc = TypeLibrary.GetType( property.PropertyType );

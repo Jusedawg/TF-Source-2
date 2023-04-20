@@ -1,13 +1,12 @@
 ﻿using TFS2.UI;
+using System.ComponentModel.DataAnnotations;
 
 namespace TFS2;
 
 internal class ClientSettings
 {
-
 	[Display( Name = "#GameSettings.ShowChat", Description = "#GameSettings.ShowChat.Description" )]
 	public bool ShowChat { get; set; } = true;
-
 
 	public void Save() => Cookie.Set( "tfs2.clientsettings", this );
 
