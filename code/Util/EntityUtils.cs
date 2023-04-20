@@ -18,6 +18,9 @@ namespace TFS2
 		/// <returns></returns>
 		public static IEnumerable<T> ResolveTargetNames<T>( string targetNames )
 		{
+			if ( string.IsNullOrWhiteSpace( targetNames ) )
+				yield break;
+
 			foreach ( var part in targetNames.Split( ' ' ) )
 			{
 				var ent = Entity.FindByName( part.Trim() );
@@ -45,6 +48,9 @@ namespace TFS2
 		/// <returns></returns>
 		public static T[][] ResolveTargetNameLists<T>( string targetNames )
 		{
+			if ( string.IsNullOrWhiteSpace( targetNames ) )
+				return default;
+
 			List<T[]> elements = new();
 			List<T> currentElements = new();
 			foreach ( var list in targetNames.Split( ' ' ) )
