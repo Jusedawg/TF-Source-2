@@ -39,6 +39,15 @@
         SetClass("visible", TFGameRules.Current?.State == GameState.ReadyUp);
     }
 
+    [Event.Client.BuildInput]
+    public void BuildInput()
+    {
+        if (Input.Pressed("Ready"))
+        {
+            TFGameRules.ToggleReady();
+        }
+    }
+
     private void OnClientReadyToggle(ClientReadyToggleEvent ev)
     {
         StateHasChanged();
