@@ -74,9 +74,9 @@ public partial class ClassSelection : MenuOverlay
 	}
 
 	[ConCmd.Client( "tf_open_menu_class" )]
-	public static void Command_OpenTeamMenu()
+	public static void Command_OpenClassMenu()
 	{
-		Open<ClassSelection>();
+		TFGameRules.Current.ShowClassSelectionMenu();
 	}
 
 	public void OnClickLoadout()
@@ -279,22 +279,22 @@ public class ClassSelectionButton : Label
 		}
 	}
 
-	InputButton GetShortcutButton()
+	string GetShortcutButton()
 	{
-		if ( PlayerClass == null ) return 0;
+		if ( PlayerClass == null ) return "Slot10";
 
 		return PlayerClass.Entry switch
 		{
-			TFPlayerClass.Scout => InputButton.Slot1,
-			TFPlayerClass.Soldier => InputButton.Slot2,
-			TFPlayerClass.Pyro => InputButton.Slot3,
-			TFPlayerClass.Demoman => InputButton.Slot4,
-			TFPlayerClass.Heavy => InputButton.Slot5,
-			TFPlayerClass.Engineer => InputButton.Slot6,
-			TFPlayerClass.Medic => InputButton.Slot7,
-			TFPlayerClass.Sniper => InputButton.Slot8,
-			TFPlayerClass.Spy => InputButton.Slot9,
-			_ => 0
+			TFPlayerClass.Scout => "Slot1",
+			TFPlayerClass.Soldier => "Slot2",
+			TFPlayerClass.Pyro => "Slot3",
+			TFPlayerClass.Demoman => "Slot4",
+			TFPlayerClass.Heavy => "Slot5",
+			TFPlayerClass.Engineer => "Slot6",
+			TFPlayerClass.Medic => "Slot7",
+			TFPlayerClass.Sniper => "Slot8",
+			TFPlayerClass.Spy => "Slot9",
+			_ => "Slot10"
 		};
 	}
 

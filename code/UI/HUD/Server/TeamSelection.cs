@@ -129,7 +129,7 @@ public class TeamSelectionBackground : ScenePanel
 				Prop = new SceneModel( World, Model.Load( GetTeamButtonModelPath( TFTeam.Unassigned ) ), transform ),
 				Classes = "team door random",
 				Text = "1",
-				Shortcut = InputButton.Slot1,
+				Shortcut = "Slot1",
 				Parent = this
 			};
 
@@ -144,7 +144,7 @@ public class TeamSelectionBackground : ScenePanel
 				Prop = new SceneModel( World, Model.Load( GetTeamButtonModelPath( TFTeam.Spectator ) ), transform ),
 				Classes = "team tv spectator",
 				Text = "2",
-				Shortcut = InputButton.Slot2,
+				Shortcut = "Slot2",
 				Parent = this
 			};
 
@@ -159,7 +159,7 @@ public class TeamSelectionBackground : ScenePanel
 				Prop = new SceneModel( World, Model.Load( GetTeamButtonModelPath( TFTeam.Blue ) ), transform ),
 				Classes = "team door blue",
 				Text = "3",
-				Shortcut = InputButton.Slot3,
+				Shortcut = "Slot3",
 				Parent = this
 			};
 
@@ -169,7 +169,7 @@ public class TeamSelectionBackground : ScenePanel
 				Prop = new SceneModel( World, Model.Load( GetTeamButtonModelPath( TFTeam.Red ) ), transform ),
 				Classes = "team door red",
 				Text = "4",
-				Shortcut = InputButton.Slot4,
+				Shortcut = "Slot4",
 				Parent = this
 			};
 
@@ -195,7 +195,7 @@ public class TeamSelectionButton : Label
 {
 	public SceneModel Prop { get; set; }
 	public TFTeam Team { get; set; }
-	public InputButton Shortcut { get; set; }
+	public string Shortcut { get; set; }
 
 	public TeamSelectionButton()
 	{
