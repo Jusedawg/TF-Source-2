@@ -206,7 +206,7 @@ public partial class VoiceMenu : Panel
 		// If we've pressed Slot0 close the menu right away, this button means cancel.
 		if ( Input.Pressed( "Slot10" ) )
 		{
-			//Input.SuppressButton( "Slot10" );
+			Input.Clear( "Slot10" );
 			Close();
 			return;
 		}
@@ -216,7 +216,7 @@ public partial class VoiceMenu : Panel
 			if ( Input.Pressed( pair.Key ) )
 			{
 				ButtonPressed( pair.Key );
-				//Input.SuppressButton( pair.Key );
+				Input.Clear( pair.Key );
 			}
 		}
 	}

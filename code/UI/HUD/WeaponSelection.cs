@@ -240,7 +240,7 @@ public partial class WeaponSelection : Panel
 			{
 				if ( Input.Down( "Attack1" ) )
 					// TODO: Fix this when SetAction gets a better parameter option
-					Input.SetAction( new InputAction( "Attack1", "mouse1" ), false );
+					Input.Clear( "Attack1");
 				else
 					AttackInputHeld = false;
 			}
