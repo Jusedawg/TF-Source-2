@@ -5,8 +5,8 @@ namespace TFS2;
 
 internal class ClientSettings
 {
-	[Display( Name = "#GameSettings.ShowChat", Description = "#GameSettings.ShowChat.Description" )]
-	public bool ShowChat { get; set; } = true;
+	[Display( Name = "#GameSettings.ShowTextChat", Description = "#GameSettings.ShowTextChat.Description" )]
+	public bool ShowTextChat { get; set; } = true;
 
 	public void Save() => Cookie.Set( "tfs2.clientsettings", this );
 
