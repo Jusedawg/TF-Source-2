@@ -7,19 +7,20 @@
 @inherits MenuOverlay
 
 <root>
+    <div class="container">
 
-    <div class="navbar">
-        <button>#GameSettings.GeneralSettings</button>
-        <div style="flex-grow: 1;" />
-        <button onclick=@(Close) class="exit">#GameSettings.Close</button>
-    </div>
+        <text class="header">Settings</text>
 
-    <div class="body">
-        <ObjectEditor @ref=Editor />
-    </div>
+        <div class="content">
+            <div class="body">
+				<ObjectEditor @ref=Editor />
+			</div>
+		</div>
 
-    <div class="footer">
-        <button onclick=@(SetDefaults) class="reset-defaults">#GameSettings.Reset</button>
+		<div class="footer">
+			<button onclick=@(SetDefaults) class="reset-defaults, button-dark">#GameSettings.Reset</button>
+			<button onclick=@(Close) class="exit, button-dark">#GameSettings.Close</button>
+		</div>
     </div>
 </root>
 
