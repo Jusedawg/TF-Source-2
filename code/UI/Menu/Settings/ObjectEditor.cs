@@ -57,9 +57,9 @@ public class ObjectEditor : Panel
 		foreach ( var propertyGroup in groups )
 		{
 			//Make heading
-			Panel header = new Panel();
+			Label header = new Label();
 
-			header.SetClass( $"{propertyGroup.Key}", true);
+			header.SetClass( "group", true);
 			header.SetContent(propertyGroup.Key);
 
 			AddChild(header);
@@ -71,5 +71,4 @@ public class ObjectEditor : Panel
             }
         }
 	}
-
 }
