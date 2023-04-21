@@ -8,8 +8,6 @@ internal class ClientSettings
 	[Display( Name = "#GameSettings.ShowTextChat", Description = "#GameSettings.ShowTextChat.Description" )]
 	public bool ShowTextChat { get; set; } = true;
 
-	public void Save() => Cookie.Set( "tfs2.clientsettings", this );
-
 	private static ClientSettings current;
 	public static ClientSettings Current
 	{
@@ -21,7 +19,9 @@ internal class ClientSettings
 		}
 	}
 
-	public static void Reset()
+    public void Save() => Cookie.Set("tfs2.clientsettings", this);
+
+    public static void Reset()
 	{
 		current = new();
 		current.Save();

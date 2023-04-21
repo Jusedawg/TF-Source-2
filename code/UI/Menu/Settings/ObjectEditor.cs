@@ -19,7 +19,10 @@ public class ObjectEditor : Panel
 		var properties = TypeLibrary.GetPropertyDescriptions( target );
 		foreach ( var property in properties )
 		{
-			AddChild( new SettingRow( target, property ) );
+			if(!property.IsStatic)
+			{
+                AddChild(new SettingRow(target, property));
+            }
 		}
 	}
 
