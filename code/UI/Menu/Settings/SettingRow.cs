@@ -11,7 +11,7 @@ internal class SettingRow : Panel
 	public Label Label { get; }
 	public Panel ValueArea { get; }
 
-	public SettingRow( object target, PropertyDescription property ) : this()
+    public SettingRow( object target, PropertyDescription property ) : this()
 	{
 		Label.Text = property.GetDisplayInfo().Name;
 
