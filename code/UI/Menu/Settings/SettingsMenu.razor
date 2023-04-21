@@ -9,7 +9,7 @@
 <root>
     <div class="container">
 
-        <text class="header">Settings</text>
+		<text class="header">#GameSettings.GeneralSettings</text>
 
         <div class="content">
             <div class="body">
@@ -52,11 +52,12 @@
 		Editor.SetTarget( ClientSettings.Current );
 	}
 
-	public void Close() => SetOpen( false );
+	public void OnClickClose()
+	{
+		Close();
+	}
 
 	private static SettingsMenu Current;
-	public static void SetOpen( bool open ) => Current?.SetClass( "open", open );
-	public static void ToggleOpen() => Current?.SetClass( "open", !Current.HasClass( "open" ) );
 
 	protected override void OnEvent( PanelEvent e )
 	{
