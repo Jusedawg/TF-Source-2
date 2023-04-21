@@ -54,12 +54,14 @@ public class ObjectEditor : Panel
         });
 
 		//Loop over all groups
-		foreach(var propertyGroup in groups)
+		foreach ( var propertyGroup in groups )
 		{
 			//Make heading
 			Panel header = new Panel();
-			header.SetClass("header", true);
+
+			header.SetClass( $"{propertyGroup.Key}", true);
 			header.SetContent(propertyGroup.Key);
+
 			AddChild(header);
 
 			//Add settings row for properties
