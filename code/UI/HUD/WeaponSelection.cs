@@ -113,7 +113,7 @@ public partial class WeaponSelection : Panel
 
 		SelectedSlot = slot;
 
-		if ( !FastWeaponSwitchEnabled )
+		if ( !ClientSettings.Current.FastWeaponSwitch )
 		{
 			if ( !IsEnabled )
 				Setup();
@@ -147,7 +147,7 @@ public partial class WeaponSelection : Panel
 		if ( !player.IsValid() )
 			return;
 
-		if ( FastWeaponSwitchEnabled )
+		if ( ClientSettings.Current.FastWeaponSwitch )
 		{
 			// If fast weapon switch is enabled, we're always confirming our selection change.
 			SelectSlot( player.GetActiveTFSlot() );
@@ -218,7 +218,7 @@ public partial class WeaponSelection : Panel
 		// Confirmation
 		//
 		bool confirmChoice = false;
-		if ( FastWeaponSwitchEnabled )
+		if ( ClientSettings.Current.FastWeaponSwitch )
 		{
 			// If fast weapon switch is enabled, we're always confirming our selection change.
 			confirmChoice = true;
@@ -258,8 +258,6 @@ public partial class WeaponSelection : Panel
 			Close();
 		}
 	}
-
-	[ConVar.Client( "cl_fast_weapon_switch" )] public static bool FastWeaponSwitchEnabled { get; set; } = true;
 	[ConVar.Client( "cl_hud_weaponlist_close_time" )] public static float AutoCloseTime { get; set; } = 20;
 }
 
