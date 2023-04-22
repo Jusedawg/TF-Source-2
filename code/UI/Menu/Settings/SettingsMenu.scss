@@ -33,13 +33,14 @@ SettingsMenu {
 
     .header {
         width: 100%;
-        padding: 15px 20px;
+        padding: 30px 20px;
         font-size: 52px;
         background-color: $tan-darkest;
         border-radius: 6px;
         font-family: TF2_Build;
         color: $tan-light;
         text-align: center;
+        align-items: center;
     }
 
     .navbar button {
@@ -50,6 +51,7 @@ SettingsMenu {
     .footer {
         position: absolute;
         bottom: 0;
+        margin: 5px;
 
         .reset-defaults {
             width: 49%;
@@ -65,21 +67,20 @@ SettingsMenu {
 
 ObjectEditor {
     overflow: scroll;
+    height: 88%;
 
     .group {
-        width: 100%;
         color: #e6d9bc;
         font-family: TF2_Build;
         font-size: 30px;
-        flex-direction: column;
-        height: 48px;
+        margin: 24px;
+        align-items: center;
         text-align: center;
-        padding-top: 5px;
     }
 }
 
 SettingRow {
-    background-color: rgba(black .1);
+    background-color: rgba(black .2);
     color: #e6d9bc;
     margin-bottom: 8px;
     align-items: center;
@@ -88,7 +89,7 @@ SettingRow {
     flex-shrink: 0;
 
     &:hover {
-        background-color: rgba(black .3);
+        background-color: rgba(black .4);
     }
 
     > Label {
