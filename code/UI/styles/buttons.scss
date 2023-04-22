@@ -36,6 +36,40 @@
     }
 }
 
+.button.toggle {
+    background-color: $tan-dark;
+    font-family: MaterialIcons;
+    width: 10%;
+    height: 10%;
+    color: $tan-light;
+    padding: 15px 30px;
+    font-size: 48px;
+    border-radius: 5px;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    &:hover {
+        background-color: #924738;
+    }
+
+    &:active {
+        sound-in: ui.button.click;
+        sound-out: ui.button.release;
+    }
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
 .button-dark {
     background: linear-gradient(to right, #606060, #424242);
     font-family: TF2_Build;
