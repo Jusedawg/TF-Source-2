@@ -22,7 +22,7 @@ SettingsMenu {
 
     .container {
         max-width: 800px;
-        max-height: 800px;
+        max-height: 600px;
         width: 100%;
         height: 100%;
         background: linear-gradient(to right, #231f1cee, #302a25ee, #231f1cee);
@@ -49,17 +49,35 @@ SettingsMenu {
     }
 
     .footer {
-        flex-direction: column;
-        margin-top: 10px;
-    }
+        position: absolute;
+        bottom: 0;
 
-    .reset-defaults {
-        align-self: flex-end;
+        .reset-defaults {
+            width: 49%;
+            margin: 5px;
+        }
+
+        .exit {
+            width: 48%;
+            margin: 5px;
+        }
     }
 }
 
 ObjectEditor {
     overflow: scroll;
+
+    .group {
+        width: 100%;
+        color: #e6d9bc;
+        font-family: TF2 Build;
+        font-size: 30px;
+        flex-direction: column;
+        height: 15%;
+        text-align: center;
+        padding-left: 16px;
+        padding-top: 10px;
+    }
 }
 
 SettingRow {
@@ -68,7 +86,7 @@ SettingRow {
     margin-bottom: 4px;
     align-items: center;
     font-size: 24px;
-    font-family: TF2_Build;
+    font-family: TF2 Build;
     flex-shrink: 0;
 
     &:hover {
@@ -78,11 +96,12 @@ SettingRow {
     > Label {
         width: 100%;
         color: #e6d9bc;
-        font-family: TF2_Build;
+        font-family: TF2 Secondary;
         font-size: 24px;
         flex-direction: column;
         height: 100%;
         align-items: center;
+        padding-left: 20px;
     }
 
     TextEntry {
@@ -93,11 +112,8 @@ SettingRow {
     }
 
     Button {
-        flex-shrink: 0;
-    }
-
-    .checkmark {
         aspect-ratio: 1;
+        padding-right: 20px;
     }
 
     .slider {
