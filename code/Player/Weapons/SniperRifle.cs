@@ -79,17 +79,12 @@ public partial class SniperRifle : TFWeaponBase
 
 		if ( IsZoomed )
 		{
-			if ( OwnerWantsAutoRezoom() )
+			if ( (Owner as TFPlayer).AutoRezoom )
 				WillAutoZoomIn = true;
 
 			ResetCharge();
 			ZoomOutDelayed( 0.5f );
 		}
-	}
-
-	public bool OwnerWantsAutoRezoom()
-	{
-		return Owner?.Client?.GetClientData( "tf_sniper_autoscope_enabled", "1" ).ToBool() ?? false;
 	}
 
 	public void ZoomOutDelayed( float delay )

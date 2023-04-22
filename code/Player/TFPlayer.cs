@@ -252,6 +252,17 @@ public partial class TFPlayer : SDKPlayer
 		SimulateTaunts();
 	}
 
+	[ClientInput] public bool AutoRezoom { get; set; }
+	[ClientInput] public bool AutoReload { get; set; }
+
+	public override void BuildInput()
+	{
+		AutoRezoom = ClientSettings.Current.AutoZoomIn;
+		AutoReload = ClientSettings.Current.AutoReload;
+
+		base.BuildInput();
+	}
+
 	public override void Tick()
 	{
 		base.Tick();
