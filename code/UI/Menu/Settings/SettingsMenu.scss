@@ -22,9 +22,8 @@ SettingsMenu {
 
     .container {
         max-width: 750px;
-        max-height: 550px;
         width: 100%;
-        height: 100%;
+        height: 80%;
         background: linear-gradient(to right, #231f1cee, #302a25ee, #231f1cee);
         backdrop-filter: blur(50px);
         border-radius: 6px;
@@ -73,17 +72,16 @@ ObjectEditor {
         font-family: TF2_Build;
         font-size: 30px;
         flex-direction: column;
-        height: 15%;
+        height: 48px;
         text-align: center;
-        padding-left: 16px;
-        padding-top: 10px;
+        padding-top: 5px;
     }
 }
 
 SettingRow {
     background-color: rgba(black .1);
     color: #e6d9bc;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     align-items: center;
     font-size: 24px;
     font-family: TF2_Build;
@@ -94,60 +92,75 @@ SettingRow {
     }
 
     > Label {
-        width: 100%;
+        width: 80%;
         color: #e6d9bc;
         font-family: TF2_Secondary;
         font-size: 24px;
         flex-direction: column;
         height: 100%;
         align-items: center;
-        padding-left: 20px;
+        padding-left: 24px;
     }
 
     TextEntry {
         cursor: text;
         height: 100%;
+        width: 60%;
         padding: 20px;
-        background-color: black;
+    }
+
+    .value-area {
+        width: 80%;
+        padding-left: 120px;
     }
 
     Button.toggle {
         aspect-ratio: 1;
-        padding-right: 20px;
-        margin-right: 5px;
     }
 
     .slider {
-        width: 100%;
-        flex-direction: row;
-        margin-bottom: 20px;
+        flex-grow: 1;
+        cursor: pointer;
+        min-height: 28px;
+        align-items: center;
+        padding-right: 28px;
+        width: 90%;
 
-        .track {
-            left: 5px;
-            top: 5px;
-            right: 5px;
-            height: 10px;
-            bottom: 0px;
-            border-radius: 2px;
-            background-color: transparent;
+        > .thumb {
+            background-color: $tan-dark;
+            position: relative;
+            width: 28px;
+            height: 28px;
+            border-radius: 1000px;
+            box-shadow: 2px 2px 10px black;
+            transition: all 0.2s ease-out;
 
-            .inner {
-                left: 0px;
-                top: 0px;
-                right: 0px;
-                height: 100%;
-                border-radius: 1px;
-                background-color: rgba( #fff, 0.6 );
+            &:hover {
+                background-color: $button-hover;
             }
+        }
 
-            .thumb {
-                background-color: white;
-                box-shadow: none;
-                border-radius: 0;
+        &:active {
+            > .thumb {
+                background-color: $tan-light;
+            }
+        }
+
+        > .track {
+            position: absolute;
+            left: 14px; // This has to be half of the thumb's width :S
+            right: 14px;
+            height: 10px;
+            width: 90%;
+            background-color: $tan-darker;
+            border-radius: 5px;
+
+            > .inner {
+                border-radius: 4px;
+                background-color: $tan-dark;
+                width: 90%;
                 height: 10px;
-                width: 10px;
-                top: 0px;
-                display: none;
+                transition: all 0.2s ease-out;
             }
         }
     }
