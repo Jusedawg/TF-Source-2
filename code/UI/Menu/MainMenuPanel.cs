@@ -66,6 +66,11 @@ public partial class MainMenuPanel : Panel
 		MenuOverlay.Open<TeamSelection>();
 	}
 
+	public void OnClickBlog()
+	{
+		MenuOverlay.Open<BlogView>();
+	}
+
 	public bool ShouldDraw()
 	{
 		return Enabled;
