@@ -133,16 +133,24 @@ MainMenuPanel {
                 padding: 15px 200px 20px 20px;
                 flex-direction: column;
 
+                .link {
+                    font-family: MaterialIcons;
+                    font-size: 20px;
+                    padding-left: 6px;
+                    color: #a08f82;
+                }
+
                 .text {
                     color: #a08f82;
                     font-family: TF2_Secondary;
-                    font-size: 16px;
+                    font-size: 20px;
                     margin-bottom: 15px;
                 }
 
                 .button-dark {
                     width: 110%;
-                    padding: 5px 20px 5px 15px;
+                    font-size: 22px;
+                    padding: 5px 5px 5px 15px;
                 }
             }
         }
