@@ -11,7 +11,7 @@ internal class SettingRow : Panel
 	public Label Label { get; }
 	public Panel ValueArea { get; }
 
-    public SettingRow( object target, PropertyDescription property ) : this()
+	public SettingRow( object target, PropertyDescription property ) : this()
 	{
 		Label.Text = property.GetDisplayInfo().Name;
 
@@ -22,15 +22,18 @@ internal class SettingRow : Panel
 		{
 			var button = ValueArea.Add.Button( string.Empty, "toggle" );
 			button.SetClass( "active", (bool)currentValue );
+			if ( button.HasClass( "active" ) ) button.SetText( "done" );
 			button.AddEventListener( "onmousedown", () =>
 			{
 				button.SetClass( "active", !button.HasClass( "active" ) );
+				button.SetText( "done" );
 				property.SetValue( target, button.HasClass( "active" ) );
 				CreateEvent( "save" );
+				if ( !button.HasClass( "active" ) ) button.SetText( string.Empty );
 			} );
 		}
 
-		if( property.PropertyType == typeof( string ) )
+		if ( property.PropertyType == typeof( string ) )
 		{
 			var textentry = ValueArea.Add.TextEntry( (string)currentValue );
 			textentry.AddEventListener( "value.changed", () =>
@@ -40,7 +43,7 @@ internal class SettingRow : Panel
 			} );
 		}
 
-		if( property.PropertyType.IsEnum )
+		if ( property.PropertyType.IsEnum )
 		{
 			var dropdown = new DropDown( ValueArea );
 			dropdown.SetPropertyObject( "value", currentValue );
@@ -52,7 +55,7 @@ internal class SettingRow : Panel
 			} );
 		}
 
-		if( property.PropertyType == typeof( float ) )
+		if ( property.PropertyType == typeof( float ) )
 		{
 			var minmax = property.GetCustomAttribute<MinMaxAttribute>();
 			var min = minmax?.MinValue ?? 0f;

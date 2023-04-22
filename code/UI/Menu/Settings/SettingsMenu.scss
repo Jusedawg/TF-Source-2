@@ -70,7 +70,7 @@ ObjectEditor {
     .group {
         width: 100%;
         color: #e6d9bc;
-        font-family: TF2 Build;
+        font-family: TF2_Build;
         font-size: 30px;
         flex-direction: column;
         height: 15%;
@@ -86,7 +86,7 @@ SettingRow {
     margin-bottom: 4px;
     align-items: center;
     font-size: 24px;
-    font-family: TF2 Build;
+    font-family: TF2_Build;
     flex-shrink: 0;
 
     &:hover {
@@ -96,7 +96,7 @@ SettingRow {
     > Label {
         width: 100%;
         color: #e6d9bc;
-        font-family: TF2 Secondary;
+        font-family: TF2_Secondary;
         font-size: 24px;
         flex-direction: column;
         height: 100%;
@@ -111,9 +111,10 @@ SettingRow {
         background-color: black;
     }
 
-    Button {
+    Button.toggle {
         aspect-ratio: 1;
         padding-right: 20px;
+        margin-right: 5px;
     }
 
     .slider {
