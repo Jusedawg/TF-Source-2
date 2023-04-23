@@ -28,10 +28,10 @@ namespace TFS2.UI
 		{
 			if ( Input.Pressed( "Chat" ))
 			{
-				if ( ClientSettings.Current.ShowTextChat )
+				if ( TFClientSettings.Current.ShowTextChat )
 					Open();
 				else
-					AddInformation( "Text chat is currently disabled. You can toggle this option in your settings." ); //TODO: Add this in settings
+					AddInformation( "Text chat is currently disabled. You can toggle this option in your settings." );
 			}
 		}
 

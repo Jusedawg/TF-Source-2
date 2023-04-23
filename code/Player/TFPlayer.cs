@@ -257,8 +257,8 @@ public partial class TFPlayer : SDKPlayer
 
 	public override void BuildInput()
 	{
-		AutoRezoom = ClientSettings.Current.AutoZoomIn;
-		AutoReload = ClientSettings.Current.AutoReload;
+		AutoRezoom = TFClientSettings.Current.AutoZoomIn;
+		AutoReload = TFClientSettings.Current.AutoReload;
 
 		base.BuildInput();
 	}

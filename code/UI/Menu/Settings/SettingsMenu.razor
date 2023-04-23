@@ -1,5 +1,6 @@
 ﻿
 @using TFS2.UI;
+@using Amper.FPS;
 @using Sandbox.UI;
 
 @namespace TFS2
@@ -36,20 +37,20 @@
 	{
 		base.OnHotloaded();
 
-		Editor.SetTarget( ClientSettings.Current );
+		Editor.SetTarget( TFClientSettings.Current );
 	}
 
 	protected override void OnAfterTreeRender(bool firstTime)
 	{
 		if ( firstTime )
-			Editor.SetTarget( ClientSettings.Current );
+			Editor.SetTarget( TFClientSettings.Current );
 	}
 
 	public void SetDefaults()
 	{
-		ClientSettings.Reset();
+		TFClientSettings.Reset();
 
-		Editor.SetTarget( ClientSettings.Current );
+		Editor.SetTarget( TFClientSettings.Current );
 	}
 
 	public void OnClickClose()
@@ -65,7 +66,7 @@
 
 		if ( e.Name == "save" )
 		{
-			ClientSettings.Current.Save();
+			TFClientSettings.Current.Save();
 		}
 	}
 }

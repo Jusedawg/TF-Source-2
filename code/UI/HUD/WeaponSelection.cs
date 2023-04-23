@@ -113,7 +113,7 @@ public partial class WeaponSelection : Panel
 
 		SelectedSlot = slot;
 
-		if ( !ClientSettings.Current.FastWeaponSwitch )
+		if ( !TFClientSettings.Current.FastWeaponSwitch )
 		{
 			if ( !IsEnabled )
 				Setup();
@@ -147,7 +147,7 @@ public partial class WeaponSelection : Panel
 		if ( !player.IsValid() )
 			return;
 
-		if ( ClientSettings.Current.FastWeaponSwitch )
+		if ( TFClientSettings.Current.FastWeaponSwitch )
 		{
 			// If fast weapon switch is enabled, we're always confirming our selection change.
 			SelectSlot( player.GetActiveTFSlot() );
@@ -218,7 +218,7 @@ public partial class WeaponSelection : Panel
 		// Confirmation
 		//
 		bool confirmChoice = false;
-		if ( ClientSettings.Current.FastWeaponSwitch )
+		if ( TFClientSettings.Current.FastWeaponSwitch )
 		{
 			// If fast weapon switch is enabled, we're always confirming our selection change.
 			confirmChoice = true;

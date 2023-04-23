@@ -4,12 +4,13 @@ using Sandbox.UI;
 using System.Collections.Generic;
 using System.Net;
 using System.Reflection;
+using Amper.FPS;
 
 namespace TFS2.UI;
 
 public class ObjectEditor : Panel
 {
-	private const string EmptyGroupName = ClientSettings.OtherGroup;
+	private const string EmptyGroupName = TFClientSettings.OtherGroup;
 
 	public ObjectEditor()
 	{
@@ -47,8 +48,8 @@ public class ObjectEditor : Panel
 		var groups = new List<KeyValuePair<string, List<PropertyDescription>>>(groupedProperties);
 		groups.Sort((a, b) =>
 		{
-			int orderA = ClientSettings.GetGroupOrder(a.Key);
-			int orderB = ClientSettings.GetGroupOrder(b.Key);
+			int orderA = TFClientSettings.GetGroupOrder(a.Key);
+			int orderB = TFClientSettings.GetGroupOrder(b.Key);
 
 			return orderA.CompareTo(orderB);
         });

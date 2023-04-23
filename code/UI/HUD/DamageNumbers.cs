@@ -37,9 +37,9 @@ public class DamageNumbers : Panel
 		// Play hit sound, if the player is alive.
 		if ( victim.IsAlive() )
 		{
-			if ( TimeSinceDing > 0.1f && ClientSettings.Current.PlayHitSound )
+			if ( TimeSinceDing > 0.1f && TFClientSettings.Current.PlayHitSound )
 			{
-				Sound.FromScreen( "ui.hitsound.default" ).SetVolume( ClientSettings.Current.HitSoundVolume ); ;
+				Sound.FromScreen( "ui.hitsound.default" ).SetVolume( TFClientSettings.Current.HitSoundVolume ); ;
 				TimeSinceDing = 0;
 			}
 		}
@@ -79,8 +79,8 @@ public class DamageNumbers : Panel
 		if ( args.Attacker == args.Victim )
 			return;
 
-		if ( ClientSettings.Current.PlayLastHitSound )
-			Sound.FromScreen( "ui.killsound.default" ).SetVolume( ClientSettings.Current.LastHitSoundVolume ); ;
+		if ( TFClientSettings.Current.PlayLastHitSound )
+			Sound.FromScreen( "ui.killsound.default" ).SetVolume( TFClientSettings.Current.LastHitSoundVolume ); ;
 	}
 
 	public void OnInstanceDestroyed( DamageNumberInstance instance )
