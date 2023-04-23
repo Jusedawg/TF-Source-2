@@ -186,7 +186,7 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse
 
 	public override bool ShouldAutoReload()
 	{
-		if ( (Owner as TFPlayer).AutoReload )
+		if ( (Owner as TFPlayer)?.AutoReload ?? false )
 		{
 			return true;
 		}

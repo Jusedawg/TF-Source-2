@@ -79,7 +79,7 @@ public partial class SniperRifle : TFWeaponBase
 
 		if ( IsZoomed )
 		{
-			if ( (Owner as TFPlayer).AutoRezoom )
+			if ( ( Owner as TFPlayer )?.AutoRezoom ?? false )
 				WillAutoZoomIn = true;
 
 			ResetCharge();
