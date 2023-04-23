@@ -7,6 +7,12 @@ partial class TFViewModel : SDKViewModel
 {
 	ModelEntity Attachment;
 
+	public override void PlaceViewmodel()
+	{
+		base.PlaceViewmodel();
+		Camera.Main.SetViewModelCamera( TFClientSettings.Current.ViewmodelFov );
+	}
+
 	public override void SetWeaponModel( string viewmodel, SDKWeapon entity )
 	{
 		ClearWeapon( entity );
