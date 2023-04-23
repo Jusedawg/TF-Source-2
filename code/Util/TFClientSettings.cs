@@ -51,7 +51,7 @@ internal class TFClientSettings
 	[Display( Name = "#GameSettings.ViewmodelFov", Description = "#GameSettings.ViewmodelFov.Desc", GroupName = CombatGroup )]
 	public int ViewmodelFov { get; set; } = 70;
 
-	[Display( Name = "#GameSettings.GenericVolume", Description = "#GameSettings.GenericVolume.Desc", GroupName = SoundGroup )]
+	/*[Display( Name = "#GameSettings.GenericVolume", Description = "#GameSettings.GenericVolume.Desc", GroupName = SoundGroup )]
 	public float GenericVolume { get; set; } = 1f;
 
 	[Display( Name = "#GameSettings.AmbienceVolume", Description = "#GameSettings.AmbienceVolume.Desc", GroupName = SoundGroup )]
@@ -61,7 +61,7 @@ internal class TFClientSettings
 	public float SoundtrackVolume { get; set; } = 1f;
 
 	[Display( Name = "#GameSettings.AnnouncerVolume", Description = "#GameSettings.AnnouncerVolume.Desc", GroupName = SoundGroup )]
-	public float AnnouncerVolume { get; set; } = 1f;
+	public float AnnouncerVolume { get; set; } = 1f; */
 
 	public static int GetGroupOrder( string group )
 	{
