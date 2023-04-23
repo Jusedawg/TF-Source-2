@@ -39,7 +39,7 @@ public class DamageNumbers : Panel
 		{
 			if ( TimeSinceDing > 0.1f && ClientSettings.Current.PlayHitSound )
 			{
-				Sound.FromScreen( "ui.hitsound.default" );
+				Sound.FromScreen( "ui.hitsound.default" ).SetVolume( ClientSettings.Current.HitSoundVolume ); ;
 				TimeSinceDing = 0;
 			}
 		}
@@ -80,7 +80,7 @@ public class DamageNumbers : Panel
 			return;
 
 		if ( ClientSettings.Current.PlayLastHitSound )
-			Sound.FromScreen( "ui.killsound.default" );
+			Sound.FromScreen( "ui.killsound.default" ).SetVolume( ClientSettings.Current.LastHitSoundVolume ); ;
 	}
 
 	public void OnInstanceDestroyed( DamageNumberInstance instance )

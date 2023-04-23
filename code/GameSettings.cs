@@ -25,7 +25,7 @@ internal class ClientSettings
 	public bool ShowTextChat { get; set; } = true;
 
 	[Display( Name = "#GameSettings.ViewmodelFov", Description = "#GameSettings.ViewmodelFov.Desc", GroupName = CombatGroup )]
-	public float ViewmodelFov { get; set; } = 70f;
+	public int ViewmodelFov { get; set; } = 70;
 
 	[Display( Name = "#GameSettings.AutoReload", Description = "#GameSettings.AutoReload.Desc", GroupName = CombatGroup )]
 	public bool AutoReload { get; set; } = true;
@@ -38,6 +38,12 @@ internal class ClientSettings
 
 	[Display( Name = "#GameSettings.AutoZoomIn", Description = "#GameSettings.AutoZoomIn.Desc", GroupName = ClassGroup )]
 	public bool AutoZoomIn { get; set; } = true;
+
+	[Display( Name = "#GameSettings.LastHitSoundVolume", Description = "#GameSettings.LastHitSoundVolume.Desc", GroupName = SoundGroup )]
+	public float LastHitSoundVolume { get; set; } = 1f;
+
+	[Display( Name = "#GameSettings.HitSoundVolume", Description = "#GameSettings.HitSoundVolume.Desc", GroupName = SoundGroup )]
+	public float HitSoundVolume { get; set; } = 1f;
 
 	[Display( Name = "#GameSettings.PlayHitSound", Description = "#GameSettings.PlayHitSound.Desc", GroupName = SoundGroup )]
 	public bool PlayHitSound { get; set; } = true;
