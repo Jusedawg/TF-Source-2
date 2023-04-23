@@ -51,6 +51,9 @@ internal class ClientSettings
 	[Display( Name = "#GameSettings.PlayLastHitSound", Description = "#GameSettings.PlayLastHitSound.Desc", GroupName = SoundGroup )]
 	public bool PlayLastHitSound { get; set; } = true;
 
+	[Display( Name = "#GameSettings.GameplayVolume", Description = "#GameSettings.GameplayVolume.Desc", GroupName = SoundGroup )]
+	public float GameplayVolume { get; set; } = 1f;
+
 	private static ClientSettings current;
 	public static ClientSettings Current
 	{
