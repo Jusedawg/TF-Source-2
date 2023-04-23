@@ -1,12 +1,12 @@
-﻿using TFS2.UI;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using Amper.FPS;
 
 namespace TFS2;
 
-internal class ClientSettings
+internal class TFClientSettings
 {
-	private static List<string> GroupOrder = new List<string>()
+	protected static List<string> GroupOrder = new List<string>()
 	{
 		SocialGroup,
 		CombatGroup,
@@ -23,9 +23,6 @@ internal class ClientSettings
 
 	[Display( Name = "#GameSettings.ShowTextChat", Description = "#GameSettings.ShowTextChat.Description", GroupName = SocialGroup )]
 	public bool ShowTextChat { get; set; } = true;
-
-	[Display( Name = "#GameSettings.ViewmodelFov", Description = "#GameSettings.ViewmodelFov.Desc", GroupName = CombatGroup )]
-	public int ViewmodelFov { get; set; } = 70;
 
 	[Display( Name = "#GameSettings.AutoReload", Description = "#GameSettings.AutoReload.Desc", GroupName = CombatGroup )]
 	public bool AutoReload { get; set; } = true;
@@ -51,25 +48,37 @@ internal class ClientSettings
 	[Display( Name = "#GameSettings.PlayLastHitSound", Description = "#GameSettings.PlayLastHitSound.Desc", GroupName = SoundGroup )]
 	public bool PlayLastHitSound { get; set; } = true;
 
-	[Display( Name = "#GameSettings.GameplayVolume", Description = "#GameSettings.GameplayVolume.Desc", GroupName = SoundGroup )]
-	public float GameplayVolume { get; set; } = 1f;
+	[Display( Name = "#GameSettings.ViewmodelFov", Description = "#GameSettings.ViewmodelFov.Desc", GroupName = CombatGroup )]
+	public int ViewmodelFov { get; set; } = 70;
 
-	private static ClientSettings current;
-	public static ClientSettings Current
-	{
-		get
-		{
-			if ( current == null )
-				current = Cookie.Get<ClientSettings>( "tfs2.clientsettings", new() );
-			return current;
-		}
-	}
+	[Display( Name = "#GameSettings.GenericVolume", Description = "#GameSettings.GenericVolume.Desc", GroupName = SoundGroup )]
+	public float GenericVolume { get; set; } = 1f;
+
+	[Display( Name = "#GameSettings.AmbienceVolume", Description = "#GameSettings.AmbienceVolume.Desc", GroupName = SoundGroup )]
+	public float AmbienceVolume { get; set; } = 1f;
+
+	[Display( Name = "#GameSettings.SoundtrackVolume", Description = "#GameSettings.SoundtrackVolume.Desc", GroupName = SoundGroup )]
+	public float SoundtrackVolume { get; set; } = 1f;
+
+	[Display( Name = "#GameSettings.AnnouncerVolume", Description = "#GameSettings.AnnouncerVolume.Desc", GroupName = SoundGroup )]
+	public float AnnouncerVolume { get; set; } = 1f;
 
 	public static int GetGroupOrder( string group )
 	{
 		int index = GroupOrder.FindIndex( x => x == group );
 		if ( index < 0 ) index = int.MaxValue;
 		return index;
+	}
+
+	private static TFClientSettings current;
+	public static TFClientSettings Current
+	{
+		get
+		{
+			if ( current == null )
+				current = Cookie.Get<TFClientSettings>( "tfs2.clientsettings", new() );
+			return current;
+		}
 	}
 
 	public void Save() => Cookie.Set( "tfs2.clientsettings", this );
@@ -79,5 +88,4 @@ internal class ClientSettings
 		current = new();
 		current.Save();
 	}
-
 }
