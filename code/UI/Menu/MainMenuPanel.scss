@@ -36,6 +36,19 @@ MainMenuPanel {
             margin-top: 30px 0;
         }
 
+        .new {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background: url(/ui/menu/new_large.png);
+            height: 124px;
+            width: 124px;
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 435px;
+            margin-left: 435px;
+            z-index: 3;
+        }
+
         .menublock {
             flex-direction: column;
             width: 60%;
@@ -93,11 +106,11 @@ MainMenuPanel {
                 }
 
                 .date_icon {
-                    height: 20px;
-                    width: 20px;
+                    height: 24px;
+                    width: 24px;
                     background: url(/ui/menu/calendar_range.png);
                     background-size: cover;
-                    background-image-tint: $tan-light;
+                    background-image-tint: $text-highlight;
                 }
 
                 .date_label {
@@ -120,16 +133,24 @@ MainMenuPanel {
                 padding: 15px 200px 20px 20px;
                 flex-direction: column;
 
+                .link {
+                    font-family: MaterialIcons;
+                    font-size: 20px;
+                    padding-left: 6px;
+                    color: #a08f82;
+                }
+
                 .text {
                     color: #a08f82;
                     font-family: TF2_Secondary;
-                    font-size: 16px;
+                    font-size: 20px;
                     margin-bottom: 15px;
                 }
 
                 .button-dark {
                     width: 110%;
-                    padding: 5px 20px 5px 15px;
+                    font-size: 22px;
+                    padding: 5px 5px 5px 15px;
                 }
             }
         }

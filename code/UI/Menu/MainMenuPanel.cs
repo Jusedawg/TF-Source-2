@@ -41,7 +41,7 @@ public partial class MainMenuPanel : Panel
 
 	public void OnClickSettings()
 	{
-		MenuOverlay.Open<Settings>();
+		MenuOverlay.Open<SettingsMenu>();
 	}
 
 	public void OnClickLoadout()

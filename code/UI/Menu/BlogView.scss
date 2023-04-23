@@ -9,7 +9,10 @@ BlogView {
     position: absolute;
     justify-content: center;
     align-items: center;
+    padding-left: 520px;
+    padding-top: 80px;
     transition: opacity .3s ease, transform .3s ease;
+    pointer-events: none;
 
     .container {
         flex-direction: column;
@@ -18,8 +21,8 @@ BlogView {
         flex-grow: 1;
         pointer-events: all;
         transition: transform .2s ease;
-        max-width: 800px;
-        max-height: 800px;
+        max-width: 1000px;
+        max-height: 770px;
 
         .header {
             height: 10%;
@@ -27,10 +30,14 @@ BlogView {
             padding: 15px 20px;
             background-color: $tan-darkest;
             border-radius: 6px;
-            font-family: big_noodle_titling;
-            font-size: 40px;
-            color: $tan-light;
-            text-align: center;
+
+            .label {
+                font-family: big_noodle_titling;
+                font-size: 40px;
+                color: $tan-light;
+                margin-left: 45%;
+                align-items: center;
+            }
         }
 
         .website {
