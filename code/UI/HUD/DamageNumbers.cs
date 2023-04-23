@@ -37,7 +37,7 @@ public class DamageNumbers : Panel
 		// Play hit sound, if the player is alive.
 		if ( victim.IsAlive() )
 		{
-			if ( TimeSinceDing > 0.1f && TFClientSettings.Current.PlayHitSound )
+			if ( TFClientSettings.Current.PlayHitSound && TimeSinceDing > 0.1f )
 			{
 				Sound.FromScreen( "ui.hitsound.default" ).SetVolume( TFClientSettings.Current.HitSoundVolume ); ;
 				TimeSinceDing = 0;
