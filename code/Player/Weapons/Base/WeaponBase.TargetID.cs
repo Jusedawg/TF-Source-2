@@ -11,5 +11,5 @@ partial class TFWeaponBase : IInteractableTargetID
 
 	bool IInteractableTargetID.CanInteract( TFPlayer user ) => IsUsable( user );
 	string IInteractableTargetID.InteractText => "Pickup";
-	InputButton IInteractableTargetID.InteractButton => InputButton.Use;
+	string IInteractableTargetID.InteractButton => "Interact";
 }

@@ -35,6 +35,25 @@ public partial class TFGameRules : SDKGame
 			TickRespawnWaves();
 	}
 
+	[Event.Client.BuildInput]
+	void MenuInputs()
+	{
+		if ( Input.Pressed( "Team" ) )
+		{
+			if ( MenuOverlay.CurrentMenu is TeamSelection )
+				MenuOverlay.CloseActive();
+			else
+				MenuOverlay.Open<TeamSelection>();
+		}
+		else if ( Input.Pressed( "Class" ) )
+		{
+			if ( MenuOverlay.CurrentMenu is ClassSelection )
+				MenuOverlay.CloseActive();
+			else
+				MenuOverlay.Open<ClassSelection>();
+		}
+	}
+
 	public override void ClientJoined( IClient client )
 	{
 		var player = new TFPlayer();

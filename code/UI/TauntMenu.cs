@@ -28,9 +28,9 @@ public class TauntMenu : Panel
 
 		if ( !player.IsAlive ) return;
 
-		SetClass( "open", Input.Down( InputButton.Drop ) );
+		SetClass( "open", Input.Down( "Taunt" ) );
 
-		if ( Input.Released( InputButton.Drop ) )
+		if ( Input.Released( "Taunt" ) )
 		{
 			Mouse.Position = Screen.Size * .5f;
 		}

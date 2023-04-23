@@ -12,6 +12,7 @@ QuitDialog {
     transition: opacity .1s ease, transform .1s ease;
     visibility: hidden;
     background-color: #000a;
+    pointer-events: none;
 
     &:intro {
         opacity: 0;
@@ -24,7 +25,6 @@ QuitDialog {
     }
 
     &.open {
-        pointer-events: all;
         visibility: visible;
     }
 
@@ -38,6 +38,7 @@ QuitDialog {
         border-radius: 6px;
         transition: transform .2s ease;
         flex-direction: column;
+        pointer-events: all;
 
         > .header {
             width: 100%;

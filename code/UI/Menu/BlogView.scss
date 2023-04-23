@@ -1,0 +1,51 @@
+﻿@import "/UI/styles/colors.scss";
+@import "/UI/styles/buttons.scss";
+
+BlogView {
+    z-index: 6;
+    width: 100%;
+    height: 100%;
+    align-self: center;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    padding-left: 520px;
+    padding-top: 80px;
+    transition: opacity .3s ease, transform .3s ease;
+    pointer-events: none;
+
+    .container {
+        flex-direction: column;
+        background: linear-gradient(to right, #231f1cee, #302a25ee, #231f1cee);
+        backdrop-filter: blur(50px);
+        flex-grow: 1;
+        pointer-events: all;
+        transition: transform .2s ease;
+        max-width: 1000px;
+        max-height: 770px;
+
+        .header {
+            height: 10%;
+            width: 100%;
+            padding: 15px 20px;
+            background-color: $tan-darkest;
+            border-radius: 6px;
+
+            .label {
+                font-family: big_noodle_titling;
+                font-size: 40px;
+                color: $tan-light;
+                margin-left: 45%;
+                align-items: center;
+            }
+        }
+
+        .website {
+            height: 90%;
+            width: 95%;
+            flex-grow: 1;
+            align-self: center;
+            margin: 20px;
+        }
+    }
+}

@@ -1,0 +1,49 @@
+﻿@using System;
+@using Sandbox.UI;
+@namespace TFS2.UI
+@attribute [StyleSheet("UI/Menu/BlogView.scss")]
+
+@inherits MenuOverlay
+
+<root>
+    <div class="container">
+        <div class="header">Blogpost</div>
+        <WebPanel class="website" @ref="WebPanel"></WebPanel>
+        <button class="button-dark" @onclick=@OnClickClose>Close</button>
+    </div>
+</root>
+
+@code {
+
+    public string Url
+    {
+        get { return WebPanel?.Surface?.Url ?? ""; }
+        set { if (WebPanel?.Surface?.Url != null) WebPanel.Surface.Url = value; }
+    }
+
+    public WebPanel WebPanel { get; set; }
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        if (firstTime)
+        {
+            WebPanel.Surface.Url = GetBlogURL();
+        }
+    }
+
+    protected string GetBlogURL()
+    {
+        // TODO: Get blog URL from latest blog.
+        return "https://tfsource2.com/post/opening-the-source";
+    }
+
+    protected override int BuildHash()
+    {
+        // this will force a rebuild every time the date time string changes
+        return HashCode.Combine(DateTime.Now.ToString());
+    }
+
+    protected void OnClickClose() => Close();
+}

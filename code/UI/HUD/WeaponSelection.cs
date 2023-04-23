@@ -113,7 +113,7 @@ public partial class WeaponSelection : Panel
 
 		SelectedSlot = slot;
 
-		if ( !FastWeaponSwitchEnabled )
+		if ( !TFClientSettings.Current.FastWeaponSwitch )
 		{
 			if ( !IsEnabled )
 				Setup();
@@ -147,7 +147,7 @@ public partial class WeaponSelection : Panel
 		if ( !player.IsValid() )
 			return;
 
-		if ( FastWeaponSwitchEnabled )
+		if ( TFClientSettings.Current.FastWeaponSwitch )
 		{
 			// If fast weapon switch is enabled, we're always confirming our selection change.
 			SelectSlot( player.GetActiveTFSlot() );
@@ -199,12 +199,12 @@ public partial class WeaponSelection : Panel
 		//
 		// Keyboard Switch
 		//
-		if ( Input.Pressed( InputButton.Slot1 ) ) SelectSlot( TFWeaponSlot.Primary );
-		if ( Input.Pressed( InputButton.Slot2 ) ) SelectSlot( TFWeaponSlot.Secondary );
-		if ( Input.Pressed( InputButton.Slot3 ) ) SelectSlot( TFWeaponSlot.Melee );
-		if ( Input.Pressed( InputButton.Slot4 ) ) SelectSlot( TFWeaponSlot.PDA );
-		if ( Input.Pressed( InputButton.Slot5 ) ) SelectSlot( TFWeaponSlot.PDA2 );
-		if ( Input.Pressed( InputButton.Slot6 ) ) SelectSlot( TFWeaponSlot.Action );
+		if ( Input.Pressed( "Slot1" ) ) SelectSlot( TFWeaponSlot.Primary );
+		if ( Input.Pressed( "Slot2" ) ) SelectSlot( TFWeaponSlot.Secondary );
+		if ( Input.Pressed( "Slot3" ) ) SelectSlot( TFWeaponSlot.Melee );
+		if ( Input.Pressed( "Slot4" ) ) SelectSlot( TFWeaponSlot.PDA );
+		if ( Input.Pressed( "Slot5" ) ) SelectSlot( TFWeaponSlot.PDA2 );
+		if ( Input.Pressed( "Slot6" ) ) SelectSlot( TFWeaponSlot.Action );
 
 		/*
 		// NO SLOTS THAT CAN THEORETICALLY USE THIS YET, SO DON'T NEED TO CHECK.
@@ -218,7 +218,7 @@ public partial class WeaponSelection : Panel
 		// Confirmation
 		//
 		bool confirmChoice = false;
-		if ( FastWeaponSwitchEnabled )
+		if ( TFClientSettings.Current.FastWeaponSwitch )
 		{
 			// If fast weapon switch is enabled, we're always confirming our selection change.
 			confirmChoice = true;
@@ -228,7 +228,7 @@ public partial class WeaponSelection : Panel
 			// Otherwise see if weapon list menu is both visible and we're pressing attack to confirm.
 			if ( IsEnabled )
 			{
-				if ( Input.Pressed( InputButton.PrimaryAttack ) )
+				if ( Input.Pressed( "Attack1" ) )
 				{
 					confirmChoice = true;
 					AttackInputHeld = true;
@@ -238,8 +238,9 @@ public partial class WeaponSelection : Panel
 			// Don't allow player to use attack button if they press it to confirm selection and didn't release since then.
 			if ( AttackInputHeld )
 			{
-				if ( Input.Down( InputButton.PrimaryAttack ) )
-					Input.SetButton( InputButton.PrimaryAttack, false );
+				if ( Input.Down( "Attack1" ) )
+					// TODO: Fix this when SetAction gets a better parameter option
+					Input.Clear( "Attack1");
 				else
 					AttackInputHeld = false;
 			}
@@ -257,8 +258,6 @@ public partial class WeaponSelection : Panel
 			Close();
 		}
 	}
-
-	[ConVar.Client( "cl_fast_weapon_switch" )] public static bool FastWeaponSwitchEnabled { get; set; } = true;
 	[ConVar.Client( "cl_hud_weaponlist_close_time" )] public static float AutoCloseTime { get; set; } = 20;
 }
 

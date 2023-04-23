@@ -37,6 +37,20 @@
         }
 
         SetClass("visible", TFGameRules.Current?.State == GameState.ReadyUp);
+        if (Game.LocalClient.Pawn is TFPlayer ply)
+        {
+            SetClass("red", ply.Team == TFTeam.Red);
+            SetClass("blu", ply.Team == TFTeam.Blue);
+        }
+    }
+
+    [Event.Client.BuildInput]
+    public void BuildInput()
+    {
+        if (Input.Pressed("Ready"))
+        {
+            TFGameRules.ToggleReady();
+        }
     }
 
     private void OnClientReadyToggle(ClientReadyToggleEvent ev)

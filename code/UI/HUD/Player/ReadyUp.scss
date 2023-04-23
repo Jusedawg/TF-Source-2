@@ -18,10 +18,17 @@ ReadyUp {
     }
 
     border: 2px solid #f2e2c1;
-    background-color: #bd3b3b;
     padding: 5px 40px;
     border-radius: 10px;
     flex-direction: column;
+
+    &.red {
+        background-color: #bd3b3b;
+    }
+
+    &.blu {
+        background-color: #5b7a8e;
+    }
 
     .title {
         width: 100%;

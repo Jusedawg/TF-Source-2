@@ -36,6 +36,39 @@
     }
 }
 
+.button.toggle {
+    background-color: $tan-dark;
+    font-family: MaterialIcons;
+    width: 14px;
+    height: 14px;
+    color: $tan-light;
+    font-size: 48px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    aspect-ratio: 1;
+    margin-left: 65%;
+
+    &:hover {
+        background-color: #924738;
+    }
+
+    &:active {
+        sound-in: ui.button.click;
+        sound-out: ui.button.release;
+    }
+
+    &.hidden {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    &.disabled {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
 .button-dark {
     background: linear-gradient(to right, #606060, #424242);
     font-family: TF2_Build;

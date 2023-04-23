@@ -26,8 +26,13 @@ namespace TFS2.UI
 		[Event.Client.BuildInput]
 		public void ProcessClientInput()
 		{
-			if ( Input.Pressed( InputButton.Chat ) )
-				Open();
+			if ( Input.Pressed( "Chat" ))
+			{
+				if ( TFClientSettings.Current.ShowTextChat )
+					Open();
+				else
+					AddInformation( "Text chat is currently disabled. You can toggle this option in your settings." );
+			}
 		}
 
 		public override void OnButtonEvent( ButtonEvent e )

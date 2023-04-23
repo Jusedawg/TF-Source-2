@@ -51,17 +51,17 @@ public partial class VoiceMenu : Panel
 		}
 	};
 
-	readonly Dictionary<InputButton, int> SlotButtons = new()
+	readonly Dictionary<string, int> SlotButtons = new()
 	{
-		{ InputButton.Slot1, 0 },
-		{ InputButton.Slot2, 1 },
-		{ InputButton.Slot3, 2 },
-		{ InputButton.Slot4, 3 },
-		{ InputButton.Slot5, 4 },
-		{ InputButton.Slot6, 5 },
-		{ InputButton.Slot7, 6 },
-		{ InputButton.Slot8, 7 },
-		{ InputButton.Slot9, 8 }
+		{ "Slot1", 0 },
+		{ "Slot2", 1 },
+		{ "Slot3", 2 },
+		{ "Slot4", 3 },
+		{ "Slot5", 4 },
+		{ "Slot6", 5 },
+		{ "Slot7", 6 },
+		{ "Slot8", 7 },
+		{ "Slot9", 8 }
 	};
 
 	
@@ -140,7 +140,7 @@ public partial class VoiceMenu : Panel
 
 	public void Show( int menu = 0 )
 	{
-		InfoContainer.SetClass( "visible", Input.GetButtonOrigin( InputButton.View ) != null );
+		//InfoContainer.SetClass( "visible", Input.GetButtonOrigin( InputButton.View ) != null );
 		Shown = true;
 		AddClass( "visible" );
 		SwitchToPage( menu );
@@ -193,16 +193,20 @@ public partial class VoiceMenu : Panel
 	[Event.Client.BuildInput]
 	public void ProcessClientInput()
 	{
-		if ( Input.Pressed( InputButton.View ) )
-			NextPage();
+		if ( Input.Pressed( "VoiceMenu1" ) )
+			Toggle(0);
+		else if ( Input.Pressed( "VoiceMenu2" ) )
+			Toggle(1);
+		else if ( Input.Pressed( "VoiceMenu3" ) )
+			Toggle( 2 );
 
 		if ( !Shown )
 			return;
 
 		// If we've pressed Slot0 close the menu right away, this button means cancel.
-		if ( Input.Pressed( InputButton.Slot0 ) )
+		if ( Input.Pressed( "Slot10" ) )
 		{
-			Input.SuppressButton( InputButton.Slot0 );
+			Input.Clear( "Slot10" );
 			Close();
 			return;
 		}
@@ -212,12 +216,12 @@ public partial class VoiceMenu : Panel
 			if ( Input.Pressed( pair.Key ) )
 			{
 				ButtonPressed( pair.Key );
-				Input.SuppressButton( pair.Key );
+				Input.Clear( pair.Key );
 			}
 		}
 	}
 
-	public void ButtonPressed( InputButton button )
+	public void ButtonPressed( string button )
 	{
 		if ( !Shown )
 			return;

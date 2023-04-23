@@ -15,7 +15,7 @@ public partial class MainMenuPanel : Panel
 	{
 		if ( TimeSinceInteraction > 0.1f )
 		{
-			if ( Input.Pressed( InputButton.Menu ) )
+			if ( Input.Pressed( "Menu" ) )
 			{
 				TimeSinceInteraction = 0;
 				Toggle();
@@ -41,7 +41,7 @@ public partial class MainMenuPanel : Panel
 
 	public void OnClickSettings()
 	{
-		MenuOverlay.Open<Settings>();
+		MenuOverlay.Open<SettingsMenu>();
 	}
 
 	public void OnClickLoadout()
@@ -64,6 +64,11 @@ public partial class MainMenuPanel : Panel
 	{
 		Hide();
 		MenuOverlay.Open<TeamSelection>();
+	}
+
+	public void OnClickBlog()
+	{
+		MenuOverlay.Open<BlogView>();
 	}
 
 	public bool ShouldDraw()

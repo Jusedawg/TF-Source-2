@@ -252,6 +252,17 @@ public partial class TFPlayer : SDKPlayer
 		SimulateTaunts();
 	}
 
+	[ClientInput] public bool AutoRezoom { get; set; }
+	[ClientInput] public bool AutoReload { get; set; }
+
+	public override void BuildInput()
+	{
+		AutoRezoom = TFClientSettings.Current.AutoZoomIn;
+		AutoReload = TFClientSettings.Current.AutoReload;
+
+		base.BuildInput();
+	}
+
 	public override void Tick()
 	{
 		base.Tick();
@@ -271,13 +282,11 @@ public partial class TFPlayer : SDKPlayer
 		SwitchOffEmptyWeapon();
 	}
 
+	public override string UseButton => "CallMedic";
 	public override bool AttemptUse()
 	{
-		if ( base.AttemptUse() )
-			return true;
-
 		SpeakConceptIfAllowed( TFResponseConcept.VoiceMedic );
-		return false;
+		return true;
 	}
 
 	public virtual void OnSwitchedViewMode( bool is_first_person )

@@ -14,5 +14,5 @@ public interface IInteractableTargetID : ITargetID
 {
 	public bool CanInteract( TFPlayer user );
 	public string InteractText { get; }
-	public InputButton InteractButton { get; }
+	public string InteractButton { get; }
 }

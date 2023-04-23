@@ -1,0 +1,72 @@
+﻿
+@using TFS2.UI;
+@using Amper.FPS;
+@using Sandbox.UI;
+
+@namespace TFS2
+@attribute [StyleSheet("/ui/Menu/Settings/SettingsMenu.scss")]
+@inherits MenuOverlay
+
+<root>
+    <div class="container">
+
+		<text class="header">#GameSettings.GeneralSettings</text>
+
+        <div class="content">
+            <div class="body">
+				<ObjectEditor @ref=Editor/>
+			</div>
+		</div>
+
+		<div class="footer">
+			<button onclick=@(SetDefaults) class="reset-defaults">#GameSettings.Reset</button>
+			<button onclick=@(Close) class="exit">#GameSettings.Close</button>
+		</div>
+    </div>
+</root>
+
+@code {
+	public ObjectEditor Editor;
+
+	public SettingsMenu()
+	{
+		Current = this;
+	}
+
+	public override void OnHotloaded()
+	{
+		base.OnHotloaded();
+
+		Editor.SetTarget( TFClientSettings.Current );
+	}
+
+	protected override void OnAfterTreeRender(bool firstTime)
+	{
+		if ( firstTime )
+			Editor.SetTarget( TFClientSettings.Current );
+	}
+
+	public void SetDefaults()
+	{
+		TFClientSettings.Reset();
+
+		Editor.SetTarget( TFClientSettings.Current );
+	}
+
+	public void OnClickClose()
+	{
+		Close();
+	}
+
+	private static SettingsMenu Current;
+
+	protected override void OnEvent( PanelEvent e )
+	{
+		base.OnEvent( e );
+
+		if ( e.Name == "save" )
+		{
+			TFClientSettings.Current.Save();
+		}
+	}
+}
