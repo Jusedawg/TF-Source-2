@@ -7,13 +7,13 @@
 
 <root>
     <div class="container">
-        <text class="header">Are you sure?</text>
+        <text class="header">#GameMenu.QuitDialog.Title</text>
 
         <div class="content">
-            <text class="message">Are you really sure you want to quit this gamemode? Think about the consequences of you performing this action. If you quit, you will not be able to play it again. This is your only opportunity to make a choice. Think wisely. :)</text>
+			<text class="message">#GameMenu.QuitDialog.Description</text>
             <div class="button_container">
-                <button class="button" @onclick=@OnClickCancel>Cancel</button>
-                <button class="button" @onclick=@OnClickQuit>Quit</button>
+				<button class="button" @onclick=@OnClickCancel>#Generic.Cancel</button>
+				<button class="button" @onclick=@OnClickQuit>#Generic.Quit</button>
             </div>
         </div>
     </div>
