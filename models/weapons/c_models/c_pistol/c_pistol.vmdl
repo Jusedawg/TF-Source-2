@@ -60,7 +60,7 @@
 						name = "c_pistol_reference_0_mesh"
 						parent_bone = "c_pistol_reference"
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						recenter_on_parent_bone = true
 						offset_origin = [ 0.0, 0.0, 0.0 ]
 						offset_angles = [ 0.0, 0.0, 0.0 ]
@@ -194,7 +194,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.092311, -3.148525, -3.749414 ]
 								hitbox_maxs = [ 1.335121, 7.029264, 8.63168 ]
 							},
@@ -203,7 +203,7 @@
 								parent_bone = "vm_weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.828343, -3.934705, -3.264322 ]
 								hitbox_maxs = [ 0.828343, 4.282869, 2.217095 ]
 							},
@@ -212,7 +212,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.092311, -3.148525, -3.749414 ]
 								hitbox_maxs = [ 1.335121, 7.029264, 8.63168 ]
 							},
@@ -221,7 +221,7 @@
 								parent_bone = "vm_weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.828343, -3.934705, -3.264322 ]
 								hitbox_maxs = [ 0.828343, 4.282869, 2.217095 ]
 							},
@@ -230,7 +230,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.092311, -3.148525, -3.749414 ]
 								hitbox_maxs = [ 1.335121, 7.029264, 8.63168 ]
 							},
@@ -239,7 +239,7 @@
 								parent_bone = "vm_weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.828343, -3.934705, -3.264322 ]
 								hitbox_maxs = [ 0.828343, 4.282869, 2.217095 ]
 							},
@@ -254,7 +254,7 @@
 					{
 						_class = "RenderMeshFile"
 						name = "c_pistol_bg_body_lod0"
-						filename = "models\\weapons\\c_models\\c_pistol\\c_pistol_fbx\\mesh\\c_pistol_bg_body_lod0.fbx"
+						filename = "models/weapons/v_models/v_pistol_scout/v_pistol_scout.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -271,6 +271,7 @@
 					{
 						_class = "RenderMeshFile"
 						name = "c_pistol_bg_body_lod1"
+						disabled = true
 						filename = "models\\weapons\\c_models\\c_pistol\\c_pistol_fbx\\mesh\\c_pistol_bg_body_lod1.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -288,6 +289,7 @@
 					{
 						_class = "RenderMeshFile"
 						name = "c_pistol_bg_body_lod2"
+						disabled = true
 						filename = "models\\weapons\\c_models\\c_pistol\\c_pistol_fbx\\mesh\\c_pistol_bg_body_lod2.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -332,10 +334,29 @@
 				]
 				default_root_bone_name = ""
 			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "c_pistol.vmat"
+								to = "materials/models/weapons/c_models/c_pistol/c_pistol.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 		importer_notes = """
 Imported from compiled VMDL_C
 """
