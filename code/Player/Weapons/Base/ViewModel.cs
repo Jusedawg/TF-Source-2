@@ -39,6 +39,8 @@ partial class TFViewModel : SDKViewModel
 		var matGroup = (int)weapon.Team - 2;
 		SetMaterialGroup( matGroup );
 		Attachment?.SetMaterialGroup( matGroup );
+		EnableShadowCasting = false;
+		Attachment.EnableShadowCasting = false;
 	}
 
 	public string GetPlayerHandsModel()

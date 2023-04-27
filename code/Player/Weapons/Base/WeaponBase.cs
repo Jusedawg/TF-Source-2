@@ -56,6 +56,7 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse
 		SetModel( Data.WorldModel );
 		Clip = Data.ClipSize;
 		EnableShadowInFirstPerson = false;
+		EnableShadowCasting = false;
 	}
 
 	public override void OnEquip( SDKPlayer owner )

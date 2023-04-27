@@ -28,6 +28,7 @@ partial class TFPlayer
 		// Change the model 
 		SetModel( PlayerClass.Model );
 		SetMaterialGroup( TeamNumber - 2 );
+		EnableShadowCasting = false;
 
 		if ( ResourceLibrary.TryGet<TFResponseData>( PlayerClass.Responses, out var responseData ) ) 
 			ResponseController.Load( responseData );
