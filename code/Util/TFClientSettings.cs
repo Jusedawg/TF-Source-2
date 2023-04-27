@@ -15,52 +15,52 @@ internal class TFClientSettings
 		OtherGroup
 	};
 
-	public const string SocialGroup = "#GameSettings.Social.Group";
-	public const string CombatGroup = "#GameSettings.Combat.Group";
-	public const string ClassGroup = "#GameSettings.Class.Group";
-	public const string SoundGroup = "#GameSettings.Sound.Group";
-	public const string OtherGroup = "#GameSettings.Other.Group";
+	public const string SocialGroup = "#GameSettings.Group.Social";
+	public const string CombatGroup = "#GameSettings.Group.Combat";
+	public const string ClassGroup = "#GameSettings.Group.Class";
+	public const string SoundGroup = "#GameSettings.Group.Sound";
+	public const string OtherGroup = "#GameSettings.Group.Misc";
 
-	[Display( Name = "#GameSettings.ShowTextChat", Description = "#GameSettings.ShowTextChat.Description", GroupName = SocialGroup )]
+	[Display( Name = "#GameSettings.Setting.ShowTextChat", Description = "#GameSettings.Description.ShowTextChat", GroupName = SocialGroup )]
 	public bool ShowTextChat { get; set; } = true;
 
-	[Display( Name = "#GameSettings.AutoReload", Description = "#GameSettings.AutoReload.Desc", GroupName = CombatGroup )]
+	[Display( Name = "#GameSettings.Setting.AutoReload", Description = "#GameSettings.Description.AutoReload", GroupName = CombatGroup )]
 	public bool AutoReload { get; set; } = true;
 
-	[Display( Name = "#GameSettings.FastWeaponSwitch", Description = "#GameSettings.FastWeaponSwitch.Desc", GroupName = CombatGroup )]
+	[Display( Name = "#GameSettings.Setting.FastWeaponSwitch", Description = "#GameSettings.Description.FastWeaponSwitch", GroupName = CombatGroup )]
 	public bool FastWeaponSwitch { get; set; } = true;
 
-	[Display( Name = "#GameSettings.MedigunAutoHeal", Description = "#GameSettings.MedigunAutoHeal.Desc", GroupName = ClassGroup )]
+	[Display( Name = "#GameSettings.Setting.MedigunAutoHeal", Description = "#GameSettings.Description.MedigunAutoHeal", GroupName = ClassGroup )]
 	public bool MedigunAutoHeal { get; set; } = true;
 
-	[Display( Name = "#GameSettings.AutoZoomIn", Description = "#GameSettings.AutoZoomIn.Desc", GroupName = ClassGroup )]
+	[Display( Name = "#GameSettings.Setting.AutoZoomIn", Description = "#GameSettings.Description.AutoZoomIn", GroupName = ClassGroup )]
 	public bool AutoZoomIn { get; set; } = true;
 
-	[Display( Name = "#GameSettings.LastHitSoundVolume", Description = "#GameSettings.LastHitSoundVolume.Desc", GroupName = SoundGroup )]
+	[Display( Name = "#GameSettings.Setting.LastHitSoundVolume", Description = "#GameSettings.Description.LastHitSoundVolume", GroupName = SoundGroup )]
 	public float LastHitSoundVolume { get; set; } = 1f;
 
-	[Display( Name = "#GameSettings.HitSoundVolume", Description = "#GameSettings.HitSoundVolume.Desc", GroupName = SoundGroup )]
+	[Display( Name = "#GameSettings.Setting.HitSoundVolume", Description = "#GameSettings.Description.HitSoundVolume", GroupName = SoundGroup )]
 	public float HitSoundVolume { get; set; } = 1f;
 
-	[Display( Name = "#GameSettings.PlayHitSound", Description = "#GameSettings.PlayHitSound.Desc", GroupName = SoundGroup )]
+	[Display( Name = "#GameSettings.Setting.PlayHitSound", Description = "#GameSettings.Description.PlayHitSound", GroupName = SoundGroup )]
 	public bool PlayHitSound { get; set; } = true;
 
-	[Display( Name = "#GameSettings.PlayLastHitSound", Description = "#GameSettings.PlayLastHitSound.Desc", GroupName = SoundGroup )]
+	[Display( Name = "#GameSettings.Setting.PlayLastHitSound", Description = "#GameSettings.Description.PlayLastHitSound", GroupName = SoundGroup )]
 	public bool PlayLastHitSound { get; set; } = true;
 
-	[Display( Name = "#GameSettings.ViewmodelFov", Description = "#GameSettings.ViewmodelFov.Desc", GroupName = CombatGroup )]
+	[Display( Name = "#GameSettings.Setting.ViewmodelFov", Description = "#GameSettings.Description.ViewmodelFov", GroupName = CombatGroup )]
 	public int ViewmodelFov { get; set; } = 70;
 
-	/*[Display( Name = "#GameSettings.GenericVolume", Description = "#GameSettings.GenericVolume.Desc", GroupName = SoundGroup )]
+	/*[Display( Name = "#GameSettings.Setting.GenericVolume", Description = "#GameSettings.Description.GenericVolume", GroupName = SoundGroup )]
 	public float GenericVolume { get; set; } = 1f;
 
-	[Display( Name = "#GameSettings.AmbienceVolume", Description = "#GameSettings.AmbienceVolume.Desc", GroupName = SoundGroup )]
+	[Display( Name = "#GameSettings.Setting.AmbienceVolume", Description = "#GameSettings.Description.AmbienceVolume", GroupName = SoundGroup )]
 	public float AmbienceVolume { get; set; } = 1f;
 
-	[Display( Name = "#GameSettings.SoundtrackVolume", Description = "#GameSettings.SoundtrackVolume.Desc", GroupName = SoundGroup )]
+	[Display( Name = "#GameSettings.Setting.SoundtrackVolume", Description = "#GameSettings.Description.SoundtrackVolume", GroupName = SoundGroup )]
 	public float SoundtrackVolume { get; set; } = 1f;
 
-	[Display( Name = "#GameSettings.AnnouncerVolume", Description = "#GameSettings.AnnouncerVolume.Desc", GroupName = SoundGroup )]
+	[Display( Name = "#GameSettings.Setting.AnnouncerVolume", Description = "#GameSettings.Description.AnnouncerVolume", GroupName = SoundGroup )]
 	public float AnnouncerVolume { get; set; } = 1f; */
 
 	public static int GetGroupOrder( string group )

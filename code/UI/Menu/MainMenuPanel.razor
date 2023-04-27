@@ -10,7 +10,7 @@
     <div class="disclaimer">
         <div class="dev_container">
             <div class="dev_text">
-                <text>In-development build: bugs are to be expected and essential features may be missing</text>
+                <text>#GameMenu.DevNotice</text>
             </div>
             <div class="dev_logo" />
         </div>
@@ -21,12 +21,12 @@
         <image class="logotype" />
         <div class="menublock">
             <div class="header">
-                <text>Game</text>
+                <text>#GameMenu.Title.Game</text>
             </div>
 
             <div class="content">
-                <button class="button-gradient" @onclick=@OnClickResumeGame>Resume Game</button>
-                <button class="button-gradient disabled" @onclick=@OnClickJoinGame>Join a Game</button>
+				<button class="button-gradient" @onclick=@OnClickResumeGame>#GameMenu.ResumeGame</button>
+				<button class="button-gradient disabled" @onclick=@OnClickJoinGame>#GameMenu.JoinGame</button>
             </div>
         </div>
 
@@ -34,12 +34,12 @@
 
         <div class="menublock">
             <div class="header">
-                <text>Customize</text>
+				<text>#GameMenu.Title.Customize</text>
             </div>
             <div class="content">
-                <button class="button-gradient" @onclick=@OnClickLoadout>Loadout</button>
+				<button class="button-gradient" @onclick=@OnClickLoadout>#GameMenu.Loadout</button>
 				<button class="button-gradient" style="box-shadow: 0px 0px 10px 3px #a95821;" @onclick=@OnClickSettings>
-					Settings
+					#GameMenu.Settings
 				</button>
             </div>
         </div>
@@ -49,15 +49,16 @@
                 <div>
                     <div class="date">
                         <div class="date_icon" />
-                        <text class="date_label">Sunday, Nov 20th, 2022</text>
+						<text class="date_label">Sunday, Nov 20th, 2022</text>
                     </div>
                 </div>
-                <text class="title">Opening the Source</text>
+				<text class="title">Opening the Source</text>
             </div>
 
 			<div class="content">
 				<text class="text">An update about the state of the project, what has happened over the past few months, what we have planned for the future and what you should expect.</text>
-				<button class="button-dark" @onclick=@OnClickBlog>Read More on tfsource2.com
+				<button class="button-dark" @onclick=@OnClickBlog>
+					#GameMenu.Blog.ReadMore
 					<text class="link">open_in_new</text>
 				</button>
 			</div>
@@ -65,9 +66,9 @@
     </div>
 
     <div class="footer">
-        <button class="button-dark" icon="highlight_off" @onclick=@OnClickQuit>Quit</button>
-        <button class="button-dark" @onclick=@OnClickClassSelection icon="people_alt">Change Class</button>
-        <button class="button-dark" @onclick=@OnClickTeamSelection icon="sync_alt">Switch Team</button>
+		<button class="button-dark" icon="highlight_off" @onclick=@OnClickQuit>#Generic.Quit</button>
+		<button class="button-dark" @onclick=@OnClickClassSelection icon="people_alt">#GameMenu.ChangeClass</button>
+		<button class="button-dark" @onclick=@OnClickTeamSelection icon="sync_alt">#GameMenu.SwitchTeam</button>
         <text @ref="PlayerName" class="playername" />
         <image @ref="PlayerAvatar" class="playeravatar" />
 		<div class="inputnotice">

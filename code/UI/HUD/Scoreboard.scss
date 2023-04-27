@@ -169,6 +169,7 @@ Scoreboard {
                 background-color: rgba(35, 35, 35, 0.9);
 
                 .class_image {
+                    margin-top: 6px;
                     margin-left: 20px;
                     width: 15%;
                     background-size: contain;
@@ -187,7 +188,8 @@ Scoreboard {
                         .name {
                             width: 100%;
                             padding-left: 5%;
-                            font-size: 38px;
+                            font-family: BigNoodleTitling;
+                            font-size: 42px;
                         }
 
                         .map {
@@ -206,19 +208,20 @@ Scoreboard {
                         .col {
                             margin-top: 1.5%;
                             flex-direction: column;
-                            font-family: Inter_Normal;
                             font-size: 16px;
 
                             .row {
                                 margin-bottom: 27px;
 
                                 .stat_name {
+                                    font-family: Inter_Bold;
                                     width: 100%;
                                     text-align: right;
                                     padding: 0 5px;
                                 }
 
                                 .stat_value {
+                                    font-family: Inter_Normal;
                                     width: 100%;
                                     text-align: left;
                                     padding: 0 5px;
