@@ -38,6 +38,7 @@ Interested in fixing a bug or implementing a feature? Whether it's a major chang
 As long as you abide by these guidelines, you can submit a pull request and an Amper developer will try to review it as soon as possible.  
 Also, feel free to join our [Discord](https://discord.gg/tMnTsUsVjP) and chat with other developers about your ideas in the special channels.
 
+**For localization contributions check out [this repository.](https://github.com/AmperSoftware/TF-Source-2-Localization)**
 # License & Disclaimer
 
 This repository is licensed under the [MIT license](https://github.com/AmperSoftware/TF-Source-2/blob/dev/LICENSE.md).
