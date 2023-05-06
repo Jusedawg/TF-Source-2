@@ -27,8 +27,8 @@ public abstract partial class GamemodeEntity : Entity, IGamemode
 	public virtual bool IsActive() => true;
 	public abstract bool HasWon( out TFTeam team, out TFWinReason reason );
 
-	[Event.Tick.Server] public virtual void Tick() { }
-	[Event.Entity.PostSpawn] public virtual void PostLevelSetup() { }
+	[GameEvent.Tick.Server] public virtual void Tick() { }
+	[GameEvent.Entity.PostSpawn] public virtual void PostLevelSetup() { }
 
 	public virtual void RoundEnd( RoundEndEvent args ) { }
 	public virtual void RoundActivate( RoundActiveEvent args ) { }

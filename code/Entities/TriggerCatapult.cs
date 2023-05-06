@@ -23,7 +23,7 @@ public partial class TriggerCatapult : BaseTrigger
 
 	TimeSince TimeSinceTick { get; set; }
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	public void Tick()
 	{
 		if ( TimeSinceTick < 0.05f ) return;

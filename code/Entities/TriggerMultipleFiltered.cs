@@ -18,7 +18,7 @@ partial class TriggerMultipleFiltered : TriggerMultiple
 	public Filter Filter { get; set; }
 
 
-	[Event.Entity.PostSpawn]
+	[GameEvent.Entity.PostSpawn]
 	public void OnLevelCreated()
 	{
 		Filter = FindByName( FilterName ) as Filter;

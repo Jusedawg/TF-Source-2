@@ -69,7 +69,7 @@ public partial class FlagCaptureZone : BaseTrigger, ITeam
 	}
 
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	public void Tick()
 	{
 		foreach ( var toucher in TouchingEntities )

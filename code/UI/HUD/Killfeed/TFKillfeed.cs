@@ -20,7 +20,7 @@ public partial class TFKillFeed : Panel
 		EventDispatcher.Subscribe<ControlPointCapturedEvent>( OnPointCaptured, this );
 	}
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	public override void Tick()
 	{
 		base.Tick();

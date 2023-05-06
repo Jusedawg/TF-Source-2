@@ -23,7 +23,7 @@ namespace TFS2.UI
 
 		public TFChatBox() => Instance = this;
 
-		[Event.Client.BuildInput]
+		[GameEvent.Client.BuildInput]
 		public void ProcessClientInput()
 		{
 			if ( Input.Pressed( "Chat" ))

@@ -39,7 +39,7 @@ public partial class TeamSpawnPoint : SDKSpawnPoint
 		TeamOption = DefaultTeamOption;
 	}
 
-	[Event.Entity.PostSpawn]
+	[GameEvent.Entity.PostSpawn]
 	public void PostLevelSetup()
 	{
 		Room = FindByName( AssociatedRespawnRoom ) as RespawnRoom;
@@ -67,7 +67,7 @@ public partial class TeamSpawnPoint : SDKSpawnPoint
 		return true;
 	}
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	public void Tick()
 	{
 		if ( !tf_debug_spawnpoints )

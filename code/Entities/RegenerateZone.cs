@@ -28,7 +28,7 @@ partial class RegenerateZone : BaseTrigger
 		Transmit = TransmitType.Always;
 	}
 
-	[Event.Entity.PostSpawn]
+	[GameEvent.Entity.PostSpawn]
 	public void OnLevelCreated()
 	{
 		AssociatedModel = FindByName( AssociatedName ) as AnimatedEntity;

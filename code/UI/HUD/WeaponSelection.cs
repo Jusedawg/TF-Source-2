@@ -140,7 +140,7 @@ public partial class WeaponSelection : Panel
 	/// <summary>
 	/// Processes user input while weapon selection is active.
 	/// </summary>
-	[Event.Client.BuildInput]
+	[GameEvent.Client.BuildInput]
 	public void ProcessClientInput()
 	{
 		var player = TFPlayer.LocalPlayer;

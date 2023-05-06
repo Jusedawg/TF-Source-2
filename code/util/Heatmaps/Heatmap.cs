@@ -30,7 +30,7 @@ public class Heatmap
 		loadedFile = name;
 	}
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	public void Tick()
 	{
 		if ( !Draw )

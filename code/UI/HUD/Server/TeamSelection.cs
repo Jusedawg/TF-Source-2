@@ -226,7 +226,7 @@ public class TeamSelectionButton : Label
 		MenuOverlay.CloseActive();
 	}
 
-	[Event.Client.BuildInput]
+	[GameEvent.Client.BuildInput]
 	public void ProcessClientInput()
 	{
 		if ( Sandbox.Game.LocalPawn is not TFPlayer player )

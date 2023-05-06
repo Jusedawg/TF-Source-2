@@ -76,7 +76,7 @@ public partial class ControlPoint : BaseTrigger
 	public bool IsFromStartTouch { get; set; }
 
 
-	[Event.Entity.PostSpawn]
+	[GameEvent.Entity.PostSpawn]
 	public void PostLevelSetup()
 	{
 		// try to find our previous points
@@ -109,7 +109,7 @@ public partial class ControlPoint : BaseTrigger
 
 	int LastAnnouncerSecond { get; set; }
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	public void CaptureThink()
 	{
 		if ( TimeSinceLastThink < 0.1f )

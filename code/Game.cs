@@ -35,7 +35,7 @@ public partial class TFGameRules : SDKGame
 			TickRespawnWaves();
 	}
 
-	[Event.Client.BuildInput]
+	[GameEvent.Client.BuildInput]
 	void MenuInputs()
 	{
 		if ( Input.Pressed( "Team" ) )
