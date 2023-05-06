@@ -14,8 +14,8 @@
 						remaps = 
 						[
 							{
-								from = "v_pistol.vmat"
-								to = "materials/models/weapons/v_pistol/v_pistol.vmat"
+								from = "c_pistol.vmat"
+								to = "materials/models/weapons/c_models/c_pistol/c_pistol.vmat"
 							},
 						]
 						use_global_default = false
@@ -29,28 +29,91 @@
 				[
 					{
 						_class = "Attachment"
-						name = "weapon_bone"
-						parent_bone = "bip_hand_r"
-						relative_origin = [ 36.946716, 23.236864, 11.639824 ]
-						relative_angles = [ 10.267326, -25.960852, -159.938019 ]
-						weight = 1.0
-						ignore_rotation = false
-					},
-					{
-						_class = "Attachment"
 						name = "eject_brass"
-						parent_bone = "gun"
+						parent_bone = "weapon_bone"
 						relative_origin = [ 1.009217, 6.191494, 3.464704 ]
-						relative_angles = [ -0.0, 44.888035, 180.0 ]
+						relative_angles = [ -0.0, 44.888035, -180.0 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
 					{
 						_class = "Attachment"
 						name = "muzzle"
-						parent_bone = "gun"
+						parent_bone = "weapon_bone"
 						relative_origin = [ 0.0, 5.960703, 9.193801 ]
 						relative_angles = [ -90.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "pedestal_0"
+						parent_bone = "weapon_bone"
+						relative_origin = [ 0.0, 2.826619, 2.045477 ]
+						relative_angles = [ -90.0, -90.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "unusual_0"
+						parent_bone = "weapon_bone"
+						relative_origin = [ 0.0, 5.960703, 8.63168 ]
+						relative_angles = [ -90.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "unusual_1"
+						parent_bone = "weapon_bone"
+						relative_origin = [ 0.0, 5.838126, 6.305295 ]
+						relative_angles = [ -90.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "unusual_2"
+						parent_bone = "weapon_bone"
+						relative_origin = [ 0.0, 5.715549, 3.978911 ]
+						relative_angles = [ -90.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "unusual_3"
+						parent_bone = "weapon_bone"
+						relative_origin = [ 0.0, 5.592973, 1.652526 ]
+						relative_angles = [ -90.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "unusual_4"
+						parent_bone = "weapon_bone"
+						relative_origin = [ 0.0, 5.470396, -0.673858 ]
+						relative_angles = [ -90.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "unusual_5"
+						parent_bone = "weapon_bone"
+						relative_origin = [ 0.0, 5.347819, -3.000242 ]
+						relative_angles = [ -90.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "icon_camera"
+						parent_bone = "weapon_bone"
+						relative_origin = [ 13.056375, 9.403747, 13.444486 ]
+						relative_angles = [ 33.714619, -154.832809, 104.616943 ]
 						weight = 1.0
 						ignore_rotation = false
 					},
@@ -70,7 +133,7 @@
 								parent_bone = "bip_upperarm_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.64, -13.28, -4.24 ]
 								hitbox_maxs = [ 3.09, 1.3, 5.27 ]
 							},
@@ -79,7 +142,7 @@
 								parent_bone = "bip_lowerarm_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.01, -13.11, -4.23 ]
 								hitbox_maxs = [ 3.09, 3.96, 4.32 ]
 							},
@@ -88,7 +151,7 @@
 								parent_bone = "bip_hand_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -2.63, -7.5, -3.06 ]
 								hitbox_maxs = [ 2.39, 1.5, 4.13 ]
 							},
@@ -97,7 +160,7 @@
 								parent_bone = "bip_upperarm_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.09, -1.3, -5.27 ]
 								hitbox_maxs = [ 4.64, 13.25, 4.24 ]
 							},
@@ -106,7 +169,7 @@
 								parent_bone = "bip_lowerarm_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.36, -5.58, -3.67 ]
 								hitbox_maxs = [ 4.64, 12.42, 4.33 ]
 							},
@@ -115,7 +178,7 @@
 								parent_bone = "bip_hand_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -2.5, -1.0, -4.0 ]
 								hitbox_maxs = [ 2.5, 7.0, 4.0 ]
 							},
@@ -124,7 +187,7 @@
 								parent_bone = "gun"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.11, 2.0, -3.0 ]
 								hitbox_maxs = [ 1.07, 7.0, 9.0 ]
 							},
@@ -138,8 +201,8 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						name = "v_pistol_engineer"
-						filename = "models/weapons/v_models/v_pistol_engineer/v_pistol_engineer.dmx"
+						name = "v_pistol"
+						filename = "models/weapons/v_models/v_pistol_scout/v_pistol_scout.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -200,7 +263,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/weapons/v_models/v_pistol_engineer/anims/draw.smd"
+						source_filename = "models/weapons/arms/c_engineer_arms/anims/pstl_draw.dmx"
 						start_frame = -1
 						end_frame = -1
 						framerate = 30.0
@@ -221,7 +284,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/weapons/v_models/v_pistol_engineer/anims/idle.smd"
+						source_filename = "models/weapons/arms/c_engineer_arms/anims/pstl_idle.dmx"
 						start_frame = -1
 						end_frame = -1
 						framerate = 30.0
@@ -242,7 +305,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/weapons/v_models/v_pistol_engineer/anims/fire.smd"
+						source_filename = "models/weapons/arms/c_engineer_arms/anims/pstl_fire.dmx"
 						start_frame = -1
 						end_frame = -1
 						framerate = 30.0
@@ -278,7 +341,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/weapons/v_models/v_pistol_engineer/anims/reload.smd"
+						source_filename = "models/weapons/arms/c_engineer_arms/anims/pstl_reload.dmx"
 						start_frame = -1
 						end_frame = -1
 						framerate = 30.0
