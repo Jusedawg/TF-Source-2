@@ -12,7 +12,7 @@ public partial class TFHud : HudEntity<TFRootPanel>
 		Instance = this;
 	}
 
-	[Event.Client.Frame]
+	[GameEvent.Client.Frame]
 	public void OnHudChangeEnabled()
 	{
 		if ( Enabled )

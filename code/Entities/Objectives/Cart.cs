@@ -98,7 +98,7 @@ namespace TFS2
 			Tags.Add( CollisionTags.Solid );
 		}
 
-		[Event.Entity.PostSpawn]
+		[GameEvent.Entity.PostSpawn]
 		public void PostLevelSetup()
 		{
 			Path = FindByName( LinkedCartPath ) as CartPath;
@@ -127,7 +127,7 @@ namespace TFS2
 			IsAtEnd = false;
 		}
 
-		[Event.Tick.Server]
+		[GameEvent.Tick.Server]
 		public void Tick()
 		{
 			if ( Path == null )

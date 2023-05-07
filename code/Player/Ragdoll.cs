@@ -157,7 +157,7 @@ partial class TFGib : ModelEntity
 	Vector3 LastDecalPosition { get; set; }
 	[ConVar.Client] public static float tf_gibs_decal_interval { get; set; } = 16;
 
-	[Event.Client.Frame]
+	[GameEvent.Client.Frame]
 	public void Frame()
 	{
 		//

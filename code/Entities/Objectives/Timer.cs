@@ -14,7 +14,7 @@ public partial class TFTimer : Timer
 
 	int lastSecond = -1;
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	void Tick()
 	{
 		if ( Paused )

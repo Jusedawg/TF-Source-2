@@ -171,11 +171,13 @@ public partial class Scoreboard : Panel
 
 public class ScoreboardPlayerEntry : Panel
 {
+	const float UPDATE_TIME = 0.5f;
 	public IClient Client { get; set; }
 	private TimeSince TimeSinceUpdate { get; set; }
 	private Image Avatar { get; set; }
 	private Label Name { get; set; }
 	private Image ClassIcon { get; set; }
+	private Label Score { get; set; }
 	private Label Ping { get; set; }
 
 	public ScoreboardPlayerEntry()
@@ -183,17 +185,22 @@ public class ScoreboardPlayerEntry : Panel
 		Avatar = Add.Image( $"", "avatar" );
 		Name = Add.Label( "", "name" );
 		ClassIcon = Add.Image( $"", "classicon" );
+		Score = Add.Label( "0", "score" );
 		Ping = Add.Label( "0", "ping" );
 	}
 
 	public override void Tick()
 	{
 		base.Tick();
+		if ( TimeSinceUpdate < UPDATE_TIME )
+			return;
+
 		if ( Client == null || !Client.IsValid() )
 			return;
 
 		Avatar.SetTexture( $"avatar:{Client.SteamId}" );
 		Name.Text = Client.Name;
+		Score.Text = $"{Client.GetPoints()}";
 		Ping.Text = $"{Client.Ping}";
 		TimeSinceUpdate = 0;
 	}

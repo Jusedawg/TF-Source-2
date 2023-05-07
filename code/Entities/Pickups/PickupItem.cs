@@ -79,7 +79,7 @@ public abstract class PickupItem : AnimatedEntity
 		RenderColor = RenderColor.WithAlpha( 0f );
 	}
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	public void Tick()
 	{
 		if ( isRespawning && timeSincePickup > RespawnTime )

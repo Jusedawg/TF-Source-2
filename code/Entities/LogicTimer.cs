@@ -65,7 +65,7 @@ public partial class LogicTimer : Entity
 	bool paused;
 	float timePassed;
 	float timeToPass;
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	private void Tick()
 	{
 		if(Enabled)

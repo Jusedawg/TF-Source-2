@@ -36,7 +36,7 @@ public partial class RespawnRoom : BaseTrigger
 		TeamOption = DefaultTeamOption;
 	}
 
-	[Event.Entity.PostSpawn]
+	[GameEvent.Entity.PostSpawn]
 	public void PostLevelSetup()
 	{
 		ControlPoint = FindByName( AssociatedControlPoint ) as ControlPoint;
@@ -74,7 +74,7 @@ public partial class RespawnRoom : BaseTrigger
 		return false;
 	}
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	public void Tick()
 	{
 		if ( !TeamSpawnPoint.tf_debug_spawnpoints )

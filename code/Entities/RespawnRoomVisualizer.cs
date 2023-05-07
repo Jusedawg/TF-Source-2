@@ -20,7 +20,7 @@ public partial class RespawnRoomVisualizer : ModelEntity
 
 	[Net] HammerTFTeamOption TeamOption { get; set; }
 
-	[Event.Entity.PostSpawn]
+	[GameEvent.Entity.PostSpawn]
 	public void PostLevelSetup()
 	{
 		Room = FindByName( AssociatedRespawnRoom ) as RespawnRoom;
@@ -55,7 +55,7 @@ public partial class RespawnRoomVisualizer : ModelEntity
 		}
 	}
 
-	[Event.Client.Frame]
+	[GameEvent.Client.Frame]
 	public void Frame()
 	{
 		EnableDrawing = IsVisibleForLocalPlayer();

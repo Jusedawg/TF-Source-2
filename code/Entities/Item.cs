@@ -35,7 +35,7 @@ public abstract partial class Item : AnimatedEntity
 		base.Spawn();
 	}
 
-	[Event.Tick.Server]
+	[GameEvent.Tick.Server]
 	public virtual void Tick()
 	{
 	}
