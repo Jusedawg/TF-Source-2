@@ -1,22 +1,27 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/complex.shader_c"
-	"g_flAmbientOcclusionDirectDiffuse"		"0.000000"
-	"g_flAmbientOcclusionDirectSpecular"		"0.000000"
-	"TextureAmbientOcclusion"		"materials/default/default_ao.tga"
-	"g_flModelTintAmount"		"1.000000"
-	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
-	"TextureColor"		"materials/models/player/pyro/pyro_red.tga"
-	"g_flFadeExponent"		"1.000000"
-	"g_bFogEnabled"		"1"
-	"g_flDirectionalLightmapMinZ"		"0.050000"
-	"g_flDirectionalLightmapStrength"		"1.000000"
-	"g_flMetalness"		"0.000000"
-	"TextureNormal"		"materials/models/player/pyro/pyro_normal.png"
-	"TextureRoughness"		"[0.700000 0.700000 0.700000 0.000000]"
-	"g_nScaleTexCoordUByModelScaleAxis"		"0"
-	"g_nScaleTexCoordVByModelScaleAxis"		"0"
-	"g_vTexCoordOffset"		"[0.000 0.000]"
-	"g_vTexCoordScale"		"[1.000 1.000]"
-	"g_vTexCoordScrollSpeed"		"[0.000 0.000]"
+	shader "shaders/sourcebox/sourcebox_skin.shader_c"
+
+	//---- Rendering ----
+	F_LIGHTWARPTEXTURE 1
+	F_RIMLIGHT 1
+
+	//---- Attributes ----
+	g_flBaseMapAlphaPhongMask "0.000"
+	g_flRimBoost "2.000"
+	g_flRimExponent "4.000"
+	g_flRimMask "0.000"
+	g_flSpecularBoost "1.000"
+	g_flSpecularExponent "15.000"
+	g_vDiffuseModulation "[1.000000 1.000000 1.000000 1.000000]"
+	g_vSourceFresnelRanges "[2.000 1.000 5.000]"
+	g_vSpecularTint "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Material ----
+	Color "materials/models/player/pyro/pyro_red.tga"
+	LightWarpTexture "materials/models/player/pyro/pyro_lightwarp.tga"
+	Normal "materials/models/player/pyro/pyro_normal.tga"
+	SpecularExponentTexture ""
 }
