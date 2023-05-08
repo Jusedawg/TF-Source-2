@@ -1,30 +1,34 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/skin.shader_c"
-	"F_DO_NOT_CAST_SHADOWS"		"1"
-	"F_DISABLE_Z_PREPASS"		"1"
-	"g_flAmbientOcclusionDirectDiffuse"		"1.000000"
-	"g_flAmbientOcclusionDirectSpecular"		"1.000000"
-	"g_vAmbientOcclusionColorBleed"		"[0.400000 0.149020 0.129412 0.000000]"
-	"TextureAmbientOcclusion"		"materials/models/player/soldier/soldier_head_ao.tga"
-	"g_flModelTintAmount"		"1.000000"
-	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
-	"TextureColor"		"materials/models/player/soldier/soldier_head.tga"
-	"g_flCurvatureScale"		"1.000000"
-	"g_flMouthInteriorBrightnessScale"		"1.000000"
-	"TextureInsideMouth"		"materials/default/default_black_mask.tga"
-	"g_bFogEnabled"		"1"
-	"g_vAmbientNormalSoftness"		"[1.000000 0.301961 0.000000 0.000000]"
-	"TextureDiffuseFalloff"		"materials/models/player/shared/pyro_lightwarp.tga"
-	"TextureShadowFalloff"		"materials/default/default_skin_shadowwarp.tga"
-	"g_flDiffuseNormalBlur"		"0.500000"
-	"TextureNormal"		"materials/default/default_normal.tga"
-	"TextureRoughness"		"materials/models/player/soldier/soldier_head_rough.png"
-	"g_flSecondSpecularLobeGlossiness"		"0.276000"
-	"g_flSecondSpecularLobeRatio"		"0.207000"
-	"g_vTexCoordOffset"		"[0.000 0.000]"
-	"g_vTexCoordScale"		"[1.000 1.000]"
-	"g_flTransmissionFalloff"		"4.000000"
-	"g_vTransmissionColor"		"[0.000000 0.000000 0.000000 0.000000]"
-	"TextureTransmissiveMask"		"materials/default/default_trans.tga"
+	shader "shaders/sourcebox/sourcebox_skin.shader_c"
+
+	//---- Animation ----
+	F_MORPH_SUPPORTED 1
+
+	//---- Rendering ----
+	F_DO_NOT_CAST_SHADOWS 1
+	F_LIGHTWARPTEXTURE 1
+	F_RIMLIGHT 1
+
+	//---- Z-Buffering ----
+	F_DISABLE_Z_PREPASS 1
+
+	//---- Attributes ----
+	g_flBaseMapAlphaPhongMask "0.000"
+	g_flRimBoost "2.000"
+	g_flRimExponent "4.000"
+	g_flRimMask "0.000"
+	g_flSpecularBoost "0.300"
+	g_flSpecularExponent "20.000"
+	g_vDiffuseModulation "[1.000000 1.000000 1.000000 1.000000]"
+	g_vSourceFresnelRanges "[0.300 1.000 8.000]"
+	g_vSpecularTint "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Material ----
+	Color "materials/models/player/soldier/soldier_head.tga"
+	LightWarpTexture "materials/models/player/pyro/pyro_lightwarp.tga"
+	Normal "materials/default/default_normal.tga"
+	SpecularExponentTexture ""
 }

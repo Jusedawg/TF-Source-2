@@ -313,20 +313,16 @@
 						remaps = 
 						[
 							{
-								from = "w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-							{
-								from = "soldier_red_hq.vmat"
-								to = "materials/models/player/soldier/soldier_red_hq.vmat"
-							},
-							{
 								from = "soldier_hands.vmat"
 								to = "materials/models/player/soldier/soldier_hands.vmat"
 							},
 							{
-								from = "materials/models/player/soldier/w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
+								from = "v_rocket.vmat"
+								to = "materials/models/weapons/v_rocketlauncher/v_rocket.vmat"
+							},
+							{
+								from = "soldier_sleeves_red.vmat"
+								to = "materials/models/player/soldier/soldier_sleeves_red.vmat"
 							},
 						]
 						use_global_default = false
@@ -338,29 +334,19 @@
 						remaps = 
 						[
 							{
-								from = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-							{
-								from = "materials/models/player/soldier/soldier_red_hq.vmat"
-								to = "materials/models/player/soldier/soldier_blue_hq.vmat"
-							},
-							{
 								from = "materials/models/player/soldier/soldier_hands.vmat"
 								to = "materials/models/player/soldier/soldier_hands.vmat"
+							},
+							{
+								from = "materials/models/player/soldier/soldier_sleeves_red.vmat"
+								to = "materials/models/player/soldier/soldier_sleeves_blue.vmat"
 							},
 						]
 					},
 					{
 						_class = "MaterialGroup"
 						name = "2"
-						remaps = 
-						[
-							{
-								from = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-						]
+						remaps = [  ]
 					},
 					{
 						_class = "MaterialGroup"
@@ -368,25 +354,15 @@
 						remaps = 
 						[
 							{
-								from = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-							{
-								from = "materials/models/player/soldier/soldier_red_hq.vmat"
-								to = "materials/models/player/soldier/soldier_blue_hq.vmat"
+								from = "materials/models/player/soldier/soldier_sleeves_red.vmat"
+								to = "materials/models/player/soldier/soldier_sleeves_blue.vmat"
 							},
 						]
 					},
 					{
 						_class = "MaterialGroup"
 						name = "4"
-						remaps = 
-						[
-							{
-								from = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-						]
+						remaps = [  ]
 					},
 					{
 						_class = "MaterialGroup"
@@ -394,25 +370,15 @@
 						remaps = 
 						[
 							{
-								from = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-							{
-								from = "materials/models/player/soldier/soldier_red_hq.vmat"
-								to = "materials/models/player/soldier/soldier_blue_hq.vmat"
+								from = "materials/models/player/soldier/soldier_sleeves_red.vmat"
+								to = "materials/models/player/soldier/soldier_sleeves_blue.vmat"
 							},
 						]
 					},
 					{
 						_class = "MaterialGroup"
 						name = "6"
-						remaps = 
-						[
-							{
-								from = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-						]
+						remaps = [  ]
 					},
 					{
 						_class = "MaterialGroup"
@@ -420,25 +386,15 @@
 						remaps = 
 						[
 							{
-								from = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-							{
-								from = "materials/models/player/soldier/soldier_red_hq.vmat"
-								to = "materials/models/player/soldier/soldier_blue_hq.vmat"
+								from = "materials/models/player/soldier/soldier_sleeves_red.vmat"
+								to = "materials/models/player/soldier/soldier_sleeves_blue.vmat"
 							},
 						]
 					},
 					{
 						_class = "MaterialGroup"
 						name = "8"
-						remaps = 
-						[
-							{
-								from = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-						]
+						remaps = [  ]
 					},
 					{
 						_class = "MaterialGroup"
@@ -446,12 +402,8 @@
 						remaps = 
 						[
 							{
-								from = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-							{
-								from = "materials/models/player/soldier/soldier_red_hq.vmat"
-								to = "materials/models/player/soldier/soldier_blue_hq.vmat"
+								from = "materials/models/player/soldier/soldier_sleeves_red.vmat"
+								to = "materials/models/player/soldier/soldier_sleeves_blue.vmat"
 							},
 						]
 					},
@@ -612,7 +564,7 @@
 								parent_bone = "root"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -10.9283, -20.0, -20.0 ]
 								hitbox_maxs = [ 10.928331, 0.000046, 0.0 ]
 							},
@@ -621,7 +573,7 @@
 								parent_bone = "bip_upperarm_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.381047, -14.058315, -6.860674 ]
 								hitbox_maxs = [ 2.777832, 0.0, 2.726928 ]
 							},
@@ -630,7 +582,7 @@
 								parent_bone = "bip_upperarm_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -2.587495, 0.0, -2.726921 ]
 								hitbox_maxs = [ 4.381043, 14.05838, 6.311728 ]
 							},
@@ -639,7 +591,7 @@
 								parent_bone = "bip_lowerarm_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.7379, -13.133844, -4.678624 ]
 								hitbox_maxs = [ 4.321864, 8.850441, 5.058723 ]
 							},
@@ -648,7 +600,7 @@
 								parent_bone = "bip_lowerarm_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.32182, -1.088845, -4.078206 ]
 								hitbox_maxs = [ 3.737717, 13.133854, 4.678626 ]
 							},
@@ -657,7 +609,7 @@
 								parent_bone = "bip_wrist_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.423043, -1.506064, -4.606082 ]
 								hitbox_maxs = [ 3.975845, 5.87851, 3.702914 ]
 							},
@@ -666,7 +618,7 @@
 								parent_bone = "bip_wrist_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.975821, -5.878531, -3.702926 ]
 								hitbox_maxs = [ 3.423066, 1.50604, 4.606073 ]
 							},
@@ -675,7 +627,7 @@
 								parent_bone = "bip_hand_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.658195, -5.454004, -2.840721 ]
 								hitbox_maxs = [ 2.311574, 1.57496, 3.408231 ]
 							},
@@ -684,7 +636,7 @@
 								parent_bone = "bip_hand_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -2.395088, -2.369345, -3.122164 ]
 								hitbox_maxs = [ 8.025963, 6.928272, 2.840719 ]
 							},
@@ -693,7 +645,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ 0.0, 0.0, 0.0 ]
 								hitbox_maxs = [ 3.907276, 9.50758, 9.639423 ]
 							},
@@ -702,7 +654,7 @@
 								parent_bone = "rocket"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.444, -1.444, -7.659924 ]
 								hitbox_maxs = [ 1.443999, 1.444, 7.659924 ]
 							},
@@ -711,7 +663,7 @@
 								parent_bone = "bip_thumb_0_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.241916, -3.099541, -2.013925 ]
 								hitbox_maxs = [ 1.509174, 0.351801, 1.056137 ]
 							},
@@ -720,7 +672,7 @@
 								parent_bone = "bip_thumb_0_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.509135, -1.492648, -1.056126 ]
 								hitbox_maxs = [ 1.241953, 3.099564, 3.244394 ]
 							},
@@ -729,7 +681,7 @@
 								parent_bone = "bip_thumb_1_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.241919, -3.176197, -2.263905 ]
 								hitbox_maxs = [ 1.581255, 2.913067, 0.85114 ]
 							},
@@ -738,7 +690,7 @@
 								parent_bone = "bip_thumb_1_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.581229, -2.913068, -0.85114 ]
 								hitbox_maxs = [ 1.241943, 2.625845, 2.263896 ]
 							},
@@ -747,7 +699,7 @@
 								parent_bone = "bip_thumb_2_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.011056, -1.677868, -0.781549 ]
 								hitbox_maxs = [ 1.581261, 1.59267, 0.808567 ]
 							},
@@ -756,7 +708,7 @@
 								parent_bone = "bip_thumb_2_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.581229, -1.592664, -0.808567 ]
 								hitbox_maxs = [ 1.011094, 1.677878, 0.781551 ]
 							},
@@ -765,7 +717,7 @@
 								parent_bone = "bip_index_meta_0_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.79153, -3.307287, -1.785089 ]
 								hitbox_maxs = [ 0.711162, 0.517483, 1.500898 ]
 							},
@@ -774,7 +726,7 @@
 								parent_bone = "bip_index_meta_0_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.711126, -0.517509, -1.500893 ]
 								hitbox_maxs = [ 1.791565, 3.307262, 1.785098 ]
 							},
@@ -783,7 +735,7 @@
 								parent_bone = "bip_index_0_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.174024, -2.892874, -1.92483 ]
 								hitbox_maxs = [ 1.077036, 3.08454, 1.111673 ]
 							},
@@ -792,7 +744,7 @@
 								parent_bone = "bip_index_0_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.077021, -2.206653, -1.111676 ]
 								hitbox_maxs = [ 1.174035, 2.89282, 1.924825 ]
 							},
@@ -801,7 +753,7 @@
 								parent_bone = "bip_index_1_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.982481, -2.658839, -2.875343 ]
 								hitbox_maxs = [ 0.888564, 1.971103, 0.653991 ]
 							},
@@ -810,7 +762,7 @@
 								parent_bone = "bip_index_1_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.888582, -1.97109, -0.654038 ]
 								hitbox_maxs = [ 0.982463, 2.658859, 2.875298 ]
 							},
@@ -819,7 +771,7 @@
 								parent_bone = "bip_index_2_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.897969, -1.529672, -0.988288 ]
 								hitbox_maxs = [ 0.634221, 1.46313, 0.473293 ]
 							},
@@ -828,7 +780,7 @@
 								parent_bone = "bip_index_2_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.634214, -1.46317, -0.473299 ]
 								hitbox_maxs = [ 0.897978, 1.529642, 0.988286 ]
 							},
@@ -837,7 +789,7 @@
 								parent_bone = "bip_middle_meta_0_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.696686, -3.408819, -2.154138 ]
 								hitbox_maxs = [ 0.764605, 0.0, 1.801896 ]
 							},
@@ -846,7 +798,7 @@
 								parent_bone = "bip_middle_meta_0_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.764603, 0.0, -1.801915 ]
 								hitbox_maxs = [ 0.696687, 3.408815, 2.154109 ]
 							},
@@ -855,7 +807,7 @@
 								parent_bone = "bip_middle_0_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.792895, -2.799505, -2.549913 ]
 								hitbox_maxs = [ 1.119267, 2.731914, 1.372065 ]
 							},
@@ -864,7 +816,7 @@
 								parent_bone = "bip_middle_0_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.119277, -2.731895, -1.372096 ]
 								hitbox_maxs = [ 0.792891, 2.799559, 2.54987 ]
 							},
@@ -873,7 +825,7 @@
 								parent_bone = "bip_middle_1_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.792897, -2.906454, -2.363496 ]
 								hitbox_maxs = [ 0.898991, 2.457238, 0.537267 ]
 							},
@@ -882,7 +834,7 @@
 								parent_bone = "bip_middle_1_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.898985, -2.457287, -0.537276 ]
 								hitbox_maxs = [ 0.792903, 2.906411, 2.36349 ]
 							},
@@ -891,7 +843,7 @@
 								parent_bone = "bip_middle_2_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.631783, -1.977588, -0.9663 ]
 								hitbox_maxs = [ 0.811801, 1.444521, 0.460612 ]
 							},
@@ -900,7 +852,7 @@
 								parent_bone = "bip_middle_2_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.811807, -1.444513, -0.46063 ]
 								hitbox_maxs = [ 0.631777, 1.9776, 0.96628 ]
 							},
@@ -909,7 +861,7 @@
 								parent_bone = "bip_ring_meta_0_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.926721, -3.388151, -1.85685 ]
 								hitbox_maxs = [ 0.736182, 0.0, 1.775335 ]
 							},
@@ -918,7 +870,7 @@
 								parent_bone = "bip_ring_meta_0_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.736191, 0.0, -1.775334 ]
 								hitbox_maxs = [ 0.926712, 3.388241, 1.856844 ]
 							},
@@ -927,7 +879,7 @@
 								parent_bone = "bip_ring_0_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.96381, -2.085274, -2.569815 ]
 								hitbox_maxs = [ 0.856215, 2.830306, 1.266112 ]
 							},
@@ -936,7 +888,7 @@
 								parent_bone = "bip_ring_0_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.856201, -2.830353, -1.26611 ]
 								hitbox_maxs = [ 0.963824, 2.085255, 2.569818 ]
 							},
@@ -945,7 +897,7 @@
 								parent_bone = "bip_ring_1_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.920814, -2.447539, -1.987568 ]
 								hitbox_maxs = [ 0.856213, 2.525627, 0.641875 ]
 							},
@@ -954,7 +906,7 @@
 								parent_bone = "bip_ring_1_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.856204, -2.52565, -0.641861 ]
 								hitbox_maxs = [ 0.920824, 2.44752, 1.987576 ]
 							},
@@ -963,7 +915,7 @@
 								parent_bone = "bip_ring_2_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.667771, -1.844144, -0.934837 ]
 								hitbox_maxs = [ 0.621968, 1.15442, 0.455034 ]
 							},
@@ -972,7 +924,7 @@
 								parent_bone = "bip_ring_2_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.621965, -1.154441, -0.455037 ]
 								hitbox_maxs = [ 0.667775, 1.844114, 0.934834 ]
 							},
@@ -981,7 +933,7 @@
 								parent_bone = "bip_pinky_meta_0_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.718687, -3.297543, -1.735326 ]
 								hitbox_maxs = [ 1.884207, 0.691568, 1.608979 ]
 							},
@@ -990,7 +942,7 @@
 								parent_bone = "bip_pinky_meta_0_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.884206, -0.691516, -1.60901 ]
 								hitbox_maxs = [ 0.906208, 4.238991, 1.735295 ]
 							},
@@ -999,7 +951,7 @@
 								parent_bone = "bip_pinky_0_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.83659, -1.951851, -2.28331 ]
 								hitbox_maxs = [ 1.211611, 2.696687, 0.998706 ]
 							},
@@ -1008,7 +960,7 @@
 								parent_bone = "bip_pinky_0_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.211603, -2.679502, -0.998758 ]
 								hitbox_maxs = [ 0.836599, 2.047811, 2.454201 ]
 							},
@@ -1017,7 +969,7 @@
 								parent_bone = "bip_pinky_1_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.789288, -2.075198, -1.649175 ]
 								hitbox_maxs = [ 0.675876, 2.054815, 0.558522 ]
 							},
@@ -1026,7 +978,7 @@
 								parent_bone = "bip_pinky_2_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.584768, -1.525281, -0.941927 ]
 								hitbox_maxs = [ 0.630842, 0.977388, 0.443463 ]
 							},
@@ -1040,7 +992,6 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						name = "c_soldier_arms_bg_body_lod0"
 						filename = "models/weapons/arms/c_soldier_arms/c_soldier_arms.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -4320,6 +4271,7 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/weapons/arms/c_soldier_arms/c_soldier_arms.vanmgrph"
+		base_model_name = ""
 		importer_notes = """
 Imported from compiled VMDL_C
 """
