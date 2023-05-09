@@ -14,10 +14,11 @@
 						switch_threshold = 0.0
 						meshes = 
 						[
-							"body",
-							"grenades",
-							"hat",
-							"rocket",
+							"soldier_morphs_low",
+							"grenades_bodygroup",
+							"hat_bodygroup",
+							"soldier_rocket",
+							"medal_bodygroup",
 						]
 					},
 					{
@@ -25,10 +26,11 @@
 						switch_threshold = 20.0
 						meshes = 
 						[
-							"body_lod1",
-							"grenades_lod1",
-							"hat_lod1",
-							"rocket_lod1",
+							"soldier_lod_01_low",
+							"grenades_lod_01",
+							"hat_lod_01",
+							"soldier_rocket_lod_01",
+							"medal_bodygroup",
 						]
 					},
 					{
@@ -36,10 +38,11 @@
 						switch_threshold = 30.0
 						meshes = 
 						[
-							"body_lod2",
-							"grenades_lod2",
-							"hat_lod2",
-							"rocket_lod2",
+							"soldier_lod_02_low",
+							"grenades_lod_02",
+							"hat_lod_02",
+							"soldier_rocket_lod_02",
+							"medal_bodygroup",
 						]
 					},
 					{
@@ -47,14 +50,16 @@
 						switch_threshold = 40.0
 						meshes = 
 						[
-							"body_lod3",
-							"grenades_lod3",
-							"hat_lod3",
-							"rocket_lod3",
+							"soldier_lod_03_low",
+							"grenades_lod_02",
+							"hat_lod_02",
+							"soldier_rocket_lod_03",
+							"medal_bodygroup",
 						]
 					},
 					{
 						_class = "LODGroup"
+						disabled = true
 						switch_threshold = 50.0
 						meshes = 
 						[
@@ -66,6 +71,7 @@
 					},
 					{
 						_class = "LODGroup"
+						disabled = true
 						switch_threshold = 60.0
 						meshes = 
 						[
@@ -90,12 +96,10 @@
 								_class = "BodyGroupChoice"
 								meshes = 
 								[
-									"body",
-									"body_lod1",
-									"body_lod2",
-									"body_lod3",
-									"body_lod4",
-									"body_lod5",
+									"soldier_morphs_low",
+									"soldier_lod_01_low",
+									"soldier_lod_02_low",
+									"soldier_lod_03_low",
 								]
 							},
 						]
@@ -110,12 +114,9 @@
 								_class = "BodyGroupChoice"
 								meshes = 
 								[
-									"hat",
-									"hat_lod1",
-									"hat_lod2",
-									"hat_lod3",
-									"hat_lod4",
-									"hat_lod5",
+									"hat_bodygroup",
+									"hat_lod_01",
+									"hat_lod_02",
 								]
 							},
 							{
@@ -134,12 +135,9 @@
 								_class = "BodyGroupChoice"
 								meshes = 
 								[
-									"grenades",
-									"grenades_lod1",
-									"grenades_lod2",
-									"grenades_lod3",
-									"grenades_lod4",
-									"grenades_lod5",
+									"grenades_bodygroup",
+									"grenades_lod_01",
+									"grenades_lod_02",
 								]
 							},
 							{
@@ -162,12 +160,29 @@
 								_class = "BodyGroupChoice"
 								meshes = 
 								[
-									"rocket",
-									"rocket_lod1",
-									"rocket_lod2",
-									"rocket_lod3",
-									"rocket_lod4",
-									"rocket_lod5",
+									"soldier_rocket",
+									"soldier_rocket_lod_01",
+									"soldier_rocket_lod_02",
+									"soldier_rocket_lod_03",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "medal"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"medal_bodygroup",
 								]
 							},
 						]
@@ -186,32 +201,28 @@
 						remaps = 
 						[
 							{
-								from = "eyeball_l.vmat"
-								to = "materials/models/player/shared/eyeball_temp_iris_blue.vmat"
-							},
-							{
-								from = "eyeball_r.vmat"
-								to = "materials/models/player/shared/eyeball_temp_iris_blue.vmat"
-							},
-							{
-								from = "soldier_head_red.vmat"
+								from = "models/player/soldier/soldier_head_red.vmat"
 								to = "materials/models/player/soldier/soldier_head.vmat"
 							},
 							{
-								from = "soldier_red.vmat"
+								from = "models/player/soldier/soldier_red.vmat"
 								to = "materials/models/player/soldier/soldier_red.vmat"
 							},
 							{
-								from = "w_rocket01.vmat"
+								from = "models/player/soldier/eyeball_r.vmat"
+								to = "materials/models/player/shared/eyeball_temp_iris_blue.vmat"
+							},
+							{
+								from = "models/player/soldier/eyeball_l.vmat"
+								to = "materials/models/player/shared/eyeball_temp_iris_blue.vmat"
+							},
+							{
+								from = "models/player/soldier/medals.vmat"
+								to = "materials/models/player/items/soldier/medals.vmat"
+							},
+							{
+								from = "models/player/soldier/w_rocket01.vmat"
 								to = "materials/models/weapons/w_rocketlauncher/w_rocket01.vmat"
-							},
-							{
-								from = "soldier_sfm_hands.vmat"
-								to = "materials/models/player/soldier/soldier_sfm_hands.vmat"
-							},
-							{
-								from = "soldier_red_hq.vmat"
-								to = "materials/models/player/soldier/soldier_red_hq.vmat"
 							},
 						]
 						use_global_default = false
@@ -228,12 +239,8 @@
 								to = "materials/models/player/soldier/soldier_blue.vmat"
 							},
 							{
-								from = "materials/models/player/soldier/eyeball_r.vmat"
-								to = "materials/models/player/soldier/eyeball_r.vmat"
-							},
-							{
-								from = "materials/models/player/soldier/soldier_red_hq.vmat"
-								to = "materials/models/player/soldier/soldier_blue_hq.vmat"
+								from = "materials/models/player/items/soldier/medals.vmat"
+								to = "materials/models/player/items/soldier/medals_blue.vmat"
 							},
 						]
 					},
@@ -248,18 +255,6 @@
 								to = "materials/models/player/soldier/soldier_red_invun.vmat"
 							},
 							{
-								from = "materials/models/player/soldier/eyeball_l.vmat"
-								to = "materials/models/player/soldier/eyeball_invun.vmat"
-							},
-							{
-								from = "materials/models/player/soldier/eyeball_r.vmat"
-								to = "materials/models/player/soldier/eyeball_invun.vmat"
-							},
-							{
-								from = "materials/models/player/soldier/soldier_red_hq.vmat"
-								to = "materials/models/player/soldier/soldier_red_invun.vmat"
-							},
-							{
 								from = "materials/models/player/soldier/soldier_head.vmat"
 								to = "materials/models/player/soldier/soldier_head_red_invun.vmat"
 							},
@@ -268,8 +263,8 @@
 								to = "materials/models/player/soldier/eyeball_invun.vmat"
 							},
 							{
-								from = "materials/models/player/soldier/soldier_sfm_hands.vmat"
-								to = "materials/invun/invulnfx_red.vmat"
+								from = "materials/models/player/items/soldier/medals.vmat"
+								to = "materials/models/player/soldier/soldier_red_invun.vmat"
 							},
 						]
 					},
@@ -284,28 +279,16 @@
 								to = "materials/models/player/soldier/soldier_blue_invun.vmat"
 							},
 							{
-								from = "materials/models/player/soldier/eyeball_l.vmat"
-								to = "materials/models/player/soldier/eyeball_invun.vmat"
-							},
-							{
-								from = "materials/models/player/soldier/eyeball_r.vmat"
-								to = "materials/models/player/soldier/eyeball_invun.vmat"
-							},
-							{
-								from = "materials/models/player/soldier/soldier_red_hq.vmat"
-								to = "materials/models/player/soldier/soldier_blue_invun.vmat"
-							},
-							{
 								from = "materials/models/player/shared/eyeball_temp_iris_blue.vmat"
 								to = "materials/models/player/soldier/eyeball_invun.vmat"
 							},
 							{
-								from = "materials/models/player/soldier/soldier_sfm_hands.vmat"
-								to = "materials/invun/invulnfx_blue.vmat"
-							},
-							{
 								from = "materials/models/player/soldier/soldier_head.vmat"
 								to = "materials/models/player/soldier/soldier_head_blue_invun.vmat"
+							},
+							{
+								from = "materials/models/player/items/soldier/medals.vmat"
+								to = "materials/models/player/soldier/soldier_blue_invun.vmat"
 							},
 						]
 					},
@@ -317,9 +300,8 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						name = "body"
-						note = "HD Soldier Mesh"
-						filename = "models/player/soldier/mesh/soldier_morphs_high.dmx"
+						name = "grenades_bodygroup"
+						filename = "models/player/soldier/parts/dmx/grenades_bodygroup.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -335,10 +317,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "body1"
-						note = "SD Soldier Mesh"
-						disabled = true
-						filename = "models/player/soldier/mesh/soldier_morphs_low.dmx"
+						name = "hat_bodygroup"
+						filename = "models/player/soldier/parts/dmx/hat_bodygroup.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -354,8 +334,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "body_lod1"
-						filename = "models/player/soldier/mesh/soldier_morphs_low_lod1.dmx"
+						name = "medal_bodygroup"
+						filename = "models/player/soldier/parts/dmx/medal_bodygroup.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -371,8 +351,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "body_lod2"
-						filename = "models/player/soldier/mesh/soldier_morphs_low_lod2.dmx"
+						name = "soldier_morphs_low"
+						filename = "models/player/soldier/parts/dmx/soldier_morphs_low.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -388,8 +368,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "body_lod3"
-						filename = "models/player/soldier/mesh/soldier_morphs_low_lod3.dmx"
+						name = "soldier_rocket"
+						filename = "models/player/soldier/parts/dmx/soldier_rocket.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -405,8 +385,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "body_lod4"
-						filename = "models/player/soldier/mesh/soldier_morphs_low_lod4.dmx"
+						name = "grenades_lod_01"
+						filename = "models/player/soldier/parts/dmx/grenades_lod_01.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -422,8 +402,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "body_lod5"
-						filename = "models/player/soldier/mesh/soldier_morphs_low_lod5.dmx"
+						name = "hat_lod_01"
+						filename = "models/player/soldier/parts/dmx/hat_lod_01.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -439,20 +419,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "hat"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								note = "Disabled due to breaking with default animations"
-								bone_names = 
-								[
-									"prp_helmet_strap_0L",
-									"prp_helmet_strap_0R",
-								]
-							},
-						]
-						filename = "models/player/soldier/mesh/hat_bodygroup.dmx"
+						name = "soldier_lod_01_low"
+						filename = "models/player/soldier/parts/dmx/soldier_lod_01_low.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -468,20 +436,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "hat_lod1"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								note = "Disabled due to breaking with default animations"
-								bone_names = 
-								[
-									"prp_helmet_strap_0L",
-									"prp_helmet_strap_0R",
-								]
-							},
-						]
-						filename = "models/player/soldier/mesh/hat_bodygroup_lod1.dmx"
+						name = "soldier_rocket_lod_01"
+						filename = "models/player/soldier/parts/dmx/soldier_rocket_lod_01.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -497,20 +453,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "hat_lod2"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								note = "Disabled due to breaking with default animations"
-								bone_names = 
-								[
-									"prp_helmet_strap_0L",
-									"prp_helmet_strap_0R",
-								]
-							},
-						]
-						filename = "models/player/soldier/mesh/hat_bodygroup_lod2.dmx"
+						name = "grenades_lod_02"
+						filename = "models/player/soldier/parts/dmx/grenades_lod_02.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -526,20 +470,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "hat_lod3"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								note = "Disabled due to breaking with default animations"
-								bone_names = 
-								[
-									"prp_helmet_strap_0L",
-									"prp_helmet_strap_0R",
-								]
-							},
-						]
-						filename = "models/player/soldier/mesh/hat_bodygroup_lod3.dmx"
+						name = "hat_lod_02"
+						filename = "models/player/soldier/parts/dmx/hat_lod_02.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -555,20 +487,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "hat_lod4"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								note = "Disabled due to breaking with default animations"
-								bone_names = 
-								[
-									"prp_helmet_strap_0L",
-									"prp_helmet_strap_0R",
-								]
-							},
-						]
-						filename = "models/player/soldier/mesh/hat_bodygroup_lod4.dmx"
+						name = "soldier_lod_02_low"
+						filename = "models/player/soldier/parts/dmx/soldier_lod_02_low.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -584,20 +504,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "hat_lod5"
-						children = 
-						[
-							{
-								_class = "RemoveBoneAndChildren"
-								note = "Disabled due to breaking with default animations"
-								bone_names = 
-								[
-									"prp_helmet_strap_0L",
-									"prp_helmet_strap_0R",
-								]
-							},
-						]
-						filename = "models/player/soldier/mesh/hat_bodygroup_lod5.dmx"
+						name = "soldier_rocket_lod_02"
+						filename = "models/player/soldier/parts/dmx/soldier_rocket_lod_02.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -613,8 +521,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "grenades"
-						filename = "models/player/soldier/mesh/grenades_bodygroup.dmx"
+						name = "soldier_lod_03_low"
+						filename = "models/player/soldier/parts/dmx/soldier_lod_03_low.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -630,178 +538,8 @@
 					},
 					{
 						_class = "RenderMeshFile"
-						name = "grenades_lod1"
-						filename = "models/player/soldier/mesh/grenades_bodygroup_lod1.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "grenades_lod2"
-						filename = "models/player/soldier/mesh/grenades_bodygroup_lod2.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "grenades_lod3"
-						filename = "models/player/soldier/mesh/grenades_bodygroup_lod3.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "grenades_lod4"
-						filename = "models/player/soldier/mesh/grenades_bodygroup_lod4.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "grenades_lod5"
-						filename = "models/player/soldier/mesh/grenades_bodygroup_lod5.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "rocket"
-						filename = "models/player/soldier/mesh/soldier_rocket.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "rocket_lod1"
-						filename = "models/player/soldier/mesh/soldier_rocket_lod1.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "rocket_lod2"
-						filename = "models/player/soldier/mesh/soldier_rocket_lod2.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "rocket_lod3"
-						filename = "models/player/soldier/mesh/soldier_rocket_lod3.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "rocket_lod4"
-						filename = "models/player/soldier/mesh/soldier_rocket_lod4.dmx"
-						import_translation = [ 0.0, 0.0, 0.0 ]
-						import_rotation = [ 0.0, 0.0, 0.0 ]
-						import_scale = 1.0
-						align_origin_x_type = "None"
-						align_origin_y_type = "None"
-						align_origin_z_type = "None"
-						parent_bone = ""
-						import_filter = 
-						{
-							exclude_by_default = false
-							exception_list = [  ]
-						}
-					},
-					{
-						_class = "RenderMeshFile"
-						name = "rocket_lod5"
-						filename = "models/player/soldier/mesh/soldier_rocket_lod5.dmx"
+						name = "soldier_rocket_lod_03"
+						filename = "models/player/soldier/parts/dmx/soldier_rocket_lod_03.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
