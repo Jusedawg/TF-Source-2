@@ -256,6 +256,22 @@
 				children = 
 				[
 					{
+						_class = "DefaultMaterialGroup"
+						remaps = 
+						[
+							{
+								from = "models/player/medic/medic_hands_red.vmat"
+								to = "materials/models/player/medic/medic_hands_red.vmat"
+							},
+							{
+								from = "models/player/medic/medic_red.vmat"
+								to = "materials/models/player/medic/medic_red.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+					{
 						_class = "MaterialGroup"
 						name = "1"
 						remaps = 
@@ -520,7 +536,7 @@
 								parent_bone = "bip_upperarm_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -2.54, -18.92, -3.0 ]
 								hitbox_maxs = [ 3.46, -0.92, 4.0 ]
 							},
@@ -529,7 +545,7 @@
 								parent_bone = "bip_lowerarm_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -2.34, -12.57, -2.51 ]
 								hitbox_maxs = [ 3.66, 2.43, 3.49 ]
 							},
@@ -538,7 +554,7 @@
 								parent_bone = "bip_hand_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -1.81, -7.5, -3.28 ]
 								hitbox_maxs = [ 3.19, 1.5, 3.47 ]
 							},
@@ -547,7 +563,7 @@
 								parent_bone = "bip_upperarm_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.46, 0.92, -4.0 ]
 								hitbox_maxs = [ 2.54, 18.92, 3.0 ]
 							},
@@ -556,7 +572,7 @@
 								parent_bone = "bip_lowerarm_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.66, -3.2, -3.49 ]
 								hitbox_maxs = [ 2.34, 11.81, 2.51 ]
 							},
@@ -565,7 +581,7 @@
 								parent_bone = "bip_hand_r"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.19, -1.5, -3.47 ]
 								hitbox_maxs = [ 1.81, 7.5, 3.28 ]
 							},
@@ -579,7 +595,6 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						name = "c_medic_arms_bg_body_lod0"
 						filename = "models/weapons/arms/c_medic_arms/c_medic_arms.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -2447,6 +2462,7 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "models/weapons/arms/c_medic_arms/c_medic_arms.vanmgrph"
+		base_model_name = ""
 		importer_notes = """
 Imported from compiled VMDL_C
 """

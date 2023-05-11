@@ -65,7 +65,7 @@
 								parent_bone = "mesh"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.724947, -0.773005, -0.005487 ]
 								hitbox_maxs = [ 0.724947, 0.769899, 9.150107 ]
 							},
@@ -74,7 +74,7 @@
 								parent_bone = "mesh"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.724947, -0.773005, -0.005487 ]
 								hitbox_maxs = [ 0.724947, 0.769899, 9.150107 ]
 							},
@@ -131,7 +131,7 @@
 						name = "phys"
 						parent_bone = ""
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						recenter_on_parent_bone = false
 						offset_origin = [ 0.0, 0.0, 0.0 ]
 						offset_angles = [ 90.0, 0.0, 0.0 ]
@@ -156,6 +156,7 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 		importer_notes = """
 Imported from compiled VMDL_C
 """
