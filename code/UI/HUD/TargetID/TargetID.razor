@@ -11,14 +11,14 @@
 
     <div class="container">
         <!-- Stupid hack because theres no way to make a float in razor apparently  -->
-        <HealthCross @ref="Cross" FlashScale=@float.Parse("0.5") />
+        <HealthCross FlashScale=@float.Parse("0.5") @ref="Cross" />
         <div class="labels">
             <div class="profile">
-                <text @ref="Pretext" class="pretext" />
-                <image @ref="Avatar" class="avatar" />
-                <text @ref="Name" class="name" />
+                <text class="pretext" @ref="Pretext" />
+                <image class="avatar" @ref="Avatar" />
+                <text class="name" @ref="Name" />
             </div>
-            <text @ref="Subtext" class="subtext" />
+            <text class="subtext" @ref="Subtext" />
         </div>
     </div>
 
@@ -29,13 +29,3 @@
         </div>
     </div>
 </root>
-
-@code {
-    public HealthCross Cross { get; set; }
-    public Image Avatar { get; set; }
-    public Label Name { get; set; }
-    public Label Subtext { get; set; }
-    public Label Pretext { get; set; }
-    public InputGlyph InteractionButton { get; set; }
-    public Label InteractionText { get; set; }
-}
