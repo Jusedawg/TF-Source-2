@@ -29,6 +29,7 @@ public partial class StickyBomb : TFProjectile
 		DamageInfo = DamageInfo.WithTag( TFDamageTags.Blast );
 		FaceVelocity = false;
 		AutoDestroyTime = null;
+		EnableShadowCasting = false;
 	}
 
 	protected override void OnPhysicsCollision( CollisionEventData eventData )

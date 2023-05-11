@@ -14,8 +14,8 @@ public partial class Grenade : TFProjectile
 		MoveType = ProjectileMoveType.Physics;
 		DamageInfo = DamageInfo.WithTag(TFDamageTags.Blast);
 		FaceVelocity = false;
-
 		AutoExplodeTime = GetExplodeTime();
+		EnableShadowCasting = false;
 	}
 
 	public override void OnTraceTouch( Entity other, TraceResult trace )
