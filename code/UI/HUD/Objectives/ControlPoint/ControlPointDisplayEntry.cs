@@ -33,13 +33,13 @@ partial class ControlPointDisplayEntry : Panel
 		return true;
 	}
 
-	public Vector2 GetArrowDirectionForTeam( TFTeam team )
+	public int GetArrowDirectionForTeam( TFTeam team )
 	{
 		return team switch
 		{
-			TFTeam.Red => Vector2.Left,
-			TFTeam.Blue => Vector2.Right,
-			_ => Vector2.Zero,
+			TFTeam.Red => 1, // left
+			TFTeam.Blue => -1, // right
+			_ => 0, // invalid
 		};
 	}
 
@@ -59,21 +59,21 @@ partial class ControlPointDisplayEntry : Panel
 
 	public void UpdatePointer( TFPlayer player )
 	{
-		var iOwnerTeam = Point.OwnerTeam;
-		var iCappingTeam = Point.CapturingTeam;
-		var iPlayerTeam = player.Team;
+		var ownerTeam = Point.OwnerTeam;
+		var cappingTeam = Point.CapturingTeam;
+		var playerTeam = player.Team;
 		var bCapBlocked = Point.Blocked;
 
 		PointerMessage.Text = GetPointerText( player );
 
-		if ( !bCapBlocked && iCappingTeam != TFTeam.Unassigned && iCappingTeam != iOwnerTeam && iCappingTeam == iPlayerTeam )
+		if ( !bCapBlocked && cappingTeam != TFTeam.Unassigned && cappingTeam != ownerTeam && cappingTeam == playerTeam )
 		{
-			CapperProgressPanel.SetClass( "red", iCappingTeam == TFTeam.Red );
-			CapperProgressPanel.SetClass( "blue", iCappingTeam == TFTeam.Blue );
+			CapperProgressPanel.SetClass( "red", cappingTeam == TFTeam.Red );
+			CapperProgressPanel.SetClass( "blue", cappingTeam == TFTeam.Blue );
 			CapperProgressPanel.SetClass( "visible", true );
 
-			OwnerProgressPanel.SetClass( "red", iCappingTeam == TFTeam.Red );
-			OwnerProgressPanel.SetClass( "blue", iCappingTeam == TFTeam.Blue );
+			OwnerProgressPanel.SetClass( "red", cappingTeam == TFTeam.Red );
+			OwnerProgressPanel.SetClass( "blue", cappingTeam == TFTeam.Blue );
 			OwnerProgressPanel.SetClass( "visible", true );
 
 			BlockedPanel.SetClass( "visible", false );
@@ -188,20 +188,20 @@ partial class ControlPointDisplayEntry : Panel
 		{
 			float remainingTime = Point.TimeRemaining;
 			float totalTime = Point.TimeToCapture;
-			float perc = 1 - Math.Clamp( remainingTime / totalTime, 0, 1 );
+			float progressPercent = 1 - Math.Clamp( remainingTime / totalTime, 0, 1 );
 
 			// original size
-			float fullsize = -1.35f;
-			float delta = fullsize * perc;
-			float pos = delta;
+			int direction = GetArrowDirectionForTeam( capteam ); ;
+			float fullsize = -1.25f;
+			float leftOffset = fullsize * progressPercent;
 
-			var dir = GetArrowDirectionForTeam( capteam );
-			dir *= pos;
-			dir += fullsize;
-			dir -= 0.01f;
+			leftOffset *= direction;
+			leftOffset += fullsize;
+			//pos -= 0.05f * direction;
 
-			ProgressArrow.Style.Set( "left", $"{dir.x * 100}%" );
+			ProgressArrow.Style.Set( "left", $"{leftOffset * 100}%" );
 			// ProgressIndicator.Style.Set( "top", $"{dir.y * 100}%" );
+			DebugOverlay.ScreenText( $"progress: {progressPercent}/{leftOffset * 100}/{direction}", 2 );
 
 			if ( !IsPulsing ) Pulse( .8f );
 		}
