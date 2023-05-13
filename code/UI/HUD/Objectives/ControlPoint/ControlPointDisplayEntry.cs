@@ -201,7 +201,6 @@ partial class ControlPointDisplayEntry : Panel
 
 			ProgressArrow.Style.Set( "left", $"{leftOffset * 100}%" );
 			// ProgressIndicator.Style.Set( "top", $"{dir.y * 100}%" );
-			DebugOverlay.ScreenText( $"progress: {progressPercent}/{leftOffset * 100}/{direction}", 2 );
 
 			if ( !IsPulsing ) Pulse( .8f );
 		}
