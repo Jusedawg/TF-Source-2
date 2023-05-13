@@ -20,17 +20,17 @@ partial class TFGameRules
 	{
 		var prevPoints = point.GetPreviousPointsForTeam( team );
 
+		// can't cap if it's locked
+		if ( point.Locked )
+			return false;
+
 		// we can't set ourselves as previous point, assume null.
-		foreach(var prevPoint in prevPoints)
+		foreach (var prevPoint in prevPoints)
 		{
 			if ( prevPoint == point )
 				continue;
 
 			if ( prevPoint != null && prevPoint.OwnerTeam != team )
-				return false;
-
-			// can't cap if it's locked
-			if ( point.Locked )
 				return false;
 		}
 

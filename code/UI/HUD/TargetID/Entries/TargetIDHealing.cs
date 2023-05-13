@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace TFS2;
 
+[StyleSheet( "/UI/HUD/TargetID/TargetID.scss" )]
 public partial class TargetIDHealing : TargetID
 {
 	public static TargetIDHealing Current;

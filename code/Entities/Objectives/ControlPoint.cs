@@ -331,7 +331,7 @@ public partial class ControlPoint : BaseTrigger
 		else
 		{
 			// If there are any teams in the zone that aren't the owner, try to start capping
-			if ( iTeamsInZone > 0 )
+			if ( iTeamsInZone > 0 && !Locked )
 			{
 				foreach ( TFTeam team in Enum.GetValues( typeof( TFTeam ) ) )
 				{
@@ -528,7 +528,7 @@ public partial class ControlPoint : BaseTrigger
 	{
 		switch ( team )
 		{
-			case TFTeam.Red: return All.FirstOrDefault( x => x.PreviousRedPoints.Contains(this) );
+			case TFTeam.Red: return All.FirstOrDefault( x => x.PreviousRedPoints.Contains( this ) );
 			case TFTeam.Blue: return All.FirstOrDefault( x => x.PreviousBluePoints.Contains( this ) );
 			default: return null;
 		}

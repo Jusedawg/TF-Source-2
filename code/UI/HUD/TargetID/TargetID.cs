@@ -9,6 +9,13 @@ namespace TFS2;
 public partial class TargetID : Panel
 {
 	public ITargetID Target { get; set; }
+	public HealthCross Cross { get; set; }
+	public Image Avatar { get; set; }
+	public Label Name { get; set; }
+	public Label Subtext { get; set; }
+	public Label Pretext { get; set; }
+	public InputGlyph InteractionButton { get; set; }
+	public Label InteractionText { get; set; }
 
 	public override void Tick()
 	{

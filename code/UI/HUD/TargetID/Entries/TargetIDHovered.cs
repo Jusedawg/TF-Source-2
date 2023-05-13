@@ -4,6 +4,7 @@ using Amper.FPS;
 
 namespace TFS2;
 
+[StyleSheet( "/UI/HUD/TargetID/TargetID.scss" )]
 public partial class TargetIDHovered : TargetID
 {
 	public override ITargetID FindTarget()
