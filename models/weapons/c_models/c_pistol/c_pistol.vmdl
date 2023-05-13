@@ -41,7 +41,7 @@
 				[
 					{
 						_class = "PhysicsBodyMarkup"
-						target_body = "c_pistol_reference"
+						target_body = "weapon_bone"
 						mass_override = 1.0
 						inertia_scale = 1.0
 						linear_damping = 0.0
@@ -58,16 +58,16 @@
 					{
 						_class = "PhysicsHullFile"
 						name = "c_pistol_reference_0_mesh"
-						parent_bone = "c_pistol_reference"
+						parent_bone = "weapon_bone"
 						surface_prop = "default"
 						collision_tags = "solid"
-						recenter_on_parent_bone = true
+						recenter_on_parent_bone = false
 						offset_origin = [ 0.0, 0.0, 0.0 ]
 						offset_angles = [ 0.0, 0.0, 0.0 ]
 						align_origin_x_type = "None"
 						align_origin_y_type = "None"
 						align_origin_z_type = "None"
-						filename = "models\\weapons\\c_models\\c_pistol\\c_pistol_fbx\\physics\\physmesh.dmx"
+						filename = "models/weapons/v_models/v_pistol_scout/v_pistol_scout.dmx"
 						import_scale = 1.0
 						faceMergeAngle = 10.0
 						maxHullVertices = 0
@@ -79,6 +79,9 @@
 							exception_list = 
 							[
 								"c_pistol_reference_0_mesh",
+								"Plane_007",
+								"Plane",
+								"Circle",
 							]
 						}
 					},
@@ -324,7 +327,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models\\weapons\\c_models\\c_pistol\\c_pistol_fbx\\anim\\idle.dmx"
+						source_filename = "models/weapons/v_models/v_pistol_scout/v_pistol_scout.dmx"
 						start_frame = -1
 						end_frame = -1
 						framerate = 30.0
