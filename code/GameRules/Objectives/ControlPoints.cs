@@ -18,9 +18,6 @@ partial class TFGameRules
 	/// </summary>
 	public bool TeamMayCapturePoint( TFTeam team, ControlPoint point )
 	{
-		if ( !PointsMayBeCaptured() )
-			return false;
-
 		var prevPoints = point.GetPreviousPointsForTeam( team );
 
 		// can't cap if it's locked
