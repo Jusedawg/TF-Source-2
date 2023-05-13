@@ -146,7 +146,7 @@ PS
 		Material material = GatherMaterial(i);
 
 		//Animate normal by changing uv sample start and scale down "size"
-		#if S_ANIMATED_NORMAL
+#if S_ANIMATED_NORMAL
 
 		float2 uv = i.vTextureCoords.xy;
 		float2 scale = float2(1 / g_AnimatedGrid.x, 1 / g_AnimatedGrid.y);
@@ -157,15 +157,18 @@ PS
 
         //Sample normal and blend via "whiteout" blend method
         float3 animatedNormalSample = Tex2DS(g_tAnimatedNormal, TextureFiltering, clamp(uv + uvStart, float2(0.001, 0.001), float2(0.999, 0.999))).rgb * 2 - 1;
-        float3 normalAdj = material.Normal * 2.0f - 1.0f;
-        float3 r = normalize(float3(normalAdj.xy + animatedNormalSample.xy, normalAdj.z * animatedNormalSample.z));
-		material.Normal = r * 0.5f + 0.5f;
-
-        #endif
+        animatedNormalSample = Vec3TsToWsNormalized(animatedNormalSample, i.vNormalWs.xyz, i.vTangentUWs, i.vTangentVWs);
+        //float3 normalAdj = material.Normal * 2.0f - 1.0f;
+        //float3 r = normalize(float3(normalAdj.xy + animatedNormalSample.xy, normalAdj.z * animatedNormalSample.z));
+		//material.Normal = r * 0.5f + 0.5f;
+        
+        //FIX: Just make normal be cubemap normal in WS
+        material.Normal = animatedNormalSample;
+#endif
 
         //Get normal including the normal map
-		float3 reflectionNormal = Vec3TsToWsNormalized(material.Normal * 2.0f - 1.0f, i.vNormalWs.xyz, i.vTangentUWs, i.vTangentVWs);
-		
+		float3 reflectionNormal = material.Normal;
+
 		//Get fresnel value using normal vector
 		float3 dirToCamera = normalize(i.vPositionWithOffsetWs);
 		float fresnel = FresnelRange(reflectionNormal, dirToCamera, g_FresnelRange);
@@ -209,7 +212,8 @@ PS
 		rimlight *= rimlightDirectionMultiplier;
 
 		//Finalise output, add reflection to lit output via "lighten" mode, add rimlight
-		float4 o = FinalizePixelMaterial( i, material );
+        ShadingModelValveStandard shading;
+		float4 o = FinalizePixelMaterial( i, material, shading );
 		o.rgb = float3(max(reflectionColor.x, o.x), max(reflectionColor.y, o.y), max(reflectionColor.z, o.z));
 		o.rgb += rimlight.rgb;
 
