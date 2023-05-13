@@ -21,6 +21,7 @@
     public ReadyUp()
     {
         EventDispatcher.Subscribe<ClientReadyToggleEvent>(OnClientReadyToggle, this);
+        EventDispatcher.Subscribe<RoundRestartEvent>(OnRoundRestart, this);
     }
 
     int lastClientCount = 0;
@@ -30,10 +31,6 @@
         {
             lastClientCount = Game.Clients.Count;
             StateHasChanged();
-            foreach (var cl in Game.Clients)
-            {
-                Log.NetInfo($"{cl.Name} ready: {TFGameRules.Current.IsReady(cl)}");
-            }
         }
 
         SetClass("visible", TFGameRules.Current?.State == GameState.ReadyUp);
@@ -54,6 +51,11 @@
     }
 
     private void OnClientReadyToggle(ClientReadyToggleEvent ev)
+    {
+        StateHasChanged();
+    }
+
+    private void OnRoundRestart(RoundRestartEvent ev)
     {
         StateHasChanged();
     }
