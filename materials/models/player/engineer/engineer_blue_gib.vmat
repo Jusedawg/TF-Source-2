@@ -1,6 +1,27 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/complex.shader_c"
-	"TextureColor"		"materials/models/player/engineer/engineer_blue_gib.tga"
-	"TextureNormal"		"materials/models/player/engineer/engineer_normal.png"
+	shader "shaders/sourcebox/sourcebox_skin.shader_c"
+
+	//---- Rendering ----
+	F_LIGHTWARPTEXTURE 1
+	F_RIMLIGHT 1
+
+	//---- Attributes ----
+	g_flBaseMapAlphaPhongMask "0.000"
+	g_flRimBoost "2.000"
+	g_flRimExponent "4.000"
+	g_flRimMask "0.000"
+	g_flSpecularBoost "0.500"
+	g_flSpecularExponent "15.000"
+	g_vDiffuseModulation "[1.000000 1.000000 1.000000 1.000000]"
+	g_vSourceFresnelRanges "[1.000 10.000 20.000]"
+	g_vSpecularTint "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Material ----
+	Color "materials/models/player/engineer/engineer_blue_gib.tga"
+	LightWarpTexture "materials/models/player/pyro/pyro_lightwarp.tga"
+	Normal "materials/models/player/engineer/engineer_normal.tga"
+	SpecularExponentTexture ""
 }
