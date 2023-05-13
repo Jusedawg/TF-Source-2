@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://tfsource2.com/engine/applications/blog/templates/tfs2/assets/images/tfs2_rect_logotype.png">
+	<img src="https://github.com/AmperSoftware/TF-Source-2/blob/578f0c8578c6fb729d926a69d0931bea035bf39d/ui/Menu/tfs2_logotype.png">
 </p>
 <hr>
 
