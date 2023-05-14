@@ -20,10 +20,12 @@ partial class TFPlayer
 	{
 		if ( InCondition( TFCondition.Taunting ) ) return;
 
-		else if ( Input.Pressed( "Taunt" ) )
+		
+		else if ( Input.Pressed( "Inspect" ) )
 		{
 			SwapCamera();
 		}
+		
 	}
 
 	public override void CalculatePlayerView()

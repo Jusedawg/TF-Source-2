@@ -414,8 +414,8 @@ partial class TFPlayer
 			TauntPropModel.Delete();
 		if ( weapon != null && weapon.EnableDrawing == false )
 			weapon.EnableDrawing = true;
-		if ( !StayThirdperson )
-			ThirdpersonSet( false );
+
+		ThirdpersonSet( StayThirdperson );
 	}
 
 	#region Partner Taunt Logic
