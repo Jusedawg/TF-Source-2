@@ -110,6 +110,11 @@ public class DamageNumberInstance : Label
 		AddClass( "number" );
 		AddDamage( damage );
 
+		CalculatePosition();
+	}
+
+	public void CalculatePosition()
+	{
 		Position = Target.WorldSpaceBounds.Center.WithZ( Target.WorldSpaceBounds.Maxs.z + 10 );
 	}
 
@@ -118,6 +123,7 @@ public class DamageNumberInstance : Label
 		Damage += damage;
 		SetText( $"{(Damage > 0 ? "-" : "+")}{MathF.Ceiling( Damage )}" );
 		TimeSinceCreated = 0;
+		CalculatePosition();
 	}
 
 	public override void Tick()
