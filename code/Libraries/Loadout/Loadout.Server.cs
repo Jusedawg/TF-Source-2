@@ -48,21 +48,6 @@ partial class Loadout
 		loadout.OnUpdated();
 	}
 
-	public Task RequestDataFromClientAsync()
-	{
-		// bot's dont have loadouts, return completed task right away.
-		if ( Client.IsBot ) 
-			return GameTask.CompletedTask;
-
-		return GameTask.RunInThreadAsync( () =>
-		{
-			var t = new TaskCompletionSource();
-			RequestDataFromClient( r => { t.TrySetResult(); } );
-
-			return t.Task;
-		} );
-	}
-
 	/// <summary>
 	/// Request loadout information from client.
 	/// </summary>

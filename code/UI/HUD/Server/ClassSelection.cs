@@ -199,7 +199,7 @@ public class ClassSelectionPlayerModel : ScenePanel
 		}
 	}
 
-	public async void PreviewClass( PlayerClass pclass )
+	public void PreviewClass( PlayerClass pclass )
 	{
 		if ( Sandbox.Game.LocalPawn is not TFPlayer player ) return;
 
@@ -228,7 +228,7 @@ public class ClassSelectionPlayerModel : ScenePanel
 		// Fetch the player's inventory for the weapon preview...
 		Loadout loadout = Loadout.ForClient( Sandbox.Game.LocalClient );
 		// and get the weapon for the preview slot.
-		WeaponData previewWeapon = await loadout.GetLoadoutItemAsync( pclass, GetPreviewWeaponSlot() );
+		WeaponData previewWeapon = loadout.GetLoadoutItem( pclass, GetPreviewWeaponSlot() );
 		if ( previewWeapon == null ) return;
 
 		// Ensure it has a valid world model.

@@ -19,10 +19,6 @@ public partial class ItemSelection : MenuOverlay
 	{
 		return Loadout.LocalLoadout.GetLoadoutItem( PlayerClass, Slot );
 	}
-	private async Task<WeaponData> GetEquippedAsync()
-	{
-		return await Loadout.LocalLoadout.GetLoadoutItemAsync( PlayerClass, Slot );
-	}
 
 	public void OnClickBack()
 	{

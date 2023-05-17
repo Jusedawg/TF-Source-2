@@ -16,12 +16,12 @@ partial class Loadout
 		LocalLoadout.SendDataToServer();
 	}
 
-	public async void SendDataToServer()
+	public void SendDataToServer()
 	{
 		Game.AssertClient();
 
 		// Make sure our loadout is loaded before we access it.
-		await LoadAsync();
+		Load();
 
 		if ( IsDataValid() )
 		{

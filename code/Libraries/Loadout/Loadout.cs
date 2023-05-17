@@ -105,41 +105,6 @@ public partial class Loadout : BaseNetworkable
 		}
 	}
 
-	/// <summary>
-	/// Load the loadout from the appropriate source if not yet loaded.
-	/// </summary>
-	/// <returns></returns>
-	public async Task LoadAsync()
-	{
-		State = LoadoutState.Loaded;
-		if ( !NeedsReload() )
-			return;
-
-		State = LoadoutState.Loading;
-
-		if ( Client.IsBot )
-		{
-			// This client is a bot, don't bother requesting loadout...
-			State = LoadoutState.Unavailable;
-		}
-		else
-		{
-			if ( Game.IsClient )
-			{
-				// if we're on the client, load data from disk.
-				LoadDataFromDisk();
-			}
-			else
-			{
-				// if we're on server, request data from client.
-				await RequestDataFromClientAsync();
-			}
-
-			if ( Data == null ) State = LoadoutState.Failed;
-			else State = LoadoutState.Loaded;
-		}
-	}
-
 	public bool NeedsReload()
 	{
 		if ( State == LoadoutState.Loading )
@@ -223,12 +188,6 @@ public partial class Loadout : BaseNetworkable
 			return defaultItem;
 
 		return weapondata;
-	}
-
-	public async Task<WeaponData> GetLoadoutItemAsync( PlayerClass pclass, TFWeaponSlot slot )
-	{
-		await LoadAsync();
-		return GetLoadoutItem(pclass, slot, false);
 	}
 
 	/// <summary>
