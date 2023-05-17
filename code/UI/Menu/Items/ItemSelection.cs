@@ -15,15 +15,13 @@ public partial class ItemSelection : MenuOverlay
 		Slot = slot;
 	}
 
-	private WeaponData GetEquipped() => GetEquippedAsync().Result;
+	private WeaponData GetEquipped()
+	{
+		return Loadout.LocalLoadout.GetLoadoutItem( PlayerClass, Slot );
+	}
 	private async Task<WeaponData> GetEquippedAsync()
 	{
-		var loadout = Loadout.LocalLoadout;
-		await loadout.Load();
-
-		// Add the currently equipped weapon.
-		var equipped = await loadout.GetLoadoutItem( PlayerClass, Slot );
-		return equipped;
+		return await Loadout.LocalLoadout.GetLoadoutItemAsync( PlayerClass, Slot );
 	}
 
 	public void OnClickBack()

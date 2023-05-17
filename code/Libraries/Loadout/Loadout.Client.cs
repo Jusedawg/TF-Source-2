@@ -21,7 +21,7 @@ partial class Loadout
 		Game.AssertClient();
 
 		// Make sure our loadout is loaded before we access it.
-		await Load();
+		await LoadAsync();
 
 		if ( IsDataValid() )
 		{

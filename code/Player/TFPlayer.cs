@@ -126,7 +126,7 @@ public partial class TFPlayer : SDKPlayer
 		CreateTauntList();
 	}
 
-	public async void RegenerateWeaponsForClass( PlayerClass pclass )
+	public void RegenerateWeaponsForClass( PlayerClass pclass )
 	{
 		// getting loadout for this client
 		var loadout = Loadout.ForClient( Client );
@@ -134,7 +134,7 @@ public partial class TFPlayer : SDKPlayer
 		foreach ( TFWeaponSlot slot in Enum.GetValues( typeof( TFWeaponSlot ) ) )
 		{
 			// get the weapons in our loadout for this slot.
-			var data = await loadout.GetLoadoutItem( pclass, slot );
+			var data = loadout.GetLoadoutItem( pclass, slot );
 
 			// No weapon here
 			if ( !data.IsValid() )

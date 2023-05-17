@@ -74,12 +74,42 @@ public partial class Loadout : BaseNetworkable
 		State = LoadoutState.Invalid;
 		Data = null;
 	}
+	public void Load()
+	{
+		State = LoadoutState.Loaded;
+		if ( !NeedsReload() )
+			return;
+
+		State = LoadoutState.Loading;
+
+		if ( Client.IsBot )
+		{
+			// This client is a bot, don't bother requesting loadout...
+			State = LoadoutState.Unavailable;
+		}
+		else
+		{
+			if ( Game.IsClient )
+			{
+				// if we're on the client, load data from disk.
+				LoadDataFromDisk();
+			}
+			else
+			{
+				// if we're on server, request data from client.
+				RequestDataFromClient();
+			}
+
+			if ( Data == null ) State = LoadoutState.Failed;
+			else State = LoadoutState.Loaded;
+		}
+	}
 
 	/// <summary>
 	/// Load the loadout from the appropriate source if not yet loaded.
 	/// </summary>
 	/// <returns></returns>
-	public async Task Load()
+	public async Task LoadAsync()
 	{
 		State = LoadoutState.Loaded;
 		if ( !NeedsReload() )
@@ -152,7 +182,7 @@ public partial class Loadout : BaseNetworkable
 		TimeSinceDataUpdated = 0;
 	}
 
-	public async Task<WeaponData> GetLoadoutItem( PlayerClass pclass, TFWeaponSlot slot )
+	public WeaponData GetLoadoutItem( PlayerClass pclass, TFWeaponSlot slot, bool reloadLoadout = true )
 	{
 		if ( pclass == null )
 			return null;
@@ -164,7 +194,8 @@ public partial class Loadout : BaseNetworkable
 			return null;
 
 		// find the item from loadout
-		await Load();
+		if(reloadLoadout)
+			Load();
 
 		// Loadout data was unavailable, use stock.
 		if ( !IsDataValid() )
@@ -192,6 +223,12 @@ public partial class Loadout : BaseNetworkable
 			return defaultItem;
 
 		return weapondata;
+	}
+
+	public async Task<WeaponData> GetLoadoutItemAsync( PlayerClass pclass, TFWeaponSlot slot )
+	{
+		await LoadAsync();
+		return GetLoadoutItem(pclass, slot, false);
 	}
 
 	/// <summary>

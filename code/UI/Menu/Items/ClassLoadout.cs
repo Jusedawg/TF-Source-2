@@ -23,7 +23,7 @@ public partial class ClassLoadout : MenuOverlay
 
 	public WeaponData GetWeaponForSlot(TFWeaponSlot slot)
 	{
-		var wpn = Loadout.LocalLoadout.GetLoadoutItem( PlayerClass, slot ).Result;
+		var wpn = Loadout.LocalLoadout.GetLoadoutItemAsync( PlayerClass, slot ).Result;
 		if ( wpn != null )
 			return wpn;
 		else
