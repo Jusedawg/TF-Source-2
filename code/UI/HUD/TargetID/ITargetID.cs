@@ -9,6 +9,11 @@ public interface ITargetID : IValid
 	public TFTeam Team { get; }
 	public Entity Entity => this as Entity;
 }
+public interface ITargetIDSubtext
+{
+	public bool HasSubtext => !string.IsNullOrWhiteSpace( Subtext );
+	public string Subtext { get; }
+}
 
 public interface IInteractableTargetID : ITargetID
 {

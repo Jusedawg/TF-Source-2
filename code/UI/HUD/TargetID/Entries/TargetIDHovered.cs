@@ -62,9 +62,9 @@ public partial class TargetIDHovered : TargetID
 
 	public override bool UpdateSubtext( Label label )
 	{
-		if ( Target is TFWeaponBase weapon )
+		if ( Target is ITargetIDSubtext t )
 		{
-			label.Text = $"Dropped by: {weapon.OriginalOwner.Name}";
+			label.Text = t.Subtext;
 			return true;
 		}
 
