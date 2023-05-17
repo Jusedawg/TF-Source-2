@@ -11,7 +11,7 @@ partial class TFWeaponBase : IInteractableTargetID, ITargetIDSubtext
 
 	bool IInteractableTargetID.CanInteract( TFPlayer user ) => IsUsable( user );
 	string IInteractableTargetID.InteractText => "Pickup";
-	string IInteractableTargetID.InteractButton => "Interact";
+	string IInteractableTargetID.InteractButton => "Inspect";
 
 	string ITargetIDSubtext.Subtext => $"Dropped by: {OriginalOwner.Name}";
 }
