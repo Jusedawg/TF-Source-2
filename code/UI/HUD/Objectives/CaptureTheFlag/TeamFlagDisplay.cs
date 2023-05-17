@@ -44,10 +44,10 @@ public partial class TeamFlagDisplay : Panel
 			Limit.Text = "";
 		}
 
-		var ourFlags = Flags.Keys;
+		var knownFlags = Flags.Keys;
 
-		foreach ( var item in flags.Except( flags ) ) AddFlag( item );
-		foreach ( var item in ourFlags.Except( flags ) ) RemoveFlag( item );
+		foreach ( var item in flags.Except( knownFlags ) ) AddFlag( item );
+		foreach ( var item in knownFlags.Except( flags ) ) RemoveFlag( item );
 
 		// Local Flag
 		var hasFlag = TryGetLocalPlayerPickedFlag( out var flag );
