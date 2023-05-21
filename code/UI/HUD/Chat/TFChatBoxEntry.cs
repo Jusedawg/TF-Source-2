@@ -31,9 +31,6 @@ namespace TFS2.UI
 			base.Tick();
 
 			Wrapper.Style.Opacity = GetOpacity();
-
-			if ( TimeSinceCreated > 30 )
-				Delete();
 		}
 
 		public float GetOpacity()

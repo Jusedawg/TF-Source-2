@@ -187,6 +187,7 @@ namespace TFS2.UI
 			Instance.AddString( msg );
 		}
 
+		const int MAX_MESSAGES = 100;
 		public void AddString( ColorFormattedString message )
 		{
 			// Check if the razor layout is done
@@ -195,6 +196,8 @@ namespace TFS2.UI
 
 			var entry = new TFChatBoxEntry( message );
 			MessagesContainer?.AddChild( entry );
+			if ( MessagesContainer.ChildrenCount > MAX_MESSAGES )
+				MessagesContainer?.GetChild( 0 )?.Delete();
 		}
 
 		public void Say( string message, ChatType type )
