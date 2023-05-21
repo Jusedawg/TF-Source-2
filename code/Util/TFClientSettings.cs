@@ -37,9 +37,11 @@ internal class TFClientSettings
 	public bool AutoZoomIn { get; set; } = true;
 
 	[Display( Name = "#GameSettings.Setting.LastHitSoundVolume", Description = "#GameSettings.Description.LastHitSoundVolume", GroupName = SoundGroup )]
+	[MinMax( 1f, 10f )]
 	public float LastHitSoundVolume { get; set; } = 1f;
 
 	[Display( Name = "#GameSettings.Setting.HitSoundVolume", Description = "#GameSettings.Description.HitSoundVolume", GroupName = SoundGroup )]
+	[MinMax( 1f, 10f )]
 	public float HitSoundVolume { get; set; } = 1f;
 
 	[Display( Name = "#GameSettings.Setting.PlayHitSound", Description = "#GameSettings.Description.PlayHitSound", GroupName = SoundGroup )]
@@ -49,6 +51,7 @@ internal class TFClientSettings
 	public bool PlayLastHitSound { get; set; } = true;
 
 	[Display( Name = "#GameSettings.Setting.ViewmodelFov", Description = "#GameSettings.Description.ViewmodelFov", GroupName = CombatGroup )]
+	[MinMax( 70, 95 )]
 	public int ViewmodelFov { get; set; } = 70;
 
 	[Display( Name = "#GameSettings.Setting.SayTextTime", Description = "#GameSettings.Description.SayTextTime", GroupName = SocialGroup )]
