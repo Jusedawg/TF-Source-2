@@ -51,6 +51,14 @@ internal class TFClientSettings
 	[Display( Name = "#GameSettings.Setting.ViewmodelFov", Description = "#GameSettings.Description.ViewmodelFov", GroupName = CombatGroup )]
 	public int ViewmodelFov { get; set; } = 70;
 
+	[Display( Name = "#GameSettings.Setting.SayTextTime", Description = "#GameSettings.Description.SayTextTime", GroupName = SocialGroup )]
+	[MinMax( 15, 45 )]
+	public int SayTextTime { get; set; } = 15;
+
+	[Display( Name = "#GameSettings.Setting.SayTextFadeTime", Description = "#GameSettings.Description.SayTextFadeTime", GroupName = SocialGroup )]
+	[MinMax( 1f, 5f )]
+	public float SayTextFadeTime { get; set; } = 1f;
+
 	/*[Display( Name = "#GameSettings.Setting.GenericVolume", Description = "#GameSettings.Description.GenericVolume", GroupName = SoundGroup )]
 	public float GenericVolume { get; set; } = 1f;
 

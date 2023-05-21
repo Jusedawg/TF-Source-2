@@ -13,8 +13,8 @@ namespace TFS2.UI
 	{
 		public TimeSince TimeSinceCreated { get; set; }
 		ColorFormattedString Text { get; set; }
-		bool IsFaded => TimeSinceCreated > (hud_saytext_time + hud_saytext_fadetime);
-		bool IsFading => !IsFaded && TimeSinceCreated > hud_saytext_time;
+		bool IsFaded => TimeSinceCreated > (TFClientSettings.Current.SayTextTime + TFClientSettings.Current.SayTextFadeTime);
+		bool IsFading => !IsFaded && TimeSinceCreated > TFClientSettings.Current.SayTextTime;
 
 		public TFChatBoxEntry( ColorFormattedString text )
 		{
@@ -43,14 +43,11 @@ namespace TFS2.UI
 
 			if ( IsFading )
 			{
-				float lerp = (TimeSinceCreated - hud_saytext_time) / hud_saytext_fadetime;
+				float lerp = (TimeSinceCreated - TFClientSettings.Current.SayTextTime) / TFClientSettings.Current.SayTextFadeTime;
 				return lerp.RemapClamped( 0, 1, 1, 0 );
 			}
 
 			return 1;
 		}
-
-		[ConVar.Client] public static float hud_saytext_time { get; set; } = 15;
-		[ConVar.Client] public static float hud_saytext_fadetime { get; set; } = 1;
 	}
 }
