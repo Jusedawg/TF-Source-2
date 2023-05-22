@@ -15,7 +15,7 @@ namespace TFS2
 	[Library("tf_cart", Title = "Payload Cart" ,Group = "Objectives")]
 	[Model(Model = "models/props_trainyard/bomb_cart.vmdl" )]
 	[HammerEntity]
-	public partial class Cart : AnimatedEntity, ITeam
+	public partial class Cart : AnimatedEntity, ITeam, IResettable
 	{
 		[ConVar.Replicated] public static bool tf_debug_cart { get; set; } = false;
 
@@ -111,7 +111,7 @@ namespace TFS2
 			Reset();
 		}
 
-		public void Reset()
+		public void Reset(bool fullRoundReset = true)
 		{
 			var firstNode = Path.PathNodes.First();
 			Position = firstNode.WorldPosition;

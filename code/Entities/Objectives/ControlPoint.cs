@@ -12,7 +12,7 @@ namespace TFS2;
 [Category( "Objectives" )]
 [Icon( "my_location" )]
 [HammerEntity]
-public partial class ControlPoint : BaseTrigger
+public partial class ControlPoint : BaseTrigger, IResettable
 {
 	public new static IReadOnlyList<ControlPoint> All => _all;
 	private static List<ControlPoint> _all = new();
@@ -539,8 +539,9 @@ public partial class ControlPoint : BaseTrigger
 		NumberTouchers.TryGetValue( team, out var num );
 		return num;
 	}
-	[Input]
-	public void Reset()
+
+
+	public void Reset(bool fullRoundReset = true)
 	{
 		Game.AssertServer();
 
@@ -554,6 +555,8 @@ public partial class ControlPoint : BaseTrigger
 
 		SetLocked( StartLocked );
 	}
+	[Input]
+	public void Reset() => Reset( true );
 
 	public TFTeam GetDefaultTeamOwner()
 	{

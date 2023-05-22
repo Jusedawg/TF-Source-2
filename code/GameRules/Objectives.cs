@@ -39,10 +39,8 @@ partial class TFGameRules
 
 	public override void ResetObjectives()
 	{
-		// reset all objectives ents
-		foreach ( var flag in All.OfType<Flag>() ) flag.Reset();
-		foreach ( var point in ControlPoint.All ) point.Reset();
-		foreach ( var cart in All.OfType<Cart>() ) cart.Reset();
+		// reset all resettable ents
+		foreach ( var ent in All.OfType<IResettable>() ) ent.Reset();
 	}
 
 	public override void CalculateObjectives()

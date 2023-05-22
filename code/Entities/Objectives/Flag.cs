@@ -10,7 +10,7 @@ namespace TFS2;
 [Icon( "tour" )]
 [Model(Model = "models/flag/briefcase.vmdl" ), RenderFields]
 [HammerEntity]
-public partial class Flag : Item, ITeam
+public partial class Flag : Item, ITeam, IResettable
 {
 	[Property] public HammerTFTeamOption DefaultTeam { get; set; }
 	[Property] public bool StartsDisabled { get; set; }
@@ -184,7 +184,7 @@ public partial class Flag : Item, ITeam
 		CurrentSequence.Name = "idle";
 	}
 
-	public void Reset()
+	public void Reset(bool fullRoundReset = true)
 	{
 		if ( !Game.IsServer ) return;
 
