@@ -96,6 +96,8 @@ namespace TFS2
 			EnableAllCollisions = true;
 
 			Tags.Add( CollisionTags.Solid );
+			Tags.Add( "cart" );
+			Tags.Add( $"cart_{Team.GetTag()}" );
 		}
 
 		[GameEvent.Entity.PostSpawn]
