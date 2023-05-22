@@ -21,12 +21,11 @@ namespace TFS2
 
 		#region Properties
 		public int TeamNumber => (int)Team;
-		[Property("Team")]
-		public TFTeam Team { get; set; } = TFTeam.Blue;
+		[Property( "Team" )]
+		public HammerTFTeamOption TeamOption { get; set; } = HammerTFTeamOption.Blue;
 
-		[Property("Path", Title = "Linked Path"), FGDType("target_destination")]
+		[Property("Path", Title = "Starting Path"), FGDType("target_destination")]
 		public string LinkedCartPath { get; set; }
-		public CartPath Path { get; protected set; }
 		
 		[Category( "Speed" ), Property( "Level1Speed", Title = "x1 Speed" )]
 		public float Level1Speed { get; set; } = 50f;
@@ -60,7 +59,8 @@ namespace TFS2
 		[Category( "Sound" ), Property("CartGrindSound", Title = "Rollback Sound" ), FGDType( "sound" )]
 		public string RollbackSound { get; set; }
 		#endregion
-
+		[Net] public TFTeam Team { get; set; }
+		public CartPath Path { get; protected set; }
 		public IReadOnlyList<TFPlayer> Pushers => pushers;
 		public IReadOnlyList<TFPlayer> Blockers => blockers;
 		protected List<TFPlayer> pushers = new();
@@ -95,6 +95,8 @@ namespace TFS2
 			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
 			EnableAllCollisions = true;
 
+			Team = TeamOption.ToTFTeam();
+
 			Tags.Add( CollisionTags.Solid );
 			Tags.Add( "cart" );
 			Tags.Add( $"cart_{Team.GetTag()}" );
@@ -113,20 +115,25 @@ namespace TFS2
 
 		public void Reset(bool fullRoundReset = true)
 		{
-			var firstNode = Path.PathNodes.First();
-			Position = firstNode.WorldPosition;
-			var dir = Position - Path.GetPointBetweenNodes( firstNode, firstNode.GetNextNode(), 0.05f );
-			Rotation = Rotation.LookAt( dir ).Angles().WithRoll( 0 ).ToRotation();
+			ResetPath();
 
 			pushers.Clear();
 			blockers.Clear();
 
-			CurrentNode = firstNode;
-			CurrentFraction = 0;
 			TimeSincePush = 0;
-			NodeDistance = Path.GetCurveLength( CurrentNode, CurrentNode.GetNextNode(), 10 );
 			CurrentSpeed = 0;
+		}
+
+		public void ResetPath()
+		{
+			CurrentNode = Path.PathNodes.First();
+			CurrentFraction = 0;
+			NodeDistance = Path.GetCurveLength( CurrentNode, CurrentNode.GetNextNode(), 10 );
 			IsAtEnd = false;
+
+			Position = CurrentNode.WorldPosition;
+			var dir = Position - Path.GetPointBetweenNodes( CurrentNode, CurrentNode.GetNextNode(), 0.05f );
+			Rotation = Rotation.LookAt( dir ).Angles().WithRoll( 0 ).ToRotation();
 		}
 
 		[GameEvent.Tick.Server]
@@ -283,6 +290,13 @@ namespace TFS2
 
 				if ( CurrentNode.GetNextNode() == null )
 				{
+					var next = CurrentNode.GetNextPath();
+					if(next != null)
+					{
+						Path = next;
+						ResetPath();
+					}
+
 					IsAtEnd = true;
 					StopMoveSounds();
 					OnReachEnd.Fire( this );

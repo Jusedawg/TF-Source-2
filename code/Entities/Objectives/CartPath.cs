@@ -178,14 +178,24 @@ namespace TFS2
 		/// <summary>
 		/// This control point gets captured if a cart passes over this node.
 		/// </summary>
-		[Property, FGDType("target_destination")]
+		[Property(Title = "Control Point"), FGDType("target_destination")]
 		public string LinkedControlPoint { get; set; }
+
+		/// <summary>
+		/// Path to jump to when this node is passed, currently only does something at the end of a path.
+		/// </summary>
+		[Property, FGDType( "target_destination" )]
+		public string NextPath { get; set; }
 
 		public ControlPoint GetControlPoint()
 		{
 			return Entity.FindByName( LinkedControlPoint ) as ControlPoint;
 		}
 
+		public CartPath GetNextPath()
+		{
+			return Entity.FindByName( NextPath ) as CartPath;
+		}
 
 		/// <summary>
 		/// Gets the next node in the current path.
