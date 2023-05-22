@@ -15,8 +15,10 @@ namespace TFS2;
 [EditorModel( "models/editor/team_player_start.vmdl" )]
 [DrawAngles]
 [HammerEntity]
-public partial class TeamSpawnPoint : SDKSpawnPoint
+public partial class TeamSpawnPoint : SDKSpawnPoint 
 {
+	[Property("Enabled", Title = "Enabled"), Net]
+	public bool StartsEnabled { get; set; } = true;
 	/// <summary>
 	/// The default team option for this spawn room. If "Associated Respawn Room" is set, it will 
 	/// stay in sync with the value of that respawn room.
@@ -32,11 +34,13 @@ public partial class TeamSpawnPoint : SDKSpawnPoint
 
 	public RespawnRoom Room { get; set; }
 	public HammerTFTeamOption TeamOption { get; set; }
+	public bool Enabled { get; set; }
 
 	public override void Spawn()
 	{
 		base.Spawn();
 		TeamOption = DefaultTeamOption;
+		Enabled = StartsEnabled;
 	}
 
 	[GameEvent.Entity.PostSpawn]
@@ -53,6 +57,8 @@ public partial class TeamSpawnPoint : SDKSpawnPoint
 
 	public override bool CanSpawn( SDKPlayer player )
 	{
+		if ( !Enabled ) return false;
+
 		var playerTeam = (TFTeam)player.TeamNumber;
 		if ( !TeamOption.Is( playerTeam ) )
 			return false;
@@ -66,6 +72,10 @@ public partial class TeamSpawnPoint : SDKSpawnPoint
 
 		return true;
 	}
+
+	[Input] public void Enable() => Enabled = true;
+	[Input] public void Disable() => Enabled = false;
+	[Input] public void Toggle() => Enabled = !Enabled;
 
 	[GameEvent.Tick.Server]
 	public void Tick()
