@@ -211,13 +211,16 @@ class LegacyShadeParams {
     float   SpecularExponent;
 
     float3  StaticLightingColor;
-    float3  EnvMapColor;
+    float3  EnvmapMask;
 
     float3  SelfIllumMask;
 
     // used by EyeRefract
     float IrisHighlightMask;
     float AverageAmbient;
+
+    // custom controls
+    float4 DiffuseModControls;
 
     LegacyShadeInputs inputs;
 
@@ -237,11 +240,14 @@ class LegacyShadeParams {
         SpecularExponent = m.SpecularExponent;
         SelfIllumMask = m.SelfIllumMask;
         StaticLightingColor = m.StaticLightingColor;
-        EnvMapColor = m.EnvMapColor;
-        
+        EnvmapMask = m.EnvmapMask;
+
         // used by EyeRefract
         IrisHighlightMask = m.IrisHighlightMask;
         AverageAmbient = m.AverageAmbient;
+
+        // custom controls
+        DiffuseModControls = m.DiffuseModControls;
     }
 
     //
@@ -598,6 +604,9 @@ class ShadingModelLegacy : ShadingModel
         // PixelShaderDoSpecularLighting does nothing for ambient. Individual shaders (VertexLitGeneric, skin, etc) should add their own ambient envmapping.
         lightShade.Specular = SpecularModulate( m_sumSpecularLighting );
 
+        #ifdef CUSTOM_DIFFUSE_MODULATE
+            lightShade.Diffuse = CustomDiffuseModulate(lightShade.Diffuse, shadeParams.Albedo, shadeParams.SelfIllumMask, shadeParams.DiffuseModControls);
+        #endif // CUSTOM_DIFFUSE_MODULATE
         
         if ( config.DoSpecular && config.DoRimLighting )
         {
@@ -678,8 +687,14 @@ class ShadingModelLegacy : ShadingModel
 
     float4 PostProcess( float4 vColor )
     {
-        // add in (optional) envmap color
-        float3 envMapColor = shadeParams.EnvMapColor;
+        #if S_CUSTOM_CUBEMAP
+            // TODO: CUBEMAP_SPHERE_LEGACY?
+            float3 envmapBase = CONVERT_ENVMAP(Tex3D( g_tEnvMap, shadeParams.inputs.ReflectRayWs )).rgb;
+        #else
+            float3 envmapBase = GetAllCubemaps(shadeParams, 0);
+        #endif // !S_CUSTOM_CUBEMAP
+
+        float3 envMapColor = GetEnvmapColor(envmapBase, shadeParams.EnvmapMask, shadeParams.Fresnel);
 
         if ( config.DoIrisLighting )
         {

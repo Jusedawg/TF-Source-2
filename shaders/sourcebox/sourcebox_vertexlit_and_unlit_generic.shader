@@ -185,6 +185,57 @@ PS
     float g_flVertexAlpha                       < UiGroup( "Attributes,11/1007" ); Default(0.0f); >;
     
     #define USE_MANUAL_CUBEMAP (S_CUBEMAP && S_CUSTOM_CUBEMAP)
+    #if S_DISTANCEALPHA && (S_DISTANCEALPHAFROMDETAIL == 0)
+        #define BASE_COLOR_ALPHA_NAME   DistAlphaMask
+    #elif S_BASEALPHAENVMAPMASK
+        #define BASE_COLOR_ALPHA_NAME   EnvmapMask
+    #elif S_BLENDTINTBYBASEALPHA
+        #define BASE_COLOR_ALPHA_NAME   TintMask
+    #elif ( !S_BASEALPHAENVMAPMASK && !S_SELFILLUM && !S_BLENDTINTBYBASEALPHA )
+        #define BASE_COLOR_ALPHA_NAME   Translucency
+    #elif S_SELFILLUM
+        #define BASE_COLOR_ALPHA_NAME   SelfIllumMaskTexture
+    #else
+    #endif
+
+    float3 GetEnvmapColor( float3 envmapBase, float3 specularFactor, float fresnelRanges )
+    {
+        float3 specularLighting = float3(0.0, 0.0, 0.0);
+
+        #if S_CUBEMAP
+            specularLighting = g_flEnvMapScale * envmapBase;
+            specularLighting *= specularFactor;
+            specularLighting *= g_vEnvMapTint.rgb;
+            float3 specularLightingSquared = specularLighting * specularLighting;
+            specularLighting = lerp( specularLighting, specularLightingSquared, g_vEnvMapContrast );
+            float3 greyScale = dot( specularLighting, float3( 0.299f, 0.587f, 0.114f ) );
+            specularLighting = lerp( greyScale, specularLighting, g_vEnvMapSaturation );
+        #endif // S_CUBEMAP
+
+        return specularLighting;
+    }
+
+    // This stuff needs to happen BEFORE the envmap color is added, so we hook into the custom lighting model.
+    #define CUSTOM_DIFFUSE_MODULATE
+    #include "sourcebox/common/texcombine.hlsl"
+    float3 CustomDiffuseModulate( float3 diffuse, float3 albedo, float3 selfillumMask, float4 detailColor )
+    {
+        #if S_DETAILTEXTURE
+            diffuse.xyz = 
+                TextureCombinePostLighting( diffuse.xyz, detailColor, S_DETAIL_BLEND_MODE, g_flDetailBlendFactor );
+        #endif
+
+        #if S_SELFILLUM_ENVMAPMASK_ALPHA
+            float3 selfIllumComponent = g_vSelfIllumTint * albedo;
+            float Adj_Alpha = selfillumMask.r;
+            diffuse.xyz=( max( 0, 1-Adj_Alpha ) * diffuse.xyz) + Adj_Alpha * selfIllumComponent;
+        #else
+            #if ( S_SELFILLUM )
+                diffuse.xyz = lerp( diffuse.xyz, g_vSelfIllumTint * albedo, selfillumMask );
+            #endif // S_SELFILLUM
+        #endif
+    }
+
     #include "sourcebox/common/legacy_pixel.hlsl"
     
 
@@ -323,6 +374,21 @@ PS
 
 	    alpha = lerp( alpha, alpha * i.vVertexColor.a, g_flVertexAlpha );
 
+        // setup selfillum controls
+        float3 vSelfIllumMask;
+        #if S_SELFILLUM_ENVMAPMASK_ALPHA
+            // range of alpha:
+            // 0 - 0.125 = lerp(diffuse,selfillum,alpha*8)
+            // 0.125-1.0 = selfillum*(1+alpha-0.125)*8 (over bright glows)
+            float Adj_Alpha=8*envmapMaskTexel.a;
+            vSelfIllumMask = float3(Adj_Alpha, 0, 0);
+        #else
+            if ( bSelfIllum )
+            {
+                vSelfIllumMask = Tex2D( g_tSelfIllumMaskTexture, i.vTextureCoords.xy ).rgb;
+                vSelfIllumMask = g_bSelfIllumMaskControl ? vSelfIllumMask : baseColor.aaa;
+            }
+        #endif
 
         ShadingModelLegacy sm;
         sm.config.DoDiffuse = S_DIFFUSELIGHTING ? true : false;
@@ -351,10 +417,9 @@ PS
         m.AmbientOcclusion = 1.0;
         m.SpecularTint = float3( 1.0, 1.0, 1.0 );
         m.Opacity = alpha;
-        m.SelfIllumMask = baseColor.aaa;
-
-        // set our envmap color to 0
-        m.EnvMapColor = float3(0.0f, 0.0f, 0.0f);
+        m.SelfIllumMask = vSelfIllumMask;
+        m.EnvmapMask = specularFactor;
+        m.DiffuseModControls = detailColor;
 
         float4 output = FinalizePixelMaterial( i, m, sm );
         output.a = alpha;
@@ -365,62 +430,6 @@ PS
         {
             output.rgb = albedo;
         }
-
-        // bit of a hack.
-        // this should only apply to the diffuse component, NOT the specular component.
-        // however, our specular component in the shading model should be 0. I'm adding the envmap (pseudo-specular) component manually.
-        #if S_DETAILTEXTURE
-            output.xyz = 
-                TextureCombinePostLighting( output.xyz, detailColor, S_DETAIL_BLEND_MODE, g_flDetailBlendFactor );
-        #endif
-
-        #if S_SELFILLUM_ENVMAPMASK_ALPHA
-            // range of alpha:
-            // 0 - 0.125 = lerp(diffuse,selfillum,alpha*8)
-            // 0.125-1.0 = selfillum*(1+alpha-0.125)*8 (over bright glows)
-            float3 selfIllumComponent = g_vSelfIllumTint * albedo;
-            float Adj_Alpha=8*envmapMaskTexel.a;
-            output.xyz=( max( 0, 1-Adj_Alpha ) * output.xyz) + Adj_Alpha * selfIllumComponent;
-        #else
-            if ( bSelfIllum )
-            {
-                float3 vSelfIllumMask = Tex2D( g_tSelfIllumMaskTexture, i.vTextureCoords.xy ).rgb;
-                vSelfIllumMask = lerp( baseColor.aaa, vSelfIllumMask, g_flSelfIllumMaskControl );
-                output.xyz = lerp( output.xyz, g_vSelfIllumTint * albedo, vSelfIllumMask );
-            }
-        #endif
-
-	    float3 specularLighting = float3( 0.0f, 0.0f, 0.0f );
-        if( bCubemap )
-        {
-            // #if CUBEMAP_SPHERE_LEGACY
-            //         HALF3 reflectVect = normalize(CalcReflectionVectorUnnormalized( i.worldSpaceNormal, i.worldVertToEyeVector.xyz ));
-
-            //         specularLighting = 0.5 * tex2D( EnvmapSampler, float2(reflectVect.x, reflectVect.y) ) * g_DiffuseModulation.rgb * diffuseLighting;
-            // #else
-            float3 positionWs = i.vPositionWithOffsetWs.xyz + g_vCameraPositionWs;
-            // View ray in World Space
-            float3 viewRayWs = normalize(CalculatePositionToCameraDirWs( positionWs ));
-            float3 reflectVect = reflect( -viewRayWs, m.Normal );
-            // float3 reflectVect = CalcReflectionVectorUnnormalized( i.worldSpaceNormal, i.worldVertToEyeVector.xyz );
-
-            #if S_CUSTOM_CUBEMAP
-                specularLighting = g_flEnvMapScale * CONVERT_ENVMAP(Tex3D( g_tEnvMap, reflectVect )).rgb;
-            #else // !S_CUSTOM_CUBEMAP
-                // grab cubemap manually
-                specularLighting = float3(g_flEnvMapScale, g_flEnvMapScale, g_flEnvMapScale) * sm.GetAllCubemaps(sm.shadeParams, 0);
-            #endif // !S_CUSTOM_CUBEMAP
-
-            specularLighting *= specularFactor;
-            specularLighting *= g_vEnvMapTint.rgb;
-            float3 specularLightingSquared = specularLighting * specularLighting;
-            specularLighting = lerp( specularLighting, specularLightingSquared, g_vEnvMapContrast );
-            float3 greyScale = dot( specularLighting, float3( 0.299f, 0.587f, 0.114f ) );
-            specularLighting = lerp( greyScale, specularLighting, g_vEnvMapSaturation );
-            // #endif
-        }
-        // add the envmap color
-        output.rgb += specularLighting;
 
         return FinalizeLegacyOutput(output);
 	}

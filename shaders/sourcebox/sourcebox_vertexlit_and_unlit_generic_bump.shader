@@ -123,6 +123,35 @@ PS
     #define D_AMBIENT_LIGHT                    1
 
     #define USE_MANUAL_CUBEMAP (S_CUBEMAP && S_CUSTOM_CUBEMAP)
+    #if S_BLENDTINTBYBASEALPHA
+        #define BASE_COLOR_ALPHA_NAME   TintMask
+    #elif ( !S_SELFILLUM && !S_BLENDTINTBYBASEALPHA )
+        #define BASE_COLOR_ALPHA_NAME   Translucency
+    #elif S_SELFILLUM
+        #define BASE_COLOR_ALPHA_NAME   SelfIllumMaskTexture
+    #endif
+
+    #if S_NORMALMAPALPHAENVMAPMASK
+        #define NORMAL_ALPHA_NAME       EnvmapMask
+    #endif // S_NORMALMAPALPHAENVMAPMASK
+
+    float3 GetEnvmapColor( float3 envmapBase, float3 specularFactor, float fresnelRanges )
+    {
+        float3 specularLighting = float3(0.0, 0.0, 0.0);
+        
+        #if S_CUBEMAP
+            specularLighting = g_flEnvMapScale * envmapBase;
+            specularLighting *= specularFactor;
+            specularLighting *= g_vEnvMapTint.rgb;
+            float3 specularLightingSquared = specularLighting * specularLighting;
+            specularLighting = lerp( specularLighting, specularLightingSquared, g_vEnvMapContrast );
+            float3 greyScale = dot( specularLighting, float3( 0.299f, 0.587f, 0.114f ) );
+            specularLighting = lerp( greyScale, specularLighting, g_vEnvMapSaturation );
+        #endif // S_CUBEMAP
+
+        return specularLighting;
+    }
+
     #include "sourcebox/common/legacy_pixel.hlsl"
 
 	float4 MainPs( PixelInput i ) : SV_Target0
@@ -188,37 +217,9 @@ PS
         #endif // ( !S_SELFILLUM && !S_BLENDTINTBYBASEALPHA )
         m.Opacity = alpha;
         m.SelfIllumMask = baseColor.aaa;
-
-        // set our envmap color to 0
-        m.EnvMapColor = float3(0.0f, 0.0f, 0.0f);
-
-        float4 output = FinalizePixelMaterial( i, m, sm );
-
-        float3 specularLighting = float3( 0.0f, 0.0f, 0.0f );
-        #if S_CUBEMAP
-            float3 positionWs = i.vPositionWithOffsetWs.xyz + g_vCameraPositionWs;
-            // View ray in World Space
-            float3 viewRayWs = normalize(CalculatePositionToCameraDirWs( positionWs ));
-            float3 reflectVect = reflect( -viewRayWs, m.Normal );
-            // float3 reflectVect = CalcReflectionVectorUnnormalized( worldSpaceNormal, i.worldVertToEyeVectorXYZ_tangentSpaceVertToEyeVectorZ.xyz );
-
-            #if S_CUSTOM_CUBEMAP
-                specularLighting = g_flEnvMapScale * CONVERT_ENVMAP(Tex3D( g_tEnvMap, reflectVect )).rgb;
-            #else // !S_CUSTOM_CUBEMAP
-                specularLighting = float3(g_flEnvMapScale, g_flEnvMapScale, g_flEnvMapScale) * sm.GetAllCubemaps(sm.shadeParams, 0);
-            #endif // !S_CUSTOM_CUBEMAP
-            
-            specularLighting *= specularFactor;
-            specularLighting *= g_vEnvMapTint.rgb;
-            float3 specularLightingSquared = specularLighting * specularLighting;
-            specularLighting = lerp( specularLighting, specularLightingSquared, g_vEnvMapContrast );
-            float3 greyScale = dot( specularLighting, float3( 0.299f, 0.587f, 0.114f ) );
-            specularLighting = lerp( greyScale, specularLighting, g_vEnvMapSaturation );
-        #endif // S_CUBEMAP
-        // add the envmap color
-        output.rgb += specularLighting;
+        m.EnvmapMask = float3(specularFactor, specularFactor, specularFactor);
 
         // PixelInput, Material, Shading Model
-        return FinalizeLegacyOutput(output);
+        return FinalizeLegacyOutput(FinalizePixelMaterial( i, m, sm ));
 	}
 }

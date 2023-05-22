@@ -27,12 +27,15 @@ struct Material {
     float3  SelfIllumMask;
     
     float3  StaticLightingColor;
-    float3  EnvMapColor;
+    float3  EnvmapMask;
 
     // used for EyeRefract
     float3 CorneaNormal;
     float IrisHighlightMask;
     float AverageAmbient;
+
+    // custom controls
+    float4 DiffuseModControls;
     
     // Emulated PBR parameters, for S&box shading model
     // you shouldn't ever need to bother with these, they're just here to keep the compiler happy
@@ -73,7 +76,7 @@ Material GetDefaultLegacyMaterial()
     m.SpecularTint = float3(1.0, 1.0, 1.0);
     m.SpecularExponent = 1.0;
     m.StaticLightingColor = float3(0.0, 0.0, 0.0);
-    m.EnvMapColor = float3(0.0, 0.0, 0.0);
+    m.EnvmapMask = float3(1.0, 1.0, 1.0);
     m.SelfIllumMask = float3(1.0, 1.0, 1.0);
 
     // used for EyeRefract
@@ -81,6 +84,9 @@ Material GetDefaultLegacyMaterial()
     m.IrisHighlightMask = 0.0;
     m.AverageAmbient = 1.0;
 	
+    // custom controls
+    m.DiffuseModControls = float4(0, 0, 0, 0);
+    
     // Emulated PBR parameters, for S&box shading model
     m.Roughness = 1.0;
     m.Metalness = 0.0;

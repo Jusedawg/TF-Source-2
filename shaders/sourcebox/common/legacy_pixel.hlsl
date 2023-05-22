@@ -30,7 +30,7 @@ BoolAttribute( translucent, F_ENABLE_BLEND ? true : false );
 StaticCombo( S_ALPHA_TEST_MANUAL				    , F_ALPHA_TEST				     , Sys( ALL ) );
 // StaticCombo( S_ALPHA_TEST_FUNC				        , F_ALPHA_TEST_FUNC				 , Sys( ALL ) );
 #define S_ALPHA_TEST_FUNC 6
-float g_flAlphaTestReference < UiGroup( "Rendering,1/1" ); Default(0.3f); Range(0.0f, 1.0f); >;
+float g_flAlphaTestReference < UiGroup( "Material,10/14" ); Default(0.3f); Range(0.0f, 1.0f); >;
 
 #if (S_ALPHA_TEST_MANUAL)
     #if (S_ALPHA_TEST_FUNC == 0)
