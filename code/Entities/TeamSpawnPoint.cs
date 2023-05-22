@@ -15,7 +15,7 @@ namespace TFS2;
 [EditorModel( "models/editor/team_player_start.vmdl" )]
 [DrawAngles]
 [HammerEntity]
-public partial class TeamSpawnPoint : SDKSpawnPoint 
+public partial class TeamSpawnPoint : SDKSpawnPoint, IResettable
 {
 	[Property("Enabled", Title = "Enabled"), Net]
 	public bool StartsEnabled { get; set; } = true;
@@ -31,14 +31,30 @@ public partial class TeamSpawnPoint : SDKSpawnPoint
 	/// </summary>
 	[Property, FGDType( "target_destination" )]
 	public string AssociatedRespawnRoom { get; set; }
-
+	/// <summary>
+	/// Only spawn here when this control point is owned by the players team
+	/// </summary>
+	[Property, FGDType( "target_destination" )]
+	public string AssociatedControlPoint { get; set; }
+	/// <summary>
+	/// Change team according to the team of the associated respawn room.
+	/// If set to false, this spawn just gets disabled when the respawn room changes team.
+	/// </summary>
+	[Property]
+	public bool ChangeTeamAutomatically { get; set; } = true;
 	public RespawnRoom Room { get; set; }
+	public ControlPoint Point { get; set; }
 	public HammerTFTeamOption TeamOption { get; set; }
 	public bool Enabled { get; set; }
 
 	public override void Spawn()
 	{
 		base.Spawn();
+		Reset();
+	}
+
+	public void Reset(bool fullRoundReset = true)
+	{
 		TeamOption = DefaultTeamOption;
 		Enabled = StartsEnabled;
 	}
@@ -53,26 +69,31 @@ public partial class TeamSpawnPoint : SDKSpawnPoint
 			Room.AddSpawnPoint( this );
 			TeamOption = Room.TeamOption;
 		}
+
+		Point = FindByName( AssociatedControlPoint ) as ControlPoint;
 	}
 
 	public override bool CanSpawn( SDKPlayer player )
 	{
-		if ( !Enabled ) return false;
+		if ( !IsEnabled() ) return false;
 
 		var playerTeam = (TFTeam)player.TeamNumber;
-		if ( !TeamOption.Is( playerTeam ) )
-			return false;
-
-		if ( Room != null && Room.ControlPoint != null )  
+		if ( Room != null )  
 		{
-			var point = Room.ControlPoint;
+			if ( ChangeTeamAutomatically )
+				TeamOption = Room.TeamOption;
+
+			var point = Point ?? Room.ControlPoint;
 			if ( point != TFGameRules.Current.GetFarthestOwnedControlPointWithRespawnRoom( playerTeam ) )
 				return false;
 		}
 
+		if ( !TeamOption.Is( playerTeam ) )
+			return false;
+
 		return true;
 	}
-
+	public bool IsEnabled() => Enabled && (Point == null || ITeam.IsSame( Point, this ));
 	[Input] public void Enable() => Enabled = true;
 	[Input] public void Disable() => Enabled = false;
 	[Input] public void Toggle() => Enabled = !Enabled;
@@ -80,9 +101,12 @@ public partial class TeamSpawnPoint : SDKSpawnPoint
 	[GameEvent.Tick.Server]
 	public void Tick()
 	{
-		if ( !tf_debug_spawnpoints )
-			return;
+		if ( tf_debug_spawnpoints )
+			Debug();
+	}
 
+	protected virtual void Debug()
+	{
 		DebugOverlay.Sphere( Position, 10, CanSpawn( All.OfType<TFPlayer>().First() ) ? Color.Green : Color.Red, 0, false );
 		DebugOverlay.Line( Position, Position + Vector3.Up * 64, Color.Yellow );
 		DebugOverlay.Line( Position, Position - Vector3.Up * 64, Color.Yellow );
@@ -90,9 +114,8 @@ public partial class TeamSpawnPoint : SDKSpawnPoint
 			$"Room Name: {AssociatedRespawnRoom}\n" +
 			$"Room: {Room}\n" +
 			$"TeamOption: {TeamOption}\n",
-			Position + Vector3.Up * 50 
-			);
-
+			Position + Vector3.Up * 50
+		);
 	}
 
 	[ConVar.Replicated] public static bool tf_debug_spawnpoints { get; set; }
