@@ -157,7 +157,7 @@ partial class TFGameRules
 		return teamPoints.FirstOrDefault();
 	}
 
-	public ControlPoint GetFarthestOwnedControlPoint( TFTeam team )
+	public List<ControlPoint> GetFarthestOwnedControlPoints( TFTeam team )
 	{
 		// get the first point that we own.
 		var point = GetFirstOwnedControlPoint( team );
@@ -166,22 +166,24 @@ partial class TFGameRules
 		if ( point == null )
 			return null;
 
-		// we can't possibly have more iterations in the loop than we have points on the map.
-		// use this as loop limit. in reality we should almost never reach this index.
-		var count = ControlPoint.All.Count;
+		return GetLastPointsFor(point, team);
+	}
 
-		for ( int i = 0; i < count; i++ )
+	private List<ControlPoint> GetLastPointsFor(ControlPoint point, TFTeam team)
+	{
+		var nextPoints = point.GetNextControlPointsForTeam( team );
+		if ( !nextPoints.Any() )
 		{
-			var nextPoint = point.GetNextControlPointForTeam( team );
-
-			// next point doesn't exist or belongs to some other team.
-			if ( nextPoint == null || nextPoint.OwnerTeam != team )
-				break;
-
-			point = nextPoint;
+			return new List<ControlPoint> { point };
 		}
 
-		return point;
+		List<ControlPoint> lastPoints = new();
+		foreach (var nextPoint in nextPoints)
+		{
+			lastPoints.AddRange(GetLastPointsFor(nextPoint, team));
+		}
+
+		return lastPoints;
 	}
 
 	/// <summary>
@@ -189,61 +191,41 @@ partial class TFGameRules
 	/// </summary>
 	/// <param name="team"></param>
 	/// <returns></returns>
-	public ControlPoint GetFarthestOwnedControlPointWithRespawnRoom( TFTeam team )
+	public List<ControlPoint> GetFarthestOwnedControlPointsWithRespawnRoom( TFTeam team )
 	{
-		// get the first point that we own.
-		var finalPoint = GetFirstDefaultOwnedControlPoint( team );
-
-		// If team doesnt own a single point, that means that they cant possibly have a "farthest" control point.
-		if ( finalPoint == null )
-			return null;
-
-		// we can't possibly have more iterations in the loop than we have points on the map.
-		// use this as loop limit. in reality we should almost never reach this index.
-		var count = ControlPoint.All.Count;
-
 		var teamRespawns = All.OfType<RespawnRoom>().Where( x => x.TeamOption.Is( team ) );
-		var point = finalPoint;
+		var farthest = GetFarthestOwnedControlPoints( team );
+		if ( farthest == null || !farthest.Any() ) return null;
 
-		for ( int i = 0; i < count; i++ )
-		{
-			point = point.GetNextControlPointForTeam( team );
-
-			// next point doesn't exist or belo	ngs to some other team.
-			if ( point == null || point.OwnerTeam != team )
-				break;
-
-			if ( !teamRespawns.Any( x => x.ControlPoint == point ) )
-				continue;
-
-			finalPoint = point;
-		}
-
-		return finalPoint;
+		return teamRespawns.Select(spawn => spawn.ControlPoint).Where(cp => cp.OwnerTeam == team).Intersect(farthest).ToList();
 	}
 
-	public IEnumerable<ControlPoint> GetControlPointRouteForTeam( TFTeam team )
+	public List<ControlPoint> GetControlPointRouteForTeam( TFTeam team )
 	{
 		var point = GetFirstDefaultOwnedControlPoint( team );
 		if ( point == null )
-			yield break;
+			return null;
 
-		// we can't possibly have more iterations in the loop than we have points on the map.
-		// use this as loop limit. in reality we should almost never reach this index.
-		var count = ControlPoint.All.Count;
+		return GetAllNextPointsFor( point, team );
+	}
 
-		for ( int i = 0; i < count; i++ )
+	private List<ControlPoint> GetAllNextPointsFor(ControlPoint point, TFTeam team)
+	{
+		var nextPoints = point.GetNextControlPointsForTeam( team );
+
+		List<ControlPoint> lastPoints = new()
 		{
-			yield return point;
+			point
+		};
+		if ( !nextPoints.Any() )
+			return lastPoints;
 
-			var nextPoint = point.GetNextControlPointForTeam( team );
-
-			// next point doesn't exist
-			if ( nextPoint == null )
-				break;
-
-			point = nextPoint;
+		foreach ( var nextPoint in nextPoints )
+		{
+			lastPoints.AddRange( GetAllNextPointsFor( nextPoint, team ) );
 		}
+
+		return lastPoints;
 	}
 
 	[ConCmd.Server( "sv_spewcontrolpoints" )]
@@ -257,9 +239,9 @@ partial class TFGameRules
 			Log.Info( $"{team}" );
 
 			var first = Current.GetFirstOwnedControlPoint( team );
-			var farthest = Current.GetFarthestOwnedControlPoint( team );
+			var farthest = Current.GetFarthestOwnedControlPoints( team );
 			Log.Info( $" - First Owned: {first}" );
-			Log.Info( $" - Farthest Owned: {farthest}" );
+			Log.Info( $" - Farthest Owned: {string.Join(' ', farthest)}" );
 		}
 	}
 }

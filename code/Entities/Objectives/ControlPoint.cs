@@ -524,12 +524,12 @@ public partial class ControlPoint : BaseTrigger, IResettable
 		}
 	}
 
-	public ControlPoint GetNextControlPointForTeam( TFTeam team )
+	public IList<ControlPoint> GetNextControlPointsForTeam( TFTeam team )
 	{
 		switch ( team )
 		{
-			case TFTeam.Red: return All.FirstOrDefault( x => x.PreviousRedPoints.Contains( this ) );
-			case TFTeam.Blue: return All.FirstOrDefault( x => x.PreviousBluePoints.Contains( this ) );
+			case TFTeam.Red: return PreviousRedPoints;
+			case TFTeam.Blue: return PreviousBluePoints;
 			default: return null;
 		}
 	}

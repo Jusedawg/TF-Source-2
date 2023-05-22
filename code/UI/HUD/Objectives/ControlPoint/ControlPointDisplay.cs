@@ -47,7 +47,8 @@ partial class ControlPointDisplay : Panel
 
 	public void ReorderEntries()
 	{
-		var order = TFGameRules.Current.GetControlPointRouteForTeam( TFTeam.Blue ).ToList();
+		var order = TFGameRules.Current.GetControlPointRouteForTeam( TFTeam.Blue );
+		if ( order == null ) return;
 
 		SortChildren( ( x, y ) => {
 			// If either of the panels are null, dont sort this.
