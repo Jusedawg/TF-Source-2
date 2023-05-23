@@ -189,6 +189,9 @@ namespace TFS2
 
 		public ControlPoint GetControlPoint()
 		{
+			if ( LinkedControlPoint.StartsWith( "[PR#]" ) ) 
+				LinkedControlPoint = LinkedControlPoint.Substring( 5 );
+
 			return Entity.FindByName( LinkedControlPoint ) as ControlPoint;
 		}
 

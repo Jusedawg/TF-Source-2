@@ -295,13 +295,14 @@ namespace TFS2
 					{
 						Path = next;
 						ResetPath();
+						return -2;
 					}
 
 					IsAtEnd = true;
 					StopMoveSounds();
 					OnReachEnd.Fire( this );
 					Log.Info( $"Reached end at: {CurrentNode.GetIndex() + 1}" );
-					return 0;
+					return -1;
 				}
 			}
 
@@ -349,10 +350,9 @@ namespace TFS2
 		protected virtual void OnNodeChanged( CartPathNode node )
 		{
 			//node.OnPass.Fire( this );
-			if ( node.GetControlPoint() != null )
+			var cp = node.GetControlPoint();
+			if ( cp != null )
 			{
-				var cp = node.GetControlPoint();
-
 				// Let gamerules know about this.
 				TFGameRules.Current.ControlPointCaptured( cp, cp.OwnerTeam, Team, pushers.Select(ply => ply.Client).ToArray() );
 				cp.SetOwnerTeam( Team );
