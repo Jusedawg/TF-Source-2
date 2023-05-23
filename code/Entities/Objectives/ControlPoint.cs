@@ -80,8 +80,9 @@ public partial class ControlPoint : BaseTrigger, IResettable
 	public void PostLevelSetup()
 	{
 		// try to find our previous points
-		PreviousRedPoints = EntityUtils.ResolveTargetNames<ControlPoint>( PreviousRedPointNames ).ToList();
-		PreviousBluePoints = EntityUtils.ResolveTargetNames<ControlPoint>( PreviousBluePointNames ).ToList();
+		var t = new ControlPoint[] { this };
+		PreviousRedPoints = EntityUtils.ResolveTargetNames<ControlPoint>( PreviousRedPointNames ).Except( t ).ToList();
+		PreviousBluePoints = EntityUtils.ResolveTargetNames<ControlPoint>( PreviousBluePointNames ).Except( t ).ToList();
 	}
 
 	public ControlPoint()
@@ -524,12 +525,12 @@ public partial class ControlPoint : BaseTrigger, IResettable
 		}
 	}
 
-	public IList<ControlPoint> GetNextControlPointsForTeam( TFTeam team )
+	public IEnumerable<ControlPoint> GetNextPointsForTeam( TFTeam team )
 	{
 		switch ( team )
 		{
-			case TFTeam.Red: return PreviousRedPoints;
-			case TFTeam.Blue: return PreviousBluePoints;
+			case TFTeam.Red: return All.Where(cp => cp.PreviousRedPoints.Contains(this));
+			case TFTeam.Blue: return All.Where( cp => cp.PreviousBluePoints.Contains( this ) );
 			default: return null;
 		}
 	}

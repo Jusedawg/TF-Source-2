@@ -77,7 +77,7 @@ public partial class RespawnRoom : BaseTrigger
 	[GameEvent.Tick.Server]
 	public void Tick()
 	{
-		if ( !TeamSpawnPoint.tf_debug_spawnpoints )
+		if ( !tf_debug_spawnrooms )
 			return;
 
 		DebugOverlay.Text( 
@@ -88,4 +88,6 @@ public partial class RespawnRoom : BaseTrigger
 			WorldSpaceBounds.Center );
 
 	}
+
+	[ConVar.Replicated] public static bool tf_debug_spawnrooms { get; set; }
 }

@@ -123,11 +123,11 @@ partial class TFGameRules
 	}
 
 	/// <summary>
-	/// Returns the first owned point by the team that doesn't have any previous points set.
+	/// Returns all first owned points by the team that doesn't have any previous points set.
 	/// </summary>
 	/// <param name="team"></param>
 	/// <returns></returns>
-	public ControlPoint GetFirstOwnedControlPoint( TFTeam team )
+	public IEnumerable<ControlPoint> GetFirstOwnedControlPoints( TFTeam team )
 	{
 		if ( !team.IsPlayable() )
 			return null;
@@ -148,14 +148,17 @@ partial class TFGameRules
 				teamPoints = teamPoints.Where( x => !x.PreviousBluePoints.Any() ); break;
 		}
 
-		// If we have multiple "first" points, that means the cp layout is asymetrical. Return null.
-		if ( teamPoints.Count() > 1 )
-			return null;
-
 		// now we should have just a single control point.
 		// return the first one.
-		return teamPoints.FirstOrDefault();
+		return teamPoints;
 	}
+
+	/// <summary>
+	/// Returns the first owned point by the team that doesn't have any previous points set.
+	/// </summary>
+	/// <param name="team"></param>
+	/// <returns></returns>
+	public ControlPoint GetFirstOwnedControlPoint( TFTeam team ) => GetFirstOwnedControlPoints( team )?.FirstOrDefault();
 
 	public List<ControlPoint> GetFarthestOwnedControlPoints( TFTeam team )
 	{
@@ -169,18 +172,31 @@ partial class TFGameRules
 		return GetLastPointsFor(point, team);
 	}
 
-	private List<ControlPoint> GetLastPointsFor(ControlPoint point, TFTeam team)
+	private List<ControlPoint> GetLastPointsFor(ControlPoint point, TFTeam team, Func<ControlPoint, bool> condition = default)
 	{
-		var nextPoints = point.GetNextControlPointsForTeam( team );
-		if ( !nextPoints.Any() )
+		var nextPoints = point.GetNextPointsForTeam( team );
+		if( point.OwnerTeam != team) return null;
+
+		if ( nextPoints == default || !nextPoints.Any() )
 		{
+			if ( condition != default && !condition.Invoke( point ) ) return null;
+
 			return new List<ControlPoint> { point };
 		}
 
 		List<ControlPoint> lastPoints = new();
 		foreach (var nextPoint in nextPoints)
 		{
-			lastPoints.AddRange(GetLastPointsFor(nextPoint, team));
+			var nextLastPoints = GetLastPointsFor( nextPoint, team, condition );
+			if( nextLastPoints != null)
+				lastPoints.AddRange( nextLastPoints );
+		}
+
+		if ( !lastPoints.Any() )
+		{
+			if ( condition != default && !condition.Invoke( point ) ) return null;
+
+			return new List<ControlPoint> { point };
 		}
 
 		return lastPoints;
@@ -193,11 +209,19 @@ partial class TFGameRules
 	/// <returns></returns>
 	public List<ControlPoint> GetFarthestOwnedControlPointsWithRespawnRoom( TFTeam team )
 	{
-		var teamRespawns = All.OfType<RespawnRoom>().Where( x => x.TeamOption.Is( team ) );
-		var farthest = GetFarthestOwnedControlPoints( team );
+		var teamSpawnControlPoints = All.OfType<RespawnRoom>().Where( x => x.TeamOption.Is( team ) ).Select(room => room.ControlPoint);
+		// get the first point that we own.
+		var point = GetFirstOwnedControlPoint( team );
+
+		// If team doesnt own a single point, that means that they cant possibly have a "farthest" control point.
+		if ( point == null )
+			return null;
+
+		var farthest = GetLastPointsFor( point, team, ( cp ) => teamSpawnControlPoints.Contains(cp) );
+
 		if ( farthest == null || !farthest.Any() ) return null;
 
-		return teamRespawns.Select(spawn => spawn.ControlPoint).Where(cp => cp.OwnerTeam == team).Intersect(farthest).ToList();
+		return farthest.ToList();
 	}
 
 	public List<ControlPoint> GetControlPointRouteForTeam( TFTeam team )
@@ -211,7 +235,7 @@ partial class TFGameRules
 
 	private List<ControlPoint> GetAllNextPointsFor(ControlPoint point, TFTeam team)
 	{
-		var nextPoints = point.GetNextControlPointsForTeam( team );
+		var nextPoints = point.GetNextPointsForTeam( team );
 
 		List<ControlPoint> lastPoints = new()
 		{
