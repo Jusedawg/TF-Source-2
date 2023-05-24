@@ -6,6 +6,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Sandbox;
 using Editor;
+using System.Text.Json.Serialization;
 
 namespace TFS2
 {
@@ -18,21 +19,32 @@ namespace TFS2
 		/// </summary>
 		public class Section
 		{
+			public CartPath Path { get; init; }
 			/// <summary>
 			/// The distance of this section as fraction (0..1)
 			/// </summary>
 			public float Distance { get; init; }
 			public PathNodeMode Mode { get; init; }
+
+			public override string ToString()
+			{
+				return $"{Distance}-{Mode}";
+			}
 		}
 		public class ControlPointInfo
 		{
+			public CartPath Path { get; init; }
 			/// <summary>
-			/// The distance of this section as fraction (0..1)
+			/// The distance of this cp from the start in HU
 			/// </summary>
 			public float Distance { get; init; }
 			public ControlPoint Point { get; init; }
+			public override string ToString()
+			{
+				return $"{Distance}-{Point}";
+			}
 		}
-		public Section[] GetSections()
+		public List<Section> GetSections()
 		{
 			var sections = new List<Section>();
 
@@ -45,7 +57,8 @@ namespace TFS2
 				{
 					sections.Add( new Section
 					{
-						Distance = GetFraction(GetCurveLength(start, node, 10 )),
+						Path = this,
+						Distance = GetFraction(GetCurveLength(start, node, PATH_DETAIL ) ),
 						Mode = currentMode
 					} );
 
@@ -60,21 +73,23 @@ namespace TFS2
 				// Add last section
 				sections.Add( new Section
 				{
-					Distance = GetFraction( GetCurveLength( start, lastNode, 10 ) ),
+					Path = this,
+					Distance = GetFraction( GetCurveLength( start, lastNode, PATH_DETAIL ) ),
 					Mode = currentMode
 				} );
 			}
 
-			return sections.ToArray();
+			return sections;
 		}
-		public IEnumerable<ControlPointInfo> GetControlPoints()
+		public List<ControlPointInfo> GetControlPoints()
 		{
 			var cpNodes = PathNodes.Where( node => node.GetControlPoint() != null );
 			return cpNodes.Select( node => new ControlPointInfo()
 			{
+				Path = this,
 				Distance = GetNodeDistance( node ),
 				Point = node.GetControlPoint()
-			} );
+			} ).ToList();
 		}
 		/// <summary>
 		/// How much of the path a certain distance takes up.
@@ -85,35 +100,62 @@ namespace TFS2
 		{
 			return MathX.Clamp( distance / GetFullLength(), 0f, 1f );
 		}
-
 		public float GetFraction( CartPathNode node )
 		{
 			return GetFraction( GetNodeDistance( node ) );
 		}
-		public float GetFullLength()
+		internal const int PATH_DETAIL = 10;
+		public float GetFullLength(int detail = PATH_DETAIL)
 		{
 			float length = 0;
 			for ( int i = 0; i < PathNodes.Count - 1; i++ )
 			{
-				length += GetCurveLength( PathNodes[i], PathNodes[i + 1], 10 );
+				length += GetCurveLength( PathNodes[i], PathNodes[i + 1], detail );
 			}
 
 			return length;
 		}
 		
-		public float GetNodeDistance(CartPathNode node)
+		public float GetNodeDistance(CartPathNode node, int detail = PATH_DETAIL )
 		{
 			float length = 0;
 			for ( int i = 0; i < PathNodes.Count - 1; i++ )
 			{
-				if ( PathNodes[i] == node )
+				var current = PathNodes[i];
+				if ( current == node )
 				{
 					return length;
 				}
-				length += GetCurveLength( PathNodes[i], PathNodes[i + 1], 10 );
+				length += GetCurveLength( current, PathNodes[i + 1], detail );
 			}
 
 			return length;
+		}
+
+		public float GetNodeDistance( CartPathNode start, CartPathNode node, int detail = PATH_DETAIL )
+		{
+			int startIndex = PathNodes.IndexOf( start );
+			if ( startIndex == -1 )
+				startIndex = 0;
+			float length = 0;
+			for ( int i = startIndex; i < PathNodes.Count - 1; i++ )
+			{
+				var current = PathNodes[i];
+				if ( current == node )
+				{
+					return length;
+				}
+				length += GetCurveLength( current, PathNodes[i + 1], detail );
+			}
+
+			return length;
+		}
+
+		public override void Spawn()
+		{
+			base.Spawn();
+
+			Transmit = TransmitType.Always;
 		}
 
 		public override void DrawPath( int segments, bool drawTangents = false )
@@ -172,6 +214,7 @@ namespace TFS2
 	{
 
 		[Property( "CartMode", Title = "Movement Mode" )]
+		//[JsonPropertyName( "CartMode" )]
 		public PathNodeMode Mode { get; set; } = PathNodeMode.Default;
 		protected CartPath Path => PathEntity as CartPath;
 
@@ -189,6 +232,9 @@ namespace TFS2
 
 		public ControlPoint GetControlPoint()
 		{
+			// Not sure why but this seems to be prepended to the linked control point KV of the some nodes so im bandaid fixing it for now
+			// - quality 19/5/23
+
 			if ( LinkedControlPoint.StartsWith( "[PR#]" ) ) 
 				LinkedControlPoint = LinkedControlPoint.Substring( 5 );
 
@@ -200,37 +246,9 @@ namespace TFS2
 			return Entity.FindByName( NextPath ) as CartPath;
 		}
 
-		/// <summary>
-		/// Gets the next node in the current path.
-		/// </summary>
-		/// <returns></returns>
-		public CartPathNode GetNextNode()
+		public override string ToString()
 		{
-			if ( Path == null ) return null;
-
-			int index = Path.PathNodes.IndexOf( this );
-			if ( index == -1 ) return null;
-
-			index++;
-			if ( index >= Path.PathNodes.Count ) return null;
-
-			return Path.PathNodes[index] as CartPathNode;
-		}
-		/// <summary>
-		/// Gets the previous node in the current path.
-		/// </summary>
-		/// <returns></returns>
-		public CartPathNode GetPreviousNode()
-		{
-			int index = GetIndex() - 1;
-			if ( index < 0 )
-				return null;
-			return Path.PathNodes[index];
-		}
-
-		public int GetIndex()
-		{
-			return Path.PathNodes.IndexOf( this );
+			return $"{Mode}-{LinkedControlPoint ?? "none"}-{NextPath??"none"}";
 		}
 	}
 

@@ -1,14 +1,149 @@
-﻿PayloadDisplay {
+﻿@import "/UI/styles/colors.scss";
+
+PayloadDisplay {
     width: 100%;
-    justify-content: center;
+    z-index: 2;
     display: none;
+    justify-content: center;
+    flex-direction: row-reverse;
+    bottom: 0;
 
     &.visible {
         display: flex;
     }
 
-    .container {
-        width: 600px;
-        flex-direction: column;
+    PayloadPath {
+        height: 180px;
+        width: 30%;
+
+        .progress_bar {
+            height: 50%;
+            align-self: flex-end;
+
+            .point {
+                align-self: center;
+                position: absolute;
+                height: 100%;
+                aspect-ratio: 1;
+                z-index: 3;
+
+                &.neutral {
+                    background-image: url("/UI/Hud/Objectives/Payload/point_neutral_opaque.png");
+                    background-size: 100%;
+                    background-repeat: no-repeat;
+                }
+
+                &.blu {
+                    background-image: url("/UI/Hud/Objectives/Payload/point_blue.png");
+                    background-size: 100%;
+                    background-repeat: no-repeat;
+                }
+
+                &.red {
+                    background-image: url("/UI/Hud/Objectives/Payload/point_red.png");
+                    background-size: 100%;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .home {
+                align-self: center;
+                position: absolute;
+                height: 100%;
+                aspect-ratio: 1;
+                z-index: 3;
+                left: -6%;
+
+                &.blu {
+                    background-image: url("/UI/Hud/Objectives/Payload/home_blue.png");
+                    background-size: 100%;
+                    background-repeat: no-repeat;
+                }
+
+                &.red {
+                    background-image: url("/UI/Hud/Objectives/Payload/home_red.png");
+                    background-size: 100%;
+                    background-repeat: no-repeat;
+                }
+            }
+
+            .track {
+                align-self: center;
+                width: 100%;
+                height: 20%;
+                background-image: url("/UI/Hud/Objectives/Payload/track.png");
+                background-size: 100%;
+                background-repeat: repeat-x;
+                /*
+                &.blu {
+                    background-image: url("/UI/Hud/Objectives/Payload/track_blue.png");
+                    background-size: 100%;
+                    background-repeat: repeat-x;
+                }
+
+                &.red {
+                    background-image: url("/UI/Hud/Objectives/Payload/track_red.png");
+                    background-size: 100%;
+                    background-repeat: repeat-x;
+                }
+                */
+            }
+        }
+
+        .cart_container {
+            position: absolute;
+            height: 180%;
+            bottom: 0;
+            aspect-ratio: 0.35;
+            //flex-direction: row;
+
+            .cart {
+                align-self: center;
+                position: absolute;
+                bottom: 10%;
+                aspect-ratio: 1;
+                height: 35%;
+                z-index: 4;
+
+                &.blu {
+                    background-image: url("/UI/Hud/Objectives/Payload/blue_top.png");
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+
+                &.red {
+                    background-image: url("/UI/Hud/Objectives/Payload/red_top.png");
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+
+                .status {
+                    width: 100%;
+                    text-align: center;
+                    font-family: TF2_Secondary;
+                    font-size: 38px;
+                    color: $white;
+                    margin-top: 5px;
+                }
+            }
+
+            .status_container {
+                position: absolute;
+                top: 0;
+                left: -20%;
+                height: 60%;
+                width: 140%;
+                background-image: url(/ui/hud/objectives/controlpoints/progress_bar_pointer.png);
+                background-size: cover;
+                background-position-x: center;
+                background-repeat: no-repeat;
+                display: none;
+                z-index: 4;
+
+                &.visible {
+                    display: flex;
+                }
+            }
+        }
     }
 }

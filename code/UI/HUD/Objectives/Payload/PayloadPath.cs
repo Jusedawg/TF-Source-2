@@ -1,59 +1,203 @@
-﻿#if false
-
-using System.Collections.Generic;
+﻿using Sandbox;
 using Sandbox.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static Sandbox.Gizmo;
 
-namespace TFS2.UI
+namespace TFS2.UI;
+
+public partial class PayloadPath : Panel
 {
-	[UseTemplate]
-	public class PayloadPath : Panel
+	private class PathInfo
 	{
-		public CartPath Path { get; set; }
-		protected Dictionary<CartPath.Section, Panel> section;
-		Dictionary<Cart, PayloadCart> carts { get; set; } = new();
-		Dictionary<ControlPoint, Panel> points { get; set; } = new();
+		public float Distance;
+		public float Length;
+	}
 
-		protected override void PostTemplateApplied()
+	public Cart Cart { get; set; }
+	private Cart lastCart;
+
+	TFTeam CartTeam;
+	float PathLength;
+	Dictionary<CartPath, PathInfo> _pathLengths;
+	Dictionary<CartPath.Section, Panel> PathSections;
+	Dictionary<CartPath.ControlPointInfo, Panel> ControlPoints;
+
+	Panel ProgressBar;
+	Panel HomePanel;
+
+	Panel CartContainer;
+	Panel CartPanel;
+	Label StatusLabel;
+	Label PointerMessage;
+
+	public override void Tick()
+	{
+		if ( !Cart.IsValid() || !Cart.IsLoaded ) return;
+
+		if ( Cart != lastCart )
+			InitCart( Cart );
+
+		if ( Cart == null ) return;
+
+		float cartFraction = CartFraction();
+		Length cartPos = FractionLength( cartFraction );
+		Length remainder = FractionLength( 1 - cartFraction );
+
+		if(Cart.tf_debug_cart)
 		{
-			var sectionData = Path.GetSections();
-			foreach ( var s in sectionData )
-			{
-				string modeClass = "";
-				switch ( s.Mode )
-				{
-					case PathNodeMode.RollBack:
-						modeClass = "rollback";
-						break;
-					case PathNodeMode.RollForward:
-						modeClass = "rollforward";
-						break;
-				}
+			DebugOverlay.ScreenText( $"CartPos: {cartPos}" );
+			DebugOverlay.ScreenText( $"Remainder: {remainder}", 1 );
 
-				var panel = Add.Panel( modeClass );
-				panel.Style.Width = Length.Percent( s.Distance * 100 );
-				section.Add( s, panel );
-			}
-
-			foreach ( var cp in Path.GetControlPoints() )
-			{
-				AddPoint( cp.Point );
-			}
+			DebugOverlay.ScreenText( $"CartFraction: {cartFraction}", 2 );
+			DebugOverlay.ScreenText( $"PathLength: {_pathLengths}", 3 );
+			DebugOverlay.ScreenText( $"CartDistance: {Cart.GetCurrentDistance()}", 4 );
 		}
 
-		public void AddCart( Cart cart )
+
+		var cartPanelPos = cartPos;
+		float cartHalfWidth = 10f;
+		cartPanelPos.Value -= cartHalfWidth;
+		CartContainer.Style.Left = cartPanelPos;
+
+		if ( CartTeam == TFTeam.Blue)
 		{
-			carts.Add( cart, new()
-			{
-				Parent = this,
-				Cart = cart
-			} );
+			CartPanel.SetClass( "blu", true );
+			CartPanel.SetClass( "red", false );
+
+			HomePanel.SetClass( "blu", true );
+			HomePanel.SetClass( "red", false );
+		}
+		else
+		{
+			CartPanel.SetClass( "blu", false );
+			CartPanel.SetClass( "red", true );
+
+			HomePanel.SetClass( "blu", false );
+			HomePanel.SetClass( "red", true );
 		}
 
-		public void AddPoint( ControlPoint point )
+		if ( Cart.Pushers.Any() )
+			StatusLabel.Text = $"x{Cart.GetCapRate()}";
+		else
+			StatusLabel.Text = "";
+
+		foreach((CartPath.ControlPointInfo info, Panel panel) in ControlPoints)
 		{
-			points.Add( point, Add.Panel( "point" ) );
+			float fraction = ControlPointFraction( info );
+			Length cpPos = FractionLength( fraction );
+
+			/*
+			if(fraction.AlmostEqual(1))
+			{
+				// Offset the control point position by half the image (TODO: Get this value at runtime)
+				const float LAST_CP_HALF_WIDTH = 8f;
+				cpPos.Value -= LAST_CP_HALF_WIDTH;
+			}
+			else
+			*/
+			{
+				const float CP_HALF_WIDTH = 8f;
+				cpPos.Value -= CP_HALF_WIDTH;
+			}
+
+			panel.Style.Left = cpPos;
+
+			switch(info.Point.OwnerTeam)
+			{
+				case TFTeam.Blue:
+					panel.SetClass( "blu", true );
+					panel.SetClass( "red", false );
+					panel.SetClass( "neutral", false );
+					break;
+				case TFTeam.Red:
+					panel.SetClass( "blu", false );
+					panel.SetClass( "red", true );
+					panel.SetClass( "neutral", false );
+					break;
+				default:
+					panel.SetClass( "blu", false );
+					panel.SetClass( "red", false );
+					panel.SetClass( "neutral", true );
+					break;
+			}
 		}
 	}
-}
 
-#endif
+	private void InitCart(Cart cart)
+	{
+		var paths = cart.GetPaths();
+		if(paths == null || !paths.Any())
+		{
+			Log.Error( "Cant have path UI with no paths!" );
+			return;
+		}
+
+		if(lastCart != null)
+		{
+			foreach ( var section in PathSections )
+				section.Value.Delete();
+
+			foreach ( var cp in ControlPoints )
+				cp.Value.Delete();
+		}
+
+		lastCart = Cart;
+		Cart = cart;
+
+		CartTeam = cart.Team;
+		_pathLengths = new();
+		PathSections = new();
+		ControlPoints = new();
+
+		foreach(var path in paths)
+		{
+			PathInfo info = new()
+			{
+				Distance = _pathLengths?.Values?.Sum( info => info.Length ) ?? 0f,
+				Length = path?.GetFullLength() ?? 0f
+			};
+			_pathLengths.Add( path, info);
+
+			var sections = path.GetSections();
+			var cps = path.GetControlPoints();
+			foreach ( var section in sections )
+			{
+				PathSections.Add( section, ProgressBar.Add.Panel( "section" ) );
+			}
+
+			foreach ( var cp in cps )
+			{
+				ControlPoints.Add( cp, ProgressBar.Add.Panel( "point neutral" ) );
+			}
+
+			//Log.Info( string.Join(',', sections ));
+		}
+
+		PathLength = _pathLengths.Values.Sum(info => info.Length);
+	}
+
+	private Length FractionLength(float fraction)
+	{
+		return Length.Fraction( fraction ) ?? 0;
+	}
+
+	/// <summary>
+	/// Gets the distance from the left the cart element should be
+	/// </summary>
+	/// <returns></returns>
+	private float CartFraction()
+	{
+		var distance = Cart.GetCurrentDistance() + PathOffset(Cart.Path);
+		return distance / PathLength;
+	}
+
+	private float PathOffset( CartPath path ) => _pathLengths.GetValueOrDefault( path )?.Distance ?? 0f;
+	private float ControlPointFraction(CartPath.ControlPointInfo info)
+	{
+		return (info.Distance + PathOffset( info.Path ) ) / PathLength;
+	}
+}

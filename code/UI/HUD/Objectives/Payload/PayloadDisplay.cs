@@ -1,50 +1,47 @@
-﻿#if false
-
+﻿using Sandbox.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sandbox;
-using Sandbox.UI;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace TFS2.UI;
 
-[UseTemplate]
-partial class PayloadDisplay : Panel
+public partial class PayloadDisplay : Panel
 {
-	Panel pathContainer { get; set; }
-	Dictionary<CartPath, PayloadPath> paths { get; set; } = new();
+	Dictionary<Cart, PayloadPath> pathEntries = new();
 	public override void Tick()
 	{
 		SetClass( "visible", ShouldDraw() );
 
-		var currentPaths = paths.Keys;
-		var pathEntities = Entity.All.OfType<CartPath>();
+		if ( !IsVisible ) return;
 
-		foreach ( var newPath in pathEntities.Except( currentPaths ) ) AddPath( newPath );
-		foreach ( var oldPath in currentPaths.Except( pathEntities ) ) RemovePath( oldPath );
+		var carts = Cart.All;
+		var localCarts = pathEntries.Keys;
+
+		foreach ( var item in carts.Except( localCarts ) ) AddCart( item );
+		foreach ( var item in localCarts.Except( carts ) ) RemoveCart( item );
 	}
 
-	public bool ShouldDraw() => TFGameRules.Current.MapHasCarts;
 
-	public void AddPath( CartPath path )
+	private void AddCart( Cart cart )
 	{
-		PayloadPath element = new()
-		{
-			Parent = this,
-			Path = path
-		};
-
-		element.Parent = pathContainer;
-		paths.Add( path, element );
+		pathEntries.Add( 
+			cart, 
+			new() { 
+				Cart = cart, 
+				Parent = this
+			} 
+		);
 	}
-
-	public void RemovePath( CartPath path )
+	private void RemoveCart( Cart cart )
 	{
-		if ( paths.TryGetValue( path, out var entry ) )
+		if(pathEntries.TryGetValue(cart, out var panel))
 		{
-			entry?.Delete();
-			paths.Remove( path );
+			panel.Delete();
+			pathEntries.Remove( cart );
 		}
 	}
-}
 
-#endif
+	public bool ShouldDraw() => TFGameRules.Current.IsPlaying<Payload>();
+}

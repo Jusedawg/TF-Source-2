@@ -14,6 +14,8 @@ partial class ControlPointDisplay : Panel
 	{
 		points = ControlPoint.All;
 		SetClass( "visible", ShouldDraw() );
+		if ( !IsVisible )
+			return;
 
 		var ourPoints = PointEntries.Keys;
 
@@ -43,7 +45,7 @@ partial class ControlPointDisplay : Panel
 		ReorderEntries();
 	}
 
-	public bool ShouldDraw() => points.Any() && !TFGameRules.Current.MapHasCarts;
+	public bool ShouldDraw() => TFGameRules.Current.IsPlaying<ControlPoints>();
 
 	public void ReorderEntries()
 	{

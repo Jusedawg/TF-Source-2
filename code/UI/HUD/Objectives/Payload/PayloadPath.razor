@@ -1,0 +1,20 @@
+﻿@using Sandbox.UI;
+
+@namespace TFS2.UI
+
+<root>
+    <div class="progress_bar" @ref="ProgressBar">
+        <div class="home" @ref="HomePanel" />
+
+        <div class="track" />
+    </div>
+
+    <div class="cart_container" @ref="CartContainer">
+        <div class="status_container">
+            <text class="message" @ref="PointerMessage" />
+        </div>
+        <div class="cart" @ref="CartPanel"> 
+            <label class="status" @ref="StatusLabel"/>
+        </div>
+    </div>
+</root>
