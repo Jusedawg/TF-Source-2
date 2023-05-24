@@ -72,7 +72,6 @@ public class PlayerClass : GameResource
 	//
 
 	[ResourceType( "tfweapon" )] public List<string> DefaultWeapons { get; set; }
-	[ResourceType( "building" )] public List<string> Buildings { get; set; }
 
 	//
 	// Abilities

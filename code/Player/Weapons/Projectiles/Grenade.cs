@@ -38,8 +38,8 @@ public partial class Grenade : TFProjectile
 		// Can't touch our teammaters.
 		if ( ITeam.IsSame( this, other ) ) return false;
 
-		// grenades can only directly impact buildings and players.
-		return other is TFPlayer;/* || other is Building;*/
+		// grenades can only directly impact players.
+		return other is TFPlayer;
 	}
 
 	public float GetExplodeTime()
