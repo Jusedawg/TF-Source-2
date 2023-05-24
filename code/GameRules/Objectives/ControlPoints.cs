@@ -176,11 +176,10 @@ partial class TFGameRules
 	{
 		var nextPoints = point.GetNextPointsForTeam( team );
 		if( point.OwnerTeam != team) return null;
+		if ( condition != default && !condition.Invoke( point ) ) return null;
 
 		if ( nextPoints == default || !nextPoints.Any() )
 		{
-			if ( condition != default && !condition.Invoke( point ) ) return null;
-
 			return new List<ControlPoint> { point };
 		}
 
@@ -191,11 +190,8 @@ partial class TFGameRules
 			if( nextLastPoints != null)
 				lastPoints.AddRange( nextLastPoints );
 		}
-
 		if ( !lastPoints.Any() )
 		{
-			if ( condition != default && !condition.Invoke( point ) ) return null;
-
 			return new List<ControlPoint> { point };
 		}
 
@@ -212,12 +208,12 @@ partial class TFGameRules
 		var teamSpawnControlPoints = All.OfType<RespawnRoom>().Where( x => x.TeamOption.Is( team ) ).Select(room => room.ControlPoint);
 		// get the first point that we own.
 		var point = GetFirstOwnedControlPoint( team );
-
+		
 		// If team doesnt own a single point, that means that they cant possibly have a "farthest" control point.
-		if ( point == null )
+		if ( point == null || teamSpawnControlPoints == null || !teamSpawnControlPoints.Any() )
 			return null;
 
-		var farthest = GetLastPointsFor( point, team, ( cp ) => teamSpawnControlPoints.Contains(cp) );
+		var farthest = GetLastPointsFor( point, team, ( cp ) => teamSpawnControlPoints.Contains( cp ) );
 
 		if ( farthest == null || !farthest.Any() ) return null;
 

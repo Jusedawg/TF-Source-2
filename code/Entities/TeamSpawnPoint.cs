@@ -85,7 +85,7 @@ public partial class TeamSpawnPoint : SDKSpawnPoint, IResettable
 
 			var point = Point ?? Room.ControlPoint;
 			var farthestPoints = TFGameRules.Current.GetFarthestOwnedControlPointsWithRespawnRoom( playerTeam );
-			if ( farthestPoints == null || !farthestPoints.Contains(point) )
+			if ( farthestPoints != null && !farthestPoints.Contains(point) )
 				return false;
 		}
 
