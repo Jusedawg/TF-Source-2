@@ -12,7 +12,8 @@
 CreateInputTexture2D( Color,            Srgb,   8, "",                  "_color",   "Material,10/10",   Default3( 1.0, 1.0, 1.0 ) );
 CreateInputTexture2D( Translucency,     Linear, 8, "",                  "_trans",   "Material,10/11",   Default( 1.0 ) );
 CreateInputTexture2D( Normal,           Linear, 8, "NormalizeNormals",  "_normal",  "Material,10/12",   Default3( 0.5, 0.5, 1.0 ) );
-CreateInputTexture2D( LightWarpTexture, Linear, 8, "",                  "_lightwarp","Material,10/13",  Default3( 1.0, 1.0, 1.0 ) );
+CreateInputTexture2D( AmbientOcclusion, Linear, 8, "",                  "_ao",      "Material,10/13",   Default( 1.0 ) );
+CreateInputTexture2D( LightWarpTexture, Linear, 8, "",                  "_lightwarp","Material,10/14",  Default3( 1.0, 1.0, 1.0 ) );
 
 CreateInputTexture2D( TintMask,         Srgb,   8, "",                  "_tint",    "Tint,20/10",       Default( 1.0 ) );
 float g_flTintReplacementControl    < UiGroup( "Tint,20/11" ); Range(0.0f, 1.0f); Default(1.0f); >;
@@ -154,5 +155,8 @@ CreateTexture2D( g_tSelfIllumMaskTexture ) < Channel( RGB, Box( SelfIllumMaskTex
     CreateTexture2D( g_tWrinkleNormal ) < Channel( RGBA, Box( WrinkleNormal ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
     CreateTexture2D( g_tWrinkleStretchNormal ) < Channel( RGBA, Box( WrinkleStretchNormal ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 #endif // S_WRINKLEMAP
+
+
+CreateTexture2D( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Linear ); OutputFormat( RGBA8888 ); SrgbRead( false ); >;
 
 #endif // SOURCEBOX_LEGACY_PIXELINPUTS_H

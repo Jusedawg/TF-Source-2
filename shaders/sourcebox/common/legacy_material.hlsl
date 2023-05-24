@@ -74,7 +74,10 @@ Material GetDefaultLegacyMaterial()
     m.RimExponent = 0.0;
     m.SpecularMask = 1.0;
     m.SpecularTint = float3(1.0, 1.0, 1.0);
-    m.SpecularExponent = 1.0;
+
+    // assume 0.5 roughness default for AO calc
+    m.SpecularExponent = 43.93398;
+
     m.StaticLightingColor = float3(0.0, 0.0, 0.0);
     m.EnvmapMask = float3(1.0, 1.0, 1.0);
     m.SelfIllumMask = float3(1.0, 1.0, 1.0);

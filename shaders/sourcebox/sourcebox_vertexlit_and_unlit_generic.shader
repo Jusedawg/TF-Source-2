@@ -234,6 +234,8 @@ PS
                 diffuse.xyz = lerp( diffuse.xyz, g_vSelfIllumTint * albedo, selfillumMask );
             #endif // S_SELFILLUM
         #endif
+
+        return diffuse;
     }
 
     #include "sourcebox/common/legacy_pixel.hlsl"
@@ -267,6 +269,10 @@ PS
         // #endif
 
         #endif // !S_SEAMLESS_BASE
+
+        // #if S_AMBIENT_OCCLUSION
+        float flAmbientOcclusion = Tex2D( g_tAmbientOcclusionTexture, i.vTextureCoords.xy ).r;
+        // #endif // S_AMBIENT_OCCLUSION
 
         #if S_DISTANCEALPHA && (S_DISTANCEALPHAFROMDETAIL == 0)
             float distAlphaMask = baseColor.a;
@@ -393,7 +399,7 @@ PS
         ShadingModelLegacy sm;
         sm.config.DoDiffuse = S_DIFFUSELIGHTING ? true : false;
         sm.config.HalfLambert = false;
-        sm.config.DoAmbientOcclusion = false;
+        sm.config.DoAmbientOcclusion = true;
         sm.config.DoLightingWarp = false;
         sm.config.DoRimLighting = false;
         sm.config.DoSpecularWarp = false;
@@ -414,12 +420,17 @@ PS
         // m.Normal = TransformNormal( i, DecodeHemiOctahedronNormal( normalTexel.xy ) );
         m.Normal = TransformNormal( i, tangentSpaceNormal );
 
-        m.AmbientOcclusion = 1.0;
+        // #if S_AMBIENT_OCCLUSION
+        m.AmbientOcclusion = float3(flAmbientOcclusion, flAmbientOcclusion, flAmbientOcclusion);
+        // #endif // S_AMBIENT_OCCLUSION
+        
         m.SpecularTint = float3( 1.0, 1.0, 1.0 );
         m.Opacity = alpha;
         m.SelfIllumMask = vSelfIllumMask;
         m.EnvmapMask = specularFactor;
-        m.DiffuseModControls = detailColor;
+        #if S_DETAILTEXTURE
+            m.DiffuseModControls = detailColor;
+        #endif
 
         float4 output = FinalizePixelMaterial( i, m, sm );
         output.a = alpha;

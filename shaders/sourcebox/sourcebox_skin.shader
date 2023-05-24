@@ -162,7 +162,7 @@ PS
         ShadingModelLegacy sm;
         sm.config.DoDiffuse = true;
         sm.config.HalfLambert = true;
-        sm.config.DoAmbientOcclusion = false;
+        sm.config.DoAmbientOcclusion = /*S_AMBIENT_OCCLUSION ? */true /*: false*/;
         sm.config.DoLightingWarp = S_LIGHTWARPTEXTURE ? true : false;
         sm.config.DoRimLighting = S_RIMLIGHT ? true : false;
         sm.config.DoSpecularWarp = S_PHONGWARPTEXTURE ? true : false;
@@ -191,6 +191,10 @@ PS
             // Apply wrinkle blend to only RGB.  Alpha comes from the base texture
             baseColor.rgb = flTextureAmount * baseColor.rgb + flWrinkleAmount * wrinkleColor.rgb + flStretchAmount * stretchColor.rgb;
         #endif // S_WRINKLEMAP
+
+        // #if S_AMBIENT_OCCLUSION
+        float flAmbientOcclusion = Tex2D( g_tAmbientOcclusionTexture, vUV ).r;
+        // #endif // S_AMBIENT_OCCLUSION
 
         #if S_DETAILTEXTURE
             // float4 detailColor = Tex2D( g_tDetailTexture, i.vTextureCoords.zw );
@@ -286,6 +290,10 @@ PS
         m.RimFresnel = fRimFresnel;
         m.RimExponent = g_flRimExponent;
         
+        // #if S_AMBIENT_OCCLUSION
+        m.AmbientOcclusion = float3(flAmbientOcclusion, flAmbientOcclusion, flAmbientOcclusion);
+        // #endif // S_AMBIENT_OCCLUSION
+
         #if ( S_SELFILLUMFRESNEL == 1 )
             // this one just uses the base color alpha
             m.SelfIllumMask = baseColor.a;

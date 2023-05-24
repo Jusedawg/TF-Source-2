@@ -159,7 +159,7 @@ PS
         ShadingModelLegacy sm;
         sm.config.DoDiffuse = S_DIFFUSELIGHTING ? true : false;
         sm.config.HalfLambert = S_HALFLAMBERT ? true : false;
-        sm.config.DoAmbientOcclusion = false;
+        sm.config.DoAmbientOcclusion = true;
         sm.config.DoLightingWarp = S_LIGHTWARPTEXTURE ? true : false;
         sm.config.DoRimLighting = false;
         sm.config.DoSpecularWarp = false;
@@ -181,6 +181,9 @@ PS
             baseColor = TextureCombine( baseColor, detailColor, S_DETAIL_BLEND_MODE, g_flDetailBlendFactor );
         #endif // S_DETAILTEXTURE
         
+        // #if S_AMBIENT_OCCLUSION
+        float flAmbientOcclusion = Tex2D( g_tAmbientOcclusionTexture, vUV ).r;
+        // #endif // S_AMBIENT_OCCLUSION
         
         float4 normalTexel = Tex2D( g_tNormal, vUV );
         // inverted normals
@@ -208,7 +211,10 @@ PS
         // m.Normal = TransformNormal( i, DecodeHemiOctahedronNormal( normalTexel.xy ) );
         m.Normal = TransformNormal( i, tangentSpaceNormal );
 
-        m.AmbientOcclusion = 1.0;
+        // #if S_AMBIENT_OCCLUSION
+        m.AmbientOcclusion = float3(flAmbientOcclusion, flAmbientOcclusion, flAmbientOcclusion);
+        // #endif // S_AMBIENT_OCCLUSION
+        
         m.SpecularTint = float3( 1.0, 1.0, 1.0 );
 
         float alpha = g_vDiffuseModulation.a;

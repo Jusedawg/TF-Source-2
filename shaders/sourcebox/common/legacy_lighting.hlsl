@@ -96,6 +96,23 @@ class ShadingLegacyConfig {
     #define cOOOverbright 0.5f
 };
 
+// S&box glue
+class ShadingBuiltinConfig
+{  
+    //
+    // Sets the shading model to use for ambient occlusion
+    //
+    // Can be one of the following values:
+    // 0 - AMBIENT_OCCLUSION_SIMPLE ( Default )
+    // 1 - AMBIENT_OCCLUSION_MULTIBOUNCE
+    // 2 - AMBIENT_OCCLUSION_BENT_NORMALS ( + MultiBounce )
+    //
+    #define AMBIENT_OCCLUSION_SIMPLE 0
+    #define AMBIENT_OCCLUSION_MULTIBOUNCE 1
+    #define AMBIENT_OCCLUSION_BENT_NORMALS 2
+    uint AmbientOcclusionModel;
+};
+
 // Processed pixel inputs to what's easier to be consumed by the shader
 class LegacyShadeInputs
 {
@@ -223,6 +240,7 @@ class LegacyShadeParams {
     float4 DiffuseModControls;
 
     LegacyShadeInputs inputs;
+    ShadingBuiltinConfig config;
 
     void GetCommonParams( const PixelInput pixel, const Material m )
     {
@@ -248,6 +266,9 @@ class LegacyShadeParams {
 
         // custom controls
         DiffuseModControls = m.DiffuseModControls;
+
+
+        config.AmbientOcclusionModel = AMBIENT_OCCLUSION_MULTIBOUNCE;
     }
 
     //
@@ -276,6 +297,8 @@ class LegacyShadeParams {
         return params;
     }
 };
+
+#include "sourcebox/common/legacy_lighting.ambientocclusion.hlsl"
 
 class ShadingModelLegacy : ShadingModel
 {
@@ -335,6 +358,7 @@ class ShadingModelLegacy : ShadingModel
             // From SDK: Raise to higher powers for darker AO values
     //		float fAOPower = lerp( 4.0f, 1.0f, fAmbientOcclusion );
     //		result *= pow( NDotL * 0.5 + 0.5, fAOPower );
+            // fResult *= GetAmbientOcclusion(shadeParams);
             fResult *= shadeParams.AmbientOcclusion.r;
         }
 
@@ -349,7 +373,9 @@ class ShadingModelLegacy : ShadingModel
 
         if ( config.DoAmbientOcclusion && config.DoIrisLighting )
         {
-            fOut *= shadeParams.AmbientOcclusion.rgb;
+            // TODO: this was RGB AO originally?
+            // fOut *= GetAmbientOcclusion(shadeParams);
+            fOut *= shadeParams.AmbientOcclusion;
         }
 
         return fOut;
@@ -380,7 +406,10 @@ class ShadingModelLegacy : ShadingModel
         specularLighting *= color;											// Modulate with light color
         
         if ( config.DoAmbientOcclusion && !config.DoIrisLighting )			// Optionally modulate with ambient occlusion
+        {
+            // specularLighting *= specularAO( shadeParams, GetAmbientOcclusion(shadeParams) );
             specularLighting *= shadeParams.AmbientOcclusion.r;
+        }
 
         if ( config.DoRimLighting )											// Optionally do rim lighting
         {
@@ -578,10 +607,15 @@ class ShadingModelLegacy : ShadingModel
 
             if ( config.AmbientLight )
             {
+                float3 diffAmbient = ambient;
                 if ( config.DoAmbientOcclusion && !config.DoIrisLighting )
-                    ambient *= shadeParams.AmbientOcclusion.r * shadeParams.AmbientOcclusion.r;	// Note squaring...
+                {
+                    // ambient *= shadeParams.AmbientOcclusion.r * shadeParams.AmbientOcclusion.r;	// Note squaring...
+                    float flAO = GetAmbientOcclusion(shadeParams);
+                    diffAmbient *= flAO * flAO;	// Note squaring...
+                }
 
-                linearColor += ambient;
+                linearColor += diffAmbient;
             }
 
             m_sumDiffuseLighting += linearColor;
@@ -617,8 +651,19 @@ class ShadingModelLegacy : ShadingModel
 
             lightShade.Specular = max( lightShade.Specular, m_sumRimLighting );
 			
+            // not in SDK
+            float3 specAmbient = ambient;
+            if ( config.DoAmbientOcclusion )
+            {
+                float3 vAmbientOcclusion = specularAO( shadeParams, GetAmbientOcclusion(shadeParams) );
+                if( shadeParams.config.AmbientOcclusionModel >= AMBIENT_OCCLUSION_MULTIBOUNCE )
+                    vAmbientOcclusion = gtaoMultiBounce( vAmbientOcclusion.x, shadeParams.Albedo.rgb ).xxx;
+                
+                specAmbient *= vAmbientOcclusion;
+            }
+
 			// Add in view-ray lookup from ambient cube
-            lightShade.Specular += (ambient * g_flRimBoost) * saturate(fRimMultiply * shadeParams.inputs.NormalWs.z);
+            lightShade.Specular += (specAmbient * g_flRimBoost) * saturate(fRimMultiply * shadeParams.inputs.NormalWs.z);
         }
         
         return lightShade;
@@ -702,10 +747,114 @@ class ShadingModelLegacy : ShadingModel
             envMapColor *= m_sumDiffuseLighting;
         }
 
+        // Not in SDK:
+        // cubemaps also count as indirect specular lighting, so multiply by specular AO here aswell
+        if ( config.DoAmbientOcclusion )
+        {
+            float3 vAmbientOcclusion = specularAO( shadeParams, GetAmbientOcclusion(shadeParams) );
+            if( shadeParams.config.AmbientOcclusionModel >= AMBIENT_OCCLUSION_MULTIBOUNCE )
+                vAmbientOcclusion = gtaoMultiBounce( vAmbientOcclusion.x, shadeParams.Albedo.rgb ).xxx;
+            
+            envMapColor *= vAmbientOcclusion;
+        }
+
         // TODO fog
         float3 result = vColor.rgb + envMapColor;
 
         return float4( result, shadeParams.Opacity );
+    }
+
+    // TODO: copied from pixel.shading.standard.indirect.hlsl
+    static float GetAmbientOcclusion( LegacyShadeParams i )
+    {
+        float fAmbientOcclusion = i.AmbientOcclusion.r;          // Texture Ambient Occlusion
+        fAmbientOcclusion *= GetDynamicAmbientOcclusion( i );  // Dynamic Ambient Occlusion ( eg AOProxies )
+        fAmbientOcclusion *= GetBakedAmbientOcclusion( i );    // Baked Ambient Occlusion ( eg Lightmap )
+
+        return fAmbientOcclusion;
+    }
+
+    static float GetDynamicAmbientOcclusion( LegacyShadeParams i )
+    {
+        // --------------------------------------------------------------------------------------------
+        if ( g_bAmbientOcclusionProxiesEnabled )
+		{
+            // Fixme: Add depth to Z channel
+            float3 vPositionSs = float3( i.inputs.PositionSs, 1.0f );
+			
+            //
+			// Validity mask - only want the lights on our side of the hemisphere
+            // Fixme: Geometric normal
+			//
+			float4 vLightDirectionValidMask;
+			vLightDirectionValidMask.x = dot( g_vAmbientOcclusionProxyLightPositions[0].xyz, i.inputs.NormalWs.xyz );
+			vLightDirectionValidMask.y = dot( g_vAmbientOcclusionProxyLightPositions[1].xyz, i.inputs.NormalWs.xyz );
+			vLightDirectionValidMask.z = dot( g_vAmbientOcclusionProxyLightPositions[2].xyz, i.inputs.NormalWs.xyz );
+			vLightDirectionValidMask.w = dot( g_vAmbientOcclusionProxyLightPositions[3].xyz, i.inputs.NormalWs.xyz );
+			vLightDirectionValidMask.xyzw = max( vLightDirectionValidMask.xyzw, float4( 0.0, 0.0, 0.0, 0.0 ) );
+
+			const float flAoProxyDownres = g_vAoProxyDownres.x;
+			float2 vAoProxyTexelSize = 1.0 / TextureDimensions2D( g_tDynamicAmbientOcclusionDepth, 0 ).xy;
+
+			//
+			// Gather depth values in 2x2 neighborhood
+			//
+			float2 vAoProxyUv = floor( vPositionSs.xy * flAoProxyDownres ) * vAoProxyTexelSize.xy + 0.5 * vAoProxyTexelSize.xy;
+			float4 v4Depths = g_tDynamicAmbientOcclusionDepth.GatherRed( g_sCookieSampler, vAoProxyUv.xy );
+			float4 vDepthDiffs = ( v4Depths.xyzw - vPositionSs.zzzz );
+
+			//
+			// Calculate offset to smallest depth difference
+			//
+			float flMinDist = vDepthDiffs.w;
+			float2 vOffset = float2( 0.0, 0.0 );
+			if ( abs( vDepthDiffs.z ) < flMinDist )
+			{
+				flMinDist = vDepthDiffs.z;
+				vOffset = float2( vAoProxyTexelSize.x, 0.0 );
+			}
+			if ( abs( vDepthDiffs.x ) < flMinDist )
+			{
+				flMinDist = vDepthDiffs.x;
+				vOffset = float2( 0.0, vAoProxyTexelSize.y );
+			}
+			if ( abs( vDepthDiffs.y ) < flMinDist )
+			{
+				flMinDist = vDepthDiffs.y;
+				vOffset = vAoProxyTexelSize.xy;
+			}
+
+			//
+			// Lookup directional AO texel
+			//
+			float4 vAoProxyTexel = AttributeTex2DS( g_tDynamicAmbientOcclusion, g_sPointClamp, vAoProxyUv.xy + vOffset.xy );
+
+			//
+			// Calculate relative contributions of all the lights
+			//
+			float4 vLightingComposition = vLightDirectionValidMask.xyzw;
+			float flSum = dot( vLightingComposition.xyzw, float4( 1.0, 1.0, 1.0, 1.0 ) ) + g_vAmbientOcclusionProxyAmbientStrength.x;
+			flSum = rcp( flSum );
+
+			return flSum * ( g_vAmbientOcclusionProxyAmbientStrength.x + dot( vLightingComposition.xyzw, vAoProxyTexel.xyzw ) );
+		}
+
+        return 1.0f;
+
+    }
+
+    //
+    // Get ambient occlusion info from the lightmap if available
+    //
+    static float GetBakedAmbientOcclusion( LegacyShadeParams i )
+    {
+        #if ( D_BAKED_LIGHTING_FROM_LIGHTMAP )
+            float2 vLightmapUV = i.inputs.PositionLightmap;
+            float4 vAHDData = Tex2DArrayS( LightMap( 3 ), g_sTrilinearClamp, float3( i.inputs.PositionLightmap, 0 ) );
+            return vAHDData.w;
+        #endif
+
+        return 1.0f;
     }
 };
 
