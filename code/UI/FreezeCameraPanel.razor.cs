@@ -35,9 +35,9 @@ public partial class FreezeCameraPanel : Panel
 		Instance?.SetupFreeze( target, time, position, rotation, fov );
 	}
 
-	const string KILLER_HEADER = "You were killed by";
-	const string KILLER_HEADER_DEAD = "You were killed by the late";
-	const string KILLER_OTHER_NAME = "The Environment";
+	const string KILLER_HEADER = "#FreezeCamera.KillerHeader";
+	const string KILLER_HEADER_DEAD = "#FreezeCamera.KillerHeaderDead";
+	const string KILLER_OTHER_NAME = "#FreezeCamera.NonPlayerName";
 	public void SetupFreeze( Entity target, float time, Vector3 position, Rotation rotation, float fov )
 	{
 		var size = new Vector2( Screen.Width, Screen.Height );
