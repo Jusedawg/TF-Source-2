@@ -79,6 +79,20 @@ VS
 	// Main
 	//
 
+    float3 Vec3WorldToTangent( float3 iWorldVector, float3 iWorldNormal, float3 iWorldTangent, float3 iWorldBinormal )
+    {
+        float3 vTangentVector;
+        vTangentVector.x = dot( iWorldVector.xyz, iWorldTangent.xyz );
+        vTangentVector.y = dot( iWorldVector.xyz, iWorldBinormal.xyz );
+        vTangentVector.z = dot( iWorldVector.xyz, iWorldNormal.xyz );
+        return vTangentVector.xyz; // Return without normalizing
+    }
+
+    float3 Vec3WorldToTangentNormalized( float3 iWorldVector, float3 iWorldNormal, float3 iWorldTangent, float3 iWorldBinormal )
+    {
+        return normalize( Vec3WorldToTangent( iWorldVector, iWorldNormal, iWorldTangent, iWorldBinormal ) );
+    }
+    
     // https://github.com/ValveSoftware/source-sdk-2013/blob/0d8dceea4310fde5706b3ce1c70609d72a38efdf/sp/src/materialsystem/stdshaders/eye_refract_vs20.fxc
 	PixelInput MainVs( INSTANCED_SHADER_PARAMS( VS_INPUT i ) )
 	{
@@ -104,7 +118,7 @@ VS
 
         float3 vWorldViewVector = -CalculatePositionToCameraDirWs( o.vPositionWs );
         // float3 vTangentViewVector = Vec3WorldToTangentNormalized(vWorldViewVector.xyz, vWorldNormal.xyz, vWorldTangent.xyz, vWorldBinormal.xyz);
-        o.vTangentViewVector = Vec3WsToTsNormalized(vWorldViewVector.xyz, vWorldNormal.xyz, vWorldTangent.xyz, vWorldBinormal.xyz);
+        o.vTangentViewVector = Vec3WorldToTangentNormalized(vWorldViewVector.xyz, vWorldNormal.xyz, vWorldTangent.xyz, vWorldBinormal.xyz);
         
 		return FinalizeVertex( o );
 	}
