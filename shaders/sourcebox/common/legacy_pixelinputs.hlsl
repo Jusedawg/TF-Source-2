@@ -14,13 +14,18 @@ CreateInputTexture2D( Translucency,     Linear, 8, "",                  "_trans"
 CreateInputTexture2D( Normal,           Linear, 8, "NormalizeNormals",  "_normal",  "Material,10/12",   Default3( 0.5, 0.5, 1.0 ) );
 CreateInputTexture2D( LightWarpTexture, Linear, 8, "",                  "_lightwarp","Material,10/13",  Default3( 1.0, 1.0, 1.0 ) );
 
-CreateInputTexture2D( AmbientOcclusion, Linear, 8, "",                  "_ao",      "Material,10/Ambient Occlusion,14/1",   Default( 1.0 ) );
+#if AO_TEXTURE_IS_SRGB
+    CreateInputTexture2D( AmbientOcclusion, Srgb, 8, "",                  "_ao",      "Material,10/Ambient Occlusion,14/1",   Default( 1.0 ) );
+#else // !AO_TEXTURE_IS_SRGB
+    CreateInputTexture2D( AmbientOcclusion, Linear, 8, "",                  "_ao",      "Material,10/Ambient Occlusion,14/1",   Default( 1.0 ) );
+#endif // AO_TEXTURE_IS_SRGB
+
 float g_flAmbientOcclusionDirectDiffuse         < UiGroup( "Material,10/Ambient Occlusion,14/2" ); Range(0.0f, 1.0f); Default(1.0f); >;
 float g_flAmbientOcclusionDirectPostLightwarp   < UiGroup( "Material,10/Ambient Occlusion,14/3" ); Range(0.0f, 1.0f); Default(1.0f); >;
 float g_flAmbientOcclusionDirectSpecular        < UiGroup( "Material,10/Ambient Occlusion,14/4" ); Range(0.0f, 1.0f); Default(1.0f); >;
 float g_flAmbientOcclusionDirectAmbient         < UiGroup( "Material,10/Ambient Occlusion,14/5" ); Range(0.0f, 1.0f); Default(1.0f); >;
 
-CreateInputTexture2D( TintMask,         Srgb,   8, "",                  "_tint",    "Tint,20/10",       Default( 1.0 ) );
+CreateInputTexture2D( TintMask,      Linear,   8, "",                  "_tint",    "Tint,20/10",       Default( 1.0 ) );
 float g_flTintReplacementControl    < UiGroup( "Tint,20/11" ); Range(0.0f, 1.0f); Default(1.0f); >;
 float4 g_vDiffuseModulation         < UiGroup( "Tint,20/12" ); UiType( Color ); Default4(1.0f, 1.0f, 1.0f, 1.0); >;
 float4 g_vModulationColor           < UiGroup( "Tint,20/13" ); UiType( Color ); Default4(1.0f, 1.0f, 1.0f, 1.0); >;
@@ -29,7 +34,7 @@ CreateInputTexture2D( DetailTexture, Linear, 8, "", "_detail", "Detail,30/10", D
 float g_flDetailBlendFactor         < UiGroup( "Detail,30/11" ); Range(0.0f, 1.0f); Default(1.0f); >;
 
 
-CreateInputTexture2D( SelfIllumMaskTexture, Linear, 8, "", "", "Self Illum,40/10", Default3( 1.0, 1.0, 1.0 ) );
+CreateInputTexture2D( SelfIllumMaskTexture, Linear, 8, "", "_selfillummask", "Self Illum,40/10", Default3( 1.0, 1.0, 1.0 ) );
 float3 g_vSelfIllumFresnelMinMaxExp < UiGroup( "Self Illum,40/11" ); Range3(0.0f, 0.0f, 0.0f, 10.0f, 10.0f, 10.0f); Default3(0.0f, 1.0f, 1.0f); >;
 #define g_vSelfIllumFresnelMin g_vSelfIllumFresnelMinMaxExp.r
 #define g_vSelfIllumFresnelMax g_vSelfIllumFresnelMinMaxExp.g
@@ -43,8 +48,8 @@ float3 g_vSelfIllumFresnelMinMaxExp < UiGroup( "Self Illum,40/11" ); Range3(0.0f
 float3 g_vSelfIllumTint             < UiGroup( "Self Illum,40/15" ); UiType( Color ); Default3(1.0f, 1.0f, 1.0f); >;
 bool g_bSelfIllumMaskControl        < UiGroup( "Self Illum,40/16" ); Default(1); >;
 
-CreateInputTextureCube( EnvMap,     Linear, 8, "", "",          "Envmap,50/10", Default3( 1.0, 1.0, 1.0 ) );
-CreateInputTexture2D(   EnvmapMask, Linear, 8, "", "_envmap",   "Envmap,50/11", Default( 1.0 ) );
+CreateInputTextureCube( EnvMap,     Srgb, 8, "", "_cube",          "Envmap,50/10", Default3( 1.0, 1.0, 1.0 ) );
+CreateInputTexture2D(   EnvmapMask, Linear, 8, "", "_envmapmask",   "Envmap,50/11", Default( 1.0 ) );
 float g_flEnvMapScale               < UiGroup( "Envmap,50/12" ); Range(0.0f, 4.0f); Default(1.0f); >;
 float3 g_vEnvMapTint                < UiGroup( "Envmap,50/13" ); UiType( Color ); Default3(1.0f, 1.0f, 1.0f); >;
 float3 g_vEnvMapContrast            < UiGroup( "Envmap,50/14" ); Range3(0.0f, 0.0f, 0.0f, 4.0f, 4.0f, 4.0f); Default3(0.0f, 0.0f, 0.0f); >;
@@ -56,15 +61,15 @@ CreateInputTexture2D( SpecMask,                 Linear, 8, "", "_spec", "Specula
 bool g_bBaseMapAlphaPhongMask       < UiGroup( "Specular,60/Spec Mask,10/11" ); Default(0); >;
 float g_fInvertPhongMask            < UiGroup( "Specular,60/Spec Mask,10/12" ); Range(0.0f, 1.0f); Default(0.0f); >;
 
-CreateInputTexture2D( SpecularExponentTexture,  Linear, 8, "", "",      "Specular,60/Spec Exponent,20/10", Default( 1.0 ) );
+CreateInputTexture2D( SpecularExponentTexture,  Linear, 8, "", "_specexp",      "Specular,60/Spec Exponent,20/10", Default( 1.0 ) );
 bool g_bConstantSpecularExponent    < UiGroup( "Specular,60/Spec Exponent,20/11" ); Default(1); >;
 float g_flSpecularExponent          < UiGroup( "Specular,60/Spec Exponent,20/12" ); Range(0.0f, 255.0f); Default(0.0f); >;
 
-CreateInputTexture2D( SpecularTintTexture,      Linear, 8, "", "",      "Specular,60/Spec Tint,30/10", Default( 1.0 ) );
+CreateInputTexture2D( SpecularTintTexture,      Linear, 8, "", "_spectint",      "Specular,60/Spec Tint,30/10", Default( 1.0 ) );
 bool g_bConstantSpecularTint        < UiGroup( "Specular,60/Spec Tint,30/11" ); Default(1); >;
 float3 g_vSpecularTint              < UiGroup( "Specular,60/Spec Tint,30/12" ); UiType( Color ); Default3(1.0f, 1.0f, 1.0f); >;
 
-CreateInputTexture2D( SpecularWarpTexture,      Linear, 8, "", "",      "Specular,60/60", Default3( 1.0, 1.0, 1.0 ) );
+CreateInputTexture2D( SpecularWarpTexture,      Linear, 8, "", "_phongwarp",      "Specular,60/60", Default3( 1.0, 1.0, 1.0 ) );
 float g_flSpecularBoost             < UiGroup( "Specular,60/61" ); Range(0.0f, 20.0f); Default(1.0f); >;
 
 // Simplified for TF:S2, use the remap equation for fresnel ranges
@@ -75,7 +80,7 @@ float3 g_vSourceFresnelRanges             < UiGroup( "Specular,60/62" ); Default
 
 float g_flEnvMapFresnel             < UiGroup( "Specular,60/63" ); Range(0.0f, 1.0f); Default(0.0f); >;
 
-CreateInputTexture2D( RimMaskTexture, Linear, 8, "", "", "Rimlight,70/10", Default( 1.0 ) );
+CreateInputTexture2D( RimMaskTexture, Linear, 8, "", "_rimmask", "Rimlight,70/10", Default( 1.0 ) );
 float g_flRimBoost                  < UiGroup( "Rimlight,70/11" ); Range(0.0f, 4.0f); Default(1.0f); >;
 float g_flRimMask                   < UiGroup( "Rimlight,70/12" ); Range(0.0f, 1.0f); Default(0.0f); >;
 float g_flRimExponent               < UiGroup( "Rimlight,70/13" ); Range(0.0f, 20.0f); Default(1.0f); >;
@@ -163,7 +168,11 @@ CreateTexture2D( g_tSelfIllumMaskTexture ) < Channel( RGB, Box( SelfIllumMaskTex
     CreateTexture2D( g_tWrinkleStretchNormal ) < Channel( RGBA, Box( WrinkleStretchNormal ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 #endif // S_WRINKLEMAP
 
-
-CreateTexture2D( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Linear ); OutputFormat( RGBA8888 ); SrgbRead( false ); >;
+// for some ungodly reason, the EyeRefract AO texture is set up as SRGB in the SDK
+#if AO_TEXTURE_IS_SRGB
+    CreateTexture2D( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Srgb ); OutputFormat( RGBA8888 ); SrgbRead( true ); >;
+#else // AO_TEXTURE_IS_SRGB
+    CreateTexture2D( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Linear ); OutputFormat( RGBA8888 ); SrgbRead( false ); >;
+#endif // AO_TEXTURE_IS_SRGB
 
 #endif // SOURCEBOX_LEGACY_PIXELINPUTS_H

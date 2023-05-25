@@ -196,8 +196,8 @@ class LegacyShadeInputs
 
         // used for EyeRefract
         #if ( PS_INPUT_HAS_TANGENT_BASIS )
-            TangentWs = pixelInput.vTangentUWs;
-            BinormalWs = ( pixelInput.vTangentVWs.xyz * 2.0f ) - 1.0f;
+            TangentWs = normalize(pixelInput.vTangentUWs);
+            BinormalWs = normalize(pixelInput.vTangentVWs.xyz);
         #else // !PS_INPUT_HAS_TANGENT_BASIS
             TangentWs = float3(1.0, 0.0, 0.0);
             BinormalWs = float3(0.0, 1.0, 0.0);
@@ -206,7 +206,7 @@ class LegacyShadeInputs
         ViewRayTs = Vec3WorldToTangentNormalized(ViewRayWs.xyz, NormalWs.xyz, TangentWs.xyz, BinormalWs.xyz);
         CorneaNormalTs = material.CorneaNormal;
         CorneaNormalWs = Vec3TangentToWorldNormalized( CorneaNormalTs.xyz, NormalWs.xyz, TangentWs.xyz, BinormalWs.xyz );
-        CorneaReflectionWs = reflect( ViewRayWs.xyz, CorneaNormalWs.xyz );
+        CorneaReflectionWs = reflect( -ViewRayWs.xyz, CorneaNormalWs.xyz );
     }
 };
 
@@ -623,19 +623,22 @@ class ShadingModelLegacy : ShadingModel
         }
 
         // finalize the lighting
+        float3 irisLighting = float3(0.0, 0.0, 0.0);
         if ( config.DoIrisLighting )
         {
             float3 vIrisTangentNormal = shadeParams.inputs.CorneaNormalTs.xyz;
             vIrisTangentNormal.xy *= -2.5f; // I'm not normalizing on purpose
         
             // Add slight view dependent iris lighting based on ambient light intensity to enhance situations with no local lights (0.5f is to help keep it subtle)
-            m_sumIrisLighting.rgb += saturate( dot( vIrisTangentNormal, -shadeParams.inputs.ViewRayTs.xyz ) ) * shadeParams.AverageAmbient * shadeParams.IrisHighlightMask * 0.5f;
-
-            // iris lighting is added to final diffuse, before it gets modulated by iris/pupil/sclera color (material.Albedo)
-            m_sumDiffuseLighting += m_sumIrisLighting;
+            // m_sumIrisLighting.rgb += saturate( dot( vIrisTangentNormal, -shadeParams.inputs.ViewRayTs.xyz ) ) * shadeParams.AverageAmbient * shadeParams.IrisHighlightMask * 0.5f;
+            m_sumIrisLighting.rgb += saturate( dot( vIrisTangentNormal, -shadeParams.inputs.ViewRayTs.xyz ) ) * ambient * shadeParams.IrisHighlightMask * 0.5f;
+            
+            irisLighting = m_sumIrisLighting;
         }
 
-        lightShade.Diffuse = DiffuseModulate( m_sumDiffuseLighting );
+        // iris lighting is added to final diffuse, before it gets modulated by iris/pupil/sclera color (material.Albedo)
+        lightShade.Diffuse = DiffuseModulate( m_sumDiffuseLighting + irisLighting );
+
         // PixelShaderDoSpecularLighting does nothing for ambient. Individual shaders (VertexLitGeneric, skin, etc) should add their own ambient envmapping.
         lightShade.Specular = SpecularModulate( m_sumSpecularLighting );
 
@@ -672,10 +675,10 @@ class ShadingModelLegacy : ShadingModel
 
     // copied from pixel.shading.standard.indirect.hlsl
     // Keep these in sync if Sam changes anything (but make sure to delete roughness LOD stuff since we aren't PBR)
-    static float4 GetCubemap( LegacyShadeParams input, uint nCubeIndex, float2 vAnisotropy = 0.0f, float flRetroReflectivity = 0.0f )
+    float4 GetCubemap( LegacyShadeParams input, uint nCubeIndex, float2 vAnisotropy = 0.0f, float flRetroReflectivity = 0.0f )
     {
         const float3 vPositionWs = input.inputs.PositionWs;
-        const float3 vNormalWs = input.inputs.NormalWs;
+        const float3 vNormalWs = config.DoIrisLighting ? input.inputs.CorneaNormalWs : input.inputs.NormalWs;
         
         // Todo: fixme these
         const float3 vTangentUWs = 0.0f;
@@ -733,12 +736,14 @@ class ShadingModelLegacy : ShadingModel
 
     float4 PostProcess( float4 vColor )
     {
-        #if S_CUSTOM_CUBEMAP
+        float3 vReflect = config.DoIrisLighting ? shadeParams.inputs.CorneaReflectionWs : shadeParams.inputs.ReflectRayWs;
+        
+        #if USE_MANUAL_CUBEMAP
             // TODO: CUBEMAP_SPHERE_LEGACY?
-            float3 envmapBase = CONVERT_ENVMAP(Tex3D( g_tEnvMap, shadeParams.inputs.ReflectRayWs )).rgb;
-        #else
+            float3 envmapBase = CONVERT_ENVMAP(Tex3D( g_tEnvMap, vReflect )).rgb;
+        #else // !USE_MANUAL_CUBEMAP
             float3 envmapBase = GetAllCubemaps(shadeParams, 0);
-        #endif // !S_CUSTOM_CUBEMAP
+        #endif // !USE_MANUAL_CUBEMAP
 
         float3 envMapColor = GetEnvmapColor(envmapBase, shadeParams.EnvmapMask, shadeParams.Fresnel);
 
