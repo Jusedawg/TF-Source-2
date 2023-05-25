@@ -50,6 +50,7 @@ public partial class Timer : Entity
 	public Timer()
 	{
 		All.Add( this );
+		EventDispatcher.Subscribe<RoundActiveEvent>( OnRoundStart, this );
 		EventDispatcher.Subscribe<RoundRestartEvent>( OnRoundRestart, this );
 	}
 
@@ -60,11 +61,6 @@ public partial class Timer : Entity
 		Transmit = TransmitType.Always;
 		TimeSinceStartedCounting = 0;
 		Paused = true;
-
-		SetTime( StartTime );
-
-		if ( StartActive )
-			Start();
 
 		// Add this to timer registry.
 		All.Add( this );
@@ -183,7 +179,13 @@ public partial class Timer : Entity
 		}
 	}
 
-	public void OnRoundRestart( RoundRestartEvent args )
+	public virtual void OnRoundStart( RoundActiveEvent args )
+	{
+		SetTime( StartTime );
+		if ( StartActive )
+			Start();
+	}
+	public virtual void OnRoundRestart( RoundRestartEvent args )
 	{
 		if ( ResetOnRoundStart )
 			Restart();
