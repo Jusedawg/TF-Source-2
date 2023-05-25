@@ -8,7 +8,7 @@ namespace TFS2.UI;
 
 public partial class RoundStatusDisplay : Panel
 {
-	Dictionary<TFTimer, RoundStatusTimerEntry> Timers { get; set; } = new();
+	Dictionary<RoundTimer, RoundStatusTimerEntry> Timers { get; set; } = new();
 	Label GameStateLabel { get; set; }
 	Panel TimersContainer { get; set; }
 	public override void Tick()
@@ -39,14 +39,14 @@ public partial class RoundStatusDisplay : Panel
 
 	public void UpdateTimers()
 	{
-		var timers = Timer.All.OfType<TFTimer>().Where( x => x.IsVisibleOnHUD );
+		var timers = RoundTimer.All.Where( x => x.IsVisibleOnHUD );
 		var keys = Timers.Keys;
 
 		foreach ( var entry in timers.Except( keys ) ) AddTimer( entry );
 		foreach ( var entry in keys.Except( timers ) ) RemoveTimer( entry );
 	}
 
-	public void AddTimer( TFTimer timer )
+	public void AddTimer( RoundTimer timer )
 	{
 		Timers[timer] = new RoundStatusTimerEntry
 		{
@@ -56,7 +56,7 @@ public partial class RoundStatusDisplay : Panel
 		ReorderTimers();
 	}
 
-	public void RemoveTimer( TFTimer timer )
+	public void RemoveTimer( RoundTimer timer )
 	{
 		if ( Timers.TryGetValue( timer, out var entry ) )
 		{
@@ -86,7 +86,7 @@ public partial class RoundStatusDisplay : Panel
 
 class RoundStatusTimerEntry : Label
 {
-	public TFTimer Timer { get; set; }
+	public RoundTimer Timer { get; set; }
 
 	public override void Tick()
 	{

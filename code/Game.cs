@@ -128,7 +128,7 @@ public partial class TFGameRules : SDKGame
 	[ClientRpc] public void ShowClassSelectionMenu() { MenuOverlay.Open<ClassSelection>(); }
 	[ClientRpc] public void ShowServerMessage() { MenuOverlay.Open<ServerMessage>(); }
 
-	TFTimer WaitingForPlayersTimer { get; set; }
+	RoundTimer WaitingForPlayersTimer { get; set; }
 
 	public override void OnWaitingForPlayersStarted()
 	{

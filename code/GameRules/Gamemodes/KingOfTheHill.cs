@@ -22,7 +22,7 @@ public partial class KingOfTheHill : GamemodeEntity
 	[Property, FGDType( "target_destination" )] public string PointName { get; set; }
 	protected ControlPoint Point { get; set; }
 
-	Dictionary<TFTeam, TFTimer> Timers { get; set; } = new();
+	Dictionary<TFTeam, RoundTimer> Timers { get; set; } = new();
 
 	public KingOfTheHill()
 	{
