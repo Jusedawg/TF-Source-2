@@ -23,16 +23,21 @@ public partial class RoundStatusDisplay : Panel
 
 	public bool ShouldDraw()
 	{
-		return !Input.Down( InputButton.Score );
+		return !Input.Down( "Score" );
 	}
 
+	const string WAITING_FOR_PLAYERS_TEXT = "#GameState.WaitingForPlayers";
+	const string SETUP_TEXT = "#GameState.Setup";
 	public void UpdateGameStateLabel()
 	{
 		string value = "";
 
 		// Show a message for waiting for players, unless we play arena (it has it's own message)
 		if ( SDKGame.Current.IsWaitingForPlayers && !TFGameRules.Current.IsPlaying<Arena>() )
-			value = $"Waiting For Players";
+			value = WAITING_FOR_PLAYERS_TEXT;
+
+		if ( RoundTimer.All.Any( timer => timer.InSetup ) )
+			value = SETUP_TEXT;
 
 		GameStateLabel.Text = value;
 	}
