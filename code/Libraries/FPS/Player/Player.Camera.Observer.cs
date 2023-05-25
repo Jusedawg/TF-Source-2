@@ -80,9 +80,9 @@ public partial class SDKPlayer
 		float posLerp = TimeSinceDeath / deathAnimTime;
 		posLerp = Math.Clamp( posLerp, 0, 1.0f );
 
-		var target = Position + -toKiller * posLerp * ChaseDistanceMax * Easing.QuadraticInOut( posLerp );
+		var target = EyePosition + -toKiller * posLerp * ChaseDistanceMax * Easing.QuadraticInOut( posLerp );
 
-		var tr = Trace.Ray( Position, target )
+		var tr = Trace.Ray( EyePosition, target )
 			.WithAnyTags( CollisionTags.Solid )
 			.Run();
 
