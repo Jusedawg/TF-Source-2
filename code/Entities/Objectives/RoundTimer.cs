@@ -13,6 +13,7 @@ namespace TFS2;
 [Title("Round Timer")]
 [Description("Timer which ticks down is shown on the HUD")]
 [Icon("timer")]
+[Category( "Gameplay" )]
 [HammerEntity]
 public partial class RoundTimer : Entity
 {

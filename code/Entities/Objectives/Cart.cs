@@ -14,6 +14,7 @@ namespace TFS2
 	/// </summary>
 	[Library("tf_cart", Title = "Payload Cart" ,Group = "Objectives")]
 	[Model(Model = "models/props_trainyard/bomb_cart.vmdl" )]
+	[Category( "Objectives" )]
 	[HammerEntity]
 	public partial class Cart : AnimatedEntity, ITeam, IResettable
 	{

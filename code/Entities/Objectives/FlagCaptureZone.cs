@@ -10,7 +10,7 @@ using Amper.FPS;
 namespace TFS2;
 
 [Library( "tf_flag_capturezone" )]
-[Title("FLag Capture Zone")]
+[Title("Flag Capture Zone")]
 [Category("Objectives")]
 [Icon("pin_drop")]
 [HammerEntity]

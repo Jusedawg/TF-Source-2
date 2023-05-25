@@ -11,6 +11,8 @@ using System.Text.Json.Serialization;
 namespace TFS2
 {
 	[Library("tf_cart_path"), Path("tf_cart_path_node")]
+	[Title("Cart Path")]
+	[Category( "Objectives" )]
 	[HammerEntity]
 	public class CartPath : BasePathEntity<CartPathNode>
 	{
