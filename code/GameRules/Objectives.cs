@@ -24,7 +24,7 @@ partial class TFGameRules
 	[Net] private GamemodeNetworkable ClassGamemode { get; set; }
 
 	public bool HasGamemode() => GetGamemode() != default;
-	public bool IsPlaying<T>() where T : IGamemode => GetGamemode().GetType() == typeof(T); // Instead of is T to avoid subclasses triggering this, might want to reconsider this later
+	public bool IsPlaying<T>() where T : IGamemode => GetGamemode()?.GetType() == typeof(T); // Instead of is T to avoid subclasses triggering this, might want to reconsider this later
 	public bool TryGetGamemode<T>(out T instance) where T : IGamemode
 	{
 		if( GetGamemode() is T mode)
