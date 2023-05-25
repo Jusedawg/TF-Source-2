@@ -1,0 +1,25 @@
+{
+  "Title": "Dispenser",
+  "EngineClass": "tf_building_dispenser",
+  "BuildCost": 100,
+  "UpgradeCost": 200,
+  "BlueprintModel": "models/buildables/dispenser/shared/dispenser_blueprint.vmdl",
+  "BlueprintIcon": null,
+  "Levels": [
+    {
+      "MaxHealth": 150,
+      "Model": "models/buildables/dispenser/lvl1/dispenser.vmdl",
+      "DeployModel": "models/buildables/dispenser/lvl1/dispenser_build.vmdl"
+    },
+    {
+      "MaxHealth": 180,
+      "Model": "models/buildables/dispenser/lvl2/dispenser_lvl2.vmdl",
+      "DeployModel": "models/buildables/dispenser/lvl2/dispenser_lvl2_upgrade.vmdl"
+    },
+    {
+      "MaxHealth": 216,
+      "Model": "models/buildables/dispenser/lvl3/dispenser_lvl3.vmdl",
+      "DeployModel": "models/buildables/dispenser/lvl3/dispenser_lvl3_upgrade.vmdl"
+    }
+  ]
+}
