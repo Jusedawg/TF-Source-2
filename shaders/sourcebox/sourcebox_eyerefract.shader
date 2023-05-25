@@ -45,9 +45,11 @@ COMMON
 
     // defaults to 0. only used for intro?
     float3 g_vEyeOrigin            < UiGroup( "Attributes,11/14" ); Default3(0.0f, 0.0f, 0.0f); >;
+
     // kDefaultIrisU/kDefaultIrisV
-    float4 g_vIrisProjectionU      < UiGroup( "Attributes,11/14" ); Default4(1.0f, 0.0f, 0.0f, 0.0f); >;
-    float4 g_vIrisProjectionV      < UiGroup( "Attributes,11/14" ); Default4(0.0f, 1.0f, 0.0f, 0.0f); >;
+    // defaults to make it look good in the material editor
+    float4 g_vIrisProjectionU      < UiGroup( "Attributes,11/14" ); Default4(0.0f, 0.05f, 0.0f, 0.5f); >;
+    float4 g_vIrisProjectionV      < UiGroup( "Attributes,11/14" ); Default4(0.0f, 0.0f, 0.05f, 0.5f); >;
 }
 
 //=========================================================================================================================
@@ -119,11 +121,11 @@ PS
 
     // Cornea normal - not SRGB!
     CreateInputTexture2D( Cornea, Linear, 8, "", "", "Eyes,1/1", Default3( 1.0, 1.0, 1.0 ) );
-    CreateTexture2D( g_tCornea ) < Channel( RGB, Box( Cornea ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+    CreateTexture2D( g_tCornea ) < Channel( RGB, Box( Cornea ), Linear ); OutputFormat( DXT5 ); AddressU( CLAMP ); AddressV( CLAMP ); SrgbRead( false ); >;
 
     // Iris
     CreateInputTexture2D( Iris, Srgb, 8, "", "", "Eyes,1/2", Default3( 1.0, 1.0, 1.0 ) );
-    CreateTexture2D( g_tIris ) < Channel( RGB, Box( Iris ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >;
+    CreateTexture2D( g_tIris ) < Channel( RGB, Box( Iris ), Srgb ); OutputFormat( BC7 ); AddressU( CLAMP ); AddressV( CLAMP ); SrgbRead( true ); >;
 
     // Eye reflection cubemap
     // CreateInputTextureCube( Envmap, Srgb, 8, "", "", "Material,10/14", Default3( 1.0, 1.0, 1.0 ) );

@@ -170,7 +170,7 @@ CreateTexture2D( g_tSelfIllumMaskTexture ) < Channel( RGB, Box( SelfIllumMaskTex
 
 // for some ungodly reason, the EyeRefract AO texture is set up as SRGB in the SDK
 #if AO_TEXTURE_IS_SRGB
-    CreateTexture2D( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Srgb ); OutputFormat( RGBA8888 ); SrgbRead( true ); >;
+    CreateTexture2D( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Srgb ); OutputFormat( RGBA8888 ); AddressU( CLAMP ); AddressV( CLAMP ); SrgbRead( true ); >;
 #else // AO_TEXTURE_IS_SRGB
     CreateTexture2D( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Linear ); OutputFormat( RGBA8888 ); SrgbRead( false ); >;
 #endif // AO_TEXTURE_IS_SRGB
