@@ -1,0 +1,38 @@
+﻿using Amper.FPS;
+using Editor;
+using Sandbox;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TFS2;
+
+[Library("tf_gamerules")]
+[Title("TF:S2 Gamerules")]
+[Description("Allows modifiying gamerules and listening for events inside of a map.")]
+[Icon("gavel")]
+[Category( "Gamemode" )]
+[HammerEntity]
+public partial class TFGameRulesRelay : Entity
+{
+	public TFGameRulesRelay()
+	{
+		EventDispatcher.Subscribe<RoundActiveEvent>( OnRoundStartEvent, this );
+		EventDispatcher.Subscribe<RoundRestartEvent>( OnRoundRestartEvent, this );
+	}
+
+	private void OnRoundStartEvent( RoundActiveEvent ev )
+	{
+		OnRoundStart.Fire(this);
+	}
+
+	private void OnRoundRestartEvent( RoundRestartEvent ev )
+	{
+		OnRoundRestart.Fire(this);
+	}
+
+	public Output OnRoundStart { get; set; }
+	public Output OnRoundRestart { get; set; }
+}
