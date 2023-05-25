@@ -1,7 +1,17 @@
 ﻿@using Sandbox.UI;
 
 @namespace TFS2.UI
-@attribute [StyleSheet("/Libraries/FPS/UI/FreezeCameraPanel.scss")]
+@attribute [StyleSheet]
 
 <root>
+    <div class="killer" @ref="KillerPanel">
+        <HealthCross class="health" @ref="KillerHealth" ShowMaxHealth=@false FlashScale=@(0.2f) />
+        <div class="info">
+            <label class="header" @ref="KillerHeader" />
+            <div class="player">
+                <img class="avatar" @ref="KillerAvatar" />
+                <label class="name" @ref="KillerName" />
+            </div>
+        </div>
+    </div>
 </root>

@@ -1,0 +1,81 @@
+﻿FreezeCameraPanel {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background-size: 100%;
+
+    &.visible {
+        display: flex;
+    }
+
+    .killer {
+        position: absolute;
+        z-index: 6;
+        top: 70%;
+        right: 0.5%;
+        width: 30%;
+        height: 8%;
+        padding: 1%;
+        border: 2px solid #f2e2c1;
+        border-radius: 10px;
+        flex-direction: row;
+
+        .health {
+            align-self: center;
+            width: 15%;
+            background-size: cover;
+
+            .label {
+                font-family: TF2_Secondary;
+                font-size: 20px;
+                top: 35%;
+            }
+        }
+
+        .info {
+            height: 100%;
+            font-family: TF2_Secondary;
+            color: white;
+            flex-direction: column;
+            padding-left: 2%;
+
+
+            .header {
+                font-size: 20px;
+                height: 40%;
+            }
+
+            .player {
+                font-size: 30px;
+                bottom: 0;
+                align-items: flex-end;
+
+                .avatar {
+                    height: 100%;
+                    aspect-ratio: 1;
+                }
+
+                .name {
+                    width: 100%;
+                    padding-left: 2%;
+                }
+            }
+        }
+
+        &.red {
+            background-color: #bd3b3b;
+        }
+
+        &.blu {
+            background-color: #5b7a8e;
+        }
+
+        &.other {
+            background-color: #302f2d;
+        }
+    }
+}

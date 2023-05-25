@@ -12,7 +12,13 @@ public partial class FreezeCameraPanel : Panel
 	public bool WillFreeze { get; set; }
 
 	SceneCamera FreezeCam;
-	Texture ColorTexture;
+	Texture BackgroundTexture;
+
+	Panel KillerPanel;
+	HealthCross KillerHealth;
+	Label KillerHeader;
+	Image KillerAvatar;
+	Label KillerName;
 
 	public FreezeCameraPanel()
 	{
@@ -29,13 +35,46 @@ public partial class FreezeCameraPanel : Panel
 		Instance?.SetupFreeze( target, time, position, rotation, fov );
 	}
 
+	const string KILLER_HEADER = "You were killed by";
+	const string KILLER_HEADER_DEAD = "You were killed by the late";
+	const string KILLER_OTHER_NAME = "The Environment";
 	public void SetupFreeze( Entity target, float time, Vector3 position, Rotation rotation, float fov )
 	{
 		var size = new Vector2( Screen.Width, Screen.Height );
 
-		ColorTexture?.Dispose();
+		// Display killer data on screen
+		if(target is TFPlayer ply)
+		{
+			KillerHealth.DesiredTarget = ply;
+			if ( !ply.IsAlive )
+				KillerHeader.Text = KILLER_HEADER_DEAD;
+			else
+				KillerHeader.Text = KILLER_HEADER;
+			KillerAvatar.SetTexture( $"avatar:{ply.Client.SteamId}" );
+			KillerName.Text = ply.Client.Name;
 
-		ColorTexture = Texture.CreateRenderTarget()
+			KillerHealth.SetClass( "visible", true );
+			KillerAvatar.SetClass( "visible", true );
+
+			KillerPanel.SetClass( "blu", ply.Team == TFTeam.Blue );
+			KillerPanel.SetClass( "red", ply.Team == TFTeam.Red );
+			KillerPanel.SetClass( "other", !ply.Team.IsPlayable() );
+		}
+		else
+		{
+			KillerHeader.Text = KILLER_HEADER;
+			KillerName.Text = KILLER_OTHER_NAME;
+
+			KillerHealth.SetClass( "visible", false );
+			KillerAvatar.SetClass( "visible", false );
+
+			KillerPanel.SetClass( "blu", false );
+			KillerPanel.SetClass( "red", false );
+			KillerPanel.SetClass( "other", true );
+		}
+
+		BackgroundTexture?.Dispose();
+		BackgroundTexture = Texture.CreateRenderTarget()
 			.WithSize( size )
 			.WithFormat( ImageFormat.RGBA32323232F )
 			.WithScreenMultiSample()
@@ -53,12 +92,12 @@ public partial class FreezeCameraPanel : Panel
 		FreezeCam.EnablePostProcessing = true;
 		// TODO: Copy important render attributes from main camera
 
-		Graphics.RenderToTexture( FreezeCam, ColorTexture );
+		Graphics.RenderToTexture( FreezeCam, BackgroundTexture );
 
 		TimeSinceFrozen = 0;
 		FreezeTime = time;
 		
-		Style.SetBackgroundImage( ColorTexture );
+		Style.SetBackgroundImage( BackgroundTexture );
 		WillFreeze = true;
 	}
 
