@@ -10,13 +10,15 @@ public partial class HealthCross : Panel
 	const float DangerHealthFractionThreshold = 0.5f;
 	public IHasMaxHealth DesiredTarget { get; set; }
 	public float FlashScale { get; set; }
+	public bool ShowMaxHealth { get; set; }
 	IHasMaxHealth Target => DesiredTarget ?? TFPlayer.LocalPlayer;
 	public HealthCross() : this( null ) { }
 
-	public HealthCross( IHasMaxHealth target = null, float flashScale = 1 )
+	public HealthCross( IHasMaxHealth target = null, float flashScale = 1, bool showMaxHealth = true )
 	{
 		DesiredTarget = target;
 		FlashScale = flashScale;
+		ShowMaxHealth = showMaxHealth;
 	}
 
 	public override void Tick()
@@ -32,7 +34,7 @@ public partial class HealthCross : Panel
 		HealthLabel.Text = MathF.Ceiling( health ).ToString();
 		MaxHealthLabel.Text = MathF.Ceiling( maxHealth ).ToString();
 
-		SetClass( "show_maxhealth", fraction < .95f );
+		SetClass( "show_maxhealth", fraction < .95f && ShowMaxHealth );
 		SetClass( "is_danger", fraction < DangerHealthFractionThreshold );
 
 		SimulateDangerFlash();
