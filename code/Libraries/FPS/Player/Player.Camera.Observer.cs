@@ -14,9 +14,9 @@ public partial class SDKPlayer
 	public virtual float FreezeCamDistanceMax => 200;
 	public virtual float ChaseDistanceMin => 16;
 	public virtual float ChaseDistanceMax => 96;
-	Vector3 LastDeathcamPosition { get; set; }
-	bool WillPlayFreezeCamSound { get; set; }
-	bool WillFreezeGameScene { get; set; }
+	protected Vector3 LastDeathCamPosition { get; set; }
+	protected bool WillPlayFreezeCamSound { get; set; }
+	protected bool WillFreezeGameScene { get; set; }
 
 	public void CalculateChaseCamView( )
 	{
@@ -43,7 +43,7 @@ public partial class SDKPlayer
 		Camera.Position = tr.EndPosition;
 	}
 
-	public void CalculateDeathCamView()
+	public virtual void CalculateDeathCamView()
 	{
 		Camera.FirstPersonViewer = null;
 
@@ -53,18 +53,11 @@ public partial class SDKPlayer
 		if ( killer == null || this == killer )
 			return;
 
-		var deathAnimTime = DeathAnimationTime;
-		if ( TimeSinceDeath > deathAnimTime )
-		{
-			CalculateFreezeCamView( );
-			return;
-		}
-
 		//
 		// Force look at enemy
 		//
 
-		float rotLerp = TimeSinceDeath / (deathAnimTime / 2);
+		float rotLerp = TimeSinceDeath / (DeathAnimationTime / 2);
 		rotLerp = Math.Clamp( rotLerp, 0, 1.0f );
 
 		var toKiller = killer.GetEyePosition() - EyePosition;
@@ -77,7 +70,7 @@ public partial class SDKPlayer
 		// Zoom out from our target
 		//
 
-		float posLerp = TimeSinceDeath / deathAnimTime;
+		float posLerp = TimeSinceDeath / DeathAnimationTime;
 		posLerp = Math.Clamp( posLerp, 0, 1.0f );
 
 		var target = EyePosition + -toKiller * posLerp * ChaseDistanceMax * Easing.QuadraticInOut( posLerp );
@@ -92,88 +85,10 @@ public partial class SDKPlayer
 		Camera.Position = target;
 
 		// position is going to be reset next tick, remember it to use in freezecam.
-		LastDeathcamPosition = EyePosition;
+		LastDeathCamPosition = EyePosition;
 
 		WillPlayFreezeCamSound = true;
 		WillFreezeGameScene = true;
-	}
-
-	public void CalculateFreezeCamView( )
-	{
-		Camera.FirstPersonViewer = null;
-
-		var killer = LastAttacker;
-
-		if ( killer == null )
-			return;
-
-		// get time for death animation
-		var deathAnimTime = DeathAnimationTime;
-		// get time for freeze cam to move to the player
-		var travelTime = sv_spectator_freeze_traveltime;
-
-		// time that has passed while we are in freeze cam
-		var timeInFreezeCam = TimeSinceDeath - deathAnimTime;
-		timeInFreezeCam = MathF.Max( 0, timeInFreezeCam );
-
-		// get lerp of the travel
-		var travelLerp = Math.Clamp( timeInFreezeCam / travelTime, 0, 1 );
-
-		// getting origin position and killer eye position
-		var originPos = LastDeathcamPosition;
-		var killerPos = killer.GetEyePosition();
-
-		// direction to target from us.
-		var toTarget = killerPos - originPos;
-		toTarget = toTarget.Normal;
-
-		// getting distance from that we need to keep from killer's eyes.
-		var distFromTarget = FreezeCamDistanceMin;
-
-		// final position, this is where the freezecam will end.
-		var targetPos = killerPos - toTarget * distFromTarget;
-
-		//
-		// making sure there are no walls in between us
-		//
-
-		var tr = Trace.Ray( killerPos, targetPos )
-			.WithAnyTags( CollisionTags.Solid )
-			.Ignore( killer )
-			.Run();
-
-		targetPos = tr.EndPosition;
-		if ( tr.Hit ) targetPos += toTarget * MathF.Min( 5, tr.Distance );
-		var targetRot = Rotation.LookAt( toTarget );
-
-		Camera.Position = originPos.LerpTo( targetPos, travelLerp * Easing.EaseIn( travelLerp ) );
-		Camera.Rotation = targetRot;
-
-		//
-		// Playing freezecam sound .3s before we reach destination.
-		//
-
-		var freezeSoundLength = .3f;
-		var freezeSoundStartTime = travelTime - freezeSoundLength;
-
-		if ( WillPlayFreezeCamSound && timeInFreezeCam > freezeSoundStartTime )
-		{
-			WillPlayFreezeCamSound = false;
-			PlayFreezeCamSound();
-		}
-
-		//
-		// Freezing screen when we reach lerp 1.
-		//
-
-		float fov = Camera.FieldOfView;
-		if ( fov <= 0 ) fov = DesiredFieldOfView;
-
-		if ( WillFreezeGameScene && travelLerp >= 1 )
-		{
-			WillFreezeGameScene = false;
-			FreezeCameraPanel.Freeze( sv_spectator_freeze_time, targetPos, targetRot, fov );
-		}
 	}
 
 	public virtual void PlayFreezeCamSound()

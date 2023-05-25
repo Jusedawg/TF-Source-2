@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 
-namespace Amper.FPS;
+namespace TFS2.UI;
 
 public partial class FreezeCameraPanel : Panel
 {
@@ -21,18 +21,15 @@ public partial class FreezeCameraPanel : Panel
 
 	public override void Tick()
 	{
-		var draw = ShouldDraw();
-		SetClass( "visible", draw );
-		if ( !draw && FreezeCam != null )
-			FreezeCam = null;
+		SetClass( "visible", ShouldDraw() );
 	}
 
-	public static void Freeze( float time, Vector3 position, Rotation rotation, float fov )
+	public static void Freeze( Entity target, float time, Vector3 position, Rotation rotation, float fov )
 	{
-		Instance?.SetupFreeze( time, position, rotation, fov );
+		Instance?.SetupFreeze( target, time, position, rotation, fov );
 	}
 
-	public void SetupFreeze( float time, Vector3 position, Rotation rotation, float fov )
+	public void SetupFreeze( Entity target, float time, Vector3 position, Rotation rotation, float fov )
 	{
 		var size = new Vector2( Screen.Width, Screen.Height );
 
@@ -44,13 +41,17 @@ public partial class FreezeCameraPanel : Panel
 			.WithScreenMultiSample()
 			.Create();
 
-		var currentCam = Camera.Current ?? Camera.Main;
 		FreezeCam = new SceneCamera( "FreezeCam" );
 		FreezeCam.World = Game.SceneWorld;
 		FreezeCam.Position = position;
 		FreezeCam.Rotation = rotation;
 		FreezeCam.FieldOfView = fov;
+
+		// Settings from regular camera
+		var currentCam = Camera.Current ?? Camera.Main;
 		FreezeCam.ZFar = currentCam.ZFar;
+		FreezeCam.EnablePostProcessing = true;
+		// TODO: Copy important render attributes from main camera
 
 		Graphics.RenderToTexture( FreezeCam, ColorTexture );
 
@@ -63,22 +64,13 @@ public partial class FreezeCameraPanel : Panel
 
 	public bool ShouldDraw()
 	{
+		var currentCam = Camera.Current ?? Camera.Main;
+		if(currentCam.FirstPersonViewer != null)
+		{
+			// If we are already alive, stop drawing
+			return false;
+		}
+
 		return IsFrozen;
 	}
-
-	/*
-	public override void DrawBackground( ref RenderState state )
-	{
-		base.DrawBackground( ref state );
-		return;
-		if ( WillFreeze )
-		{
-			// Fill the texture with background
-			Rect rect = new( 0, 0, Size.x, Size.y );
-			//Graphics.DrawQuad(rect, Material.UI.Basic)
-			//Render.Draw.DrawScene( ColorTexture, DepthTexture, Map.Scene, Render.Attributes, , Position, Rotation, FieldOfView, 0.1f, 9999, false);
-			WillFreeze = false;
-		}
-	}
-	*/
 }
