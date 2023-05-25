@@ -2,56 +2,29 @@
 using System;
 using System.Collections.Generic;
 using Amper.FPS;
+using Editor;
 
 namespace TFS2;
 
 /// <summary>
 /// Timer entity, used to count down the time for the purposes of a gamemode.
 /// </summary>
+[Library("tf_timer")]
+[Title("Round Timer")]
+[Description("Timer which ticks down is shown on the HUD")]
+[Icon("timer")]
+[HammerEntity]
 public partial class TFTimer : Timer
 {
+	[Property] public bool PlayAnnouncerVoicelines { get; set; } = true;
 	[Net] public TFTeam OwnerTeam { get; set; }
-
-	int lastSecond = -1;
-
-	[GameEvent.Tick.Server]
-	void Tick()
+	protected override void Tick()
 	{
-		if ( Paused )
-			return;
+		base.Tick();
 
-		float timeLeft = GetRemainingTime();
-		int second = timeLeft.FloorToInt();
-
-		if ( second != lastSecond )
-		{
-			//
-			// Outputs
-			//
-			switch ( second )
-			{
-				case 300: On5MinRemain.Fire( this ); break;
-				case 240: On4MinRemain.Fire( this ); break;
-				case 180: On3MinRemain.Fire( this ); break;
-				case 120: On2MinRemain.Fire( this ); break;
-				case 60: On1MinRemain.Fire( this ); break;
-				case 30: On30SecRemain.Fire( this ); break;
-				case 10: On10SecRemain.Fire( this ); break;
-				case 5: On5SecRemain.Fire( this ); break;
-				case 4: On4SecRemain.Fire( this ); break;
-				case 3: On3SecRemain.Fire( this ); break;
-				case 2: On2SecRemain.Fire( this ); break;
-				case 1: On1SecRemain.Fire( this ); break;
-			}
-
-			lastSecond = second;
-		}
-
-		if ( timeLeft == 0 )
-		{
-			Pause();
-			OnFinished.Fire( this );
-		}
+		if ( !PlayAnnouncerVoicelines ) return;
+		int secondsRemaining = GetRemainingTime().FloorToInt();
+		PlayAnnouncerTimeVoiceLine( secondsRemaining );
 	}
 
 	public void PlayAnnouncerTimeVoiceLine( int second )

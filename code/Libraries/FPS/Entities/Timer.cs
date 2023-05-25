@@ -14,23 +14,23 @@ public partial class Timer : Entity
 	/// <summary>
 	/// Maximum amount of time this timer can reach.
 	/// </summary>
-	public float MaxTimerLength { get; set; } = 600;
+	[Property] public float MaxTimerLength { get; set; } = 600;
 	/// <summary>
 	/// Start counting down from this value.
 	/// </summary>
-	public float StartTime { get; set; } = 300;
+	[Property] public float StartTime { get; set; } = 300;
 	/// <summary>
 	/// Automatically start this timer when it's created.
 	/// </summary>
-	public bool StartActive { get; set; }
+	[Property] public bool StartActive { get; set; }
 	/// <summary>
 	/// If true, this timer will not be shown on the timer HUD.
 	/// </summary>
-	[Net] public bool HideFromHUD { get; set; }
+	[Property, Net] public bool HideFromHUD { get; set; }
 	/// <summary>
 	/// Should this timer reset on round restart?
 	/// </summary>
-	public bool ResetOnRoundStart { get; set; } = true;
+	[Property] public bool ResetOnRoundStart { get; set; } = true;
 
 	/// <summary>
 	/// Defines if this timer is currently paused? Setting this to true will make timer freeze at it's current value.
@@ -44,10 +44,6 @@ public partial class Timer : Entity
 	/// The amount of time since the timer started counting.
 	/// </summary>
 	[Net] public TimeSince TimeSinceStartedCounting { get; set; }
-	/// <summary>
-	/// If this timer is owned by some team, this value will contain it.
-	/// </summary>
-	[Net] public int OwnerTeamNumber { get; set; }
 
 	public bool IsVisibleOnHUD => !HideFromHUD;
 
@@ -83,6 +79,7 @@ public partial class Timer : Entity
 	/// <summary>
 	/// Start the timer.
 	/// </summary>
+	[Input]
 	public void Start()
 	{
 		if ( !Game.IsServer )
@@ -95,6 +92,7 @@ public partial class Timer : Entity
 		TimeSinceStartedCounting = 0;
 	}
 
+	[Input]
 	public void Restart()
 	{
 		if ( !Game.IsServer )
@@ -106,6 +104,7 @@ public partial class Timer : Entity
 		Start();
 	}
 
+	[Input]
 	public void Pause()
 	{
 		if ( !Game.IsServer )
@@ -118,6 +117,7 @@ public partial class Timer : Entity
 		Paused = true;
 	}
 
+	[Input]
 	public void SetTime( float time )
 	{
 		AbsoluteTime = time;
@@ -142,8 +142,8 @@ public partial class Timer : Entity
 
 	int lastSecond = -1;
 
-	[Event.Tick.Server]
-	void Tick()
+	[GameEvent.Tick.Server]
+	protected virtual void Tick()
 	{
 		if ( Paused )
 			return;
