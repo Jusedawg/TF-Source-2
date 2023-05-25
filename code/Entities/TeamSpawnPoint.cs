@@ -82,10 +82,21 @@ public partial class TeamSpawnPoint : SDKSpawnPoint, IResettable
 		{
 			if ( ChangeTeamAutomatically )
 				TeamOption = Room.TeamOption;
+		}
 
-			var point = Point ?? Room.ControlPoint;
+		ControlPoint point;
+		if(Point != null)
+		{
+			point = Point;
+			var farthestPoints = TFGameRules.Current.GetFarthestOwnedControlPoints( playerTeam );
+			if ( farthestPoints != null && !farthestPoints.Contains( point ) )
+				return false;
+		}
+		else if( Room != null)
+		{
+			point = Room.ControlPoint;
 			var farthestPoints = TFGameRules.Current.GetFarthestOwnedControlPointsWithRespawnRoom( playerTeam );
-			if ( farthestPoints != null && !farthestPoints.Contains(point) )
+			if ( farthestPoints != null && !farthestPoints.Contains( point ) )
 				return false;
 		}
 
