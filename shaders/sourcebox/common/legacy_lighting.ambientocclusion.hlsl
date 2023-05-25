@@ -44,6 +44,8 @@ float specularAO( LegacyShadeParams i, float ambientOcclusion )
         specularAO = SpecularAO_Lagarde(NoV, ambientOcclusion, roughness);
     }
 
+    return SpecularAO_Cones(i.inputs.NormalWs, ambientOcclusion, roughness, NrV);
+
     return specularAO;
 }
 

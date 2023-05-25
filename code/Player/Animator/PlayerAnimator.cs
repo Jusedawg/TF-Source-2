@@ -8,6 +8,15 @@ partial class TFPlayerAnimator : PlayerAnimator
 {
 	new TFPlayer Player => (TFPlayer)base.Player;
 	const float DeltaMultiplier = 5f;
+
+	private TimeUntil NextLookTime;
+	private Entity LookTarget;
+
+	private static readonly string[] EyeAttachments = new string[] {
+		"lefteye",
+		"righteye"
+	};
+
 	public override void UpdateMovement()
 	{
 		if ( Player.InCondition( TFCondition.Taunting ) )
@@ -76,7 +85,88 @@ public override void UpdateRotation()
 		SetLookAt( "aim_body", lookAtPos );
 		SetAnimParameter( "body_pitch", pitch );
 		SetAnimParameter( "body_yaw", yaw );
-	}
+
+		UpdateLookTarget();
+
+    }
+
+	// find a valid entity to stare intensely at
+	private void UpdateLookTarget()
+	{
+		if ( NextLookTime || LookTarget == null || !LookTarget.IsValid )
+		{
+            var random = new Random();
+
+			Entity best = null;
+			float bestDist = float.MaxValue;
+
+			foreach ( var ent in Entity.FindInSphere( Player.Position, 1024 ) )
+			{
+				if (ent == Player)
+					continue;
+
+				float dist = Vector3.DistanceBetweenSquared(Player.Position, ent.Position);
+
+				// give extra weight to other players
+				if (ent is TFPlayer)
+					dist *= 0.5f;
+
+				if (dist < bestDist)
+				{
+					var headDir = Player.GetEyeRotation().Forward;
+					var targetDir = (ent.Position - Player.GetEyePosition()).Normal;
+
+					if (Vector3.Dot(headDir, targetDir) > 0.7f)
+					{
+                        bestDist = dist;
+                        best = ent;
+                    }
+				}
+			}
+
+			LookTarget = best;
+
+			// Source SDK timing
+			NextLookTime = random.Int( 1, 5 );
+		}
+
+		// now, update the eye shader params
+		foreach (var att in EyeAttachments)
+		{
+			if (Player.GetAttachment(att) is not Transform eyeTransform)
+				continue;
+
+			Vector3 targetPos = Player.GetEyePosition() + Player.GetEyeRotation().Forward * 200;
+			if (LookTarget != null && LookTarget.IsValid)
+				targetPos = LookTarget.Position;
+
+			Vector3 lookDir = (targetPos - eyeTransform.Position).Normal;
+
+            var eyeForward = lookDir;
+            var eyeRight = Vector3.Cross(eyeForward, eyeTransform.Rotation.Up).Normal;
+            var eyeUp = Vector3.Cross(eyeRight, eyeForward).Normal;
+
+			// iris scale from the .qc file
+			const float irisScale = 0.6f;
+
+			float invScale = 1.0f / irisScale;
+			eyeRight *= -invScale;
+			eyeUp *= -invScale;
+
+            // offset by 0.5f to place the texture in the eye center
+            Vector4 irisU = new Vector4(eyeRight, -Vector3.Dot(eyeRight, eyeTransform.Position) + 0.5f);
+            Vector4 irisV = new Vector4(eyeUp, -Vector3.Dot(eyeUp, eyeTransform.Position) + 0.5f);
+
+
+			// set the dynamic params
+			if (Player.SceneObject != null)
+			{
+                Player.SceneObject.Attributes.Set($"${att}_origin", eyeTransform.Position);
+                Player.SceneObject.Attributes.Set($"${att}_iris_u", irisU);
+                Player.SceneObject.Attributes.Set($"${att}_iris_v", irisV);
+            }
+        }
+    }
 
 	public void UpdateTauntMovement()
 	{
