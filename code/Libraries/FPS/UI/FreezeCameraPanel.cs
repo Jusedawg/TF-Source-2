@@ -9,17 +9,10 @@ public partial class FreezeCameraPanel : Panel
 	public float FreezeTime { get; set; }
 	public TimeSince TimeSinceFrozen { get; set; }
 	public bool IsFrozen => TimeSinceFrozen < FreezeTime;
-
 	public bool WillFreeze { get; set; }
 
-	Texture ColorTexture { get; set; }
-	Texture DepthTexture { get; set; }
-
-	Vector3 Position { get; set; }
-	Rotation Rotation { get; set; }
-	float FieldOfView { get; set; }
-
-	Vector2 Size { get; set; }
+	SceneCamera FreezeCam;
+	Texture ColorTexture;
 
 	public FreezeCameraPanel()
 	{
@@ -28,7 +21,10 @@ public partial class FreezeCameraPanel : Panel
 
 	public override void Tick()
 	{
-		SetClass( "visible", ShouldDraw() );
+		var draw = ShouldDraw();
+		SetClass( "visible", draw );
+		if ( !draw && FreezeCam != null )
+			FreezeCam = null;
 	}
 
 	public static void Freeze( float time, Vector3 position, Rotation rotation, float fov )
@@ -38,26 +34,28 @@ public partial class FreezeCameraPanel : Panel
 
 	public void SetupFreeze( float time, Vector3 position, Rotation rotation, float fov )
 	{
-		Size = new Vector2( Screen.Width, Screen.Height );
+		var size = new Vector2( Screen.Width, Screen.Height );
 
 		ColorTexture?.Dispose();
-		DepthTexture?.Dispose();
 
 		ColorTexture = Texture.CreateRenderTarget()
-			.WithSize( Size )
+			.WithSize( size )
 			.WithFormat( ImageFormat.RGBA32323232F )
 			.WithScreenMultiSample()
 			.Create();
 
-		var cam = Camera.Current ?? Camera.Main;
-		Graphics.RenderToTexture( cam, ColorTexture );
+		var currentCam = Camera.Current ?? Camera.Main;
+		FreezeCam = new SceneCamera( "FreezeCam" );
+		FreezeCam.World = Game.SceneWorld;
+		FreezeCam.Position = position;
+		FreezeCam.Rotation = rotation;
+		FreezeCam.FieldOfView = fov;
+		FreezeCam.ZFar = currentCam.ZFar;
+
+		Graphics.RenderToTexture( FreezeCam, ColorTexture );
 
 		TimeSinceFrozen = 0;
 		FreezeTime = time;
-
-		Position = position;
-		Rotation = rotation;
-		FieldOfView = fov; 
 		
 		Style.SetBackgroundImage( ColorTexture );
 		WillFreeze = true;
@@ -65,7 +63,6 @@ public partial class FreezeCameraPanel : Panel
 
 	public bool ShouldDraw()
 	{
-		//Log.Info( $"IsFrozen: {IsFrozen}" );
 		return IsFrozen;
 	}
 
