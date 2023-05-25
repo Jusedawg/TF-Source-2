@@ -75,7 +75,6 @@ public class PostProcessingManager
 		if ( effect == null )
 			return;
 
-		Log.Info( $"SetVisible {effect.GetType().Name} {visible}" );
 		effect.Enabled = visible;
 
 		var type = effect.GetType();
