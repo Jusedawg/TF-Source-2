@@ -6,7 +6,7 @@ namespace TFS2.UI;
 
 public partial class Health : Panel
 {
-
+	private Panel PlayerClassIcon { get; set; }
 	public Health()
 	{
 		BindClass( "red", () => TFPlayer.LocalPlayer.Team == TFTeam.Red );
@@ -30,7 +30,7 @@ public partial class Health : Panel
 		if ( !player.IsValid() )
 			return false;
 
-		if ( Input.Down( InputButton.Score ) )
+		if ( Input.Down( "score" ) )
 			return false;
 
 		return player.IsAlive;
