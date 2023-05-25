@@ -161,16 +161,19 @@ PS
     StaticCombo( S_ENVMAPMASK					, F_ENVMAPMASK					 , Sys( ALL ) );
     StaticCombo( S_BASEALPHAENVMAPMASK		    , F_BASEALPHAENVMAPMASK		     , Sys( ALL ) );
     StaticCombo( S_SELFILLUM					, F_SELFILLUM					 , Sys( ALL ) );
-    StaticCombo( S_VERTEXCOLOR				    , F_VERTEXCOLOR				     , Sys( ALL ) );
-    // StaticCombo( S_FLASHLIGHT					, F_FLASHLIGHT					 , Sys( ALL ) );
+    // StaticCombo( S_VERTEXCOLOR				    , F_VERTEXCOLOR				     , Sys( ALL ) );
+    #define S_VERTEXCOLOR 0
     StaticCombo( S_SELFILLUM_ENVMAPMASK_ALPHA   , F_SELFILLUM_ENVMAPMASK_ALPHA   , Sys( ALL ) );
-    StaticCombo( S_DETAIL_BLEND_MODE            , F_DETAIL_BLEND_MODE            , Sys( ALL ) );
     StaticCombo( S_DISTANCEALPHA                , F_DISTANCEALPHA                , Sys( ALL ) );
     StaticCombo( S_DISTANCEALPHAFROMDETAIL      , F_DISTANCEALPHAFROMDETAIL      , Sys( ALL ) );
     StaticCombo( S_SOFT_MASK                    , F_SOFT_MASK                    , Sys( ALL ) );
     StaticCombo( S_OUTLINE                      , F_OUTLINE                      , Sys( ALL ) );
     StaticCombo( S_OUTER_GLOW                   , F_OUTER_GLOW                   , Sys( ALL ) );
     StaticCombo( S_BLENDTINTBYBASEALPHA         , F_BLENDTINTBYBASEALPHA         , Sys( ALL ) );
+    
+    // StaticCombo( S_DETAIL_BLEND_MODE            , F_DETAIL_BLEND_MODE            , Sys( ALL ) );
+    int g_nDetailBlendMode < Expression(F_DETAIL_BLEND_MODE); >;
+    #define DETAIL_BLEND_MODE g_nDetailBlendMode
 
     float3 g_vDetailTint                        < UiType( Color ); UiGroup( "Attributes,11/1000" ); Default3(1.0f, 1.0f, 1.0f); >;
     float4 g_vOutlineParams                     < UiType( Color ); UiGroup( "Attributes,11/1001" ); Default4(1.0f, 1.0f, 1.0f, 1.0f); >;
@@ -222,7 +225,7 @@ PS
     {
         #if S_DETAILTEXTURE
             diffuse.xyz = 
-                TextureCombinePostLighting( diffuse.xyz, detailColor, S_DETAIL_BLEND_MODE, g_flDetailBlendFactor );
+                TextureCombinePostLighting( diffuse.xyz, detailColor, DETAIL_BLEND_MODE, g_flDetailBlendFactor );
         #endif
 
         #if S_SELFILLUM_ENVMAPMASK_ALPHA
@@ -294,7 +297,7 @@ PS
                 detailColor.a = 1.0;									// make tcombine treat as 1.0
             #endif
             baseColor = 
-                TextureCombine( baseColor, detailColor, S_DETAIL_BLEND_MODE, g_flDetailBlendFactor );
+                TextureCombine( baseColor, detailColor, DETAIL_BLEND_MODE, g_flDetailBlendFactor );
         #endif
 
         // #if S_DISTANCEALPHA
@@ -336,11 +339,11 @@ PS
 
         float3 specularFactor = 1.0f;
         float4 envmapMaskTexel;
-        if( bEnvmapMask )
-        {
+
+        #if S_ENVMAPMASK
             envmapMaskTexel = Tex2D( g_tEnvMapMask, i.vTextureCoords.xy );
             specularFactor *= envmapMaskTexel.xyz;	
-        }
+        #endif // S_ENVMAPMASK
 
         if( bBaseAlphaEnvmapMask )
         {

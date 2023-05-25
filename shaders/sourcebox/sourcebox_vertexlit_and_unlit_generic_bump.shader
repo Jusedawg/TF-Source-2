@@ -118,7 +118,12 @@ PS
     StaticCombo( S_NORMALMAPALPHAENVMAPMASK         , F_NORMALMAPALPHAENVMAPMASK        , Sys( ALL ) );
     StaticCombo( S_HALFLAMBERT                      , F_HALFLAMBERT                     , Sys( ALL ) );
     StaticCombo( S_BLENDTINTBYBASEALPHA             , F_BLENDTINTBYBASEALPHA            , Sys( ALL ) );
-    StaticCombo( S_DETAIL_BLEND_MODE                , F_DETAIL_BLEND_MODE               , Sys( ALL ) );
+
+    // StaticCombo( S_DETAIL_BLEND_MODE                , F_DETAIL_BLEND_MODE               , Sys( ALL ) );
+    // dynamic param to save on compile time
+    int g_nDetailBlendMode < Expression(F_DETAIL_BLEND_MODE); >;
+    #define DETAIL_BLEND_MODE g_nDetailBlendMode
+
     // DynamicCombo( D_AMBIENT_LIGHT, 0..1, Sys( ALL ) );
     #define D_AMBIENT_LIGHT                    1
 
@@ -178,7 +183,7 @@ PS
             // was packed into a vec4 in the sdk
             // float4 detailColor = Tex2D( g_tDetailTexture, i.vTextureCoords.zw );
             float4 detailColor = CONVERT_DETAIL(Tex2D( g_tDetailTexture, i.vDetailTextureCoords.xy ));
-            baseColor = TextureCombine( baseColor, detailColor, S_DETAIL_BLEND_MODE, g_flDetailBlendFactor );
+            baseColor = TextureCombine( baseColor, detailColor, DETAIL_BLEND_MODE, g_flDetailBlendFactor );
         #endif // S_DETAILTEXTURE
         
         // #if S_AMBIENT_OCCLUSION

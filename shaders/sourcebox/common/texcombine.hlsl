@@ -20,40 +20,40 @@
 float4 TextureCombine( float4 baseColor, float4 detailColor, int combine_mode,
 					   float fBlendFactor )
 {
+	[branch]
 	if ( combine_mode == TCOMBINE_MOD2X_SELECT_TWO_PATTERNS)
 	{
 		float3 dc=lerp(detailColor.r,detailColor.a, baseColor.a);
 		baseColor.rgb*=lerp(float3(1,1,1),2.0*dc,fBlendFactor);
 	}
-	if ( combine_mode == TCOMBINE_RGB_EQUALS_BASE_x_DETAILx2)
+	else if ( combine_mode == TCOMBINE_RGB_EQUALS_BASE_x_DETAILx2)
 		baseColor.rgb*=lerp(float3(1,1,1),2.0*detailColor.rgb,fBlendFactor);
-	if ( combine_mode == TCOMBINE_RGB_ADDITIVE )
+	else if ( combine_mode == TCOMBINE_RGB_ADDITIVE )
  		baseColor.rgb += fBlendFactor * detailColor.rgb;
-	if ( combine_mode == TCOMBINE_DETAIL_OVER_BASE )
+	else if ( combine_mode == TCOMBINE_DETAIL_OVER_BASE )
 	{
 		float fblend=fBlendFactor * detailColor.a;
 		baseColor.rgb = lerp( baseColor.rgb, detailColor.rgb, fblend);
 	}
-	if ( combine_mode == TCOMBINE_FADE )
+	else if ( combine_mode == TCOMBINE_FADE )
 	{
 		baseColor = lerp( baseColor, detailColor, fBlendFactor);
 	}
-	if ( combine_mode == TCOMBINE_BASE_OVER_DETAIL )
+	else if ( combine_mode == TCOMBINE_BASE_OVER_DETAIL )
 	{
 		float fblend=fBlendFactor * (1-baseColor.a);
 		baseColor.rgb = lerp( baseColor.rgb, detailColor.rgb, fblend );
 		baseColor.a = detailColor.a;
 	}
-	if ( combine_mode == TCOMBINE_MULTIPLY )
+	else if ( combine_mode == TCOMBINE_MULTIPLY )
 	{
 		baseColor = lerp( baseColor, baseColor*detailColor, fBlendFactor);
 	}
-
-	if (combine_mode == TCOMBINE_MASK_BASE_BY_DETAIL_ALPHA )
+	else if (combine_mode == TCOMBINE_MASK_BASE_BY_DETAIL_ALPHA )
 	{
 		baseColor.a = lerp( baseColor.a, baseColor.a*detailColor.a, fBlendFactor );
 	}
-	if ( combine_mode == TCOMBINE_SSBUMP_NOBUMP )
+	else if ( combine_mode == TCOMBINE_SSBUMP_NOBUMP )
 	{
 		baseColor.rgb = baseColor.rgb * dot( detailColor.rgb, 2.0/3.0 );
 	}
@@ -63,9 +63,10 @@ float4 TextureCombine( float4 baseColor, float4 detailColor, int combine_mode,
 float3 TextureCombinePostLighting( float3 lit_baseColor, float4 detailColor, int combine_mode,
 								   float fBlendFactor )
 {
+	[branch]
 	if ( combine_mode == TCOMBINE_RGB_ADDITIVE_SELFILLUM )
  		lit_baseColor += fBlendFactor * detailColor.rgb;
-	if ( combine_mode == TCOMBINE_RGB_ADDITIVE_SELFILLUM_THRESHOLD_FADE )
+	else if ( combine_mode == TCOMBINE_RGB_ADDITIVE_SELFILLUM_THRESHOLD_FADE )
 	{
  		// fade in an unusual way - instead of fading out color, remap an increasing band of it from
  		// 0..1

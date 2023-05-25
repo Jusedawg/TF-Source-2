@@ -359,7 +359,7 @@ class ShadingModelLegacy : ShadingModel
     //		float fAOPower = lerp( 4.0f, 1.0f, fAmbientOcclusion );
     //		result *= pow( NDotL * 0.5 + 0.5, fAOPower );
             // fResult *= GetAmbientOcclusion(shadeParams);
-            fResult *= shadeParams.AmbientOcclusion.r;
+            fResult *= lerp(1.0f, shadeParams.AmbientOcclusion.r, g_flAmbientOcclusionDirectDiffuse * (1 - g_flAmbientOcclusionDirectPostLightwarp));
         }
 
         float3 fOut = float3( fResult, fResult, fResult );
@@ -371,11 +371,12 @@ class ShadingModelLegacy : ShadingModel
             fOut = 2.0f * Tex2DLevel( g_tLightWarpTexture, float2( fResult, 0 ), 0 ).rgb;
         }
 
-        if ( config.DoAmbientOcclusion && config.DoIrisLighting )
+        // TF:S2 change: always apply AO post-lightwarp
+        if ( config.DoAmbientOcclusion && (config.DoIrisLighting || true) )
         {
             // TODO: this was RGB AO originally?
             // fOut *= GetAmbientOcclusion(shadeParams);
-            fOut *= shadeParams.AmbientOcclusion;
+            fOut *= lerp(1.0f, shadeParams.AmbientOcclusion, g_flAmbientOcclusionDirectDiffuse * g_flAmbientOcclusionDirectPostLightwarp);
         }
 
         return fOut;
@@ -408,7 +409,7 @@ class ShadingModelLegacy : ShadingModel
         if ( config.DoAmbientOcclusion && !config.DoIrisLighting )			// Optionally modulate with ambient occlusion
         {
             // specularLighting *= specularAO( shadeParams, GetAmbientOcclusion(shadeParams) );
-            specularLighting *= shadeParams.AmbientOcclusion.r;
+            specularLighting *= lerp(1.0f, shadeParams.AmbientOcclusion.r, g_flAmbientOcclusionDirectSpecular);
         }
 
         if ( config.DoRimLighting )											// Optionally do rim lighting
@@ -612,7 +613,7 @@ class ShadingModelLegacy : ShadingModel
                 {
                     // ambient *= shadeParams.AmbientOcclusion.r * shadeParams.AmbientOcclusion.r;	// Note squaring...
                     float flAO = GetAmbientOcclusion(shadeParams);
-                    diffAmbient *= flAO * flAO;	// Note squaring...
+                    diffAmbient *= lerp(1.0f, flAO * flAO, g_flAmbientOcclusionDirectAmbient);	// Note squaring...
                 }
 
                 linearColor += diffAmbient;
@@ -659,7 +660,7 @@ class ShadingModelLegacy : ShadingModel
                 if( shadeParams.config.AmbientOcclusionModel >= AMBIENT_OCCLUSION_MULTIBOUNCE )
                     vAmbientOcclusion = gtaoMultiBounce( vAmbientOcclusion.x, shadeParams.Albedo.rgb ).xxx;
                 
-                specAmbient *= vAmbientOcclusion;
+                specAmbient *= lerp(float3(1.0f, 1.0f, 1.0f), vAmbientOcclusion, g_flAmbientOcclusionDirectAmbient);
             }
 
 			// Add in view-ray lookup from ambient cube

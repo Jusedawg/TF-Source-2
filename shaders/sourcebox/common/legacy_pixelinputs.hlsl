@@ -12,8 +12,13 @@
 CreateInputTexture2D( Color,            Srgb,   8, "",                  "_color",   "Material,10/10",   Default3( 1.0, 1.0, 1.0 ) );
 CreateInputTexture2D( Translucency,     Linear, 8, "",                  "_trans",   "Material,10/11",   Default( 1.0 ) );
 CreateInputTexture2D( Normal,           Linear, 8, "NormalizeNormals",  "_normal",  "Material,10/12",   Default3( 0.5, 0.5, 1.0 ) );
-CreateInputTexture2D( AmbientOcclusion, Linear, 8, "",                  "_ao",      "Material,10/13",   Default( 1.0 ) );
-CreateInputTexture2D( LightWarpTexture, Linear, 8, "",                  "_lightwarp","Material,10/14",  Default3( 1.0, 1.0, 1.0 ) );
+CreateInputTexture2D( LightWarpTexture, Linear, 8, "",                  "_lightwarp","Material,10/13",  Default3( 1.0, 1.0, 1.0 ) );
+
+CreateInputTexture2D( AmbientOcclusion, Linear, 8, "",                  "_ao",      "Material,10/Ambient Occlusion,14/1",   Default( 1.0 ) );
+float g_flAmbientOcclusionDirectDiffuse         < UiGroup( "Material,10/Ambient Occlusion,14/2" ); Range(0.0f, 1.0f); Default(1.0f); >;
+float g_flAmbientOcclusionDirectPostLightwarp   < UiGroup( "Material,10/Ambient Occlusion,14/3" ); Range(0.0f, 1.0f); Default(1.0f); >;
+float g_flAmbientOcclusionDirectSpecular        < UiGroup( "Material,10/Ambient Occlusion,14/4" ); Range(0.0f, 1.0f); Default(1.0f); >;
+float g_flAmbientOcclusionDirectAmbient         < UiGroup( "Material,10/Ambient Occlusion,14/5" ); Range(0.0f, 1.0f); Default(1.0f); >;
 
 CreateInputTexture2D( TintMask,         Srgb,   8, "",                  "_tint",    "Tint,20/10",       Default( 1.0 ) );
 float g_flTintReplacementControl    < UiGroup( "Tint,20/11" ); Range(0.0f, 1.0f); Default(1.0f); >;
@@ -39,7 +44,7 @@ float3 g_vSelfIllumTint             < UiGroup( "Self Illum,40/15" ); UiType( Col
 bool g_bSelfIllumMaskControl        < UiGroup( "Self Illum,40/16" ); Default(1); >;
 
 CreateInputTextureCube( EnvMap,     Linear, 8, "", "",          "Envmap,50/10", Default3( 1.0, 1.0, 1.0 ) );
-CreateInputTexture2D(   EnvmapMask, Srgb,   8, "", "_envmap",   "Envmap,50/11", Default( 1.0 ) );
+CreateInputTexture2D(   EnvmapMask, Linear, 8, "", "_envmap",   "Envmap,50/11", Default( 1.0 ) );
 float g_flEnvMapScale               < UiGroup( "Envmap,50/12" ); Range(0.0f, 4.0f); Default(1.0f); >;
 float3 g_vEnvMapTint                < UiGroup( "Envmap,50/13" ); UiType( Color ); Default3(1.0f, 1.0f, 1.0f); >;
 float3 g_vEnvMapContrast            < UiGroup( "Envmap,50/14" ); Range3(0.0f, 0.0f, 0.0f, 4.0f, 4.0f, 4.0f); Default3(0.0f, 0.0f, 0.0f); >;
@@ -104,11 +109,13 @@ float4 CONVERT_COLOR(float4 s) { return s; }
 CreateTextureCube( g_tEnvMap ) < Channel( RGBA, Box( EnvMap ), Srgb ); OutputFormat( RGBA8888 ); SrgbRead( true ); >;
 float4 CONVERT_ENVMAP(float4 s) { return s; }
 
-#if S_SELFILLUM_ENVMAPMASK_ALPHA
-    CreateTexture2D( g_tEnvMapMask ) < Channel( RGBA, Box( EnvMapMask ), Linear ); OutputFormat( DXT1 ); SrgbRead( false ); >;
-#else // !S_SELFILLUM_ENVMAPMASK_ALPHA
-    CreateTexture2D( g_tEnvMapMask ) < Channel( RGB, Box( EnvMapMask ), Linear ); OutputFormat( DXT1 ); SrgbRead( false ); >;
-#endif // !S_SELFILLUM_ENVMAPMASK_ALPHA
+#if S_ENVMAPMASK
+    #if S_SELFILLUM_ENVMAPMASK_ALPHA
+        CreateTexture2D( g_tEnvMapMask ) < Channel( RGBA, Box( EnvmapMask ), Linear ); OutputFormat( DXT1 ); SrgbRead( false ); >;
+    #else // !S_SELFILLUM_ENVMAPMASK_ALPHA
+        CreateTexture2D( g_tEnvMapMask ) < Channel( RGB, Box( EnvmapMask ), Linear ); OutputFormat( DXT1 ); SrgbRead( false ); >;
+    #endif // !S_SELFILLUM_ENVMAPMASK_ALPHA
+#endif // S_ENVMAPMASK
 
 // both warp textures must be RGB!
 // love that this doesn't work for procedural stuff (unless i missed something)

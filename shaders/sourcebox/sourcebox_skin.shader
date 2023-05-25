@@ -126,8 +126,9 @@ PS
     StaticCombo( S_RIMLIGHT                         , F_RIMLIGHT                        , Sys( ALL ) );
     StaticCombo( S_BLENDTINTBYBASEALPHA             , F_BLENDTINTBYBASEALPHA            , Sys( ALL ) );
     
-    StaticCombo( S_DETAIL_BLEND_MODE                , F_DETAIL_BLEND_MODE               , Sys( ALL ) );
-
+    // StaticCombo( S_DETAIL_BLEND_MODE                , F_DETAIL_BLEND_MODE               , Sys( ALL ) );
+    int g_nDetailBlendMode < Expression(F_DETAIL_BLEND_MODE); >;
+    #define DETAIL_BLEND_MODE g_nDetailBlendMode
 
     #define USE_MANUAL_CUBEMAP (S_CUBEMAP && S_CUSTOM_CUBEMAP)
     #if S_BLENDTINTBYBASEALPHA
@@ -200,7 +201,7 @@ PS
             // float4 detailColor = Tex2D( g_tDetailTexture, i.vTextureCoords.zw );
             // packed in SDK
             float4 detailColor = CONVERT_DETAIL(Tex2D( g_tDetailTexture, i.vDetailTextureCoords.xy ));
-            baseColor = TextureCombine( baseColor, detailColor, S_DETAIL_BLEND_MODE, g_flDetailBlendFactor );
+            baseColor = TextureCombine( baseColor, detailColor, DETAIL_BLEND_MODE, g_flDetailBlendFactor );
         #endif // S_DETAILTEXTURE
 
         // float fogFactor = CalcPixelFogFactor( PIXELFOGTYPE, g_FogParams, g_EyePos_SpecExponent.z, vWorldPos.z, vProjPos.z );
