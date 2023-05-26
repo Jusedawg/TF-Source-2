@@ -178,10 +178,18 @@ namespace TFS2
 					{
 						DebugOverlay.Text( $"Linked CP Name: {cartNode.LinkedControlPoint}", nodePos + Vector3.Up * 12, 2, Color.White, 0, 2500 );
 						if(cartNode.GetControlPoint() != null)
-							DebugOverlay.Text( $"Control Point: {cartNode.GetControlPoint().PrintName}", nodePos + Vector3.Up * 12, 3, Color.White, 0, 2500 );
+							DebugOverlay.Text( $"= Control Point: {cartNode.GetControlPoint().PrintName}", nodePos + Vector3.Up * 12, 3, Color.White, 0, 2500 );
+					}
+
+					if(!string.IsNullOrEmpty(cartNode.NextPath))
+					{
+						DebugOverlay.Text( $"Next Path Name: {cartNode.NextPath}", nodePos + Vector3.Up * 12, 4, Color.White, 0, 2500 );
+						if ( cartNode.GetNextPath() != null )
+							DebugOverlay.Text( $"= Next Path: {cartNode.GetNextPath()}", nodePos + Vector3.Up * 12, 5, Color.White, 0, 2500 );
+
 					}
 				}
-				
+
 
 				// Tangents
 				if ( drawTangents )
@@ -245,6 +253,9 @@ namespace TFS2
 
 		public CartPath GetNextPath()
 		{
+			if ( NextPath.StartsWith( "[PR#]" ) )
+				NextPath = NextPath.Substring( 5 );
+
 			return Entity.FindByName( NextPath ) as CartPath;
 		}
 
