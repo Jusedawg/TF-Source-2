@@ -23,8 +23,10 @@ partial class TriggerMultipleFiltered : TriggerMultiple
 	{
 		Filter = FindByName( FilterName ) as Filter;
 
+		/*
 		if ( Filter == null ) 
 			Log.Error( $"Filter entity is not configured for tf_trigger_multiple_filtered ({this})." );
+		*/
 	}
 
 	public override bool PassesTriggerFilters( Entity other )

@@ -129,12 +129,12 @@ public partial class TFGameRules : SDKGame
 	[ClientRpc] public void ShowServerMessage() { MenuOverlay.Open<ServerMessage>(); }
 
 	RoundTimer WaitingForPlayersTimer { get; set; }
-
+	public const string WAITING_FOR_PLAYERS_TIMER_NAME = "@timer_waiting_for_players";
 	public override void OnWaitingForPlayersStarted()
 	{
 		WaitingForPlayersTimer = new()
 		{
-			Name = "@timer_waiting_for_players",
+			Name = WAITING_FOR_PLAYERS_TIMER_NAME,
 			AbsoluteTime = WaitingForPlayersTime,
 			Paused = false,
 			PlayAnnouncerVoicelines = false
