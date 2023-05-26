@@ -171,14 +171,14 @@ public partial class TFGameRules : SDKGame
 public enum TFWinReason
 {
 	None,
-	AllPointsCaptured,
-	OpponentsDead,
-	FragLimit,
-	FlagCaptureLimit,
-	DefendUntilTimeLimit,
-	Stalemate,
-	Timelimit,
-	Winlimit
+	AllPointsCaptured = 1,
+	OpponentsDead = 2,
+	FragLimit = 3,
+	FlagCaptureLimit = 4,
+	DefendUntilTimeLimit = 5,
+	Stalemate = 6,
+	Timelimit = 7,
+	Winlimit = 8
 }
 
 public enum TFTeamRole

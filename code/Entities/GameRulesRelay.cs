@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 namespace TFS2;
 
 [Library("tf_gamerules")]
-[Title("TF:S2 Gamerules")]
+[Title("Gamerules")]
 [Description("Allows modifiying gamerules and listening for events inside of a map.")]
 [Icon("gavel")]
-[Category( "Gamemode" )]
+[Category( "Configuration" )]
 [HammerEntity]
 public partial class TFGameRulesRelay : Entity
 {
