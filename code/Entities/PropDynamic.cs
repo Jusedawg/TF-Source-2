@@ -15,8 +15,10 @@ namespace TFS2;
 [Model]
 [RenderFields]
 [HammerEntity]
-partial class PropDynamic : AnimatedEntity
+partial class PropDynamic : AnimatedEntity, IResettable
 {
+	[Property( "Enabled", Title = "Enabled" ), Net]
+	public bool StartsEnabled { get; set; } = true;
 	[Property] public bool Solid { get; set; } = true;
 
 	public override void Spawn()
@@ -27,6 +29,18 @@ partial class PropDynamic : AnimatedEntity
 		UsePhysicsCollision = true;
 
 		Tags.Add( Solid ? CollisionTags.Solid : CollisionTags.NotSolid );
+	}
+
+	public void Reset( bool fullRoundReset = true )
+	{
+		if(StartsEnabled)
+		{
+			Input_Enable();
+		}
+		else
+		{
+			Input_Disable();
+		}
 	}
 
 	[Input( "SetMaterialGroupName" )]
