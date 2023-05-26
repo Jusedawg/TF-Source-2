@@ -11,12 +11,18 @@ namespace TFS2;
 [Category("Filters")]
 [Icon("done_all")]
 [HammerEntity]
-partial class TriggerMultipleFiltered : TriggerMultiple
+partial class TriggerMultipleFiltered : TriggerMultiple, IResettable
 {
 	[Property( "filter_name", Title = "Filter Name" ), FGDType( "target_destination" )]
 	public string FilterName { get; set; }
 	public Filter Filter { get; set; }
+	bool StartsEnabled;
+	public override void Spawn()
+	{
+		base.Spawn();
 
+		StartsEnabled = Enabled;
+	}
 
 	[GameEvent.Entity.PostSpawn]
 	public void OnLevelCreated()
@@ -38,5 +44,13 @@ partial class TriggerMultipleFiltered : TriggerMultiple
 			return true;
 
 		return Filter.Test( other );
+	}
+
+	public void Reset( bool fullRoundReset = true )
+	{
+		if ( StartsEnabled )
+			Enable();
+		else
+			Disable();
 	}
 }
