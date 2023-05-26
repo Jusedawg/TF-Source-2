@@ -86,9 +86,14 @@ RoundStatusDisplay {
                     width: 100%;
                     text-align: center;
                     transition: color .4s ease;
+                    display:none;
 
                     &.active {
                         color: $tan-light;
+                    }
+
+                    &.visible {
+                        display:flex;
                     }
                 }
             }

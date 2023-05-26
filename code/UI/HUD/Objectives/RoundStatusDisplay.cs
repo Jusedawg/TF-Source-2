@@ -92,7 +92,6 @@ public partial class RoundStatusDisplay : Panel
 class RoundStatusTimerEntry : Label
 {
 	public RoundTimer Timer { get; set; }
-
 	public override void Tick()
 	{
 		if ( Timer == null )
@@ -100,7 +99,10 @@ class RoundStatusTimerEntry : Label
 
 		Text = Timer.GetTimeString();
 		SetClass( "active", !Timer.Paused );
-		SetClass( "visible", TFGameRules.Current.State >= GameState.PreRound );
+		if(SDKGame.Current.IsWaitingForPlayers)
+			SetClass( "visible", Timer.Name == TFGameRules.WAITING_FOR_PLAYERS_TIMER_NAME ); // too bad!
+		else
+			SetClass( "visible", TFGameRules.Current.State >= GameState.PreRound );
 	}
 }
 

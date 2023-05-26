@@ -160,6 +160,7 @@ public partial class RoundTimer : Entity
 	public void AddTime( float time )
 	{
 		var addedTime = SetTime( AbsoluteTime + time );
+		Log.Info( $"AddTime {addedTime}" );
 		OnTimeAdded?.Invoke( addedTime );
 	}
 
