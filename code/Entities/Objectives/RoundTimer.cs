@@ -14,6 +14,7 @@ namespace TFS2;
 [Description("Timer which ticks down is shown on the HUD")]
 [Icon("timer")]
 [Category( "Gameplay" )]
+[EditorSprite( "materials/editor/tf_logic_setup_time.vmat" )]
 [HammerEntity]
 public partial class RoundTimer : Entity
 {
@@ -31,7 +32,7 @@ public partial class RoundTimer : Entity
 	/// <summary>
 	/// Automatically start this timer when it's created.
 	/// </summary>
-	[Property] public bool StartActive { get; set; }
+	[Property] public bool StartActive { get; set; } = true;
 	/// <summary>
 	/// If true, this timer will not be shown on the timer HUD.
 	/// </summary>
