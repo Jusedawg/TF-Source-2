@@ -4,8 +4,7 @@ PayloadDisplay {
     width: 100%;
     z-index: 2;
     display: none;
-    justify-content: center;
-    flex-direction: row-reverse;
+    flex-direction: column-reverse;
     bottom: 0;
 
     &.visible {
@@ -13,11 +12,14 @@ PayloadDisplay {
     }
 
     PayloadPath {
-        height: 180px;
-        width: 30%;
+        height: 40%;
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
 
         .progress_bar {
             height: 50%;
+            width: 40%;
             align-self: flex-end;
 
             .point {
@@ -95,7 +97,7 @@ PayloadDisplay {
             height: 180%;
             bottom: 0;
             aspect-ratio: 0.35;
-            //flex-direction: row;
+            //flex-direction: column;
 
             .cart {
                 align-self: center;

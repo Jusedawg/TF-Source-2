@@ -23,7 +23,6 @@ public partial class PayloadDisplay : Panel
 		foreach ( var item in localCarts.Except( carts ) ) RemoveCart( item );
 	}
 
-
 	private void AddCart( Cart cart )
 	{
 		pathEntries.Add( 
