@@ -552,7 +552,7 @@ public partial class ControlPoint : BaseTrigger, IResettable
 		UnlockTime = -1;
 		StopLoopingSounds();
 
-		SetOwnerTeam( GetDefaultTeamOwner() );
+		SetOwnerTeam( GetDefaultTeamOwner(), false );
 
 		SetLocked( StartLocked );
 	}
@@ -576,6 +576,11 @@ public partial class ControlPoint : BaseTrigger, IResettable
 	[Input( "SetOwner" )]
 	public void SetOwnerTeam( TFTeam team )
 	{
+		SetOwnerTeam( team, true );
+	}
+
+	public void SetOwnerTeam(TFTeam team, bool fireEvents = true)
+	{
 		BreakCapture( false );
 		HandleRespawnTimeAdjustments( OwnerTeam, team );
 
@@ -584,21 +589,24 @@ public partial class ControlPoint : BaseTrigger, IResettable
 		if ( team == TFTeam.Spectator )
 			team = TFTeam.Unassigned;
 
-		if ( team != OwnerTeam )
+		if ( fireEvents )
 		{
-			switch ( team )
+			if ( team != OwnerTeam )
 			{
-				case TFTeam.Unassigned:
-					OnOwnerReset.Fire( this );
-					break;
+				switch ( team )
+				{
+					case TFTeam.Unassigned:
+						OnOwnerReset.Fire( this );
+						break;
 
-				case TFTeam.Red:
-					OnOwnerChangedToRed.Fire( this );
-					break;
+					case TFTeam.Red:
+						OnOwnerChangedToRed.Fire( this );
+						break;
 
-				case TFTeam.Blue:
-					OnOwnerChangedToBlue.Fire( this );
-					break;
+					case TFTeam.Blue:
+						OnOwnerChangedToBlue.Fire( this );
+						break;
+				}
 			}
 		}
 
