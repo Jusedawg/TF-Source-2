@@ -1,4 +1,5 @@
-﻿using Sandbox;
+﻿using Amper.FPS;
+using Sandbox;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -96,11 +97,24 @@ public partial class Cart
 				remainingDistance = DoMoveForwards( remainingDistance );
 			}
 		}
+
 		var newpos = GetPathPosition();
-
 		Vector3 dir = isMovingReverse ? newpos - Position : Position - newpos;
-		Rotation = Rotation.LookAt( dir );
 
+		/*
+		// Push player away from the cart
+		var forwardTrace = GetEntitiesBBox( dir + Vector3.Down * 4 );
+		foreach(var ent in forwardTrace)
+		{
+			if ( ent == this ) return;
+
+			Log.Info( $"Traced ent: {ent}" );
+			ent.Velocity += dir.WithZ(0);
+		}
+		*/
+
+		Velocity = dir;
+		Rotation = Rotation.LookAt( dir );
 		Position = newpos;
 
 		if ( isRolling )
@@ -136,10 +150,7 @@ public partial class Cart
 					return -2;
 				}
 
-				IsAtEnd = true;
-				StopMoveSounds();
-				OnReachEnd.Fire( this );
-				Log.Info( $"Reached end at: {CurrentIndex + 1}" );
+				FinishMoving();
 				return -1;
 			}
 		}
@@ -167,5 +178,24 @@ public partial class Cart
 		}
 
 		return distance - usedDistance;
+	}
+
+	public virtual IEnumerable<Entity> GetEntitiesBBox(Vector3 offset)
+	{
+		var bounds = CollisionBounds;
+		bounds = bounds.Translate( Position );
+		bounds = bounds.Translate( offset );
+
+		return Entity.FindInBox( bounds );
+	}
+
+	protected virtual void FinishMoving()
+	{
+		IsAtEnd = true;
+		StopMoveSounds();
+		OnReachEnd.Fire( this );
+		Log.Info( $"Reached end at: {CurrentIndex + 1}" );
+		if ( EnablePhysicsAtEnd )
+			EnablePhysics();
 	}
 }

@@ -28,6 +28,8 @@ namespace TFS2
 
 		[Property("Path", Title = "Starting Path"), FGDType("target_destination")]
 		public string LinkedCartPath { get; set; }
+		[Property]
+		public bool EnablePhysicsAtEnd { get; set; } = true;
 		
 		[Category( "Speed" ), Property( "Level1Speed", Title = "x1 Speed" )]
 		public float Level1Speed { get; set; } = 50f;
@@ -102,6 +104,7 @@ namespace TFS2
 		/// </summary>
 		protected float CurrentSpeed;
 		protected bool IsAtEnd = false;
+		protected bool IsPhysics = false;
 
 		// Util list of distances to next node
 		[Net]
@@ -127,7 +130,7 @@ namespace TFS2
 		}
 		public override void Spawn()
 		{
-			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+			DisablePhysics();
 			EnableAllCollisions = true;
 
 			Team = TeamOption.ToTFTeam();
@@ -150,6 +153,11 @@ namespace TFS2
 
 		public void Reset(bool fullRoundReset = true)
 		{
+			if(IsPhysics)
+			{
+				DisablePhysics();
+			}
+
 			Path = startingPath;
 			ResetPath();
 
@@ -186,6 +194,8 @@ namespace TFS2
 			{
 				Log.Error( $"Cart {this} has no path set!" );
 			}
+
+			if ( IsPhysics ) return;
 
 			DoMovement();
 
@@ -378,6 +388,27 @@ namespace TFS2
 				if ( blockers.Contains( ply ) )
 					StopBlock( ply );
 			}
+		}
+
+		[Input]
+		public void EnablePhysics()
+		{
+			if ( Game.IsClient ) return;
+
+			IsPhysics = true;
+
+			SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+			//PhysicsEnabled = true;
+		}
+		[Input]
+		public void DisablePhysics()
+		{
+			if ( Game.IsClient ) return;
+
+			IsPhysics = false;
+
+			SetupPhysicsFromModel( PhysicsMotionType.Keyframed );
+			//PhysicsEnabled = false;
 		}
 
 		public Output OnStartPush { get; set; }

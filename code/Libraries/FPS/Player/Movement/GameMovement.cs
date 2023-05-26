@@ -66,7 +66,8 @@ public partial class GameMovement
 		player.Velocity = Velocity;
 
 		// TODO: Sort out basevelocity
-		player.BaseVelocity = 0;
+		//player.BaseVelocity = 0;
+		player.BaseVelocity = Player.GroundEntity?.Velocity ?? 0;
 	}
 
 	public virtual void ProcessMovement()
