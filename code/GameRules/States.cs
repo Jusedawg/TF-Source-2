@@ -7,7 +7,7 @@ namespace TFS2;
 partial class TFGameRules
 {
 	[ConVar.Replicated] public static bool mp_tournament_readymode { get; set; } = false;
-	public override bool WaitingForPlayersEnabled() => !ReadyUpEnabled();
+	public override bool WaitingForPlayersEnabled() => !ReadyUpEnabled() && !mp_waiting_for_players_cancel;
 	public override bool ReadyUpEnabled() => mp_tournament_readymode || GetGamemode()?.Properties.RequireReadyUp == true;
 	public override void OnRoundRestart()
 	{

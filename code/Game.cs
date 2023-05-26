@@ -136,7 +136,8 @@ public partial class TFGameRules : SDKGame
 		{
 			Name = "@timer_waiting_for_players",
 			AbsoluteTime = WaitingForPlayersTime,
-			Paused = false
+			Paused = false,
+			PlayAnnouncerVoicelines = false
 		};
 	}
 
