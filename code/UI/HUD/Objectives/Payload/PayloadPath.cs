@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Sandbox.Gizmo;
 
 namespace TFS2.UI;
 
@@ -90,15 +89,13 @@ public partial class PayloadPath : Panel
 			float fraction = ControlPointFraction( info );
 			Length cpPos = FractionLength( fraction );
 
-			/*
 			if(fraction.AlmostEqual(1))
 			{
 				// Offset the control point position by half the image (TODO: Get this value at runtime)
-				const float LAST_CP_HALF_WIDTH = 8f;
+				const float LAST_CP_HALF_WIDTH = 5f;
 				cpPos.Value -= LAST_CP_HALF_WIDTH;
 			}
 			else
-			*/
 			{
 				const float CP_HALF_WIDTH = 8f;
 				cpPos.Value -= CP_HALF_WIDTH;
@@ -178,6 +175,18 @@ public partial class PayloadPath : Panel
 		}
 
 		PathLength = _pathLengths.Values.Sum(info => info.Length);
+
+		// Check if teres a single control point which has been excluded for the path, this is common in payload maps with deathpits!
+		var leftOutCps = ControlPoint.All.Except( ControlPoints.Keys.Select( info => info.Point ) );
+		if ( leftOutCps.Count() == 1 )
+		{
+			var singleLeftOut = leftOutCps.FirstOrDefault();
+			if ( singleLeftOut.OwnerTeam != CartTeam )
+			{
+				var lastPath = paths.Last();
+				ControlPoints.Add( new() { Path = lastPath, Distance = -1, Point = singleLeftOut}, ProgressBar.Add.Panel( "point neutral" ) );
+			}
+		}
 	}
 
 	private Length FractionLength(float fraction)
@@ -198,6 +207,8 @@ public partial class PayloadPath : Panel
 	private float PathOffset( CartPath path ) => _pathLengths.GetValueOrDefault( path )?.Distance ?? 0f;
 	private float ControlPointFraction(CartPath.ControlPointInfo info)
 	{
+		if ( info.Distance == -1 ) return 1;
+
 		return (info.Distance + PathOffset( info.Path ) ) / PathLength;
 	}
 }
