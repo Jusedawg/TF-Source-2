@@ -41,6 +41,17 @@ partial class TFGameRules
 	{
 		// reset all resettable ents
 		foreach ( var ent in All.OfType<IResettable>() ) ent.Reset();
+
+		// Reset default ents manually
+		foreach(var door in All.OfType<DoorEntity>())
+		{
+			door.Locked = door.SpawnSettings.HasFlag( DoorEntity.Flags.StartLocked );
+
+			if ( door.InitialPosition > 0 )
+			{
+				door.FireInput("SetPosition", door, door.InitialPosition / 100.0f );
+			}
+		}
 	}
 
 	public override void CalculateObjectives()
@@ -96,6 +107,10 @@ partial class TFGameRules
 
 		// if we're waiting for players, we can't cap.
 		if ( IsWaitingForPlayers )
+			return false;
+
+		// same if we are in setup time
+		if ( IsInSetup )
 			return false;
 
 		return true;
