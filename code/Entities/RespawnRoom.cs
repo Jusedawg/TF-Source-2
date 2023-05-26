@@ -36,7 +36,6 @@ public partial class RespawnRoom : BaseTrigger, IResettable
 	{
 		base.Spawn();
 		StartsEnabled = Enabled;
-		Log.Info( Enabled );
 
 		Reset();
 	}

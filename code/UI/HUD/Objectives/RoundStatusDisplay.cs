@@ -36,7 +36,7 @@ public partial class RoundStatusDisplay : Panel
 		if ( SDKGame.Current.IsWaitingForPlayers && !TFGameRules.Current.IsPlaying<Arena>() )
 			value = WAITING_FOR_PLAYERS_TEXT;
 
-		if ( RoundTimer.All.Any( timer => timer.InSetup ) )
+		if ( TFGameRules.Current.IsInSetup )
 			value = SETUP_TEXT;
 
 		GameStateLabel.Text = value;
@@ -100,6 +100,7 @@ class RoundStatusTimerEntry : Label
 
 		Text = Timer.GetTimeString();
 		SetClass( "active", !Timer.Paused );
+		SetClass( "visible", TFGameRules.Current.State >= GameState.PreRound );
 	}
 }
 

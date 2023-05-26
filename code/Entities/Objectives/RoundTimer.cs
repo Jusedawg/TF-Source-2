@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Amper.FPS;
 using Editor;
+using System.Linq;
 
 namespace TFS2;
 
@@ -49,10 +50,6 @@ public partial class RoundTimer : Entity
 	/// </summary>
 	[Net] public bool Paused { get; set; }
 	/// <summary>
-	/// Are we currently in setup?
-	/// </summary>
-	[Net] public bool InSetup { get; set; } = false;
-	/// <summary>
 	/// Count time relative to this value.
 	/// </summary>
 	[Net] public float AbsoluteTime { get; set; }
@@ -62,21 +59,24 @@ public partial class RoundTimer : Entity
 	[Net] public TimeSince TimeSinceStartedCounting { get; set; }
 
 	public bool HasSetup => SetupTime > 0;
+	public bool InSetup { get; set; }
 	public bool IsVisibleOnHUD => !HideFromHUD;
 	public RoundTimer()
 	{
 		All.Add( this );
 		EventDispatcher.Subscribe<RoundActiveEvent>( OnRoundStart, this );
-		EventDispatcher.Subscribe<RoundRestartEvent>( OnRoundRestart, this );
 	}
 
 	public override void Spawn()
 	{
 		base.Spawn();
 
+		SetTime( AbsoluteTime );
 		Transmit = TransmitType.Always;
 		TimeSinceStartedCounting = 0;
 		Paused = true;
+		if(HasSetup)
+			TFGameRules.Current.HasSetup = true;
 	}
 
 	protected override void OnDestroy()
@@ -97,8 +97,10 @@ public partial class RoundTimer : Entity
 		if ( Paused )
 			OnStarted.Fire( this );
 
+		InSetup = false;
 		Paused = false;
 		TimeSinceStartedCounting = 0;
+		TFGameRules.Current.IsInSetup = All.Any(timer => timer.InSetup);
 	}
 	[Input]
 	public void StartSetup()
@@ -112,8 +114,10 @@ public partial class RoundTimer : Entity
 			OnSetupStarted.Fire( this );
 
 		InSetup = true;
+		Paused = false;
 		TimeSinceStartedCounting = 0;
-		AbsoluteTime = SetupTime;
+		SetTime(SetupTime);
+		TFGameRules.Current.IsInSetup = true;
 	}
 
 	[Input]
@@ -156,7 +160,7 @@ public partial class RoundTimer : Entity
 	public void AddTime( float time )
 	{
 		var addedTime = SetTime( AbsoluteTime + time );
-		OnTimeAdded( addedTime );
+		OnTimeAdded?.Invoke( addedTime );
 	}
 
 	public float GetRemainingTime()
@@ -198,6 +202,16 @@ public partial class RoundTimer : Entity
 				int secondsRemaining = GetRemainingTime().FloorToInt();
 				PlayAnnouncerTimeVoiceLine( secondsRemaining, true );
 			}
+
+			if ( timeLeft == 0 )
+			{
+				SetTime( StartTime );
+				Start();
+				OnSetupEnded.Fire( this );
+
+				SDKGame.PlaySoundToAll( "ambience.siren", SoundBroadcastChannel.Ambience );
+				SDKGame.PlaySoundToAll( "announcer.round_start", SoundBroadcastChannel.Announcer );
+			}
 		}
 		else
 		{
@@ -231,12 +245,12 @@ public partial class RoundTimer : Entity
 				int secondsRemaining = GetRemainingTime().FloorToInt();
 				PlayAnnouncerTimeVoiceLine( secondsRemaining );
 			}
-		}
 
-		if ( timeLeft == 0 )
-		{
-			Pause();
-			OnFinished.Fire( this );
+			if ( timeLeft == 0 )
+			{
+				Pause();
+				OnFinished.Fire( this );
+			}
 		}
 	}
 
@@ -281,14 +295,10 @@ public partial class RoundTimer : Entity
 			return;
 		}
 
-		SetTime( StartTime );
+		if ( ResetOnRoundStart )
+			SetTime( StartTime );
 		if ( StartActive )
 			Start();
-	}
-	public virtual void OnRoundRestart( RoundRestartEvent args )
-	{
-		if ( ResetOnRoundStart )
-			Restart();
 	}
 	public event Action<float> OnTimeAdded;
 	protected Output On5MinRemain { get; set; }

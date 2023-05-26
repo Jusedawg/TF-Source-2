@@ -19,6 +19,8 @@ partial class TFGameRules
 
 	int LastAnnouncerSeconds { get; set; }
 	bool WillPlayGameStartSong { get; set; }
+	[Net] public bool HasSetup { get; set; }
+	[Net] public bool IsInSetup { get; set; }
 
 	public override void StartedPreGame()
 	{
@@ -59,7 +61,7 @@ partial class TFGameRules
 			//
 
 			// don't run this if we're waiting for players.
-			if ( !IsWaitingForPlayers )
+			if ( !IsWaitingForPlayers && !HasSetup )
 			{
 				var timeUntilEnd = GetPreRoundFreezeTime() - TimeSinceStateChange;
 				var seconds = timeUntilEnd.CeilToInt() - 1;
