@@ -11,29 +11,40 @@ namespace TFS2;
 [Category("Gameplay")]
 [Icon("Home")]
 [HammerEntity]
-public partial class RespawnRoom : BaseTrigger
+public partial class RespawnRoom : BaseTrigger, IResettable
 {
 	[Property( "Team", Title = "Default Team" )] 
 	public HammerTFTeamOption DefaultTeamOption { get; set; }
 
 	/// <summary>
-	/// The tf_control_point associated with this respawn room. Ownership of control points will control this spawn point's enabled state.
+	/// The tf_control_point associated with this respawn room. Ownership of control points will control this spawn point's team or enabled state.
 	/// </summary>
 	[Property, FGDType( "target_destination" )]
 	public string AssociatedControlPoint { get; set; }
+
+	[Property]
+	public bool SwitchTeamAutomatically { get; set; } = true;
 
 	List<RespawnRoomVisualizer> Visualizers { get; set; } = new();
 	List<TeamSpawnPoint> SpawnPoints { get; set; } = new();
 
 	public ControlPoint ControlPoint { get; set; }
 	public HammerTFTeamOption TeamOption { get; set; }
-
 	public bool IsInside( TFPlayer ply ) => TouchingEntities.Contains( ply );
-
+	bool StartsEnabled = true;
 	public override void Spawn()
 	{
 		base.Spawn();
+		StartsEnabled = Enabled;
+		Log.Info( Enabled );
+
+		Reset();
+	}
+
+	public void Reset( bool fullRoundReset = true )
+	{
 		TeamOption = DefaultTeamOption;
+		Enabled = StartsEnabled;
 	}
 
 	[GameEvent.Entity.PostSpawn]
@@ -77,10 +88,19 @@ public partial class RespawnRoom : BaseTrigger
 	[GameEvent.Tick.Server]
 	public void Tick()
 	{
+		if(ControlPoint != null)
+		{
+			if ( SwitchTeamAutomatically )
+				TeamOption = ControlPoint.OwnerTeam.ToOption();
+			else
+				Enabled = TeamOption.Is( ControlPoint.OwnerTeam );
+		}
+
 		if ( !tf_debug_spawnrooms )
 			return;
 
-		DebugOverlay.Text( 
+		DebugOverlay.Text(
+			$"Enabled: {Enabled}\n" +
 			$"TeamOption: {TeamOption}\n" +
 			$"ControlPoint: {ControlPoint}\n" +
 			$"Visualizers: {Visualizers.Count}\n" +

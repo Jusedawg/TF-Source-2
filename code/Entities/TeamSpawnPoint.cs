@@ -92,7 +92,7 @@ public partial class TeamSpawnPoint : SDKSpawnPoint, IResettable
 			if ( farthestPoints != null && !farthestPoints.Contains( point ) )
 				return false;
 		}
-		else if( Room != null)
+		else if( Room != null && Room.Enabled)
 		{
 			point = Room.ControlPoint;
 			var farthestPoints = TFGameRules.Current.GetFarthestOwnedControlPointsWithRespawnRoom( playerTeam );
@@ -105,7 +105,7 @@ public partial class TeamSpawnPoint : SDKSpawnPoint, IResettable
 
 		return true;
 	}
-	public bool IsEnabled() => Enabled && (Point == null || ITeam.IsSame( Point, this ));
+	public bool IsEnabled() => Enabled && (Point == null || TeamOption.Is(Point.OwnerTeam));
 	[Input] public void Enable() => Enabled = true;
 	[Input] public void Disable() => Enabled = false;
 	[Input] public void Toggle() => Enabled = !Enabled;

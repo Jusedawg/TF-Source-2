@@ -94,4 +94,14 @@ public static class TFTeamExtensions
 			_ => TFTeam.Unassigned
 		};
 	}
+
+	public static HammerTFTeamOption ToOption(this TFTeam team)
+	{
+		return team switch
+		{
+			TFTeam.Red => HammerTFTeamOption.Red,
+			TFTeam.Blue => HammerTFTeamOption.Blue,
+			_ => HammerTFTeamOption.Any
+		};
+	}
 }
