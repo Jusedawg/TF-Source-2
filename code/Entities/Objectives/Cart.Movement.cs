@@ -11,6 +11,7 @@ namespace TFS2;
 public partial class Cart
 {
 	bool wasMoving = false;
+	bool wasRolling = false;
 	protected virtual void DoMovement()
 	{
 		if ( !CanMove() )
@@ -19,6 +20,8 @@ public partial class Cart
 		bool isRolling = false;
 		if ( CanPush() )
 		{
+			wasRolling = false;
+
 			float maxSpeed = 0;
 			switch ( GetCapRate() )
 			{
@@ -43,6 +46,7 @@ public partial class Cart
 		else if ( CanRollforward() )
 		{
 			isRolling = true;
+			wasRolling = true;
 			float maxSpeed = Level3Speed;
 
 			CurrentSpeed += Acceleration * Time.Delta;
@@ -51,16 +55,25 @@ public partial class Cart
 		else if ( CanRollback() )
 		{
 			isRolling = true;
+			wasRolling = true;
+
 			float minSpeed = -BackwardsSpeed;
 			CurrentSpeed -= Acceleration * Time.Delta;
 			CurrentSpeed = MathF.Max( minSpeed, CurrentSpeed );
 		}
 		else
 		{
+			wasRolling = false;
+
 			float minSpeed = 0f;
 			CurrentSpeed -= Acceleration * Time.Delta;
 			CurrentSpeed = MathF.Max( minSpeed, CurrentSpeed );
 		}
+
+		if ( isRolling && !wasRolling )
+			OnStartRolling.Fire( this );
+		else if ( !isRolling && wasRolling )
+			OnStopRolling.Fire( this );
 
 		if ( CurrentSpeed < 0 && CurrentIndex == 0 && CurrentFraction <= 0 )
 		{

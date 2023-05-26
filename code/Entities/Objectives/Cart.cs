@@ -413,7 +413,8 @@ namespace TFS2
 
 		public Output OnStartPush { get; set; }
 		public Output OnStopPush { get; set; }
-
+		public Output OnStartRolling { get; set; }
+		public Output OnStopRolling { get; set; }
 		public Output OnStartBlock { get; set; }
 		public Output OnStopBlock { get; set; }
 		public Output OnReachEnd { get; set; }
