@@ -12,12 +12,14 @@ namespace TFS2;
 [AutoApplyMaterial( "materials/overlays/no_entry.vmat" )]
 [Solid]
 [HammerEntity]
-public partial class RespawnRoomVisualizer : ModelEntity
+public partial class RespawnRoomVisualizer : ModelEntity, IResettable
 {
+	[Property(Title = "Enabled")]
+	public bool StartsEnabled { get; set; }
 	[Property, FGDType( "target_destination" )]
 	public string AssociatedRespawnRoom { get; set; }
 	public RespawnRoom Room { get; set; }
-
+	[Net] bool Enabled { get; set; }
 	[Net] HammerTFTeamOption TeamOption { get; set; }
 
 	[GameEvent.Entity.PostSpawn]
@@ -41,6 +43,12 @@ public partial class RespawnRoomVisualizer : ModelEntity
 		Tags.Add( TFCollisionTags.TeamBarrier );
 	}
 
+	public void Reset( bool fullRoundReset = true )
+	{
+		SetEnabled( StartsEnabled );
+	}
+
+
 	public void SetTeamOption( HammerTFTeamOption option )
 	{
 		TeamOption = option;
@@ -54,6 +62,24 @@ public partial class RespawnRoomVisualizer : ModelEntity
 			// Log.Info( $"Visualizer (room \"{AssociatedRespawnRoom}\") accepts team \"{team}\": {TeamOption.Is( team )}" );
 		}
 	}
+	public void SetEnabled( bool enabled )
+	{
+		if ( enabled ) Enable();
+		else Disable();
+	}
+
+	[Input]
+	public void Enable()
+	{
+		Enabled = true;
+		EnableAllCollisions = true;
+	}
+	[Input]
+	public void Disable()
+	{
+		Enabled = false;
+		EnableAllCollisions = false;
+	}
 
 	[GameEvent.Client.Frame]
 	public void Frame()
@@ -61,14 +87,19 @@ public partial class RespawnRoomVisualizer : ModelEntity
 		EnableDrawing = IsVisibleForLocalPlayer();
 	}
 
+	const float FADE_END_DISTANCE = 800f;
+	const float FADE_END_DISTANCE_SQR = FADE_END_DISTANCE * FADE_END_DISTANCE;
 	public bool IsVisibleForLocalPlayer()
 	{
-		if ( TFGameRules.Current.AreRespawnRoomsOpen() ) 
+		if ( TFGameRules.Current.AreRespawnRoomsOpen() || !Enabled ) 
 			return false;
 
 		var player = TFPlayer.LocalPlayer;
 		if ( player == null )
 			return false;
+
+		var distSqr = player.Position.DistanceSquared( Position );
+		if ( distSqr > FADE_END_DISTANCE_SQR ) return false;
 
 		return !TeamOption.Is( player.Team );
 	}
