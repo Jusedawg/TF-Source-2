@@ -19,6 +19,8 @@ public partial class TeamFlagDisplay : Panel
 	Label ScoreBlue { get; set; }
 	Label ScoreRed { get; set; }
 	IEnumerable<Flag> flags;
+	TimeSince timeSinceReorder;
+	const float REORDER_TIME = 2f;
 	public override void Tick()
 	{
 		flags = Entity.All.OfType<Flag>();
@@ -76,6 +78,11 @@ public partial class TeamFlagDisplay : Panel
 		}
 
 		SetClass( "has_flag", hasFlag );
+
+		if(timeSinceReorder >= REORDER_TIME )
+		{
+			Reorder();
+		}
 	}
 
 	public bool TryGetLocalPlayerPickedFlag( out Flag flag )
@@ -147,6 +154,7 @@ public partial class TeamFlagDisplay : Panel
 
 	public void Reorder()
 	{
+		timeSinceReorder = 0;
 		FlagCompassContainer.SortChildren( ( Panel x, Panel y ) =>
 		{
 			if ( x is not TeamFlagCompass x1 || y is not TeamFlagCompass y1 )
