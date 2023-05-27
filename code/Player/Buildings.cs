@@ -53,6 +53,6 @@ public partial class TFPlayer
 		}
 
 		builder.PlacementData = data;
-		ply.SwitchToWeapon( builder, true );
+		ply.ForceSwitchWeapon( builder);
 	}
 }

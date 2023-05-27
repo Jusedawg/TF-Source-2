@@ -55,6 +55,8 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 	}
 	public virtual void Initialize(BuildingData data)
 	{
+		if ( Game.IsClient ) return;
+
 		Data = data;
 
 		maxLevel = data.LevelCount;
@@ -69,6 +71,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 		SetModel(name);
 		SetMaterialGroup( Team.GetName() );
 		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, Data.Mins, Data.Maxs );
+		UseAnimGraph = true;
 	}
 	public virtual void SetOwner(TFPlayer owner)
 	{
@@ -77,6 +80,8 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 	}
 	public virtual void SetLevel(int level)
 	{
+		if ( Game.IsClient ) return;
+
 		if ( level > maxLevel )
 			level = maxLevel;
 		else if ( level <= 0 )

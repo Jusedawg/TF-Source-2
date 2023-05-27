@@ -1,7 +1,9 @@
 ﻿using Sandbox;
+using Sandbox.UI.Tests;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TFS2;
 
 namespace Amper.FPS;
 
@@ -9,9 +11,12 @@ partial class SDKPlayer
 {
 	public IEnumerable<SDKWeapon> Weapons => Children.OfType<SDKWeapon>();
 	[Net] public SDKWeapon ActiveWeapon { get; set; }
-	[ClientInput] public Entity RequestedActiveWeapon { get; set; }
-	[Predicted] SDKWeapon LastActiveWeapon { get; set; }
-
+	[ClientInput] public SDKWeapon RequestedActiveWeapon { get; set; }
+	public bool HasUsedRequest { get; set; } = false;
+	[Net] public SDKWeapon ForcedActiveWeapon { get; set; }
+	public bool AutoResetForcedActiveWeapon { get; set; } = true;
+	SDKWeapon LastActiveWeapon { get; set; }
+	SDKWeapon LastRequestedWeapon { get; set; }
 	/// <summary>
 	/// Can this player attack using their weapons?
 	/// </summary>
@@ -19,9 +24,30 @@ partial class SDKPlayer
 
 	public virtual void SimulateActiveWeapon( IClient cl )
 	{
-		if ( RequestedActiveWeapon != ActiveWeapon && RequestedActiveWeapon is SDKWeapon weapon )
+		if( Game.IsServer )
 		{
-			SwitchToWeapon( weapon );
+			if( ForcedActiveWeapon != null && AutoResetForcedActiveWeapon && ActiveWeapon == ForcedActiveWeapon && ActiveWeapon.IsDeployed  )
+			{
+				ForcedActiveWeapon = null;
+				AutoResetForcedActiveWeapon = true;
+			}
+		}
+
+		if ( RequestedActiveWeapon != LastRequestedWeapon )
+		{
+			HasUsedRequest = false;
+			LastRequestedWeapon = RequestedActiveWeapon;
+		}
+
+		if (ForcedActiveWeapon != null )
+		{
+			if(ForcedActiveWeapon != ActiveWeapon)
+				SwitchToWeapon( ForcedActiveWeapon );
+		}
+		else if ( !HasUsedRequest && RequestedActiveWeapon != null )
+		{
+			HasUsedRequest = true;
+			SwitchToWeapon( RequestedActiveWeapon );
 		}
 
 		if ( LastActiveWeapon != ActiveWeapon )
@@ -56,7 +82,7 @@ partial class SDKPlayer
 		}
 	}
 
-	public bool SwitchToWeapon( SDKWeapon weapon, bool switchRequested = false )
+	public bool SwitchToWeapon( SDKWeapon weapon )
 	{
 		if ( !weapon.IsValid() )
 			return false;
@@ -78,9 +104,17 @@ partial class SDKPlayer
 		}
 
 		ActiveWeapon = weapon;
-		if(switchRequested)
-			RequestedActiveWeapon = weapon;
+
 		return true;
+	}
+
+	public virtual void ForceSwitchWeapon(SDKWeapon weapon, bool manualReset = true)
+	{
+		Game.AssertServer();
+
+		ForcedActiveWeapon = weapon;
+		if ( manualReset )
+			AutoResetForcedActiveWeapon = false;
 	}
 
 	public virtual bool EquipWeapon( SDKWeapon weapon, bool makeActive = false )
@@ -151,8 +185,23 @@ partial class SDKPlayer
 		var first = weapons.FirstOrDefault();
 		if ( first.IsValid() )
 		{
-			SwitchToWeapon( first );
+			SwitchToWeapon( first);
 			return;
+		}
+	}
+
+	public virtual void SwitchToLastWeapon(SDKWeapon except = null, bool force = false)
+	{
+		var weapon = LastActiveWeapon;
+		if ( !weapon.IsValid() || weapon == ActiveWeapon || weapon == except )
+			weapon = Weapons.FirstOrDefault(wpn => wpn != ActiveWeapon && wpn != except );
+
+		if (weapon.IsValid())
+		{
+			if ( force )
+				ForceSwitchWeapon( weapon );
+			else
+				SwitchToWeapon( weapon );
 		}
 	}
 

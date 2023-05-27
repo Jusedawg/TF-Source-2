@@ -56,8 +56,14 @@ public class BuildingData : GameResource
 		if ( string.IsNullOrEmpty( EngineClass ) )
 			return null;
 
+		if(Levels.Count == 0)
+		{
+			Log.Warning( $"Tried to create instance of data with no levels!" );
+			return null;
+		}
+
 		var building = TypeLibrary.Create<TFBuilding>( EngineClass, false );
-		if(building == default)
+		if(building == null)
 		{
 			Log.Error( $"Tried to create building with invalid engine class {EngineClass}!" );
 			return null;

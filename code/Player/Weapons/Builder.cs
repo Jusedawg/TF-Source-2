@@ -21,33 +21,35 @@ public partial class Builder : TFWeaponBase
 	/// Clientside blueprint
 	/// </summary>
 	public AnimatedEntity Blueprint { get; set; }
+	bool hasBuilt = false;
 	//
 	// Rotation
 	//
 	[Net] public float TargetBuildRotation { get; set; }
 	[Net] public float CurrentBuildRotation { get; set; }
-	public override void PrimaryAttack()
+	public override bool NeedsAmmo() => false;
+	public override void Attack()
 	{
 		Build();
 	}
 
 	public virtual void Build()
 	{
-		if(BuildingData == null)
+		if ( BuildingData == null )
 		{
 			Log.Error( $"Tried to build with no building data!" );
 			return;
 		}
 
 		var placementResult = CalculateBuildingPlacement();
-		if(placementResult.Status != BuildingDeployResponse.CanBuild)
+		if ( placementResult.Status != BuildingDeployResponse.CanBuild )
 		{
 			Log.Info( $"Tried to build even though we cant, ignoring" );
 			return;
 		}
 
 		Transform buildingTransform = new( placementResult.Origin, placementResult.Rotation );
-		if (IsCarryingBuilding)
+		if ( IsCarryingBuilding )
 		{
 			CarriedBuilding.StopCarrying( buildingTransform );
 		}
@@ -57,14 +59,17 @@ public partial class Builder : TFWeaponBase
 		}
 		PlayDeployVO();
 
+		hasBuilt = true;
 		StopPlacement();
 	}
 
+	const float ROTATE_COOLDOWN = 0.5f;
 	public override void SecondaryAttack()
 	{
 		// Rotate build angles
 		TargetBuildRotation += 90;
 		TargetBuildRotation %= 360;
+		NextSecondaryAttackTime = Time.Now + ROTATE_COOLDOWN;
 	}
 
 	public void StartPlacement()
@@ -86,6 +91,15 @@ public partial class Builder : TFWeaponBase
 			Blueprint.SetModel( BuildingData.BlueprintModel);
 			Blueprint.UseAnimGraph = false;
 		}
+
+		hasBuilt = false;
+		ResetForcedWeapon();
+	}
+
+	private void ResetForcedWeapon()
+	{
+		if( TFOwner.ForcedActiveWeapon == this)
+			TFOwner.ForcedActiveWeapon = null;
 	}
 
 	/// <summary>
@@ -93,10 +107,15 @@ public partial class Builder : TFWeaponBase
 	/// </summary>
 	public void StopPlacement()
 	{
-		if ( Blueprint != null )
+		if ( Game.IsClient )
 		{
-			Blueprint.Delete();
+			Blueprint?.Delete();
 			Blueprint = null;
+		}
+		else
+		{
+			ResetForcedWeapon();
+			TFOwner.SwitchToLastWeapon(this);
 		}
 	}
 
@@ -105,20 +124,20 @@ public partial class Builder : TFWeaponBase
 		// TODO: Implement
 	}
 
-	/// <summary>
-	/// Update the transforms of the blueprint in the world.
-	/// </summary>
-	[GameEvent.Tick.Client]
-	public void UpdateBlueprintRotation()
+	public override void Simulate( IClient cl )
 	{
+		base.Simulate( cl );
+
 		var rotation = Rotation.From( 0, CurrentBuildRotation, 0 );
 		var target = Rotation.From( 0, TargetBuildRotation, 0 );
 
 		var lerped = Rotation.Slerp( rotation, target, Time.Delta * RotationSpeed );
 		CurrentBuildRotation = lerped.Yaw();
-
-		if ( Blueprint != null )
+		
+		if(Game.IsClient)
 		{
+			if ( Blueprint == null ) return;
+
 			var result = CalculateBuildingPlacement();
 			Blueprint.Position = result.Origin;
 			Blueprint.Rotation = result.Rotation;
@@ -135,8 +154,7 @@ public partial class Builder : TFWeaponBase
 	{
 		var response = new BuildingPlacementResult();
 
-		var player = Owner as TFPlayer;
-		if ( player == null )
+		if ( TFOwner == null )
 		{
 			// Owner is not a player (?) cannot build.
 			response.Status = BuildingDeployResponse.CannotBuild;
@@ -147,7 +165,7 @@ public partial class Builder : TFWeaponBase
 		// Rotation
 		//
 
-		var yaw = player.EyeRotation.Yaw();
+		var yaw = TFOwner.EyeRotation.Yaw();
 		var rot = Rotation.From( 0, yaw, 0 );
 		var buildDirection = rot.Forward;
 		response.Rotation = Rotation.From( 0, yaw + CurrentBuildRotation, 0 );
@@ -227,14 +245,16 @@ public partial class Builder : TFWeaponBase
 	public override void OnDeploy( SDKPlayer owner )
 	{
 		if ( !IsValid ) return;
+		base.OnDeploy( owner );
 		StartPlacement();
 	}
 
 	public override void OnHolster( SDKPlayer owner )
 	{
 		if ( !IsValid ) return;
-
-		StopPlacement();
+		base.OnHolster( owner );
+		if ( !hasBuilt)
+			StopPlacement();
 	}
 
 	public override bool CanHolster( SDKPlayer ply )
