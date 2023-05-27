@@ -58,7 +58,7 @@ public partial class PayloadPath : Panel
 
 
 		var cartPanelPos = cartPos;
-		float cartHalfWidth = 9f;
+		float cartHalfWidth = 6f;
 		cartPanelPos.Value -= cartHalfWidth;
 		CartContainer.Style.Left = cartPanelPos;
 
@@ -97,7 +97,7 @@ public partial class PayloadPath : Panel
 			}
 			else
 			{
-				const float CP_HALF_WIDTH = 8f;
+				const float CP_HALF_WIDTH = 5f;
 				cpPos.Value -= CP_HALF_WIDTH;
 			}
 
