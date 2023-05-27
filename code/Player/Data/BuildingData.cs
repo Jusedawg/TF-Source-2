@@ -27,6 +27,7 @@ public class BuildingData : GameResource
 	public int BuildCost { get; set; } = 100;
 	public float BuildTime { get; set; } = 10f;
 	public int UpgradeCost { get; set; } = 200;
+	public float UpgradeTime { get; set; } = 1.2f;
 	
 	public List<BuildingLevelData> Levels { get; set; } = new();
 	[HideInEditor]
@@ -47,6 +48,9 @@ public class BuildingData : GameResource
 	[Category( "Blueprint" )]
 	[ResourceType( "png" )]
 	public string BlueprintIcon { get; set; }
+	[Category("Sound")]
+	[ResourceType("sound")]
+	public string DestroyedSound { get; set; }
 	/// <summary>
 	/// Creates an instance of this weapon.
 	/// </summary>

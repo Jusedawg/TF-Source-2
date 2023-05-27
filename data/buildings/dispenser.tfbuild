@@ -2,9 +2,9 @@
   "Title": "Dispenser",
   "EngineClass": "tf_building_dispenser",
   "BuildCost": 100,
+  "BuildTime": 10,
   "UpgradeCost": 200,
-  "BlueprintModel": "models/buildables/dispenser/shared/dispenser_blueprint.vmdl",
-  "BlueprintIcon": null,
+  "UpgradeTime": 1.2,
   "Levels": [
     {
       "MaxHealth": 150,
@@ -21,5 +21,15 @@
       "Model": "models/buildables/dispenser/lvl3/dispenser_lvl3.vmdl",
       "DeployModel": "models/buildables/dispenser/lvl3/dispenser_lvl3_upgrade.vmdl"
     }
-  ]
+  ],
+  "LevelCount": 3,
+  "Mins": "-20,-20,0",
+  "Maxs": "20,20,55",
+  "BBox": {
+    "Center": "0,0,27.5",
+    "Size": "40,40,55"
+  },
+  "BlueprintModel": "models/buildables/dispenser/shared/dispenser_blueprint.vmdl",
+  "BlueprintIcon": null,
+  "DestroyedSound": "sounds/buildings/building_dispenser.explode.sound"
 }

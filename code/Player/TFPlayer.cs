@@ -117,7 +117,7 @@ public partial class TFPlayer : SDKPlayer
 		// Abilities + Misc stuff
 		//
 
-		if ( HasMetal )
+		if ( UsesMetal )
 			Metal = MaxMetal;
 
 		RemoveCondition( TFCondition.Burning );

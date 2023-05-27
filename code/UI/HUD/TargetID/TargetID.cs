@@ -66,6 +66,9 @@ public partial class TargetID : Panel
 
 	public virtual bool UpdateAvatar( Image image )
 	{
+		if ( string.IsNullOrEmpty( Target.Avatar ))
+			return false;
+
 		var entity = Target.Entity;
 		if ( !entity.IsValid() )
 			return false;
@@ -101,14 +104,10 @@ public partial class TargetID : Panel
 
 	public virtual bool UpdateSubtext( Label label )
 	{
-		if ( Target is TFPlayer player )
+		if ( Target is ITargetIDSubtext subtext && subtext.HasSubtext )
 		{
-			var medigun = player.GetWeaponOfType<Medigun>();
-			if ( medigun.IsValid() )
-			{
-				label.Text = $"ÜberCharge: {MathF.Floor( medigun.ChargeLevel )}%";
-				return true;
-			}
+			label.Text = subtext.Subtext;
+			return true;
 		}
 
 		return false;
