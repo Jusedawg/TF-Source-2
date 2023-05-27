@@ -162,6 +162,7 @@ public partial class Flag : Item, ITeam, IResettable
 
 		StopSpinning();
 		CreateTrails();
+		OnPickup.Fire( player );
 	}
 
 	public void Capture( TFPlayer player, FlagCaptureZone zone )
@@ -170,6 +171,7 @@ public partial class Flag : Item, ITeam, IResettable
 
 		base.Drop();
 		Reset();
+		OnCapture.Fire( player );
 
 		EventDispatcher.InvokeEvent( new FlagCapturedEvent() { Flag = this, Capper = player, Zone = zone } );
 	}
@@ -265,11 +267,13 @@ public partial class Flag : Item, ITeam, IResettable
 	public override void OnDropped()
 	{
 		DeleteTrails();
+		OnDrop.Fire( this );
 	}
 
 	public override void OnReturned()
 	{
 		DeleteTrails();
+		OnReturn.Fire( this );
 	}
 
 	Particles PapersTrail { get; set; }
@@ -294,4 +298,9 @@ public partial class Flag : Item, ITeam, IResettable
 		PapersTrail?.Destroy( true );
 		ColorTrail?.Destroy( true );
 	}
+
+	public Output OnCapture { get; set; }
+	public Output OnPickup { get; set; }
+	public Output OnDrop { get; set; }
+	public Output OnReturn { get; set; }
 }
