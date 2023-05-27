@@ -146,6 +146,19 @@ public partial class RoundTimer : Entity
 	}
 
 	[Input]
+	public void Resume()
+	{
+		if ( !Game.IsServer )
+			return;
+
+		if ( Paused )
+			OnResume.Fire( this );
+
+		Paused = false;
+		TimeSinceStartedCounting = 0;
+	}
+
+	[Input]
 	public float SetTime( float time )
 	{
 		if ( MaxTimerLength != 0 && time > MaxTimerLength ) time = MaxTimerLength;
@@ -318,6 +331,7 @@ public partial class RoundTimer : Entity
 
 	protected Output OnRestarted { get; set; }
 	protected Output OnPaused { get; set; }
+	protected Output OnResume { get; set; }
 	protected Output OnStarted { get; set; }
 	protected Output OnFinished { get; set; }
 	protected Output OnSetupStarted { get; set; }
