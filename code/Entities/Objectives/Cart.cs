@@ -275,7 +275,7 @@ namespace TFS2
 
 		public int GetCapRate()
 		{
-			return pushers.Sum( TFGameRules.Current.GetCaptureValueForPlayer );
+			return (int)MathF.Min(pushers.Sum( TFGameRules.Current.GetCaptureValueForPlayer ), 3);
 		}
 
 		public bool CanMove()
