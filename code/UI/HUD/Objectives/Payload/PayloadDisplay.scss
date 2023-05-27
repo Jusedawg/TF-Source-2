@@ -1,11 +1,12 @@
 ﻿@import "/UI/styles/colors.scss";
 
 PayloadDisplay {
-    width: 100%;
+    width: 50%;
     z-index: 2;
     display: none;
     flex-direction: column-reverse;
     bottom: 0;
+    left: 25%;
 
     &.visible {
         display: flex;
@@ -13,13 +14,11 @@ PayloadDisplay {
 
     PayloadPath {
         height: 40%;
-        width: 100%;
         flex-direction: row;
-        justify-content: center;
+        //justify-content: center;
 
         .progress_bar {
             height: 50%;
-            width: 40%;
             align-self: flex-end;
 
             .point {
@@ -97,11 +96,10 @@ PayloadDisplay {
             height: 180%;
             bottom: 0;
             aspect-ratio: 0.35;
-            //flex-direction: column;
+            flex-direction: column;
 
             .cart {
-                align-self: center;
-                position: absolute;
+                align-self: flex-end;
                 bottom: 10%;
                 aspect-ratio: 1;
                 height: 35%;
@@ -130,20 +128,19 @@ PayloadDisplay {
             }
 
             .status_container {
-                position: absolute;
-                top: 0;
-                left: -20%;
+                align-self: flex-start;
+                //left: -20%;
                 height: 60%;
                 width: 140%;
                 background-image: url(/ui/hud/objectives/controlpoints/progress_bar_pointer.png);
                 background-size: cover;
                 background-position-x: center;
                 background-repeat: no-repeat;
-                display: none;
+                opacity: 0;
                 z-index: 4;
 
                 &.visible {
-                    display: flex;
+                    opacity:1;
                 }
             }
         }
