@@ -76,10 +76,7 @@
 						name = "c_minigun_0_mesh"
 						parent_bone = "c_minigun"
 						surface_prop = "default"
-						collision_group = ""
-						collision_interact_as = ""
-						collision_interact_with = ""
-						collision_interact_exclude = ""
+						collision_tags = "solid"
 						recenter_on_parent_bone = true
 						offset_origin = [ 0.0, 0.0, 0.0 ]
 						offset_angles = [ 0.0, 0.0, 0.0 ]
@@ -213,7 +210,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -15.976231, -32.753723, -6.774405 ]
 								hitbox_maxs = [ 9.822632, 6.968715, 35.6506 ]
 							},
@@ -222,7 +219,7 @@
 								parent_bone = "barrel"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.889256, -4.861622, -6.405691 ]
 								hitbox_maxs = [ 4.889254, 4.872044, 30.71459 ]
 							},
@@ -231,7 +228,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -15.976231, -32.753723, -6.774405 ]
 								hitbox_maxs = [ 9.822632, 6.968715, 35.6506 ]
 							},
@@ -240,7 +237,7 @@
 								parent_bone = "barrel"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.889256, -4.861622, -6.405691 ]
 								hitbox_maxs = [ 4.889254, 4.872044, 30.71459 ]
 							},
@@ -249,7 +246,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -15.976231, -32.753723, -6.774405 ]
 								hitbox_maxs = [ 9.822632, 6.968715, 35.6506 ]
 							},
@@ -258,7 +255,7 @@
 								parent_bone = "barrel"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.889256, -4.861622, -6.405691 ]
 								hitbox_maxs = [ 4.889254, 4.872044, 30.71459 ]
 							},
@@ -267,7 +264,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -15.976231, -32.753723, -6.774405 ]
 								hitbox_maxs = [ 9.822632, 6.968715, 35.6506 ]
 							},
@@ -276,7 +273,7 @@
 								parent_bone = "barrel"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.889256, -4.861622, -6.405691 ]
 								hitbox_maxs = [ 4.889254, 4.872044, 30.71459 ]
 							},
@@ -285,7 +282,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -15.976231, -32.753723, -6.774405 ]
 								hitbox_maxs = [ 9.822632, 6.968715, 35.6506 ]
 							},
@@ -294,7 +291,7 @@
 								parent_bone = "barrel"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.889256, -4.861622, -6.405691 ]
 								hitbox_maxs = [ 4.889254, 4.872044, 30.71459 ]
 							},
@@ -481,13 +478,63 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "barrel_spin"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "barrel_spin"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/c_models/c_minigun/c_minigun_fbx/anim/barrel_spin.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
+			},
+			{
+				_class = "WeightListList"
+				children = 
+				[
+					{
+						_class = "WeightList"
+						name = "barrel"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "barrel"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+				]
 			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = ""
+		anim_graph_name = "models/weapons/c_models/c_minigun/c_minigun.vanmgrph"
+		base_model_name = ""
 		importer_notes = """
 Imported from compiled VMDL_C
 """

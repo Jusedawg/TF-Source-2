@@ -232,7 +232,8 @@ public partial class Minigun : TFHoldWeaponBase
 	{
 		CalculateBarrelMovement();
 		
-		SendViewModelAnimParameter("f_barrel_cycle", BarrelAngle/360);
+		SendViewModelAnimParameter("f_barrel_cycle", BarrelAngle / 360);
+		SetAnimParameter("f_barrel_cycle", BarrelAngle / 360 );
 		
 		/*
 		//Procedural Animation, could not get transform/SetBone to perform right so we are using animgraph method for now
