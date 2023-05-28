@@ -43,6 +43,13 @@ public partial class TFPlayer
 		return used;
 	}
 
+	public void GiveMetal(int amount)
+	{
+		Metal += amount;
+		if ( Metal > MaxMetal )
+			Metal = MaxMetal;
+	}
+
 	[ConCmd.Server("tf_build")]
 	public static void StartBuilding(string buildingName)
 	{
