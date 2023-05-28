@@ -126,6 +126,11 @@ public partial class Minigun : TFHoldWeaponBase
 		}
 		else
 		{
+			//Don't want to interrupt spindown sound
+			if ( LastSpinSound == SpinSoundType.SpinDown )
+			{
+				return;
+			}
 			SpinSound?.Stop();
 			SpinSound = null;
 		}
@@ -147,6 +152,12 @@ public partial class Minigun : TFHoldWeaponBase
 
 	public SpinSoundType GetSpinSoundType()
 	{
+		//Prevents current sound from playing for a split second when switching weapons
+		if ( ViewModel?.Weapon != this)
+		{
+			return SpinSoundType.None;
+		}
+
 		// If we are in the progress of changing our spin state.
 		if ( NextSpinChangeTime >= Time.Now )
 		{
@@ -173,6 +184,88 @@ public partial class Minigun : TFHoldWeaponBase
 		}
 
 		return SpinSoundType.None;
+	}
+
+	//
+	// Animations
+	//
+
+	float BarrelAngle { get; set; }
+	float BarrelVelocity { get; set; }
+	float BarrelTargetVelocity { get; set; }
+	float BarrelMaxVelocity { get; set; } = 20f;
+
+	public override void OnEquip( SDKPlayer owner )
+	{
+		base.OnEquip( owner );
+
+		BarrelVelocity = 0f;
+		BarrelTargetVelocity = 0f;
+		BarrelAngle = 0f;
+	}
+
+	public override void FrameSimulate( IClient cl )
+	{
+		base.FrameSimulate( cl );
+
+		UpdateViewmodelAnimations();
+	}
+
+	public void UpdateViewmodelAnimations()
+	{
+		if ( IsHolding )
+		{
+			if ( IsFiring && HasEnoughAmmoToAttack() )
+			{
+					SendViewModelAnimParameter( "b_fire_hold", true );
+			}
+
+			else SendViewModelAnimParameter( "b_fire_hold", false );
+		}
+
+		BarrelTargetVelocity = IsHolding ? BarrelMaxVelocity : 0f;
+
+		UpdateBarrelRotation();
+	}
+
+	public void UpdateBarrelRotation()
+	{
+		CalculateBarrelMovement();
+		
+		SendViewModelAnimParameter("f_barrel_cycle", BarrelAngle/360);
+		
+		/*
+		//Procedural Animation, could not get transform/SetBone to perform right so we are using animgraph method for now
+		if ( ViewModel?.Weapon == this && BarrelBoneIndex != -1 )
+		{
+			Transform newTransform = ViewModel.GetBoneTransform( BarrelBoneIndex, false);
+			DebugOverlay.ScreenText($"{newTransform.Rotation.Angles()}", 1);
+			//newTransform.Rotation = Rotation.From( 0, 0, BarrelAngle);
+			//QAngle
+
+			ViewModel.SetBone( BarrelBoneIndex, newTransform );
+		}
+		*/
+	}
+
+	void CalculateBarrelMovement()
+	{
+		if ( BarrelVelocity != BarrelTargetVelocity )
+		{
+			float flBarrelAcceleration = IsHolding ? 0.5f : 0.1f;
+
+			// update barrel velocity to bring it up to speed or to rest
+			BarrelVelocity = MathX.Approach( BarrelVelocity, BarrelTargetVelocity, flBarrelAcceleration );
+		}
+
+		// update the barrel rotation based on current velocity
+		BarrelAngle += BarrelVelocity;
+
+		//Reset barrel angle beyond 360, for use with f_barrel_cycle
+		if ( BarrelAngle >= 360 )
+		{
+			BarrelAngle -= 360;
+		}
 	}
 
 	public override float CrosshairScale() => 1.5f;

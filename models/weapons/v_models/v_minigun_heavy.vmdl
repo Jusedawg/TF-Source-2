@@ -61,7 +61,7 @@
 								parent_bone = "v_minigun_body"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ 16.5, -22.5, -7.5 ]
 								hitbox_maxs = [ 37.5, 2.5, 7.5 ]
 							},
@@ -70,7 +70,7 @@
 								parent_bone = "v_minigun_barrel"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -19.52, -4.91, -5.06 ]
 								hitbox_maxs = [ 37.41, 5.09, 4.94 ]
 							},
@@ -79,7 +79,7 @@
 								parent_bone = "bip_hand_l"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -4.8, -8.33, -4.66 ]
 								hitbox_maxs = [ 3.35, 2.97, 6.63 ]
 							},
@@ -255,22 +255,61 @@
 						take = 0
 						reverse = false
 					},
+					{
+						_class = "AnimFile"
+						name = "barrel_spin"
+						children = 
+						[
+							{
+								_class = "AnimSubtract"
+								anim_name = "barrel_spin"
+								frame = 0
+							},
+						]
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/weapons/v_models/v_minigun_heavy/anims/barrel_spin.smd"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
 				]
 				default_root_bone_name = ""
 			},
 			{
 				_class = "BoneMarkupList"
+				bone_cull_type = "None"
+			},
+			{
+				_class = "WeightListList"
 				children = 
 				[
 					{
-						_class = "BoneMarkup"
-						target_bone = ""
-						ignore_Translation = false
-						ignore_rotation = false
-						do_not_discard = false
+						_class = "WeightList"
+						name = "barrel"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "v_minigun_barrel"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
 					},
 				]
-				bone_cull_type = "None"
 			},
 		]
 		model_archetype = ""
