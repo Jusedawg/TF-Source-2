@@ -34,7 +34,7 @@ CreateInputTexture2D( DetailTexture, Linear, 8, "", "_detail", "Detail,30/10", D
 float g_flDetailBlendFactor         < UiGroup( "Detail,30/11" ); Range(0.0f, 1.0f); Default(1.0f); >;
 
 
-CreateInputTexture2D( SelfIllumMaskTexture, Linear, 8, "", "_selfillummask", "Self Illum,40/10", Default3( 1.0, 1.0, 1.0 ) );
+CreateInputTexture2D( SelfIllumMaskTexture, Linear, 8, "", "_selfillum", "Self Illum,40/10", Default3( 1.0, 1.0, 1.0 ) );
 float3 g_vSelfIllumFresnelMinMaxExp < UiGroup( "Self Illum,40/11" ); Range3(0.0f, 0.0f, 0.0f, 10.0f, 10.0f, 10.0f); Default3(0.0f, 1.0f, 1.0f); >;
 #define g_vSelfIllumFresnelMin g_vSelfIllumFresnelMinMaxExp.r
 #define g_vSelfIllumFresnelMax g_vSelfIllumFresnelMinMaxExp.g
@@ -63,7 +63,7 @@ float g_fInvertPhongMask            < UiGroup( "Specular,60/Spec Mask,10/12" ); 
 
 CreateInputTexture2D( SpecularExponentTexture,  Linear, 8, "", "_specexp",      "Specular,60/Spec Exponent,20/10", Default( 1.0 ) );
 bool g_bConstantSpecularExponent    < UiGroup( "Specular,60/Spec Exponent,20/11" ); Default(1); >;
-float g_flSpecularExponent          < UiGroup( "Specular,60/Spec Exponent,20/12" ); Range(0.0f, 255.0f); Default(0.0f); >;
+float g_flSpecularExponent          < UiGroup( "Specular,60/Spec Exponent,20/12" ); Range(0.0f, 255.0f); Default(20.0f); >;
 
 CreateInputTexture2D( SpecularTintTexture,      Linear, 8, "", "_spectint",      "Specular,60/Spec Tint,30/10", Default( 1.0 ) );
 bool g_bConstantSpecularTint        < UiGroup( "Specular,60/Spec Tint,30/11" ); Default(1); >;
