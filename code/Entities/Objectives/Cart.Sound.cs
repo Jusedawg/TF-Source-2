@@ -12,6 +12,12 @@ namespace TFS2
 		protected Sound currentMoveSound;
 		protected Sound currentRollingSound;
 
+        protected virtual void StopAllSound()
+        {
+            currentMoveSound.Stop();
+            currentRollingSound.Stop();
+        }
+
 		protected virtual void StartMoveSounds()
 		{
 			if (currentMoveSound.IsPlaying )

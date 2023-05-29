@@ -11,7 +11,10 @@ public partial class Cart
 	protected virtual void DoMovement()
 	{
 		if ( !CanMove() )
-			return;
+        {
+            StopAllSound();
+            return;
+        }
 
 		bool isRolling = false;
 		if ( CanPush() )
@@ -37,7 +40,7 @@ public partial class Cart
 			CurrentSpeed += Acceleration * Time.Delta;
 			CurrentSpeed = MathF.Min( maxSpeed, CurrentSpeed );
 
-			TimeSincePush = 0;
+			TimeSincePush = 0f;
 		}
 		else if ( CanRollforward() )
 		{
@@ -65,6 +68,8 @@ public partial class Cart
 			CurrentSpeed -= Acceleration * Time.Delta;
 			CurrentSpeed = MathF.Max( minSpeed, CurrentSpeed );
 		}
+
+        SetRollingSoundState(isRolling);
 
 		if ( isRolling && !wasRolling )
 			OnStartRolling.Fire( this );
@@ -125,8 +130,6 @@ public partial class Cart
 		Velocity = dir;
 		Rotation = Rotation.LookAt( dir );
 		Position = newpos;
-
-        SetRollingSoundState(isRolling);
 
         if ( !wasMoving )
 		{
