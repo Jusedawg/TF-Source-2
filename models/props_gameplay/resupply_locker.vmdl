@@ -75,8 +75,8 @@
 						_class = "PhysicsHullFile"
 						name = "resupply_locker_physbox_0_mesh"
 						parent_bone = "resupply_locker_physbox"
-						surface_prop = "default"
-						collision_prop = "default"
+						surface_prop = "metal"
+						collision_tags = "solid"
 						recenter_on_parent_bone = true
 						offset_origin = [ 0.0, 0.0, 0.0 ]
 						offset_angles = [ 0.0, 0.0, 0.0 ]
@@ -114,7 +114,7 @@
 								parent_bone = "body"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -31.865702, -0.160063, -15.96267 ]
 								hitbox_maxs = [ 31.927097, 113.031876, 15.783018 ]
 							},
@@ -123,7 +123,7 @@
 								parent_bone = "doorr"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -28.148659, -46.856419, -1.471324 ]
 								hitbox_maxs = [ 0.061935, 47.10088, 3.626604 ]
 							},
@@ -132,7 +132,7 @@
 								parent_bone = "doorl"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.059341, -46.856419, -1.471285 ]
 								hitbox_maxs = [ 28.125448, 47.10088, 3.626604 ]
 							},
@@ -141,7 +141,7 @@
 								parent_bone = "body"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -31.865702, -0.160063, -15.96267 ]
 								hitbox_maxs = [ 31.927097, 113.031876, 15.783018 ]
 							},
@@ -150,7 +150,7 @@
 								parent_bone = "doorr"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -28.148659, -46.856419, -1.471324 ]
 								hitbox_maxs = [ 0.061935, 47.10088, 3.626604 ]
 							},
@@ -159,7 +159,7 @@
 								parent_bone = "doorl"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.059341, -46.856419, -1.471285 ]
 								hitbox_maxs = [ 28.125448, 47.10088, 3.626604 ]
 							},
@@ -168,7 +168,7 @@
 								parent_bone = "body"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -31.865702, -0.160063, -15.96267 ]
 								hitbox_maxs = [ 31.927097, 113.031876, 15.783018 ]
 							},
@@ -177,7 +177,7 @@
 								parent_bone = "doorr"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -28.148659, -46.856419, -1.471324 ]
 								hitbox_maxs = [ 0.061935, 47.10088, 3.626604 ]
 							},
@@ -186,7 +186,7 @@
 								parent_bone = "doorl"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.059341, -46.856419, -1.471285 ]
 								hitbox_maxs = [ 28.125448, 47.10088, 3.626604 ]
 							},
@@ -195,7 +195,7 @@
 								parent_bone = "body"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -31.865702, -0.160063, -15.96267 ]
 								hitbox_maxs = [ 31.927097, 113.031876, 15.783018 ]
 							},
@@ -204,7 +204,7 @@
 								parent_bone = "doorr"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -28.148659, -46.856419, -1.471324 ]
 								hitbox_maxs = [ 0.061935, 47.10088, 3.626604 ]
 							},
@@ -213,7 +213,7 @@
 								parent_bone = "doorl"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.059341, -46.856419, -1.471285 ]
 								hitbox_maxs = [ 28.125448, 47.10088, 3.626604 ]
 							},
@@ -222,7 +222,7 @@
 								parent_bone = "body"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -31.865702, -0.160063, -15.96267 ]
 								hitbox_maxs = [ 31.927097, 113.031876, 15.783018 ]
 							},
@@ -231,7 +231,7 @@
 								parent_bone = "doorr"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -28.148659, -46.856419, -1.471324 ]
 								hitbox_maxs = [ 0.061935, 47.10088, 3.626604 ]
 							},
@@ -240,7 +240,7 @@
 								parent_bone = "doorl"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -0.059341, -46.856419, -1.471285 ]
 								hitbox_maxs = [ 28.125448, 47.10088, 3.626604 ]
 							},
@@ -452,6 +452,7 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = "animgraphs/resupply_locker.vanmgrph"
+		base_model_name = ""
 		importer_notes = """
 Imported from compiled VMDL_C
 """
