@@ -52,9 +52,25 @@ partial class TFGameRules
 				door.FireInput("SetPosition", door, door.InitialPosition / 100.0f );
 			}
 		}
-	}
 
-	public override void CalculateObjectives()
+		//Swap player teams if this is round end, we have a winner + the gamemode allows it
+		try
+		{
+            if (IsRoundEnded && Winner != 0 && GetGamemode().ShouldSwapTeams((TFTeam)Winner, (TFWinReason)WinReason))
+            {
+#if DEBUG
+				Log.Info("Will swap player teams");
+#endif
+				SwapAllPlayersTeam();
+            }
+        }
+        catch(InvalidCastException e)
+		{
+			Log.Error($"Failed to swap teams due to cast error: {e.Message}");
+		}
+    }
+
+    public override void CalculateObjectives()
 	{
 		// This function helps define what game type are we currently playing.
 

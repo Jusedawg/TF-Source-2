@@ -11,5 +11,5 @@ namespace TFS2
 	{
 		public override string Title => "Payload";
 		public override bool IsActive() => Entity.All.OfType<Cart>().Any();
-	}
+    }
 }

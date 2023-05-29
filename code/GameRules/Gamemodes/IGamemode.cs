@@ -12,5 +12,6 @@
 		public GamemodeProperties Properties { get; }
 		public bool IsActive();
 		public bool HasWon( out TFTeam team, out TFWinReason reason );
+		public bool ShouldSwapTeams(TFTeam winner, TFWinReason winReason);
 	}
 }

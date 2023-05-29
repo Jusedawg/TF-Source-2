@@ -17,7 +17,8 @@ namespace TFS2
 		/// If false, shows the arena selection screen.
 		/// </summary>
 		public bool DisableTeamSelection { get; init; }
-		public Func<TFPlayer, TFTeam> AutoTeamOverride;
+        public bool SwapTeamsOnRoundRestart { get; init; }
+        public Func<TFPlayer, TFTeam> AutoTeamOverride;
 		public GamemodeProperties()
 		{
 			DisablePlayerRespawn = false;
@@ -27,6 +28,7 @@ namespace TFS2
 			IsAttackDefense = false;
 			RequireReadyUp = false;
 			DisableTeamSelection = false;
-		}
+			SwapTeamsOnRoundRestart = true;
+        }
 	}
 }

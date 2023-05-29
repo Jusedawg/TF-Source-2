@@ -9,8 +9,13 @@ namespace TFS2
 
 		public virtual GamemodeProperties Properties => default;
 
-		public abstract bool HasWon( out TFTeam team, out TFWinReason reason );
+		public abstract bool HasWon(out TFTeam team, out TFWinReason reason);
 
 		public abstract bool IsActive();
+
+		public virtual bool ShouldSwapTeams(TFTeam winner, TFWinReason winReason)
+		{
+			return Properties.SwapTeamsOnRoundRestart;
+		}
 	}
 }
