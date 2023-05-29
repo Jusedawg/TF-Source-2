@@ -36,8 +36,10 @@ partial class TFPlayer : IResponseSpeaker<TFResponseConcept, TFResponseContext>
 			return;
 
 		ResponseController.Speak( concept );
-		NextResponseTime = Time.Now + .5f;
+		NextResponseTime = Time.Now + tf_max_voice_speak_delay;
 	}
+
+	[ConVar.Replicated] public static float tf_max_voice_speak_delay { get; set; } = 1.5f;
 
 	[ConCmd.Server( "voicemenu" )]
 	public static void Command_VoiceMenu( int menu, int concept )
