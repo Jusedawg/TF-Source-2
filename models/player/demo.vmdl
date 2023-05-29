@@ -249,7 +249,7 @@
 						[
 							{
 								from = "materials/models/player/demo/eyeball_r.vmat"
-								to = "materials/models/player/shared/eyeball_temp_iris_brown.vmat"
+								to = "materials/models/player/demo/eyeball_r.vmat"
 							},
 							{
 								from = "materials/models/player/demo/smiley.vmat"
@@ -301,6 +301,10 @@
 								from = "materials/models/player/shared/eyeball_temp_iris_brown.vmat"
 								to = "materials/models/player/demo/eyeball_invun.vmat"
 							},
+							{
+								from = "materials/models/player/demo/eyeball_r.vmat"
+								to = "materials/models/player/demo/eyeball_invun.vmat"
+							},
 						]
 					},
 					{
@@ -323,6 +327,10 @@
 							},
 							{
 								from = "materials/models/player/shared/eyeball_temp_iris_brown.vmat"
+								to = "materials/models/player/demo/eyeball_invun.vmat"
+							},
+							{
+								from = "materials/models/player/demo/eyeball_r.vmat"
 								to = "materials/models/player/demo/eyeball_invun.vmat"
 							},
 						]
@@ -1592,6 +1600,17 @@
 					{
 						_class = "RenderMeshFile"
 						name = "demo_lod_01_low"
+						children = 
+						[
+							{
+								_class = "RemoveBoneAndChildren"
+								bone_names = 
+								[
+									"hlp_forearm_l",
+									"hlp_forearm_r",
+								]
+							},
+						]
 						filename = "models/player/demo/parts/dmx/demo_lod_01_low.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -1609,6 +1628,17 @@
 					{
 						_class = "RenderMeshFile"
 						name = "demo_lod_02_low"
+						children = 
+						[
+							{
+								_class = "RemoveBoneAndChildren"
+								bone_names = 
+								[
+									"hlp_forearm_l",
+									"hlp_forearm_r",
+								]
+							},
+						]
 						filename = "models/player/demo/parts/dmx/demo_lod_02_low.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
@@ -1626,6 +1656,17 @@
 					{
 						_class = "RenderMeshFile"
 						name = "demo_lod_03_low"
+						children = 
+						[
+							{
+								_class = "RemoveBoneAndChildren"
+								bone_names = 
+								[
+									"hlp_forearm_l",
+									"hlp_forearm_r",
+								]
+							},
+						]
 						filename = "models/player/demo/parts/dmx/demo_lod_03_low.dmx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]

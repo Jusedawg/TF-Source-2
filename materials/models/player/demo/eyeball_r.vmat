@@ -1,5 +1,43 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/complex.shader_c"
-	"TextureColor"		"materials/models/player/shared/dxlevel80/eyeball_r.tga"
+	shader "shaders/sourcebox/sourcebox_eyerefract.shader_c"
+
+	//---- Animation ----
+	F_MORPH_SUPPORTED 1
+
+	//---- Rendering ----
+	F_HALFLAMBERT 1
+	F_LIGHTWARPTEXTURE 1
+
+	//---- Attributes ----
+	g_vEyeOrigin "[0.000 0.000 0.000]"
+	g_vIrisProjectionU "[1.000 0.000 0.000 0.000]"
+	g_vIrisProjectionV "[0.000 1.000 0.000 0.000]"
+
+	//---- Envmap ----
+	EnvMap "materials/models/player/shared/eye_reflection_cube.psd"
+
+	//---- Eyes ----
+	Cornea "materials/models/player/shared/eye-cornea.tga"
+	g_flCorneaBumpStrength "1.000"
+	g_flDilationFactor "0.500"
+	g_flGlossiness "1.000"
+	g_flParallaxStrength "0.250"
+	g_vAmbientOcclColor "[1.000000 1.000000 1.000000 0.000000]"
+	Iris "materials/models/player/shared/eye-iris-brown.tga"
+
+	//---- Material ----
+	AmbientOcclusion "materials/models/player/shared/eye-extra.tga"
+	g_flAmbientOcclusionDirectDiffuse "0.000"
+	g_flAmbientOcclusionDirectPostLightwarp "1.000"
+	LightWarpTexture "materials/models/player/shared/eye_lightwarp.tga"
+
+	DynamicParams
+	{
+		g_vEyeOrigin "$righteye_origin"
+		g_vIrisProjectionU "$righteye_iris_u"
+		g_vIrisProjectionV "$righteye_iris_v"
+	}
 }
