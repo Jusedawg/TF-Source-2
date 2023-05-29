@@ -33,7 +33,7 @@ public abstract partial class GamemodeEntity : Entity, IGamemode
 	public virtual void RoundEnd( RoundEndEvent args ) { }
 	public virtual void RoundActivate( RoundActiveEvent args ) { }
 	public virtual void RoundRestart( RoundRestartEvent args ) { Reset(); }
-    public virtual bool ShouldSwapTeams(int winner, int winReason)
+    public virtual bool ShouldSwapTeams(TFTeam winner, TFWinReason winReason)
     {
 		return Properties.SwapTeamsOnRoundRestart;
     }

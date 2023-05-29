@@ -13,7 +13,7 @@ namespace TFS2
 
 		public abstract bool IsActive();
 
-		public virtual bool ShouldSwapTeams(int winner, int winReason)
+		public virtual bool ShouldSwapTeams(TFTeam winner, TFWinReason winReason)
 		{
 			return Properties.SwapTeamsOnRoundRestart;
 		}
