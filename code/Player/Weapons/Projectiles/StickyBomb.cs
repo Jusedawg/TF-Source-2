@@ -62,9 +62,10 @@ public partial class StickyBomb : TFProjectile
 			var vecDir = WorldSpaceBounds.Center - who.WorldSpaceBounds.Center;
 			vecDir = vecDir.Normal;
 			PhysicsBody.Velocity = vecDir * DeflectionForce;
+
+			NextRestickTime = Time.Now + tf_grenade_force_sleeptime;
 		}
 
-		NextRestickTime = Time.Now + tf_grenade_force_sleeptime;
 		NextDeflectResetTime = Time.Now + tf_pipebomb_deflect_reset_time;
 
 		base.Deflected( weapon, who );
