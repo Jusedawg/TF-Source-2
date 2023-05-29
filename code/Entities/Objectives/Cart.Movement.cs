@@ -1,10 +1,6 @@
-﻿using Amper.FPS;
-using Sandbox;
+﻿using Sandbox;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TFS2;
 
@@ -15,14 +11,17 @@ public partial class Cart
 	protected virtual void DoMovement()
 	{
 		if ( !CanMove() )
-			return;
+        {
+            StopAllSound();
+            return;
+        }
 
 		bool isRolling = false;
 		if ( CanPush() )
 		{
 			wasRolling = false;
 
-			float maxSpeed = 0;
+			float maxSpeed = 0f;
 			switch ( GetCapRate() )
 			{
 				case 0:
@@ -41,7 +40,7 @@ public partial class Cart
 			CurrentSpeed += Acceleration * Time.Delta;
 			CurrentSpeed = MathF.Min( maxSpeed, CurrentSpeed );
 
-			TimeSincePush = 0;
+			TimeSincePush = 0f;
 		}
 		else if ( CanRollforward() )
 		{
@@ -70,18 +69,20 @@ public partial class Cart
 			CurrentSpeed = MathF.Max( minSpeed, CurrentSpeed );
 		}
 
+        SetRollingSoundState(isRolling);
+
 		if ( isRolling && !wasRolling )
 			OnStartRolling.Fire( this );
 		else if ( !isRolling && wasRolling )
 			OnStopRolling.Fire( this );
 
-		if ( CurrentSpeed < 0 && CurrentIndex == 0 && CurrentFraction <= 0 )
+		if ( CurrentSpeed < 0f && CurrentIndex == 0f && CurrentFraction <= 0f )
 		{
-			CurrentSpeed = 0;
+			CurrentSpeed = 0f;
 			return;
 		}
 
-		if ( CurrentSpeed == 0 )
+		if ( CurrentSpeed == 0f )
 		{
 			if ( wasMoving )
 			{
@@ -92,7 +93,7 @@ public partial class Cart
 			return;
 		}
 
-		bool isMovingReverse = CurrentSpeed < 0;
+		bool isMovingReverse = CurrentSpeed < 0f;
 
 		if ( isMovingReverse )
 		{
@@ -130,16 +131,15 @@ public partial class Cart
 		Rotation = Rotation.LookAt( dir );
 		Position = newpos;
 
-		if ( isRolling )
-			RollingSounds();
-
-		if ( !wasMoving )
+        if ( !wasMoving )
 		{
 			StartMoveSounds();
 			wasMoving = true;
 		}
 		else
+		{
 			MoveSounds();
+		}
 	}
 
 	protected virtual float DoMoveForwards( float distance )

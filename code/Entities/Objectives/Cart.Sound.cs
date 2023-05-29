@@ -9,41 +9,51 @@ namespace TFS2
 {
 	public partial class Cart
 	{
-		protected Sound RollingSound;
-		protected Sound GrindingSound;
+		protected Sound currentMoveSound;
+		protected Sound currentRollingSound;
+
+        protected virtual void StopAllSound()
+        {
+            currentMoveSound.Stop();
+            currentRollingSound.Stop();
+        }
 
 		protected virtual void StartMoveSounds()
 		{
-			if ( RollingSound.IsPlaying )
-				RollingSound.Stop();
+			if (currentMoveSound.IsPlaying )
+                currentMoveSound.Stop();
 
-			RollingSound = PlaySound( StartMoveSound );
+            currentMoveSound = PlaySound( StartMoveSound );
 		}
 
 		protected virtual void MoveSounds()
 		{
-			if ( !RollingSound.IsPlaying )
+			if ( !currentMoveSound.IsPlaying )
 			{
-				RollingSound = PlaySound( MoveSound );
+                currentMoveSound = PlaySound( MoveSound );
 			}
 		}
 
 		protected virtual void StopMoveSounds()
 		{
-			RollingSound.Stop();
-			RollingSound = PlaySound( StopMoveSound );
-			GrindingSound = GrindingSound.Stop();
+            currentMoveSound.Stop();
+            currentMoveSound = PlaySound( StopMoveSound );
+			currentRollingSound = currentRollingSound.Stop();
 		}
 
 		/// <summary>
 		/// Plays rollback/rollforward sounds (grinding)
 		/// </summary>
-		protected virtual void RollingSounds()
+		protected virtual void SetRollingSoundState(bool isRolling)
 		{
-			if ( GrindingSound.IsPlaying )
-				return;
-
-			GrindingSound = PlaySound( RollbackSound );
+			if (isRolling && !currentRollingSound.IsPlaying)
+			{
+				currentRollingSound = PlaySound(RollbackSound);
+			}
+			else if(!isRolling && currentRollingSound.IsPlaying)
+			{
+				currentRollingSound.Stop();
+			}
 		}
 	}
 }
