@@ -37,6 +37,22 @@ partial class TFGameRules
 	{
 		PlaySoundToTeam( (TFTeam)team, "announcer.your_team.lost", SoundBroadcastChannel.Announcer );
 	}
+
+	/// <summary>
+	/// Swap players on Red or Blue to opposite team
+	/// </summary>
+    protected void SwapAllPlayersTeam()
+    {
+        var players = All.OfType<TFPlayer>().ToList();
+        foreach (var player in players)
+        {
+			TFTeam current = player.Team;
+            if(current == TFTeam.Red || current == TFTeam.Blue)
+			{
+				player.TeamNumber = current == TFTeam.Red ? (int)TFTeam.Blue : (int)TFTeam.Red;
+            }
+        }
+    }
 }
 
 public enum TFTeam 

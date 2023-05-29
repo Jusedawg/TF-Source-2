@@ -37,7 +37,6 @@ partial class SDKGame
 	}
 
 	public virtual void OnRoundRestart() { }
-
 	public virtual void CalculateObjectives() { }
 	public virtual void ResetObjectives() { }
 
