@@ -168,10 +168,12 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 	}
 
 	[ClientRpc]
-	public void OnStopCharge()
+	public void OnStopCharge( bool shouldFire )
 	{
 		ChargeUpSound.Stop();
-		SendViewModelAnimParameter( "b_fire" );
+
+		SendViewModelAnimParameter( "b_charging", false );
+		if ( shouldFire ) SendViewModelAnimParameter( "b_fire" );
 	}
 
 	public override bool CanReload()
@@ -204,14 +206,14 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 		{
 			PrimaryAttack();
 			CalculateNextAttackTime();
-			charger.StopCharging();
+			charger.StopCharging( true );
 		}
 	}
 
 	public override void OnHolster( SDKPlayer owner )
 	{
-		base.OnHolster( owner );
 		((IChargeable)this).StopCharging();
+		base.OnHolster( owner );
 	}
 
 	public override void OnDrop( SDKPlayer owner )
