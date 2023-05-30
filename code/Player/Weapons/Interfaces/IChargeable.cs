@@ -18,10 +18,10 @@ public interface IChargeable
 
 	public virtual bool IsCharged => IsCharging && GetCurrentCharge() >= 1;
 
-	public virtual void StopCharging()
+	public virtual void StopCharging( bool shouldFire = false )
 	{
 		IsCharging = false;
-		OnStopCharge();
+		OnStopCharge( shouldFire );
 	}
 
 	public virtual void StartCharging()
@@ -33,5 +33,5 @@ public interface IChargeable
 	}
 
 	public void OnStartCharge();
-	public void OnStopCharge();
+	public void OnStopCharge( bool shouldFire );
 }
