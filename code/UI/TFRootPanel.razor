@@ -1,43 +1,13 @@
 ﻿@using Sandbox.UI;
 @using Amper.FPS;
+@using TFS2;
 
 @attribute [StyleSheet("/UI/TFRootPanel.scss")]
 
 @namespace TFS2.UI
 @inherits RootPanel
 <root>
-    <GameHUD>
-        <!-- Player Vitals -->
-        <Health></Health>
-        <Ammo></Ammo>
-        <Ubercharge></Ubercharge>
-        <TargetIDContainer></TargetIDContainer>
-        <DamageNumbers></DamageNumbers>
-        <DamageIndicators></DamageIndicators>
-
-        <!-- Weapons -->
-        <WeaponSelection></WeaponSelection>
-        <SniperScopeCharge></SniperScopeCharge>
-
-        <!-- Game -->
-        <WinPanel></WinPanel>
-        <Alert></Alert>
-        <TeamGoalDisplay></TeamGoalDisplay>
-        <ObjectivesStatus></ObjectivesStatus>
-        <Spectator></Spectator>
-        <RoundStatusDisplay></RoundStatusDisplay>
-        <ArenaWaitingForPlayers></ArenaWaitingForPlayers>
-        <FreezeCameraPanel></FreezeCameraPanel>
-        <ReadyUp></ReadyUp>
-
-        <!-- Communications -->
-        <VoiceMenu></VoiceMenu>
-        <VoiceWheel></VoiceWheel>
-        <Scoreboard></Scoreboard>
-        <VoiceList></VoiceList>
-        <TFKillFeed></TFKillFeed>
-        <TFChatBox></TFChatBox>
-    </GameHUD>
+    <GameHUD></GameHUD>
 
     <!-- Developer -->
     <MainMenuPanel></MainMenuPanel>
