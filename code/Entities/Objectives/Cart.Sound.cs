@@ -6,7 +6,9 @@ namespace TFS2
 	public partial class Cart
 	{
 		protected Sound currentMoveSound;
+		private bool currentMoveSoundPlaying;
 		protected Sound currentRollingSound;
+		private bool currentRollingSoundPlaying;
 
 		[ConCmd.Server("tf_cartsnd")]
 		public static void CartSoundInfoCmd()
@@ -22,32 +24,41 @@ namespace TFS2
         protected virtual void StopAllSound()
         {
             currentMoveSound.Stop();
+			currentMoveSoundPlaying = false;
+
             currentRollingSound.Stop();
+			currentRollingSoundPlaying = false;
         }
 
 		protected virtual void StartMoveSounds()
 		{
-			if ( currentMoveSound.IsPlaying )
+			if (currentMoveSoundPlaying)
 			{
                 currentMoveSound.Stop();
             }
 
             currentMoveSound = PlaySound( StartMoveSound );
-		}
+			currentMoveSoundPlaying = true;
+
+        }
 
 		protected virtual void MoveSounds()
 		{
-			if ( !currentMoveSound.IsPlaying )
+			if ( !currentMoveSoundPlaying)
 			{
                 currentMoveSound = PlaySound( MoveSound );
-			}
+				currentMoveSoundPlaying = true;
+            }
 		}
 
 		protected virtual void StopMoveSounds()
 		{
             currentMoveSound.Stop();
             currentMoveSound = PlaySound( StopMoveSound );
-			currentRollingSound.Stop();
+			currentMoveSoundPlaying = true;
+
+            currentRollingSound.Stop();
+			currentRollingSoundPlaying = false;
 		}
 
 		/// <summary>
@@ -55,13 +66,15 @@ namespace TFS2
 		/// </summary>
 		protected virtual void SetRollingSoundState(bool isRolling)
 		{
-			if (isRolling && !currentRollingSound.IsPlaying)
+			if (isRolling && !currentRollingSoundPlaying)
 			{
 				currentRollingSound = PlaySound(RollbackSound);
+                currentRollingSoundPlaying = true;
             }
-			else if(!isRolling && currentRollingSound.IsPlaying)
+			else if(!isRolling && currentRollingSoundPlaying)
 			{
 				currentRollingSound.Stop();
+				currentRollingSoundPlaying = false;
             }
 		}
 	}
