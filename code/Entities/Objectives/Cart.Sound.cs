@@ -1,9 +1,5 @@
 ﻿using Sandbox;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TFS2
 {
@@ -11,6 +7,17 @@ namespace TFS2
 	{
 		protected Sound currentMoveSound;
 		protected Sound currentRollingSound;
+
+		[ConCmd.Server("tf_cartsnd")]
+		public static void CartSoundInfoCmd()
+		{
+			Cart currentCart = Entity.All.FirstOrDefault(x => x is Cart) as Cart;
+			if(currentCart != null)
+			{
+                Log.Info($"currentMoveSound: Playing? {currentCart.currentMoveSound.IsPlaying}");
+                Log.Info($"currentRollingSound: Playing? {currentCart.currentRollingSound.IsPlaying}");
+            }
+        }
 
         protected virtual void StopAllSound()
         {
@@ -20,8 +27,10 @@ namespace TFS2
 
 		protected virtual void StartMoveSounds()
 		{
-			if (currentMoveSound.IsPlaying )
+			if ( currentMoveSound.IsPlaying )
+			{
                 currentMoveSound.Stop();
+            }
 
             currentMoveSound = PlaySound( StartMoveSound );
 		}
@@ -38,7 +47,7 @@ namespace TFS2
 		{
             currentMoveSound.Stop();
             currentMoveSound = PlaySound( StopMoveSound );
-			currentRollingSound = currentRollingSound.Stop();
+			currentRollingSound.Stop();
 		}
 
 		/// <summary>
@@ -49,11 +58,11 @@ namespace TFS2
 			if (isRolling && !currentRollingSound.IsPlaying)
 			{
 				currentRollingSound = PlaySound(RollbackSound);
-			}
+            }
 			else if(!isRolling && currentRollingSound.IsPlaying)
 			{
 				currentRollingSound.Stop();
-			}
+            }
 		}
 	}
 }

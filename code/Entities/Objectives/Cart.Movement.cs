@@ -69,28 +69,28 @@ public partial class Cart
 			CurrentSpeed = MathF.Max( minSpeed, CurrentSpeed );
 		}
 
-        SetRollingSoundState(isRolling);
-
 		if ( isRolling && !wasRolling )
 			OnStartRolling.Fire( this );
 		else if ( !isRolling && wasRolling )
 			OnStopRolling.Fire( this );
 
-		if ( CurrentSpeed < 0f && CurrentIndex == 0f && CurrentFraction <= 0f )
+		if ( CurrentSpeed < 0f && CurrentIndex == 0 && CurrentFraction <= 0f )
 		{
 			CurrentSpeed = 0f;
-			return;
+			isRolling = false;
 		}
 
-		if ( CurrentSpeed == 0f )
-		{
-			if ( wasMoving )
-			{
-				StopMoveSounds();
-				wasMoving = false;
-			}
+        SetRollingSoundState(isRolling);
 
-			return;
+        if ( CurrentSpeed == 0f )
+		{
+            if(wasMoving)
+			{
+                StopMoveSounds();
+                wasMoving = false;
+            }
+
+            return;
 		}
 
 		bool isMovingReverse = CurrentSpeed < 0f;
