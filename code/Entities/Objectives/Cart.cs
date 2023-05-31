@@ -365,7 +365,7 @@ namespace TFS2
 		public override void StartTouch( Entity other )
 		{
 			//Log.Info( "StartTouch" );
-			if (other is TFPlayer ply)
+			if (other is TFPlayer ply && ply.Team.IsPlayable())
 			{
 				if ( ply.Team == Team )
 				{
