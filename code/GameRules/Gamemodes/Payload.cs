@@ -1,9 +1,5 @@
 ﻿using Sandbox;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TFS2
 {
@@ -11,5 +7,9 @@ namespace TFS2
 	{
 		public override string Title => "Payload";
 		public override bool IsActive() => Entity.All.OfType<Cart>().Any();
+        public override bool ShouldSwapTeams(TFTeam winner, TFWinReason winReason)
+        {
+            return true;
+        }
     }
 }
