@@ -57,7 +57,7 @@ public partial class RoundTimer : Entity
 	/// The amount of time since the timer started counting.
 	/// </summary>
 	[Net] public TimeSince TimeSinceStartedCounting { get; set; }
-
+	[Net] public bool InOvertime { get; set; }
 	public bool HasSetup => SetupTime > 0;
 	public bool InSetup { get; set; }
 	public bool IsVisibleOnHUD => !HideFromHUD;
@@ -199,7 +199,14 @@ public partial class RoundTimer : Entity
 	protected virtual void Tick()
 	{
 		if ( Paused )
-			return;
+		{
+			if(Game.IsServer && InOvertime && !CheckOvertime())
+			{
+				StopOvertime();
+			}
+			else
+				return;
+		}
 
 		float timeLeft = GetRemainingTime();
 		int second = timeLeft.FloorToInt();
@@ -262,10 +269,39 @@ public partial class RoundTimer : Entity
 
 			if ( timeLeft == 0 )
 			{
-				Pause();
-				OnFinished.Fire( this );
+				if(CheckOvertime())
+				{
+					StartOvertime();
+				}
+				else
+				{
+					Pause();
+					OnFinished.Fire( this );
+				}
 			}
 		}
+	}
+
+	const string OVERTIME_SOUND = "announcer.overtime";
+	public void StartOvertime()
+	{
+		// Dont call Pause() to avoid firing OnPaused output
+		InOvertime = true;
+		AbsoluteTime = GetRemainingTime();
+		Paused = true;
+
+		TFGameRules.PlaySoundToAll( OVERTIME_SOUND, SoundBroadcastChannel.Announcer );
+	}
+	public void StopOvertime()
+	{
+		// Dont call Resume() to avoid firing OnResumed output
+		InOvertime = false;
+		Paused = false;
+		TimeSinceStartedCounting = 0;
+	}
+	public bool CheckOvertime()
+	{
+		return GetRemainingTime() < 1 && Entity.All.OfType<IRoundTimerBlocker>().Any( blocker => blocker.ShouldBlock() );
 	}
 
 	public void PlayAnnouncerTimeVoiceLine( int second, bool begins = false )

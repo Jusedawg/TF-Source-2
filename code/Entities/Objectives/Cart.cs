@@ -16,7 +16,7 @@ namespace TFS2
 	[Model(Model = "models/props_trainyard/bomb_cart.vmdl" )]
 	[Category( "Objectives" )]
 	[HammerEntity]
-	public partial class Cart : AnimatedEntity, ITeam, IResettable
+	public partial class Cart : AnimatedEntity, ITeam, IResettable, IRoundTimerBlocker
 	{
 		[ConVar.Replicated] public static bool tf_debug_cart { get; set; } = false;
 		public static new IEnumerable<Cart> All => Entity.All.OfType<Cart>();
@@ -388,6 +388,12 @@ namespace TFS2
 				if ( blockers.Contains( ply ) )
 					StopBlock( ply );
 			}
+		}
+
+		const float PUSH_OVERTIME_GRACEPERIOD = 5f;
+		public bool ShouldBlock()
+		{
+			return pushers.Any() || TimeSincePush < PUSH_OVERTIME_GRACEPERIOD;
 		}
 
 		[Input]

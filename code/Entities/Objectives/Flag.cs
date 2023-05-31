@@ -10,7 +10,7 @@ namespace TFS2;
 [Icon( "tour" )]
 [Model(Model = "models/flag/briefcase.vmdl" ), RenderFields]
 [HammerEntity]
-public partial class Flag : Item, ITeam, IResettable
+public partial class Flag : Item, ITeam, IResettable, IRoundTimerBlocker
 {
 	[Property] public HammerTFTeamOption DefaultTeam { get; set; }
 	[Property] public bool StartsDisabled { get; set; }
@@ -274,6 +274,11 @@ public partial class Flag : Item, ITeam, IResettable
 	{
 		DeleteTrails();
 		OnReturn.Fire( this );
+	}
+
+	public bool ShouldBlock()
+	{
+		return State != FlagState.Home;
 	}
 
 	Particles PapersTrail { get; set; }

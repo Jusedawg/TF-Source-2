@@ -28,6 +28,7 @@ public partial class RoundStatusDisplay : Panel
 
 	const string WAITING_FOR_PLAYERS_TEXT = "#GameState.WaitingForPlayers";
 	const string SETUP_TEXT = "#GameState.Setup";
+	const string OVERTIME_TEXT = "Overtime";
 	public void UpdateGameStateLabel()
 	{
 		string value = "";
@@ -35,9 +36,10 @@ public partial class RoundStatusDisplay : Panel
 		// Show a message for waiting for players, unless we play arena (it has it's own message)
 		if ( SDKGame.Current.IsWaitingForPlayers && !TFGameRules.Current.IsPlaying<Arena>() )
 			value = WAITING_FOR_PLAYERS_TEXT;
-
-		if ( TFGameRules.Current.IsInSetup )
+		else if ( TFGameRules.Current.IsInSetup )
 			value = SETUP_TEXT;
+		else if ( Timers.Keys.Any( timer => timer.InOvertime ) )
+			value = OVERTIME_TEXT;
 
 		GameStateLabel.Text = value;
 	}

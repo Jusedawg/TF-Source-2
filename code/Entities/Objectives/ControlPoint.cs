@@ -12,7 +12,7 @@ namespace TFS2;
 [Category( "Objectives" )]
 [Icon( "my_location" )]
 [HammerEntity]
-public partial class ControlPoint : BaseTrigger, IResettable
+public partial class ControlPoint : BaseTrigger, IResettable, IRoundTimerBlocker
 {
 	public new static IReadOnlyList<ControlPoint> All => _all;
 	private static List<ControlPoint> _all = new();
@@ -663,6 +663,11 @@ public partial class ControlPoint : BaseTrigger, IResettable
 
 		UnlockTime = -1;
 		Locked = false;
+	}
+
+	public bool ShouldBlock()
+	{
+		return IsBeingCaptured;
 	}
 
 	void AwardDefensePointsToTouchers()
