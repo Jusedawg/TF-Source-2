@@ -8,6 +8,8 @@ using Sandbox;
 namespace TFS2;
 public partial class TFBuilding
 {
+	protected virtual float ConstructionBoostMultiplier => 1.5f;
+	protected virtual float ConstructionBoostTime => 1f;
 	/// <summary>
 	/// Have we completed our first construction?
 	/// </summary>
@@ -25,6 +27,8 @@ public partial class TFBuilding
 	[Net] public float ConstructionTime { get; protected set; }
 	protected bool ConstructionCompleted => ConstructionProgress >= ConstructionTime;
 	protected float healthToGain;
+	protected Dictionary<Entity, TimeUntil> constructionBoostTimers = new();
+	protected Dictionary<Entity, float> constructionBoostMultipliers = new();
 	/// <summary>
 	/// Get the completion of this buildings construction
 	/// </summary>
@@ -37,8 +41,41 @@ public partial class TFBuilding
 	public float GetConstructionRate()
 	{
 		// TODO: Redeploy
-		// TODO: Wrench boosting
-		return 1;
+		float multiplier = 1f;
+		if(constructionBoostTimers.Any())
+		{
+			foreach ( var source in constructionBoostTimers.Keys.ToArray() )
+			{
+				if( constructionBoostTimers[source] )
+				{
+					constructionBoostTimers.Remove( source );
+					constructionBoostMultipliers.Remove( source );
+					continue;
+				}
+
+				multiplier *= constructionBoostMultipliers[source];
+			}
+		}
+
+		return multiplier;
+	}
+
+	public virtual void ApplyConstructionBoost( Entity source, float multiplier = -1f)
+	{
+		if ( !IsConstructing ) return;
+		if(source == null) return;
+		if ( multiplier == -1 ) multiplier = ConstructionBoostMultiplier;
+
+		if(constructionBoostTimers.ContainsKey(source))
+		{
+			constructionBoostTimers[source] = ConstructionBoostTime;
+			constructionBoostMultipliers[source] = multiplier;
+		}
+		else
+		{
+			constructionBoostTimers.Add( source, ConstructionBoostTime );
+			constructionBoostMultipliers.Add( source, multiplier );
+		}
 	}
 
 	public virtual void StartConstruction(float time = default)

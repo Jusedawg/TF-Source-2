@@ -82,6 +82,27 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 		MaxHealth = levelData.MaxHealth;
 	}
 
+	public virtual int ApplyRepairMetal(int amount, float metalToRepair = 3f, float repairPower = 1)
+	{
+		if ( amount <= 0 ) return 0; // No point in trying to apply no metal
+		if ( Level >= MaxLevel ) return 0;
+		if ( IsConstructing || IsUpgrading ) return 0;
+
+		return DoRepair(amount, metalToRepair, repairPower);
+	}
+
+	protected virtual int DoRepair(int amount, float metalToRepair, float repairPower)
+	{
+		float healAmount = 100 * repairPower;
+		healAmount = MathF.Min( healAmount, MaxHealth - Health );
+
+		var newHealth = MathF.Min( MaxHealth, Health + healAmount );
+		int cost = MathX.CeilToInt((newHealth - Health) * metalToRepair);
+
+		Health = newHealth;
+		return cost;
+	}
+
 	/// <summary>
 	/// Applies metal to the buildings upgrade progress.
 	/// </summary>
@@ -172,6 +193,13 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 		base.TakeDamage( info );
 	}
 
+	public virtual void ManualDestroy()
+	{
+		var dmg = DamageInfo.Generic( Health )
+								.WithTags( "manual_destroy" );
+		TakeDamage( dmg );
+	}
+
 	public override void OnKilled()
 	{
 		PlaySound( Data.DestroyedSound );
@@ -200,7 +228,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 		{
 			DebugOverlay.Text( $"[CONSTRUCTION]", pos, 8, Color.Red );
 			DebugOverlay.Text( $"= ConstructionProgress: {ConstructionProgress}", pos, 9, Color.Yellow );
-			DebugOverlay.Text( $"= ConstructionTime: {ConstructionTime}", pos, 10, Color.Yellow );
+			DebugOverlay.Text( $"= ConstructionTime: {ConstructionTime} (x{GetConstructionRate()})", pos, 10, Color.Yellow );
 			DebugOverlay.Text( $"= healthToGain: {healthToGain}", pos, 11, Color.Yellow );
 		}
 		else if(IsUpgrading)

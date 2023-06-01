@@ -9,10 +9,10 @@ namespace TFS2;
 
 public partial class TFPlayer
 {
-	[Net] public IList<TFBuilding> Buildings { get; set; }
+	[Net, SkipHotload] public IList<TFBuilding> Buildings { get; set; }
 	[Net] public int Metal { get; set; }
-	public int MaxMetal => PlayerClass.Abilities.Metal;
-	public bool UsesMetal => PlayerClass.Abilities.HasMetal;
+	public int MaxMetal => PlayerClass?.Abilities.Metal != null ? PlayerClass.Abilities.Metal : 0;
+	public bool UsesMetal => PlayerClass?.Abilities.HasMetal == true;
 
 	/// <summary>
 	/// Creates a building belonging to this player at a certain position.
@@ -22,6 +22,7 @@ public partial class TFPlayer
 	public void Build(BuildingData data, Transform transform)
 	{
 		if ( Game.IsClient ) return;
+		if ( !CanBuild( data ) ) return;
 
 		var building = data.CreateInstance();
 		if ( building == null )
@@ -32,9 +33,13 @@ public partial class TFPlayer
 		building.SetOwner( this );
 		building.StopCarrying( transform );
 		Buildings.Add( building );
+		Metal -= data.BuildCost;
 	}
 	public void Build( string buildingName, Transform transform ) => Build( BuildingData.Get( buildingName ), transform );
-
+	public bool CanBuild(BuildingData data)
+	{
+		return Buildings.Count( building => building.Data == data ) < data.MaxCount && Metal >= data.BuildCost;
+	}
 	public int ConsumeMetal(int amount)
 	{
 		int used = (int)MathF.Min(Metal, amount);
@@ -43,11 +48,28 @@ public partial class TFPlayer
 		return used;
 	}
 
+	public int GetUsableMetal(int targetAmount)
+	{
+		return (int)MathF.Min( Metal, targetAmount );
+	}
+
 	public void GiveMetal(int amount)
 	{
 		Metal += amount;
 		if ( Metal > MaxMetal )
 			Metal = MaxMetal;
+	}
+
+	public void DestroyBuildings()
+	{
+		if(Buildings.Any())
+		{
+			foreach ( var building in Buildings )
+			{
+				building.ManualDestroy();
+			}
+			Buildings.Clear();
+		}
 	}
 
 	[ConCmd.Server("tf_build")]
@@ -88,9 +110,7 @@ public partial class TFPlayer
 		var building = ply.Buildings?.FirstOrDefault( building => building.Data == data );
 		if(building != null)
 		{
-			var dmg = DamageInfo.Generic( building.Health )
-								.WithTags( "manual_destroy" );
-			building.TakeDamage( dmg );
+			building.ManualDestroy();
 		}
 	}
 }

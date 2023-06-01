@@ -28,7 +28,7 @@ public class BuildingData : GameResource
 	public float BuildTime { get; set; } = 10f;
 	public int UpgradeCost { get; set; } = 200;
 	public float UpgradeTime { get; set; } = 1.2f;
-	
+	public int MaxCount { get; set; } = 1;
 	public List<BuildingLevelData> Levels { get; set; } = new();
 	[HideInEditor]
 	public int LevelCount => Levels.Count;

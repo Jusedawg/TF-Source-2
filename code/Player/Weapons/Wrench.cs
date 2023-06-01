@@ -12,16 +12,33 @@ public class Wrench : TFMeleeBase
 	{
 		if(entity is TFBuilding building && building.Owner == Owner )
 		{
-			int usedMetal = 25;
-			if ( TFGameRules.Current.IsInSetup )
-				usedMetal *= 2;
-
-			usedMetal = TFOwner.ConsumeMetal( usedMetal );
-			usedMetal = building.ApplyUpgradeMetal( usedMetal );
-			if ( usedMetal > 0 )
+			if(building.IsConstructing)
+			{
+				building.ApplyConstructionBoost( this );
 				wasSuccess = true;
+			}
 			else
-				wasSuccess = false;
+			{
+				int usedMetal = 25;
+				if ( TFGameRules.Current.IsInSetup )
+					usedMetal *= 2;
+
+				usedMetal = TFOwner.GetUsableMetal( usedMetal );
+				int repairMetal = building.ApplyRepairMetal( usedMetal );
+				if(repairMetal != 0)
+				{
+					usedMetal = repairMetal;
+				}
+				else
+				{
+					usedMetal = building.ApplyUpgradeMetal( usedMetal );
+				}
+				TFOwner.ConsumeMetal( usedMetal );
+				if ( usedMetal > 0 )
+					wasSuccess = true;
+				else
+					wasSuccess = false;
+			}
 		}
 
 		base.OnHitEntity( entity, tr );
