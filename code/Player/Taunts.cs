@@ -79,35 +79,31 @@ partial class TFPlayer
 		// Reset our tauntlist, incase we have one
 		TauntList.Clear();
 
-		var classname = PlayerClass.Title.ToLower();
-		TFPlayerClass classkey = TFPlayerClass.Undefined;
+		TFPlayerClass classkey = GetTFPlayerClass();
 
-		foreach ( KeyValuePair<TFPlayerClass, string> pair in PlayerClass.Names )
+		// Add taunt to Class' taunt list if an entry for our current class exists
+		foreach ( var taunt in TauntData.StockTaunts )
 		{
-			if ( pair.Value == classname )
+			if ( taunt.AnimationModelEntries == null ) continue;
+			foreach ( var tauntModelEntry in taunt.AnimationModelEntries )
 			{
-				classkey = pair.Key;
+				if ( tauntModelEntry.playerClass == classkey )
+				{
+					TauntList.Add( taunt );
+				}
 			}
 		}
 
-		// Add taunt to Class' taunt list if Undefined (aka Allclass)
-		foreach ( var taunt in TauntData.EnabledTaunts )
+		//Custom taunts, currently not implemented
+		foreach ( var taunt in TauntData.CustomTaunts )
 		{
-			if ( taunt.Class == TFPlayerClass.Undefined )
+			if ( taunt.AnimationModelEntries == null ) break;
+			foreach ( var tauntModelEntry in taunt.AnimationModelEntries )
 			{
-				TauntList.Add( taunt );
-			}
-		}
-
-		// Separate so ALLCLASS taunts cycle first, this is important because we cannot dynamically match a playermodel's tauntlist enum, so it MUST match up
-		// Sorting alphabetically in separated groups is the only way to do this
-
-		// Add taunt to Class' taunt list if it belongs to this class
-		foreach ( var taunt in TauntData.EnabledTaunts )
-		{
-			if ( taunt.Class == classkey )
-			{
-				TauntList.Add( taunt );
+				if ( tauntModelEntry.playerClass == classkey )
+				{
+					TauntList.Add( taunt );
+				}
 			}
 		}
 	}
@@ -154,13 +150,10 @@ partial class TFPlayer
 			if ( TryDoubleTapTaunt() ) return;
 		}
 
+		//If we have somehow exited taunt condition without reseting our parameters, do so now
 		if ( !InCondition( TFCondition.Taunting ) && !TauntsReset )
 		{
-			ActiveTaunt = null;
-			Animator?.SetAnimParameter( "b_taunt", false );
-			Animator?.SetAnimParameter( "b_taunt_partner", false );
-			Animator?.SetAnimParameter( "b_taunt_initiator", false );
-			TauntsReset = true;
+			ResetTauntParams();
 		}
 
 		//Failsafe, check to see if we are somehow in taunt condition without a taunt set
@@ -189,6 +182,7 @@ partial class TFPlayer
 				AcceptPartnerTaunt( true );
 			}
 
+			/* DEPRECATED BY ANIMGRAPH TAGS SYSTEM
 			if ( ActiveTaunt.TauntType == TauntType.Partner && !WaitingForPartner )
 			{
 				if ( TimeSinceTaunt > TauntDuration )
@@ -197,24 +191,28 @@ partial class TFPlayer
 					return;
 				}
 			}
+
+			
 			// Stop single taunts via duration
 			if ( ActiveTaunt.TauntType == TauntType.Once && TimeSinceTaunt > TauntDuration )
 			{
 				StopTaunt();
 				return;
 			}
+			*/
 
 			// Stop single taunts via loss of grounded state
-			if ( ActiveTaunt.TauntType != TauntType.Looping && GroundEntity == null )
+			if ( ActiveTaunt.RequireGround && GroundEntity == null )
 			{
 				StopTaunt();
 				return;
 			}
 
 			// Stop looping/partner taunts via key press
-			if ( (ActiveTaunt.TauntType == TauntType.Looping || ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner) && (Input.Pressed( "Jump" ) || Input.Pressed( "Taunt" )) )
+			if ( TauntCanCancel && (Input.Pressed( "Jump" ) || Input.Pressed( "Taunt" )) )
 			{
-				StopTaunt();
+				//TauntAnimationMaster?.SetAnimParameter( "b_taunt_cancel", true ); //TAM
+				SetAnimParameter( "b_taunt_cancel", true );
 				return;
 			}
 		}
@@ -261,7 +259,7 @@ partial class TFPlayer
 		if ( PartnerTarget != null && PartnerTarget.InCondition( TFCondition.Taunting ) )
 		{
 			// Partner Taunt
-			if ( PartnerTarget.ActiveTaunt.TauntType == TauntType.Partner && PartnerTarget.WaitingForPartner == true && IsPartnerTauntAngleValid( PartnerTarget ) )
+			if (  PartnerTarget.WaitingForPartner == true && IsPartnerTauntAngleValid( PartnerTarget ) )
 			{
 				WeaponTauntAvailable = false;
 				ActiveTaunt = PartnerTarget.ActiveTaunt;
@@ -271,7 +269,7 @@ partial class TFPlayer
 				return true;
 			}
 			// Group taunt
-			else if ( PartnerTarget.ActiveTaunt.TauntType == TauntType.Looping && PartnerTarget.ActiveTaunt.TauntAllowJoin == true )
+			else if ( PartnerTarget.ActiveTaunt.TauntAllowJoin == true )
 			{
 				WeaponTauntAvailable = false;
 				ActiveTaunt = PartnerTarget.ActiveTaunt;
@@ -337,7 +335,7 @@ partial class TFPlayer
 
 		if ( !CanTaunt() ) return;
 
-		if ( TauntType == TauntType.Partner )
+		if ( taunt.IsPartnerTaunt )
 		{
 			//If we are starting the partner taunt, we need to check for valid spacing
 			if ( initiator )
@@ -350,16 +348,23 @@ partial class TFPlayer
 			}
 		}
 
-		// prevents conflicting rotation issues when joining partner taunt
+		// sets player facing the direction of their camera, rather than their model rotation.
 		if ( initiator )
 		{
 			Rotation = Animator.GetIdealRotation();
 		}
 
-		if ( TauntType == TauntType.Once )
+
+		/*
+		//TauntDuration deprecated by OnAnimGraphTag
+		if ( TauntType == TauntType.Simple )
 		{
-			TauntDuration = GetSequenceDuration( ActiveTaunt.SequenceName );
-		}
+			if (!string.IsNullOrEmpty( ActiveTaunt.SequenceName ) ) TauntDuration = GetSequenceDuration( ActiveTaunt.SequenceName );
+			if ( taunt.IsCustomTaunt ) TauntDuration = tauntPuppetMaster.GetSequenceDuration( ActiveTaunt.SequenceName );
+			if ( tauntPuppetMaster != null ) TauntDuration = tauntPuppetMaster.CurrentSequence.Duration;
+			Log.Info($"Duration {TauntDuration}");
+		} 
+		*/
 
 		CreateTauntProp( ActiveTaunt );
 
@@ -369,8 +374,11 @@ partial class TFPlayer
 			StartMusic();
 		}
 
-		animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
-		animcontroller?.SetAnimParameter( "taunt_type", (int)TauntType );
+		if ( !taunt.UseTAM )
+		{
+			animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
+			animcontroller?.SetAnimParameter( "taunt_type", (int)TauntType );
+		}
 
 		TimeSinceTaunt = 0;
 		StayThirdperson = IsThirdperson;
@@ -596,10 +604,12 @@ partial class TFPlayer
 			animcontroller?.SetAnimParameter( "b_taunt_initiator", true );
 		}
 		TimeSinceTaunt = 0;
-		GetPartnerDuration( player, isInitiator );
+		//GetPartnerDuration( player, isInitiator );
 		WaitingForPartner = false;
 	}
 
+	//TauntDuration deprecated by OnAnimGraphTag
+	/*
 	/// <summary>
 	/// Simplified version for now. Hardcoded references for partner exit durations, values vary too much per class and state, variables are too complex for simpler dynamic code
 	/// </summary>
@@ -612,8 +622,9 @@ partial class TFPlayer
 			tauntDurationVar = 4.17f;
 		}
 		tauntDurationVar += 0.1f; //Small cooldown window to prevent taunting before playermodel is ready to
-		player.TauntDuration = tauntDurationVar;
+		//player.TauntDuration = tauntDurationVar; 
 	}
+	*/
 
 	/// <summary>
 	/// Unused, Generates random winner for duel taunts

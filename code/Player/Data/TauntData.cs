@@ -45,6 +45,12 @@ public class TauntData : GameResource
 	public bool Legacy { get; set; }
 
 	/// <summary>
+	/// Is this taunt running on the Taunt Animation Model system?
+	/// </summary>
+	[Title( "Use Taunt Animation Model System" )]
+	public bool UseTAM { get; set; }
+
+	/// <summary>
 	/// Is this taunt disabled? If so, it will not generate in any taunt lists
 	/// </summary>
 	public bool Disabled { get; set; }
@@ -57,11 +63,18 @@ public class TauntData : GameResource
 	public bool RequireGround { get; set; } = true;
 
 	/// <summary>
-	/// Which class can use this taunt? Used to generate the taunt list
+	/// If enabled, allows this taunt to accept partners
 	/// </summary>
 	[Category( "Attributes" )]
-	[Obsolete]
-	public TFPlayerClass Class { get; set; } = TFPlayerClass.Undefined;
+	[Title( "Partner Taunt" )]
+	public bool IsPartnerTaunt { get; set; }
+
+	/// <summary>
+	/// Which class can use this taunt? Used to generate the taunt list
+	/// </summary>
+	//[Category( "Attributes" )]
+	//[Obsolete]
+	//public TFPlayerClass Class { get; set; } = TFPlayerClass.Undefined;
 
 	[Category( "Attributes" )]
 	public TauntType TauntType { get; set; }
