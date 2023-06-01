@@ -32,6 +32,7 @@ public partial class TFPlayer : SDKPlayer
 		{
 			PlayerClass = DesiredPlayerClass;
 			DesiredPlayerClass = null;
+			DestroyBuildings();
 		}
 
 		base.Respawn();
