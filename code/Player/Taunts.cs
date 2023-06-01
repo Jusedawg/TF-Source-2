@@ -2,6 +2,7 @@
 using Sandbox;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TFS2;
 
@@ -25,12 +26,19 @@ partial class TFPlayer
 	public bool TauntEnableMove { get; set; }
 
 	/// <summary>
-	/// Timer for simple taunts
+	/// Whether or not the player can manually cancel their taunt. Set via AnimGraphTag
+	/// </summary>
+	[Net]
+	public bool TauntCanCancel { get; set; }
+
+	/// <summary>
+	/// DEPRECATED. Timer for simple taunts
 	/// </summary>
 	[Net, Predicted]
 	public TimeSince TimeSinceTaunt { get; set; }
 
-	[Net, Predicted]
+	//TauntDuration to be deprecated by OnAnimGraphTag
+	[Net]
 	public float TauntDuration { get; set; } = 1f;
 
 	[Net]
@@ -53,9 +61,7 @@ partial class TFPlayer
 	public bool WeaponTauntAvailable { get; set; }
 
 	//Partner Taunt Vars
-
-	[Net, Predicted]
-	public TFPlayer PartnerTarget { get; set; }
+	public TFPlayer PartnerTarget => GetPartnerTarget();
 
 	/// <summary>
 	/// How far to consider a hovered player for a valid partner, players bounds width multiplied by 2.5
@@ -127,13 +133,20 @@ partial class TFPlayer
 		}
 
 		//I believe this code can be rewritten better, I just don't remember how
+		/*
 		if ( HoveredEntity != null )
 		{
-			if ( HoveredDistance < PartnerDistance ) //player bounds width * 2.5
-				PartnerTarget = HoveredEntity as TFPlayer;
+			if ( HoveredEntity is TFPlayer player  )
+			{
+				if ( HoveredDistance < PartnerDistance ) //player bounds width * 2.5
+					PartnerTarget = player;
+				else
+					PartnerTarget = null;
+			}
 			else
 				PartnerTarget = null;
 		}
+		*/
 
 		//If taunt menu button is pressed before certain time elapses, check for Partner/Group taunts, if none play weapon taunt
 		if ( Input.Pressed( "Taunt" ) && WeaponTauntAvailable && !InCondition( TFCondition.Taunting ) )
@@ -155,6 +168,11 @@ partial class TFPlayer
 
 		if ( InCondition( TFCondition.Taunting ) )
 		{
+			if ( !IsLocalPawn )
+			{
+				UpdateMusicPosition();
+			}
+
 			if ( Input.Pressed( "Attack1" ) )
 			{
 				Animator?.SetAnimParameter( "b_fire", true );
@@ -165,8 +183,8 @@ partial class TFPlayer
 				Animator?.SetAnimParameter( "b_fire_secondary", true );
 			}
 
-			//Call a fake partner accept
-			if ( ActiveTaunt.TauntType == TauntType.Partner && Input.Pressed( "Taunt" ) )
+			//Debug, call a fake partner accept
+			if ( ActiveTaunt.TauntType == TauntType.Partner && Input.Pressed( "Ready" ) )
 			{
 				AcceptPartnerTaunt( true );
 			}
@@ -211,6 +229,23 @@ partial class TFPlayer
 		if ( TryJoinTaunt() ) return true;
 		if ( TryWeaponTaunt() ) return true;
 		return false;
+	}
+	public TFPlayer GetPartnerTarget()
+	{
+		if ( HoveredEntity != null )
+		{
+			if ( HoveredEntity is TFPlayer player )
+			{
+				if ( HoveredDistance < PartnerDistance ) //player bounds width * 2.5
+					return player;
+				else
+					return null;
+			}
+			else
+				return null;
+		}
+		else
+			return null;
 	}
 
 	/// <summary>
@@ -401,21 +436,37 @@ partial class TFPlayer
 
 		RemoveCondition( TFCondition.Taunting );
 
-		Rotation = Animator.GetIdealRotation();
-		Animator.SetAnimParameter( "b_taunt", false );
-		Animator.SetAnimParameter( "b_taunt_partner", false );
-		Animator.SetAnimParameter( "b_taunt_initiator", false );
-		TauntEnableMove = false;
-		WaitingForPartner = false;
+		ResetTauntParams();
 
 		StopMusic();
+
+		//DeleteAnimationMaster();
+
+		Rotation = Animator.GetIdealRotation();
 
 		if ( TauntPropModel != null && Game.IsServer )
 			TauntPropModel.Delete();
 		if ( weapon != null && weapon.EnableDrawing == false )
 			weapon.EnableDrawing = true;
 
-		ThirdpersonSet( StayThirdperson );
+		ThirdpersonSet( !StayThirdperson );
+
+	}
+
+	/// <summary>
+	/// Failsafe function that makes sure our parameters are set back to default when a taunt ends
+	/// </summary>
+	public void ResetTauntParams()
+	{
+		ActiveTaunt = null;
+		Animator?.SetAnimParameter( "b_taunt", false );
+		Animator?.SetAnimParameter( "b_taunt_associate", false );
+		Animator?.SetAnimParameter( "b_taunt_initiator", false );
+		TauntEnableMove = false;
+		TauntCanCancel = false;
+		WaitingForPartner = false;
+
+		TauntsReset = true;
 	}
 
 	#region Partner Taunt Logic
@@ -492,27 +543,23 @@ partial class TFPlayer
 	/// </summary>
 	public bool IsPartnerTauntAngleValid( TFPlayer target )
 	{
-		var targetYaw = target.Rotation.Yaw();
-		float idealYaw;
-		if ( targetYaw >= 0 )
-		{
-			idealYaw = targetYaw - 180;
-		}
-		else
-		{
-			idealYaw = targetYaw + 180;
-		}
-		var angleDiff = Math.Abs( Rotation.Yaw() - idealYaw );
-		var angleDiffMax = 50f;
+		// Get a vector from owner origin to target origin
+		var vecToTarget = (target.WorldSpaceBounds.Center - Owner.WorldSpaceBounds.Center).WithZ( 0 ).Normal;
 
-		if ( angleDiff <= angleDiffMax )
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		// Get owner forward view vector
+		var vecOwnerForward = Owner.GetEyeRotation().Forward.WithZ( 0 ).Normal;
+
+		// Get target forward view vector
+		var vecTargetForward = target.GetEyeRotation().Forward.WithZ( 0 ).Normal;
+
+		// Make sure owner is behind, facing and aiming at target's back
+		float flPosVsTargetViewDot = vecToTarget.Dot( vecTargetForward ); // Behind?
+		float flPosVsOwnerViewDot = vecToTarget.Dot( vecOwnerForward );   // Facing?
+		float flViewAnglesDot = vecTargetForward.Dot( vecOwnerForward );  // Facestab?
+
+		//Log.Info( $"{flPosVsTargetViewDot < 0}" );
+		//Log.Info( $"{flPosVsOwnerViewDot > 0.5f}" );
+		return flPosVsTargetViewDot < 0 && flPosVsOwnerViewDot > 0.5f;
 	}
 
 	/// <summary>
@@ -520,6 +567,7 @@ partial class TFPlayer
 	/// </summary>
 	public void PartnerSetLocation( TFPlayer target )
 	{
+		if ( Game.IsClient ) return;
 		var distance = 68;
 		Vector3 moveTo = target.Position + target.Rotation.Forward * distance;
 		var rotateTo = Rotation.FromYaw( target.Rotation.Yaw() - 180f );
@@ -599,34 +647,78 @@ partial class TFPlayer
 
 	Sound TauntMusic { get; set; }
 
+	[ClientRpc]
 	public void StartMusic()
 	{
 		var tauntMusic = ActiveTaunt.TauntMusic;
+
+		//Lets us assign a UI variant without having to manually do so
 		var tauntMusicLength = ActiveTaunt.TauntMusic.Length;
 		var format = ".sound";
-		var tauntMusicNoFormat = tauntMusic.Remove( tauntMusicLength - format.Length ); //Lets us assign a UI variant without having to manually do so
+		var tauntMusicNoFormat = tauntMusic.Remove( tauntMusicLength - format.Length );
 
-		//TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
-
-		using ( Prediction.Off() ) //INVESTIGATE, joining taunt plays sound from UI as expected, but not when starting taunt from button (has to do with tauntmenu call?)
+		if ( IsLocalPawn )
 		{
-			if ( Game.LocalClient?.Pawn == this )
-			{
-				Log.Info( "local music" );
-				TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
-			}
-			if ( Game.LocalClient?.Pawn != this )
-			{
-				Log.Info( "nonlocal music" );
-				TauntMusic = Sound.FromEntity( ActiveTaunt.TauntMusic, this, "head" ); ; //INVESTIGATE, not playing from attachment
-				TauntMusic.SetVolume( 0.5f );
-			}
+			Log.Info( "local music" );
+			TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
+			SetOtherMusicVolume( 0.1f, this ); //Figure out how to muffle incoming taunt music from other players ONLY for this player
+		}
+		else
+		{
+			Log.Info( "nonlocal music" );
+			//var attachment = PlayerModel.GetAttachment( "head" ); TAM
+			var attachment = GetAttachment( "head" );
+			//TauntMusic = Sound.FromEntity( ActiveTaunt.TauntMusic, PlayerModel, "head" ); //Doesn't play from attachment, using hacky workaround
+			TauntMusic = Sound.FromWorld( ActiveTaunt.TauntMusic, attachment.Value.Position );
 		}
 	}
 
+	[ClientRpc]
+	public void UpdateMusicPosition()
+	{
+		//var attachment = PlayerModel.GetAttachment( "head" ); TAM
+		var attachment = GetAttachment( "head" );
+		TauntMusic.SetPosition( attachment.Value.Position );
+	}
+
+	[ClientRpc]
+	public void SetOtherMusicVolume( float volume, TFPlayer caller )
+	{
+		foreach ( TFPlayer player in Entity.All.Where( x => x != caller ).OfType<TFPlayer>() )
+		{
+			player.TauntMusic.SetVolume( volume );
+		}
+	}
+
+	[ClientRpc]
 	public void StopMusic()
 	{
 		TauntMusic.Stop();
+		SetOtherMusicVolume( 1f, this );
+	}
+
+	public bool IsLocalTFPlayer( TFPlayer pawn )
+	{
+		var steamId = Game.SteamId;
+		foreach ( var client in Game.Clients )
+		{
+			if ( client.SteamId == steamId && client.Pawn == pawn ) return true;
+		}
+
+		return false;
+	}
+
+	public IEnumerable<IClient> GetNonLocalTFPlayers( TFPlayer pawn )
+	{
+		List<IClient> clients = new List<IClient>();
+		var steamId = Game.SteamId;
+		foreach ( var client in Game.Clients )
+		{
+			if ( client.SteamId == steamId && client.Pawn == pawn ) continue;
+			clients.Add( client );
+		}
+
+		return clients;
 	}
 
 	#endregion
@@ -853,6 +945,58 @@ partial class TFPlayer
 		{
 			Tauntkill_SpyFencing( intData );
 		}
+
+		base.OnAnimEventGeneric( name, intData, floatData, vectorData, stringData );
+	}
+
+	public virtual void RecieveAnimGraphTag( string tag, AnimGraphTagEvent fireMode )
+	{
+		OnAnimGraphTag( tag, fireMode );
+	}
+
+	protected override void OnAnimGraphTag( string tag, AnimGraphTagEvent fireMode )
+	{
+		if ( tag == "TF_Taunt_CanCancel" )
+		{
+			if ( fireMode == AnimGraphTagEvent.Start )
+			{
+				TauntCanCancel = true;
+			}
+			if ( fireMode == AnimGraphTagEvent.End )
+			{
+				TauntCanCancel = false;
+			}
+			if ( fireMode == AnimGraphTagEvent.Fired )
+			{
+				TauntCanCancel = !TauntCanCancel;
+			}
+		}
+
+		if ( tag == "TF_Taunt_PartnerTauntReady" )
+		{
+			if ( fireMode == AnimGraphTagEvent.Start )
+			{
+				WaitingForPartner = true;
+			}
+			if ( fireMode == AnimGraphTagEvent.End )
+			{
+				WaitingForPartner = false;
+			}
+			if ( fireMode == AnimGraphTagEvent.Fired )
+			{
+				WaitingForPartner = !WaitingForPartner;
+			}
+		}
+
+		if ( tag == "TF_Taunt_End" )
+		{
+			if ( fireMode == AnimGraphTagEvent.Start || fireMode == AnimGraphTagEvent.Fired )
+			{
+				StopTaunt();
+			}
+		}
+
+		base.OnAnimGraphTag( tag, fireMode );
 	}
 
 	[ConVar.Replicated] public static bool tf_sv_debug_taunts { get; set; } = false;
