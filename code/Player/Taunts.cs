@@ -91,7 +91,7 @@ partial class TFPlayer
 		}
 
 		// Add taunt to Class' taunt list if Undefined (aka Allclass)
-		foreach ( var taunt in TauntData.AllActive )
+		foreach ( var taunt in TauntData.EnabledTaunts )
 		{
 			if ( taunt.Class == TFPlayerClass.Undefined )
 			{
@@ -103,7 +103,7 @@ partial class TFPlayer
 		// Sorting alphabetically in separated groups is the only way to do this
 
 		// Add taunt to Class' taunt list if it belongs to this class
-		foreach ( var taunt in TauntData.AllActive )
+		foreach ( var taunt in TauntData.EnabledTaunts )
 		{
 			if ( taunt.Class == classkey )
 			{
@@ -194,24 +194,28 @@ partial class TFPlayer
 				if ( TimeSinceTaunt > TauntDuration )
 				{
 					StopTaunt();
+					return;
 				}
 			}
 			// Stop single taunts via duration
 			if ( ActiveTaunt.TauntType == TauntType.Once && TimeSinceTaunt > TauntDuration )
 			{
 				StopTaunt();
+				return;
 			}
 
 			// Stop single taunts via loss of grounded state
 			if ( ActiveTaunt.TauntType != TauntType.Looping && GroundEntity == null )
 			{
 				StopTaunt();
+				return;
 			}
 
 			// Stop looping/partner taunts via key press
 			if ( (ActiveTaunt.TauntType == TauntType.Looping || ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner) && (Input.Pressed( "Jump" ) || Input.Pressed( "Taunt" )) )
 			{
 				StopTaunt();
+				return;
 			}
 		}
 	}
@@ -357,13 +361,11 @@ partial class TFPlayer
 			TauntDuration = GetSequenceDuration( ActiveTaunt.SequenceName );
 		}
 
-		if ( !string.IsNullOrEmpty( ActiveTaunt.TauntPropModel ) )
-		{
-			CreateTauntProp( ActiveTaunt, this );
-		}
+		CreateTauntProp( ActiveTaunt );
 
 		if ( !string.IsNullOrEmpty( taunt.TauntMusic ) )
 		{
+			StopMusic();
 			StartMusic();
 		}
 
@@ -446,10 +448,10 @@ partial class TFPlayer
 
 		if ( TauntPropModel != null && Game.IsServer )
 			TauntPropModel.Delete();
-		if ( weapon != null && weapon.EnableDrawing == false )
+		if ( weapon != null )
 			weapon.EnableDrawing = true;
 
-		ThirdpersonSet( !StayThirdperson );
+		ThirdpersonSet( StayThirdperson );
 
 	}
 
@@ -631,16 +633,29 @@ partial class TFPlayer
 	/// </summary>
 	/// <param name="taunt"></param>
 	/// <param name="player"></param>
-	public void CreateTauntProp( TauntData taunt, TFPlayer player )
+	public void CreateTauntProp( TauntData taunt )
 	{
-		player.TauntPropModel = new AnimatedEntity
+		var propPath = taunt.GetPropModel( GetTFPlayerClass() );
+
+		//Didn't get a class-specific entry, try all class
+		if ( string.IsNullOrEmpty( propPath ) )
+		{
+			propPath = taunt.GetPropModel( TFPlayerClass.Undefined );
+		}
+
+		//didn't get any matching entries, do nothing
+		if ( string.IsNullOrEmpty( propPath ) ) return;
+
+		TauntPropModel = new AnimatedEntity
 		{
 			Position = Position,
-			Owner = player,
+			Owner = this,
 			EnableHideInFirstPerson = false,
 		};
-		player.TauntPropModel.SetModel( taunt.TauntPropModel );
-		player.TauntPropModel.SetParent( player, true );
+		TauntPropModel.SetModel( propPath );
+
+		//TauntPropModel.SetParent( PlayerModel, true ); TAM
+		TauntPropModel.SetParent( this, true );
 	}
 
 	#region Music
@@ -997,6 +1012,20 @@ partial class TFPlayer
 		}
 
 		base.OnAnimGraphTag( tag, fireMode );
+	}
+	public TFPlayerClass GetTFPlayerClass()
+	{
+		var classname = PlayerClass.Title.ToLower();
+		TFPlayerClass classkey = TFPlayerClass.Undefined;
+
+		foreach ( KeyValuePair<TFPlayerClass, string> pair in PlayerClass.Names )
+		{
+			if ( pair.Value == classname )
+			{
+				classkey = pair.Key;
+			}
+		}
+		return classkey;
 	}
 
 	[ConVar.Replicated] public static bool tf_sv_debug_taunts { get; set; } = false;
