@@ -50,7 +50,13 @@
 					{
 						_class = "DefaultMaterialGroup"
 						name = "0"
-						remaps = [  ]
+						remaps = 
+						[
+							{
+								from = "materials/models/weapons/c_items/c_syringegun_glass.vmat"
+								to = "materials/models/weapons/v_syringegun/v_syringegun_glass.vmat"
+							},
+						]
 						use_global_default = false
 						global_default_material = ""
 					},
@@ -96,7 +102,7 @@
 						name = "c_syringegun_0_mesh"
 						parent_bone = "c_syringegun"
 						surface_prop = "default"
-						collision_prop = "default"
+						collision_tags = "solid"
 						recenter_on_parent_bone = true
 						offset_origin = [ 0.0, 0.0, 0.0 ]
 						offset_angles = [ 0.0, 0.0, 0.0 ]
@@ -167,7 +173,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -2.49, 1.0, -6.39 ]
 								hitbox_maxs = [ 2.51, 11.0, 23.610001 ]
 							},
@@ -176,7 +182,7 @@
 								parent_bone = "vm_weapon_bone_2"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.14, -3.19, -3.23 ]
 								hitbox_maxs = [ 3.01, 2.97, 4.72 ]
 							},
@@ -185,7 +191,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -2.49, 1.0, -6.39 ]
 								hitbox_maxs = [ 2.51, 11.0, 23.610001 ]
 							},
@@ -194,7 +200,7 @@
 								parent_bone = "vm_weapon_bone_2"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.14, -3.19, -3.23 ]
 								hitbox_maxs = [ 3.01, 2.97, 4.72 ]
 							},
@@ -203,7 +209,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -2.49, 1.0, -6.39 ]
 								hitbox_maxs = [ 2.51, 11.0, 23.610001 ]
 							},
@@ -212,7 +218,7 @@
 								parent_bone = "vm_weapon_bone_2"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.14, -3.19, -3.23 ]
 								hitbox_maxs = [ 3.01, 2.97, 4.72 ]
 							},
@@ -221,7 +227,7 @@
 								parent_bone = "weapon_bone"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -2.49, 1.0, -6.39 ]
 								hitbox_maxs = [ 2.51, 11.0, 23.610001 ]
 							},
@@ -230,7 +236,7 @@
 								parent_bone = "vm_weapon_bone_2"
 								surface_property = "metal"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -3.14, -3.19, -3.23 ]
 								hitbox_maxs = [ 3.01, 2.97, 4.72 ]
 							},
@@ -344,6 +350,7 @@
 		model_archetype = ""
 		primary_associated_entity = ""
 		anim_graph_name = ""
+		base_model_name = ""
 		importer_notes = """
 Imported from compiled VMDL_C
 """
