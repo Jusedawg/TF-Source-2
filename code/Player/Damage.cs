@@ -86,7 +86,6 @@ partial class TFPlayer
 		direction = direction.Normal;
 
 		Vector3 dmgForce = default;
-		bool wasInAir = IsInAir;
 		bool isSelfDamage = info.Attacker == this;
 		if ( info.Force == default )
 		{
@@ -122,11 +121,9 @@ partial class TFPlayer
 			dmgForce = info.Force;
 
 		ApplyAbsoluteImpulse( dmgForce );
-		if(IsInAir && !wasInAir)
-		{
-			IsLaunched= true;
-			IsBlastJumping = isSelfDamage;
-		}
+
+		IsLaunched = true;
+		IsBlastJumping = isSelfDamage;
 	}
 
 	public override void OnTakeDamageEffects( Entity attacker, Entity weapon, float damage, string[] tags, Vector3 position, Vector3 force )
