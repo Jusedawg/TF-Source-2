@@ -36,6 +36,14 @@ partial class TFPlayer
 	[Net]
 	public bool TauntsReset { get; set; }
 
+	/// <summary>
+	/// Timer that will force players out of taunting if they've been in a non-cancellable taunt for too long
+	/// </summary>
+	[Net]
+	public TimeUntil TauntTimeout { get; set; }
+
+	public float TauntTimeoutMaxDuration { get; set; } = 10f;
+
 	//
 	//Weapon Taunt Vars
 	//
@@ -213,6 +221,19 @@ partial class TFPlayer
 			{
 				//TauntAnimationMaster?.SetAnimParameter( "b_taunt_cancel", true ); //TAM
 				Animator?.SetAnimParameter( "b_taunt_cancel", true );
+				TauntTimeout = TauntTimeoutMaxDuration; //Reset our timeout countdown so we don't accidentally force exit in the middle of an outro animation;
+				return;
+			}
+
+			if (TauntTimeout && TauntCanCancel)
+			{
+				TauntTimeout = TauntTimeoutMaxDuration;
+			}
+
+			//We have somehow reached the timeout and aren't in a cancellable state, force exit taunting
+			if ( TauntTimeout.Fraction >= 0.5f && TauntTimeout && !TauntCanCancel )
+			{
+				StopTaunt();
 				return;
 			}
 		}
@@ -314,6 +335,7 @@ partial class TFPlayer
 		(Animator as TFPlayerAnimator)?.SetAnimParameter( "b_taunt", true );
 
 		Velocity = 0f;
+		TauntTimeout = TauntTimeoutMaxDuration;
 
 		AddCondition( TFCondition.Taunting );
 		TauntEnableMove = false;
@@ -474,6 +496,8 @@ partial class TFPlayer
 		TauntEnableMove = false;
 		TauntCanCancel = false;
 		WaitingForPartner = false;
+
+		TauntTimeout = 1f;
 
 		ActiveTaunt = null;
 
