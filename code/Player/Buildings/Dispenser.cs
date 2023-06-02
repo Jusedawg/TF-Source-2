@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace TFS2;
 [Library( "tf_building_dispenser" )]
 [Title( "Dispenser" )]
+[Category("Gameplay")]
 public partial class Dispenser : TFBuilding
 {
 	protected virtual List<float> LevelHealing => new() { 10f, 15f, 20f };
@@ -28,6 +29,8 @@ public partial class Dispenser : TFBuilding
 	}
 	public override void SetOwner( TFPlayer owner )
 	{
+		if ( Game.IsClient ) return;
+
 		base.SetOwner( owner );
 		Trigger.Team = owner.Team;
 	}

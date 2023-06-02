@@ -19,20 +19,7 @@ public class Wrench : TFMeleeBase
 			}
 			else
 			{
-				int usedMetal = 25;
-				if ( TFGameRules.Current.IsInSetup )
-					usedMetal *= 2;
-
-				usedMetal = TFOwner.GetUsableMetal( usedMetal );
-				int repairMetal = building.ApplyRepairMetal( usedMetal );
-				if(repairMetal != 0)
-				{
-					usedMetal = repairMetal;
-				}
-				else
-				{
-					usedMetal = building.ApplyUpgradeMetal( usedMetal );
-				}
+				int usedMetal = building.ApplyMetal( TFOwner.Metal );
 				TFOwner.ConsumeMetal( usedMetal );
 				if ( usedMetal > 0 )
 					wasSuccess = true;

@@ -82,7 +82,27 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 		MaxHealth = levelData.MaxHealth;
 	}
 
-	public virtual int ApplyRepairMetal(int amount, float metalToRepair = 3f, float repairPower = 1)
+	/// <summary>
+	/// Automatically apply metal to this building. Does checks for repairing vs upgrading etc
+	/// </summary>
+	/// <param name="metalCount">Max metal allowed to be consumed</param>
+	/// <param name="metalToRepair"></param>
+	/// <param name="repairPower"></param>
+	/// <returns></returns>
+	public virtual int ApplyMetal(int metalCount, float metalToRepair = 3f, float repairPower = 1f)
+	{
+		int repairMetal = ApplyRepairMetal( metalCount, metalToRepair, repairPower );
+		if ( repairMetal != 0 )
+			return repairMetal;
+
+		int requestedMetal = 25;
+		if ( TFGameRules.Current.IsInSetup )
+			requestedMetal *= 2;
+
+		requestedMetal = (int)MathF.Min( metalCount, requestedMetal );
+		return ApplyUpgradeMetal( requestedMetal );
+	}
+	public virtual int ApplyRepairMetal(int amount, float metalToRepair = 3f, float repairPower = 1f)
 	{
 		if ( amount <= 0 ) return 0; // No point in trying to apply no metal
 		if ( Level >= MaxLevel ) return 0;
@@ -203,6 +223,8 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 	public override void OnKilled()
 	{
 		PlaySound( Data.DestroyedSound );
+		Owner.Buildings.Remove( this );
+
 		// TODO: Explosion Particle
 		// TODO: Destroyed Voiceline
 		// TODO: Building parts

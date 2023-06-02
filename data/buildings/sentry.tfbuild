@@ -1,0 +1,36 @@
+{
+  "Title": "Sentry Gun",
+  "EngineClass": "tf_building_sentry",
+  "BuildCost": 130,
+  "BuildTime": 10,
+  "UpgradeCost": 200,
+  "UpgradeTime": 1.2,
+  "MaxCount": 1,
+  "Levels": [
+    {
+      "MaxHealth": 150,
+      "Model": "models/buildables/sentry/lvl1/sentry1.vmdl",
+      "DeployModel": "models/buildables/sentry/lvl1/sentry1_build.vmdl"
+    },
+    {
+      "MaxHealth": 180,
+      "Model": "models/buildables/sentry/lvl2/sentry2.vmdl",
+      "DeployModel": "models/buildables/sentry/lvl2/sentry2_upgrade.vmdl"
+    },
+    {
+      "MaxHealth": 216,
+      "Model": "models/buildables/sentry/lvl3/sentry3.vmdl",
+      "DeployModel": "models/buildables/sentry/lvl3/sentry3_upgrade.vmdl"
+    }
+  ],
+  "LevelCount": 3,
+  "Mins": "-20,-20,0",
+  "Maxs": "20,20,66",
+  "BBox": {
+    "Center": "0,0,33",
+    "Size": "40,40,66"
+  },
+  "BlueprintModel": "models/buildables/sentry/shared/sentry1_blueprint.vmdl",
+  "BlueprintIcon": null,
+  "DestroyedSound": "sounds/buildings/building_sentry.explode.sound"
+}
