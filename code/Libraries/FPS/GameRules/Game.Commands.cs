@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System.Linq;
 
 namespace Amper.FPS;
 
@@ -131,5 +132,15 @@ partial class SDKGame
 
 		ent.Position = tr.EndPosition + Vector3.Up * 10;
 	}
+
+	[ConCmd.Admin( "r_skin" )]
+	public static void Command_Respawn( int group )
+	{
+		foreach (var entity in All.OfType<ITeam>().OfType<ModelEntity>() )
+		{
+			entity.SetMaterialGroup( group );
+		}
+	}
+
 	[ConVar.Server] public static float sv_damageforce_scale { get; set; } = 1;
 }
