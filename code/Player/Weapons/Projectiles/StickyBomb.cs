@@ -37,6 +37,7 @@ public partial class StickyBomb : TFProjectile
 		if ( !CanStickOnEntity( eventData.Other.Entity ) )
 			return;
 
+		Tags.Add( CollisionTags.BulletClip );
 		MoveType = ProjectileMoveType.None;
 		SetParent( eventData.This.Entity );
 	}
@@ -58,6 +59,7 @@ public partial class StickyBomb : TFProjectile
 		{
 			// The sticky bomb has touched a surface at least once, let's apply velocity manually
 			MoveType = ProjectileMoveType.Physics;
+			Tags.Remove( CollisionTags.BulletClip );
 
 			var vecDir = WorldSpaceBounds.Center - who.WorldSpaceBounds.Center;
 			vecDir = vecDir.Normal;
