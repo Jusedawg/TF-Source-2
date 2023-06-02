@@ -3141,7 +3141,7 @@
 					{
 						m_id = 873642126
 					}
-					m_networkMode = "ClientPredicted"
+					m_networkMode = "ServerAuthoritative"
 					m_sNote = ""
 					m_inputConnection = 
 					{
@@ -5542,6 +5542,28 @@
 							{
 								key = 
 								{
+									m_id = 28910495
+								}
+								value = 
+								{
+									_class = "CSequenceAnimNode"
+									m_sName = "Unnamed"
+									m_vecPosition = [ -832.0, 256.0 ]
+									m_nNodeID = 
+									{
+										m_id = 28910495
+									}
+									m_networkMode = "ServerAuthoritative"
+									m_sNote = ""
+									m_tagSpans = [  ]
+									m_sequenceName = "taunt04"
+									m_playbackSpeed = 1.0
+									m_bLoop = false
+								}
+							},
+							{
+								key = 
+								{
 									m_id = 29848054
 								}
 								value = 
@@ -5591,7 +5613,7 @@
 								{
 									_class = "CStateMachineAnimNode"
 									m_sName = "Taunt: Intro Looping"
-									m_vecPosition = [ -288.0, 32.0 ]
+									m_vecPosition = [ -576.0, 32.0 ]
 									m_nNodeID = 
 									{
 										m_id = 150367614
@@ -5824,7 +5846,7 @@
 								{
 									_class = "CStateMachineAnimNode"
 									m_sName = "Taunt: Mannrobics SM"
-									m_vecPosition = [ -288.0, -608.0 ]
+									m_vecPosition = [ -448.0, -608.0 ]
 									m_nNodeID = 
 									{
 										m_id = 234924155
@@ -6290,7 +6312,7 @@
 								{
 									_class = "CSequenceAnimNode"
 									m_sName = "Unnamed"
-									m_vecPosition = [ -832.0, 352.0 ]
+									m_vecPosition = [ -832.0, 400.0 ]
 									m_nNodeID = 
 									{
 										m_id = 336909670
@@ -6602,7 +6624,7 @@
 								{
 									_class = "CStateMachineAnimNode"
 									m_sName = "Taunt: Looping"
-									m_vecPosition = [ -288.0, -288.0 ]
+									m_vecPosition = [ -640.0, -288.0 ]
 									m_nNodeID = 
 									{
 										m_id = 452827352
@@ -6829,9 +6851,22 @@
 												m_id = 4294967295
 											}
 										},
+										{
+											m_nodeID = 
+											{
+												m_id = 1546959555
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
 									]
 									m_tags = 
 									[
+										{
+											m_id = 4294967295
+										},
 										{
 											m_id = 4294967295
 										},
@@ -7042,7 +7077,7 @@
 								{
 									_class = "CSequenceAnimNode"
 									m_sName = "Unnamed"
-									m_vecPosition = [ -832.0, 304.0 ]
+									m_vecPosition = [ -832.0, 352.0 ]
 									m_nNodeID = 
 									{
 										m_id = 1004986088
@@ -7284,7 +7319,7 @@
 								{
 									_class = "CSequenceAnimNode"
 									m_sName = "Unnamed"
-									m_vecPosition = [ -832.0, 256.0 ]
+									m_vecPosition = [ -832.0, 304.0 ]
 									m_nNodeID = 
 									{
 										m_id = 1494514593
@@ -7493,7 +7528,7 @@
 								{
 									_class = "CStateMachineAnimNode"
 									m_sName = "Taunt: Simple Partner"
-									m_vecPosition = [ -288.0, -192.0 ]
+									m_vecPosition = [ -576.0, -192.0 ]
 									m_nNodeID = 
 									{
 										m_id = 1751579217
@@ -7917,7 +7952,31 @@
 										},
 										{
 											_class = "CAnimState"
-											m_transitions = [  ]
+											m_transitions = 
+											[
+												{
+													_class = "CAnimStateTransition"
+													m_conditions = [  ]
+													m_blendDuration = 0.2
+													m_destState = 
+													{
+														m_id = 1048193784
+													}
+													m_bReset = true
+													m_resetCycleOption = "Beginning"
+													m_flFixedCycleValue = 0.0
+													m_blendCurve = 
+													{
+														m_vControlPoint1 = [ 0.5, 0.0 ]
+														m_vControlPoint2 = [ 0.5, 1.0 ]
+													}
+													m_bForceFootPlant = false
+													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
+												},
+											]
 											m_tags = 
 											[
 												{
@@ -8046,7 +8105,17 @@
 										{
 											m_nodeID = 
 											{
+												m_id = 28910495
+											}
+											m_outputID = 
+											{
 												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 1494514593
 											}
 											m_outputID = 
 											{
@@ -8086,6 +8155,9 @@
 									]
 									m_tags = 
 									[
+										{
+											m_id = 4294967295
+										},
 										{
 											m_id = 4294967295
 										},
@@ -23758,6 +23830,7 @@
 					"taunt_laugh",
 					"taunt_replay",
 					"taunt_russian",
+					"weapon_heavy_lunchbox",
 					"weapon_heavy_melee",
 					"weapon_heavy_primary",
 					"weapon_heavy_secondary",

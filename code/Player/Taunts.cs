@@ -404,7 +404,7 @@ partial class TFPlayer
 			animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
 		}
 
-		StayThirdperson = IsThirdperson;
+		StayThirdperson = IsThirdpersonTF;
 		ThirdpersonSet( true );
 
 		ApplyTauntConds();

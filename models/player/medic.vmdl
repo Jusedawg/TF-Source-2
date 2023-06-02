@@ -5090,6 +5090,36 @@
 						master_morph_weight = -1.0
 						morph_weights = [  ]
 					},
+					{
+						_class = "WeightList"
+						name = "weights_IgnoreWeaponBones"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "bip_foot_L_IK"
+								weight = 1.0
+							},
+							{
+								bone = "bip_foot_R_IK"
+								weight = 1.0
+							},
+							{
+								bone = "bip_pelvis"
+								weight = 1.0
+							},
+							{
+								bone = "weapon_bone"
+								weight = 0.0
+							},
+							{
+								bone = "weapon_bone_l"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
 				]
 			},
 			{
@@ -8646,11 +8676,24 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
 											Int = 1
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
+									},
+									{
+										_class = "AnimEvent"
+										event_class = "AE_GENERIC_EVENT"
+										event_frame = 119
+										event_keys = 
+										{
+											TypeName = "TF_HIDE_WEAPON"
+											Int = 0
 											Float = 0.0
 											Vector = [ 0.0, 0.0, 0.0 ]
 											StringData = ""
@@ -8697,11 +8740,24 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
 											Int = 1
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
+									},
+									{
+										_class = "AnimEvent"
+										event_class = "AE_GENERIC_EVENT"
+										event_frame = 75
+										event_keys = 
+										{
+											TypeName = "TF_HIDE_WEAPON"
+											Int = 0
 											Float = 0.0
 											Vector = [ 0.0, 0.0, 0.0 ]
 											StringData = ""
@@ -8762,7 +8818,6 @@
 							{
 								_class = "AnimFile"
 								name = "taunt06"
-								disabled = true
 								activity_name = ""
 								activity_weight = 1
 								weight_list_name = ""
@@ -8862,11 +8917,24 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
 											Int = 1
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
+									},
+									{
+										_class = "AnimEvent"
+										event_class = "AE_GENERIC_EVENT"
+										event_frame = 99
+										event_keys = 
+										{
+											TypeName = "TF_HIDE_WEAPON"
+											Int = 0
 											Float = 0.0
 											Vector = [ 0.0, 0.0, 0.0 ]
 											StringData = ""
@@ -8913,11 +8981,24 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
 											Int = 1
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
+									},
+									{
+										_class = "AnimEvent"
+										event_class = "AE_GENERIC_EVENT"
+										event_frame = 145
+										event_keys = 
+										{
+											TypeName = "TF_HIDE_WEAPON"
+											Int = 0
 											Float = 0.0
 											Vector = [ 0.0, 0.0, 0.0 ]
 											StringData = ""
@@ -9183,11 +9264,11 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 119
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
-											Int = 1
+											Int = 0
 											Float = 0.0
 											Vector = [ 0.0, 0.0, 0.0 ]
 											StringData = ""
@@ -9234,11 +9315,11 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 119
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
-											Int = 1
+											Int = 0
 											Float = 0.0
 											Vector = [ 0.0, 0.0, 0.0 ]
 											StringData = ""
@@ -9285,7 +9366,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -9357,7 +9438,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -10640,7 +10721,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -10704,7 +10785,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -10814,7 +10895,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -10950,7 +11031,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -11023,7 +11104,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"

@@ -2525,7 +2525,7 @@
 					{
 						m_id = 873642126
 					}
-					m_networkMode = "ClientPredicted"
+					m_networkMode = "ServerAuthoritative"
 					m_sNote = ""
 					m_inputConnection = 
 					{
@@ -5648,7 +5648,7 @@
 								{
 									_class = "CSequenceAnimNode"
 									m_sName = "Unnamed"
-									m_vecPosition = [ -832.0, 400.0 ]
+									m_vecPosition = [ -832.0, 448.0 ]
 									m_nNodeID = 
 									{
 										m_id = 336909670
@@ -5656,7 +5656,7 @@
 									m_networkMode = "ServerAuthoritative"
 									m_sNote = ""
 									m_tagSpans = [  ]
-									m_sequenceName = "taunt02"
+									m_sequenceName = "taunt04"
 									m_playbackSpeed = 1.0
 									m_bLoop = false
 								}
@@ -5928,7 +5928,7 @@
 											{
 												m_nodeID = 
 												{
-													m_id = 475697717
+													m_id = 1018567367
 												}
 												m_outputID = 
 												{
@@ -6077,185 +6077,6 @@
 									]
 									m_bBlockWaningTags = false
 									m_bLockStateWhenWaning = false
-								}
-							},
-							{
-								key = 
-								{
-									m_id = 475697717
-								}
-								value = 
-								{
-									_class = "CSelectorAnimNode"
-									m_sName = "Taunt Selection"
-									m_vecPosition = [ -32.0, -608.0 ]
-									m_nNodeID = 
-									{
-										m_id = 475697717
-									}
-									m_networkMode = "ServerAuthoritative"
-									m_sNote = ""
-									m_children = 
-									[
-										{
-											m_nodeID = 
-											{
-												m_id = 234924155
-											}
-											m_outputID = 
-											{
-												m_id = 4294967295
-											}
-										},
-										{
-											m_nodeID = 
-											{
-												m_id = 452827352
-											}
-											m_outputID = 
-											{
-												m_id = 4294967295
-											}
-										},
-										{
-											m_nodeID = 
-											{
-												m_id = 1751579217
-											}
-											m_outputID = 
-											{
-												m_id = 4294967295
-											}
-										},
-										{
-											m_nodeID = 
-											{
-												m_id = 1546959555
-											}
-											m_outputID = 
-											{
-												m_id = 4294967295
-											}
-										},
-										{
-											m_nodeID = 
-											{
-												m_id = 1546959555
-											}
-											m_outputID = 
-											{
-												m_id = 4294967295
-											}
-										},
-										{
-											m_nodeID = 
-											{
-												m_id = 150367614
-											}
-											m_outputID = 
-											{
-												m_id = 4294967295
-											}
-										},
-										{
-											m_nodeID = 
-											{
-												m_id = 1546959555
-											}
-											m_outputID = 
-											{
-												m_id = 4294967295
-											}
-										},
-										{
-											m_nodeID = 
-											{
-												m_id = 1546959555
-											}
-											m_outputID = 
-											{
-												m_id = 4294967295
-											}
-										},
-										{
-											m_nodeID = 
-											{
-												m_id = 1546959555
-											}
-											m_outputID = 
-											{
-												m_id = 4294967295
-											}
-										},
-										{
-											m_nodeID = 
-											{
-												m_id = 1546959555
-											}
-											m_outputID = 
-											{
-												m_id = 4294967295
-											}
-										},
-									]
-									m_tags = 
-									[
-										{
-											m_id = 4294967295
-										},
-										{
-											m_id = 4294967295
-										},
-										{
-											m_id = 4294967295
-										},
-										{
-											m_id = 4294967295
-										},
-										{
-											m_id = 4294967295
-										},
-										{
-											m_id = 4294967295
-										},
-										{
-											m_id = 4294967295
-										},
-										{
-											m_id = 4294967295
-										},
-										{
-											m_id = 4294967295
-										},
-										{
-											m_id = 4294967295
-										},
-									]
-									m_selectionSource = "SelectionSource_Enum"
-									m_boolParamID = 
-									{
-										m_id = 4294967295
-									}
-									m_enumParamID = 
-									{
-										m_id = 662934062
-									}
-									m_intParamID = 
-									{
-										m_id = 4294967295
-									}
-									m_intParamMinValue = 0
-									m_intParamMaxValue = 2
-									m_blendDuration = 0.0
-									m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
-									m_bResetOnChange = true
-									m_bSyncCyclesOnChange = false
-									m_blendCurve = 
-									{
-										m_vControlPoint1 = [ 0.5, 0.0 ]
-										m_vControlPoint2 = [ 0.5, 1.0 ]
-									}
-									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -6435,7 +6256,7 @@
 								{
 									_class = "CSequenceAnimNode"
 									m_sName = "Unnamed"
-									m_vecPosition = [ -832.0, 352.0 ]
+									m_vecPosition = [ -832.0, 400.0 ]
 									m_nNodeID = 
 									{
 										m_id = 1004986088
@@ -6446,6 +6267,198 @@
 									m_sequenceName = "taunt01"
 									m_playbackSpeed = 1.0
 									m_bLoop = false
+								}
+							},
+							{
+								key = 
+								{
+									m_id = 1018567367
+								}
+								value = 
+								{
+									_class = "CSelectorAnimNode"
+									m_sName = "Taunt Selection"
+									m_vecPosition = [ -32.0, -608.0 ]
+									m_nNodeID = 
+									{
+										m_id = 1018567367
+									}
+									m_networkMode = "ServerAuthoritative"
+									m_sNote = ""
+									m_children = 
+									[
+										{
+											m_nodeID = 
+											{
+												m_id = 234924155
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 452827352
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 1751579217
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 1546959555
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 1546959555
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 150367614
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 1546959555
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 1546959555
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 1546959555
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 1546959555
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
+												m_id = 1546959555
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+									]
+									m_tags = 
+									[
+										{
+											m_id = 4294967295
+										},
+										{
+											m_id = 4294967295
+										},
+										{
+											m_id = 4294967295
+										},
+										{
+											m_id = 4294967295
+										},
+										{
+											m_id = 4294967295
+										},
+										{
+											m_id = 4294967295
+										},
+										{
+											m_id = 4294967295
+										},
+										{
+											m_id = 4294967295
+										},
+										{
+											m_id = 4294967295
+										},
+										{
+											m_id = 4294967295
+										},
+										{
+											m_id = 4294967295
+										},
+									]
+									m_selectionSource = "SelectionSource_Enum"
+									m_boolParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_enumParamID = 
+									{
+										m_id = 662934062
+									}
+									m_intParamID = 
+									{
+										m_id = 4294967295
+									}
+									m_intParamMinValue = 0
+									m_intParamMaxValue = 2
+									m_blendDuration = 0.0
+									m_tagBehavior = "SelectorTagBehavior_OffWhenFinished"
+									m_bResetOnChange = true
+									m_bSyncCyclesOnChange = false
+									m_blendCurve = 
+									{
+										m_vControlPoint1 = [ 0.5, 0.0 ]
+										m_vControlPoint2 = [ 0.5, 1.0 ]
+									}
+									m_intParamNames = [  ]
 								}
 							},
 							{
@@ -6677,7 +6690,7 @@
 								{
 									_class = "CSequenceAnimNode"
 									m_sName = "Unnamed"
-									m_vecPosition = [ -832.0, 304.0 ]
+									m_vecPosition = [ -832.0, 352.0 ]
 									m_nNodeID = 
 									{
 										m_id = 1494514593
@@ -7305,7 +7318,31 @@
 										},
 										{
 											_class = "CAnimState"
-											m_transitions = [  ]
+											m_transitions = 
+											[
+												{
+													_class = "CAnimStateTransition"
+													m_conditions = [  ]
+													m_blendDuration = 0.2
+													m_destState = 
+													{
+														m_id = 1048193784
+													}
+													m_bReset = true
+													m_resetCycleOption = "Beginning"
+													m_flFixedCycleValue = 0.0
+													m_blendCurve = 
+													{
+														m_vControlPoint1 = [ 0.5, 0.0 ]
+														m_vControlPoint2 = [ 0.5, 1.0 ]
+													}
+													m_bForceFootPlant = false
+													m_bDisabled = false
+													m_bRandomTimeBetween = false
+													m_flRandomTimeStart = 0.0
+													m_flRandomTimeEnd = 0.0
+												},
+											]
 											m_tags = 
 											[
 												{
@@ -7454,6 +7491,16 @@
 										{
 											m_nodeID = 
 											{
+												m_id = 1925146971
+											}
+											m_outputID = 
+											{
+												m_id = 4294967295
+											}
+										},
+										{
+											m_nodeID = 
+											{
 												m_id = 1494514593
 											}
 											m_outputID = 
@@ -7484,6 +7531,9 @@
 									]
 									m_tags = 
 									[
+										{
+											m_id = 4294967295
+										},
 										{
 											m_id = 4294967295
 										},
@@ -7560,6 +7610,28 @@
 									m_sNote = ""
 									m_tagSpans = [  ]
 									m_sequenceName = "taunt_highfiveSuccess"
+									m_playbackSpeed = 1.0
+									m_bLoop = false
+								}
+							},
+							{
+								key = 
+								{
+									m_id = 1925146971
+								}
+								value = 
+								{
+									_class = "CSequenceAnimNode"
+									m_sName = "Unnamed"
+									m_vecPosition = [ -832.0, 304.0 ]
+									m_nNodeID = 
+									{
+										m_id = 1925146971
+									}
+									m_networkMode = "ServerAuthoritative"
+									m_sNote = ""
+									m_tagSpans = [  ]
+									m_sequenceName = "taunt07"
 									m_playbackSpeed = 1.0
 									m_bLoop = false
 								}
@@ -38508,6 +38580,7 @@
 					"taunt_replay",
 					"taunt_russian",
 					"taunt_coffee",
+					"weapon_soldier_chestthump",
 					"weapon_soldier_melee",
 					"weapon_soldier_primary",
 					"weapon_soldier_secondary",
