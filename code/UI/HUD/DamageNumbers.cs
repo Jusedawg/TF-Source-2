@@ -33,6 +33,10 @@ public class DamageNumbers : Panel
 
 		// Getting the target of the damage.
 		var damage = args.Damage;
+		
+		// If we do no damage (like hitting an ubered player), ignore.
+		if ( damage <= 0 )
+			return;
 
 		// Play hit sound, if the player is alive.
 		if ( victim.IsAlive() )
