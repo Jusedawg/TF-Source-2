@@ -6,100 +6,6 @@
 		children = 
 		[
 			{
-				_class = "BoneMarkupList"
-				bone_cull_type = "None"
-			},
-			{
-				_class = "Skeleton"
-				children = 
-				[
-					{
-						_class = "Bone"
-						name = "base"
-						children = 
-						[
-							{
-								_class = "Bone"
-								name = "redx"
-								origin = [ 0.0, -2.0, 0.0 ]
-								angles = [ -0.0, 0.0, 0.0 ]
-								do_not_discard = true
-							},
-							{
-								_class = "Bone"
-								name = "cube"
-								origin = [ 0.0, 5.0, 0.0 ]
-								angles = [ -0.0, 0.0, 0.0 ]
-								do_not_discard = true
-							},
-							{
-								_class = "Bone"
-								name = "cube1"
-								origin = [ 0.0, 8.374099, 0.0 ]
-								angles = [ -0.0, 0.0, 0.0 ]
-								do_not_discard = true
-							},
-							{
-								_class = "Bone"
-								name = "cube2"
-								origin = [ 0.0, 14.891129, 0.0 ]
-								angles = [ -0.0, 0.0, 0.0 ]
-								do_not_discard = true
-							},
-							{
-								_class = "Bone"
-								name = "cube3"
-								children = 
-								[
-									{
-										_class = "Bone"
-										name = "cube4"
-										origin = [ 0.0, 10.622133, 0.0 ]
-										angles = [ -0.0, 0.0, 0.0 ]
-										do_not_discard = true
-									},
-									{
-										_class = "Bone"
-										name = "cube5"
-										origin = [ 0.0, 38.636467, 0.0 ]
-										angles = [ -0.0, 0.0, 0.0 ]
-										do_not_discard = true
-									},
-								]
-								origin = [ 0.0, 21.992155, 0.0 ]
-								angles = [ -0.0, 0.0, 0.0 ]
-								do_not_discard = true
-							},
-						]
-						origin = [ 0.0, 0.0, 0.0 ]
-						angles = [ -0.0, 0.0, 89.999985 ]
-						do_not_discard = true
-					},
-				]
-			},
-			{
-				_class = "MaterialGroupList"
-				children = 
-				[
-					{
-						_class = "DefaultMaterialGroup"
-						remaps = 
-						[
-							{
-								from = "teleporter_blueprint_exit_is_unused.vmat"
-								to = "materials/models/buildables/teleporter/teleporter_blueprint_exit.vmat"
-							},
-							{
-								from = "teleporter_blueprint_model_is_unused.vmat"
-								to = "materials/models/buildables/teleporter/teleporter_blueprint_model.vmat"
-							},
-						]
-						use_global_default = false
-						global_default_material = ""
-					},
-				]
-			},
-			{
 				_class = "HitboxSetList"
 				children = 
 				[
@@ -113,7 +19,7 @@
 								parent_bone = "base"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -23.597498, -2.0, -29.869791 ]
 								hitbox_maxs = [ 23.455549, 21.992155, 29.869791 ]
 							},
@@ -122,7 +28,7 @@
 								parent_bone = "cube"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -25.461935, -3.783993, -15.474764 ]
 								hitbox_maxs = [ 25.461935, 1.529125, 16.21232 ]
 							},
@@ -131,7 +37,7 @@
 								parent_bone = "cube1"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -14.565353, -1.680063, -6.59862 ]
 								hitbox_maxs = [ 14.565353, 3.254944, 6.598627 ]
 							},
@@ -140,7 +46,7 @@
 								parent_bone = "cube2"
 								surface_property = "default"
 								translation_only = false
-								group_id = 0
+								tags = ""
 								hitbox_mins = [ -25.706482, -3.217513, -6.404212 ]
 								hitbox_maxs = [ 25.706482, 0.0, 6.411069 ]
 							},
@@ -154,7 +60,8 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "models/buildables/teleporter/teleporter_blueprint_exit_refs/mesh/teleporter_blueprint_exit_lod0.dmx"
+						name = "teleporter_blueprint_exit_bg_body_lod0"
+						filename = "models\\buildables\\teleporter\\teleporter_blueprint_exit_fbx\\mesh\\teleporter_blueprint_exit_bg_body_lod0.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
@@ -176,7 +83,7 @@
 				[
 					{
 						_class = "AnimFile"
-						name = "exit_idle"
+						name = "idle"
 						activity_name = "ACT_OBJ_PLACING"
 						activity_weight = 1
 						weight_list_name = ""
@@ -188,7 +95,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/buildables/teleporter/teleporter_blueprint_exit_refs/anim/exit_idle.dmx"
+						source_filename = "models\\buildables\\teleporter\\teleporter_blueprint_exit_fbx\\anim\\exit_idle.dmx"
 						start_frame = -1
 						end_frame = -1
 						framerate = 30.0
@@ -197,7 +104,7 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "exit_reject"
+						name = "reject"
 						activity_name = "ACT_OBJ_IDLE"
 						activity_weight = 1
 						weight_list_name = ""
@@ -209,7 +116,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models/buildables/teleporter/teleporter_blueprint_exit_refs/anim/exit_reject.dmx"
+						source_filename = "models\\buildables\\teleporter\\teleporter_blueprint_exit_fbx\\anim\\exit_reject.dmx"
 						start_frame = -1
 						end_frame = -1
 						framerate = 1.0
@@ -219,9 +126,27 @@
 				]
 				default_root_bone_name = ""
 			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = ""
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = false
+					},
+				]
+				bone_cull_type = "None"
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""
-		anim_graph_name = "models/buildables/shared/blueprint.vanmgrph"
+		anim_graph_name = "models/buildables/animgraph/blueprint.vanmgrph"
+		base_model_name = ""
+		importer_notes = """
+Imported from compiled VMDL_C
+"""
 	}
 }
