@@ -620,7 +620,6 @@ partial class TFPlayer
 	/// Creates a temporary prop model for taunts
 	/// </summary>
 	/// <param name="taunt"></param>
-	/// <param name="player"></param>
 	public void CreateTauntProp( TauntData taunt )
 	{
 		var propPath = taunt.GetPropModel( GetTFPlayerClass() );
@@ -896,28 +895,32 @@ partial class TFPlayer
 
 		if ( name == "TF_HIDE_WEAPON" )
 		{
-			var weapon = ActiveWeapon as TFWeaponBase;
-			if ( weapon == null ) return;
-
-			if ( intData == 0 )
+			TFWeaponBase weapon = (TFWeaponBase)ActiveWeapon;
+			if ( weapon != null )
 			{
-				weapon.EnableDrawing = true;
-			}
-			if ( intData == 1 )
-			{
-				weapon.EnableDrawing = false;
+				if ( intData == 0 )
+				{
+					weapon.EnableDrawing = true;
+				}
+				if ( intData == 1 )
+				{
+					weapon.EnableDrawing = false;
+				}
 			}
 		}
 
 		if ( name == "TF_HIDE_TAUNTPROP" )
 		{
-			if ( intData == 0 && TauntPropModel.EnableDrawing == false )
+			if ( TauntPropModel != null )
 			{
-				TauntPropModel.EnableDrawing = true;
-			}
-			if ( intData == 1 && TauntPropModel.EnableDrawing == true )
-			{
-				TauntPropModel.EnableDrawing = false;
+				if ( intData == 0 && TauntPropModel.EnableDrawing == false )
+				{
+					TauntPropModel.EnableDrawing = true;
+				}
+				if ( intData == 1 && TauntPropModel.EnableDrawing == true )
+				{
+					TauntPropModel.EnableDrawing = false;
+				}
 			}
 		}
 
@@ -928,10 +931,11 @@ partial class TFPlayer
 
 		if ( name == "TF_SET_BODYGROUP_WEAPON" )
 		{
-			var weapon = ActiveWeapon as TFWeaponBase;
-			if ( weapon == null ) return;
-
-			weapon.SetBodyGroup( stringData, intData );
+			TFWeaponBase weapon = (TFWeaponBase)ActiveWeapon;
+			if ( weapon != null )
+			{
+				weapon.SetBodyGroup( stringData, intData );
+			}
 		}
 
 		if ( name == "TF_TAUNTKILL_HEAVYHIGHNOON" )
