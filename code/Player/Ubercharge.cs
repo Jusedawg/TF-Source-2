@@ -23,8 +23,13 @@ partial class TFPlayer
 		var medigun = GetWeaponOfType<Medigun>();
 		if ( medigun.IsValid() && medigun.IsReleasingCharge )
 		{
-			var effect = medigun.GetChargeType();
-			newProvidedEffects[effect] = medigun;
+			if ( medigun == ActiveWeapon )
+			{
+				var effect = medigun.GetChargeType();
+				newProvidedEffects[effect] = medigun;
+			}
+
+			medigun.DrainCharge();
 		}
 
 		// Checking what effects healers provide right now.
