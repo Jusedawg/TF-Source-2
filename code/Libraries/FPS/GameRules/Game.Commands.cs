@@ -136,7 +136,7 @@ partial class SDKGame
 	[ConCmd.Admin( "r_skin" )]
 	public static void Command_Respawn( int group )
 	{
-		foreach (var entity in All.OfType<ITeam>().OfType<ModelEntity>() )
+		foreach ( var entity in All.OfType<ITeam>().OfType<ModelEntity>() )
 		{
 			entity.SetMaterialGroup( group );
 		}
