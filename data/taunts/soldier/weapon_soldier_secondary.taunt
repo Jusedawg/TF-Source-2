@@ -2,12 +2,20 @@
   "DisplayName": "Taunt: Shotgun",
   "Icon": "",
   "SequenceName": "taunt04",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Soldier",
-  "TauntType": "Once",
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntPropModel": null,
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Soldier"
+    }
+  ],
+  "PropModelEntries": null,
   "TauntMovespeed": 0,
+  "TauntStrafing": false,
   "TauntForceMove": false,
   "TauntMusic": null
 }

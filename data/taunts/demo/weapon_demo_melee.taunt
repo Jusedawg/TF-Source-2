@@ -2,11 +2,20 @@
   "DisplayName": "Taunt: Bottle",
   "Icon": "",
   "SequenceName": "taunt03",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Demoman",
-  "TauntType": "Once",
-  "TauntMovespeed": 0,
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntPropModel": ""
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Demoman"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

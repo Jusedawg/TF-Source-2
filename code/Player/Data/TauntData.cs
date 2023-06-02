@@ -40,11 +40,6 @@ public class TauntData : GameResource
 	public string SequenceName { get; set; }
 
 	/// <summary>
-	/// Is this taunt running on the Legacy Pre-AnimGraph Tag system?
-	/// </summary>
-	public bool Legacy { get; set; }
-
-	/// <summary>
 	/// Is this taunt running on the Taunt Animation Model system?
 	/// </summary>
 	[Title( "Use Taunt Animation Model System" )]
@@ -63,21 +58,11 @@ public class TauntData : GameResource
 	public bool RequireGround { get; set; } = true;
 
 	/// <summary>
-	/// If enabled, allows this taunt to accept partners
+	/// If enabled, taunt will only be performed if there is space allowed for a partner
 	/// </summary>
 	[Category( "Attributes" )]
 	[Title( "Partner Taunt" )]
 	public bool IsPartnerTaunt { get; set; }
-
-	/// <summary>
-	/// Which class can use this taunt? Used to generate the taunt list
-	/// </summary>
-	//[Category( "Attributes" )]
-	//[Obsolete]
-	//public TFPlayerClass Class { get; set; } = TFPlayerClass.Undefined;
-
-	[Category( "Attributes" )]
-	public TauntType TauntType { get; set; }
 
 	/// <summary>
 	/// Allows players to join into the taunt by double-tapping the taunt button while looking at a player performing the taunt
@@ -113,6 +98,13 @@ public class TauntData : GameResource
 	[Category( "Movement" )]
 	[Title( "Maximum Movmement Speed" )]
 	public float TauntMovespeed { get; set; }
+
+	/// <summary>
+	/// Allows the player to strafe instead of rotate when using left/right inputs
+	/// </summary>
+	[Category( "Movement" )]
+	[Title( "Allow Strafing" )]
+	public bool TauntStrafing { get; set; }
 
 	/// <summary>
 	/// Forces the player to move forward

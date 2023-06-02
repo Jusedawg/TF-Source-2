@@ -2,12 +2,42 @@
   "DisplayName": "Taunt: Conga",
   "Icon": "",
   "SequenceName": "taunt_conga",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Undefined",
-  "TauntType": "Looping",
+  "RequireGround": false,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": true,
-  "TauntPropModel": null,
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {},
+    {
+      "playerClass": "Soldier"
+    },
+    {
+      "playerClass": "Pyro"
+    },
+    {
+      "playerClass": "Demoman"
+    },
+    {
+      "playerClass": "Heavy"
+    },
+    {
+      "playerClass": "Engineer"
+    },
+    {
+      "playerClass": "Medic"
+    },
+    {
+      "playerClass": "Sniper"
+    },
+    {
+      "playerClass": "Spy"
+    }
+  ],
+  "PropModelEntries": null,
   "TauntMovespeed": 50,
+  "TauntStrafing": false,
   "TauntForceMove": true,
   "TauntMusic": "sounds/music/music.conga.sound"
 }

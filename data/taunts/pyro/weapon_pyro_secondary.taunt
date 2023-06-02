@@ -2,11 +2,20 @@
   "DisplayName": "Taunt: Hadouken",
   "Icon": "",
   "SequenceName": "taunt02",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Pyro",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": false,
-  "TauntPropModel": null
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Pyro"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

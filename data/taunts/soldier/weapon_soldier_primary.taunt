@@ -2,11 +2,20 @@
   "DisplayName": "Taunt: Rocket Launcher",
   "Icon": "",
   "SequenceName": "taunt01",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Soldier",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": false,
-  "TauntPropModel": null
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Soldier"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

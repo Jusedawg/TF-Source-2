@@ -2,11 +2,20 @@
   "DisplayName": "Taunt: Kukri",
   "Icon": "",
   "SequenceName": "taunt03",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Sniper",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": false,
-  "TauntPropModel": null
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Sniper"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

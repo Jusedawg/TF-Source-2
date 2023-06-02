@@ -2,11 +2,20 @@
   "DisplayName": "Taunt: Spycrab",
   "Icon": "",
   "SequenceName": "taunt05",
-  "Disabled": false,
-  "Class": "Spy",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "UseTAM": false,
+  "Disabled": true,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": false,
-  "TauntPropModel": null
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Spy"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

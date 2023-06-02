@@ -2,11 +2,20 @@
   "DisplayName": "Taunt: Fresh Brewed Victory",
   "Icon": "",
   "SequenceName": "taunt_coffee",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Soldier",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": true,
-  "TauntPropModel": ""
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Soldier"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

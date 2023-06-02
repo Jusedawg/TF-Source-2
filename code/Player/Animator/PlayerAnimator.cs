@@ -9,6 +9,10 @@ partial class TFPlayerAnimator : PlayerAnimator
 	new TFPlayer Player => (TFPlayer)base.Player;
 	const float DeltaMultiplier = 5f;
 
+	private bool IsTaunting { get; set; }
+	private TimeUntil ExitTauntTime;
+	const float TauntRotationBlendTime = 0.5f;
+
 	private TimeUntil NextLookTime;
 	private Entity LookTarget;
 
@@ -21,7 +25,10 @@ partial class TFPlayerAnimator : PlayerAnimator
 	{
 		if ( Player.InCondition( TFCondition.Taunting ) )
 		{
-			UpdateTauntMovement();
+			if ( Player.ActiveTaunt.TauntStrafing )
+				Player.Rotation = GetIdealRotation();
+			else
+				UpdateTauntRotation();
 			return;
 		}
 
@@ -51,21 +58,42 @@ public override void UpdateRotation()
 	{
 		if ( Player.InCondition( TFCondition.Taunting ) )
 		{
+			if ( !IsTaunting )
+			{
+				IsTaunting = true;
+			}
+
 			UpdateTauntRotation();
 			return;
 		}
 
 		var idealRotation = GetIdealRotation();
 
-		// If we're moving, rotate to our ideal rotation
-		if ( Player.Velocity.Length > 10 )
+		//Handle Timer Settings when we exit a taunt
+		if ( IsTaunting )
 		{
-			Player.Rotation = Rotation.Slerp( Player.Rotation, idealRotation, Time.Delta * DeltaMultiplier ); 
+			IsTaunting = false;
+			ExitTauntTime = TauntRotationBlendTime;
 		}
-		// Clamp the foot rotation to within 90 degrees of the ideal rotation
-		Player.Rotation = Player.Rotation.Clamp( idealRotation, 45 );
+
+		//if we are in a specific window, rotate slowly without clamping
+		if ( !ExitTauntTime )
+		{
+			Player.Rotation = Rotation.Lerp( Player.Rotation, idealRotation, (float)ExitTauntTime.Fraction );
+		}
+
+		else 
+		{
+
+			// If we're moving, rotate to our ideal rotation
+			if ( Player.Velocity.Length > 10 )
+			{
+				Player.Rotation = Rotation.Slerp( Player.Rotation, idealRotation, Time.Delta * DeltaMultiplier );
+			}
+			// Clamp the foot rotation to within 90 degrees of the ideal rotation
+			Player.Rotation = Player.Rotation.Clamp( idealRotation, 45 );
+		}
 	}
-	
 
 	public override void UpdateLookAt()
 	{
@@ -171,15 +199,20 @@ public override void UpdateRotation()
 	public void UpdateTauntMovement()
 	{
 		var LRinput = Input.AnalogMove.y;
-		var currX = Player.GetAnimParameterFloat("move_x");
-		var targetX = MathX.Lerp( currX, -LRinput, Time.Delta * DeltaMultiplier );
 
-		SetAnimParameter( "move_x", targetX );
+		//If we don't allow strafing, convert LR input into smooth turn blending
+		if ( !Player.ActiveTaunt.TauntStrafing )
+		{
+			var currX = Player.GetAnimParameterFloat( "move_x" );
+			var targetX = MathX.Lerp( currX, -LRinput, Time.Delta * DeltaMultiplier );
+
+			Player.SetAnimParameter( "move_x", targetX );
+		}
 	}
 
 	public void UpdateTauntRotation()
 	{
-		if ( Player.TauntEnableMove )
+		if ( Player.TauntEnableMove && !Player.ActiveTaunt.TauntStrafing )
 		{
 			var LRinput = Input.AnalogMove.y;
 			var targetRot = (QAngle)Player.Rotation;

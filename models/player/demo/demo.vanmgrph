@@ -95,7 +95,7 @@
 					{
 						m_id = 873642126
 					}
-					m_networkMode = "ServerAuthoritative"
+					m_networkMode = "ClientPredicted"
 					m_sNote = ""
 					m_inputConnection = 
 					{
@@ -3714,7 +3714,7 @@
 											}
 											m_position = [ 80.0, -48.0 ]
 											m_bIsStartState = false
-											m_bIsEndtState = false
+											m_bIsEndtState = true
 											m_bIsPassthrough = false
 											m_bIsRootMotionExclusive = false
 											m_bAlwaysEvaluate = false
@@ -5598,13 +5598,8 @@
 													m_flRandomTimeEnd = 0.0
 												},
 											]
-											m_tags = 
-											[
-												{
-													m_id = 1955466051
-												},
-											]
-											m_tagBehaviors = [ 2 ]
+											m_tags = [  ]
+											m_tagBehaviors = [  ]
 											m_name = "Taunt"
 											m_inputConnection = 
 											{
@@ -5837,8 +5832,13 @@
 													m_flRandomTimeEnd = 0.0
 												},
 											]
-											m_tags = [  ]
-											m_tagBehaviors = [  ]
+											m_tags = 
+											[
+												{
+													m_id = 266257893
+												},
+											]
+											m_tagBehaviors = [ 0 ]
 											m_name = "Intro"
 											m_inputConnection = 
 											{
@@ -5978,8 +5978,16 @@
 													m_flRandomTimeEnd = 0.0
 												},
 											]
-											m_tags = [  ]
-											m_tagBehaviors = [  ]
+											m_tags = 
+											[
+												{
+													m_id = 1165686901
+												},
+												{
+													m_id = 266257893
+												},
+											]
+											m_tagBehaviors = [ 0, 0 ]
 											m_name = "Idle"
 											m_inputConnection = 
 											{
@@ -6098,13 +6106,8 @@
 													m_flRandomTimeEnd = 0.0
 												},
 											]
-											m_tags = 
-											[
-												{
-													m_id = 138305248
-												},
-											]
-											m_tagBehaviors = [ 0 ]
+											m_tags = [  ]
+											m_tagBehaviors = [  ]
 											m_name = "Associate"
 											m_inputConnection = 
 											{
@@ -6156,7 +6159,7 @@
 											}
 											m_position = [ -176.0, 368.0 ]
 											m_bIsStartState = false
-											m_bIsEndtState = false
+											m_bIsEndtState = true
 											m_bIsPassthrough = false
 											m_bIsRootMotionExclusive = false
 											m_bAlwaysEvaluate = false
@@ -22722,28 +22725,31 @@
 				}
 			},
 			{
-				_class = "CStringAnimTag"
+				_class = "CTaskStatusAnimTag"
 				m_name = "TF_Taunt_CanCancel"
 				m_tagID = 
 				{
 					m_id = 1165686901
 				}
+				m_identifierString = ""
 			},
 			{
-				_class = "CStringAnimTag"
+				_class = "CTaskStatusAnimTag"
 				m_name = "TF_Taunt_PartnerTauntReady"
 				m_tagID = 
 				{
 					m_id = 266257893
 				}
+				m_identifierString = ""
 			},
 			{
-				_class = "CStringAnimTag"
+				_class = "CTaskStatusAnimTag"
 				m_name = "TF_Taunt_End"
 				m_tagID = 
 				{
 					m_id = 1955466051
 				}
+				m_identifierString = ""
 			},
 		]
 	}

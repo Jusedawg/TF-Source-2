@@ -177,29 +177,10 @@ partial class TFPlayer
 			}
 
 			//Debug, call a fake partner accept
-			if ( ActiveTaunt.TauntType == TauntType.Partner && Input.Pressed( "Ready" ) )
+			if ( WaitingForPartner && Input.Pressed( "Ready" ) )
 			{
 				AcceptPartnerTaunt( true );
 			}
-
-			/* DEPRECATED BY ANIMGRAPH TAGS SYSTEM
-			if ( ActiveTaunt.TauntType == TauntType.Partner && !WaitingForPartner )
-			{
-				if ( TimeSinceTaunt > TauntDuration )
-				{
-					StopTaunt();
-					return;
-				}
-			}
-
-			
-			// Stop single taunts via duration
-			if ( ActiveTaunt.TauntType == TauntType.Once && TimeSinceTaunt > TauntDuration )
-			{
-				StopTaunt();
-				return;
-			}
-			*/
 
 			// Stop single taunts via loss of grounded state
 			if ( ActiveTaunt.RequireGround && GroundEntity == null )
@@ -212,7 +193,7 @@ partial class TFPlayer
 			if ( TauntCanCancel && (Input.Pressed( "Jump" ) || Input.Pressed( "Taunt" )) )
 			{
 				//TauntAnimationMaster?.SetAnimParameter( "b_taunt_cancel", true ); //TAM
-				SetAnimParameter( "b_taunt_cancel", true );
+				Animator?.SetAnimParameter( "b_taunt_cancel", true );
 				return;
 			}
 		}
@@ -330,7 +311,6 @@ partial class TFPlayer
 		ActiveTaunt = taunt;
 
 		var animcontroller = Animator as TFPlayerAnimator;
-		var TauntType = taunt.TauntType;
 		var TauntIndex = TauntList.IndexOf( ActiveTaunt );  //Find way to dynamically assign, right now it MUST line up to animgraph
 
 		if ( !CanTaunt() ) return;
@@ -377,7 +357,6 @@ partial class TFPlayer
 		if ( !taunt.UseTAM )
 		{
 			animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
-			animcontroller?.SetAnimParameter( "taunt_type", (int)TauntType );
 		}
 
 		TimeSinceTaunt = 0;
@@ -450,9 +429,7 @@ partial class TFPlayer
 
 		StopMusic();
 
-		//DeleteAnimationMaster();
-
-		Rotation = Animator.GetIdealRotation();
+		//DeleteAnimationMaster(); TAM
 
 		if ( TauntPropModel != null && Game.IsServer )
 			TauntPropModel.Delete();
@@ -468,13 +445,15 @@ partial class TFPlayer
 	/// </summary>
 	public void ResetTauntParams()
 	{
-		ActiveTaunt = null;
 		Animator?.SetAnimParameter( "b_taunt", false );
 		Animator?.SetAnimParameter( "b_taunt_associate", false );
 		Animator?.SetAnimParameter( "b_taunt_initiator", false );
+		Animator?.SetAnimParameter( "b_taunt_cancel", false );
 		TauntEnableMove = false;
 		TauntCanCancel = false;
 		WaitingForPartner = false;
+
+		ActiveTaunt = null;
 
 		TauntsReset = true;
 	}
@@ -488,7 +467,6 @@ partial class TFPlayer
 	{
 		if ( PartnerTauntIsSpaceValid() )
 		{
-			WaitingForPartner = true;
 			return true;
 		}
 		else
@@ -597,7 +575,7 @@ partial class TFPlayer
 		if ( !isInitiator )
 		{
 			PlayTaunt( ActiveTaunt, false );
-			animcontroller?.SetAnimParameter( "b_taunt_partner", true );
+			animcontroller?.SetAnimParameter( "b_taunt_associate", true );
 		}
 		else
 		{
@@ -605,7 +583,6 @@ partial class TFPlayer
 		}
 		TimeSinceTaunt = 0;
 		//GetPartnerDuration( player, isInitiator );
-		WaitingForPartner = false;
 	}
 
 	//TauntDuration deprecated by OnAnimGraphTag
@@ -982,6 +959,8 @@ partial class TFPlayer
 
 	protected override void OnAnimGraphTag( string tag, AnimGraphTagEvent fireMode )
 	{
+		if ( !Game.IsServer ) return;
+
 		if ( tag == "TF_Taunt_CanCancel" )
 		{
 			if ( fireMode == AnimGraphTagEvent.Start )

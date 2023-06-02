@@ -2,11 +2,20 @@
   "DisplayName": "Taunt: Pistol",
   "Icon": "",
   "SequenceName": "taunt02",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Scout",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": false,
-  "TauntPropModel": ""
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+		"playerClass": "Scout"
+	}
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }
