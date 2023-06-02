@@ -23,7 +23,7 @@ partial class TFPlayer
 
 		else if ( Input.Pressed( "Inspect" ) )
 		{
-			SwapCamera();
+			ThirdpersonSet( false );
 		}
 	}
 	public override void CalculatePlayerView()

@@ -40,7 +40,7 @@ public class TauntData : GameResource
 	public string SequenceName { get; set; }
 
 	/// <summary>
-	/// Is this taunt running on the Taunt Animation Model system?
+	/// Is this taunt running on the Taunt Animation Model system? Currently Unimplemented
 	/// </summary>
 	[Title( "Use Taunt Animation Model System" )]
 	public bool UseTAM { get; set; }
