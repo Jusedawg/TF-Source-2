@@ -60,7 +60,8 @@ public partial class Medigun
 
 	public void SimulateCharge()
 	{
-		DrainCharge();
+		//Moved to Player UberCharge code so it ticks while weapon isn't active;
+		//DrainCharge();
 	}
 
 	public void BuildCharge()
