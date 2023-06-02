@@ -1,0 +1,1021 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						meshes = 
+						[
+							"sentry1_blueprint_bg_sentry1_lod0",
+							"sentry1_blueprint_bg_sentry1_range_sm1_lod0",
+							"sentry1_blueprint_bg_sentry1_range_mini_sm1_lod0",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 20.0
+						meshes = 
+						[
+							"sentry1_blueprint_bg_sentry1_lod1",
+							"sentry1_blueprint_bg_sentry1_range_sm1_lod1",
+							"sentry1_blueprint_bg_sentry1_range_mini_sm1_lod1",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 30.0
+						meshes = 
+						[
+							"sentry1_blueprint_bg_sentry1_lod2",
+							"sentry1_blueprint_bg_sentry1_range_sm1_lod2",
+							"sentry1_blueprint_bg_sentry1_range_mini_sm1_lod2",
+						]
+					},
+					{
+						_class = "LODGroup"
+						note = "Disabled, Source1 Shadow LOD, Invalid Switch :: -1.0"
+						disabled = true
+						switch_threshold = -1.0
+						meshes = 
+						[
+							"sentry1_blueprint_bg_sentry1_lod3",
+						]
+					},
+				]
+			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "BodyGroup"
+						name = "sentry1_range"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"sentry1_blueprint_bg_sentry1_range_sm1_lod0",
+									"sentry1_blueprint_bg_sentry1_range_sm1_lod1",
+									"sentry1_blueprint_bg_sentry1_range_sm1_lod2",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "sentry1_range_mini"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"sentry1_blueprint_bg_sentry1_range_mini_sm1_lod0",
+									"sentry1_blueprint_bg_sentry1_range_mini_sm1_lod1",
+									"sentry1_blueprint_bg_sentry1_range_mini_sm1_lod2",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						remaps = [  ]
+						use_global_default = false
+						global_default_material = ""
+					},
+					{
+						_class = "MaterialGroup"
+						name = "1"
+						remaps = 
+						[
+							{
+								from = "materials/models/buildables/sentry1/blueprint_build.vmat"
+								to = "materials/models/buildables/sentry1/blueprint_build.vmat"
+							},
+							{
+								from = "materials/models/buildables/sentry1/blueprint_model.vmat"
+								to = "materials/models/buildables/sentry1/blueprint_model.vmat"
+							},
+							{
+								from = "materials/models/buildables/sentry1/sentry_pulse.vmat"
+								to = "materials/models/buildables/sentry1/sentry_pulse.vmat"
+							},
+							{
+								from = "materials/models/buildables/sentry1/sentry_pulse3.vmat"
+								to = "materials/models/buildables/sentry1/sentry_pulse_blue.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "default"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1509.523804, -1509.523804, -1509.899536 ]
+								hitbox_maxs = [ 1509.523804, 1509.523804, 1511.237305 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.329643, -0.567879, -22.944599 ]
+								hitbox_maxs = [ 17.523701, 7.959024, 20.658245 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.288599, -4.958899, -19.811369 ]
+								hitbox_maxs = [ 13.288599, 7.713727, 16.760056 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.790976, -7.853291, -13.083575 ]
+								hitbox_maxs = [ 9.790976, 7.636284, 13.029727 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.909, -20.122162 ]
+								hitbox_maxs = [ 14.487457, 7.884155, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.961712, -20.12216 ]
+								hitbox_maxs = [ 14.487457, 8.566554, 18.416527 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346825, -7.62711, -19.358658 ]
+								hitbox_maxs = [ 14.487457, 0.566554, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1509.523804, -1509.523804, -1509.899536 ]
+								hitbox_maxs = [ 1509.523804, 1509.523804, 1511.237305 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.329643, -0.567879, -22.944599 ]
+								hitbox_maxs = [ 17.523701, 7.959024, 20.658245 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.288599, -4.958899, -19.811369 ]
+								hitbox_maxs = [ 13.288599, 7.713727, 16.760056 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.790976, -7.853291, -13.083575 ]
+								hitbox_maxs = [ 9.790976, 7.636284, 13.029727 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.909, -20.122162 ]
+								hitbox_maxs = [ 14.487457, 7.884155, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.961712, -20.12216 ]
+								hitbox_maxs = [ 14.487457, 8.566554, 18.416527 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346825, -7.62711, -19.358658 ]
+								hitbox_maxs = [ 14.487457, 0.566554, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1509.523804, -1509.523804, -1509.899536 ]
+								hitbox_maxs = [ 1509.523804, 1509.523804, 1511.237305 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.329643, -0.567879, -22.944599 ]
+								hitbox_maxs = [ 17.523701, 7.959024, 20.658245 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.288599, -4.958899, -19.811369 ]
+								hitbox_maxs = [ 13.288599, 7.713727, 16.760056 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.790976, -7.853291, -13.083575 ]
+								hitbox_maxs = [ 9.790976, 7.636284, 13.029727 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.909, -20.122162 ]
+								hitbox_maxs = [ 14.487457, 7.884155, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.961712, -20.12216 ]
+								hitbox_maxs = [ 14.487457, 8.566554, 18.416527 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346825, -7.62711, -19.358658 ]
+								hitbox_maxs = [ 14.487457, 0.566554, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1509.523804, -1509.523804, -1509.899536 ]
+								hitbox_maxs = [ 1509.523804, 1509.523804, 1511.237305 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.329643, -0.567879, -22.944599 ]
+								hitbox_maxs = [ 17.523701, 7.959024, 20.658245 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.288599, -4.958899, -19.811369 ]
+								hitbox_maxs = [ 13.288599, 7.713727, 16.760056 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.790976, -7.853291, -13.083575 ]
+								hitbox_maxs = [ 9.790976, 7.636284, 13.029727 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.909, -20.122162 ]
+								hitbox_maxs = [ 14.487457, 7.884155, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.961712, -20.12216 ]
+								hitbox_maxs = [ 14.487457, 8.566554, 18.416527 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346825, -7.62711, -19.358658 ]
+								hitbox_maxs = [ 14.487457, 0.566554, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1509.523804, -1509.523804, -1509.899536 ]
+								hitbox_maxs = [ 1509.523804, 1509.523804, 1511.237305 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.329643, -0.567879, -22.944599 ]
+								hitbox_maxs = [ 17.523701, 7.959024, 20.658245 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.288599, -4.958899, -19.811369 ]
+								hitbox_maxs = [ 13.288599, 7.713727, 16.760056 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.790976, -7.853291, -13.083575 ]
+								hitbox_maxs = [ 9.790976, 7.636284, 13.029727 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.909, -20.122162 ]
+								hitbox_maxs = [ 14.487457, 7.884155, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.961712, -20.12216 ]
+								hitbox_maxs = [ 14.487457, 8.566554, 18.416527 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346825, -7.62711, -19.358658 ]
+								hitbox_maxs = [ 14.487457, 0.566554, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1509.523804, -1509.523804, -1509.899536 ]
+								hitbox_maxs = [ 1509.523804, 1509.523804, 1511.237305 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.329643, -0.567879, -22.944599 ]
+								hitbox_maxs = [ 17.523701, 7.959024, 20.658245 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.288599, -4.958899, -19.811369 ]
+								hitbox_maxs = [ 13.288599, 7.713727, 16.760056 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.790976, -7.853291, -13.083575 ]
+								hitbox_maxs = [ 9.790976, 7.636284, 13.029727 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.909, -20.122162 ]
+								hitbox_maxs = [ 14.487457, 7.884155, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.961712, -20.12216 ]
+								hitbox_maxs = [ 14.487457, 8.566554, 18.416527 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346825, -7.62711, -19.358658 ]
+								hitbox_maxs = [ 14.487457, 0.566554, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1509.523804, -1509.523804, -1509.899536 ]
+								hitbox_maxs = [ 1509.523804, 1509.523804, 1511.237305 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.329643, -0.567879, -22.944599 ]
+								hitbox_maxs = [ 17.523701, 7.959024, 20.658245 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.288599, -4.958899, -19.811369 ]
+								hitbox_maxs = [ 13.288599, 7.713727, 16.760056 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.790976, -7.853291, -13.083575 ]
+								hitbox_maxs = [ 9.790976, 7.636284, 13.029727 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.909, -20.122162 ]
+								hitbox_maxs = [ 14.487457, 7.884155, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.961712, -20.12216 ]
+								hitbox_maxs = [ 14.487457, 8.566554, 18.416527 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346825, -7.62711, -19.358658 ]
+								hitbox_maxs = [ 14.487457, 0.566554, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1509.523804, -1509.523804, -1509.899536 ]
+								hitbox_maxs = [ 1509.523804, 1509.523804, 1511.237305 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.329643, -0.567879, -22.944599 ]
+								hitbox_maxs = [ 17.523701, 7.959024, 20.658245 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.288599, -4.958899, -19.811369 ]
+								hitbox_maxs = [ 13.288599, 7.713727, 16.760056 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.790976, -7.853291, -13.083575 ]
+								hitbox_maxs = [ 9.790976, 7.636284, 13.029727 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.909, -20.122162 ]
+								hitbox_maxs = [ 14.487457, 7.884155, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.961712, -20.12216 ]
+								hitbox_maxs = [ 14.487457, 8.566554, 18.416527 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346825, -7.62711, -19.358658 ]
+								hitbox_maxs = [ 14.487457, 0.566554, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1509.523804, -1509.523804, -1509.899536 ]
+								hitbox_maxs = [ 1509.523804, 1509.523804, 1511.237305 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.329643, -0.567879, -22.944599 ]
+								hitbox_maxs = [ 17.523701, 7.959024, 20.658245 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.288599, -4.958899, -19.811369 ]
+								hitbox_maxs = [ 13.288599, 7.713727, 16.760056 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.790976, -7.853291, -13.083575 ]
+								hitbox_maxs = [ 9.790976, 7.636284, 13.029727 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.909, -20.122162 ]
+								hitbox_maxs = [ 14.487457, 7.884155, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.961712, -20.12216 ]
+								hitbox_maxs = [ 14.487457, 8.566554, 18.416527 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346825, -7.62711, -19.358658 ]
+								hitbox_maxs = [ 14.487457, 0.566554, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "base"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1509.523804, -1509.523804, -1509.899536 ]
+								hitbox_maxs = [ 1509.523804, 1509.523804, 1511.237305 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.329643, -0.567879, -22.944599 ]
+								hitbox_maxs = [ 17.523701, 7.959024, 20.658245 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.288599, -4.958899, -19.811369 ]
+								hitbox_maxs = [ 13.288599, 7.713727, 16.760056 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.790976, -7.853291, -13.083575 ]
+								hitbox_maxs = [ 9.790976, 7.636284, 13.029727 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.909, -20.122162 ]
+								hitbox_maxs = [ 14.487457, 7.884155, 18.416525 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346826, -7.961712, -20.12216 ]
+								hitbox_maxs = [ 14.487457, 8.566554, 18.416527 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "cube5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.346825, -7.62711, -19.358658 ]
+								hitbox_maxs = [ 14.487457, 0.566554, 18.416525 ]
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_blueprint_bg_sentry1_lod0"
+						filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\mesh\\sentry1_blueprint_bg_sentry1_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_blueprint_bg_sentry1_range_sm1_lod0"
+						filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\mesh\\sentry1_blueprint_bg_sentry1_range_sm1_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_blueprint_bg_sentry1_range_mini_sm1_lod0"
+						filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\mesh\\sentry1_blueprint_bg_sentry1_range_mini_sm1_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_blueprint_bg_sentry1_lod1"
+						filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\mesh\\sentry1_blueprint_bg_sentry1_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_blueprint_bg_sentry1_range_sm1_lod1"
+						filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\mesh\\sentry1_blueprint_bg_sentry1_range_sm1_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_blueprint_bg_sentry1_range_mini_sm1_lod1"
+						filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\mesh\\sentry1_blueprint_bg_sentry1_range_mini_sm1_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_blueprint_bg_sentry1_lod2"
+						filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\mesh\\sentry1_blueprint_bg_sentry1_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_blueprint_bg_sentry1_range_sm1_lod2"
+						filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\mesh\\sentry1_blueprint_bg_sentry1_range_sm1_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_blueprint_bg_sentry1_range_mini_sm1_lod2"
+						filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\mesh\\sentry1_blueprint_bg_sentry1_range_mini_sm1_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_blueprint_bg_sentry1_lod3"
+						note = "Disabled, Only Referenced By Disabled LODGroup[LOD 3 (-1.0)], Source1 Shadow LOD"
+						disabled = true
+						filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\mesh\\sentry1_blueprint_bg_sentry1_lod3.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "idle"
+						activity_name = "ACT_OBJ_PLACING"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\anim\\idle.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "reject"
+						activity_name = "ACT_OBJ_IDLE"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\sentry\\sentry1_blueprint_fbx\\anim\\reject.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 1.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = "models/buildables/animgraph/blueprint.vanmgrph"
+		base_model_name = ""
+		importer_notes = """
+Imported from compiled VMDL_C
+==Warnings==
+Cannot import non-trivial meshgroup: sentry1
+Disabled LODGroup[LOD 3 (-1.0)]: Source1 Shadow LOD, Invalid Switch Distance :: -1
+Disabled RenderMeshFile[sentry1_blueprint_bg_sentry1_lod3]: Only Referenced By Disabled LODGroup3, Source1 Shadow LOD
+
+"""
+	}
+}

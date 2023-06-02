@@ -1,0 +1,2323 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "PoseParamList"
+				children = 
+				[
+					{
+						_class = "PoseParam"
+						name = "aim_yaw"
+						poseparam_min = -180.0
+						poseparam_max = 180.0
+						poseparam_looping = true
+						poseparam_loop = 360.0
+					},
+					{
+						_class = "PoseParam"
+						name = "aim_pitch"
+						poseparam_min = -50.0
+						poseparam_max = 50.0
+						poseparam_looping = false
+						poseparam_loop = 0.0
+					},
+				]
+			},
+			{
+				_class = "WeightListList"
+				children = 
+				[
+					{
+						_class = "WeightList"
+						name = "weights_aim_yaw"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "fork_base"
+								weight = 0.0
+							},
+							{
+								bone = "toolboxroot"
+								weight = 0.0
+							},
+							{
+								bone = "upper_telescope_01"
+								weight = 1.0
+							},
+							{
+								bone = "upper_telescopegaurd"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "weights_aim_pitch"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "build_point_0"
+								weight = 0.0
+							},
+							{
+								bone = "fork_base"
+								weight = 1.0
+							},
+							{
+								bone = "toolboxroot"
+								weight = 0.0
+							},
+							{
+								bone = "turretarm01"
+								weight = 1.0
+							},
+							{
+								bone = "weapon_bone"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "weights_fire"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "fork_base"
+								weight = 1.0
+							},
+							{
+								bone = "turretarm02"
+								weight = 1.0
+							},
+							{
+								bone = "upper_telescope_01"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+				]
+			},
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						meshes = 
+						[
+							"sentry1_bg_sentry_lod0",
+							"sentry1_bg_arms_lod0",
+							"sentry1_bg_mini_sentry_light_sm1_lod0",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 18.0
+						meshes = 
+						[
+							"sentry1_bg_sentry_lod1",
+							"sentry1_bg_arms_lod1",
+							"sentry1_bg_mini_sentry_light_sm1_lod1",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 30.0
+						meshes = 
+						[
+							"sentry1_bg_sentry_lod2",
+							"sentry1_bg_arms_lod2",
+							"sentry1_bg_mini_sentry_light_sm1_lod2",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 40.0
+						meshes = 
+						[
+							"sentry1_bg_sentry_lod3",
+							"sentry1_bg_arms_lod3",
+							"sentry1_bg_mini_sentry_light_sm1_lod3",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 50.0
+						meshes = 
+						[
+							"sentry1_bg_sentry_lod4",
+							"sentry1_bg_arms_lod4",
+							"sentry1_bg_mini_sentry_light_sm1_lod4",
+						]
+					},
+				]
+			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "BodyGroup"
+						name = "mini_sentry_light"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"sentry1_bg_mini_sentry_light_sm1_lod0",
+									"sentry1_bg_mini_sentry_light_sm1_lod1",
+									"sentry1_bg_mini_sentry_light_sm1_lod2",
+									"sentry1_bg_mini_sentry_light_sm1_lod3",
+									"sentry1_bg_mini_sentry_light_sm1_lod4",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "MaterialGroup"
+						name = "1"
+						remaps = 
+						[
+							{
+								from = "materials/models/buildables/sentry1/sentry1.vmat"
+								to = "materials/models/buildables/sentry1/sentry1_blue.vmat"
+							},
+							{
+								from = "materials/models/buildables/sentry1/mini_sentry_light_red.vmat"
+								to = "materials/models/buildables/sentry1/mini_sentry_light_red.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "2"
+						disabled = true
+						remaps = 
+						[
+							{
+								from = "materials/models/buildables/sentry1/sentry1.vmat"
+								to = "materials/models/buildables/sentry1/mini_sentry_red.vmat"
+							},
+							{
+								from = "materials/models/buildables/sentry1/mini_sentry_light_red.vmat"
+								to = "materials/models/buildables/sentry1/mini_sentry_light_red.vmat"
+							},
+						]
+					},
+					{
+						_class = "MaterialGroup"
+						name = "3"
+						disabled = true
+						remaps = 
+						[
+							{
+								from = "materials/models/buildables/sentry1/sentry1.vmat"
+								to = "materials/models/buildables/sentry1/mini_sentry_blue.vmat"
+							},
+							{
+								from = "materials/models/buildables/sentry1/mini_sentry_light_red.vmat"
+								to = "materials/models/buildables/sentry1/mini_sentry_light_blue.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "PhysicsBodyMarkupList"
+				children = 
+				[
+					{
+						_class = "PhysicsBodyMarkup"
+						target_body = "buildables_phys"
+						mass_override = 1.0
+						inertia_scale = 1.0
+						linear_damping = 0.0
+						angular_damping = 0.0
+						use_mass_center_override = false
+						mass_center_override = [ 0.0, 0.0, 0.0 ]
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsHullFile"
+						name = "buildables_phys_0_mesh"
+						parent_bone = "buildables_phys"
+						surface_prop = "default"
+						collision_tags = "solid"
+						recenter_on_parent_bone = true
+						offset_origin = [ 0.0, 0.0, 0.0 ]
+						offset_angles = [ 0.0, 0.0, 0.0 ]
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\physics\\physmesh.dmx"
+						import_scale = 1.0
+						faceMergeAngle = 10.0
+						maxHullVertices = 0
+						import_mode = "SingleHull"
+						optimization_algorithm = "QEM"
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"buildables_phys_0_mesh",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "build_point_0"
+						parent_bone = "turret_back"
+						relative_origin = [ 0.613734, 6.285233, 0.830994 ]
+						relative_angles = [ -90.0, -90.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "laser_origin"
+						parent_bone = "turret_back"
+						relative_origin = [ -4.0, -2.549999, 23.0 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "siren"
+						parent_bone = "turret_back"
+						relative_origin = [ -1.8, 12.5, 0.5 ]
+						relative_angles = [ -0.0, 3.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "muzzle"
+						parent_bone = "turret_muzzle"
+						relative_origin = [ 0.056861, 0.008255, 3.636854 ]
+						relative_angles = [ -90.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "sapper_attach"
+						parent_bone = "turret_back"
+						relative_origin = [ 0.008688, 5.901482, 0.092555 ]
+						relative_angles = [ 19.940435, -0.000002, -90.000038 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "hose_0_L"
+						parent_bone = "hose_0_l"
+						relative_origin = [ -0.0, -0.000001, 0.0 ]
+						relative_angles = [ 0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "default"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.145599, -17.457558, -26.60976 ]
+								hitbox_maxs = [ 17.145599, 7.264774, 16.917938 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.54545, -18.719452, -6.531026 ]
+								hitbox_maxs = [ 4.54545, 4.656008, 4.334118 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "fork_base"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.511524, -1.351418, -13.762436 ]
+								hitbox_maxs = [ 10.570217, 9.667009, 3.613971 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.978691, -10.537359, -9.877029 ]
+								hitbox_maxs = [ 9.999546, 15.246815, 25.291351 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turret_muzzle"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.37492, -2.547577, -2.61263 ]
+								hitbox_maxs = [ 2.508524, 2.335869, 3.28244 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.304342, -1.615234, -1.587097 ]
+								hitbox_maxs = [ 6.566505, 1.578543, 1.586292 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.587097, -1.392212, -5.19129 ]
+								hitbox_maxs = [ 1.586293, 5.40793, 1.360224 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretarm03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.786565, -0.590899, -0.583265 ]
+								hitbox_maxs = [ 0.786564, 0.496805, 0.553236 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.310124, -2.395953, -11.036263 ]
+								hitbox_maxs = [ 19.855289, 16.951002, 0.49577 ]
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_sentry_lod0"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_sentry_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_arms_lod0"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_arms_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_mini_sentry_light_sm1_lod0"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_mini_sentry_light_sm1_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_sentry_lod1"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_sentry_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_arms_lod1"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_arms_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_mini_sentry_light_sm1_lod1"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_mini_sentry_light_sm1_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_sentry_lod2"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_sentry_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_arms_lod2"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_arms_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_mini_sentry_light_sm1_lod2"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_mini_sentry_light_sm1_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_sentry_lod3"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_sentry_lod3.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_arms_lod3"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_arms_lod3.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_mini_sentry_light_sm1_lod3"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_mini_sentry_light_sm1_lod3.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_sentry_lod4"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_sentry_lod4.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_arms_lod4"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_arms_lod4.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry1_bg_mini_sentry_light_sm1_lod4"
+						filename = "models\\buildables\\sentry\\sentry1_fbx\\mesh\\sentry1_bg_mini_sentry_light_sm1_lod4.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "build"
+						children = 
+						[
+							{
+								_class = "AnimEvent"
+								disabled = true
+								event_class = "AE_CL_DISABLE_BODYGROUP"
+								event_frame = 0
+								event_keys = 
+								{
+									name = "toolbox"
+								}
+							},
+							{
+								_class = "AnimEvent"
+								disabled = true
+								event_class = "AE_CL_ENABLE_BODYGROUP"
+								event_frame = 34
+								event_keys = 
+								{
+									name = "arms"
+								}
+							},
+							{
+								_class = "AnimEvent"
+								disabled = true
+								event_class = "AE_CL_ENABLE_BODYGROUP"
+								event_frame = 299
+								event_keys = 
+								{
+									name = "toolbox"
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 4
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build1"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 6
+								event_keys = 
+								{
+									name = "Building_Sentrygun.BuildSteam1"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 10
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build1A"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 23
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build1B"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 33
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build2"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 41
+								event_keys = 
+								{
+									name = "Building_Sentrygun.BuildSteam2"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 58
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build3"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 68
+								event_keys = 
+								{
+									name = "Building_Sentrygun.BuildSteam3"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 92
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build4"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 116
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build5"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 145
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build6"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 160
+								event_keys = 
+								{
+									name = "Building_Sentrygun.BuildSteam4"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 162
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build7"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 209
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build7A"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 216
+								event_keys = 
+								{
+									name = "Building_Sentrygun.BuildSteam5"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 233
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build8"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 254
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build9"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 260
+								event_keys = 
+								{
+									name = "Building_Sentrygun.Build10"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+						]
+						disabled = true
+						activity_name = "ACT_OBJ_ASSEMBLING"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry1_fbx/anim/build.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "fire"
+						activity_name = "ACT_RANGE_ATTACK1"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry1_fbx/anim/fire.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "ref"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry1_fbx/anim/ref.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_yaw_right"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry1_fbx/anim/a_yaw_right.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_yaw_back"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry1_fbx/anim/a_yaw_back.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_yaw_left"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry1_fbx/anim/a_yaw_left.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_center"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry1_fbx/anim/a_center.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_pitch_down"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry1_fbx/anim/a_pitch_down.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_pitch_up"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry1_fbx/anim/a_pitch_up.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = ""
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = false
+					},
+				]
+				bone_cull_type = "None"
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = "models/buildables/animgraph/sentry1.vanmgrph"
+		base_model_name = ""
+		importer_notes = """
+Imported from compiled VMDL_C
+==Warnings==
+Cannot import non-trivial meshgroup: sentry
+Cannot import non-trivial meshgroup: arms
+
+"""
+	}
+}
