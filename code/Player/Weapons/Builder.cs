@@ -15,7 +15,10 @@ public partial class Builder : TFWeaponBase
 	public static float RotationSpeed { get; set; } = 10f;
 	[Net] public BuildingData PlacementData { get; set; }
 	[Net] public TFBuilding CarriedBuilding { get; set; }
-	protected BuildingData BuildingData => CarriedBuilding?.Data ?? PlacementData;
+	public BuildingData BuildingData => CarriedBuilding?.Data ?? PlacementData;
+	/// <summary>
+	/// Are we carrying an existing building?
+	/// </summary>
 	public bool IsCarryingBuilding => CarriedBuilding != null;
 	/// <summary>
 	/// Clientside blueprint
@@ -121,7 +124,10 @@ public partial class Builder : TFWeaponBase
 
 	protected virtual void PlayDeployVO()
 	{
-		// TODO: Implement
+		if(!IsCarryingBuilding)
+			TFOwner.PlayResponse( BuildingData.BuiltVO );
+
+		// TODO: Redeploy VO
 	}
 
 	public override void Simulate( IClient cl )

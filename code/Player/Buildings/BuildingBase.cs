@@ -31,6 +31,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 	[Net] public int AppliedMetal { get; protected set; }
 	public BuildingLevelData GetRequestedLevelData() => Data.Levels.ElementAtOrDefault(RequestedLevel-1);
 	public BuildingLevelData GetLevelData() => Data.Levels.ElementAtOrDefault( Level-1 );
+	public DamageInfo LastDamageInfo { get; protected set; }
 	public override void Spawn()
 	{
 		Health = 1;
@@ -207,26 +208,36 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 			return;
 		}
 
+		LastDamageInfo = info;
 		base.TakeDamage( info );
 	}
 
+	public const string MANUAL_DESTROY_TAG = "manual_destroy";
 	public virtual void ManualDestroy()
 	{
 		var dmg = DamageInfo.Generic( Health )
-								.WithTags( "manual_destroy" );
+								.WithTags( MANUAL_DESTROY_TAG );
 		TakeDamage( dmg );
 	}
 
 	public override void OnKilled()
 	{
-		PlaySound( Data.DestroyedSound );
 		Owner.Buildings.Remove( this );
 
-		// TODO: Explosion Particle
-		// TODO: Destroyed Voiceline
-		// TODO: Building parts
-
+		KilledEffects();
 		base.OnKilled();
+	}
+
+	protected virtual void KilledEffects()
+	{
+		PlaySound( Data.DestroyedSound );
+		if(LastDamageInfo.HasTag(MANUAL_DESTROY_TAG))
+		{
+			Owner.PlayResponse( Data.DestroyedVO );
+		}
+
+		// TODO: Explosion Particle
+		// TODO: Building parts
 	}
 
 	#region Debug

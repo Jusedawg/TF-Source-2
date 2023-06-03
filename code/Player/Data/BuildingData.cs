@@ -48,9 +48,18 @@ public class BuildingData : GameResource
 	[Category( "Blueprint" )]
 	[ResourceType( "png" )]
 	public string BlueprintIcon { get; set; }
-	[Category("Sound")]
+	[Category("Sounds")]
 	[ResourceType("sound")]
 	public string DestroyedSound { get; set; }
+	[Category( "Sounds" )]
+	[ResourceType( "sound" )]
+	public string BuiltVO { get; set; }
+	[Category( "Sounds" )]
+	[ResourceType( "sound" )]
+	public string DestroyedVO { get; set; }
+	[Category( "Sounds" )]
+	[ResourceType( "sound" )]
+	public string SappedVO { get; set; }
 	/// <summary>
 	/// Creates an instance of this weapon.
 	/// </summary>
