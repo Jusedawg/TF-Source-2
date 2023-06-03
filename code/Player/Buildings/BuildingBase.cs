@@ -33,7 +33,6 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 	public BuildingLevelData GetLevelData() => Data.Levels.ElementAtOrDefault( Level-1 );
 	public override void Spawn()
 	{
-		base.Spawn();
 		Health = 1;
 		UseAnimGraph = false;
 	}
@@ -47,9 +46,6 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 		SetLevel( 1 );
 		RequestedLevel = 1;
 
-		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, Data.Mins, Data.Maxs );
-		EnableAllCollisions = true;
-
 		IsInitialized = true;
 		StartCarrying();
 	}
@@ -61,6 +57,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, Data.Mins, Data.Maxs );
 		EnableAllCollisions = true;
 		UseAnimGraph = true;
+		Tags.Add( CollisionTags.Solid );
 	}
 	public virtual void SetOwner(TFPlayer owner)
 	{
