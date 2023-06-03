@@ -231,7 +231,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 	protected virtual void KilledEffects()
 	{
 		PlaySound( Data.DestroyedSound );
-		if(LastDamageInfo.HasTag(MANUAL_DESTROY_TAG))
+		if(!LastDamageInfo.HasTag(MANUAL_DESTROY_TAG))
 		{
 			Owner.PlayResponse( Data.DestroyedVO );
 		}
