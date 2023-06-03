@@ -10259,14 +10259,6 @@
 						children = 
 						[
 							{
-								_class = "AnimAddLayer"
-								anim_name = "layer_aim_yaw"
-							},
-							{
-								_class = "AnimAddLayer"
-								anim_name = "layer_aim_pitch"
-							},
-							{
 								_class = "AnimEvent"
 								event_class = "AE_CL_BODYGROUP_SET_VALUE"
 								event_frame = 0
@@ -10448,7 +10440,7 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\upgrade.dmx"
+						source_filename = "models/buildables/sentry/sentry2_heavy_fbx/anim/upgrade.dmx"
 						start_frame = -1
 						end_frame = -1
 						framerate = 80.0
@@ -10457,7 +10449,7 @@
 					},
 					{
 						_class = "AnimFile"
-						name = "aim_nat"
+						name = "a_center"
 						activity_name = ""
 						activity_weight = 1
 						weight_list_name = ""
@@ -10469,227 +10461,10 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\aim_nat.dmx"
+						source_filename = "models/buildables/sentry/sentry2_heavy_fbx/anim/a_center.dmx"
 						start_frame = -1
 						end_frame = -1
-						framerate = 1.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "1DBlend"
-						name = "layer_aim_yaw"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = true
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						poseParam = "aim_yaw"
-						blendList = 
-						[
-							{
-								name = "a_yaw_back"
-								weight = -180.0
-							},
-							{
-								name = "a_yaw_left"
-								weight = -90.0
-							},
-							{
-								name = "a_yaw_forward"
-								weight = 0.0
-							},
-							{
-								name = "a_yaw_right"
-								weight = 90.0
-							},
-							{
-								name = "a_yaw_back"
-								weight = 180.0
-							},
-						]
-					},
-					{
-						_class = "1DBlend"
-						name = "layer_aim_pitch"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = true
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						poseParam = "aim_pitch"
-						blendList = 
-						[
-							{
-								name = "a_pitch_down"
-								weight = -50.0
-							},
-							{
-								name = "a_pitch_center"
-								weight = 0.0
-							},
-							{
-								name = "a_pitch_up"
-								weight = 50.0
-							},
-						]
-					},
-					{
-						_class = "AnimFile"
-						name = "a_yaw_neutral"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\a_yaw_neutral.dmx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 30.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "a_yaw_forward"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\a_yaw_forward.dmx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 30.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "a_yaw_right"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\a_yaw_right.dmx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 30.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "a_yaw_back"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\a_yaw_back.dmx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 30.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "a_yaw_left"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\a_yaw_left.dmx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 30.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "a_pitch_neutral"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\a_pitch_neutral.dmx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 30.0
-						take = 0
-						reverse = false
-					},
-					{
-						_class = "AnimFile"
-						name = "a_pitch_center"
-						activity_name = ""
-						activity_weight = 1
-						weight_list_name = ""
-						fade_in_time = 0.2
-						fade_out_time = 0.2
-						looping = false
-						delta = false
-						worldSpace = false
-						hidden = false
-						anim_markup_ordered = false
-						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\a_pitch_center.dmx"
-						start_frame = -1
-						end_frame = -1
-						framerate = 30.0
+						framerate = -1.0
 						take = 0
 						reverse = false
 					},
@@ -10707,10 +10482,10 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\a_pitch_down.dmx"
+						source_filename = "models/buildables/sentry/sentry2_heavy_fbx/anim/a_pitch_down.dmx"
 						start_frame = -1
 						end_frame = -1
-						framerate = 30.0
+						framerate = -1.0
 						take = 0
 						reverse = false
 					},
@@ -10728,15 +10503,92 @@
 						hidden = false
 						anim_markup_ordered = false
 						disable_compression = false
-						source_filename = "models\\buildables\\sentry\\sentry2_heavy_fbx\\anim\\a_pitch_up.dmx"
+						source_filename = "models/buildables/sentry/sentry2_heavy_fbx/anim/a_pitch_up.dmx"
 						start_frame = -1
 						end_frame = -1
-						framerate = 30.0
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_yaw_back"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry2_heavy_fbx/anim/a_yaw_back.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_yaw_left"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry2_heavy_fbx/anim/a_yaw_left.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_yaw_right"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry2_heavy_fbx/anim/a_yaw_right.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
 						take = 0
 						reverse = false
 					},
 				]
 				default_root_bone_name = ""
+			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = ""
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = false
+					},
+				]
+				bone_cull_type = "None"
 			},
 		]
 		model_archetype = ""

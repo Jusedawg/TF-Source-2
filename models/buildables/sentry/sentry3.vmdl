@@ -1,0 +1,3734 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "PoseParamList"
+				children = 
+				[
+					{
+						_class = "PoseParam"
+						name = "aim_pitch"
+						poseparam_min = -50.0
+						poseparam_max = 50.0
+						poseparam_looping = false
+						poseparam_loop = 0.0
+					},
+					{
+						_class = "PoseParam"
+						name = "aim_yaw"
+						poseparam_min = -180.0
+						poseparam_max = 180.0
+						poseparam_looping = true
+						poseparam_loop = 360.0
+					},
+				]
+			},
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						meshes = 
+						[
+							"sentry3_bg_sentry3_lod0",
+							"sentry3_bg_rockets_sm0_lod0",
+							"sentry3_bg_sentry3_laser_lod0",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 18.0
+						meshes = 
+						[
+							"sentry3_bg_sentry3_lod1",
+							"sentry3_bg_rockets_sm0_lod1",
+							"sentry3_bg_sentry3_laser_lod1",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 30.0
+						meshes = 
+						[
+							"sentry3_bg_sentry3_lod2",
+							"sentry3_bg_rockets_sm0_lod2",
+							"sentry3_bg_sentry3_laser_lod2",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 40.0
+						meshes = 
+						[
+							"sentry3_bg_sentry3_lod3",
+							"sentry3_bg_rockets_sm0_lod3",
+							"sentry3_bg_sentry3_laser_lod3",
+						]
+					},
+				]
+			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "BodyGroup"
+						name = "Rockets"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"sentry3_bg_rockets_sm0_lod0",
+									"sentry3_bg_rockets_sm0_lod1",
+									"sentry3_bg_rockets_sm0_lod2",
+									"sentry3_bg_rockets_sm0_lod3",
+								]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+						]
+						hidden_in_tools = false
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "MaterialGroup"
+						name = "1"
+						remaps = 
+						[
+							{
+								from = "materials/models/buildables/sentry3/sentry3.vmat"
+								to = "materials/models/buildables/sentry3/sentry3_blue.vmat"
+							},
+							{
+								from = "materials/models/buildables/sentry1/sentry1.vmat"
+								to = "materials/models/buildables/sentry1/sentry1_blue.vmat"
+							},
+							{
+								from = "materials/models/buildables/sentry2/sentry2.vmat"
+								to = "materials/models/buildables/sentry2/sentry2_blue.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "PhysicsBodyMarkupList"
+				children = 
+				[
+					{
+						_class = "PhysicsBodyMarkup"
+						target_body = "buildables_phys"
+						mass_override = 1.0
+						inertia_scale = 1.0
+						linear_damping = 0.0
+						angular_damping = 0.0
+						use_mass_center_override = false
+						mass_center_override = [ 0.0, 0.0, 0.0 ]
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsHullFile"
+						name = "buildables_phys_0_mesh"
+						parent_bone = "buildables_phys"
+						surface_prop = "default"
+						collision_tags = "solid"
+						recenter_on_parent_bone = true
+						offset_origin = [ 0.0, 0.0, 0.0 ]
+						offset_angles = [ 0.0, 0.0, 0.0 ]
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\physics\\physmesh.dmx"
+						import_scale = 1.0
+						faceMergeAngle = 10.0
+						maxHullVertices = 0
+						import_mode = "SingleHull"
+						optimization_algorithm = "QEM"
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"buildables_phys_0_mesh",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "muzzle_l"
+						parent_bone = "s2chaingunl_02"
+						relative_origin = [ -0.069513, 0.345852, 23.112894 ]
+						relative_angles = [ -90.0, -90.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "muzzle_r"
+						parent_bone = "s2chaingunr_02"
+						relative_origin = [ 0.041495, 0.345852, 23.112894 ]
+						relative_angles = [ -90.0, -90.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "rocket"
+						parent_bone = "boxrocket"
+						relative_origin = [ 0.08813, 1.408691, 12.378716 ]
+						relative_angles = [ -89.999985, -89.999992, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "rocket_l"
+						parent_bone = "boxrocket"
+						relative_origin = [ 0.08813, 1.408691, 12.378716 ]
+						relative_angles = [ -89.999985, -89.999992, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "rocket_r"
+						parent_bone = "boxrocket"
+						relative_origin = [ 0.08813, 1.408691, 12.378716 ]
+						relative_angles = [ -89.999985, -89.999992, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "sentrydamage"
+						parent_bone = "s2turret_back"
+						relative_origin = [ -0.326208, 10.351049, 0.351295 ]
+						relative_angles = [ -67.076683, 90.0, -180.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "build_point_0"
+						parent_bone = "boxrocket"
+						relative_origin = [ 9.395753, 3.072052, -0.085674 ]
+						relative_angles = [ -88.550499, 89.99987, 179.999802 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "laser_origin"
+						parent_bone = "s2midhousingr"
+						relative_origin = [ 2.1, 5.099998, 0.0 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "default"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "toolboxroot"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -24.935829, -0.22492, -23.487457 ]
+								hitbox_maxs = [ 22.203255, 35.770191, 16.663904 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "upper_telescope_01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.680082, -2.525643, -23.7691 ]
+								hitbox_maxs = [ 14.09615, 6.985725, 4.344368 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2turret_back"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.759854, -16.824865, -10.458941 ]
+								hitbox_maxs = [ 12.312393, 10.355136, 16.643551 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2lfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.601257, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 3.23359, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingl"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.338885, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 16.482868, 6.405426, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunl_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.645363, -3.638344, -0.53629 ]
+								hitbox_maxs = [ 3.593413, 3.674957, 22.230732 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm1"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.035052, -2.023711, -2.418095 ]
+								hitbox_maxs = [ 3.808503, 1.801952, 12.360951 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.808503, -4.263928, -2.206099 ]
+								hitbox_maxs = [ 4.035053, 1.965529, 8.502413 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocketarm3"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.256694, -8.904028, -1.441083 ]
+								hitbox_maxs = [ 7.380862, 3.17223, 5.919617 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "boxrocket"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.252808, -3.887112, -6.450003 ]
+								hitbox_maxs = [ 9.395751, 6.56145, 12.350725 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2rfork_bolt"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.252604, -1.287449, -3.496004 ]
+								hitbox_maxs = [ 6.601263, 10.421616, 3.302892 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2midhousingr"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.773653, -3.143089, -11.73466 ]
+								hitbox_maxs = [ 4.468213, 7.279961, 7.408758 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s2chaingunr_02"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.61939, -3.656647, -0.53629 ]
+								hitbox_maxs = [ 3.619386, 3.656654, 22.226913 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.450612, -7.092639, -0.120098 ]
+								hitbox_maxs = [ 4.374784, 10.009871, 25.754168 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirel03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -0.055501, 0.0, 0.0 ]
+								hitbox_maxs = [ 7.920066, 14.0458, 9.757445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain09"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.881093, -18.528225, -6.274496 ]
+								hitbox_maxs = [ 3.659147, 1.257133, 18.167444 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain010"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -15.631441, -3.752378, 0.0 ]
+								hitbox_maxs = [ 0.882348, 5.448877, 20.018356 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain017"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -5.350949, -1.412449, -6.593309 ]
+								hitbox_maxs = [ 7.057175, 9.803097, 17.734901 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammochain013"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.639735, -1.201149, -7.342489 ]
+								hitbox_maxs = [ 5.210774, 2.27883, 9.350818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer01"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.454872, -7.28837, 0.0 ]
+								hitbox_maxs = [ 0.891036, 9.666892, 29.373571 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "s3wirer03"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.84219, -0.012597, -15.584279 ]
+								hitbox_maxs = [ 0.514006, 16.369478, 2.61029 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "turretbackplate"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.669553, -7.718263, -18.231804 ]
+								hitbox_maxs = [ 11.65648, 7.834862, 2.518882 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl2"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.750273, -23.096903, -5.276777 ]
+								hitbox_maxs = [ 5.681671, 2.069152, 19.618574 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl4"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.488483, -3.410242, 0.0 ]
+								hitbox_maxs = [ 7.959758, 9.23675, 18.971394 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl6"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.030546, -5.064385, -9.048476 ]
+								hitbox_maxs = [ 3.699865, 5.328824, 22.853876 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "ammobeltl8"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.746955, -11.780655, -5.747818 ]
+								hitbox_maxs = [ 2.085678, 2.415269, 4.104149 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.118805, -26.885567, -19.765957 ]
+								hitbox_maxs = [ 15.696655, 19.655579, 0.394963 ]
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_sentry3_lod0"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_sentry3_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_rockets_sm0_lod0"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_rockets_sm0_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_sentry3_laser_lod0"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_sentry3_laser_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_sentry3_lod1"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_sentry3_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_rockets_sm0_lod1"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_rockets_sm0_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_sentry3_laser_lod1"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_sentry3_laser_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_sentry3_lod2"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_sentry3_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_rockets_sm0_lod2"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_rockets_sm0_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_sentry3_laser_lod2"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_sentry3_laser_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_sentry3_lod3"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_sentry3_lod3.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_rockets_sm0_lod3"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_rockets_sm0_lod3.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sentry3_bg_sentry3_laser_lod3"
+						filename = "models\\buildables\\sentry\\sentry3_fbx\\mesh\\sentry3_bg_sentry3_laser_lod3.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "fire"
+						activity_name = "ACT_RANGE_ATTACK1"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry3_fbx/anim/fire.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "fire_empty"
+						activity_name = "ACT_RANGE_ATTACK1_LOW"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry3_fbx/anim/fire_empty.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "fire_rocket"
+						children = 
+						[
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_BODYGROUP_SET_VALUE"
+								event_frame = 1
+								event_keys = 
+								{
+									bodygroup = "Rockets"
+									value = 1
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_BODYGROUP_SET_VALUE"
+								event_frame = 62
+								event_keys = 
+								{
+									bodygroup = "Rockets"
+									value = 0
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 36
+								event_keys = 
+								{
+									name = "Building_SentryGun.RocketSteam1"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 37
+								event_keys = 
+								{
+									name = "Building_SentryGun.RocketMove1"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 50
+								event_keys = 
+								{
+									name = "Building_SentryGun.RocketClunk1"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 64
+								event_keys = 
+								{
+									name = "Building_SentryGun.RocketSteam2"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 65
+								event_keys = 
+								{
+									name = "Building_SentryGun.RocketMove2"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 79
+								event_keys = 
+								{
+									name = "Building_SentryGun.RocketClunk2"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+						]
+						activity_name = "ACT_RANGE_ATTACK2"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry3_fbx/anim/fire_rocket.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "ref"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry3_fbx/anim/ref.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_yaw_right"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry3_fbx/anim/a_yaw_right.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_yaw_back"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry3_fbx/anim/a_yaw_back.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_yaw_left"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry3_fbx/anim/a_yaw_left.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_center"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry3_fbx/anim/a_center.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_pitch_down"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry3_fbx/anim/a_pitch_down.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_pitch_up"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models/buildables/sentry/sentry3_fbx/anim/a_pitch_up.dmx"
+						start_frame = 0
+						end_frame = 0
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = ""
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = false
+					},
+				]
+				bone_cull_type = "None"
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = "models/buildables/animgraph/sentry3.vanmgrph"
+		base_model_name = ""
+		importer_notes = """
+Imported from compiled VMDL_C
+==Warnings==
+Cannot import non-trivial meshgroup: sentry3
+Cannot import non-trivial meshgroup: sentry3_laser
+
+"""
+	}
+}
