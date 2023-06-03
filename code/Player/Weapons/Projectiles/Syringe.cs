@@ -10,10 +10,13 @@ public partial class Syringe : TFProjectile
 		base.Spawn();
 		SetModel( "models/weapons/w_models/w_syringe_proj.vmdl" );
 		
-		DamageInfo = DamageInfo.WithTag(TFDamageTags.PreventPhysicsForce);
+		DamageInfo.WithTags( TFDamageTags.PreventPhysicsForce, TFDamageTags.Bullet );
 		MoveType = ProjectileMoveType.Fly;
 		Gravity = .3f;
 		EnableShadowCasting = false;
+
+		CollidesWith( CollisionTags.Solid, CollisionTags.Clip, CollisionTags.ProjectileClip, CollisionTags.BulletClip );
+		Ignores( CollisionTags.Projectile, CollisionTags.Weapon, CollisionTags.Debris );
 	}
 
 	public override bool CanBeDeflected => false;

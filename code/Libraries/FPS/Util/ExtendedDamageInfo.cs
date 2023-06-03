@@ -85,6 +85,8 @@ public struct ExtendedDamageInfo
 		return this;
 	}
 
+	public ExtendedDamageInfo WithTags( params string[] tags ) => WithTags( (IEnumerable<string>)tags );
+
 	public ExtendedDamageInfo WithTag( string tag )
 	{
 		Tags.Add( tag );
