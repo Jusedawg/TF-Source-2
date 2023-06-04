@@ -1,12 +1,21 @@
 {
-  "DisplayName": "Taunt: Revolver",
+  "DisplayName": "Weapon Taunt: Revolver",
   "Icon": "",
   "SequenceName": "taunt01",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Spy",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": false,
-  "TauntPropModel": null
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Spy"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

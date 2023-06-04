@@ -2,11 +2,42 @@
   "DisplayName": "Taunt: High Five!",
   "Icon": "",
   "SequenceName": "taunt_highfive",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Undefined",
-  "TauntType": "Partner",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": true,
   "TauntAllowJoin": false,
-  "TauntUseProp": false,
-  "TauntPropModel": ""
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {},
+    {
+      "playerClass": "Soldier"
+    },
+    {
+      "playerClass": "Pyro"
+    },
+    {
+      "playerClass": "Demoman"
+    },
+    {
+      "playerClass": "Heavy"
+    },
+    {
+      "playerClass": "Engineer"
+    },
+    {
+      "playerClass": "Medic"
+    },
+    {
+      "playerClass": "Sniper"
+    },
+    {
+      "playerClass": "Spy"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

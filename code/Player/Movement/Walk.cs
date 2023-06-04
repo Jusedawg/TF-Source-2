@@ -67,8 +67,11 @@ partial class TFGameMovement
 				flWishSpeed = 0;
 			}
 
-			vecWishDirection = Player.Rotation.Forward * input ;
-			
+			if ( !Player.ActiveTaunt.TauntStrafing )
+			{
+				vecWishDirection = Player.Rotation.Forward * input;
+			}
+
 		}
 
 		Accelerate( vecWishDirection, flWishSpeed, flAccelerate );

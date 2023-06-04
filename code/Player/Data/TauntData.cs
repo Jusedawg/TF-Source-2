@@ -17,8 +17,10 @@ public class TauntData : GameResource
 	/// </summary>
 	/// 
 	// public static List<TauntData> All = new(); Old Method
-	public static List<TauntData> All { get; set; } = new();
-	public static List<TauntData> AllActive { get; set; } = new();
+	public static List<TauntData> AllTaunts { get; set; } = new();
+	public static List<TauntData> EnabledTaunts { get; set; } = new();
+	public static List<TauntData> StockTaunts { get; set; } = new();
+	public static List<TauntData> CustomTaunts { get; set; } = new();
 
 	/// <summary>
 	/// Display Name 
@@ -38,18 +40,29 @@ public class TauntData : GameResource
 	public string SequenceName { get; set; }
 
 	/// <summary>
+	/// Is this taunt running on the Taunt Animation Model system? Currently Unimplemented
+	/// </summary>
+	[Title( "Use Taunt Animation Model System" )]
+	public bool UseTAM { get; set; }
+
+	/// <summary>
 	/// Is this taunt disabled? If so, it will not generate in any taunt lists
 	/// </summary>
 	public bool Disabled { get; set; }
 
 	/// <summary>
-	/// Which class can use this taunt? Used to generate the taunt list
+	/// If disabled, this taunt will ignore being cancelled if the player leave the ground
 	/// </summary>
 	[Category( "Attributes" )]
-	public TFPlayerClass Class { get; set; } = TFPlayerClass.Undefined;
+	[Title( "Require Ground" )]
+	public bool RequireGround { get; set; } = true;
 
+	/// <summary>
+	/// If enabled, taunt will only be performed if there is space allowed for a partner
+	/// </summary>
 	[Category( "Attributes" )]
-	public TauntType TauntType { get; set; }
+	[Title( "Partner Taunt" )]
+	public bool IsPartnerTaunt { get; set; }
 
 	/// <summary>
 	/// Allows players to join into the taunt by double-tapping the taunt button while looking at a player performing the taunt
@@ -59,12 +72,25 @@ public class TauntData : GameResource
 	public bool TauntAllowJoin { get; set; }
 
 	/// <summary>
-	/// If assigned, taunt will spawn this prop
+	/// Is this a custom taunt? This changes behavior of taunts to accomodate additional, player-installed taunts
 	/// </summary>
 	[Category( "Attributes" )]
-	[ResourceType( "vmdl" )]
-	[Title( "Prop Model" )]
-	public string TauntPropModel { get; set; }
+	[Title( "Custom Taunt" )]
+	public bool IsCustomTaunt { get; set; }
+
+	/// <summary>
+	/// If assigned, allows that class to use this taunt. The playermodel bonemerges to the selected model. Undefined does nothing. If "Custom Taunt" is enabled, uses TAM system, otherwise ignores model entry
+	/// </summary>
+	[Category( "Models" )]
+	[Title( "Animation Models" )]
+	public List<TauntModelEntry> AnimationModelEntries { get; set; }
+
+	/// <summary>
+	/// If assigned, this taunt will spawn the specified prop for it's duration. Use Undefined for a shared prop between all classes (prioritizes class-specific entries).
+	/// </summary>
+	[Category( "Models" )]
+	[Title( "Prop Models" )]
+	public List<TauntModelEntry> PropModelEntries { get; set; }
 
 	/// <summary>
 	/// If the taunt enables movement, this limits how fast the player can move
@@ -72,6 +98,13 @@ public class TauntData : GameResource
 	[Category( "Movement" )]
 	[Title( "Maximum Movmement Speed" )]
 	public float TauntMovespeed { get; set; }
+
+	/// <summary>
+	/// Allows the player to strafe instead of rotate when using left/right inputs
+	/// </summary>
+	[Category( "Movement" )]
+	[Title( "Allow Strafing" )]
+	public bool TauntStrafing { get; set; }
 
 	/// <summary>
 	/// Forces the player to move forward
@@ -92,11 +125,14 @@ public class TauntData : GameResource
 	{
 		base.PostLoad();
 
-		if ( !string.IsNullOrEmpty( TauntPropModel ) )
+		if ( PropModelEntries != null )
 		{
-			Precache.Add( TauntPropModel );
+			foreach ( var propModel in PropModelEntries )
+			{
+				Precache.Add( propModel.modelPath );
+			}
 		}
-		
+
 		// Get lowercase class name
 		//string tauntname = ResourceName.ToLower();
 
@@ -104,10 +140,17 @@ public class TauntData : GameResource
 
 		if ( !Disabled )
 		{
-			AllActive.Add( this );
+			if ( IsCustomTaunt )
+			{
+				CustomTaunts.Add( this );
+			}
+			else
+			{
+				StockTaunts.Add( this );
+			}
+			EnabledTaunts.Add( this );
 		}
-
-		All.Add( this );
+		AllTaunts.Add( this );
 	}
 
 	/// <summary>
@@ -125,7 +168,7 @@ public class TauntData : GameResource
 
 		taunt_name = taunt_name.ToLower();
 		
-		foreach (var taunt_data in AllActive)
+		foreach (var taunt_data in EnabledTaunts)
 		{
 			if (taunt_data.ResourceName == taunt_name)
 			{
@@ -136,6 +179,29 @@ public class TauntData : GameResource
 		//We have a string, but it didn't match any existing taunts
 		Log.Warning( "GET TAUNTDATA FAILED: STRING DOES NOT MATCH ANY EXISTING FILES" );
 		return null;
+	}
+	public string GetAnimationModel( TFPlayerClass playerClass )
+	{
+		if ( AnimationModelEntries == null ) return "";
+		foreach ( var entry in this.AnimationModelEntries )
+		{
+			if ( entry.playerClass == playerClass ) return entry.modelPath;
+		}
+		return "";
+	}
+	public string GetPropModel( TFPlayerClass playerClass )
+	{
+		if ( PropModelEntries == null ) return "";
+		foreach ( var entry in this.PropModelEntries )
+		{
+			if ( entry.playerClass == playerClass ) return entry.modelPath;
+		}
+		return "";
+	}
+	public struct TauntModelEntry
+	{
+		public TFPlayerClass playerClass { get; set; }
+		[ResourceType( "vmdl" )] public string modelPath { get; set; }
 	}
 }
 

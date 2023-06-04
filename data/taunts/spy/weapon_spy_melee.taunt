@@ -1,12 +1,21 @@
 {
-  "DisplayName": "Taunt: Fencing",
+  "DisplayName": "Weapon Taunt: Fencing",
   "Icon": "",
   "SequenceName": "taunt03",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Spy",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": false,
-  "TauntPropModel": null
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Spy"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

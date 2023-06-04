@@ -2,12 +2,42 @@
   "DisplayName": "Taunt: Kazotsky Kick",
   "Icon": "",
   "SequenceName": "taunt_russian",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Undefined",
-  "TauntType": "Looping",
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": true,
-  "TauntPropModel": "",
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {},
+    {
+      "playerClass": "Soldier"
+    },
+    {
+      "playerClass": "Pyro"
+    },
+    {
+      "playerClass": "Demoman"
+    },
+    {
+      "playerClass": "Heavy"
+    },
+    {
+      "playerClass": "Engineer"
+    },
+    {
+      "playerClass": "Medic"
+    },
+    {
+      "playerClass": "Sniper"
+    },
+    {
+      "playerClass": "Spy"
+    }
+  ],
+  "PropModelEntries": null,
   "TauntMovespeed": 50,
+  "TauntStrafing": false,
   "TauntForceMove": false,
   "TauntMusic": "sounds/music/music.cossack_sandvich.sound"
 }

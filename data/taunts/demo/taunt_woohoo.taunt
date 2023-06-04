@@ -2,11 +2,25 @@
   "DisplayName": "Taunt: Oblooterated",
   "Icon": "",
   "SequenceName": "taunt_woohoo",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Demoman",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": true,
-  "TauntPropModel": "models/player/items/taunts/beer_crate/beer_crate.vmdl"
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Demoman"
+    }
+  ],
+  "PropModelEntries": [
+    {
+      "playerClass": "Demoman",
+      "modelPath": "models/player/items/taunts/beer_crate/beer_crate.vmdl"
+    }
+  ],
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

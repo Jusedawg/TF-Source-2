@@ -26,9 +26,7 @@ public class TauntMenu : Panel
 			OnPlayerUpdated();
 		}
 
-		if ( !player.IsAlive ) return;
-
-		SetClass( "open", Input.Down( "Taunt" ) );
+		SetClass( "open", Input.Down( "Taunt" ) && player.IsAlive );
 
 		if ( Input.Released( "Taunt" ) )
 		{

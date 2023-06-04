@@ -7593,7 +7593,7 @@
 								]
 								activity_name = ""
 								activity_weight = 1
-								weight_list_name = ""
+								weight_list_name = "weights_ignoreWeaponBones"
 								fade_in_time = 0.2
 								fade_out_time = 0.2
 								looping = false
@@ -7668,7 +7668,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -7681,7 +7681,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_TAUNT_ENABLE_MOVE"
@@ -7732,7 +7732,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -7745,7 +7745,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_TAUNT_ENABLE_MOVE"
@@ -7792,7 +7792,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -7833,7 +7833,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_TAUNT_ENABLE_MOVE"
@@ -7906,7 +7906,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -7977,7 +7977,7 @@
 								disable_compression = false
 								source_filename = "models/player/demo/demo_fbx/anim/taunt_aerobic_b.dmx"
 								start_frame = -1
-								end_frame = -1
+								end_frame = 133
 								framerate = 24.0
 								take = 0
 								reverse = false
@@ -8041,11 +8041,24 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
 											Int = 1
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
+									},
+									{
+										_class = "AnimEvent"
+										event_class = "AE_GENERIC_EVENT"
+										event_frame = 99
+										event_keys = 
+										{
+											TypeName = "TF_HIDE_WEAPON"
+											Int = 0
 											Float = 0.0
 											Vector = [ 0.0, 0.0, 0.0 ]
 											StringData = ""
@@ -8085,7 +8098,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -8098,7 +8111,7 @@
 								]
 								activity_name = ""
 								activity_weight = 1
-								weight_list_name = ""
+								weight_list_name = "weights_ignoreWeaponBones"
 								fade_in_time = 0.2
 								fade_out_time = 0.2
 								looping = false
@@ -8119,7 +8132,7 @@
 								name = "taunt_highFiveStart_idle"
 								activity_name = ""
 								activity_weight = 1
-								weight_list_name = ""
+								weight_list_name = "weights_ignoreWeaponBones"
 								fade_in_time = 0.2
 								fade_out_time = 0.2
 								looping = false
@@ -8150,11 +8163,11 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 124
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
-											Int = 1
+											Int = 0
 											Float = 0.0
 											Vector = [ 0.0, 0.0, 0.0 ]
 											StringData = ""
@@ -8163,7 +8176,7 @@
 								]
 								activity_name = ""
 								activity_weight = 1
-								weight_list_name = ""
+								weight_list_name = "weights_ignoreWeaponBones"
 								fade_in_time = 0.2
 								fade_out_time = 0.2
 								looping = false
@@ -8194,11 +8207,11 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 124
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
-											Int = 1
+											Int = 0
 											Float = 0.0
 											Vector = [ 0.0, 0.0, 0.0 ]
 											StringData = ""
@@ -8207,7 +8220,7 @@
 								]
 								activity_name = ""
 								activity_weight = 1
-								weight_list_name = ""
+								weight_list_name = "weights_ignoreWeaponBones"
 								fade_in_time = 0.2
 								fade_out_time = 0.2
 								looping = false
@@ -9146,7 +9159,7 @@
 									{
 										_class = "AnimEvent"
 										event_class = "AE_GENERIC_EVENT"
-										event_frame = 0
+										event_frame = 1
 										event_keys = 
 										{
 											TypeName = "TF_HIDE_WEAPON"
@@ -30252,6 +30265,40 @@
 							{
 								bone = "hlp_forearm_r"
 								weight = 1.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "weights_ignoreWeaponBones"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "bip_pelvis"
+								weight = 1.0
+							},
+							{
+								bone = "weapon_bone"
+								weight = 0.0
+							},
+							{
+								bone = "weapon_bone_1"
+								weight = 0.0
+							},
+							{
+								bone = "weapon_bone_2"
+								weight = 0.0
+							},
+							{
+								bone = "weapon_bone_3"
+								weight = 0.0
+							},
+							{
+								bone = "weapon_bone_l"
+								weight = 0.0
 							},
 						]
 						master_morph_weight = -1.0

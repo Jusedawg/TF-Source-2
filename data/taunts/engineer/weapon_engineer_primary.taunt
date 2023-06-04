@@ -1,12 +1,21 @@
 {
-  "DisplayName": "Taunt: Shotgun",
+  "DisplayName": "Weapon Taunt: Shotgun",
   "Icon": "",
   "SequenceName": "taunt01",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Engineer",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": false,
-  "TauntPropModel": null
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Engineer"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

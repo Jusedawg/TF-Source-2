@@ -8090,22 +8090,6 @@
 								children = 
 								[
 									{
-										_class = "AnimAddLayer"
-										anim_name = "layer_taunt07"
-									},
-									{
-										_class = "AnimEvent"
-										event_class = "AE_WPN_HIDE"
-										event_frame = 1
-										event_keys = null
-									},
-									{
-										_class = "AnimEvent"
-										event_class = "AE_WPN_UNHIDE"
-										event_frame = 87
-										event_keys = null
-									},
-									{
 										_class = "AnimEvent"
 										event_class = "AE_CL_PLAYSOUND"
 										event_frame = 12
@@ -8213,11 +8197,36 @@
 											tags = ""
 										}
 									},
+									{
+										_class = "AnimEvent"
+										event_class = "AE_GENERIC_EVENT"
+										event_frame = 1
+										event_keys = 
+										{
+											TypeName = "TF_HIDE_WEAPON"
+											Int = 1
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
+									},
+									{
+										_class = "AnimEvent"
+										event_class = "AE_GENERIC_EVENT"
+										event_frame = 87
+										event_keys = 
+										{
+											TypeName = "TF_HIDE_WEAPON"
+											Int = 0
+											Float = 0.0
+											Vector = [ 0.0, 0.0, 0.0 ]
+											StringData = ""
+										}
+									},
 								]
-								disabled = true
 								activity_name = ""
 								activity_weight = 1
-								weight_list_name = "weightlist_9"
+								weight_list_name = ""
 								fade_in_time = 0.2
 								fade_out_time = 0.2
 								looping = false
@@ -10058,6 +10067,7 @@
 									},
 									{
 										_class = "AnimEvent"
+										disabled = true
 										event_class = "AE_CL_CREATE_PARTICLE_EFFECT"
 										event_frame = 2
 										event_keys = 

@@ -337,11 +337,13 @@ public partial class SDKPlayer : AnimatedEntity, IHasMaxHealth, IAcceptsExtended
 
 	protected override void OnAnimGraphTag( string tag, AnimGraphTagEvent fireMode )
 	{
+		base.OnAnimGraphTag( tag, fireMode );
 		ActiveWeapon?.OnPlayerAnimGraphTag( tag, fireMode );
 	}
 
 	public override void OnAnimEventGeneric( string name, int intData, float floatData, Vector3 vectorData, string stringData )
 	{
+		base.OnAnimEventGeneric( name, intData, floatData, vectorData, stringData );
 		ActiveWeapon?.OnPlayerAnimEventGeneric( name, intData, floatData, vectorData, stringData );
 	}
 

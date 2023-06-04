@@ -2,12 +2,15 @@
 using Sandbox;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TFS2;
 
 partial class TFPlayer
 {
+	//
 	//General Taunt Vars
+	//
 
 	[Net, Predicted]
 	public TauntData ActiveTaunt { get; set; }
@@ -25,18 +28,25 @@ partial class TFPlayer
 	public bool TauntEnableMove { get; set; }
 
 	/// <summary>
-	/// Timer for simple taunts
+	/// Whether or not the player can manually cancel their taunt. Set via AnimGraphTag
 	/// </summary>
-	[Net, Predicted]
-	public TimeSince TimeSinceTaunt { get; set; }
-
-	[Net, Predicted]
-	public float TauntDuration { get; set; } = 1f;
+	[Net]
+	public bool TauntCanCancel { get; set; }
 
 	[Net]
 	public bool TauntsReset { get; set; }
 
+	/// <summary>
+	/// Timer that will force players out of taunting if they've been in a non-cancellable taunt for too long
+	/// </summary>
+	[Net]
+	public TimeUntil TauntTimeout { get; set; }
+
+	public float TauntTimeoutMaxDuration { get; set; } = 10f;
+
+	//
 	//Weapon Taunt Vars
+	//
 
 	///<summary>
 	/// Timer for doubletap taunt function
@@ -52,16 +62,39 @@ partial class TFPlayer
 	[Net, Predicted]
 	public bool WeaponTauntAvailable { get; set; }
 
+	//
 	//Partner Taunt Vars
-
-	[Net, Predicted]
-	public TFPlayer PartnerTarget { get; set; }
+	//
 
 	/// <summary>
-	/// How far to consider a hovered player for a valid partner, players bounds width multiplied by 2.5
+	/// Currently hovered TFPlayer within PartnerAcceptDistance
 	/// </summary>
-	public const float PartnerDistance = 120f;
+	public TFPlayer PartnerTarget => GetPartnerTarget();
 
+	[Net]
+	public Vector3 PartnerValidLocation { get; set; }
+
+	[Net]
+	public bool PartnerSpaceAvailable { get; set; }
+
+	/// <summary>
+	/// How far to consider a hovered player for a valid partner
+	/// </summary>
+	public const float PartnerAcceptDistance = 150f;
+
+	/// <summary>
+	/// How far to consider a hovered player for a valid partner
+	/// </summary>
+	public const float PartnerPlacementDistance = 96f;
+
+	/// <summary>
+	/// How far in height can two players be from eachother?
+	/// </summary>
+	public const float PartnerMaxHeighDiff = 12f;
+
+	/// <summary>
+	/// Whether or not this player is ready to accept a partner, set via AnimGraphTag
+	/// </summary>
 	[Net]
 	public bool WaitingForPartner { get; set; }
 
@@ -73,35 +106,31 @@ partial class TFPlayer
 		// Reset our tauntlist, incase we have one
 		TauntList.Clear();
 
-		var classname = PlayerClass.Title.ToLower();
-		TFPlayerClass classkey = TFPlayerClass.Undefined;
+		TFPlayerClass classkey = GetTFPlayerClass();
 
-		foreach ( KeyValuePair<TFPlayerClass, string> pair in PlayerClass.Names )
+		// Add taunt to Class' taunt list if an entry for our current class exists
+		foreach ( var taunt in TauntData.StockTaunts )
 		{
-			if ( pair.Value == classname )
+			if ( taunt.AnimationModelEntries == null ) continue;
+			foreach ( var tauntModelEntry in taunt.AnimationModelEntries )
 			{
-				classkey = pair.Key;
+				if ( tauntModelEntry.playerClass == classkey )
+				{
+					TauntList.Add( taunt );
+				}
 			}
 		}
 
-		// Add taunt to Class' taunt list if Undefined (aka Allclass)
-		foreach ( var taunt in TauntData.AllActive )
+		//Custom taunts, currently not implemented
+		foreach ( var taunt in TauntData.CustomTaunts )
 		{
-			if ( taunt.Class == TFPlayerClass.Undefined )
+			if ( taunt.AnimationModelEntries == null ) break;
+			foreach ( var tauntModelEntry in taunt.AnimationModelEntries )
 			{
-				TauntList.Add( taunt );
-			}
-		}
-
-		// Separate so ALLCLASS taunts cycle first, this is important because we cannot dynamically match a playermodel's tauntlist enum, so it MUST match up
-		// Sorting alphabetically in separated groups is the only way to do this
-
-		// Add taunt to Class' taunt list if it belongs to this class
-		foreach ( var taunt in TauntData.AllActive )
-		{
-			if ( taunt.Class == classkey )
-			{
-				TauntList.Add( taunt );
+				if ( tauntModelEntry.playerClass == classkey )
+				{
+					TauntList.Add( taunt );
+				}
 			}
 		}
 	}
@@ -127,13 +156,20 @@ partial class TFPlayer
 		}
 
 		//I believe this code can be rewritten better, I just don't remember how
+		/*
 		if ( HoveredEntity != null )
 		{
-			if ( HoveredDistance < PartnerDistance ) //player bounds width * 2.5
-				PartnerTarget = HoveredEntity as TFPlayer;
+			if ( HoveredEntity is TFPlayer player  )
+			{
+				if ( HoveredDistance < PartnerDistance ) //player bounds width * 2.5
+					PartnerTarget = player;
+				else
+					PartnerTarget = null;
+			}
 			else
 				PartnerTarget = null;
 		}
+		*/
 
 		//If taunt menu button is pressed before certain time elapses, check for Partner/Group taunts, if none play weapon taunt
 		if ( Input.Pressed( "Taunt" ) && WeaponTauntAvailable && !InCondition( TFCondition.Taunting ) )
@@ -141,13 +177,10 @@ partial class TFPlayer
 			if ( TryDoubleTapTaunt() ) return;
 		}
 
+		//If we have somehow exited taunt condition without reseting our parameters, do so now
 		if ( !InCondition( TFCondition.Taunting ) && !TauntsReset )
 		{
-			ActiveTaunt = null;
-			Animator?.SetAnimParameter( "b_taunt", false );
-			Animator?.SetAnimParameter( "b_taunt_partner", false );
-			Animator?.SetAnimParameter( "b_taunt_initiator", false );
-			TauntsReset = true;
+			ResetTauntParams();
 		}
 
 		//Failsafe, check to see if we are somehow in taunt condition without a taunt set
@@ -155,6 +188,11 @@ partial class TFPlayer
 
 		if ( InCondition( TFCondition.Taunting ) )
 		{
+			if ( !IsLocalPawn )
+			{
+				UpdateMusicPosition();
+			}
+
 			if ( Input.Pressed( "Attack1" ) )
 			{
 				Animator?.SetAnimParameter( "b_fire", true );
@@ -165,35 +203,38 @@ partial class TFPlayer
 				Animator?.SetAnimParameter( "b_fire_secondary", true );
 			}
 
-			//Call a fake partner accept
-			if ( ActiveTaunt.TauntType == TauntType.Partner && Input.Pressed( "Taunt" ) )
+			//Debug, call a fake partner accept
+			if ( WaitingForPartner && Input.Pressed( "Ready" ) )
 			{
 				AcceptPartnerTaunt( true );
 			}
 
-			if ( ActiveTaunt.TauntType == TauntType.Partner && !WaitingForPartner )
-			{
-				if ( TimeSinceTaunt > TauntDuration )
-				{
-					StopTaunt();
-				}
-			}
-			// Stop single taunts via duration
-			if ( ActiveTaunt.TauntType == TauntType.Once && TimeSinceTaunt > TauntDuration )
-			{
-				StopTaunt();
-			}
-
 			// Stop single taunts via loss of grounded state
-			if ( ActiveTaunt.TauntType != TauntType.Looping && GroundEntity == null )
+			if ( ActiveTaunt.RequireGround && GroundEntity == null )
 			{
 				StopTaunt();
+				return;
 			}
 
 			// Stop looping/partner taunts via key press
-			if ( (ActiveTaunt.TauntType == TauntType.Looping || ActiveTaunt.TauntType == TauntType.Partner && WaitingForPartner) && (Input.Pressed( "Jump" ) || Input.Pressed( "Taunt" )) )
+			if ( TauntCanCancel && (Input.Pressed( "Jump" ) || Input.Pressed( "Taunt" )) )
+			{
+				//TauntAnimationMaster?.SetAnimParameter( "b_taunt_cancel", true ); //TAM
+				Animator?.SetAnimParameter( "b_taunt_cancel", true );
+				TauntTimeout = TauntTimeoutMaxDuration; //Reset our timeout countdown so we don't accidentally force exit in the middle of an outro animation;
+				return;
+			}
+
+			if (TauntTimeout && TauntCanCancel)
+			{
+				TauntTimeout = TauntTimeoutMaxDuration;
+			}
+
+			//We have somehow reached the timeout and aren't in a cancellable state, force exit taunting
+			if ( TauntTimeout.Fraction >= 0.5f && TauntTimeout && !TauntCanCancel )
 			{
 				StopTaunt();
+				return;
 			}
 		}
 	}
@@ -212,6 +253,23 @@ partial class TFPlayer
 		if ( TryWeaponTaunt() ) return true;
 		return false;
 	}
+	public TFPlayer GetPartnerTarget()
+	{
+		if ( HoveredEntity != null )
+		{
+			if ( HoveredEntity is TFPlayer player )
+			{
+				if ( HoveredDistance < PartnerAcceptDistance )
+					return player;
+				else
+					return null;
+			}
+			else
+				return null;
+		}
+		else
+			return null;
+	}
 
 	/// <summary>
 	/// Attempt to join a partner or group taunt
@@ -222,7 +280,7 @@ partial class TFPlayer
 		if ( PartnerTarget != null && PartnerTarget.InCondition( TFCondition.Taunting ) )
 		{
 			// Partner Taunt
-			if ( PartnerTarget.ActiveTaunt.TauntType == TauntType.Partner && PartnerTarget.WaitingForPartner == true && IsPartnerTauntAngleValid( PartnerTarget ) )
+			if (  PartnerTarget.WaitingForPartner == true && IsPartnerTauntAngleValid( PartnerTarget ) && PartnerTarget.PartnerSpaceAvailable )
 			{
 				WeaponTauntAvailable = false;
 				ActiveTaunt = PartnerTarget.ActiveTaunt;
@@ -232,7 +290,7 @@ partial class TFPlayer
 				return true;
 			}
 			// Group taunt
-			else if ( PartnerTarget.ActiveTaunt.TauntType == TauntType.Looping && PartnerTarget.ActiveTaunt.TauntAllowJoin == true )
+			else if ( PartnerTarget.ActiveTaunt.TauntAllowJoin == true )
 			{
 				WeaponTauntAvailable = false;
 				ActiveTaunt = PartnerTarget.ActiveTaunt;
@@ -252,7 +310,6 @@ partial class TFPlayer
 		var weapon = ActiveWeapon as TFWeaponBase;
 
 		WeaponTauntAvailable = false;
-		TimeSinceTaunt = 0;
 
 		//If we have a tauntdata set, use that
 		var Tauntdata = ResourceLibrary.Get<TauntData>( weapon.Data.TauntData );
@@ -278,6 +335,7 @@ partial class TFPlayer
 		(Animator as TFPlayerAnimator)?.SetAnimParameter( "b_taunt", true );
 
 		Velocity = 0f;
+		TauntTimeout = TauntTimeoutMaxDuration;
 
 		AddCondition( TFCondition.Taunting );
 		TauntEnableMove = false;
@@ -293,50 +351,60 @@ partial class TFPlayer
 		ActiveTaunt = taunt;
 
 		var animcontroller = Animator as TFPlayerAnimator;
-		var TauntType = taunt.TauntType;
 		var TauntIndex = TauntList.IndexOf( ActiveTaunt );  //Find way to dynamically assign, right now it MUST line up to animgraph
 
 		if ( !CanTaunt() ) return;
 
-		if ( TauntType == TauntType.Partner )
+		if ( taunt.IsPartnerTaunt )
 		{
 			//If we are starting the partner taunt, we need to check for valid spacing
 			if ( initiator )
 			{
-				if ( !CanInitiatePartnerTaunt() )
+				if ( !CanInitiatePartnerTaunt() && !tf_sv_taunt_ignore_partner_space_requirements )
 				{
 					Log.Info( "Not enough space for a partner" );
 					return;
 				}
+				else if ( tf_sv_taunt_ignore_partner_space_requirements )
+				{
+					var state = PartnerSpaceAvailable ? "passed" : "failed";
+					Log.Warning( $"tf_taunt_ignore_partner_space_requirements is enabled; Partner Taunt {state} the space check");
+				}
 			}
 		}
 
-		// prevents conflicting rotation issues when joining partner taunt
+		// sets player facing the direction of their camera, rather than their model rotation.
 		if ( initiator )
 		{
 			Rotation = Animator.GetIdealRotation();
 		}
 
-		if ( TauntType == TauntType.Once )
-		{
-			TauntDuration = GetSequenceDuration( ActiveTaunt.SequenceName );
-		}
 
-		if ( !string.IsNullOrEmpty( ActiveTaunt.TauntPropModel ) )
+		/*
+		//TauntDuration deprecated by OnAnimGraphTag
+		if ( TauntType == TauntType.Simple )
 		{
-			CreateTauntProp( ActiveTaunt, this );
-		}
+			if (!string.IsNullOrEmpty( ActiveTaunt.SequenceName ) ) TauntDuration = GetSequenceDuration( ActiveTaunt.SequenceName );
+			if ( taunt.IsCustomTaunt ) TauntDuration = tauntPuppetMaster.GetSequenceDuration( ActiveTaunt.SequenceName );
+			if ( tauntPuppetMaster != null ) TauntDuration = tauntPuppetMaster.CurrentSequence.Duration;
+			Log.Info($"Duration {TauntDuration}");
+		} 
+		*/
+
+		CreateTauntProp( ActiveTaunt );
 
 		if ( !string.IsNullOrEmpty( taunt.TauntMusic ) )
 		{
+			StopMusic();
 			StartMusic();
 		}
 
-		animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
-		animcontroller?.SetAnimParameter( "taunt_type", (int)TauntType );
+		if ( !taunt.UseTAM )
+		{
+			animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
+		}
 
-		TimeSinceTaunt = 0;
-		StayThirdperson = IsThirdperson;
+		StayThirdperson = IsThirdpersonTF;
 		ThirdpersonSet( true );
 
 		ApplyTauntConds();
@@ -401,21 +469,39 @@ partial class TFPlayer
 
 		RemoveCondition( TFCondition.Taunting );
 
-		Rotation = Animator.GetIdealRotation();
-		Animator.SetAnimParameter( "b_taunt", false );
-		Animator.SetAnimParameter( "b_taunt_partner", false );
-		Animator.SetAnimParameter( "b_taunt_initiator", false );
-		TauntEnableMove = false;
-		WaitingForPartner = false;
+		ResetTauntParams();
 
 		StopMusic();
 
+		//DeleteAnimationMaster(); TAM
+
 		if ( TauntPropModel != null && Game.IsServer )
 			TauntPropModel.Delete();
-		if ( weapon != null && weapon.EnableDrawing == false )
+		if ( weapon != null )
 			weapon.EnableDrawing = true;
 
 		ThirdpersonSet( StayThirdperson );
+
+	}
+
+	/// <summary>
+	/// Failsafe function that makes sure our parameters are set back to default when a taunt ends
+	/// </summary>
+	public void ResetTauntParams()
+	{
+		Animator?.SetAnimParameter( "b_taunt", false );
+		Animator?.SetAnimParameter( "b_taunt_associate", false );
+		Animator?.SetAnimParameter( "b_taunt_initiator", false );
+		Animator?.SetAnimParameter( "b_taunt_cancel", false );
+		TauntEnableMove = false;
+		TauntCanCancel = false;
+		WaitingForPartner = false;
+
+		TauntTimeout = 1f;
+
+		ActiveTaunt = null;
+
+		TauntsReset = true;
 	}
 
 	#region Partner Taunt Logic
@@ -427,11 +513,12 @@ partial class TFPlayer
 	{
 		if ( PartnerTauntIsSpaceValid() )
 		{
-			WaitingForPartner = true;
+			PartnerSpaceAvailable = true;
 			return true;
 		}
 		else
 		{
+			PartnerSpaceAvailable = false;
 			return false;
 		}
 	}
@@ -442,46 +529,65 @@ partial class TFPlayer
 	public bool PartnerTauntIsSpaceValid()
 	{
 		var positionShiftUp = Position;
-		positionShiftUp.z += 42;
-		var validateFrom = positionShiftUp + Rotation.Forward * 24;
-		var validateTo = positionShiftUp + Rotation.Forward * 68;
+		//positionShiftUp.z += PartnerMaxHeighDiff;
+		var validateFrom = positionShiftUp;
+		var validateTo = positionShiftUp + Rotation.Forward * PartnerPlacementDistance;
 		var tr = PartnerValidateTrace( validateFrom, validateTo ).Run();
-
 
 		if ( tf_sv_debug_taunts )
 		{
+			var BBox = new BBox { Mins = ViewVectors.HullMin, Maxs = ViewVectors.HullMax };
+
 			DebugOverlay.Line( tr.StartPosition, tr.EndPosition, Game.IsServer ? Color.Yellow : Color.Green, 15f, true );
-			DebugOverlay.Box( tr.EndPosition, new Vector3( -24, -24, -41f ), new Vector3( 24, 24, 41 ), Color.Cyan, 15f, true );
+			DebugOverlay.Box( tr.EndPosition, BBox.Mins, BBox.Maxs, Color.Cyan, 15f, true );
 			DebugOverlay.Sphere( tr.EndPosition, 2f, Color.Red, 15f );
 			DebugOverlay.Sphere( tr.StartPosition, 2f, Color.Green, 15f );
 			DebugOverlay.Text( $"{tr.Distance}", tr.EndPosition, 15f );
 		}
 
-
-		// Did we hit something?
+		// This split allows us to taunt in the edge case of ceilings between max height difference
+		// Did we hit something? If so, check from max height for possible higher ground
 		if ( tr.Hit )
 		{
-			return false;
+			positionShiftUp.z += PartnerMaxHeighDiff;
+			validateFrom = positionShiftUp;
+			validateTo = positionShiftUp + Rotation.Forward * PartnerPlacementDistance;
+			var trHigh = PartnerValidateTrace( validateFrom, validateTo ).Run();
+			if ( trHigh.Hit )
+			{
+				Log.Info( "Partner Taunt Failed: Obstacle in way" );
+				return false;
+			}
 		}
 
 		var validateToDown = validateTo;
-		validateToDown.z -= 10;
+		var heightMult = tr.Hit ? 2 : 1; //If we hit low, but passed high, multiply height check to compensate
+		validateToDown.z -= PartnerMaxHeighDiff * heightMult;
 		var trDown = PartnerValidateTrace( validateTo, validateToDown ).Run();
 
-		// If no ground or ground height is too low, no need to check if height is too high because of first trace
-		if ( !trDown.Hit || (trDown.Hit && validateTo.Distance( trDown.EndPosition ) > 5f) )
+		if ( tf_sv_debug_taunts )
 		{
+			DebugOverlay.Line( trDown.StartPosition, trDown.EndPosition, Game.IsServer ? Color.Yellow : Color.Green, 15f, true );
+		}
+
+		// If no ground or ground height is too low, no need to check if height is too high because of first trace
+		if ( !trDown.Hit )
+		{
+			Log.Info( "Partner Taunt Failed: No Ground Found" );
 			return false;
 		}
 		else
 		{
+			PartnerValidLocation = trDown.HitPosition;
 			return true;
 		}
 	}
+
 	public virtual Trace PartnerValidateTrace( Vector3 Origin, Vector3 Target )
 	{
-		var collBox = new Vector3( 48, 48, 82 );
-		var tr = Trace.Box( collBox, Origin, Target )
+		//var collBox = new Vector3( 48, 48, 82 );
+		var BBox = new BBox { Mins = ViewVectors.HullMin, Maxs = ViewVectors.HullMax };
+		var tr = Trace.Box( BBox, Origin, Target )
 			.WorldOnly();
 
 		return tr;
@@ -492,27 +598,23 @@ partial class TFPlayer
 	/// </summary>
 	public bool IsPartnerTauntAngleValid( TFPlayer target )
 	{
-		var targetYaw = target.Rotation.Yaw();
-		float idealYaw;
-		if ( targetYaw >= 0 )
-		{
-			idealYaw = targetYaw - 180;
-		}
-		else
-		{
-			idealYaw = targetYaw + 180;
-		}
-		var angleDiff = Math.Abs( Rotation.Yaw() - idealYaw );
-		var angleDiffMax = 50f;
+		// Get a vector from owner origin to target origin
+		var vecToTarget = (target.WorldSpaceBounds.Center - Owner.WorldSpaceBounds.Center).WithZ( 0 ).Normal;
 
-		if ( angleDiff <= angleDiffMax )
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		// Get owner forward view vector
+		var vecOwnerForward = Owner.GetEyeRotation().Forward.WithZ( 0 ).Normal;
+
+		// Get target forward view vector
+		var vecTargetForward = target.GetEyeRotation().Forward.WithZ( 0 ).Normal;
+
+		// Make sure owner is behind, facing and aiming at target's back
+		float flPosVsTargetViewDot = vecToTarget.Dot( vecTargetForward ); // Behind?
+		float flPosVsOwnerViewDot = vecToTarget.Dot( vecOwnerForward );   // Facing?
+		float flViewAnglesDot = vecTargetForward.Dot( vecOwnerForward );  // Facestab?
+
+		//Log.Info( $"{flPosVsTargetViewDot < 0}" );
+		//Log.Info( $"{flPosVsOwnerViewDot > 0.5f}" );
+		return flPosVsTargetViewDot < 0 && flPosVsOwnerViewDot > 0.5f;
 	}
 
 	/// <summary>
@@ -520,11 +622,12 @@ partial class TFPlayer
 	/// </summary>
 	public void PartnerSetLocation( TFPlayer target )
 	{
-		var distance = 68;
-		Vector3 moveTo = target.Position + target.Rotation.Forward * distance;
+		if ( Game.IsClient ) return;
+		//var distance = PartnerPlacementDistance;
+		//Vector3 moveTo = target.Position + target.Rotation.Forward * distance;
 		var rotateTo = Rotation.FromYaw( target.Rotation.Yaw() - 180f );
 
-		Position = moveTo;
+		Position = target.PartnerValidLocation;
 		Rotation = rotateTo;
 	}
 
@@ -539,30 +642,12 @@ partial class TFPlayer
 		if ( !isInitiator )
 		{
 			PlayTaunt( ActiveTaunt, false );
-			animcontroller?.SetAnimParameter( "b_taunt_partner", true );
+			animcontroller?.SetAnimParameter( "b_taunt_associate", true );
 		}
 		else
 		{
 			animcontroller?.SetAnimParameter( "b_taunt_initiator", true );
 		}
-		TimeSinceTaunt = 0;
-		GetPartnerDuration( player, isInitiator );
-		WaitingForPartner = false;
-	}
-
-	/// <summary>
-	/// Simplified version for now. Hardcoded references for partner exit durations, values vary too much per class and state, variables are too complex for simpler dynamic code
-	/// </summary>
-	public void GetPartnerDuration( TFPlayer player, bool initiator )
-	{
-		var taunt = ActiveTaunt.ResourceName;
-		var tauntDurationVar = 0f;
-		if ( taunt == "taunt_highfive" )
-		{
-			tauntDurationVar = 4.17f;
-		}
-		tauntDurationVar += 0.1f; //Small cooldown window to prevent taunting before playermodel is ready to
-		player.TauntDuration = tauntDurationVar;
 	}
 
 	/// <summary>
@@ -582,51 +667,107 @@ partial class TFPlayer
 	/// Creates a temporary prop model for taunts
 	/// </summary>
 	/// <param name="taunt"></param>
-	/// <param name="player"></param>
-	public void CreateTauntProp( TauntData taunt, TFPlayer player )
+	public void CreateTauntProp( TauntData taunt )
 	{
-		player.TauntPropModel = new AnimatedEntity
+		var propPath = taunt.GetPropModel( GetTFPlayerClass() );
+
+		//Didn't get a class-specific entry, try all class
+		if ( string.IsNullOrEmpty( propPath ) )
+		{
+			propPath = taunt.GetPropModel( TFPlayerClass.Undefined );
+		}
+
+		//didn't get any matching entries, do nothing
+		if ( string.IsNullOrEmpty( propPath ) ) return;
+
+		TauntPropModel = new AnimatedEntity
 		{
 			Position = Position,
-			Owner = player,
+			Owner = this,
 			EnableHideInFirstPerson = false,
 		};
-		player.TauntPropModel.SetModel( taunt.TauntPropModel );
-		player.TauntPropModel.SetParent( player, true );
+		TauntPropModel.SetModel( propPath );
+
+		//TauntPropModel.SetParent( PlayerModel, true ); TAM
+		TauntPropModel.SetParent( this, true );
 	}
 
 	#region Music
 
 	Sound TauntMusic { get; set; }
 
+	[ClientRpc]
 	public void StartMusic()
 	{
 		var tauntMusic = ActiveTaunt.TauntMusic;
+
+		//Lets us assign a UI variant without having to manually do so
 		var tauntMusicLength = ActiveTaunt.TauntMusic.Length;
 		var format = ".sound";
-		var tauntMusicNoFormat = tauntMusic.Remove( tauntMusicLength - format.Length ); //Lets us assign a UI variant without having to manually do so
+		var tauntMusicNoFormat = tauntMusic.Remove( tauntMusicLength - format.Length );
 
-		//TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
-
-		using ( Prediction.Off() ) //INVESTIGATE, joining taunt plays sound from UI as expected, but not when starting taunt from button (has to do with tauntmenu call?)
+		if ( IsLocalPawn )
 		{
-			if ( Game.LocalClient?.Pawn == this )
-			{
-				Log.Info( "local music" );
-				TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
-			}
-			if ( Game.LocalClient?.Pawn != this )
-			{
-				Log.Info( "nonlocal music" );
-				TauntMusic = Sound.FromEntity( ActiveTaunt.TauntMusic, this, "head" ); ; //INVESTIGATE, not playing from attachment
-				TauntMusic.SetVolume( 0.5f );
-			}
+			//Log.Info( "local music" );
+			TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
+			SetOtherMusicVolume( 0.1f, this ); //Figure out how to muffle incoming taunt music from other players ONLY for this player
+		}
+		else
+		{
+			//Log.Info( "nonlocal music" );
+			//var attachment = PlayerModel.GetAttachment( "head" ); TAM
+			var attachment = GetAttachment( "head" );
+			//TauntMusic = Sound.FromEntity( ActiveTaunt.TauntMusic, PlayerModel, "head" ); //Doesn't play from attachment, using hacky workaround
+			TauntMusic = Sound.FromWorld( ActiveTaunt.TauntMusic, attachment.Value.Position );
 		}
 	}
 
+	[ClientRpc]
+	public void UpdateMusicPosition()
+	{
+		//var attachment = PlayerModel.GetAttachment( "head" ); TAM
+		var attachment = GetAttachment( "head" );
+		TauntMusic.SetPosition( attachment.Value.Position );
+	}
+
+	[ClientRpc]
+	public void SetOtherMusicVolume( float volume, TFPlayer caller )
+	{
+		foreach ( TFPlayer player in Entity.All.Where( x => x != caller ).OfType<TFPlayer>() )
+		{
+			player.TauntMusic.SetVolume( volume );
+		}
+	}
+
+	[ClientRpc]
 	public void StopMusic()
 	{
 		TauntMusic.Stop();
+		SetOtherMusicVolume( 1f, this );
+	}
+
+	public bool IsLocalTFPlayer( TFPlayer pawn )
+	{
+		var steamId = Game.SteamId;
+		foreach ( var client in Game.Clients )
+		{
+			if ( client.SteamId == steamId && client.Pawn == pawn ) return true;
+		}
+
+		return false;
+	}
+
+	public IEnumerable<IClient> GetNonLocalTFPlayers( TFPlayer pawn )
+	{
+		List<IClient> clients = new List<IClient>();
+		var steamId = Game.SteamId;
+		foreach ( var client in Game.Clients )
+		{
+			if ( client.SteamId == steamId && client.Pawn == pawn ) continue;
+			clients.Add( client );
+		}
+
+		return clients;
 	}
 
 	#endregion
@@ -801,28 +942,32 @@ partial class TFPlayer
 
 		if ( name == "TF_HIDE_WEAPON" )
 		{
-			var weapon = ActiveWeapon as TFWeaponBase;
-			if ( weapon == null ) return;
-
-			if ( intData == 0 )
+			TFWeaponBase weapon = (TFWeaponBase)ActiveWeapon;
+			if ( weapon != null )
 			{
-				weapon.EnableDrawing = true;
-			}
-			if ( intData == 1 )
-			{
-				weapon.EnableDrawing = false;
+				if ( intData == 0 )
+				{
+					weapon.EnableDrawing = true;
+				}
+				if ( intData == 1 )
+				{
+					weapon.EnableDrawing = false;
+				}
 			}
 		}
 
 		if ( name == "TF_HIDE_TAUNTPROP" )
 		{
-			if ( intData == 0 && TauntPropModel.EnableDrawing == false )
+			if ( TauntPropModel != null )
 			{
-				TauntPropModel.EnableDrawing = true;
-			}
-			if ( intData == 1 && TauntPropModel.EnableDrawing == true )
-			{
-				TauntPropModel.EnableDrawing = false;
+				if ( intData == 0 && TauntPropModel.EnableDrawing == false )
+				{
+					TauntPropModel.EnableDrawing = true;
+				}
+				if ( intData == 1 && TauntPropModel.EnableDrawing == true )
+				{
+					TauntPropModel.EnableDrawing = false;
+				}
 			}
 		}
 
@@ -833,10 +978,11 @@ partial class TFPlayer
 
 		if ( name == "TF_SET_BODYGROUP_WEAPON" )
 		{
-			var weapon = ActiveWeapon as TFWeaponBase;
-			if ( weapon == null ) return;
-
-			weapon.SetBodyGroup( stringData, intData );
+			TFWeaponBase weapon = (TFWeaponBase)ActiveWeapon;
+			if ( weapon != null )
+			{
+				weapon.SetBodyGroup( stringData, intData );
+			}
 		}
 
 		if ( name == "TF_TAUNTKILL_HEAVYHIGHNOON" )
@@ -853,8 +999,77 @@ partial class TFPlayer
 		{
 			Tauntkill_SpyFencing( intData );
 		}
+
+		base.OnAnimEventGeneric( name, intData, floatData, vectorData, stringData );
+	}
+
+	public virtual void RecieveAnimGraphTag( string tag, AnimGraphTagEvent fireMode )
+	{
+		OnAnimGraphTag( tag, fireMode );
+	}
+
+	protected override void OnAnimGraphTag( string tag, AnimGraphTagEvent fireMode )
+	{
+		if ( !Game.IsServer ) return;
+
+		if ( tag == "TF_Taunt_CanCancel" )
+		{
+			if ( fireMode == AnimGraphTagEvent.Start )
+			{
+				TauntCanCancel = true;
+			}
+			if ( fireMode == AnimGraphTagEvent.End )
+			{
+				TauntCanCancel = false;
+			}
+			if ( fireMode == AnimGraphTagEvent.Fired )
+			{
+				TauntCanCancel = !TauntCanCancel;
+			}
+		}
+
+		if ( tag == "TF_Taunt_PartnerTauntReady" )
+		{
+			if ( fireMode == AnimGraphTagEvent.Start )
+			{
+				WaitingForPartner = true;
+			}
+			if ( fireMode == AnimGraphTagEvent.End )
+			{
+				WaitingForPartner = false;
+			}
+			if ( fireMode == AnimGraphTagEvent.Fired )
+			{
+				WaitingForPartner = !WaitingForPartner;
+			}
+		}
+
+		if ( tag == "TF_Taunt_End" )
+		{
+			if ( fireMode == AnimGraphTagEvent.Start || fireMode == AnimGraphTagEvent.Fired )
+			{
+				StopTaunt();
+			}
+		}
+
+		base.OnAnimGraphTag( tag, fireMode );
+	}
+	public TFPlayerClass GetTFPlayerClass()
+	{
+		var classname = PlayerClass.Title.ToLower();
+		TFPlayerClass classkey = TFPlayerClass.Undefined;
+
+		foreach ( KeyValuePair<TFPlayerClass, string> pair in PlayerClass.Names )
+		{
+			if ( pair.Value == classname )
+			{
+				classkey = pair.Key;
+			}
+		}
+		return classkey;
 	}
 
 	[ConVar.Replicated] public static bool tf_sv_debug_taunts { get; set; } = false;
+	[ConVar.Replicated] public static bool tf_sv_taunt_ignore_partner_space_requirements { get; set; } = false;
 	[ConVar.Replicated] public static bool tf_disable_movement_taunts { get; set; } = false;
 }

@@ -1,12 +1,21 @@
 {
-  "DisplayName": "Taunt: Medigun",
+  "DisplayName": "Weapon Taunt: Medigun",
   "Icon": "",
   "SequenceName": "taunt02",
+  "UseTAM": false,
   "Disabled": false,
-  "Class": "Medic",
-  "TauntType": "Once",
-  "TauntForceMove": false,
+  "RequireGround": true,
+  "IsPartnerTaunt": false,
   "TauntAllowJoin": false,
-  "TauntUseProp": false,
-  "TauntPropModel": null
+  "IsCustomTaunt": false,
+  "AnimationModelEntries": [
+    {
+      "playerClass": "Medic"
+    }
+  ],
+  "PropModelEntries": null,
+  "TauntMovespeed": 0,
+  "TauntStrafing": false,
+  "TauntForceMove": false,
+  "TauntMusic": null
 }

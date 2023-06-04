@@ -12,7 +12,6 @@ public partial class TFPlayer : SDKPlayer
 {
 	public new static TFPlayer LocalPlayer => Game.LocalPawn as TFPlayer;
 	public override float DeathAnimationTime => 2;
-	public override bool IsThirdPerson => InCondition( TFCondition.Humiliated );
 
 	public TFPlayer()
 	{
