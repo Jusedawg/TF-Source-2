@@ -1,21 +1,27 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"Shader"		"shaders/complex.shader_c"
-	"TextureColor"		"materials/models/buildables/sentry1/sentry_pulse_red_color.tga"
-	"TextureTranslucency"		"materials/models/buildables/sentry1/sentry_pulse_red_trans.tga"
-	"F_TRANSLUCENT"		"1"
-	"SystemAttributes"
+	shader "shaders/sourcebox/sourcebox_vertexlit_and_unlit_generic.shader_c"
+
+	//---- Blending ----
+	F_ENABLE_BLEND 1
+
+	//---- Rendering ----
+	F_RENDER_BACKFACES 1
+
+	//---- Attributes ----
+	g_flVertexAlpha "0.000"
+
+	//---- Material ----
+	Color "materials/models/buildables/sentry1/sentry_pulse_red_color.tga"
+	Translucency "materials/models/buildables/sentry1/sentry_pulse_trans.png"
+
+	//---- Tint ----
+	g_vDiffuseModulation "[1.000000 1.000000 1.000000 1.000000]"
+
+	SystemAttributes
 	{
-		"PhysicsSurfaceProperties"		"no_decal"
-	}
-	"legacy_import"
-	{
-		"UnlitGeneric"
-		{
-			"$basetexture"		"models/buildables/sentry1/sentry_pulse_red"
-			"$surfaceprop"		"no_decal"
-			"$translucent"		"1"
-			"$model"		"1"
-		}
+		PhysicsSurfaceProperties "no_decal"
 	}
 }
