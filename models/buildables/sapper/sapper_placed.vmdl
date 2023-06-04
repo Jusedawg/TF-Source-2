@@ -280,6 +280,44 @@
 				]
 				bone_cull_type = "None"
 			},
+			{
+				_class = "BreakPieceList"
+				children = 
+				[
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/sapper_gib001.vmdl"
+					},
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/sapper_gib002.vmdl"
+					},
+				]
+			},
 		]
 		model_archetype = ""
 		primary_associated_entity = ""

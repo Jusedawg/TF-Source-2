@@ -1,0 +1,338 @@
+<!-- dmx encoding keyvalues2_noids 4 format dmx 22 -->
+"$prefix_element$"
+{
+	"anim_frameRate" "float" "30"
+	"anim_duration" "time" "0.0000"
+}
+"DmElement"
+{
+	"name" "string" "root"
+	"model" "element" "deb5248f-b245-4fbe-82f3-b1b064a633a2"
+	"skeleton" "element" "deb5248f-b245-4fbe-82f3-b1b064a633a2"
+	"makefile" "DmeDCCMakefile"
+	{
+		"name" "string" "makefile"
+		"sources" "element_array" 
+		[
+		]
+	}
+	
+	"exportTags" "DmeExportTags"
+	{
+		"name" "string" "exportTags"
+		"date" "string" ""
+		"time" "string" ""
+		"user" "string" ""
+		"machine" "string" ""
+		"app" "string" ""
+		"appVersion" "string" ""
+		"vmdl" "string" "models/buildables/gibs/dispenser_gib2.vmdl"
+	}
+	
+	"animationList" "DmeAnimationList"
+	{
+		"name" "string" "@idle"
+		"animations" "element_array" 
+		[
+			"DmeChannelsClip"
+			{
+				"name" "string" "@idle"
+				"timeFrame" "DmeTimeFrame"
+				{
+					"start" "time" "0.0000"
+					"duration" "time" "0.0000"
+					"offset" "time" "0.0000"
+					"scale" "float" "1"
+				}
+				
+				"color" "color" "0 0 0 0"
+				"text" "string" ""
+				"mute" "bool" "0"
+				"trackGroups" "element_array" 
+				[
+				]
+				"displayScale" "float" "1"
+				"channels" "element_array" 
+				[
+					"DmeChannel"
+					{
+						"name" "string" "polymsh244_p"
+						"fromElement" "element" ""
+						"fromAttribute" "string" ""
+						"fromIndex" "int" "0"
+						"toElement" "element" "b41916ff-c3c2-4620-9b5b-3b2722d6140e"
+						"toAttribute" "string" "position"
+						"toIndex" "int" "0"
+						"mode" "int" "3"
+						"log" "DmeVector3Log"
+						{
+							"name" "string" "vector3 log"
+							"layers" "element_array" 
+							[
+								"DmeVector3LogLayer"
+								{
+									"name" "string" "vector3 log"
+									"times" "time_array" 
+									[
+										"0.0000"
+									]
+									"curvetypes" "int_array" 
+									[
+									]
+									"values" "vector3_array" 
+									[
+										"0.6601564288 0.5615232587 -0.767089963"
+									]
+									"compressed" "binary" 
+									"
+									"
+								}
+							]
+							"curveinfo" "element" ""
+							"usedefaultvalue" "bool" "0"
+							"defaultvalue" "vector3" "0 0 0"
+							"bookmarksX" "time_array" 
+							[
+							]
+							"bookmarksY" "time_array" 
+							[
+							]
+							"bookmarksZ" "time_array" 
+							[
+							]
+						}
+						
+						"channelType" "string" "skeleton"
+					},
+					"DmeChannel"
+					{
+						"name" "string" "polymsh244_o"
+						"fromElement" "element" ""
+						"fromAttribute" "string" ""
+						"fromIndex" "int" "0"
+						"toElement" "element" "b41916ff-c3c2-4620-9b5b-3b2722d6140e"
+						"toAttribute" "string" "orientation"
+						"toIndex" "int" "0"
+						"mode" "int" "3"
+						"log" "DmeQuaternionLog"
+						{
+							"name" "string" "quaternion log"
+							"layers" "element_array" 
+							[
+								"DmeQuaternionLogLayer"
+								{
+									"name" "string" "quaternion log"
+									"times" "time_array" 
+									[
+										"0.0000"
+									]
+									"curvetypes" "int_array" 
+									[
+									]
+									"values" "quaternion_array" 
+									[
+										"-0.0392128974 0.0019632876 -0.0470254421 -0.9981218576"
+									]
+									"compressed" "binary" 
+									"
+									"
+								}
+							]
+							"curveinfo" "element" ""
+							"usedefaultvalue" "bool" "0"
+							"defaultvalue" "quaternion" "0 0 0 1"
+							"bookmarksX" "time_array" 
+							[
+							]
+							"bookmarksY" "time_array" 
+							[
+							]
+							"bookmarksZ" "time_array" 
+							[
+							]
+						}
+						
+						"channelType" "string" "skeleton"
+					},
+					"DmeChannel"
+					{
+						"name" "string" "dispenser_gib2_physbox_p"
+						"fromElement" "element" ""
+						"fromAttribute" "string" ""
+						"fromIndex" "int" "0"
+						"toElement" "element" "abfdbe3f-bb90-4d18-95f1-9f04968135c7"
+						"toAttribute" "string" "position"
+						"toIndex" "int" "0"
+						"mode" "int" "3"
+						"log" "DmeVector3Log"
+						{
+							"name" "string" "vector3 log"
+							"layers" "element_array" 
+							[
+								"DmeVector3LogLayer"
+								{
+									"name" "string" "vector3 log"
+									"times" "time_array" 
+									[
+										"0.0000"
+									]
+									"curvetypes" "int_array" 
+									[
+									]
+									"values" "vector3_array" 
+									[
+										"0 0 0"
+									]
+									"compressed" "binary" 
+									"
+									"
+								}
+							]
+							"curveinfo" "element" ""
+							"usedefaultvalue" "bool" "0"
+							"defaultvalue" "vector3" "0 0 0"
+							"bookmarksX" "time_array" 
+							[
+							]
+							"bookmarksY" "time_array" 
+							[
+							]
+							"bookmarksZ" "time_array" 
+							[
+							]
+						}
+						
+						"channelType" "string" "skeleton"
+					},
+					"DmeChannel"
+					{
+						"name" "string" "dispenser_gib2_physbox_o"
+						"fromElement" "element" ""
+						"fromAttribute" "string" ""
+						"fromIndex" "int" "0"
+						"toElement" "element" "abfdbe3f-bb90-4d18-95f1-9f04968135c7"
+						"toAttribute" "string" "orientation"
+						"toIndex" "int" "0"
+						"mode" "int" "3"
+						"log" "DmeQuaternionLog"
+						{
+							"name" "string" "quaternion log"
+							"layers" "element_array" 
+							[
+								"DmeQuaternionLogLayer"
+								{
+									"name" "string" "quaternion log"
+									"times" "time_array" 
+									[
+										"0.0000"
+									]
+									"curvetypes" "int_array" 
+									[
+									]
+									"values" "quaternion_array" 
+									[
+										"-0.5000000596 -0.5000000596 -0.5 0.5"
+									]
+									"compressed" "binary" 
+									"
+									"
+								}
+							]
+							"curveinfo" "element" ""
+							"usedefaultvalue" "bool" "0"
+							"defaultvalue" "quaternion" "0 0 0 1"
+							"bookmarksX" "time_array" 
+							[
+							]
+							"bookmarksY" "time_array" 
+							[
+							]
+							"bookmarksZ" "time_array" 
+							[
+							]
+						}
+						
+						"channelType" "string" "skeleton"
+					}
+				]
+				"frameRate" "float" "30"
+				"vbDelta" "bool" "0"
+				"vbLooping" "bool" "0"
+			}
+		]
+	}
+	
+}
+
+"DmeTransform"
+{
+	"id" "elementid" "b41916ff-c3c2-4620-9b5b-3b2722d6140e"
+	"position" "vector3" "0.6601558924 0.5615229607 -0.7670891881"
+	"orientation" "quaternion" "0.0391824245 -0.0019318935 0.0469870605 0.9981248379"
+}
+
+"DmeTransform"
+{
+	"id" "elementid" "abfdbe3f-bb90-4d18-95f1-9f04968135c7"
+	"position" "vector3" "0 0 0"
+	"orientation" "quaternion" "0.5 0.5 0.5000000596 -0.4999999404"
+}
+
+"DmeModel"
+{
+	"id" "elementid" "deb5248f-b245-4fbe-82f3-b1b064a633a2"
+	"name" "string" "dispenser_gib2"
+	"transform" "DmeTransform"
+	{
+		"position" "vector3" "0 0 0"
+		"orientation" "quaternion" "0 0 0 1"
+	}
+	
+	"shape" "element" ""
+	"visible" "bool" "1"
+	"children" "element_array" 
+	[
+		"DmeJoint"
+		{
+			"name" "string" "polymsh244"
+			"transform" "element" "b41916ff-c3c2-4620-9b5b-3b2722d6140e"
+			"shape" "element" ""
+			"visible" "bool" "1"
+			"children" "element_array" 
+			[
+			]
+		},
+		"DmeJoint"
+		{
+			"name" "string" "dispenser_gib2_physbox"
+			"transform" "element" "abfdbe3f-bb90-4d18-95f1-9f04968135c7"
+			"shape" "element" ""
+			"visible" "bool" "1"
+			"children" "element_array" 
+			[
+			]
+		}
+	]
+	"jointList" "element_array" 
+	[
+	]
+	"baseStates" "element_array" 
+	[
+		"DmeTransformList"
+		{
+			"name" "string" "bind"
+			"transforms" "element_array" 
+			[
+			]
+		}
+	]
+	"upAxis" "string" "Y"
+	"axisSystem" "DmeAxisSystem"
+	{
+		"upAxis" "int" "2"
+		"forwardParity" "int" "2"
+		"coordSys" "int" "0"
+	}
+	
+}
+
