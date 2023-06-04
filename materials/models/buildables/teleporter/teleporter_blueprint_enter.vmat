@@ -1,11 +1,42 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"Shader"		"shaders/complex.shader_c"
-	"TextureColor"		"materials/models/buildables/teleporter/teleporter_blueprint_enter_color.tga"
-	"SystemAttributes"
+	shader "shaders/sourcebox/sourcebox_skin.shader_c"
+
+	//---- Material ----
+	AmbientOcclusion "materials/default/default_ao.tga"
+	Color "materials/models/buildables/teleporter/teleporter_blueprint_enter_color.tga"
+	g_flAmbientOcclusionDirectAmbient "1.000"
+	g_flAmbientOcclusionDirectDiffuse "0.000"
+	g_flAmbientOcclusionDirectPostLightwarp "1.000"
+	g_flAmbientOcclusionDirectSpecular "0.000"
+	Normal "materials/default/default_normal.tga"
+	Translucency "materials/default/default_trans.tga"
+
+	//---- Rimlight ----
+	RimMaskTexture "materials/default/default_rimmask.tga"
+
+	//---- Specular ----
+	g_bBaseMapAlphaPhongMask "0"
+	g_bConstantSpecularExponent "1"
+	g_bConstantSpecularTint "1"
+	g_flSpecularBoost "1.000"
+	g_flSpecularExponent "20.000"
+	g_vSourceFresnelRanges "[0.000 0.000 0.000]"
+	g_vSpecularTint "[1.000000 1.000000 1.000000 0.000000]"
+	SpecMask "materials/default/default_spec.psd"
+	SpecularExponentTexture "materials/default/default_specexp.tga"
+	SpecularTintTexture "materials/default/default.tga"
+
+	//---- Tint ----
+	g_vDiffuseModulation "[1.000000 1.000000 1.000000 1.000000]"
+
+	SystemAttributes
 	{
-		"PhysicsSurfaceProperties"		"no_decal"
+		PhysicsSurfaceProperties "no_decal"
 	}
+
 	"legacy_import"
 	{
 		"VertexLitGeneric"

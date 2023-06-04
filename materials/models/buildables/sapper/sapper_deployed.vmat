@@ -1,0 +1,63 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/sourcebox/sourcebox_skin.shader_c"
+
+	//---- Rendering ----
+	F_CUBEMAP 1
+	F_LIGHTWARPTEXTURE 1
+
+	//---- Envmap ----
+	g_bEnvMapShadowTweaks "1"
+	g_flEnvMapScale "0.200"
+	g_vEnvMapTint "[1.000000 1.000000 1.000000 0.000000]"
+
+	//---- Material ----
+	AmbientOcclusion "materials/default/default_ao.tga"
+	Color "materials/models/buildables/sapper/sapper_deployed_color.tga"
+	g_flAmbientOcclusionDirectAmbient "1.000"
+	g_flAmbientOcclusionDirectDiffuse "0.000"
+	g_flAmbientOcclusionDirectPostLightwarp "1.000"
+	g_flAmbientOcclusionDirectSpecular "0.000"
+	LightWarpTexture "materials/models/lightwarps/weapon_lightwarp.tga"
+	Normal "materials/default/default_normal.tga"
+	Translucency "materials/default/default_trans.tga"
+
+	//---- Rimlight ----
+	RimMaskTexture "materials/default/default_rimmask.tga"
+
+	//---- Specular ----
+	g_bBaseMapAlphaPhongMask "0"
+	g_bConstantSpecularExponent "1"
+	g_bConstantSpecularTint "1"
+	g_fInvertPhongMask "0.000"
+	g_flEnvMapFresnel "0.000"
+	g_flSpecularBoost "5.500"
+	g_flSpecularExponent "25.000"
+	g_vSourceFresnelRanges "[0.250 0.500 1.000]"
+	g_vSpecularTint "[1.000000 1.000000 1.000000 0.000000]"
+	SpecMask "materials/models/buildables/sapper/sapper_deployed_spec.tga"
+	SpecularExponentTexture "materials/default/default_specexp.tga"
+	SpecularTintTexture "materials/default/default.tga"
+
+	//---- Tint ----
+	g_vDiffuseModulation "[1.000000 1.000000 1.000000 1.000000]"
+
+	"legacy_import"
+	{
+		"VertexLitGeneric"
+		{
+			"$baseTexture"		"models/buildables/sapper/sapper_deployed"
+			"$bumpmap"		"models/buildables/sapper/sapper_deployed_phongmask"
+			"$envmap"		"env_cubemap"
+			"$envmaptint"		"[.2 .2 .2]"
+			"$normalmapalphaenvmapmask"		"1"
+			"$phong"		"1"
+			"$phongexponent"		"25"
+			"$phongboost"		"5.500000"
+			"$lightwarptexture"		"models/lightwarps/weapon_lightwarp"
+			"$phongfresnelranges"		"[.25 .5 1]"
+		}
+	}
+}

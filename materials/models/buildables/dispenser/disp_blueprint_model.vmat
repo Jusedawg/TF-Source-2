@@ -1,23 +1,23 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/complex.shader_c"
-	"F_RENDER_BACKFACES"		"1"
-	"F_TRANSLUCENT"		"1"
-	"F_UNLIT"		"1"
-	"TextureAmbientOcclusion"		"materials/default/default_ao.tga"
-	"g_flModelTintAmount"		"1.000000"
-	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
-	"TextureColor"		"materials/models/buildables/dispenser/disp_blueprint_model.tga"
-	"g_flFadeExponent"		"1.000000"
-	"g_bFogEnabled"		"1"
-	"g_flMetalness"		"0.000000"
-	"TextureNormal"		"materials/default/default_normal.tga"
-	"TextureRoughness"		"[1.000000 1.000000 1.000000 0.000000]"
-	"g_nScaleTexCoordUByModelScaleAxis"		"0"
-	"g_nScaleTexCoordVByModelScaleAxis"		"0"
-	"g_vTexCoordOffset"		"[0.000 0.000]"
-	"g_vTexCoordScale"		"[1.000 1.000]"
-	"g_vTexCoordScrollSpeed"		"[0.000 0.000]"
-	"g_flOpacityScale"		"1.000000"
-	"TextureTranslucency"		"materials/models/buildables/dispenser/disp_blueprint_model_trans.png"
+	shader "shaders/sourcebox/sourcebox_vertexlit_and_unlit_generic.shader_c"
+
+	//---- Blending ----
+	F_ADDITIVE_BLEND 1
+	F_ENABLE_BLEND 1
+
+	//---- Rendering ----
+	F_RENDER_BACKFACES 1
+
+	//---- Attributes ----
+	g_flVertexAlpha "0.000"
+
+	//---- Material ----
+	Color "materials/models/buildables/dispenser/disp_blueprint_model.tga"
+	Translucency "materials/models/buildables/dispenser/disp_blueprint_model_trans.png"
+
+	//---- Tint ----
+	g_vDiffuseModulation "[1.000000 1.000000 1.000000 1.000000]"
 }

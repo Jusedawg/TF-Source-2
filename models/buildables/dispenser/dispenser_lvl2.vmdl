@@ -1,0 +1,608 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "MaterialGroup"
+						name = "1"
+						remaps = 
+						[
+							{
+								from = "materials/models/buildables/dispenser/dispenser.vmat"
+								to = "materials/models/buildables/dispenser/dispenser_blue.vmat"
+							},
+							{
+								from = "materials/models/buildables/dispenser/dispenser_upgrades_red.vmat"
+								to = "materials/models/buildables/dispenser/dispenser_upgrades_blue.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "PhysicsBodyMarkupList"
+				children = 
+				[
+					{
+						_class = "PhysicsBodyMarkup"
+						target_body = "buildables_phys"
+						mass_override = 1.0
+						inertia_scale = 1.0
+						linear_damping = 0.0
+						angular_damping = 0.0
+						use_mass_center_override = false
+						mass_center_override = [ 0.0, 0.0, 0.0 ]
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsHullFile"
+						name = "buildables_phys_0_mesh"
+						parent_bone = "buildables_phys"
+						surface_prop = "default"
+						collision_tags = "solid"
+						recenter_on_parent_bone = true
+						offset_origin = [ 0.0, 0.0, 0.0 ]
+						offset_angles = [ 0.0, 0.0, 0.0 ]
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						filename = "models\\buildables\\dispenser\\dispenser_lvl2_fbx\\physics\\physmesh.dmx"
+						import_scale = 1.0
+						faceMergeAngle = 10.0
+						maxHullVertices = 0
+						import_mode = "SingleHull"
+						optimization_algorithm = "QEM"
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"buildables_phys_0_mesh",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "build_point_0"
+						parent_bone = "joint1"
+						relative_origin = [ 42.485134, 15.27357, 0.0 ]
+						relative_angles = [ -0.000003, -70.226288, -90.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "heal_origin"
+						parent_bone = "joint1"
+						relative_origin = [ 19.258911, 6.849484, -0.955089 ]
+						relative_angles = [ 90.0, -70.226288, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "controlpanel1_ll"
+						parent_bone = "joint1"
+						relative_origin = [ 32.229652, 18.951126, -10.954267 ]
+						relative_angles = [ -90.0, -70.226288, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "controlpanel1_ur"
+						parent_bone = "joint1"
+						relative_origin = [ 42.581047, 22.672495, 9.045734 ]
+						relative_angles = [ -90.0, -70.226288, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "controlpanel0_ll"
+						parent_bone = "joint1"
+						relative_origin = [ 36.965935, 5.776621, 9.044911 ]
+						relative_angles = [ 90.0, -70.226288, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "controlpanel0_ur"
+						parent_bone = "joint1"
+						relative_origin = [ 47.317333, 9.497989, -10.95509 ]
+						relative_angles = [ 90.0, -70.226288, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "default"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								parent_bone = "joint1"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.922458, -15.969818, -22.669317 ]
+								hitbox_maxs = [ 56.420403, 29.602873, 25.081293 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint2"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.880089, -0.333103, -3.935771 ]
+								hitbox_maxs = [ 14.298683, 11.00518, 0.679616 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint3"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -11.633727, -7.68236, -3.958195 ]
+								hitbox_maxs = [ 14.057941, 0.369932, 2.412184 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint17"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.331408, -1.295078, -2.922972 ]
+								hitbox_maxs = [ 6.427054, 1.246403, 0.613348 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint18"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.268581, -1.29508, -3.039158 ]
+								hitbox_maxs = [ 6.746571, 1.246397, 0.372859 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint19"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.283254, -1.295076, -3.039158 ]
+								hitbox_maxs = [ 1.287976, 1.246399, 0.646909 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint4"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -10.661406, -0.002315, -0.958319 ]
+								hitbox_maxs = [ 12.261395, 12.025792, 13.819478 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint5"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.350477, -1.981093, -3.172854 ]
+								hitbox_maxs = [ 3.048414, 1.861008, 3.738445 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint6"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.865112, -1.297007, -3.130196 ]
+								hitbox_maxs = [ 9.571979, 1.821694, 3.494405 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint7"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.154761, -1.214007, -3.90087 ]
+								hitbox_maxs = [ 4.246059, 1.093393, 5.675931 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint8"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -6.070099, -3.379817, -3.474751 ]
+								hitbox_maxs = [ 8.61333, 3.029985, 3.688452 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint9"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.885574, -2.8458, -2.514758 ]
+								hitbox_maxs = [ 4.084536, 2.866598, 2.76254 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint21"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.730277, -1.832455, -2.026683 ]
+								hitbox_maxs = [ 4.480365, 2.020947, 2.326217 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint11"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -14.030591, -0.333102, -4.092247 ]
+								hitbox_maxs = [ 12.153442, 11.005184, 0.55542 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint12"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.793396, -7.68236, -4.1141 ]
+								hitbox_maxs = [ 11.903113, 0.369942, 2.400363 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint14"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.753726, -1.295088, -0.275456 ]
+								hitbox_maxs = [ 0.809645, 1.246395, 3.15318 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint15"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -7.119729, -1.295084, -0.258517 ]
+								hitbox_maxs = [ 6.43641, 1.246395, 3.153181 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint16"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -1.706637, -1.295085, -0.756756 ]
+								hitbox_maxs = [ 0.856734, 1.246394, 2.929313 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint13"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -12.24653, -0.020202, -0.997909 ]
+								hitbox_maxs = [ 10.68837, 12.007921, 13.817748 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint5a"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.164166, -2.964584, -2.694159 ]
+								hitbox_maxs = [ 2.803317, 2.747811, 2.590349 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint6a"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -8.891489, -3.072979, -3.172906 ]
+								hitbox_maxs = [ 5.78143, 3.336804, 4.014412 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint7a"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -4.321651, -1.231887, -4.044924 ]
+								hitbox_maxs = [ 6.094115, 1.075503, 5.515417 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint8a"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -9.950908, -1.51904, -3.367167 ]
+								hitbox_maxs = [ 6.495186, 1.599655, 3.235015 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint9a"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.948407, -1.912995, -3.120428 ]
+								hitbox_maxs = [ 3.456203, 1.9291, 3.787505 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "joint10a"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -2.944056, -2.034424, -1.034459 ]
+								hitbox_maxs = [ 4.266585, 1.818973, 3.318439 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -17.449701, -1.424008, -5.523357 ]
+								hitbox_maxs = [ 20.445435, 18.672699, 0.394966 ]
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "dispenser_lvl2_bg_body_lod0"
+						filename = "models\\buildables\\dispenser\\dispenser_lvl2_fbx\\mesh\\dispenser_lvl2_bg_body_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "upgrade"
+						children = 
+						[
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 0
+								event_keys = 
+								{
+									name = "Weapon_Scatter_Gun.Empty"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 1
+								event_keys = 
+								{
+									name = "Weapon_SniperRifle.WorldReload"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 2
+								event_keys = 
+								{
+									name = "weapons/syringegun_reload_air1.wav"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 6
+								event_keys = 
+								{
+									name = "Building_Dispenser.Build1b"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+							{
+								_class = "AnimEvent"
+								event_class = "AE_CL_PLAYSOUND"
+								event_frame = 14
+								event_keys = 
+								{
+									name = "Weapon_PDA.DrawEngineer"
+									stop_on_seq_change = false
+									use_layer_sequence = false
+									tags = ""
+								}
+							},
+						]
+						activity_name = "ACT_OBJ_UPGRADING"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\dispenser\\dispenser_lvl2_fbx\\anim\\upgrade.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = ""
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = false
+					},
+				]
+				bone_cull_type = "None"
+			},
+			{
+				_class = "BreakPieceList"
+				children = 
+				[
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/dispenser_gib1.vmdl"
+					},
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/dispenser_gib2.vmdl"
+					},
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/dispenser_gib3.vmdl"
+					},
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/dispenser_gib4.vmdl"
+					},
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/dispenser_gib5.vmdl"
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+		importer_notes = """
+Imported from compiled VMDL_C
+"""
+	}
+}

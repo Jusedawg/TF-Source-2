@@ -1,0 +1,1112 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "PoseParamList"
+				children = 
+				[
+					{
+						_class = "PoseParam"
+						name = "direction"
+						poseparam_min = -180.0
+						poseparam_max = 180.0
+						poseparam_looping = true
+						poseparam_loop = 360.0
+					},
+				]
+			},
+			{
+				_class = "WeightListList"
+				children = 
+				[
+					{
+						_class = "WeightList"
+						name = "weightlist_1"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "buildables_phys"
+								weight = 0.0
+							},
+							{
+								bone = "direction"
+								weight = 1.0
+							},
+							{
+								bone = "hose_0_l"
+								weight = 0.0
+							},
+							{
+								bone = "hose_0_r"
+								weight = 0.0
+							},
+							{
+								bone = "hose_1_l"
+								weight = 0.0
+							},
+							{
+								bone = "hose_1_r"
+								weight = 0.0
+							},
+							{
+								bone = "hose_2_l"
+								weight = 0.0
+							},
+							{
+								bone = "hose_2_r"
+								weight = 0.0
+							},
+							{
+								bone = "hose_3_l"
+								weight = 0.0
+							},
+							{
+								bone = "hose_3_r"
+								weight = 0.0
+							},
+							{
+								bone = "mid_section"
+								weight = 0.0
+							},
+							{
+								bone = "root"
+								weight = 0.0
+							},
+							{
+								bone = "weapon_bone"
+								weight = 0.0
+							},
+						]
+						master_morph_weight = -1.0
+						morph_weights = [  ]
+					},
+				]
+			},
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						meshes = 
+						[
+							"teleporter_light_bg_teleporter_lod0",
+							"teleporter_light_bg_teleporter_blur_sm1_lod0",
+							"teleporter_light_bg_teleporter_direction_sm1_lod0",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 15.0
+						meshes = 
+						[
+							"teleporter_light_bg_teleporter_lod1",
+							"teleporter_light_bg_teleporter_blur_sm1_lod1",
+							"teleporter_light_bg_teleporter_direction_sm1_lod1",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 35.0
+						meshes = 
+						[
+							"teleporter_light_bg_teleporter_lod2",
+							"teleporter_light_bg_teleporter_blur_sm1_lod2",
+							"teleporter_light_bg_teleporter_direction_sm1_lod2",
+						]
+					},
+				]
+			},
+			{
+				_class = "BodyGroupList"
+				children = 
+				[
+					{
+						_class = "BodyGroup"
+						name = "teleporter_blur"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"teleporter_light_bg_teleporter_blur_sm1_lod0",
+									"teleporter_light_bg_teleporter_blur_sm1_lod1",
+									"teleporter_light_bg_teleporter_blur_sm1_lod2",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+					{
+						_class = "BodyGroup"
+						name = "teleporter_direction"
+						children = 
+						[
+							{
+								_class = "BodyGroupChoice"
+								meshes = [  ]
+							},
+							{
+								_class = "BodyGroupChoice"
+								meshes = 
+								[
+									"teleporter_light_bg_teleporter_direction_sm1_lod0",
+									"teleporter_light_bg_teleporter_direction_sm1_lod1",
+									"teleporter_light_bg_teleporter_direction_sm1_lod2",
+								]
+							},
+						]
+						hidden_in_tools = false
+					},
+				]
+			},
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "MaterialGroup"
+						name = "1"
+						remaps = 
+						[
+							{
+								from = "materials/models/buildables/teleporter/teleporter.vmat"
+								to = "materials/models/buildables/teleporter/teleporter_blue.vmat"
+							},
+							{
+								from = "materials/models/buildables/teleporter/teleporterspin_red.vmat"
+								to = "materials/models/buildables/teleporter/teleporterspin_blue.vmat"
+							},
+							{
+								from = "materials/models/buildables/teleporter/tp_direction.vmat"
+								to = "materials/models/buildables/teleporter/tp_direction1.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "PhysicsBodyMarkupList"
+				children = 
+				[
+					{
+						_class = "PhysicsBodyMarkup"
+						target_body = "buildables_phys"
+						mass_override = 1.0
+						inertia_scale = 1.0
+						linear_damping = 0.0
+						angular_damping = 0.0
+						use_mass_center_override = false
+						mass_center_override = [ 0.0, 0.0, 0.0 ]
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsHullFile"
+						name = "buildables_phys_0_mesh"
+						parent_bone = "buildables_phys"
+						surface_prop = "default"
+						collision_tags = "solid"
+						recenter_on_parent_bone = true
+						offset_origin = [ 0.0, 0.0, 0.0 ]
+						offset_angles = [ 0.0, 0.0, 0.0 ]
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\physics\\physmesh.dmx"
+						import_scale = 1.0
+						faceMergeAngle = 10.0
+						maxHullVertices = 0
+						import_mode = "SingleHull"
+						optimization_algorithm = "QEM"
+						import_filter = 
+						{
+							exclude_by_default = true
+							exception_list = 
+							[
+								"buildables_phys_0_mesh",
+							]
+						}
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "arm_attach_L"
+						parent_bone = "mid_section"
+						relative_origin = [ 21.50292, 8.93443, 0.0 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "centre_attach"
+						parent_bone = "mid_section"
+						relative_origin = [ 0.0, 8.93443, 0.0 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "arm_attach_R"
+						parent_bone = "mid_section"
+						relative_origin = [ -21.501757, 8.93443, 0.0 ]
+						relative_angles = [ -0.0, 0.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "build_point_0"
+						parent_bone = "mid_section"
+						relative_origin = [ 0.0, -4.0, 0.0 ]
+						relative_angles = [ -90.0, -90.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "centre_attach2"
+						parent_bone = "mid_section"
+						relative_origin = [ 0.0, -4.0, 0.0 ]
+						relative_angles = [ 90.0, 90.0, 0.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "default"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -26.709818, 0.0, -26.709818 ]
+								hitbox_maxs = [ 26.709818, 12.205932, 26.709818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "mid_section"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -25.656675, -0.0, -6.38705 ]
+								hitbox_maxs = [ 25.656679, 8.946583, 6.387058 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -20.001026, -2.659543, -0.251419 ]
+								hitbox_maxs = [ 23.679281, 19.025602, 3.636749 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "direction"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.311, 0.0, 0.0 ]
+								hitbox_maxs = [ 13.311, 12.590856, 39.206448 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -26.709818, 0.0, -26.709818 ]
+								hitbox_maxs = [ 26.709818, 12.205932, 26.709818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "mid_section"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -25.656675, -0.0, -6.38705 ]
+								hitbox_maxs = [ 25.656679, 8.946583, 6.387058 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -20.001026, -2.659543, -0.251419 ]
+								hitbox_maxs = [ 23.679281, 19.025602, 3.636749 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "direction"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.311, 0.0, 0.0 ]
+								hitbox_maxs = [ 13.311, 12.590856, 39.206448 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -26.709818, 0.0, -26.709818 ]
+								hitbox_maxs = [ 26.709818, 12.205932, 26.709818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "mid_section"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -25.656675, -0.0, -6.38705 ]
+								hitbox_maxs = [ 25.656679, 8.946583, 6.387058 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -20.001026, -2.659543, -0.251419 ]
+								hitbox_maxs = [ 23.679281, 19.025602, 3.636749 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "direction"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.311, 0.0, 0.0 ]
+								hitbox_maxs = [ 13.311, 12.590856, 39.206448 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -26.709818, 0.0, -26.709818 ]
+								hitbox_maxs = [ 26.709818, 12.205932, 26.709818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "mid_section"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -25.656675, -0.0, -6.38705 ]
+								hitbox_maxs = [ 25.656679, 8.946583, 6.387058 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -20.001026, -2.659543, -0.251419 ]
+								hitbox_maxs = [ 23.679281, 19.025602, 3.636749 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "direction"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.311, 0.0, 0.0 ]
+								hitbox_maxs = [ 13.311, 12.590856, 39.206448 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -26.709818, 0.0, -26.709818 ]
+								hitbox_maxs = [ 26.709818, 12.205932, 26.709818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "mid_section"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -25.656675, -0.0, -6.38705 ]
+								hitbox_maxs = [ 25.656679, 8.946583, 6.387058 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -20.001026, -2.659543, -0.251419 ]
+								hitbox_maxs = [ 23.679281, 19.025602, 3.636749 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "direction"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.311, 0.0, 0.0 ]
+								hitbox_maxs = [ 13.311, 12.590856, 39.206448 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -26.709818, 0.0, -26.709818 ]
+								hitbox_maxs = [ 26.709818, 12.205932, 26.709818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "mid_section"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -25.656675, -0.0, -6.38705 ]
+								hitbox_maxs = [ 25.656679, 8.946583, 6.387058 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -20.001026, -2.659543, -0.251419 ]
+								hitbox_maxs = [ 23.679281, 19.025602, 3.636749 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "direction"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.311, 0.0, 0.0 ]
+								hitbox_maxs = [ 13.311, 12.590856, 39.206448 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -26.709818, 0.0, -26.709818 ]
+								hitbox_maxs = [ 26.709818, 12.205932, 26.709818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "mid_section"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -25.656675, -0.0, -6.38705 ]
+								hitbox_maxs = [ 25.656679, 8.946583, 6.387058 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -20.001026, -2.659543, -0.251419 ]
+								hitbox_maxs = [ 23.679281, 19.025602, 3.636749 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "direction"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.311, 0.0, 0.0 ]
+								hitbox_maxs = [ 13.311, 12.590856, 39.206448 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -26.709818, 0.0, -26.709818 ]
+								hitbox_maxs = [ 26.709818, 12.205932, 26.709818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "mid_section"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -25.656675, -0.0, -6.38705 ]
+								hitbox_maxs = [ 25.656679, 8.946583, 6.387058 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -20.001026, -2.659543, -0.251419 ]
+								hitbox_maxs = [ 23.679281, 19.025602, 3.636749 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "direction"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.311, 0.0, 0.0 ]
+								hitbox_maxs = [ 13.311, 12.590856, 39.206448 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "root"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -26.709818, 0.0, -26.709818 ]
+								hitbox_maxs = [ 26.709818, 12.205932, 26.709818 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "mid_section"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -25.656675, -0.0, -6.38705 ]
+								hitbox_maxs = [ 25.656679, 8.946583, 6.387058 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -20.001026, -2.659543, -0.251419 ]
+								hitbox_maxs = [ 23.679281, 19.025602, 3.636749 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "direction"
+								surface_property = "metal"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -13.311, 0.0, 0.0 ]
+								hitbox_maxs = [ 13.311, 12.590856, 39.206448 ]
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "teleporter_light_bg_teleporter_lod0"
+						filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\mesh\\teleporter_light_bg_teleporter_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "teleporter_light_bg_teleporter_blur_sm1_lod0"
+						filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\mesh\\teleporter_light_bg_teleporter_blur_sm1_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "teleporter_light_bg_teleporter_direction_sm1_lod0"
+						filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\mesh\\teleporter_light_bg_teleporter_direction_sm1_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "teleporter_light_bg_teleporter_lod1"
+						filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\mesh\\teleporter_light_bg_teleporter_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "teleporter_light_bg_teleporter_blur_sm1_lod1"
+						filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\mesh\\teleporter_light_bg_teleporter_blur_sm1_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "teleporter_light_bg_teleporter_direction_sm1_lod1"
+						filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\mesh\\teleporter_light_bg_teleporter_direction_sm1_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "teleporter_light_bg_teleporter_lod2"
+						filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\mesh\\teleporter_light_bg_teleporter_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "teleporter_light_bg_teleporter_blur_sm1_lod2"
+						filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\mesh\\teleporter_light_bg_teleporter_blur_sm1_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "teleporter_light_bg_teleporter_direction_sm1_lod2"
+						filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\mesh\\teleporter_light_bg_teleporter_direction_sm1_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "ref"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\anim\\ref.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "1DBlend"
+						name = "layer_direction"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = "weightlist_1"
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = true
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						poseParam = "direction"
+						blendList = 
+						[
+							{
+								name = "a_arrowStart"
+								weight = -180.0
+							},
+							{
+								name = "a_arrowMid0"
+								weight = -90.0
+							},
+							{
+								name = "a_arrowMid1"
+								weight = 0.0
+							},
+							{
+								name = "a_arrowMid2"
+								weight = 90.0
+							},
+							{
+								name = "a_arrowEnd"
+								weight = 180.0
+							},
+						]
+					},
+					{
+						_class = "AnimFile"
+						name = "running"
+						children = 
+						[
+							{
+								_class = "AnimAddLayer"
+								anim_name = "layer_direction"
+							},
+						]
+						activity_name = "ACT_OBJ_RUNNING"
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\anim\\running.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_running"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\anim\\a_running.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_arrowStart"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\anim\\a_arrowstart.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_arrowMid0"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\anim\\a_arrowmid0.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_arrowMid1"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\anim\\a_arrowmid1.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_arrowMid2"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\anim\\a_arrowmid2.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "a_arrowEnd"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\teleporter\\teleporter_light_fbx\\anim\\a_arrowend.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = ""
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = false
+					},
+				]
+				bone_cull_type = "None"
+			},
+			{
+				_class = "BreakPieceList"
+				children = 
+				[
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/teleporter_gib1.vmdl"
+					},
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/teleporter_gib2.vmdl"
+					},
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/teleporter_gib3.vmdl"
+					},
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/teleporter_gib4.vmdl"
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = "models/buildables/animgraph/teleporter.vanmgrph"
+		base_model_name = ""
+		importer_notes = """
+Imported from compiled VMDL_C
+==Warnings==
+Cannot import non-trivial meshgroup: teleporter
+
+"""
+	}
+}

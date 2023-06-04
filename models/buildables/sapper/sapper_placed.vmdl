@@ -1,0 +1,330 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "GameDataList"
+				children = 
+				[
+					{
+						_class = "GenericGameData"
+						game_class = "particle"
+						game_keys = 
+						{
+							name = resource:"particles/sparks/sapper_sentry1_fx.vpcf"
+							attachment_point = "left_paddle"
+							attachment_type = "follow_attachment"
+							attachment_offset = [ 0.0, 0.0, 0.0 ]
+						}
+					},
+					{
+						_class = "GenericGameData"
+						game_class = "particle"
+						game_keys = 
+						{
+							name = resource:"particles/sparks/sapper_sentry1_fx.vpcf"
+							attachment_point = "right_paddle"
+							attachment_type = "follow_attachment"
+							attachment_offset = [ 0.0, 0.0, 0.0 ]
+						}
+					},
+				]
+			},
+			{
+				_class = "LODGroupList"
+				children = 
+				[
+					{
+						_class = "LODGroup"
+						switch_threshold = 0.0
+						meshes = 
+						[
+							"sapper_placed_bg_body_lod0",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 12.0
+						meshes = 
+						[
+							"sapper_placed_bg_body_lod1",
+						]
+					},
+					{
+						_class = "LODGroup"
+						switch_threshold = 25.0
+						meshes = 
+						[
+							"sapper_placed_bg_body_lod2",
+						]
+					},
+				]
+			},
+			{
+				_class = "AttachmentList"
+				children = 
+				[
+					{
+						_class = "Attachment"
+						name = "left_paddle"
+						parent_bone = "hose_3_l"
+						relative_origin = [ -3.129554, -2.596715, 0.0 ]
+						relative_angles = [ -0.0, -180.0, -180.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+					{
+						_class = "Attachment"
+						name = "right_paddle"
+						parent_bone = "hose_3_r"
+						relative_origin = [ 3.133524, 2.596715, 0.0 ]
+						relative_angles = [ -0.0, 0.0, -180.0 ]
+						weight = 1.0
+						ignore_rotation = false
+					},
+				]
+			},
+			{
+				_class = "HitboxSetList"
+				children = 
+				[
+					{
+						_class = "HitboxSet"
+						name = "default"
+						children = 
+						[
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -12.791065, -3.867952, -1.464774 ]
+								hitbox_maxs = [ 18.999762, 14.4048, 3.825774 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "hose_3_l"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.14022, -5.687339, -3.065102 ]
+								hitbox_maxs = [ 3.54264, 9.027587, 3.090632 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "hose_3_r"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.542641, -9.027586, -3.090632 ]
+								hitbox_maxs = [ 3.140215, 5.687339, 3.065102 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -12.791065, -3.867952, -1.464774 ]
+								hitbox_maxs = [ 18.999762, 14.4048, 3.825774 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "hose_3_l"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.14022, -5.687339, -3.065102 ]
+								hitbox_maxs = [ 3.54264, 9.027587, 3.090632 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "hose_3_r"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.542641, -9.027586, -3.090632 ]
+								hitbox_maxs = [ 3.140215, 5.687339, 3.065102 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "weapon_bone"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -12.791065, -3.867952, -1.464774 ]
+								hitbox_maxs = [ 18.999762, 14.4048, 3.825774 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "hose_3_l"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.14022, -5.687339, -3.065102 ]
+								hitbox_maxs = [ 3.54264, 9.027587, 3.090632 ]
+							},
+							{
+								_class = "Hitbox"
+								parent_bone = "hose_3_r"
+								surface_property = "default"
+								translation_only = false
+								tags = ""
+								hitbox_mins = [ -3.542641, -9.027586, -3.090632 ]
+								hitbox_maxs = [ 3.140215, 5.687339, 3.065102 ]
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						name = "sapper_placed_bg_body_lod0"
+						filename = "models\\buildables\\sapper\\sapper_placed_fbx\\mesh\\sapper_placed_bg_body_lod0.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sapper_placed_bg_body_lod1"
+						filename = "models\\buildables\\sapper\\sapper_placed_fbx\\mesh\\sapper_placed_bg_body_lod1.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+					{
+						_class = "RenderMeshFile"
+						name = "sapper_placed_bg_body_lod2"
+						filename = "models\\buildables\\sapper\\sapper_placed_fbx\\mesh\\sapper_placed_bg_body_lod2.fbx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "ref"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						source_filename = "models\\buildables\\sapper\\sapper_placed_fbx\\anim\\ref.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 30.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+			{
+				_class = "BoneMarkupList"
+				children = 
+				[
+					{
+						_class = "BoneMarkup"
+						target_bone = ""
+						ignore_Translation = false
+						ignore_rotation = false
+						do_not_discard = false
+					},
+				]
+				bone_cull_type = "None"
+			},
+			{
+				_class = "BreakPieceList"
+				children = 
+				[
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/sapper_gib001.vmdl"
+					},
+					{
+						_class = "BreakPieceExternal"
+						placement_mode = "default"
+						placement_bone = ""
+						placement_attach = ""
+						is_ragdoll = false
+						offset = [ 0.0, 0.0, 0.0 ]
+						fadetime = 10.0
+						fade_min_dist = 0.0
+						fade_max_dist = 0.0
+						name_mode = "none"
+						random_spawn_chance = 1.0
+						is_essential_piece = false
+						collision_tags = "debris"
+						model = "models/buildables/gibs/sapper_gib002.vmdl"
+					},
+				]
+			},
+		]
+		model_archetype = ""
+		primary_associated_entity = ""
+		anim_graph_name = ""
+		base_model_name = ""
+		importer_notes = """
+Imported from compiled VMDL_C
+"""
+	}
+}

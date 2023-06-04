@@ -1,22 +1,37 @@
-"Layer0"
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
 {
-	"shader"		"shaders/complex.shader_c"
-	"F_TRANSLUCENT"		"1"
-	"F_UNLIT"		"1"
-	"TextureAmbientOcclusion"		"materials/default/default_ao.tga"
-	"g_flModelTintAmount"		"1.000000"
-	"g_vColorTint"		"[1.000000 1.000000 1.000000 0.000000]"
-	"TextureColor"		"materials/models/buildables/teleporter/teleportspin_red.tga"
-	"g_flFadeExponent"		"1.000000"
-	"g_bFogEnabled"		"1"
-	"g_flMetalness"		"0.000000"
-	"TextureNormal"		"materials/default/default_normal.tga"
-	"TextureRoughness"		"[1.000000 1.000000 1.000000 0.000000]"
-	"g_nScaleTexCoordUByModelScaleAxis"		"0"
-	"g_nScaleTexCoordVByModelScaleAxis"		"0"
-	"g_vTexCoordOffset"		"[0.000 0.000]"
-	"g_vTexCoordScale"		"[1.000 1.000]"
-	"g_vTexCoordScrollSpeed"		"[0.000 0.000]"
-	"g_flOpacityScale"		"1.000000"
-	"TextureTranslucency"		"materials/models/buildables/teleporter/teleportspin_trans.png"
+	shader "shaders/sourcebox/sourcebox_skin.shader_c"
+
+	//---- Blending ----
+	F_ENABLE_BLEND 1
+
+	//---- Material ----
+	AmbientOcclusion "materials/default/default_ao.tga"
+	Color "materials/models/buildables/teleporter/teleportspin_red.tga"
+	g_flAmbientOcclusionDirectAmbient "1.000"
+	g_flAmbientOcclusionDirectDiffuse "0.000"
+	g_flAmbientOcclusionDirectPostLightwarp "1.000"
+	g_flAmbientOcclusionDirectSpecular "0.000"
+	Normal "materials/default/default_normal.tga"
+	Translucency "materials/models/buildables/teleporter/teleportspin_trans.png"
+
+	//---- Rimlight ----
+	RimMaskTexture "materials/default/default_rimmask.tga"
+
+	//---- Specular ----
+	g_bBaseMapAlphaPhongMask "0"
+	g_bConstantSpecularExponent "1"
+	g_bConstantSpecularTint "1"
+	g_flSpecularBoost "1.000"
+	g_flSpecularExponent "20.000"
+	g_vSourceFresnelRanges "[0.000 0.000 0.000]"
+	g_vSpecularTint "[1.000000 1.000000 1.000000 0.000000]"
+	SpecMask "materials/default/default_spec.psd"
+	SpecularExponentTexture "materials/default/default_specexp.tga"
+	SpecularTintTexture "materials/default/default.tga"
+
+	//---- Tint ----
+	g_vDiffuseModulation "[1.000000 1.000000 1.000000 1.000000]"
 }
