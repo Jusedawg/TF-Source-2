@@ -1,0 +1,27 @@
+// THIS FILE IS AUTO-GENERATED
+
+Layer0
+{
+	shader "shaders/sourcebox/sourcebox_vertexlit_and_unlit_generic.shader_c"
+
+	//---- Blending ----
+	F_ENABLE_BLEND 1
+
+	//---- Rendering ----
+	F_RENDER_BACKFACES 1
+
+	//---- Attributes ----
+	g_flVertexAlpha "0.000"
+
+	//---- Material ----
+	Color "materials/models/buildables/sentry_shield/sentry_shield.tga"
+	Translucency "materials/models/buildables/sentry_shield/sentry_shield_trans.tga"
+
+	//---- Tint ----
+	g_vDiffuseModulation "[1.000000 1.000000 1.000000 1.000000]"
+
+	SystemAttributes
+	{
+		PhysicsSurfaceProperties "no_decal"
+	}
+}
