@@ -82,7 +82,7 @@ public struct RadiusDamageInfo
 		}
 
 		// if we're outside of the radius, exit now.
-		if ( Radius < tr.Distance || Radius == 0 )
+		if ( radius < tr.Distance || radius == 0 )
 			return;
 
 		var maxDamage = damage;
