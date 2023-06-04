@@ -140,8 +140,8 @@ public partial class Flag : Item, ITeam, IResettable, IRoundTimerBlocker
 
 	public override void Pickup( TFPlayer player )
 	{
-		base.Pickup( player );
 		if ( !Game.IsServer ) return;
+		base.Pickup( player );
 
 		// GlowActive = false;
 		SetParent( player, "flag", Transform.Zero );
@@ -221,9 +221,8 @@ public partial class Flag : Item, ITeam, IResettable, IRoundTimerBlocker
 	}
 	public override bool Drop()
 	{
-		if ( Disabled || !Drop() ) return false;
-
 		var player = TFOwner;
+		if ( Disabled || !base.Drop() ) return false;
 
 		var origin = player.Position;
 		var target = origin + Vector3.Down * 8000;
