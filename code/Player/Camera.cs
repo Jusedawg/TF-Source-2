@@ -29,9 +29,10 @@ partial class TFPlayer
 			return;
 		}
 
-		else if ( Input.Pressed( "Inspect" ) )
+		else if ( Input.Pressed( "SwapCameraView" ) )
 		{
 			SwapCamera();
+			StayThirdperson = IsThirdpersonTF;
 		}
 	}
 	public override void CalculatePlayerView()

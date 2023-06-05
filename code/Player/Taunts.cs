@@ -12,7 +12,7 @@ partial class TFPlayer
 	//General Taunt Vars
 	//
 
-	[Net]
+	[Net, Predicted]
 	public TauntData ActiveTaunt { get; set; }
 
 	[Net]
@@ -85,7 +85,7 @@ partial class TFPlayer
 	/// <summary>
 	/// How far to consider a hovered player for a valid partner
 	/// </summary>
-	public const float PartnerPlacementDistance = 96f;
+	public const float PartnerPlacementDistance = 60f;
 
 	/// <summary>
 	/// How far in height can two players be from eachother?
@@ -142,6 +142,8 @@ partial class TFPlayer
 	{
 		if ( PlayerClass == null ) return;
 
+		if ( tf_sv_taunts_debug ) SimulateTauntDebug();
+
 		//When taunt menu is closed via release, set bool that allows doublepress taunt
 		if ( Input.Released( "Taunt" ) && !WeaponTauntAvailable && !InCondition( TFCondition.Taunting ) )
 		{
@@ -154,22 +156,6 @@ partial class TFPlayer
 		{
 			WeaponTauntAvailable = false;
 		}
-
-		//I believe this code can be rewritten better, I just don't remember how
-		/*
-		if ( HoveredEntity != null )
-		{
-			if ( HoveredEntity is TFPlayer player  )
-			{
-				if ( HoveredDistance < PartnerDistance ) //player bounds width * 2.5
-					PartnerTarget = player;
-				else
-					PartnerTarget = null;
-			}
-			else
-				PartnerTarget = null;
-		}
-		*/
 
 		//If taunt menu button is pressed before certain time elapses, check for Partner/Group taunts, if none play weapon taunt
 		if ( Input.Pressed( "Taunt" ) && WeaponTauntAvailable && !InCondition( TFCondition.Taunting ) )
@@ -207,7 +193,7 @@ partial class TFPlayer
 			}
 
 			// Stop single taunts via loss of grounded state
-			if ( tf_sv_taunts_ignore_grounded_condition )
+			if ( !tf_sv_taunts_ignore_grounded_condition )
 			{
 				if ( ActiveTaunt.RequireGround && GroundEntity == null )
 				{
@@ -225,7 +211,8 @@ partial class TFPlayer
 				return;
 			}
 
-			if (TauntTimeout && TauntCanCancel)
+			//If we enter a cancellable state, tell timer to reset
+			if ( TauntCanCancel )
 			{
 				TauntTimeout = TauntTimeoutMaxDuration;
 			}
@@ -240,9 +227,30 @@ partial class TFPlayer
 		}
 	}
 
+	/// <summary>
+	/// Used to call debug every tick, code added and removed as needed for testing
+	/// </summary>
+	public void SimulateTauntDebug()
+	{
+		if ( !IsLocalPawn ) return;
+		if ( PartnerTarget != null )
+		{
+			{
+				DebugOverlay.ScreenText( $"Partner Taunt: Vaild angle {IsPartnerTauntAngleValid( PartnerTarget )}", 1 );
+			}
+		}
+		if ( InCondition(TFCondition.Taunting) )
+		{
+			if (WaitingForPartner) DebugOverlay.Axis( PartnerValidLocation, Rotation.Identity );
+		}
+
+		//DebugOverlay.ScreenText( $"Taunt Timeout: {TauntTimeout.Relative}", 0 );
+}
+
 	public bool CanTaunt()
 	{
-		if ( !IsGrounded ) return false;
+		if ( !tf_sv_taunts_ignore_grounded_condition )
+			if ( !IsGrounded ) return false;
 		if ( InCondition( TFCondition.Taunting ) ) return false;
 
 		return true;
@@ -347,7 +355,6 @@ partial class TFPlayer
 	/// </summary>
 	public void PlayTaunt( TauntData taunt, bool initiator = true )
 	{
-
 		ActiveTaunt = taunt;
 
 		var animcontroller = Animator as TFPlayerAnimator;
@@ -403,7 +410,7 @@ partial class TFPlayer
 			animcontroller?.SetAnimParameter( "taunt_name", TauntIndex );
 		}
 
-		StayThirdperson = IsThirdpersonTF;
+		//StayThirdperson = IsThirdpersonTF;
 		ThirdpersonSet( true );
 
 		ApplyTauntConds();
@@ -496,8 +503,6 @@ partial class TFPlayer
 		TauntCanCancel = false;
 		WaitingForPartner = false;
 
-		TauntTimeout = 1f;
-
 		ActiveTaunt = null;
 
 		TauntsWantReset = false;
@@ -533,38 +538,50 @@ partial class TFPlayer
 		var validateTo = positionShiftUp + Rotation.Forward * PartnerPlacementDistance;
 		var tr = PartnerValidateTrace( validateFrom, validateTo ).Run();
 
-		if ( tf_sv_debug_taunts )
+		// This split allows us to taunt in the edge case of ceilings between max height difference
+		// Did we hit something? If so, check from max height for possible higher ground
+		if ( tr.Hit )
+		{
+			if ( tf_sv_taunts_debug )
+			{
+				Log.Info( "Partner Taunt: Failed check 1, attempting check 2" );
+			}
+
+			positionShiftUp.z += PartnerMaxHeighDiff;
+			validateFrom = positionShiftUp;
+			validateTo = positionShiftUp + Rotation.Forward * PartnerPlacementDistance;
+			tr = PartnerValidateTrace( validateFrom, validateTo ).Run();
+
+			
+			if ( tr.Hit )
+			{
+				if ( tf_sv_taunts_debug )
+				{
+					Log.Info( "Partner Taunt: Failed check 2, obstacle in way" );
+				}
+			}
+		}
+
+		if ( tf_sv_taunts_debug )
 		{
 			var BBox = new BBox { Mins = ViewVectors.HullMin, Maxs = ViewVectors.HullMax };
 
 			DebugOverlay.Line( tr.StartPosition, tr.EndPosition, Game.IsServer ? Color.Yellow : Color.Green, 15f, true );
-			DebugOverlay.Box( tr.EndPosition, BBox.Mins, BBox.Maxs, Color.Cyan, 15f, true );
+			DebugOverlay.Box( tr.EndPosition, BBox.Mins, BBox.Maxs, tr.Hit? Color.Red : Color.Cyan, 15f, true );
 			DebugOverlay.Sphere( tr.EndPosition, 2f, Color.Red, 15f );
 			DebugOverlay.Sphere( tr.StartPosition, 2f, Color.Green, 15f );
 			DebugOverlay.Text( $"{tr.Distance}", tr.EndPosition, 15f );
 		}
 
-		// This split allows us to taunt in the edge case of ceilings between max height difference
-		// Did we hit something? If so, check from max height for possible higher ground
-		if ( tr.Hit )
-		{
-			positionShiftUp.z += PartnerMaxHeighDiff;
-			validateFrom = positionShiftUp;
-			validateTo = positionShiftUp + Rotation.Forward * PartnerPlacementDistance;
-			var trHigh = PartnerValidateTrace( validateFrom, validateTo ).Run();
-			if ( trHigh.Hit )
-			{
-				Log.Info( "Partner Taunt Failed: Obstacle in way" );
-				return false;
-			}
-		}
+		if ( tr.Hit ) return false;
 
 		var validateToDown = validateTo;
 		var heightMult = tr.Hit ? 2 : 1; //If we hit low, but passed high, multiply height check to compensate
 		validateToDown.z -= PartnerMaxHeighDiff * heightMult;
-		var trDown = PartnerValidateTrace( validateTo, validateToDown ).Run();
+		var trDown = Trace.Ray( validateTo, validateToDown )
+				.WorldOnly().Run();
 
-		if ( tf_sv_debug_taunts )
+		if ( tf_sv_taunts_debug )
 		{
 			DebugOverlay.Line( trDown.StartPosition, trDown.EndPosition, Game.IsServer ? Color.Yellow : Color.Green, 15f, true );
 		}
@@ -572,7 +589,10 @@ partial class TFPlayer
 		// If no ground or ground height is too low, no need to check if height is too high because of first trace
 		if ( !trDown.Hit )
 		{
-			Log.Info( "Partner Taunt Failed: No Ground Found" );
+			if ( tf_sv_taunts_debug )
+			{
+				Log.Info( "Partner Taunt: Failed check 3, no ground found" );
+			}
 			return false;
 		}
 		else
@@ -598,22 +618,29 @@ partial class TFPlayer
 	public bool IsPartnerTauntAngleValid( TFPlayer target )
 	{
 		// Get a vector from owner origin to target origin
-		var vecToTarget = (target.WorldSpaceBounds.Center - Owner.WorldSpaceBounds.Center).WithZ( 0 ).Normal;
+		var vecToTarget = (target.WorldSpaceBounds.Center - WorldSpaceBounds.Center).WithZ( 0 ).Normal;
 
 		// Get owner forward view vector
-		var vecOwnerForward = Owner.GetEyeRotation().Forward.WithZ( 0 ).Normal;
+		var vecOwnerForward = Rotation.Forward.WithZ( 0 ).Normal;
+		var vecOwnerEyesForward = EyeRotation.Forward.WithZ( 0 ).Normal;
 
 		// Get target forward view vector
-		var vecTargetForward = target.GetEyeRotation().Forward.WithZ( 0 ).Normal;
+		var vecTargetForward = target.Rotation.Forward.WithZ( 0 ).Normal;
 
 		// Make sure owner is behind, facing and aiming at target's back
 		float flPosVsTargetViewDot = vecToTarget.Dot( vecTargetForward ); // Behind?
 		float flPosVsOwnerViewDot = vecToTarget.Dot( vecOwnerForward );   // Facing?
-		float flViewAnglesDot = vecTargetForward.Dot( vecOwnerForward );  // Facestab?
+		float flViewAnglesDot = vecTargetForward.Dot( vecOwnerEyesForward );  // Angle Correct?
 
 		//Log.Info( $"{flPosVsTargetViewDot < 0}" );
 		//Log.Info( $"{flPosVsOwnerViewDot > 0.5f}" );
-		return flPosVsTargetViewDot < 0 && flPosVsOwnerViewDot > 0.5f;
+		if ( tf_sv_taunts_debug && IsLocalPawn )
+		{
+			DebugOverlay.ScreenText( $"Partner Taunt: flPosVsTargetViewDot {flPosVsTargetViewDot}", 2 );
+			DebugOverlay.ScreenText( $"Partner Taunt: flPosVsOwnerViewDot {flPosVsOwnerViewDot}", 3 );
+			DebugOverlay.ScreenText( $"Partner Taunt: vecOwnerEyesForward {flViewAnglesDot}", 4 );
+		}
+		return flPosVsTargetViewDot < 0 && flPosVsOwnerViewDot > 0.5f && flViewAnglesDot < -0.6f;
 	}
 
 	/// <summary>
@@ -835,7 +862,7 @@ partial class TFPlayer
 
 
 
-		if ( tf_sv_debug_taunts )
+		if ( tf_sv_taunts_debug )
 		{
 			//Draws approximate corners of box trace, not exact because these respect rotation while the box trace does not
 			var RU = (Rotation.Right + Rotation.Up) * (extents);
@@ -1069,7 +1096,7 @@ partial class TFPlayer
 		return classkey;
 	}
 
-	[ConVar.Replicated] public static bool tf_sv_debug_taunts { get; set; } = false;
+	[ConVar.Replicated] public static bool tf_sv_taunts_debug { get; set; } = false;
 	[ConVar.Replicated] public static bool tf_sv_taunts_ignore_partner_space_requirements { get; set; } = false;
 	[ConVar.Replicated] public static bool tf_sv_taunts_ignore_grounded_condition { get; set; } = false;
 	[ConVar.Replicated] public static bool tf_sv_taunts_disable_movement { get; set; } = false;
