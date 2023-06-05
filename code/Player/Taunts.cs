@@ -12,7 +12,7 @@ partial class TFPlayer
 	//General Taunt Vars
 	//
 
-	[Net, Predicted]
+	[Net]
 	public TauntData ActiveTaunt { get; set; }
 
 	[Net]
@@ -34,7 +34,7 @@ partial class TFPlayer
 	public bool TauntCanCancel { get; set; }
 
 	[Net]
-	public bool TauntsReset { get; set; }
+	public bool TauntsWantReset { get; set; }
 
 	/// <summary>
 	/// Timer that will force players out of taunting if they've been in a non-cancellable taunt for too long
@@ -177,8 +177,8 @@ partial class TFPlayer
 			if ( TryDoubleTapTaunt() ) return;
 		}
 
-		//If we have somehow exited taunt condition without reseting our parameters, do so now
-		if ( !InCondition( TFCondition.Taunting ) && !TauntsReset )
+		//If taunts want to reset, and we aren't in taunting condition, do that now
+		if ( !InCondition( TFCondition.Taunting ) && TauntsWantReset )
 		{
 			ResetTauntParams();
 		}
@@ -210,10 +210,13 @@ partial class TFPlayer
 			}
 
 			// Stop single taunts via loss of grounded state
-			if ( ActiveTaunt.RequireGround && GroundEntity == null )
+			if ( tf_sv_taunts_ignore_grounded_condition )
 			{
-				StopTaunt();
-				return;
+				if ( ActiveTaunt.RequireGround && GroundEntity == null )
+				{
+					StopTaunt();
+					return;
+				}
 			}
 
 			// Stop looping/partner taunts via key press
@@ -233,6 +236,7 @@ partial class TFPlayer
 			//We have somehow reached the timeout and aren't in a cancellable state, force exit taunting
 			if ( TauntTimeout.Fraction >= 0.5f && TauntTimeout && !TauntCanCancel )
 			{
+				Log.Warning( $"{ActiveTaunt.ResourceName} ERROR: TAUNT TIMED OUT" );
 				StopTaunt();
 				return;
 			}
@@ -339,7 +343,6 @@ partial class TFPlayer
 
 		AddCondition( TFCondition.Taunting );
 		TauntEnableMove = false;
-		TauntsReset = false;
 	}
 
 	/// <summary>
@@ -351,7 +354,7 @@ partial class TFPlayer
 		ActiveTaunt = taunt;
 
 		var animcontroller = Animator as TFPlayerAnimator;
-		var TauntIndex = TauntList.IndexOf( ActiveTaunt );  //Find way to dynamically assign, right now it MUST line up to animgraph
+		var TauntIndex = TauntList.IndexOf( ActiveTaunt );  //Find way to dynamically assign, right now auto-generated list  from Data MUST line up to animgraph
 
 		if ( !CanTaunt() ) return;
 
@@ -360,15 +363,14 @@ partial class TFPlayer
 			//If we are starting the partner taunt, we need to check for valid spacing
 			if ( initiator )
 			{
-				if ( !CanInitiatePartnerTaunt() && !tf_sv_taunt_ignore_partner_space_requirements )
+				if ( tf_sv_taunts_ignore_partner_space_requirements )
 				{
-					Log.Info( "Not enough space for a partner" );
-					return;
+					Log.Warning( $"tf_taunt_ignore_partner_space_requirements is enabled; ignoring space check" );
 				}
-				else if ( tf_sv_taunt_ignore_partner_space_requirements )
+				else if ( !CanInitiatePartnerTaunt() )
 				{
-					var state = PartnerSpaceAvailable ? "passed" : "failed";
-					Log.Warning( $"tf_taunt_ignore_partner_space_requirements is enabled; Partner Taunt {state} the space check");
+					Log.Warning( "Not enough space for a partner!" );
+					return;
 				}
 			}
 		}
@@ -469,7 +471,7 @@ partial class TFPlayer
 
 		RemoveCondition( TFCondition.Taunting );
 
-		ResetTauntParams();
+		TauntsWantReset = true;
 
 		StopMusic();
 
@@ -501,7 +503,7 @@ partial class TFPlayer
 
 		ActiveTaunt = null;
 
-		TauntsReset = true;
+		TauntsWantReset = false;
 	}
 
 	#region Partner Taunt Logic
@@ -905,9 +907,9 @@ partial class TFPlayer
 
 			if ( taunt != null )
 			{
-				if ( tf_disable_movement_taunts && (taunt.TauntMovespeed != 0) )
+				if ( tf_sv_taunts_disable_movement && (taunt.TauntMovespeed != 0) )
 				{
-					Log.Info( $"{taunt_name} is currently disabled by tf_disable_movement_taunts" );
+					Log.Info( $"{taunt_name} is currently disabled by tf_sv_taunts_disable_movement" );
 				}
 				else
 				{
@@ -1010,8 +1012,6 @@ partial class TFPlayer
 
 	protected override void OnAnimGraphTag( string tag, AnimGraphTagEvent fireMode )
 	{
-		if ( !Game.IsServer ) return;
-
 		if ( tag == "TF_Taunt_CanCancel" )
 		{
 			if ( fireMode == AnimGraphTagEvent.Start )
@@ -1054,6 +1054,7 @@ partial class TFPlayer
 
 		base.OnAnimGraphTag( tag, fireMode );
 	}
+
 	public TFPlayerClass GetTFPlayerClass()
 	{
 		var classname = PlayerClass.Title.ToLower();
@@ -1070,6 +1071,8 @@ partial class TFPlayer
 	}
 
 	[ConVar.Replicated] public static bool tf_sv_debug_taunts { get; set; } = false;
-	[ConVar.Replicated] public static bool tf_sv_taunt_ignore_partner_space_requirements { get; set; } = false;
-	[ConVar.Replicated] public static bool tf_disable_movement_taunts { get; set; } = false;
+	[ConVar.Replicated] public static bool tf_sv_taunts_ignore_partner_space_requirements { get; set; } = false;
+	[ConVar.Replicated] public static bool tf_sv_taunts_ignore_grounded_condition { get; set; } = false;
+	[ConVar.Replicated] public static bool tf_sv_taunts_disable_movement { get; set; } = false;
+
 }

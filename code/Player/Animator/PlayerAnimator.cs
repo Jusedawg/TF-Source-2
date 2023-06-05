@@ -25,10 +25,10 @@ partial class TFPlayerAnimator : PlayerAnimator
 	{
 		if ( Player.InCondition( TFCondition.Taunting ) )
 		{
-			if ( Player.ActiveTaunt.TauntStrafing )
-				Player.Rotation = GetIdealRotation();
-			else
-				UpdateTauntRotation();
+			UpdateTauntMovement();
+
+			UpdateTauntRotation();
+			
 			return;
 		}
 
@@ -200,8 +200,13 @@ public override void UpdateRotation()
 	{
 		var LRinput = Input.AnalogMove.y;
 
+		if ( Player.ActiveTaunt?.TauntStrafing == null ? false : Player.ActiveTaunt.TauntStrafing )
+		{
+			return;
+		}
+
 		//If we don't allow strafing, convert LR input into smooth turn blending
-		if ( !Player.ActiveTaunt.TauntStrafing )
+		else
 		{
 			var currX = Player.GetAnimParameterFloat( "move_x" );
 			var targetX = MathX.Lerp( currX, -LRinput, Time.Delta * DeltaMultiplier );
@@ -212,13 +217,21 @@ public override void UpdateRotation()
 
 	public void UpdateTauntRotation()
 	{
-		if ( Player.TauntEnableMove && !Player.ActiveTaunt.TauntStrafing )
+		if ( Player.TauntEnableMove )
 		{
-			var LRinput = Input.AnalogMove.y;
-			var targetRot = (QAngle)Player.Rotation;
-			targetRot.y += LRinput * 10;
+			if ( Player.ActiveTaunt?.TauntStrafing == null ? false : Player.ActiveTaunt.TauntStrafing )
+			{
+				Player.Rotation = GetIdealRotation();
+			}
 
-			Player.Rotation = Rotation.Lerp( Player.Rotation, targetRot, Time.Delta * 5 );
+			else
+			{
+				var LRinput = Input.AnalogMove.y;
+				var targetRot = (QAngle)Player.Rotation;
+				targetRot.y += LRinput * 10;
+
+				Player.Rotation = Rotation.Lerp( Player.Rotation, targetRot, Time.Delta * 5 );
+			}
 		}
 	}
 
