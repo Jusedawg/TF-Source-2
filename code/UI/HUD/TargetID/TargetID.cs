@@ -125,13 +125,6 @@ public partial class TargetID : Panel
 		if ( !interactable.CanInteract( player ) )
 			return false;
 
-		var entity = Target.Entity;
-		if ( entity.IsValid() )
-		{
-			if ( !player.CanUse( entity ) )
-				return false;
-		}
-
 		if(InteractionButton != null)
 		{
 			InteractionButton.Button = interactable.InteractButton;

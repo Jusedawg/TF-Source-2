@@ -36,6 +36,33 @@ public partial class TFPlayer
 		Metal -= data.BuildCost;
 	}
 	public void Build( string buildingName, Transform transform ) => Build( BuildingData.Get( buildingName ), transform );
+	public void SimulateBuildingPickup()
+	{
+		if(Game.IsServer)
+		{
+			if ( Input.Pressed( "Attack2" ) )
+			{
+				TryPickupBuilding();
+			}
+		}
+	}
+	public void TryPickupBuilding()
+	{
+		if ( Game.IsClient ) return;
+		if ( HoveredEntity is not TFBuilding building ) return;
+
+		var builder = Weapons.OfType<Builder>().FirstOrDefault();
+		if ( builder == null )
+		{
+			Log.Warning( "Cant build without builder weapon!" );
+			return;
+		}
+
+		if ( !building.CanCarry(this) ) return;
+
+		builder.CarryBuilding( building );
+		ForceSwitchWeapon( builder );
+	}
 	public bool CanBuild(BuildingData data)
 	{
 		return Buildings.Count( building => building.Data == data ) < data.MaxCount && Metal >= data.BuildCost;

@@ -71,14 +71,13 @@ public partial class SDKPlayer : AnimatedEntity, IHasMaxHealth, IAcceptsExtended
 		SimulatePassiveChildren( cl );
 
 		SimulateHover();
-		SimulateUse();
 	}
 
 	/// <summary>
 	/// Code runs here on BOTH CLIENT AND SERVER for ALL CLIENTS. You want to put here stuff that 
 	/// doesn't rely on client's input.
 	/// </summary>
-	[Event.Tick]
+	[GameEvent.Tick]
 	public virtual void Tick()
 	{
 		UpdateLastKnownArea();
@@ -313,6 +312,8 @@ public partial class SDKPlayer : AnimatedEntity, IHasMaxHealth, IAcceptsExtended
 			ViewAngles = _forceViewAngles.Value;
 			_forceViewAngles = null;
 		}
+
+		SimulateUse();
 
 		if ( Input.StopProcessing )
 			return;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TFS2;
 
-public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITargetID, ITeam, IInteractableTargetID, ITargetIDSubtext
+public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITargetID, ITeam, ITargetIDSubtext
 {
 	[Net] public bool IsInitialized { get; protected set; }
 	/// <summary>
@@ -53,7 +53,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 	public virtual void InitializeModel(string name)
 	{
 		SetModel(name);
-		SetMaterialGroup( Team.GetName() );
+		SetMaterialGroup( Team == TFTeam.Red ? 0 : 1 );
 
 		SetupPhysicsFromAABB( PhysicsMotionType.Keyframed, Data.Mins, Data.Maxs );
 		EnableAllCollisions = true;
@@ -176,31 +176,6 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 		}
 	}
 
-	public virtual void StartCarrying()
-	{
-		if ( Game.IsClient ) return;
-
-		IsCarried = true;
-		EnableAllCollisions = false;
-		EnableDrawing = false;
-		HasConstructed = false;
-
-		Parent = Owner;
-	}
-
-	public virtual void StopCarrying(Transform deployTransform)
-	{
-		if ( Game.IsClient ) return;
-
-		IsCarried = false;
-		EnableAllCollisions = true;
-		EnableDrawing = true;
-		Parent = null;
-		SetLevel( 1 );
-
-		Transform = deployTransform;
-	}
-
 	public override void TakeDamage( DamageInfo info )
 	{
 		if(ITeam.IsSame(info.Attacker, this))
@@ -299,8 +274,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 	#region UI
 	string ITargetID.Name => $"{Data.Title} built by {Owner.Client.Name}";
 	string ITargetID.Avatar => "";
-	string IInteractableTargetID.InteractText => "Pick Up";
-	string IInteractableTargetID.InteractButton => "Attack2";
+	
 	string ITargetIDSubtext.Subtext
 	{
 		get
@@ -317,6 +291,5 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 	}
 	protected virtual string MaxLevelSubtext => $"(Level {Level})";
 	protected virtual string NormalSubtext => $"(Level {Level}) Upgrade Progress: {AppliedMetal}/{Data.UpgradeCost}";
-	public bool CanInteract( TFPlayer user ) => user == Owner;
 	#endregion
 }

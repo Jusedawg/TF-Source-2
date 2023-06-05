@@ -14,7 +14,7 @@ public partial class Builder : TFWeaponBase
 	[ConVar.Replicated( "tf_obj_build_rotation_speed" )]
 	public static float RotationSpeed { get; set; } = 10f;
 	[Net] public BuildingData PlacementData { get; set; }
-	[Net] public TFBuilding CarriedBuilding { get; set; }
+	[Net] public TFBuilding CarriedBuilding { get; private set; }
 	public BuildingData BuildingData => CarriedBuilding?.Data ?? PlacementData;
 	/// <summary>
 	/// Are we carrying an existing building?
@@ -48,6 +48,12 @@ public partial class Builder : TFWeaponBase
 		if ( placementResult.Status != BuildingDeployResponse.CanBuild )
 		{
 			Log.Info( $"Tried to build even though we cant, ignoring" );
+			return;
+		}
+
+		if(!CanBuildAt(BuildingData, new(placementResult.Origin, placementResult.Rotation)))
+		{
+			Log.Info( "Tried to build at invalid position, ignoring" );
 			return;
 		}
 
@@ -92,7 +98,7 @@ public partial class Builder : TFWeaponBase
 			};
 
 			Blueprint.SetModel( BuildingData.BlueprintModel);
-			Blueprint.UseAnimGraph = false;
+			Blueprint.UseAnimGraph = true;
 		}
 
 		hasBuilt = false;
@@ -117,11 +123,17 @@ public partial class Builder : TFWeaponBase
 		}
 		else
 		{
+			CarriedBuilding = null;
 			ResetForcedWeapon();
 			TFOwner.SwitchToLastWeapon(this);
 		}
 	}
 
+	public void CarryBuilding(TFBuilding building)
+	{
+		building.StartCarrying();
+		CarriedBuilding = building;
+	}
 	protected virtual void PlayDeployVO()
 	{
 		if(!IsCarryingBuilding)
@@ -147,9 +159,50 @@ public partial class Builder : TFWeaponBase
 			var result = CalculateBuildingPlacement();
 			Blueprint.Position = result.Origin;
 			Blueprint.Rotation = result.Rotation;
-
-			Blueprint.SetAnimParameter( "reject", result.Status != BuildingDeployResponse.CanBuild );
+			bool success = result.Status == BuildingDeployResponse.CanBuild && CanBuildAt( BuildingData, new( result.Origin, result.Rotation ) );
+			Blueprint.SetAnimParameter( "reject", !success );
 		}
+	}
+
+	/// <summary>
+	/// Can this building be placed at a specific location?
+	/// </summary>
+	/// <param name="data"></param>
+	/// <param name="location">Location it should be placed at</param>
+	/// <returns></returns>
+	public static bool CanBuildAt( BuildingData data, Transform location )
+	{
+		if(NoBuildZone.InNoBuild(location.Position))
+			return false;
+
+		if ( RespawnRoom.IsInsideRoom( location.Position ) )
+			return false;
+
+		if ( CheckStuck( data, location ) )
+			return false;
+
+		return true;
+	}
+
+	/// <summary>
+	/// Would this building get stuck in the given location?
+	/// </summary
+	/// <param name="data"></param>
+	/// <param name="location"></param>
+	/// <returns>True if the building would get stuck, false otherwise</returns>
+	private static bool CheckStuck( BuildingData data, Transform location )
+	{
+		var mins = location.PointToWorld( data.Mins );
+		var maxs = location.PointToWorld( data.Maxs );
+
+		var tr = Trace.Ray( mins, maxs )
+						.WorldAndEntities()
+						.WithTag( CollisionTags.Solid )
+						.Run();
+
+		if ( tr.Hit ) return true;
+
+		return false;
 	}
 
 	/// <summary>

@@ -30,12 +30,13 @@ public partial class RespawnRoom : BaseTrigger, IResettable
 
 	public ControlPoint ControlPoint { get; set; }
 	public HammerTFTeamOption TeamOption { get; set; }
-	public bool IsInside( TFPlayer ply ) => TouchingEntities.Contains( ply );
+	public bool IsInside( TFPlayer ply ) => TouchingEntities.Contains( ply ) && Enabled;
 	bool StartsEnabled = true;
 	public override void Spawn()
 	{
 		base.Spawn();
 		StartsEnabled = Enabled;
+		Transmit = TransmitType.Always;
 
 		Reset();
 	}
@@ -81,6 +82,19 @@ public partial class RespawnRoom : BaseTrigger, IResettable
 				return true;
 
 		}
+		return false;
+	}
+
+	public static bool IsInsideRoom(Vector3 pos)
+	{
+		foreach(var room in All.OfType<RespawnRoom>())
+		{
+			if ( !room.Enabled ) continue;
+
+			if ( room.WorldSpaceBounds.Contains( pos ) )
+				return true;
+		}
+
 		return false;
 	}
 
