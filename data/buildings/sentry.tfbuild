@@ -1,5 +1,5 @@
 {
-  "Title": "Sentry Gun",
+  "Title": "Sentry",
   "EngineClass": "tf_building_sentry",
   "BuildCost": 130,
   "BuildTime": 10,
@@ -10,17 +10,20 @@
     {
       "MaxHealth": 150,
       "Model": "models/buildables/sentry/sentry1.vmdl",
-      "DeployModel": "models/buildables/sentry/sentry1_heavy.vmdl"
+      "DeployModel": "models/buildables/sentry/sentry1_heavy.vmdl",
+      "GameplayIcon": "ui/hud/buildings/hud_obj_status_sentry_1.png"
     },
     {
       "MaxHealth": 180,
       "Model": "models/buildables/sentry/sentry2.vmdl",
-      "DeployModel": "models/buildables/sentry/sentry2_heavy.vmdl"
+      "DeployModel": "models/buildables/sentry/sentry2_heavy.vmdl",
+      "GameplayIcon": "ui/hud/buildings/hud_obj_status_sentry_2.png"
     },
     {
       "MaxHealth": 216,
       "Model": "models/buildables/sentry/sentry3.vmdl",
-      "DeployModel": "models/buildables/sentry/sentry3_heavy.vmdl"
+      "DeployModel": "models/buildables/sentry/sentry3_heavy.vmdl",
+      "GameplayIcon": "ui/hud/buildings/hud_obj_status_sentry_3.png"
     }
   ],
   "LevelCount": 3,
@@ -30,8 +33,9 @@
     "Center": "0,0,33",
     "Size": "40,40,66"
   },
-  "BlueprintModel": "models/buildables/sentry/sentry1_blueprint.vmdl",
+  "BigPanel": true,
   "BlueprintIcon": null,
+  "BlueprintModel": "models/buildables/sentry/sentry1_blueprint.vmdl",
   "DestroyedSound": "sounds/buildings/building_sentry.explode.sound",
   "BuiltVO": "sounds/vo/engineer/vo.engineer.building.sentry.built.sound",
   "DestroyedVO": "sounds/vo/engineer/vo.engineer.building.sentry.destroyed.sound",

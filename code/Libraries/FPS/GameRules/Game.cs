@@ -230,8 +230,8 @@ public partial class SDKGame : GameManager
 
 	public override void BuildInput()
 	{
-		Event.Run( "buildinput" );
 		Game.LocalPawn?.BuildInput();
+		Event.Run( "buildinput" );
 		//LastCamera?.BuildInput();
 	}
 }

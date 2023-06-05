@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace TFS2;
 
-public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITargetID, ITeam, ITargetIDSubtext
+public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 {
 	[Net] public bool IsInitialized { get; protected set; }
 	/// <summary>
@@ -50,6 +50,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 		IsInitialized = true;
 		StartCarrying();
 	}
+
 	public virtual void InitializeModel(string name)
 	{
 		SetModel(name);
@@ -270,26 +271,5 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITarge
 	#region ITeam
 	public int TeamNumber => (int)Team;
 	#endregion
-
-	#region UI
-	string ITargetID.Name => $"{Data.Title} built by {Owner.Client.Name}";
-	string ITargetID.Avatar => "";
-	
-	string ITargetIDSubtext.Subtext
-	{
-		get
-		{
-			if(Level == MaxLevel)
-			{
-				return MaxLevelSubtext;
-			}
-			else
-			{
-				return NormalSubtext;
-			}
-		}
-	}
-	protected virtual string MaxLevelSubtext => $"(Level {Level})";
-	protected virtual string NormalSubtext => $"(Level {Level}) Upgrade Progress: {AppliedMetal}/{Data.UpgradeCost}";
-	#endregion
 }
+

@@ -84,7 +84,8 @@ public partial class DispenserZone : BaseTrigger
 			if ( StoredMetal == 0 ) return;
 			int usedMetal = (int)MathF.Min( StoredMetal, MetalPerInterval );
 
-			ply.GiveMetal( usedMetal );
+			usedMetal = ply.GiveMetal( usedMetal );
+			StoredMetal -= usedMetal;
 		}
 	}
 

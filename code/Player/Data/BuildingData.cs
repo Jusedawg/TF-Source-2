@@ -39,15 +39,20 @@ public class BuildingData : GameResource
 	[HideInEditor]
 	public BBox BBox => new( Mins, Maxs );
 
-	[Category("Blueprint")]
-	[ResourceType( "vmdl" )]
-	public string BlueprintModel { get; set; }
+	/// <summary>
+	/// Should the UI panel for this building be bigger? (ex: sentry)
+	/// </summary>
+	[Category( "UI" )]
+	public bool BigPanel { get; set; }
 	/// <summary>
 	/// Icon used for things like the PDA
 	/// </summary>
-	[Category( "Blueprint" )]
+	[Category( "UI" )]
 	[ResourceType( "png" )]
 	public string BlueprintIcon { get; set; }
+	[Category("UI")]
+	[ResourceType( "vmdl" )]
+	public string BlueprintModel { get; set; }
 	[Category("Sounds")]
 	[ResourceType("sound")]
 	public string DestroyedSound { get; set; }
@@ -85,6 +90,10 @@ public class BuildingData : GameResource
 
 		return building;
 	}
+	public string GetUIIcon(int level)
+	{
+		return Levels.Take(level).LastOrDefault( lvl => !string.IsNullOrEmpty( lvl.GameplayIcon ) ).GameplayIcon;
+	}
 	protected override void PostLoad()
 	{
 		if ( Levels.Count == 0 )
@@ -120,4 +129,7 @@ public struct BuildingLevelData
 	/// </summary>
 	[ResourceType( "vmdl" )]
 	public string DeployModel { get; set; }
+
+	[ResourceType( "png" )]
+	public string GameplayIcon { get; set; }
 }

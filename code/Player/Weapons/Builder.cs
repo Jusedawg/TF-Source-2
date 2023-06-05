@@ -69,7 +69,7 @@ public partial class Builder : TFWeaponBase
 		PlayDeployVO();
 
 		hasBuilt = true;
-		StopPlacement();
+		StopPlacement(true);
 	}
 
 	const float ROTATE_COOLDOWN = 0.5f;
@@ -114,7 +114,7 @@ public partial class Builder : TFWeaponBase
 	/// <summary>
 	/// Stop placing an object. This removes the blueprint.
 	/// </summary>
-	public void StopPlacement()
+	public void StopPlacement(bool switchWeapon = false)
 	{
 		if ( Game.IsClient )
 		{
@@ -125,7 +125,8 @@ public partial class Builder : TFWeaponBase
 		{
 			CarriedBuilding = null;
 			ResetForcedWeapon();
-			TFOwner.SwitchToLastWeapon(this);
+			if(switchWeapon)
+				TFOwner.SwitchToLastWeapon(this);
 		}
 	}
 
@@ -290,6 +291,8 @@ public partial class Builder : TFWeaponBase
 		Vector3 end = start + Vector3.Down * clearance;
 
 		var tr = Trace.Ray( start, end )
+			.WithTag(CollisionTags.Solid)
+			.WorldAndEntities()
 			.UseHitboxes()
 			.Ignore( Owner )
 			.Ignore( this )

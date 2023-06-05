@@ -24,6 +24,7 @@ public class PlayerDeathEvent : DispatchableEventBase
 	public string[] Tags { get; set; }
 	public Vector3 Position { get; set; }
 	public float Damage { get; set; }
+	public Entity Inflictor { get; set; }
 }
 
 [EventDispatcherEvent]

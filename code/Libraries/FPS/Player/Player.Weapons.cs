@@ -12,11 +12,9 @@ partial class SDKPlayer
 	public IEnumerable<SDKWeapon> Weapons => Children.OfType<SDKWeapon>();
 	[Net] public SDKWeapon ActiveWeapon { get; set; }
 	[ClientInput] public SDKWeapon RequestedActiveWeapon { get; set; }
-	public bool HasUsedRequest { get; set; } = false;
 	[Net] public SDKWeapon ForcedActiveWeapon { get; set; }
 	public bool AutoResetForcedActiveWeapon { get; set; } = true;
 	SDKWeapon LastActiveWeapon { get; set; }
-	SDKWeapon LastRequestedWeapon { get; set; }
 	/// <summary>
 	/// Can this player attack using their weapons?
 	/// </summary>
@@ -33,20 +31,13 @@ partial class SDKPlayer
 			}
 		}
 
-		if ( RequestedActiveWeapon != LastRequestedWeapon )
-		{
-			HasUsedRequest = false;
-			LastRequestedWeapon = RequestedActiveWeapon;
-		}
-
 		if (ForcedActiveWeapon != null )
 		{
 			if(ForcedActiveWeapon != ActiveWeapon)
 				SwitchToWeapon( ForcedActiveWeapon );
 		}
-		else if ( !HasUsedRequest && RequestedActiveWeapon != null )
+		else if ( RequestedActiveWeapon != null )
 		{
-			HasUsedRequest = true;
 			SwitchToWeapon( RequestedActiveWeapon );
 		}
 

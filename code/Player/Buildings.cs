@@ -67,6 +67,16 @@ public partial class TFPlayer
 	{
 		return Buildings.Count( building => building.Data == data ) < data.MaxCount && Metal >= data.BuildCost;
 	}
+	public bool CanBuild( string name ) => CanBuild( BuildingData.Get( name ) );
+
+	public string[] GetAvailableBuildings()
+	{
+		var wrench = Weapons.OfType<Wrench>().FirstOrDefault();
+		if ( wrench != null )
+			return wrench.AvailableBuildings;
+
+		return default;
+	}
 	public int ConsumeMetal(int amount)
 	{
 		int used = (int)MathF.Min(Metal, amount);
@@ -80,11 +90,14 @@ public partial class TFPlayer
 		return (int)MathF.Min( Metal, targetAmount );
 	}
 
-	public void GiveMetal(int amount)
+	public int GiveMetal(int amount)
 	{
+		int given = (int)MathF.Min(MaxMetal - Metal,amount);
 		Metal += amount;
 		if ( Metal > MaxMetal )
 			Metal = MaxMetal;
+
+		return given;
 	}
 
 	public void DestroyBuildings()
@@ -115,6 +128,12 @@ public partial class TFPlayer
 		if(data == null)
 		{
 			Log.Warning( $"Building with name {buildingName} does not exist!" );
+			return;
+		}
+
+		if(!ply.CanBuild(data))
+		{
+			Log.Warning( $"Cant start building if the player cant build a {buildingName}!" );
 			return;
 		}
 

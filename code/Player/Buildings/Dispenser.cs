@@ -49,6 +49,34 @@ public partial class Dispenser : TFBuilding
 			Trigger.Enable();
 	}
 
+	public override void SetLevel( int level )
+	{
+		base.SetLevel( level );
+
+		Trigger.HealingPerSecond = LevelHealing.ElementAtOrDefault( level-1 );
+		Trigger.AmmoPercentagePerSecond = LevelAmmo.ElementAtOrDefault( level-1 );
+		Trigger.MetalPerInterval = LevelMetal.ElementAtOrDefault( level-1 );
+	}
+	protected BuildingInfoLine StoredMetalLine;
+	protected override void InitializeUI( BuildingData data )
+	{
+		base.InitializeUI( data );
+		StoredMetalLine = new( 0, 0, Trigger.MaxStoredMetal, "UI/Hud/Buildings/hud_obj_status_ammo_64.png" );
+	}
+	public override void TickUI()
+	{
+		if (!IsInitialized) return;
+		base.TickUI();
+
+		StoredMetalLine.Value = Trigger.StoredMetal;
+	}
+
+	public override IEnumerable<BuildingInfoLine> GetUILines()
+	{
+		yield return StoredMetalLine;
+		yield return UpgradeMetalLine;
+	}
+
 	protected override void Debug()
 	{
 		base.Debug();
@@ -59,12 +87,4 @@ public partial class Dispenser : TFBuilding
 		DebugOverlay.Text( $"= Trigger: {Trigger}", pos, 14, Color.Yellow );
 	}
 
-	public override void SetLevel( int level )
-	{
-		base.SetLevel( level );
-
-		Trigger.HealingPerSecond = LevelHealing.ElementAtOrDefault( level-1 );
-		Trigger.AmmoPercentagePerSecond = LevelAmmo.ElementAtOrDefault( level-1 );
-		Trigger.MetalPerInterval = LevelMetal.ElementAtOrDefault( level-1 );
-	}
 }

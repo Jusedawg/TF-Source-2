@@ -10,11 +10,13 @@ using System.Threading.Tasks;
 namespace TFS2;
 
 [Library("tf_building_teleporter_entrance")]
-public class TeleporterEntrance : Teleporter
+public partial class TeleporterEntrance : Teleporter
 {
 	const string READY_SOUND = "building_teleporter.ready";
 	const string SEND_SOUND = "building_teleporter.send";
 	const string RECEIVE_SOUND = "building_teleporter.receive";
+	[Net] public int AmountTeleported { get; protected set; }
+
 	protected virtual List<float> LevelCooldownTimes => new() { 10f, 5f, 3f };
 	public virtual float GetCooldownTime() => LevelCooldownTimes.ElementAtOrDefault( Level - 1 );
 
@@ -85,6 +87,8 @@ public class TeleporterEntrance : Teleporter
 		ply.Rotation = LinkedTeleporter.Rotation;
 		UnReady( GetCooldownTime() );
 		TeleportEffects( ply );
+
+		AmountTeleported++;
 	}
 
 	const string GENERIC_FX = "particles/teleported_fx/teleported_flash.vpcf";
@@ -163,6 +167,37 @@ public class TeleporterEntrance : Teleporter
 		base.FinishConstruction();
 
 		Sound.FromEntity( READY_SOUND, this );
+	}
+
+	protected BuildingInfoLine TeleporterStatsProgress;
+	protected override void InitializeUI( BuildingData data )
+	{
+		base.InitializeUI( data );
+		TeleporterStatsProgress = new( "0", "/UI/HUD/Buildings/hud_obj_status_teleport_64.png" );
+	}
+
+	public override void TickUI()
+	{
+		if ( !IsInitialized ) return;
+		base.TickUI();
+
+		if ( IsReady || IsConstructing || !IsPaired )
+		{
+			TeleporterStatsProgress.Text = $"{AmountTeleported}";
+			TeleporterStatsProgress.ShowText = true;
+		}
+		else
+		{
+			TeleporterStatsProgress.Value = ReadyProgress;
+			TeleporterStatsProgress.MaxValue = ReadyTime;
+			TeleporterStatsProgress.ShowText = false;
+		}
+	}
+
+	public override IEnumerable<BuildingInfoLine> GetUILines()
+	{
+		yield return TeleporterStatsProgress;
+		yield return UpgradeMetalLine;
 	}
 
 	protected override void Debug()

@@ -60,7 +60,8 @@ partial class TFGameRules
 			Weapon = weaponData,
 			Tags = info.Tags?.ToArray(),
 			Position = info.ReportPosition,
-			Damage = info.Damage
+			Damage = info.Damage,
+			Inflictor = info.Inflictor
 		} );
 
 		if ( ShouldAnnounceFirstBlood() && !FirstBloodAnnounced )

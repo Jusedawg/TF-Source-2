@@ -1,4 +1,5 @@
 ﻿using Sandbox;
+using System.Collections.Generic;
 
 namespace TFS2;
 
@@ -8,6 +9,7 @@ public class Wrench : TFMeleeBase
 	const string BUILDING_HIT_SUCCESS = "weapon_wrench.hit.building.success";
 	const string BUILDING_HIT_FAIL = "weapon_wrench.hit.building.fail";
 	bool wasSuccess;
+	public virtual string[] AvailableBuildings => new[] { "sentry", "dispenser", "teleporter_entrance", "teleporter_exit" };
 	public override void OnHitEntity( Entity entity, TraceResult tr )
 	{
 		if(entity is TFBuilding building && building.Owner == Owner )

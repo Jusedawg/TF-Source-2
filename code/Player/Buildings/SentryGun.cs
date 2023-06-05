@@ -16,6 +16,8 @@ public partial class SentryGun : TFBuilding
 	public override Ray AimRay => new( Position + GetAimOffset(), AimRotation.Forward);
 	[Net] public int PrimaryAmmo { get; set; }
 	[Net] public int SecondaryAmmo { get; set; }
+	[Net] public int KillAmount { get; set; }
+	[Net] public int AssistAmount { get; set; }
 	public bool HasPrimaryAmmo => PrimaryAmmo > 0;
 	public bool HasSecondaryAmmo => SecondaryAmmo > 0;
 	protected virtual List<int> LevelMaxPrimaryAmmo => new() { 150, 200, 200 };
@@ -24,6 +26,11 @@ public partial class SentryGun : TFBuilding
 	protected virtual int GetMaxPrimaryAmmo() => LevelMaxPrimaryAmmo.ElementAtOrDefault( Level - 1 );
 	protected virtual int GetMaxSecondaryAmmo() => LevelMaxSecondaryAmmo.ElementAtOrDefault( Level - 1 );
 	protected virtual Vector3 GetAimOffset() => LevelAimOffsets.ElementAtOrDefault( Level - 1 );
+	public SentryGun()
+	{
+		EventDispatcher.Subscribe<PlayerDeathEvent>( OnPlayerDeath, this );
+	}
+
 	public override void Initialize( BuildingData data )
 	{
 		base.Initialize( data );
@@ -132,6 +139,43 @@ public partial class SentryGun : TFBuilding
 
 		SetAnimParameter( "b_build", true );
 	}
+	private void OnPlayerDeath( PlayerDeathEvent ev )
+	{
+		if ( ev.Inflictor == this )
+			KillAmount++;
+	}
+	protected BuildingInfoLine KillAssistLine;
+	protected BuildingInfoLine PrimaryAmmoLine;
+	protected BuildingInfoLine SecondaryAmmoLine;
+	protected override void InitializeUI( BuildingData data )
+	{
+		base.InitializeUI( data );
+		KillAssistLine = new( $"0 (0)", "/UI/Hud/Buildings/hud_obj_status_kill_64.png" );
+		PrimaryAmmoLine = new( PrimaryAmmo, 0, GetMaxPrimaryAmmo(), "UI/Hud/Buildings/hud_obj_status_ammo_64.png" );
+		SecondaryAmmoLine = new( SecondaryAmmo, 0, GetMaxSecondaryAmmo(), "UI/Hud/Buildings/hud_obj_status_rockets_64.png" );
+	}
+	public override void TickUI()
+	{
+		base.TickUI();
+
+		KillAssistLine.Text = $"{KillAmount} ({AssistAmount})";
+
+		PrimaryAmmoLine.Value = PrimaryAmmo;
+		PrimaryAmmoLine.MaxValue = GetMaxPrimaryAmmo();
+
+		SecondaryAmmoLine.Value = SecondaryAmmo;
+		SecondaryAmmoLine.MaxValue = GetMaxSecondaryAmmo();
+		SecondaryAmmoLine.Visible = Level == MaxLevel;
+	}
+
+	public override IEnumerable<BuildingInfoLine> GetUILines()
+	{
+		yield return KillAssistLine;
+		yield return PrimaryAmmoLine;
+		yield return SecondaryAmmoLine;
+		yield return UpgradeMetalLine;
+	}
+
 	protected override void Debug()
 	{
 		base.Debug();

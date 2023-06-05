@@ -16,8 +16,8 @@ public partial class Teleporter : TFBuilding
 	/// How long the animation takes to wind down after the teleporter is unlinked
 	/// </summary>
 	protected virtual float UnpairAnimationTime => 2f;
-	protected float readyProgress;
-	protected float readyTime;
+	[Net] protected float ReadyProgress { get; set; }
+	[Net] protected float ReadyTime { get; set; }
 	protected TimeSince timeSinceLinkedInactive;
 	public override void TickActive()
 	{
@@ -36,10 +36,10 @@ public partial class Teleporter : TFBuilding
 
 			if ( !IsReady )
 			{
-				SetAnimParameter( "f_spin_speed", readyProgress );
-				readyProgress += Time.Delta / readyTime;
+				SetAnimParameter( "f_spin_speed", ReadyProgress );
+				ReadyProgress += Time.Delta / ReadyTime;
 
-				if ( readyProgress >= 1 )
+				if ( ReadyProgress >= 1 )
 				{
 					Ready();
 				}
@@ -73,8 +73,8 @@ public partial class Teleporter : TFBuilding
 		if ( LinkedTeleporter.IsValid() ) return;
 		LinkedTeleporter = tp;
 		IsPaired = true;
-		readyProgress = 0;
-		readyTime = InitialActivationTime;
+		ReadyProgress = 0;
+		ReadyTime = InitialActivationTime;
 
 		if ( linkOther )
 			tp.Link( this, false );
@@ -95,8 +95,8 @@ public partial class Teleporter : TFBuilding
 		LinkedTeleporter.IsReady = IsReady;
 		LinkedTeleporter.RequestedLevel = RequestedLevel;
 		LinkedTeleporter.AppliedMetal = AppliedMetal;
-		LinkedTeleporter.readyProgress = readyProgress;
-		LinkedTeleporter.readyTime = readyTime;
+		LinkedTeleporter.ReadyProgress = ReadyProgress;
+		LinkedTeleporter.ReadyTime = ReadyTime;
 	}
 	public override void SetOwner( TFPlayer owner )
 	{
@@ -126,8 +126,8 @@ public partial class Teleporter : TFBuilding
 	public virtual void UnReady( float time )
 	{
 		IsReady = false;
-		readyProgress = 0;
-		readyTime = time;
+		ReadyProgress = 0;
+		ReadyTime = time;
 		SyncState();
 
 		UnReadyEffects();
@@ -161,6 +161,6 @@ public partial class Teleporter : TFBuilding
 		DebugOverlay.Text( $"= LinkedTeleporter: {LinkedTeleporter}", pos, 14, Color.Yellow );
 		DebugOverlay.Text( $"= IsPaired: {IsPaired}", pos, 15, Color.Yellow );
 		DebugOverlay.Text( $"= IsReady: {IsReady}", pos, 16, Color.Yellow );
-		DebugOverlay.Text( $"= Ready Progress: {readyProgress}/{readyTime}", pos, 17, Color.Yellow );
+		DebugOverlay.Text( $"= Ready Progress: {ReadyProgress}/{ReadyTime}", pos, 17, Color.Yellow );
 	}
 }

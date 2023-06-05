@@ -87,7 +87,6 @@ public partial class WeaponSelection : Panel
 
 		// Can't select a slot if player doesn't have weapon of this slot.
 		var weapon = player.GetWeaponInSlot( slot );
-
 		if ( !weapon.IsValid() )
 			return false;
 
