@@ -1,4 +1,6 @@
 ﻿using Sandbox;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Amper.FPS;
 
@@ -131,5 +133,62 @@ partial class SDKGame
 
 		ent.Position = tr.EndPosition + Vector3.Up * 10;
 	}
+
+	private readonly static Dictionary<ModelEntity, int> _entitiesMaterialGroups = new();
+
+	[ConVar.Server, Change( nameof( OnGlobalSkinChange ) )]
+	public static int r_skin { get; set; } = -1;
+
+	private static void OnGlobalSkinChange( int oldVluae, int newValue )
+	{
+		if ( newValue == -1 )
+		{
+			RestoreMaterialGroups();
+		}
+		else
+		{
+			UpdateMaterialGroups( true );
+		}
+	}
+
+	[GameEvent.Tick.Server]
+	public static void UpdateMaterialGroups() => UpdateMaterialGroups( false );
+
+	private static void UpdateMaterialGroups( bool force )
+	{
+		if ( !force && r_skin == -1 )
+		{
+			return;
+		}
+
+		foreach ( var entity in All.OfType<ITeam>().OfType<ModelEntity>() )
+		{
+			if ( !_entitiesMaterialGroups.ContainsKey( entity ) )
+			{
+				_entitiesMaterialGroups[entity] = entity.GetMaterialGroup();
+				entity.SetMaterialGroup( r_skin );
+				continue;
+			}
+			
+			if ( force )
+			{
+				entity.SetMaterialGroup( r_skin );
+			}
+		}
+	}
+
+	private static void RestoreMaterialGroups()
+	{
+		foreach (var (entity, skin) in _entitiesMaterialGroups )
+		{
+			if (entity.IsValid)
+			{
+				entity.SetMaterialGroup( skin );
+			}
+		}
+
+		_entitiesMaterialGroups.Clear();
+	}
+
 	[ConVar.Server] public static float sv_damageforce_scale { get; set; } = 1;
 }
