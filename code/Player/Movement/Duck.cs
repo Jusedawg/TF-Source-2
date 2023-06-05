@@ -13,4 +13,13 @@ partial class TFGameMovement
 
 		return base.IsDuckingEnabled();
 	}
+
+	public override float GetDuckSpeedModifier( float fraction )
+	{
+		if ( Player.InCondition(TFCondition.Humiliated) )
+		{
+			return 1 - fraction;
+		}
+		return base.GetDuckSpeedModifier( fraction );
+	}
 }

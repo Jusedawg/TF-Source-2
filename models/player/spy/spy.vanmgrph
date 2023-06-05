@@ -10503,7 +10503,7 @@
 														{
 															m_nodeID = 
 															{
-																m_id = 991757403
+																m_id = 1948322949
 															}
 															m_outputID = 
 															{
@@ -10659,47 +10659,6 @@
 															m_blendValue = [ -1.0, 0.0 ]
 														},
 													]
-													m_blendSourceX = "Parameter"
-													m_paramX = 
-													{
-														m_id = 1333237588
-													}
-													m_blendSourceY = "Parameter"
-													m_paramY = 
-													{
-														m_id = 1002197564
-													}
-													m_bLoop = true
-													m_bLockBlendOnReset = false
-													m_bLockWhenWaning = true
-													m_playbackSpeed = 1.0
-													m_damping = 
-													{
-														_class = "CAnimInputDamping"
-														m_speedFunction = "NoDamping"
-														m_fSpeedScale = 3.0
-														m_fMinSpeed = 5.0
-														m_fMaxTension = 1000.0
-													}
-												}
-											},
-											{
-												key = 
-												{
-													m_id = 991757403
-												}
-												value = 
-												{
-													_class = "CBlend2DAnimNode"
-													m_sName = "crouch_LOSER"
-													m_vecPosition = [ 224.0, 64.0 ]
-													m_nNodeID = 
-													{
-														m_id = 991757403
-													}
-													m_networkMode = "ServerAuthoritative"
-													m_sNote = ""
-													m_items = [  ]
 													m_blendSourceX = "Parameter"
 													m_paramX = 
 													{
@@ -11386,6 +11345,28 @@
 														m_vControlPoint2 = [ 0.5, 1.0 ]
 													}
 													m_intParamNames = [  ]
+												}
+											},
+											{
+												key = 
+												{
+													m_id = 1948322949
+												}
+												value = 
+												{
+													_class = "CSequenceAnimNode"
+													m_sName = "Unnamed"
+													m_vecPosition = [ 224.0, 64.0 ]
+													m_nNodeID = 
+													{
+														m_id = 1948322949
+													}
+													m_networkMode = "ServerAuthoritative"
+													m_sNote = ""
+													m_tagSpans = [  ]
+													m_sequenceName = "crouch_LOSER"
+													m_playbackSpeed = 1.0
+													m_bLoop = true
 												}
 											},
 										]
@@ -22686,7 +22667,7 @@
 				}
 				m_previewButton = "ANIMPARAM_BUTTON_NONE"
 				m_bNetwork = true
-				m_bUseMostRecentValue = false
+				m_bUseMostRecentValue = true
 				m_bAutoReset = false
 				m_bPredicted = false
 				m_bDefaultValue = false

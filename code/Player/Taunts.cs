@@ -761,6 +761,7 @@ partial class TFPlayer
 	[ClientRpc]
 	public void SetOtherMusicVolume( float volume, TFPlayer caller )
 	{
+		if ( !IsLocalPawn ) return;
 		foreach ( TFPlayer player in Entity.All.Where( x => x != caller ).OfType<TFPlayer>() )
 		{
 			player.TauntMusic.SetVolume( volume );
@@ -771,7 +772,7 @@ partial class TFPlayer
 	public void StopMusic()
 	{
 		TauntMusic.Stop();
-		SetOtherMusicVolume( 1f, this );
+		if (IsLocalPawn) SetOtherMusicVolume( 1f, this );
 	}
 
 	public bool IsLocalTFPlayer( TFPlayer pawn )
