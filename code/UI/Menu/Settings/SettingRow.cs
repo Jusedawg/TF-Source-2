@@ -61,7 +61,9 @@ internal class SettingRow : Panel
 			var min = minmax?.MinValue ?? 0f;
 			var max = minmax?.MaxValue ?? 100f;
 			var step = property.GetCustomAttribute<SliderStepAttribute>()?.Step ?? .1f;
-			var slider = ValueArea.Add.SliderWithEntry( min, max, step );
+			
+			var slider = new SliderControl( min, max, step );
+			slider.Parent = ValueArea;
 			slider.Bind( "value", target, property.Name );
 			slider.AddEventListener( "value.changed", () =>
 			{
@@ -75,7 +77,8 @@ internal class SettingRow : Panel
 			var min = minmax?.MinValue ?? 0;
 			var max = minmax?.MaxValue ?? 100;
 			var step = property.GetCustomAttribute<SliderStepAttribute>()?.Step ?? 1;
-			var slider = ValueArea.Add.SliderWithEntry( min, max, step );
+			var slider = new SliderControl( min, max, step );
+			slider.Parent = ValueArea;
 			slider.Bind( "value", target, property.Name );
 			slider.AddEventListener( "value.changed", () =>
 			{
