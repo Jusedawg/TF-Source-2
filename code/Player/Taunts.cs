@@ -188,10 +188,7 @@ partial class TFPlayer
 
 		if ( InCondition( TFCondition.Taunting ) )
 		{
-			if ( !IsLocalPawn )
-			{
-				UpdateMusicPosition();
-			}
+			UpdateMusicPosition();
 
 			if ( Input.Pressed( "Attack1" ) )
 			{
@@ -727,6 +724,8 @@ partial class TFPlayer
 	[ClientRpc]
 	public void UpdateMusicPosition()
 	{
+		if ( IsLocalPawn ) return;
+		
 		//var attachment = PlayerModel.GetAttachment( "head" ); TAM
 		var attachment = GetAttachment( "head" );
 		TauntMusic.SetPosition( attachment.Value.Position );
