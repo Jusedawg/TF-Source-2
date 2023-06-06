@@ -40,7 +40,6 @@ public partial class TFBuilding
 
 	public float GetConstructionRate()
 	{
-		// TODO: Redeploy
 		float multiplier = 1f;
 		if(constructionBoostTimers.Any())
 		{
@@ -56,6 +55,9 @@ public partial class TFBuilding
 				multiplier *= constructionBoostMultipliers[source];
 			}
 		}
+
+		if ( !HasFirstConstructed )
+			multiplier *= 2;
 
 		return multiplier;
 	}
@@ -108,8 +110,12 @@ public partial class TFBuilding
 		ConstructionProgress += gain;
 		SetAnimParameter( "f_speed", scale );
 
-		float gainFraction = gain / ConstructionTime;
-		Health += healthToGain * gainFraction;
+		if( !HasFirstConstructed )
+		{
+			// Only heal on first construction
+			float gainFraction = gain / ConstructionTime;
+			Health += healthToGain * gainFraction;
+		}
 	}
 
 	public virtual void FinishConstruction()

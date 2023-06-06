@@ -29,6 +29,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 	[Net] public int Level { get; protected set; }
 	[Net] public int MaxLevel { get; protected set; }
 	[Net] public int AppliedMetal { get; protected set; }
+	public virtual float PickupDistance => 96f;
 	public BuildingLevelData GetRequestedLevelData() => Data.Levels.ElementAtOrDefault(RequestedLevel-1);
 	public BuildingLevelData GetLevelData() => Data.Levels.ElementAtOrDefault( Level-1 );
 	public DamageInfo LastDamageInfo { get; protected set; }
@@ -167,13 +168,12 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 	{
 		if ( !HasConstructed && !IsConstructing )
 			StartConstruction();
-		else if ( Level != RequestedLevel && !IsUpgrading )
+		else if ( Level != RequestedLevel && !IsUpgrading && !IsConstructing )
 			StartUpgrade( Level + 1 );
 		else if (AppliedMetal >= Data.UpgradeCost && !IsUpgrading )
 		{
 			AppliedMetal -= Data.UpgradeCost;
-			RequestedLevel = Level + 1;
-			StartUpgrade( RequestedLevel );
+			StartUpgrade( Level + 1, setRequested: true );
 		}
 	}
 
@@ -194,6 +194,12 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 		var dmg = DamageInfo.Generic( Health )
 								.WithTags( MANUAL_DESTROY_TAG );
 		TakeDamage( dmg );
+	}
+
+	public bool InPickupDistance()
+	{
+		if ( Owner == null ) return false;
+		return Position.Distance( Owner.Position ) <= PickupDistance;
 	}
 
 	public override void OnKilled()

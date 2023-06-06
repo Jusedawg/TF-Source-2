@@ -13,7 +13,7 @@ public abstract partial class TFBuilding
 	[Net] public float UpgradeProgress { get; set; }
 	[Net] public float UpgradeTime { get; set; }
 	protected bool UpgradeCompleted => UpgradeProgress >= UpgradeTime;
-	public virtual void StartUpgrade(int level, float time = default)
+	public virtual void StartUpgrade(int level, float time = default, bool setRequested = false)
 	{
 		if ( !IsInitialized ) return;
 
@@ -32,7 +32,11 @@ public abstract partial class TFBuilding
 
 		var levelData = GetLevelData();
 		InitializeModel( levelData.DeployModel );
-		Health += levelData.MaxHealth - Health;
+		if(setRequested)
+		{
+			RequestedLevel = level;
+			Health += levelData.MaxHealth - Health;
+		}
 	}
 
 	public virtual void TickUpgrade()

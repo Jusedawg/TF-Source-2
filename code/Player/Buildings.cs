@@ -46,10 +46,12 @@ public partial class TFPlayer
 			}
 		}
 	}
+	const float PICKUP_DISTANCE = 96f;
 	public void TryPickupBuilding()
 	{
 		if ( Game.IsClient ) return;
 		if ( HoveredEntity is not TFBuilding building ) return;
+		if(building.Owner != this || building.InPickupDistance()) return;
 
 		var builder = Weapons.OfType<Builder>().FirstOrDefault();
 		if ( builder == null )
