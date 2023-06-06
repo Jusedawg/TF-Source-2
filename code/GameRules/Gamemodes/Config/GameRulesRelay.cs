@@ -17,8 +17,13 @@ namespace TFS2;
 [HammerEntity]
 public partial class TFGameRulesRelay : Entity
 {
+	public static TFGameRulesRelay Instance { get; set; }
+	[Property] public bool SwitchTeams { get; set; } = false;
 	public TFGameRulesRelay()
 	{
+		if ( Instance != null ) return;
+		Instance = this;
+
 		EventDispatcher.Subscribe<RoundActiveEvent>( OnRoundStartEvent, this );
 		EventDispatcher.Subscribe<RoundRestartEvent>( OnRoundRestartEvent, this );
 	}

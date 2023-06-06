@@ -56,11 +56,11 @@ partial class TFGameRules
 		//Swap player teams if this is round end, we have a winner + the gamemode allows it
 		try
 		{
-            if (IsRoundEnded && Winner != 0 && GetGamemode().ShouldSwapTeams((TFTeam)Winner, (TFWinReason)WinReason))
+            if (IsRoundEnded && Winner != 0 && (
+				GetGamemode().ShouldSwapTeams((TFTeam)Winner, (TFWinReason)WinReason) 
+				|| TFGameRulesRelay.Instance?.SwitchTeams == true
+			))
             {
-#if DEBUG
-				Log.Info("Will swap player teams");
-#endif
 				SwapAllPlayersTeam();
             }
         }
