@@ -12,7 +12,7 @@ public class Wrench : TFMeleeBase
 	public virtual string[] AvailableBuildings => new[] { "sentry", "dispenser", "teleporter_entrance", "teleporter_exit" };
 	public override void OnHitEntity( Entity entity, TraceResult tr )
 	{
-		if(entity is TFBuilding building && building.Owner == Owner )
+		if(entity is TFBuilding building)
 		{
 			if(building.IsConstructing)
 			{
@@ -35,7 +35,7 @@ public class Wrench : TFMeleeBase
 
 	public override void PlayImpactSound( Entity entity )
 	{
-		if(entity is TFBuilding building && building.Owner == Owner)
+		if(entity is TFBuilding building)
 		{
 			if ( wasSuccess )
 				PlaySound( BUILDING_HIT_SUCCESS );
