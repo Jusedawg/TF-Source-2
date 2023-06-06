@@ -39,6 +39,7 @@ partial class SDKPlayer
 		else if ( RequestedActiveWeapon != null )
 		{
 			SwitchToWeapon( RequestedActiveWeapon );
+			RequestedActiveWeapon = null;
 		}
 
 		if ( LastActiveWeapon != ActiveWeapon )

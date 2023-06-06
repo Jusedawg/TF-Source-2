@@ -241,7 +241,6 @@ public partial class WeaponSelection : Panel
 			}
 		}
 
-		bool hasRequestedWeapon = false;
 		if ( confirmChoice && HasSelectedSlot )
 		{
 			var weapon = player.GetWeaponInSlot( SelectedSlot );
@@ -249,7 +248,6 @@ public partial class WeaponSelection : Panel
 			{
 				if ( weapon != player.ActiveWeapon )
 				{
-					hasRequestedWeapon = true;
 					HasSelectedSlot = false;
 					player.RequestedActiveWeapon = weapon;
 				}
@@ -257,9 +255,6 @@ public partial class WeaponSelection : Panel
 
 			Close();
 		}
-
-		if ( !hasRequestedWeapon )
-			player.RequestedActiveWeapon = null;
 	}
 	[ConVar.Client( "cl_hud_weaponlist_close_time" )] public static float AutoCloseTime { get; set; } = 20;
 }
