@@ -56,7 +56,7 @@ public partial class TFBuilding
 			}
 		}
 
-		if ( !HasFirstConstructed )
+		if ( HasFirstConstructed )
 			multiplier *= 2;
 
 		return multiplier;
@@ -122,7 +122,7 @@ public partial class TFBuilding
 	{
 		IsConstructing = false;
 		HasConstructed = true;
-		HasFirstConstructed = false;
+		HasFirstConstructed = true;
 
 		var levelData = GetLevelData();
 		InitializeModel( levelData.Model );

@@ -51,7 +51,7 @@ public partial class TFPlayer
 	{
 		if ( Game.IsClient ) return;
 		if ( HoveredEntity is not TFBuilding building ) return;
-		if(building.Owner != this || building.InPickupDistance()) return;
+		if(building.Owner != this || !building.InPickupDistance()) return;
 
 		var builder = Weapons.OfType<Builder>().FirstOrDefault();
 		if ( builder == null )

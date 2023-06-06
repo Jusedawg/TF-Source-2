@@ -325,6 +325,11 @@ public partial class Builder : TFWeaponBase
 
 		return !IsCarryingBuilding;
 	}
+
+	public override bool CanDrop( SDKPlayer player )
+	{
+		return false;
+	}
 }
 
 public struct BuildingPlacementResult

@@ -176,7 +176,10 @@ public partial class BuildingInstancePanel : Panel
 				}
 			}
 		}
-
+		else
+		{
+			BuildingIcon.SetTexture( Data.GetUIIcon( 1 ) );
+		}
 	}
 
 	private static string GetLevelIcon(int level)
