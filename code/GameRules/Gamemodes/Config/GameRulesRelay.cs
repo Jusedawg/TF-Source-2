@@ -19,13 +19,41 @@ public partial class TFGameRulesRelay : Entity
 {
 	public static TFGameRulesRelay Instance { get; set; }
 	[Property] public bool SwitchTeams { get; set; } = false;
+	readonly TFGameRules rules;
 	public TFGameRulesRelay()
 	{
 		if ( Instance != null ) return;
 		Instance = this;
+		rules = TFGameRules.Current;
 
 		EventDispatcher.Subscribe<RoundActiveEvent>( OnRoundStartEvent, this );
 		EventDispatcher.Subscribe<RoundRestartEvent>( OnRoundRestartEvent, this );
+	}
+
+	[Input]
+	private void SetBlueWaveRespawnTime(float time)
+	{
+		rules.SetRespawnWaveTeamTimeValue( TFTeam.Blue, time );
+	}
+
+	[Input]
+	private void SetRedWaveRespawnTime( float time )
+	{
+		rules.SetRespawnWaveTeamTimeValue( TFTeam.Red, time );
+	}
+
+	[Input]
+	private void AddBlueWaveRespawnTime( float time )
+	{
+		float current = rules.GetRespawnWaveTeamTimeValue( TFTeam.Blue );
+		rules.SetRespawnWaveTeamTimeValue( TFTeam.Blue, current + time );
+	}
+
+	[Input]
+	private void AddRedWaveRespawnTime( float time )
+	{
+		float current = rules.GetRespawnWaveTeamTimeValue( TFTeam.Blue );
+		rules.SetRespawnWaveTeamTimeValue( TFTeam.Red, current + time );
 	}
 
 	private void OnRoundStartEvent( RoundActiveEvent ev )

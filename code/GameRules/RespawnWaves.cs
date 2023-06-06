@@ -100,6 +100,14 @@ partial class TFGameRules
 		return value;
 	}
 
+	public void SetRespawnWaveTeamTimeValue(TFTeam team, float value )
+	{
+		if ( !RespawnWaveTimes.ContainsKey( team ) )
+			RespawnWaveTimes.Add( team, value );
+		else
+			RespawnWaveTimes[team] = value;
+	}
+
 	/// <summary>
 	/// 
 	/// </summary>

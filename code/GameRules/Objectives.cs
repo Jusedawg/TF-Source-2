@@ -53,6 +53,9 @@ partial class TFGameRules
 			}
 		}
 
+		// Reset respawn wave times
+		RespawnWaveTimes.Clear();
+
 		//Swap player teams if this is round end, we have a winner + the gamemode allows it
 		try
 		{
