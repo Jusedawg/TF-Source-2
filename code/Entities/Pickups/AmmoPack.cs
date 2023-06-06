@@ -63,6 +63,13 @@ public abstract class AmmoPack : PickupItem
 			}
 		}
 
+		if(player.UsesMetal && player.Metal != player.MaxMetal )
+		{
+			int metalToAdd = MathX.CeilToInt( player.MaxMetal * AmmoMultiplier );
+			if ( player.GiveMetal( metalToAdd ) > 0 )
+				neededAmmo = true;
+		}
+
 		if ( !neededAmmo ) 
 			return;
 
