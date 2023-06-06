@@ -19,7 +19,7 @@ partial class TFGameRules
 
 		foreach ( TFTeam team in Enum.GetValues( typeof( TFTeam ) ) )
 		{
-			if ( !team.IsPlayable() ) 
+			if ( !team.IsPlayable() )
 				continue;
 
 			if ( !CanTeamRespawn( team ) )
@@ -62,7 +62,7 @@ partial class TFGameRules
 		if ( ply == null ) return false;
 
 		// can't respawn if they're alraedy alive.
-		if ( player.IsAlive ) 
+		if ( player.IsAlive )
 			return false;
 
 		// never respawn if game doesn't allow us to respawn.
@@ -100,12 +100,18 @@ partial class TFGameRules
 		return value;
 	}
 
-	public void SetRespawnWaveTeamTimeValue(TFTeam team, float value )
+	public void SetRespawnWaveTeamTimeValue( TFTeam team, float value )
 	{
 		if ( !RespawnWaveTimes.ContainsKey( team ) )
 			RespawnWaveTimes.Add( team, value );
 		else
 			RespawnWaveTimes[team] = value;
+	}
+
+	public void AddRespawnWaveTeamTimeValue( TFTeam team, float value )
+	{
+		float current = GetRespawnWaveTeamTimeValue( team );
+		SetRespawnWaveTeamTimeValue( team, current + value );
 	}
 
 	/// <summary>

@@ -45,15 +45,13 @@ public partial class TFGameRulesRelay : Entity
 	[Input]
 	private void AddBlueWaveRespawnTime( float time )
 	{
-		float current = rules.GetRespawnWaveTeamTimeValue( TFTeam.Blue );
-		rules.SetRespawnWaveTeamTimeValue( TFTeam.Blue, current + time );
+		rules.AddRespawnWaveTeamTimeValue( TFTeam.Blue, time );
 	}
 
 	[Input]
 	private void AddRedWaveRespawnTime( float time )
 	{
-		float current = rules.GetRespawnWaveTeamTimeValue( TFTeam.Blue );
-		rules.SetRespawnWaveTeamTimeValue( TFTeam.Red, current + time );
+		rules.AddRespawnWaveTeamTimeValue( TFTeam.Red, time );
 	}
 
 	private void OnRoundStartEvent( RoundActiveEvent ev )

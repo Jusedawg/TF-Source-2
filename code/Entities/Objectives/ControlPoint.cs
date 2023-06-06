@@ -692,7 +692,16 @@ public partial class ControlPoint : BaseTrigger, IResettable, IRoundTimerBlocker
 
 	void HandleRespawnTimeAdjustments( TFTeam oldTeam, TFTeam newTeam )
 	{
-		// TODO: Change respawn times on cap
+		if ( newTeam == TFTeam.Blue )
+			TFGameRules.Current.AddRespawnWaveTeamTimeValue( TFTeam.Blue, BlueSpawnAdjust );
+		else if ( newTeam == TFTeam.Red )
+			TFGameRules.Current.AddRespawnWaveTeamTimeValue( TFTeam.Red, RedSpawnAdjust );
+
+		if ( oldTeam == TFTeam.Blue )
+			TFGameRules.Current.AddRespawnWaveTeamTimeValue( TFTeam.Blue, -BlueSpawnAdjust );
+		else if(oldTeam == TFTeam.Red)
+			TFGameRules.Current.AddRespawnWaveTeamTimeValue( TFTeam.Red, -RedSpawnAdjust );
+
 	}
 
 	public bool CaptureModeScalesWithPlayers() => true;
