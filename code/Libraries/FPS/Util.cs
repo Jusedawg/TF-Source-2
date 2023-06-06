@@ -113,7 +113,7 @@ public static class CollisionTags
 	public const string ProjectileClip = "projectileclip";
 	public const string NPCClip = "npcclip";
 
-	public const string IdleProjectile = "idle_projectile";
+	public const string IdleProjectile = "idleprojectile";
 }
 
 public static class DamageTags

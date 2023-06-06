@@ -36,7 +36,8 @@
         "debris": "Unset",
         "interactable": "Unset",
         "playerclip": "Unset",
-        "sky": "Unset"
+        "sky": "Unset",
+        "idleprojectile": "Unset"
       },
       "Pairs": [
         {
@@ -231,6 +232,61 @@
           "a": "water",
           "b": "sky",
           "r": "Collide"
+        },
+        {
+          "a": "projectile",
+          "b": "idleprojectile",
+          "r": "Ignore"
+        },
+        {
+          "a": "weapon",
+          "b": "idleprojectile"
+        },
+        {
+          "a": "idleprojectile",
+          "b": "idleprojectile",
+          "r": "Ignore"
+        },
+        {
+          "a": "sky",
+          "b": "idleprojectile",
+          "r": "Ignore"
+        },
+        {
+          "a": "playerclip",
+          "b": "idleprojectile",
+          "r": "Ignore"
+        },
+        {
+          "a": "interactable",
+          "b": "idleprojectile",
+          "r": "Ignore"
+        },
+        {
+          "a": "debris",
+          "b": "idleprojectile",
+          "r": "Ignore"
+        },
+        {
+          "a": "player",
+          "b": "idleprojectile",
+          "r": "Ignore"
+        },
+        {
+          "a": "water",
+          "b": "idleprojectile"
+        },
+        {
+          "a": "ladder",
+          "b": "idleprojectile"
+        },
+        {
+          "a": "trigger",
+          "b": "idleprojectile"
+        },
+        {
+          "a": "solid",
+          "b": "idleprojectile"
         }
       ]
     },
