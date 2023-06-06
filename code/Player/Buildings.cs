@@ -104,12 +104,13 @@ public partial class TFPlayer
 
 	public void DestroyBuildings()
 	{
-		if(Buildings.Any())
+		if(Buildings.Count > 0)
 		{
-			foreach ( var building in Buildings )
+			for ( int i = 0; i < Buildings.Count; i++ )
 			{
-				building.ManualDestroy();
+				Buildings[i].ManualDestroy();
 			}
+
 			Buildings.Clear();
 		}
 	}
