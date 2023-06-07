@@ -13,8 +13,8 @@ public partial class Medigun
 	public const string FailSoundEffect = "weapon_medigun.notarget";
 	public const string ReleaseFailSoundEffect = "player_use_fail";
 
-	Sound? HealSound { get; set; }
-	Sound? MuzzleSound { get; set; }
+	SoundHandle? HealSound { get; set; }
+	SoundHandle? MuzzleSound { get; set; }
 
 	public override void ClientSpawn()
 	{
@@ -96,8 +96,8 @@ public partial class Medigun
 				{
 					BeamParticle.RestartEffect();
 
-					HealSound?.Stop();
-					HealSound = PlaySound( HealSoundEffect );
+					HealSound?.Stop(true);
+					HealSound = Audio.Play( HealSoundEffect, this );
 				}
 			}
 		}
@@ -107,7 +107,7 @@ public partial class Medigun
 
 			if ( HealSound != null )
 			{
-				HealSound?.Stop();
+				HealSound?.Stop(true);
 				HealSound = null;
 				PlaySound( DetachSoundEffect );
 			}
@@ -118,11 +118,11 @@ public partial class Medigun
 		{
 			if ( muzzleVisible )
 			{
-				MuzzleSound = PlaySound( ChargedSoundEffect );
+				MuzzleSound = Audio.Play( ChargedSoundEffect, this );
 			}
 			else
 			{
-				MuzzleSound?.Stop();
+				MuzzleSound?.Stop(true);
 				MuzzleSound = null;
 			}
 		}

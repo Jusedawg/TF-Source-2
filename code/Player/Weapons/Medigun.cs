@@ -250,10 +250,10 @@ public partial class Medigun : TFHoldWeaponBase //, IPassiveChild
 
 		StopHealing( true );
 
-		HealSound?.Stop();
+		HealSound?.Stop(true);
 		HealSound = null;
 
-		MuzzleSound?.Stop();
+		MuzzleSound?.Stop(true);
 		MuzzleSound = null;
 	}
 

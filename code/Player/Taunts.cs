@@ -720,7 +720,7 @@ partial class TFPlayer
 
 	#region Music
 
-	Sound TauntMusic { get; set; }
+	SoundHandle TauntMusic;
 
 	[ClientRpc]
 	public void StartMusic()
@@ -735,7 +735,7 @@ partial class TFPlayer
 		if ( IsLocalPawn )
 		{
 			//Log.Info( "local music" );
-			TauntMusic = Sound.FromScreen( To.Single( this ), $"{tauntMusicNoFormat}.ui{format}" );
+			TauntMusic = Audio.Play( $"{tauntMusicNoFormat}.ui{format}" );
 			SetOtherMusicVolume( 0.1f, this ); //Figure out how to muffle incoming taunt music from other players ONLY for this player
 		}
 		else
@@ -744,7 +744,8 @@ partial class TFPlayer
 			//var attachment = PlayerModel.GetAttachment( "head" ); TAM
 			var attachment = GetAttachment( "head" );
 			//TauntMusic = Sound.FromEntity( ActiveTaunt.TauntMusic, PlayerModel, "head" ); //Doesn't play from attachment, using hacky workaround
-			TauntMusic = Sound.FromWorld( ActiveTaunt.TauntMusic, attachment.Value.Position );
+			TauntMusic = Audio.Play( ActiveTaunt.TauntMusic );
+			TauntMusic.Position = attachment?.Position ?? Position;
 		}
 	}
 
@@ -755,7 +756,7 @@ partial class TFPlayer
 		
 		//var attachment = PlayerModel.GetAttachment( "head" ); TAM
 		var attachment = GetAttachment( "head" );
-		TauntMusic.SetPosition( attachment.Value.Position );
+		TauntMusic.Position = attachment.Value.Position;
 	}
 
 	[ClientRpc]
@@ -764,14 +765,14 @@ partial class TFPlayer
 		if ( !IsLocalPawn ) return;
 		foreach ( TFPlayer player in Entity.All.Where( x => x != caller ).OfType<TFPlayer>() )
 		{
-			player.TauntMusic.SetVolume( volume );
+			player.TauntMusic.Volume = volume;
 		}
 	}
 
 	[ClientRpc]
 	public void StopMusic()
 	{
-		TauntMusic.Stop();
+		TauntMusic.Stop(true);
 		if (IsLocalPawn) SetOtherMusicVolume( 1f, this );
 	}
 

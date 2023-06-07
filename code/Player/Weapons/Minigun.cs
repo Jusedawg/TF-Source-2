@@ -88,7 +88,7 @@ public partial class Minigun : TFHoldWeaponBase
 	// Effects
 	//
 
-	Sound? SpinSound { get; set; }
+	SoundHandle? SpinSound { get; set; }
 	SpinSoundType LastSpinSound { get; set; }
 
 	public const string SpinDrySound = "weapon_minigun.empty";
@@ -120,8 +120,8 @@ public partial class Minigun : TFHoldWeaponBase
 
 				LastSpinSound = soundType;
 
-				SpinSound?.Stop();
-				SpinSound = PlaySound( sound );
+				SpinSound?.Stop(true);
+				SpinSound = Audio.Play( sound, this );
 			}
 		}
 		else
@@ -131,7 +131,7 @@ public partial class Minigun : TFHoldWeaponBase
 			{
 				return;
 			}
-			SpinSound?.Stop();
+			SpinSound?.Stop(true);
 			SpinSound = null;
 		}
 	}
@@ -140,7 +140,7 @@ public partial class Minigun : TFHoldWeaponBase
 	{
 		base.OnHolster( owner );
 		
-		SpinSound?.Stop();
+		SpinSound?.Stop(true);
 		SpinSound = null;
 	}
 
