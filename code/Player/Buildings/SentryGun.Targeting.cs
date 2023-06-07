@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Amper.FPS;
 using Sandbox;
 
 namespace TFS2;
@@ -137,9 +138,19 @@ public partial class SentryGun
 	{
 		var lastTarget = Target;
 		//If our target leaves range or dies, remove them as our target
-		if ( HasTarget && (Position.Distance( Target.Position ) > Range || Target.LifeState != LifeState.Alive) )
+		if ( HasTarget )
 		{
-			Target = null;
+			if( Position.Distance( Target.Position ) > Range || Target.LifeState != LifeState.Alive )
+				Target = null;
+
+			var tr = Trace.Ray( AimRay.Position, Target.Position )
+						.Ignore( this )
+						.WorldAndEntities()
+						.WithTag( CollisionTags.Solid )
+						.WithoutTags(CollisionTags.Player)
+						.Run();
+			if ( tr.Hit )
+				Target = null;
 		}
 
 		if ( Target != null )
