@@ -10,8 +10,8 @@ public partial class ClassSelection : MenuOverlay
 {
 	ClassSelectionBackgroundScene BackgroundScene { get; set; }
 	ClassSelectionPlayerModel PlayerScene { get; set; }
-	Sound BackgroundMusic { get; set; }
-	Sound NoteSound { get; set; }
+	SoundHandle BackgroundMusic { get; set; }
+	SoundHandle NoteSound { get; set; }
 	PlayerClass SelectedClass { get; set; }
 
 	public ClassSelection()
@@ -21,7 +21,7 @@ public partial class ClassSelection : MenuOverlay
 		// TODO: Convert to HTML
 		StyleSheet.Load( "/UI/HUD/Server/ClassSelection.scss" );
 		BackgroundScene = AddChild<ClassSelectionBackgroundScene>();
-		BackgroundMusic = Sound.FromScreen( "music.class_menu.background" );
+		BackgroundMusic = Audio.Play( "music.class_menu.background" );
 
 		PlayerScene = AddChild<ClassSelectionPlayerModel>();
 		PreviewClass( player.PlayerClass ?? PlayerClass.Get( TFPlayerClass.Heavy ) );
@@ -39,14 +39,14 @@ public partial class ClassSelection : MenuOverlay
 
 	public override void OnDeleted()
 	{
-		BackgroundMusic.Stop();
+		BackgroundMusic.Stop(true);
 		base.OnDeleted();
 	}
 
 	public void PlayNote( int note )
 	{
-		NoteSound.Stop();
-		NoteSound = Sound.FromScreen( $"music.class_menu.note_{note}" );
+		NoteSound.Stop(true);
+		NoteSound = Audio.Play( $"music.class_menu.note_{note}" );
 	}
 
 	public void OnSelectedPlayerClass( PlayerClass playerClass )
@@ -56,7 +56,7 @@ public partial class ClassSelection : MenuOverlay
 
 		if ( playerClass == null )
 		{
-			NoteSound.Stop();
+			NoteSound.Stop(true);
 			Sound.FromScreen( "ui.button.click" );
 		}
 		else

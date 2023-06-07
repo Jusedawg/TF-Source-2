@@ -437,8 +437,8 @@ public partial class FlameThrower : TFHoldWeaponBase
 
 	bool firingCritSound;
 
-	Sound? FireLoopSound;
-	Sound? FireHitLoopSound;
+	SoundHandle? FireLoopSound;
+	SoundHandle? FireHitLoopSound;
 
 	public override void ClientTick()
 	{
@@ -454,8 +454,8 @@ public partial class FlameThrower : TFHoldWeaponBase
 					? FlameLoopCritSoundName
 					: FlameLoopSoundName;
 
-				FireLoopSound?.Stop();
-				FireLoopSound = PlaySound( sound );
+				FireLoopSound?.Stop(true);
+				FireLoopSound = Audio.Play( sound );
 
 				firingCritSound = IsCurrentAttackCritical;
 			}
@@ -468,13 +468,13 @@ public partial class FlameThrower : TFHoldWeaponBase
 
 				if ( FireHitLoopSound.HasValue != isHittingTarget )
 				{
-					FireHitLoopSound?.Stop();
+					FireHitLoopSound?.Stop(true);
 					FireHitLoopSound = null;
 
 					if ( isHittingTarget )
 					{
-						FireHitLoopSound?.Stop();
-						FireHitLoopSound = PlaySound( FlameLoopHitSoundName );
+						FireHitLoopSound?.Stop(true);
+						FireHitLoopSound = Audio.Play( FlameLoopHitSoundName );
 					}
 				}
 			}
@@ -486,11 +486,11 @@ public partial class FlameThrower : TFHoldWeaponBase
 				// Play flame loop end sound name.
 				PlaySound( FlameLoopEndSoundName );
 
-				FireLoopSound?.Stop();
+				FireLoopSound?.Stop(true);
 				FireLoopSound = null;
 			}
 
-			FireHitLoopSound?.Stop();
+			FireHitLoopSound?.Stop(true);
 			FireHitLoopSound = null;
 		}
 	}
@@ -499,10 +499,10 @@ public partial class FlameThrower : TFHoldWeaponBase
 	{
 		base.OnHolster( owner );
 
-		FireHitLoopSound?.Stop();
+		FireHitLoopSound?.Stop(true);
 		FireHitLoopSound = null;
 
-		FireLoopSound?.Stop();
+		FireLoopSound?.Stop(true);
 		FireLoopSound = null;
 	}
 }
