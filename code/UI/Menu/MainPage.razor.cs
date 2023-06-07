@@ -2,15 +2,16 @@
 using Sandbox.Localization;
 using Sandbox.Menu;
 using Sandbox.UI;
+using System.Threading.Tasks;
 using TFS2.UI;
 
 namespace TFS2.Menu;
 
 public partial class MainPage : Panel
 {
-	public void OnClickCreateGame()
+	public async Task OnClickCreateGame()
 	{
-		
+		await Game.Menu.CreateLobbyAsync();
 	}
 	public void OnClickJoinGame()
 	{

@@ -11,6 +11,10 @@ MainPage {
     backdrop-filter: blur(5px);
     background-color: #100a0194;
 
+    &.hidden {
+        display: none;
+    }
+
     .container {
         padding: 0 50px;
         max-width: 900px;
