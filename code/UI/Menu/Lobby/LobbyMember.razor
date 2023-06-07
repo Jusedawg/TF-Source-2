@@ -9,6 +9,10 @@
 <root class="@SpecialClasses()" >
     <img style="background-image: url( avatar:@Member.Id )" class="avatar" />
     <label class="name">@Member.Name</label>
+    @if (Game.Menu.Lobby != null && Game.Menu.Lobby.Owner.Equals(Member))
+    {
+        <img src="/UI/Menu/Lobby/host.png" class="host" />
+    }
 </root>
 
 @code

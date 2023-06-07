@@ -29,7 +29,15 @@
                 <LobbyMember Member=@member></LobbyMember>
             }
 
-        </div>  
+        </div>
+
+        <div class="server">
+            <MapInfo Map=@Game.Menu.Lobby.Map />
+            <div class="info">
+                <label class="title">@Game.Menu.Lobby.Title</label>
+                <label class="description">@Game.Menu.Lobby.Description</label>
+            </div>
+        </div>
     </div>
     
     <div class="actions">
