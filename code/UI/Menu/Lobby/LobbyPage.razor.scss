@@ -1,121 +1,71 @@
-﻿.layout {
+﻿@import "/UI/styles/buttons.scss";
+@import "/UI/styles/colors.scss";
+@import "/UI/styles/checkbox.scss";
+
+.layout {
     flex-direction: column;
+    margin: 5%;
+    background-color: #3C352Daa;
 
-    > * {
+    * {
         flex-shrink: 0;
-    }
-
-    > .body {
-        flex-grow: 1;
-        flex-shrink: 0;
-        flex-direction: column;
-
-        &.columned {
-            flex-direction: row;
-            flex-grow: 1;
-            flex-shrink: 1;
-            margin: 0px 50px;
-            justify-content: space-between;
-
-            > .left {
-                flex-grow: 0;
-                flex-shrink: 0;
-                overflow-y: scroll;
-                flex-direction: column;
-            }
-
-            > .right {
-                flex-grow: 0;
-                flex-shrink: 0;
-                flex-direction: column;
-            }
-        }
     }
 }
 
-$form-row-height: 48px;
+.header {
+    height: 20%;
 
-.form {
-    flex-direction: column;
-    flex-shrink: 0;
-    flex-grow: 0;
-    gap: 2px;
-    padding-left: 64px;
-    margin-bottom: 50px;
-
-    > .form-group {
-        flex-direction: row;
-        flex-shrink: 0;
-        gap: 16px;
-        min-height: $form-row-height;
-
-        > .form-label {
-            width: 280px;
-            opacity: 0.5;
-            height: $form-row-height;
-            align-items: center;
-            justify-content: flex-end;
-            font-size: 20px;
-            white-space: nowrap;
-        }
+    .title {
+        height: 30%;
+        padding-top: 2%;
+        padding-left: 2%;
+        font-family: TF2_Build;
+        font-size: 40px;
+        color: $tan-light;
     }
 }
 
-.form .form-control {
+.body {
+    height: 65%;
+    flex-direction: row;
     flex-grow: 1;
+    flex-shrink: 1;
+    margin: 0px 50px;
+    justify-content: space-between;
 
-    SliderControl, > DropDown, > textentry, SliderControl textentry {
-        flex-grow: 1;
-        font-size: 20px;
-        height: $form-row-height;
-    }
+    .players {
+        flex-direction: column;
+        width: 60%;
+        gap: 5px;
 
-    > textentry, SliderControl textentry {
-        flex-grow: 1;
-        background-color: #ffffff05;
-        height: $form-row-height;
-        color: #aaa;
-        width: 600px;
-        border-radius: 0;
-        padding: 5px;
+        LobbyMember {
+            background-color: $bg-darker;
+            //margin: 4%;
+            flex-basis: 10%;
 
-        &:hover {
-            background-color: #ffffff11;
-        }
-
-        &:focus {
-            background-color: #ffffff22;
-            color: #fff;
-        }
-    }
-
-    SliderControl {
-        gap: 2px;
-
-        > .inner {
-            > .values {
-                position: absolute;
-                padding: 16px;
-                color: #fffa;
+            .avatar {
+                margin: 3%;
+                height: 80%;
+                aspect-ratio: 1;
+                background-size: cover;
+                border-radius: 10%;
             }
 
-            > .track {
-                height: 100%;
-                margin: 2px 0px;
-                border-radius: 0;
-                background-color: #ffffff05;
-
-                > .track-active {
-                    background-color: #ffffff11;
-                    border-radius: 0;
-                }
-
-                > .thumb {
-                    width: 4px;
-                    height: 100%;
-                    background-color: #fff8;
-                }
+            .name {
+                height: 50%;
+                font-family: TF2_Secondary;
+                font-size: 40px;
+                color: $tan-light;
             }
         }
+    }
+}
+
+.actions {
+    height: 15%;
+    justify-content: space-between;
+
+    .button {
+        margin: 2%;
     }
 }

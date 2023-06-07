@@ -6,7 +6,9 @@
 @namespace TFS2.Menu
 @attribute [StyleSheet]
 
-<root class="@SpecialClasses()" tooltip="@Member.Name" style="background-image: url( avatar:@Member.Id )">
+<root class="@SpecialClasses()" >
+    <img style="background-image: url( avatar:@Member.Id )" class="avatar" />
+    <label class="name">@Member.Name</label>
 </root>
 
 @code
