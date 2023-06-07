@@ -2,9 +2,11 @@
 @using Sandbox;
 @using Amper.FPS;
 
-@attribute [StyleSheet("/UI/Menu/MainMenuPanel.scss")]
+@attribute [StyleSheet]
 
 @namespace TFS2.Menu
+
+@inherits Panel
 
 <root>
     <div class="disclaimer">
@@ -25,8 +27,16 @@
             </div>
 
             <div class="content">
-				<button class="button-gradient" @onclick=@OnClickResumeGame>#GameMenu.ResumeGame</button>
-				<button class="button-gradient disabled" @onclick=@OnClickJoinGame>#GameMenu.JoinGame</button>
+                @if(Game.InGame)
+                {
+                    <button class="button-gradient disabled" @onclick=@OnClickCreateGame>Create Game</button>
+                    <button class="button-gradient" @onclick=@OnClickJoinGame>Join Game</button>
+                }
+                else
+                {
+                    <button class="button-gradient" @onclick=@OnClickCreateGame>Create Game</button>
+                    <button class="button-gradient" @onclick=@OnClickJoinGame>Join Game</button>
+                }
             </div>
         </div>
 
@@ -37,8 +47,15 @@
 				<text>#GameMenu.Title.Customize</text>
             </div>
             <div class="content">
-				<button class="button-gradient" @onclick=@OnClickLoadout>#GameMenu.Loadout</button>
-				<button class="button-gradient" style="box-shadow: 0px 0px 10px 3px #a95821;" @onclick=@OnClickSettings>
+                @if(Game.InGame)
+                {
+                    <button class="button-gradient" @onclick=@OnClickLoadout>#GameMenu.Loadout</button>
+                }
+                else
+                {
+                    <button class="button-gradient disabled" @onclick=@OnClickLoadout>#GameMenu.Loadout</button>
+                }
+                <button class="button-gradient" style="box-shadow: 0px 0px 10px 3px #a95821;" @onclick=@OnClickSettings>
 					#GameMenu.Settings
 				</button>
             </div>
@@ -66,11 +83,15 @@
     </div>
 
     <div class="footer">
-		<button class="button-dark" icon="highlight_off" @onclick=@OnClickQuit>#Generic.Quit</button>
-		<button class="button-dark" @onclick=@OnClickClassSelection icon="people_alt">#GameMenu.ChangeClass</button>
-		<button class="button-dark" @onclick=@OnClickTeamSelection icon="sync_alt">#GameMenu.SwitchTeam</button>
-        <text @ref="PlayerName" class="playername" />
-        <image @ref="PlayerAvatar" class="playeravatar" />
+        @if(Game.InGame)
+        {
+            <button class="button-dark" icon="highlight_off" @onclick=@OnClickQuit>#Generic.Quit</button>
+            <button class="button-dark" @onclick=@OnClickClassSelection icon="people_alt">#GameMenu.ChangeClass</button>
+            <button class="button-dark" @onclick=@OnClickTeamSelection icon="sync_alt">#GameMenu.SwitchTeam</button>
+        }
+        
+        <text class="playername">@Game.UserName</text>
+        <image style="background-image: url( avatar:@Game.SteamId )" class="playeravatar" />
         <!--
         <div class="inputnotice">
             Change class & teams are now bound to <div class="glyph"><InputGlyph Button="Class" /></div> and <div class="glyph"><InputGlyph Button="Team" /></div> just like in TF2!

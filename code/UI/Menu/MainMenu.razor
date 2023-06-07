@@ -1,0 +1,65 @@
+﻿@using System
+@using Sandbox;
+@using Sandbox.MenuSystem;
+@using Sandbox.UI;
+@using Sandbox.Menu;
+
+@attribute [StyleSheet]
+@namespace TFS2.Menu
+@implements IGameMenuPanel
+@inherits NavHostPanel
+
+<root class="tfs2menu">
+
+</root>
+
+@code
+{
+    public static MainMenu Current { get; private set; }
+    public MainMenu()
+    {
+        Current = this;
+        DefaultUrl = "/";
+
+        AddDestination("/", typeof(MainPage));
+
+        /*
+        AddDestination("/load", typeof(LoadGamePage));
+        AddDestination("/lobby", typeof(LobbyPage));
+        AddDestination("/lobby/map", typeof(LobbyMapPage));
+        AddDestination("/lobby/addons", typeof(LobbyAddonPage));
+        AddDestination("/active", typeof(ActivePage));
+        AddDestination("/active/map", typeof(ActiveMapPage));
+        AddDestination("/servers", typeof(ServerListPage));
+        AddDestination("/settings", typeof(SettingsPage));
+         */
+
+        if (Game.InGame) Navigate("/active");
+
+        BindClass("ingame", () => Game.InGame);
+        BindClass("inlobby", () => Game.Menu.Lobby != null);
+    }
+
+    protected override void OnEvent(PanelEvent e)
+    {
+        if (e.Name == "package.changed")
+        {
+            StateHasChanged();
+            return;
+        }
+
+        base.OnEvent(e);
+    }
+
+    [GameEvent.Menu.ServerJoined]
+    public void OnServerJoined() => Navigate("/active");
+
+    [GameEvent.Menu.LobbyJoined]
+    public void OnLobbyJoined() => Navigate("/lobby");
+
+    [GameEvent.Menu.LobbyLeave]
+    public void OnLobbyLeave() => Navigate("/");
+
+    [GameEvent.Menu.ServerLeave]
+    public void OnServerLeave() => Navigate("/");
+}

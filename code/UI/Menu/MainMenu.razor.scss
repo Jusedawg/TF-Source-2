@@ -1,0 +1,21 @@
+﻿.tfs2menu {
+    background-color: #343948;
+    padding: 0 170px;
+    opacity: 1;
+    flex-direction: column;
+    font-size: 25px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: all 0.3s ease-out;
+    color: white;
+
+    &:intro {
+        opacity: 0;
+        transform: scaleX( 1.1 );
+    }
+
+    &.ingame {
+        background-color: #151313ee;
+    }
+}

@@ -1,3 +1,4 @@
+using Sandbox;
 using Sandbox.UI;
 using TFS2.UI;
 
@@ -22,7 +23,7 @@ public class MenuOverlay : Panel
 	{
 		CloseActive();
 
-		TFHud.Instance.RootPanel.AddChild( overlay );
+		MainMenu.Current?.FindRootPanel()?.AddChild( overlay );
 		CurrentMenu = overlay;
 		return CurrentMenu;
 	}
