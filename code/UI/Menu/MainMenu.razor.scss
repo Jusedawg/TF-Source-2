@@ -15,7 +15,8 @@
         transform: scaleX( 1.1 );
     }
 
-    &.ingame {
-        background-color: #151313ee;
+    &:not(.ingame) {
+        background-image: url(https://media.discordapp.net/attachments/998352460693372998/1114194149302878268/sbox_0228.png);
+        background-size: 100%;
     }
 }
