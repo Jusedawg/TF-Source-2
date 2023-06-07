@@ -7,6 +7,7 @@ public class InputGlyph : Image
 {
 	public string Button { get; set; }
 	public InputGlyphSize Size { get; set; }
+	public bool Listen { get; set; } = true;
 
 	static Texture UnboundTexture = Texture.Load( FileSystem.Mounted, "/ui/unbound.png" );
 
@@ -45,6 +46,12 @@ public class InputGlyph : Image
 		var aspectRatio = width / height;
 
 		Style.AspectRatio = aspectRatio;
+	}
+
+	[GameEvent.Client.BuildInput]
+	private void BuildInput()
+	{
+		if ( !Listen ) return;
 
 		if ( Input.Pressed( Button ) )
 			SetClass( "pressed", true );

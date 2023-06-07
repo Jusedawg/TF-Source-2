@@ -39,6 +39,12 @@ public class BuildingData : GameResource
 	[HideInEditor]
 	public BBox BBox => new( Mins, Maxs );
 
+	[Title("UI Name")]
+	[Category("UI")]
+	/// <summary>
+	/// The name of this building displayed in the UI
+	/// </summary>
+	public string UIName { get; set; }
 	/// <summary>
 	/// Should the UI panel for this building be bigger? (ex: sentry)
 	/// </summary>

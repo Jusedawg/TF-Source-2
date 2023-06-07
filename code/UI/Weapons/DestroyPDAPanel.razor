@@ -1,0 +1,82 @@
+﻿@using System.Collections.Generic;
+@using System.Linq;
+@using Sandbox;
+@using Sandbox.UI;
+@using Amper.FPS;
+
+@attribute [StyleSheet]
+
+@namespace TFS2.UI
+@inherits Panel
+
+@if (Buildings == null) return;
+
+<root>
+    <div class="header">
+        <img class="icon" src="/ui/HUD/Buildings/ico_demolish.png" />
+        <label class="title">Demolish</label>
+        <label class="hint">Hit 'q' to Cancel</label>
+    </div>
+
+    <div class="options">
+        @foreach(var building in Buildings)
+        {
+            <div class="building">
+                <label class="name">@building.UIName</label>
+                @if (player.Buildings.Any(b => b.Data == building))
+                {
+                    <div class="stats">
+                        <img class="icon" src="@building.GetUIIcon(1)" />
+                        <img class="demolish" src="/ui/HUD/Buildings/ico_demolish.png" />
+                    </div>
+                }
+                else 
+                {
+                    <div class="stats warning">
+                        <label class="warning">Not Built</label>
+                    </div>
+                }
+                <InputGlyph Button="@GetBuildingSlot(building)" Listen=@false />
+            </div>
+        } 
+    </div>
+</root>
+
+@code {
+    List<BuildingData> Buildings = new();
+    TFPlayer player;
+    bool wasVisible = false;
+
+    public override void Tick()
+    {
+        if(Game.LocalPawn is TFPlayer ply)
+        {
+            if(ply.ActiveWeapon is DestructionPDA)
+            {
+                SetClass("visible", true);
+                if(!wasVisible)
+                {
+                    Buildings?.Clear();
+                    Buildings = ply.GetAvailableBuildings()?.Select(name => BuildingData.Get(name))?.ToList();
+                    player = ply;
+                }
+                StateHasChanged();
+
+                wasVisible = true;
+            }
+            else
+            {
+                SetClass("visible", false);
+                if(wasVisible)
+                    StateHasChanged();
+
+                wasVisible = false;
+            }
+        }
+    }
+
+    private string GetBuildingSlot(BuildingData data)
+    {
+        return $"Slot{Buildings.IndexOf(data)+1}";
+    }
+}

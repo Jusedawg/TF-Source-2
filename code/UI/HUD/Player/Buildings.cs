@@ -101,7 +101,7 @@ public partial class BuildingInstancePanel : Panel
 		LevelIcon = iconPanel.Add.Image( GetLevelIcon( 1 ), "level" );
 
 		LineRoot = Add.Panel( "lines" );
-		NoLineText = Add.Label( $"{Data.Title}\nNot Built", "no_lines" );
+		NoLineText = Add.Label( $"{Data.UIName ?? Data.Title}\nNot Built", "no_lines" );
 
 		SetClass( "big", big );
 		HealthContainer.SetClass( "big", big );

@@ -67,7 +67,7 @@ public partial class TFPlayer
 	}
 	public bool CanBuild(BuildingData data)
 	{
-		return Buildings.Count( building => building.Data == data ) < data.MaxCount && Metal >= data.BuildCost;
+		return Buildings.Count( building => building.Data == data ) < data.MaxCount;
 	}
 	public bool CanBuild( string name ) => CanBuild( BuildingData.Get( name ) );
 
