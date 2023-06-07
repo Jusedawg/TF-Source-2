@@ -57,6 +57,12 @@ public partial class Builder : TFWeaponBase
 			return;
 		}
 
+		if ( !IsCarryingBuilding && !CanAfford( BuildingData ) )
+		{
+			Log.Info( "Tried to build without the required metal amount, ignoring" );
+			return;
+		}
+
 		Transform buildingTransform = new( placementResult.Origin, placementResult.Rotation );
 		if ( IsCarryingBuilding )
 		{
@@ -89,8 +95,9 @@ public partial class Builder : TFWeaponBase
 			return;
 		}
 
-		if ( Game.IsClient )
+		if ( Game.IsClient && !string.IsNullOrEmpty( BuildingData.BlueprintModel) )
 		{
+
 			// TODO: Add check if player is carying an object.
 			Blueprint = new AnimatedEntity
 			{
@@ -99,6 +106,12 @@ public partial class Builder : TFWeaponBase
 
 			Blueprint.SetModel( BuildingData.BlueprintModel);
 			Blueprint.UseAnimGraph = true;
+			Blueprint.SetMaterialGroup( TFOwner.Team == TFTeam.Red ? 0 : 1 );
+
+			if(!string.IsNullOrEmpty(BuildingData.BlueprintBodyGroup ) )
+			{
+				Blueprint.SetBodyGroup( BuildingData.BlueprintBodyGroup, 1 );
+			}
 		}
 
 		hasBuilt = false;
@@ -160,7 +173,7 @@ public partial class Builder : TFWeaponBase
 			var result = CalculateBuildingPlacement();
 			Blueprint.Position = result.Origin;
 			Blueprint.Rotation = result.Rotation;
-			bool success = result.Status == BuildingDeployResponse.CanBuild && CanBuildAt( BuildingData, new( result.Origin, result.Rotation ) );
+			bool success = result.Status == BuildingDeployResponse.CanBuild && CanBuildAt( BuildingData, new( result.Origin, result.Rotation ) ) && CanAfford(BuildingData);
 			Blueprint.SetAnimParameter( "reject", !success );
 		}
 	}
@@ -184,6 +197,8 @@ public partial class Builder : TFWeaponBase
 
 		return true;
 	}
+
+	private bool CanAfford( BuildingData data ) => TFOwner.Metal >= data.BuildCost;
 
 	/// <summary>
 	/// Would this building get stuck in the given location?

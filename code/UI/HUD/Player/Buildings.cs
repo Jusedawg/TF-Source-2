@@ -55,6 +55,8 @@ public partial class Buildings : Panel
 
 	private void AddInstance(TFBuilding building)
 	{
+		if ( !building.IsValid() ) return;
+
 		string id = building.Data.ResourceName;
 		if ( !BuildingPanels.TryGetValue( id, out var panel ) ) return;
 
@@ -237,7 +239,7 @@ public class BuildingInfoLinePanel : Panel
 		{
 			if(Value is Label lbl)
 			{
-				lbl.Text = Line.Text;
+				lbl?.SetText(Line.Text);
 			}
 			else
 			{
@@ -250,7 +252,7 @@ public class BuildingInfoLinePanel : Panel
 			if(Value is ProgressBar bar)
 			{
 				float percent = (Line.Value - Line.MinValue) / Line.MaxValue;
-				bar.SetProgress( percent );
+				bar?.SetProgress( percent );
 			}
 			else
 			{

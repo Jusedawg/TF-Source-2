@@ -455,7 +455,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 					: FlameLoopSoundName;
 
 				FireLoopSound?.Stop(true);
-				FireLoopSound = Audio.Play( sound, this );
+				FireLoopSound = Audio.Play( sound );
 
 				firingCritSound = IsCurrentAttackCritical;
 			}
@@ -474,7 +474,7 @@ public partial class FlameThrower : TFHoldWeaponBase
 					if ( isHittingTarget )
 					{
 						FireHitLoopSound?.Stop(true);
-						FireHitLoopSound = Audio.Play( FlameLoopHitSoundName, this );
+						FireHitLoopSound = Audio.Play( FlameLoopHitSoundName );
 					}
 				}
 			}

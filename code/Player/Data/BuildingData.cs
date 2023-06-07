@@ -59,6 +59,11 @@ public class BuildingData : GameResource
 	[Category("UI")]
 	[ResourceType( "vmdl" )]
 	public string BlueprintModel { get; set; }
+	/// <summary>
+	/// Toggle this bodygroup when placing building
+	/// </summary>
+	[Category( "UI" )]
+	public string BlueprintBodyGroup { get; set; }
 	[Category("Sounds")]
 	[ResourceType("sound")]
 	public string DestroyedSound { get; set; }

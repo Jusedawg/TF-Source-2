@@ -33,7 +33,7 @@ public partial class TFPlayer
 		building.SetOwner( this );
 		building.StopCarrying( transform );
 		Buildings.Add( building );
-		Metal -= data.BuildCost;
+		ConsumeMetal(data.BuildCost);
 	}
 	public void Build( string buildingName, Transform transform ) => Build( BuildingData.Get( buildingName ), transform );
 	public void SimulateBuildingPickup()
@@ -136,7 +136,15 @@ public partial class TFPlayer
 
 		if(!ply.CanBuild(data))
 		{
-			Log.Warning( $"Cant start building if the player cant build a {buildingName}!" );
+			if(TFBuilding.tf_debug_buildings)
+				Log.Warning( $"Cant start building if the player cant build a {buildingName}!" );
+			return;
+		}
+
+		if(ply.Metal < data.BuildCost)
+		{
+			if(TFBuilding.tf_debug_buildings)
+				Log.Warning( $"Cant start building if the player doesnt have enough metal" );
 			return;
 		}
 

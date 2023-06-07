@@ -66,14 +66,29 @@ public partial class TeleporterEntrance : Teleporter
 	public override void TickReady()
 	{
 		base.TickReady();
-
 		TeleportNext();
 	}
 
-	protected override void TickReadyEffects()
+	public override void Tick()
 	{
-		base.TickReadyEffects();
-		SetBodyGroup( "teleporter_direction", IsPaired ? 1 : 0 );
+		if ( IsCarried || !IsInitialized ) return;
+
+		base.Tick();
+
+		if( IsPaired && IsReady )
+		{
+			// Rotation between this and the other teleporter
+			var direction = Rotation.LookAt( LinkedTeleporter.Position - Position );
+			// Rotation of the teleporter direction arrow. This should be the amount of yaw rotation needed from our initial rotation.
+			float arrowRotation = MathF.Abs(direction.Yaw())- MathF.Abs(Rotation.Yaw());
+			if ( arrowRotation < 0 )
+				arrowRotation += 360;
+			SetAnimParameter( "f_direction", arrowRotation );
+
+			SetBodyGroup( "teleporter_direction", 1 );
+		}
+		else
+			SetBodyGroup( "teleporter_direction", 0 );
 	}
 
 	protected virtual void TeleportNext()
@@ -131,15 +146,16 @@ public partial class TeleporterEntrance : Teleporter
 		// TODO: Check for disguise
 		if ( ply.Team != Team ) return;
 
-		if ( ply.Velocity.WithZ(0).Length > TeleportMaxVelocity )
+		if ( ply.Velocity.x + ply.Velocity.y > TeleportMaxVelocity )
 		{
-			// Dont add a player twice
+			// Remove invalid players
 			if ( teleporterQueue.Contains( ply ) )
 				teleporterQueue.Remove( ply );
 
 			return;
 		}
 
+		// Dont add players twice
 		if ( !teleporterQueue.Contains( ply ) )
 			teleporterQueue.Add( ply );
 	}
@@ -148,18 +164,6 @@ public partial class TeleporterEntrance : Teleporter
 	{
 		if ( other is TFPlayer ply && teleporterQueue.Contains( ply ) )
 			teleporterQueue.Remove( ply );
-	}
-	public override void Link( Teleporter tp, bool linkOther = true )
-	{
-		base.Link( tp, linkOther );
-
-		// Rotation between this and the other teleporter
-		var direction = Rotation.LookAt( tp.Position - Position );
-		// Rotation of the teleporter direction arrow. This should be the amount of yaw rotation needed from our initial rotation.
-		float arrowRotation = direction.Yaw() - Rotation.Yaw();
-		if ( arrowRotation < 0 )
-			arrowRotation += 360;
-		SetAnimParameter( "f_direction", arrowRotation );
 	}
 
 	public override void FinishUpgrade()
