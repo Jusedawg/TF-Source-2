@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 public partial class JoinGameDialog : MenuOverlay
 {

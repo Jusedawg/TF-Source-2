@@ -6,7 +6,7 @@ using System.Net;
 using System.Reflection;
 using Amper.FPS;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 public class ObjectEditor : Panel
 {

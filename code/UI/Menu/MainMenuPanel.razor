@@ -4,7 +4,7 @@
 
 @attribute [StyleSheet("/UI/Menu/MainMenuPanel.scss")]
 
-@namespace TFS2.UI
+@namespace TFS2.Menu
 
 <root>
     <div class="disclaimer">
@@ -71,8 +71,10 @@
 		<button class="button-dark" @onclick=@OnClickTeamSelection icon="sync_alt">#GameMenu.SwitchTeam</button>
         <text @ref="PlayerName" class="playername" />
         <image @ref="PlayerAvatar" class="playeravatar" />
-		<div class="inputnotice">
-			Change class & teams are now bound to <div class="glyph"><InputGlyph Button="Class" /></div> and <div class="glyph"><InputGlyph Button="Team" /></div> just like in TF2!
-		</div>
+        <!--
+        <div class="inputnotice">
+            Change class & teams are now bound to <div class="glyph"><InputGlyph Button="Class" /></div> and <div class="glyph"><InputGlyph Button="Team" /></div> just like in TF2!
+        </div>
+        -->
     </div>
 </root>

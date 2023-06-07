@@ -2,9 +2,8 @@
 using Sandbox.UI;
 using System;
 using System.Collections.Generic;
-using static Sandbox.Clothing;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 public partial class ClassLoadout : MenuOverlay
 {

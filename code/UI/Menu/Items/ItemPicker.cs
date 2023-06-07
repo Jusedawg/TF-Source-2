@@ -2,7 +2,7 @@
 using Amper.FPS;
 using System;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 public partial class ItemPicker : Panel
 {

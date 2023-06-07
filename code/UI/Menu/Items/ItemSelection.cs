@@ -2,7 +2,7 @@
 using Sandbox.UI;
 using System.Threading.Tasks;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 public partial class ItemSelection : MenuOverlay
 {

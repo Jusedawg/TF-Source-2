@@ -1,39 +1,41 @@
 ﻿using Sandbox;
+using Sandbox.Menu;
 using Sandbox.UI;
+using TFS2.UI;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
-public partial class MainMenuPanel : Panel
+public partial class MainMenuPanel : Panel, IGameMenuPanel
 {
-	public TimeSince TimeSinceInteraction { get; set; }
-
 	Label PlayerName { get; set; }
 	Image PlayerAvatar { get; set; }
-	bool Enabled { get; set; }
 
 	public override void Tick()
 	{
-		if ( TimeSinceInteraction > 0.1f )
-		{
-			if ( Input.Pressed( "Menu" ) )
-			{
-				TimeSinceInteraction = 0;
-				Toggle();
-			}
-		}
-
 		if ( !IsVisible )
 			return;
 
+		if ( Game.InGame )
+			TickGame();
+		else
+			TickMenu();
+	}
+
+	private void TickGame()
+	{
 		PlayerName.Text = Sandbox.Game.LocalClient.Name;
 		PlayerAvatar.SetTexture( $"avatarbig:{Sandbox.Game.LocalClient.SteamId}" );
 	}
 
-	public void OnClickResumeGame()
+	private void TickMenu()
 	{
-		Hide();
+
 	}
 
+	public void OnClickResumeGame()
+	{
+		// implement
+	}
 	public void OnClickJoinGame()
 	{
 		MenuOverlay.Open<JoinGameDialog>();
@@ -56,50 +58,16 @@ public partial class MainMenuPanel : Panel
 
 	public void OnClickClassSelection()
 	{
-		Hide();
 		MenuOverlay.Open<ClassSelection>();
 	}
 
 	public void OnClickTeamSelection()
 	{
-		Hide();
 		MenuOverlay.Open<TeamSelection>();
 	}
 
 	public void OnClickBlog()
 	{
 		MenuOverlay.Open<BlogView>();
-	}
-
-	public bool ShouldDraw()
-	{
-		return Enabled;
-	}
-
-	public void Toggle()
-	{
-		Enabled = !Enabled;
-
-		if ( Enabled )
-			Show();
-		else
-			Hide();
-	}
-
-	public void Hide()
-	{
-		Enabled = false;
-		SetClass( "visible", false );
-		GameHUD.Enabled = true;
-		MenuOverlay.CloseActive();
-		Mouse.Position = Screen.Size * .5f;
-	}
-
-	public void Show()
-	{
-		Enabled = true;
-		SetClass( "visible", true );
-		GameHUD.Enabled = false;
-		Mouse.Position = Screen.Size * .5f;
 	}
 }

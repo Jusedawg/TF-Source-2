@@ -2,7 +2,7 @@
 using Sandbox.UI;
 using System;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 public partial class ItemsPage : MenuOverlay
 {

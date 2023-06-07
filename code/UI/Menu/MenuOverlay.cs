@@ -1,6 +1,7 @@
 using Sandbox.UI;
+using TFS2.UI;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 public class MenuOverlay : Panel
 {

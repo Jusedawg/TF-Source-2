@@ -4,7 +4,7 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 internal class SettingRow : Panel
 {
