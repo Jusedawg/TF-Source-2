@@ -55,10 +55,12 @@ public partial class Scoreboard : Panel
 
 	public override void Tick()
 	{
-		SetClass( "visible", Input.Down( InputButton.Score ) );
+		SetClass( "visible", Input.Down( "Score" ) );
 
 		if ( !IsVisible )
 			return;
+
+
 
 		Lists[TFTeam.Blue] = BluePlayerList;
 		Lists[TFTeam.Red] = RedPlayerList;
@@ -100,6 +102,10 @@ public partial class Scoreboard : Panel
 		Damage.Text = cl.GetDamage().ToString();
 
 		#endregion Stats
+
+		// SortChildren orders ascending so we invert the score
+		BluePlayerList.SortChildren<ScoreboardPlayerEntry>( ( entry ) => -entry.Client.GetPoints() );
+		RedPlayerList.SortChildren<ScoreboardPlayerEntry>( ( entry ) => -entry.Client.GetPoints() );
 	}
 
 	public void AddClient( IClient client, TFTeam team )
