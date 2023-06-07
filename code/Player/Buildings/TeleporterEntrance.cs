@@ -15,6 +15,12 @@ public partial class TeleporterEntrance : Teleporter
 	const string READY_SOUND = "building_teleporter.ready";
 	const string SEND_SOUND = "building_teleporter.send";
 	const string RECEIVE_SOUND = "building_teleporter.receive";
+
+	const string GENERIC_FX = "particles/teleported_fx/teleported_flash.vpcf";
+	const string RED_FX = "particles/teleported_fx/teleportedin_red.vpcf";
+	const string BLU_FX = "particles/teleported_fx/teleported_blue.vpcf";
+	const string RED_PLAYER_FX = "particles/teleported_fx/teleportedin_red.vpcf";
+	const string BLU_PLAYER_FX = "particles/teleported_fx/teleportedin_blue.vpcf";
 	[Net] public int AmountTeleported { get; protected set; }
 
 	protected virtual List<float> LevelCooldownTimes => new() { 10f, 5f, 3f };
@@ -59,9 +65,15 @@ public partial class TeleporterEntrance : Teleporter
 	}
 	public override void TickReady()
 	{
-		SetBodyGroup( "direction", IsPaired ? 1 : 0 );
+		base.TickReady();
 
 		TeleportNext();
+	}
+
+	protected override void TickReadyEffects()
+	{
+		base.TickReadyEffects();
+		SetBodyGroup( "teleporter_direction", IsPaired ? 1 : 0 );
 	}
 
 	protected virtual void TeleportNext()
@@ -91,11 +103,6 @@ public partial class TeleporterEntrance : Teleporter
 		AmountTeleported++;
 	}
 
-	const string GENERIC_FX = "particles/teleported_fx/teleported_flash.vpcf";
-	const string RED_FX = "particles/teleported_fx/teleportedin_red.vpcf";
-	const string BLU_FX = "particles/teleported_fx/teleported_blue.vpcf";
-	const string RED_PLAYER_FX = "particles/teleported_fx/teleportedin_red.vpcf";
-	const string BLU_PLAYER_FX = "particles/teleported_fx/teleportedin_blue.vpcf";
 	protected virtual void TeleportEffects(TFPlayer ply)
 	{
 		if(Team == TFTeam.Red)
@@ -168,7 +175,27 @@ public partial class TeleporterEntrance : Teleporter
 
 		Sound.FromEntity( READY_SOUND, this );
 	}
-
+	protected override string GetLevelParticle()
+	{
+		if ( Team == TFTeam.Blue )
+		{
+			return Level switch
+			{
+				1 => "particles/teleport_status/teleporter_blue_entrance_level1.vpcf",
+				2 => "particles/teleport_status/teleporter_blue_entrance_level2.vpcf",
+				_ => "particles/teleport_status/teleporter_blue_entrance_level3.vpcf"
+			};
+		}
+		else
+		{
+			return Level switch
+			{
+				1 => "particles/teleport_status/teleporter_red_entrance_level1.vpcf",
+				2 => "particles/teleport_status/teleporter_red_entrance_level2.vpcf",
+				_ => "particles/teleport_status/teleporter_red_entrance_level3.vpcf"
+			};
+		}
+	}
 	protected BuildingInfoLine TeleporterStatsProgress;
 	protected override void InitializeUI( BuildingData data )
 	{

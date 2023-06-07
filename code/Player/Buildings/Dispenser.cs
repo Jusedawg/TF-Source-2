@@ -57,6 +57,13 @@ public partial class Dispenser : TFBuilding
 		Trigger.AmmoPercentagePerSecond = LevelAmmo.ElementAtOrDefault( level-1 );
 		Trigger.MetalPerInterval = LevelMetal.ElementAtOrDefault( level-1 );
 	}
+
+	protected virtual string HealOriginAttachment => "heal_origin";
+	public override void InitializeModel( string name )
+	{
+		base.InitializeModel( name );
+		Trigger.HealOrigin = GetAttachment( HealOriginAttachment, false )?.Position ?? Vector3.Zero;
+	}
 	protected BuildingInfoLine StoredMetalLine;
 	protected override void InitializeUI( BuildingData data )
 	{

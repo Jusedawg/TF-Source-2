@@ -66,6 +66,8 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 	{
 		Owner = owner;
 		Team = owner.Team;
+
+		Tags.Add( Team.GetTag() );
 	}
 	public virtual void SetLevel(int level)
 	{

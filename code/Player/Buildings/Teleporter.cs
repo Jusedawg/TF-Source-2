@@ -19,6 +19,7 @@ public partial class Teleporter : TFBuilding
 	[Net] protected float ReadyProgress { get; set; }
 	[Net] protected float ReadyTime { get; set; }
 	protected TimeSince timeSinceLinkedInactive;
+	protected Particles LevelParticle;
 	public override void TickActive()
 	{
 		if(IsPaired)
@@ -61,7 +62,12 @@ public partial class Teleporter : TFBuilding
 	}
 	public virtual void TickReady()
 	{
+		TickReadyEffects();
+	}
 
+	protected virtual void TickReadyEffects()
+	{
+		
 	}
 	/// <summary>
 	/// Links another teleporter to this one.
@@ -81,6 +87,7 @@ public partial class Teleporter : TFBuilding
 	}
 	public virtual void UnLink()
 	{
+		LinkedTeleporter = null;
 		IsPaired = false;
 		timeSinceLinkedInactive = 0;
 
@@ -92,11 +99,16 @@ public partial class Teleporter : TFBuilding
 	{
 		if ( LinkedTeleporter == null ) return;
 
-		LinkedTeleporter.IsReady = IsReady;
-		LinkedTeleporter.RequestedLevel = RequestedLevel;
+		if ( IsReady )
+			LinkedTeleporter.Ready( false );
+		else
+			LinkedTeleporter.UnReady( ReadyTime, false );
+
+		//LinkedTeleporter.RequestedLevel = RequestedLevel;
 		LinkedTeleporter.AppliedMetal = AppliedMetal;
 		LinkedTeleporter.ReadyProgress = ReadyProgress;
 		LinkedTeleporter.ReadyTime = ReadyTime;
+		LinkedTeleporter.IsPaired = IsPaired;
 	}
 	public override void SetOwner( TFPlayer owner )
 	{
@@ -108,35 +120,105 @@ public partial class Teleporter : TFBuilding
 			tp.SyncState();
 		}
 	}
-	public virtual void Ready()
+	public virtual void Ready(bool sync = true )
 	{
 		IsReady = true;
-		SyncState();
-
 		ReadyEffects();
+
+		if(sync)
+			SyncState();
 	}
 
 	public virtual void ReadyEffects()
 	{
+		if(LevelParticle != default)
+			LevelParticle.EnableDrawing = true;
 		//SetBodyGroup( "direction", IsPaired ? 1 : 0 );
 		SetBodyGroup( "blur", 1 );
 		SetAnimParameter( "f_spin_speed", 1 );
 	}
 
-	public virtual void UnReady( float time )
+	public virtual void UnReady( float time, bool sync = true )
 	{
 		IsReady = false;
 		ReadyProgress = 0;
 		ReadyTime = time;
-		SyncState();
-
 		UnReadyEffects();
+
+		if(sync)
+			SyncState();
 	}
 
 	public virtual void UnReadyEffects()
 	{
-		SetBodyGroup( "blur", 0 );
+		if(LevelParticle != default)
+			LevelParticle.EnableDrawing = false;
+		SetBodyGroup( "teleporter_blur", 0 );
 		SetAnimParameter( "f_spin_speed", 0 );
+	}
+
+	const string PARTICLE_ATTACHMENT = "centre_attach2";
+	public override void SetLevel( int level )
+	{
+		base.SetLevel( level );
+
+		if(LevelParticle != default)
+			LevelParticle.Destroy();
+		LevelParticle = Particles.Create( GetLevelParticle(), this, PARTICLE_ATTACHMENT );
+		LevelParticle.EnableDrawing = IsReady && IsPaired && !IsConstructing && !IsUpgrading;
+	}
+	protected virtual string GetLevelParticle()
+	{
+		if ( Team == TFTeam.Blue )
+		{
+			return Level switch
+			{
+				1 => "particles/teleport_status/teleporter_blue_exit_level1.vpcf",
+				2 => "particles/teleport_status/teleporter_blue_exit_level2.vpcf",
+				_ => "particles/teleport_status/teleporter_blue_exit_level3.vpcf"
+			};
+		}
+		else
+		{
+			return Level switch
+			{
+				1 => "particles/teleport_status/teleporter_red_exit_level1.vpcf",
+				2 => "particles/teleport_status/teleporter_red_exit_level2.vpcf",
+				_ => "particles/teleport_status/teleporter_red_exit_level3.vpcf"
+			};
+		}
+	}
+	public override void FinishConstruction()
+	{
+		base.FinishConstruction();
+		LevelParticle.EnableDrawing = IsReady && IsPaired;
+	}
+
+	public override void StartUpgrade( int level, float time = 0, bool setRequested = false )
+	{
+		base.StartUpgrade( level, time, setRequested );
+		UnReady( time );
+	}
+	public override void FinishUpgrade()
+	{
+		base.FinishUpgrade();
+		Ready();
+		LevelParticle.EnableDrawing = IsReady && IsPaired;
+	}
+	public override void StartCarrying()
+	{
+		base.StartCarrying();
+
+		IsPaired = false;
+		timeSinceLinkedInactive = 0;
+		UnReady( 0 );
+	}
+
+	public override void StopCarrying( Transform deployTransform )
+	{
+		base.StopCarrying( deployTransform );
+		IsPaired = LinkedTeleporter.IsValid();
+		SyncState();
 	}
 
 	public override int ApplyRepairMetal( int amount, float metalToRepair = 3, float repairPower = 1 )
@@ -148,7 +230,7 @@ public partial class Teleporter : TFBuilding
 
 	public override int ApplyUpgradeMetal( int amount )
 	{
-		int result =  base.ApplyUpgradeMetal( amount );
+		int result = base.ApplyUpgradeMetal( amount );
 		SyncState();
 		return result;
 	}
