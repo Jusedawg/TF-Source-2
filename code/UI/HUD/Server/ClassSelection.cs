@@ -7,7 +7,7 @@ using TFS2.Menu;
 
 namespace TFS2.UI;
 
-public partial class ClassSelection : MenuOverlay
+public partial class ClassSelection : HudOverlay
 {
 	ClassSelectionBackgroundScene BackgroundScene { get; set; }
 	ClassSelectionPlayerModel PlayerScene { get; set; }
@@ -31,7 +31,7 @@ public partial class ClassSelection : MenuOverlay
 
 		var footer = Add.Panel( "footer menu" );
 		footer.Add.Label( "SELECT A CLASS", "title" );
-		footer.Add.ButtonWithIcon( "Edit Loadout", "inventory", "button-dark", OnClickLoadout );
+		//footer.Add.ButtonWithIcon( "Edit Loadout", "inventory", "button-dark", OnClickLoadout );
 
 		// If player has class specified, show Cancel button. Otherwise show the text.
 		if ( SelectedClass != null )
@@ -82,8 +82,10 @@ public partial class ClassSelection : MenuOverlay
 
 	public void OnClickLoadout()
 	{
+		throw new NotImplementedException();
 		Sound.FromScreen( "ui.button.click" );
-		Open( new ClassLoadout( SelectedClass ) );
+		
+		MenuOverlay.Open( new ClassLoadout( SelectedClass ) );
 	}
 
 	private void OnClickCancel()
@@ -326,6 +328,6 @@ public class ClassSelectionButton : Label
 		else
 			ConsoleSystem.Run( "tf_join_class", PlayerClass.ResourceName );
 
-		MenuOverlay.CloseActive();
+		HudOverlay.CloseActive();
 	}
 }

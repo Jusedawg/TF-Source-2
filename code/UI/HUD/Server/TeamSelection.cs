@@ -9,7 +9,7 @@ namespace TFS2.UI;
 /// <summary>
 /// MotD chalkboard when player joins a server.
 /// </summary>
-public partial class TeamSelection : MenuOverlay
+public partial class TeamSelection : HudOverlay
 {
 	TeamSelectionBackground BackgroundScene { get; set; }
 
@@ -224,7 +224,7 @@ public class TeamSelectionButton : Label
 		Sound.FromScreen( "ui.button.click" );
 
 		ConsoleSystem.Run( $"tf_join_team", Team );
-		MenuOverlay.CloseActive();
+		HudOverlay.CloseActive();
 	}
 
 	[GameEvent.Client.BuildInput]

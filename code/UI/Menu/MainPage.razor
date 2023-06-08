@@ -83,9 +83,9 @@
     </div>
 
     <div class="footer">
+        <button class="button-dark" icon="highlight_off" @onclick=@OnClickQuit>#Generic.Quit</button>
         @if(Game.InGame)
         {
-            <button class="button-dark" icon="highlight_off" @onclick=@OnClickQuit>#Generic.Quit</button>
             <button class="button-dark" @onclick=@OnClickClassSelection icon="people_alt">#GameMenu.ChangeClass</button>
             <button class="button-dark" @onclick=@OnClickTeamSelection icon="sync_alt">#GameMenu.SwitchTeam</button>
         }

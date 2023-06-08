@@ -8,7 +8,7 @@ namespace TFS2.UI;
 /// <summary>
 /// MOTD chalkboard screen shown when the player first joins a server.
 /// </summary>
-public partial class ServerMessage : MenuOverlay
+public partial class ServerMessage : HudOverlay
 {
 	ScenePanel scene;
 

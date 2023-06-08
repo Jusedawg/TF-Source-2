@@ -41,17 +41,17 @@ public partial class TFGameRules : SDKGame
 	{
 		if ( Input.Pressed( "Team" ) )
 		{
-			if ( MenuOverlay.CurrentMenu is TeamSelection )
-				MenuOverlay.CloseActive();
+			if ( HudOverlay.CurrentMenu is TeamSelection )
+				HudOverlay.CloseActive();
 			else
-				MenuOverlay.Open<TeamSelection>();
+				HudOverlay.Open<TeamSelection>();
 		}
 		else if ( Input.Pressed( "Class" ) )
 		{
-			if ( MenuOverlay.CurrentMenu is ClassSelection )
-				MenuOverlay.CloseActive();
+			if ( HudOverlay.CurrentMenu is ClassSelection )
+				HudOverlay.CloseActive();
 			else
-				MenuOverlay.Open<ClassSelection>();
+				HudOverlay.Open<ClassSelection>();
 		}
 	}
 
@@ -125,9 +125,9 @@ public partial class TFGameRules : SDKGame
 	// UI Panels
 	//
 
-	[ClientRpc] public void ShowTeamSelectionMenu() { MenuOverlay.Open<TeamSelection>(); }
-	[ClientRpc] public void ShowClassSelectionMenu() { MenuOverlay.Open<ClassSelection>(); }
-	[ClientRpc] public void ShowServerMessage() { MenuOverlay.Open<ServerMessage>(); }
+	[ClientRpc] public void ShowTeamSelectionMenu() { HudOverlay.Open<TeamSelection>(); }
+	[ClientRpc] public void ShowClassSelectionMenu() { HudOverlay.Open<ClassSelection>(); }
+	[ClientRpc] public void ShowServerMessage() { HudOverlay.Open<ServerMessage>(); }
 
 	RoundTimer WaitingForPlayersTimer { get; set; }
 	public const string WAITING_FOR_PLAYERS_TIMER_NAME = "@timer_waiting_for_players";

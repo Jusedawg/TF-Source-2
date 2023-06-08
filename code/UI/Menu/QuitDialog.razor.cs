@@ -15,6 +15,7 @@ public partial class QuitDialog : MenuOverlay
 
 	public void OnClickQuit()
 	{
-		Sandbox.Game.LocalClient.Kick();
+		Game.Menu.LeaveServer( "Disconnect" );
+		Close();
 	}
 }

@@ -30,17 +30,28 @@ public partial class MainPage : Panel
 
 	public void OnClickQuit()
 	{
-		MenuOverlay.Open<QuitDialog>();
+		if(Game.InGame)
+		{
+			MenuOverlay.Open<QuitDialog>();
+		}
+		else
+		{
+			Game.Menu.Close();
+		}
 	}
 
 	public void OnClickClassSelection()
 	{
-		MenuOverlay.Open<ClassSelection>();
+		if ( !Game.InGame ) return;
+
+		HudOverlay.Open<ClassSelection>();
 	}
 
 	public void OnClickTeamSelection()
 	{
-		MenuOverlay.Open<TeamSelection>();
+		if ( !Game.InGame ) return;
+
+		HudOverlay.Open<TeamSelection>();
 	}
 
 	public void OnClickBlog()
