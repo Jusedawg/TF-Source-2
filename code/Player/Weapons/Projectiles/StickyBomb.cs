@@ -29,10 +29,16 @@ public partial class StickyBomb : TFProjectile, IAcceptsExtendedDamageInfo
 		Health = 1;
 
 		MoveType = ProjectileMoveType.Physics;
-		DamageInfo = DamageInfo.WithTag( TFDamageTags.Blast );
+		DamageInfo.WithTag( TFDamageTags.Blast );
 		FaceVelocity = false;
 		AutoDestroyTime = null;
 		EnableShadowCasting = false;
+	}
+
+	public override void OnInitialized()
+	{
+		base.OnInitialized();
+		Tags.Add( TeamManager.GetProjectileTag( TeamNumber ) );
 	}
 
 	protected override void OnPhysicsCollision( CollisionEventData eventData )
@@ -92,6 +98,11 @@ public partial class StickyBomb : TFProjectile, IAcceptsExtendedDamageInfo
 
 	public void TakeDamage( ExtendedDamageInfo info )
 	{
+		if ( ITeam.IsSame( this, info.Attacker ) )
+		{
+			return;
+		}
+
 		// Bombs can only be destroyed by bullets, melee weapons, and syringes.
 		if ( info.HasTag( TFDamageTags.Bullet ) )
 		{

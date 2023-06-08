@@ -140,6 +140,7 @@ partial class SDKWeapon
 
 			// Doesn't colide with:
 			.WithoutTags( CollisionTags.NotSolid )
+			.WithoutTags( TeamManager.GetProjectileTag( TeamNumber ) )
 
 			.UseHitboxes();
 
