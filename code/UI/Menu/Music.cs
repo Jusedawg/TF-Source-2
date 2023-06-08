@@ -72,11 +72,11 @@ internal class Music
 		if((timeSinceLastTrack >= MIN_TRACK_PAUSE || playedTracks.Count == 0) && (timeSinceLastTrack % TRACK_CHANCE_INTERVAL).AlmostEqual( 0, Game.TickInterval + 0.01f ) )
 		{
 			var pick = Game.Random.FromList( _tracks.Where(t => playedTracks.Count >= t.MinPlays).ToList() );
-			Log.Info( $"Music play attempt: picked {pick}" );
+			//Log.Info( $"Music play attempt: picked {pick}" );
 
 			if ( Game.Random.NextSingle() < pick.Chance )
 			{
-				Log.Info( "Play sucess!" );
+				//Log.Info( "Play sucess!" );
 				PlayTrack( pick );
 			}
 		}

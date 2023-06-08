@@ -9,6 +9,10 @@ namespace TFS2.Menu;
 
 public partial class MainPage : Panel
 {
+	public void OnClickResumeGame()
+	{
+		Game.Menu.HideMenu();
+	}
 	public async Task OnClickCreateGame()
 	{
 		await Game.Menu.CreateLobbyAsync();
