@@ -43,6 +43,9 @@
         BindClass("ingame", () => Game.InGame);
         BindClass("inlobby", () => Game.Menu.Lobby != null);
 
+        // Initialize with semi-random seed to avoid the same menu background showing up all the time
+        Game.SetRandomSeed(HashCode.Combine(Game.SteamId, Game.UserName, DateTime.Now));
+
         PickBackground();
     }
 
