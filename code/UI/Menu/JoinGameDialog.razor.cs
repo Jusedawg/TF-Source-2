@@ -14,6 +14,7 @@ public partial class JoinGameDialog : MenuOverlay
 
 	public void OnClickConnect()
 	{
-		ConsoleSystem.Run( $"connect {SearchText}" );
+		if(ulong.TryParse(SearchText, out var steamid))
+			Game.Menu.ConnectToServer( steamid );
 	}
 }
