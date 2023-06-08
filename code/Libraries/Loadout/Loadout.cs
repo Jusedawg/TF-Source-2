@@ -1,11 +1,13 @@
 using Sandbox;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace TFS2;
 
 public partial class Loadout : BaseNetworkable
 {
+	const string LOADOUT_COOKIE = "tfs2_loadout";
 	public static Loadout LocalLoadout 
 	{ 
 		get
@@ -112,16 +114,25 @@ public partial class Loadout : BaseNetworkable
 		}
 		else
 		{
+			Data = Cookie.Get<LoadoutData>( LOADOUT_COOKIE, new() );
+			/*
 			if ( !Game.InGame || Game.IsClient )
 			{
 				// if we're on the client, load data from disk.
-				LoadDataFromDisk();
+				Data = Cookie.Get<LoadoutData>( LOADOUT_COOKIE, default );
 			}
 			else
 			{
 				// if we're on server, request data from client.
-				RequestDataFromClient();
+				var cl = Game.Clients.FirstOrDefault( c => c.SteamId == Client );
+				if(cl == null)
+					State = LoadoutState.Unavailable;
+				else
+				{
+					Data = cl.
+				}
 			}
+			*/
 
 			if ( Data == null ) State = LoadoutState.Failed;
 			else State = LoadoutState.Loaded;
@@ -211,6 +222,37 @@ public partial class Loadout : BaseNetworkable
 			return defaultItem;
 
 		return weapondata;
+	}
+
+	public bool SetLoadoutItem( PlayerClass pclass, TFWeaponSlot slot, WeaponData weapon )
+	{
+		TFAssert.ClientOrGameMenu();
+
+		if ( !IsDataValid() )
+			return false;
+		
+		if ( weapon == null )
+			return false;
+
+		if ( pclass == null )
+			return false;
+
+		// Check if whatever we have in the loadout is something we can actually wear.
+		if ( !weapon.CanBeOwnedByPlayerClass( pclass ) )
+			return false;
+
+		// loadout data doesn't contain anything for this class.
+		if ( !Data.Classes.TryGetValue( pclass.ResourceName, out var classData ) )
+		{
+			classData = new();
+			Data.Classes.Add( pclass.ResourceName, classData );
+		}
+
+		classData[(int)slot] = weapon.ResourceName;
+		Data.Classes[pclass.ResourceName] = classData;
+		Cookie.Set( LOADOUT_COOKIE, Data );
+
+		return true;
 	}
 
 	/// <summary>
