@@ -1,6 +1,7 @@
 using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace TFS2;
@@ -12,12 +13,7 @@ public partial class Loadout : BaseNetworkable
 	{ 
 		get
 		{
-			if ( Game.InGame )
-				return ForClient( Game.LocalClient );
-			else
-			{
-				return ForClient( Game.SteamId );
-			}
+			return ForClient( Game.SteamId );
 		}
 	}
 	static Dictionary<long, Loadout> All { get; set; } = new();
@@ -67,9 +63,11 @@ public partial class Loadout : BaseNetworkable
 	/// <returns></returns>
 	public static Loadout ForClient( IClient client )
 	{
-		if ( client == null )
-			return null;
+		Log.Info( 0 );
 
+		if ( client == default )
+			return null;
+		Log.Info( 1 );
 		return ForClient( client.SteamId );
 	}
 
@@ -114,12 +112,9 @@ public partial class Loadout : BaseNetworkable
 		}
 		else
 		{
-			Data = Cookie.Get<LoadoutData>( LOADOUT_COOKIE, new() );
-			/*
 			if ( !Game.InGame || Game.IsClient )
 			{
-				// if we're on the client, load data from disk.
-				Data = Cookie.Get<LoadoutData>( LOADOUT_COOKIE, default );
+				LoadData();
 			}
 			else
 			{
@@ -129,10 +124,9 @@ public partial class Loadout : BaseNetworkable
 					State = LoadoutState.Unavailable;
 				else
 				{
-					Data = cl.
+					RequestData( To.Single( cl ) );
 				}
 			}
-			*/
 
 			if ( Data == null ) State = LoadoutState.Failed;
 			else State = LoadoutState.Loaded;
@@ -163,14 +157,6 @@ public partial class Loadout : BaseNetworkable
 			return TimeSinceDataUpdated < mp_loadout_max_outdated_time;
 
 		return false;
-	}
-
-	/// <summary>
-	/// Called when loadout is available.
-	/// </summary>
-	public virtual void OnAvailable()
-	{
-
 	}
 
 	/// <summary>
@@ -253,6 +239,30 @@ public partial class Loadout : BaseNetworkable
 		Cookie.Set( LOADOUT_COOKIE, Data );
 
 		return true;
+	}
+
+	private void LoadData()
+	{
+		TFAssert.ClientOrGameMenu();
+
+		// if we're on the client, load data from disk.
+		Data = Cookie.Get<LoadoutData>( LOADOUT_COOKIE, new() );
+	}
+
+	[ClientRpc]
+	public static void RequestData()
+	{
+		LocalLoadout.LoadData();
+		TransmitToServer( JsonSerializer.Serialize( LocalLoadout.Data ) );
+	}
+
+	[ConCmd.Server]
+	public static void TransmitToServer(string data)
+	{
+		if ( ConsoleSystem.Caller == null ) return;
+
+		var loadout = ForClient( ConsoleSystem.Caller );
+		loadout.Data = JsonSerializer.Deserialize<LoadoutData>( data );
 	}
 
 	/// <summary>
