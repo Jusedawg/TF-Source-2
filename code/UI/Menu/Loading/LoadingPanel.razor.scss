@@ -1,0 +1,75 @@
+﻿@import "/UI/styles/colors.scss";
+
+.loadingpanel {
+    background: linear-gradient(to top, $bg-light, $bg-darker, $bg-darker, $bg-darkest);
+    background-size: 100%;
+    width: 100%;
+    height: 100%;
+    color: white;
+    padding: 100px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: TF2_Build;
+    pointer-events: all;
+
+    > .description {
+        font-size: 25px;
+        color: $tan-light;
+    }
+
+    > .title {
+        font-size: 110px;
+        color: $white;
+        font-weight: bolder;
+    }
+
+    > .subtitle {
+        font-size: 40px;
+        color: $tan-light;
+        font-weight: 100;
+    }
+
+    > .controls {
+        position: absolute;
+        bottom: 5%;
+        right: 5%;
+        height: 15%;
+        width: 15%;
+        background-color: $tan-dark;
+        flex-direction: column;
+        border-radius: 25px;
+        align-items: center;
+
+        .progress {
+            height: 60%;
+            font-size: 40px;
+            color: $tan-light;
+            font-weight: bolder;
+            text-align: center;
+            margin-top: 5%;
+            font-family: TF2_Secondary;
+        }
+
+        .button {
+            height: 40%;
+            width: 80%;
+            font-size: 25px;
+            padding: 1%;
+            margin-bottom: 5%;
+            background-color: $tan-darkest;
+            color: $white;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: TF2_Primary;
+            text-align: center;
+            border-radius: 5px;
+            justify-content: center;
+            align-items: center;
+
+            &:hover {
+                background-color: $tan-dark;
+            }
+        }
+    }
+}

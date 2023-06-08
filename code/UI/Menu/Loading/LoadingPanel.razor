@@ -1,0 +1,64 @@
+﻿@using System;
+@using System.Linq;
+@using Sandbox;
+@using Sandbox.UI;
+@using Sandbox.Menu;
+@attribute [StyleSheet]
+@namespace TFS2.Menu
+@implements Sandbox.Menu.ILoadingScreenPanel
+
+<root class="loadingpanel">
+
+    <div class="description">You're on your way to...</div>
+    <div class="title">@GetMapName()</div>
+    <div class="subtitle">@GetGamemode()</div>
+
+    <div class="controls">
+        <div class="progress">@(Progress.Title)...</div>
+        <div class="button" onclick="@Game.Menu.CancelLoading">
+            Cancel
+        </div>
+    </div>
+
+</root>
+
+@code
+{
+    public LoadingProgress Progress;
+
+    public void OnLoadingProgress(LoadingProgress progress)
+    {
+        Progress = progress;
+        StateHasChanged();
+    }
+
+    private string GetMapName()
+    {
+        return Game.Menu.Lobby?.Map?.Split('.')?.Last();
+    }
+
+    private string GetGamemode()
+    {
+        string mapName = GetMapName();
+        if (string.IsNullOrEmpty(mapName)) return "The Void";
+
+        // TODO: DONT HARDCODE THIS
+
+        if (mapName.StartsWith("ctf_"))
+            return "Capture the Flag";
+
+        if (mapName.StartsWith("cp_"))
+            return "Control Points";
+
+        if (mapName.StartsWith("pl_"))
+            return "Payload";
+
+        if (mapName.StartsWith("koth_"))
+            return "King of the Hill";
+
+        if (mapName.StartsWith("tdm_"))
+            return "Team Deathmatch";
+
+        return "";
+    }
+}
