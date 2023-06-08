@@ -4,22 +4,15 @@ using System;
 
 namespace TFS2.Menu;
 
-public partial class LoadoutSelection : MenuOverlay
+public partial class LoadoutSelection : Panel
 {
 	public void OnClickBack()
 	{
-		Close();
+		this.Navigate( "/" );
 	}
 
 	public void OnClickClassButton( string className )
 	{
-		if ( !Enum.TryParse<TFPlayerClass>( className, out var item ) )
-			return;
-
-		var playerClass = PlayerClass.Get( item );
-		if ( playerClass == null )
-			return;
-
-		Open( new ClassLoadout( playerClass ) );
+		this.Navigate( $"/loadout/class/{className}" );
 	}
 }

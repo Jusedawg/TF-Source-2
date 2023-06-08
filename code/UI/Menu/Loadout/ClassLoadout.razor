@@ -2,10 +2,14 @@
 @using Sandbox;
 @using Sandbox.UI;
 
+@page "/loadout/class/{ClassName}"
 @attribute [StyleSheet]
 
 @namespace TFS2.Menu
 @inherits MenuOverlay
+
+@if (PlayerClass == null)
+    return;
 
 <root>
     <div class="content">
@@ -23,7 +27,7 @@
                     {
                         @if (PlayerClass.GetDefaultWeaponForSlot(slot) == null)
                             continue;
-                        <ItemPicker Slot=@slot PlayerClass=@PlayerClass Data=@GetWeaponForSlot(slot) @onclick=@((PanelEvent e) => { Open(new ItemSelection(PlayerClass, slot));})/>
+                        <ItemPicker Slot=@slot PlayerClass=@PlayerClass Data=@GetWeaponForSlot(slot) @onclick=@(() => {OnClickSlot(@slot);})/>
                     }
                 </div>
             </div>

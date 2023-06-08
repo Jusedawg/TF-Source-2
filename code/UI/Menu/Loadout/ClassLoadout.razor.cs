@@ -8,6 +8,13 @@ namespace TFS2.Menu;
 
 public partial class ClassLoadout : MenuOverlay
 {
+	string ClassName
+	{
+		set
+		{
+			PlayerClass = PlayerClass.Get( value );
+		}
+	}
 	PlayerClass PlayerClass { get; set; }
 	List<ItemPicker> Slots { get; set; } = new();
 
@@ -17,15 +24,21 @@ public partial class ClassLoadout : MenuOverlay
 		{
 			PlayerClass = Game.LocalClient.GetPlayerClass();
 		}
-		else
-		{
-			PlayerClass = PlayerClass.All.Values.First();
-		}
 	}
 
 	public ClassLoadout( PlayerClass playerClass )
 	{
 		PlayerClass = playerClass;
+	}
+
+	public ClassLoadout(string name)
+	{
+		if ( !Enum.TryParse<TFPlayerClass>( name, out var item ) )
+			throw new ArgumentException();
+
+		PlayerClass = PlayerClass.Get( item );
+		if ( PlayerClass == null )
+			throw new ArgumentException();
 	}
 
 	public WeaponData GetWeaponForSlot(TFWeaponSlot slot)
@@ -39,6 +52,12 @@ public partial class ClassLoadout : MenuOverlay
 
 	public void OnClickBack()
 	{
-		Close();
+		this.Navigate("/loadout");
+	}
+
+	public void OnClickSlot(TFWeaponSlot slot)
+	{
+		if ( PlayerClass == null ) return;
+		this.Navigate( $"/loadout/class/{PlayerClass.ResourceName}/slot/{slot}" );
 	}
 }

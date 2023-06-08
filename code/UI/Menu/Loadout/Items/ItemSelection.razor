@@ -1,11 +1,15 @@
+@using System.Linq
 @using Sandbox;
 @using Sandbox.UI
-@using System.Linq
 
+@page "/loadout/class/{ClassName}/slot/{Slot}"
 @attribute [StyleSheet]
 
 @namespace TFS2.Menu
 @inherits MenuOverlay
+
+@if (PlayerClass == null)
+    return;
 
 <root>
     <div class="content">

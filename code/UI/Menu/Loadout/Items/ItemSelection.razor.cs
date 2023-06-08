@@ -6,14 +6,16 @@ namespace TFS2.Menu;
 
 public partial class ItemSelection : MenuOverlay
 {
+	string ClassName 
+	{
+		get => PlayerClass.ResourceName;
+		set
+		{
+			PlayerClass = PlayerClass.Get( value );
+		} 
+	}
 	PlayerClass PlayerClass { get; set; }
 	TFWeaponSlot Slot { get; set; }
-
-	public ItemSelection( PlayerClass pclass, TFWeaponSlot slot )
-	{
-		PlayerClass = pclass;
-		Slot = slot;
-	}
 
 	private WeaponData GetEquipped()
 	{
@@ -22,7 +24,7 @@ public partial class ItemSelection : MenuOverlay
 
 	public void OnClickBack()
 	{
-		Open( new ClassLoadout(PlayerClass) );
+		this.Navigate( $"/loadout/class/{ClassName}/" );
 	}
 
 	public void OnClickEquip(WeaponData weapon)
