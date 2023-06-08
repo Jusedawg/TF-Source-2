@@ -36,6 +36,9 @@ internal class TFClientSettings
 	[Display( Name = "#GameSettings.Setting.AutoZoomIn", Description = "#GameSettings.Description.AutoZoomIn", GroupName = ClassGroup )]
 	public bool AutoZoomIn { get; set; } = true;
 
+	[Display( Name = "#GameSettings.Setting.MenuMusicVolume", Description = "#GameSettings.Destription.MenuMusicVolume", GroupName = SoundGroup )]
+	[MinMax( 0f, 1f )]
+	public float MenuMusicVolume { get; set; } = 0.5f;
 	[Display( Name = "#GameSettings.Setting.LastHitSoundVolume", Description = "#GameSettings.Description.LastHitSoundVolume", GroupName = SoundGroup )]
 	[MinMax( 1f, 10f )]
 	public float LastHitSoundVolume { get; set; } = 1f;

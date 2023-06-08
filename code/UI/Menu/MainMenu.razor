@@ -16,10 +16,13 @@
 @code
 {
     public static MainMenu Current { get; private set; }
+    internal Music Music { get; set; }
+
     public MainMenu()
     {
         Current = this;
         DefaultUrl = "/";
+        Music = new();
 
         AddDestination("/", typeof(MainPage));
         AddDestination("/lobby", typeof(LobbyPage));
@@ -41,6 +44,11 @@
         BindClass("inlobby", () => Game.Menu.Lobby != null);
     }
 
+    public override void Tick()
+    {
+        Music.Tick();
+    }
+
     protected override void OnEvent(PanelEvent e)
     {
         if (e.Name == "package.changed")
@@ -53,7 +61,18 @@
     }
 
     [GameEvent.Menu.ServerJoined]
-    public void OnServerJoined() => Navigate("/active");
+    public void OnServerJoined()
+    {
+        Music.Stop();
+        Music.Enabled = false;
+        //Navigate("/active");
+    }
+    [GameEvent.Menu.ServerLeave]
+    public void OnServerLeave()
+    {
+        Music.Enabled = true;
+        Navigate("/");
+    }
 
     [GameEvent.Menu.LobbyJoined]
     public void OnLobbyJoined() => Navigate("/lobby");
@@ -61,6 +80,4 @@
     [GameEvent.Menu.LobbyLeave]
     public void OnLobbyLeave() => Navigate("/");
 
-    [GameEvent.Menu.ServerLeave]
-    public void OnServerLeave() => Navigate("/");
 }
