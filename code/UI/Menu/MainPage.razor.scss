@@ -8,8 +8,16 @@ MainPage {
     height: 100%;
     z-index: 5;
     flex-direction: column;
-    backdrop-filter: blur(5px);
-    background-color: #100a0194;
+
+    &.ingame {
+        backdrop-filter: blur(5px);
+        background-color: #100a0194;
+    }
+
+    &:not(.ingame) {
+        background: linear-gradient(to right, #100a01d4, #100a01a4, #100a0134, #100a0100);
+        background-size: 100%;
+    }
 
     &.hidden {
         display: none;

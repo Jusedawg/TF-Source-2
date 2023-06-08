@@ -9,6 +9,10 @@ namespace TFS2.Menu;
 
 public partial class MainPage : Panel
 {
+	public MainPage()
+	{
+		BindClass( "ingame", () => Game.InGame );
+	}
 	public void OnClickResumeGame()
 	{
 		Game.Menu.HideMenu();
