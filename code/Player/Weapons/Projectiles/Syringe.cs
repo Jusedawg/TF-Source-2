@@ -15,8 +15,8 @@ public partial class Syringe : TFProjectile
 		Gravity = .3f;
 		EnableShadowCasting = false;
 
-		CollidesWith( CollisionTags.Solid, CollisionTags.Clip, CollisionTags.ProjectileClip, CollisionTags.BulletClip );
-		Ignores( CollisionTags.Projectile, CollisionTags.Weapon, CollisionTags.Debris );
+		//CollidesWith( CollisionTags.Solid, CollisionTags.Clip, CollisionTags.ProjectileClip, CollisionTags.BulletClip );
+		//( CollisionTags.Projectile, CollisionTags.Weapon, CollisionTags.Debris );
 	}
 
 	public override bool CanBeDeflected => false;
@@ -103,6 +103,12 @@ public partial class Syringe : TFProjectile
 			.Run();
 
 		return tr;
+	}
+
+	public override Trace SetupCollisionTrace( Vector3 start, Vector3 end, Vector3 mins, Vector3 maxs )
+	{
+		return base.SetupCollisionTrace( start, end, mins, maxs )
+			.WithAnyTags( CollisionTags.BulletClip );
 	}
 
 	public override string TrailParticleName => $"particles/nailtrails/nailtrails_medic_{Team.GetName()}.vpcf";

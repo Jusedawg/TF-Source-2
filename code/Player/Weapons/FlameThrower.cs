@@ -287,7 +287,6 @@ public partial class FlameThrower : TFHoldWeaponBase
 			.WithoutTags( CollisionTags.Player )
 			.WithoutTags( CollisionTags.Weapon )
 			.WithoutTags( CollisionTags.Projectile )
-			.WithoutTags( CollisionTags.IdleProjectile )
 			// TODO: Buildings
 
 			.Run();

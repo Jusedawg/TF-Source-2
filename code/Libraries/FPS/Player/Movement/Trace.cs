@@ -48,7 +48,6 @@ partial class GameMovement
 			.WithoutTags( CollisionTags.Debris )
 			.WithoutTags( CollisionTags.Weapon )
 			.WithoutTags( CollisionTags.Projectile )
-			.WithoutTags( CollisionTags.IdleProjectile )
 
 			.Ignore( Player );
 	}

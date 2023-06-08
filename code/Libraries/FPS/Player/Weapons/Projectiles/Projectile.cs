@@ -67,9 +67,6 @@ public abstract partial class Projectile : ModelEntity, ITeam
 
 		AutoDestroyTime = 30;
 		FaceVelocity = true;
-
-		CollidesWith( CollisionTags.Solid, CollisionTags.Clip, CollisionTags.ProjectileClip );
-		Ignores( CollisionTags.Projectile, CollisionTags.IdleProjectile, CollisionTags.Weapon, CollisionTags.Debris );
 	}
 
 	[Event.Tick.Server]

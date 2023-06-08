@@ -40,9 +40,13 @@ public partial class StickyBomb : TFProjectile, IAcceptsExtendedDamageInfo
 		if ( !CanStickOnEntity( eventData.Other.Entity ) )
 			return;
 
-		Tags.Add( CollisionTags.BulletClip, CollisionTags.IdleProjectile );
+		Tags.Add( CollisionTags.BulletClip );
 		Tags.Remove( CollisionTags.Projectile );
+		Tags.Remove( CollisionTags.Solid );
+
 		MoveType = ProjectileMoveType.None;
+		EnableSolidCollisions = false;
+
 		SetParent( eventData.This.Entity );
 	}
 
@@ -54,10 +58,12 @@ public partial class StickyBomb : TFProjectile, IAcceptsExtendedDamageInfo
 
 	public void Unstick()
 	{
-		MoveType = ProjectileMoveType.Physics;
-		Tags.Remove( CollisionTags.BulletClip );
-		Tags.Remove( CollisionTags.IdleProjectile );
+		Tags.Add( CollisionTags.Solid );
 		Tags.Add( CollisionTags.Projectile );
+		Tags.Remove( CollisionTags.BulletClip );
+
+		MoveType = ProjectileMoveType.Physics;
+		EnableSolidCollisions = true;
 
 		NextRestickTime = Time.Now + tf_grenade_force_sleeptime;
 	}

@@ -1,14 +1,10 @@
 ﻿using Sandbox;
 using System;
-using System.Linq;
 
 namespace Amper.FPS;
 
 partial class Projectile
 {
-	private string[] _tagsRequire = Array.Empty<string>();
-	private string[] _tagsExclude = Array.Empty<string>();
-
 	protected Vector3 Mins;
 	protected Vector3 Maxs;
 
@@ -68,8 +64,16 @@ partial class Projectile
 	public virtual Trace SetupCollisionTrace( Vector3 start, Vector3 end, Vector3 mins, Vector3 maxs )
 	{
 		var tr = Trace.Ray( start, end )
-			.WithAnyTags( _tagsRequire )
-			.WithoutTags( _tagsExclude )
+
+			// Collides with:
+			.WithAnyTags( CollisionTags.Solid, CollisionTags.Clip, CollisionTags.ProjectileClip )
+
+			// Except weapons and other projectiles.
+			.WithoutTags( CollisionTags.Projectile, CollisionTags.Weapon )
+
+			// Doesn't collide with debris
+			.WithoutTags( CollisionTags.Debris )
+
 			.Ignore( this )
 			.Ignore( Owner );
 
@@ -81,14 +85,4 @@ partial class Projectile
 	}
 
 	[ConVar.Replicated] public static bool sv_debug_projectile_collisions { get; set; }
-
-	protected void CollidesWith( params string[] tags )
-	{
-		_tagsRequire = tags.ToArray();
-	}
-
-	protected void Ignores( params string[] tags )
-	{
-		_tagsExclude = tags.ToArray();
-	}
 }
