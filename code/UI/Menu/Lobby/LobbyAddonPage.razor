@@ -2,29 +2,49 @@
 @using Sandbox;
 @using Sandbox.MenuSystem;
 @using Sandbox.UI;
+@attribute [StyleSheet("/UI/Menu/Lobby/LobbyPage.razor.scss")]
 @inherits Panel;
 @namespace TFS2.Menu
 
-@if ( Game.Menu.Lobby == null )
+@if (Game.Menu.Lobby == null)
     return;
 
-<root style="flex-direction: column; flex-shrink: 1; flex-grow: 1;">
+<root class="layout">
 
-    <div class="navbar">
+    <div class="header">
+        <label class="title">Create A Game</label>
 
-        <div class="left">
-            <a class="button" href="/"> Home </a>
-            <span class="block">&gt;</span>
-            <a class="button" href="/lobby"> Create A Game </a>
-            <span class="block">&gt;</span>
-            <span class="block">Addon Select</span>
-        </div>
-
-        <div class="right">
+        <div class="nav">
+            <a class="tab" href="/lobby">Lobby</a>
+            <a class="tab" href="/lobby/maps">Map</a>
+            <a class="tab" href="/lobby/settings">Settings</a>
+            <a class="tab active" href="/lobby/addons">Addons</a>
         </div>
     </div>
 
-    <PackageList ShowFilters="@true" style="padding-bottom: 50px;" Query="type:addon game:any|game:@Game.Menu.Package.FullIdent" OnSelected="@OnPackageSelected" Take=@(50)></PackageList>
+    <div class="body">
+
+        <PackageList ShowFilters="@true" style="padding-bottom: 50px;" Query="type:addon game:any|game:@Game.Menu.Package.FullIdent" OnSelected="@OnPackageSelected" Take=@(50)></PackageList>
+
+    </div>
+
+    <div class="actions">
+
+        <div class="left">
+            <a class="button" href="/" title="Go To Main Menu"> &lt; </a>
+
+            <span class="button" onclick=@( () => Game.Menu.Lobby?.Leave() )>Exit Lobby</span>
+        </div>
+
+        <div class="right">
+
+            @if (Game.Menu.Lobby.Owner.IsMe)
+            {
+                <span class="button" onclick=@StartGame>Start Game</span>
+            }
+        </div>
+
+    </div>
 
 </root>
 
@@ -34,5 +54,24 @@
     {
         Game.Menu.Lobby.Addons = Game.Menu.Lobby.Addons.Add(package.FullIdent);
         this.Navigate( "/lobby" );
+    }
+
+    public void StartGame()
+    {
+        _ = Game.Menu.EnterServerAsync();
+        this.Navigate("/");
+    }
+
+    public override void Tick()
+    {
+        base.Tick();
+
+        if (!IsVisible)
+            return;
+
+        if (Game.Menu.Lobby == null)
+        {
+            this.Navigate("/");
+        }
     }
 }

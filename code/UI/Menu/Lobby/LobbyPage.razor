@@ -17,6 +17,13 @@
 
     <div class="header">
         <label class="title">Create A Game</label>
+
+        <div class="nav">
+            <a class="tab active" href="/lobby">Lobby</a>
+            <a class="tab" href="/lobby/maps">Map</a>
+            <a class="tab" href="/lobby/settings">Settings</a>
+            <a class="tab" href="/lobby/addons">Addons</a>
+        </div>
     </div>
 
     <div class="body">
@@ -65,7 +72,7 @@
     public void StartGame()
     {
         _ = Game.Menu.EnterServerAsync();
-        this.Navigate("/active");
+        this.Navigate("/");
     }
 
     protected override int BuildHash()

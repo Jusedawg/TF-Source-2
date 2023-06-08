@@ -1,26 +1,30 @@
 ﻿@using System
-@using System.Linq;
+@using System.Linq
 @using Sandbox;
 @using Sandbox.MenuSystem;
 @using Sandbox.UI;
-
-@attribute [StyleSheet]
+@attribute [StyleSheet("/UI/Menu/Lobby/LobbyPage.razor.scss")]
+@inherits Panel;
 @namespace TFS2.Menu
 
 @if (Game.Menu.Lobby == null)
-{
-        <div>No lobby. Error. We shouldn't be here.</div>
     return;
-}
 
-<root>
+<root class="layout">
+
     <div class="header">
         <label class="title">Create A Game</label>
+
+        <div class="nav">
+            <a class="tab" href="/lobby">Lobby</a>
+            <a class="tab" href="/lobby/maps">Map</a>
+            <a class="tab active" href="/lobby/settings">Settings</a>
+            <a class="tab" href="/lobby/addons">Addons</a>
+        </div>
     </div>
 
     <div class="body">
-        <div class="form scroll">
-
+        <div class="form basic">
             <h2>Server Settings</h2>
 
             <FormGroup>
@@ -37,7 +41,6 @@
                 </Control>
             </FormGroup>
 
-            <!--
             @if (MaxPlayersSupported > 1)
             {
                 <FormGroup class="form-group">
@@ -48,21 +51,8 @@
                 </FormGroup>
             }
 
-            <FormGroup>
-                <Label>Addons</Label>
-                <Control>
-
-                    @foreach (var addon in Game.Menu.Lobby.Addons)
-                    {
-                        <div class="button" onclick="@( () => Game.Menu.Lobby.Addons = Game.Menu.Lobby.Addons.Remove( addon ) )">@addon</div>
-                    }
-                    <a class="button" href="/lobby/addons">Add</a>
-                </Control>
-            </FormGroup>
-            
-
-            <div style="height: 40px; flex-shrink: 0;"></div>
-
+        </div>
+        <div class="form convars">
             @foreach (var group in Game.Menu.Package.PackageSettings.GroupBy(x => x.Group))
 	        {
                 var title = group.Key;
@@ -89,13 +79,11 @@
 
                 <div style="height: 40px; flex-shrink: 0;"></div>
 	        }
-            -->
-
         </div>
 
     </div>
     
-    <div class="navbar">
+    <div class="actions">
     
         <div class="left">
             <a class="button" href="/" title="Go To Main Menu"> &lt; </a>
@@ -112,7 +100,7 @@
         </div>
 
     </div>
-</root>
+</div>
 
 @code {
     int MaxPlayersSupported = 1;
@@ -125,7 +113,7 @@
     public void StartGame()
     {
         _ = Game.Menu.EnterServerAsync();
-        this.Navigate("/active");
+        this.Navigate("/");
     }
 
     protected override int BuildHash()

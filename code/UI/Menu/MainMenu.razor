@@ -23,7 +23,8 @@
 
         AddDestination("/", typeof(MainPage));
         AddDestination("/lobby", typeof(LobbyPage));
-        AddDestination("/lobby/map", typeof(LobbyMapPage));
+        AddDestination("/lobby/maps", typeof(LobbyMapPage));
+        AddDestination("/lobby/settings", typeof(LobbyConfigurationPage));
         AddDestination("/lobby/addons", typeof(LobbyAddonPage));
 
         /*
@@ -34,7 +35,7 @@
         AddDestination("/settings", typeof(SettingsPage));
          */
 
-        if (Game.InGame) Navigate("/active");
+        if (Game.InGame) Navigate("/");
 
         BindClass("ingame", () => Game.InGame);
         BindClass("inlobby", () => Game.Menu.Lobby != null);

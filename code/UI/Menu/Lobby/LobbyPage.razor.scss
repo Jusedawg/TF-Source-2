@@ -2,6 +2,10 @@
 @import "/UI/styles/colors.scss";
 @import "/UI/styles/checkbox.scss";
 
+.hidden {
+    display: none;
+}
+
 .layout {
     flex-direction: column;
     margin: 5%;
@@ -14,18 +18,49 @@
 
 .header {
     height: 20%;
+    flex-direction: column;
 
     .title {
-        height: 30%;
+        height: 40%;
         padding-top: 2%;
         padding-left: 2%;
         font-family: TF2_Build;
         font-size: 40px;
         color: $tan-light;
     }
+
+    .nav {
+        height: 80%;
+        justify-content: space-evenly;
+        align-items: center;
+
+        .tab {
+            padding: 1%;
+            font-family: TF2_Secondary;
+            font-size: 40px;
+            background-color: $tan-darker;
+            border-radius: 25px 25px 0 0;
+            width: 20%;
+
+            label {
+                text-align: center;
+                width: 100%;
+            }
+
+            &:hover {
+                background-color: $tan-dark;
+            }
+
+            &.active {
+                background-color: $tan-darkest;
+            }
+
+        }
+    }
 }
 
 .body {
+    border-top: 6px solid $tan-light;
     height: 65%;
     flex-direction: row;
     flex-grow: 1;
@@ -119,6 +154,104 @@
                 font-size: 24px;
                 padding-top: 2%;
                 color: $tan-light;
+            }
+        }
+    }
+}
+
+$form-row-height: 48px;
+
+.form {
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-grow: 0;
+    gap: 2px;
+    padding-left: 64px;
+    margin-bottom: 50px;
+    overflow: scroll;
+
+    &.basic {
+        width: 50%;
+    }
+
+    &.convars {
+        width: 50%;
+    }
+
+    > .form-group {
+        flex-direction: row;
+        flex-shrink: 0;
+        gap: 16px;
+        min-height: $form-row-height;
+
+        > .form-label {
+            width: 30%;
+            opacity: 0.5;
+            height: $form-row-height;
+            align-items: center;
+            justify-content: flex-end;
+            font-size: 20px;
+            white-space: nowrap;
+            word-wrap: break-word;
+        }
+    }
+
+}
+
+.form .form-control {
+    flex-grow: 1;
+
+    SliderControl, > DropDown, > textentry, SliderControl textentry {
+        flex-grow: 1;
+        font-size: 20px;
+        height: $form-row-height;
+    }
+
+    > textentry, SliderControl textentry {
+        flex-grow: 1;
+        background-color: #ffffff05;
+        height: $form-row-height;
+        color: #aaa;
+        width: 600px;
+        border-radius: 0;
+        padding: 5px;
+
+        &:hover {
+            background-color: #ffffff11;
+        }
+
+        &:focus {
+            background-color: #ffffff22;
+            color: #fff;
+        }
+    }
+
+    SliderControl {
+        gap: 2px;
+
+        > .inner {
+            > .values {
+                position: absolute;
+                padding: 16px;
+                color: #fffa;
+            }
+
+            > .track {
+                height: 100%;
+                margin: 2px 0px;
+                border-radius: 0;
+                background-color: #ffffff05;
+
+                > .track-active {
+                    background-color: #ffffff11;
+                    border-radius: 0;
+                }
+
+                > .thumb {
+                    width: 4px;
+                    height: 100%;
+                    background-color: #fff8;
+                }
             }
         }
     }
