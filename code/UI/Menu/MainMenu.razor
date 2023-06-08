@@ -42,11 +42,25 @@
 
         BindClass("ingame", () => Game.InGame);
         BindClass("inlobby", () => Game.Menu.Lobby != null);
+
+        PickBackground();
     }
 
     public override void Tick()
     {
         Music.Tick();
+    }
+
+    private void PickBackground()
+    {
+        const int BACKGROUND_NUM = 5;
+        for (int i = 1; i <= BACKGROUND_NUM; i++)
+        {
+            RemoveClass($"bg_{i}");
+        }
+
+        int background = Game.Random.Next(1, BACKGROUND_NUM);
+        AddClass($"bg_{background}");
     }
 
     protected override void OnEvent(PanelEvent e)
@@ -70,6 +84,7 @@
     [GameEvent.Menu.ServerLeave]
     public void OnServerLeave()
     {
+        PickBackground();
         Music.Enabled = true;
         Navigate("/");
     }
@@ -79,5 +94,4 @@
 
     [GameEvent.Menu.LobbyLeave]
     public void OnLobbyLeave() => Navigate("/");
-
 }
