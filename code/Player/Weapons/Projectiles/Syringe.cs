@@ -14,9 +14,6 @@ public partial class Syringe : TFProjectile
 		MoveType = ProjectileMoveType.Fly;
 		Gravity = .3f;
 		EnableShadowCasting = false;
-
-		//CollidesWith( CollisionTags.Solid, CollisionTags.Clip, CollisionTags.ProjectileClip, CollisionTags.BulletClip );
-		//( CollisionTags.Projectile, CollisionTags.Weapon, CollisionTags.Debris );
 	}
 
 	public override bool CanBeDeflected => false;

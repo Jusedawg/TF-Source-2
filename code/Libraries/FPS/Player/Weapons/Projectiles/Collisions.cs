@@ -1,5 +1,4 @@
 ﻿using Sandbox;
-using System;
 
 namespace Amper.FPS;
 
