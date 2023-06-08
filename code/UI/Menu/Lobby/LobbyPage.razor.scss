@@ -169,6 +169,7 @@ $form-row-height: 48px;
     padding-left: 64px;
     margin-bottom: 50px;
     overflow: scroll;
+    margin-top: 50px;
 
     &.basic {
         width: 50%;
@@ -177,6 +178,10 @@ $form-row-height: 48px;
     &.convars {
         width: 50%;
     }
+
+    font-family: TF2_Secondary;
+    font-size: 32px;
+    color: $tan-light;
 
     > .form-group {
         flex-direction: row;
@@ -192,10 +197,10 @@ $form-row-height: 48px;
             justify-content: flex-end;
             font-size: 20px;
             white-space: nowrap;
-            word-wrap: break-word;
+            font-size: 24px;
+            font-weight: bold;
         }
     }
-
 }
 
 .form .form-control {
