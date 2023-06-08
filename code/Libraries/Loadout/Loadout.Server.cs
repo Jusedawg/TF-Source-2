@@ -1,5 +1,6 @@
 ﻿using Sandbox;
 using System;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Amper.FPS;
@@ -65,6 +66,6 @@ partial class Loadout
 	public void RequestDataFromClient()
 	{
 		Game.AssertServer();
-		OnServerRequest( To.Single( Client ) );
+		OnServerRequest( To.Single( Game.Clients.FirstOrDefault(cl => cl.SteamId == Client) ) );
 	}
 }

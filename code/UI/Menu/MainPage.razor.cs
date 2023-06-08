@@ -13,6 +13,11 @@ public partial class MainPage : Panel
 	{
 		await Game.Menu.CreateLobbyAsync();
 	}
+	public void OnClickLoadout()
+	{
+		this.Navigate( "/loadout" );
+		//MenuOverlay.Open<ClassLoadout>();
+	}
 	public void OnClickJoinGame()
 	{
 		MenuOverlay.Open<JoinGameDialog>();
@@ -23,10 +28,6 @@ public partial class MainPage : Panel
 		MenuOverlay.Open<SettingsMenu>();
 	}
 
-	public void OnClickLoadout()
-	{
-		MenuOverlay.Open<ClassLoadout>();
-	}
 
 	public void OnClickQuit()
 	{

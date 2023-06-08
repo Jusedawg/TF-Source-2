@@ -6,10 +6,25 @@ namespace TFS2;
 
 public partial class Loadout : BaseNetworkable
 {
-	public static Loadout LocalLoadout => ForClient( Game.LocalClient );
-	static Dictionary<IClient, Loadout> All { get; set; } = new();
+	public static Loadout LocalLoadout 
+	{ 
+		get
+		{
+			if ( Game.InGame )
+				return ForClient( Game.LocalClient );
+			else
+			{
+				return ForClient( Game.SteamId );
+			}
+		}
+	}
+	static Dictionary<long, Loadout> All { get; set; } = new();
 
-	public IClient Client { get; set; }
+	/// <summary>
+	/// The steamid of the client this loadout belongs to.
+	/// Will be -1 for bots
+	/// </summary>
+	public long Client { get; set; }
 	public LoadoutState State { get; set; }
 
 	LoadoutData Data { get; set; }
@@ -53,19 +68,27 @@ public partial class Loadout : BaseNetworkable
 		if ( client == null )
 			return null;
 
-		if ( All.TryGetValue( client, out var loadout ) )
+		return ForClient( client.SteamId );
+	}
+
+	public static Loadout ForClient( long steamid)
+	{
+		if ( steamid == default )
+			return null;
+
+		if ( All.TryGetValue( steamid, out var loadout ) )
 			return loadout;
 
-		var el = new Loadout( client );
-		All[client] = el;
+		var el = new Loadout( steamid );
+		All[steamid] = el;
 
 		return el;
 	}
 
-	private Loadout( IClient client )
+	private Loadout( long steamid )
 	{
 		State = LoadoutState.Invalid;
-		Client = client;
+		Client = steamid;
 	}
 
 	// Invalidates the loadout, we will request it again next time we need it.
@@ -82,14 +105,14 @@ public partial class Loadout : BaseNetworkable
 
 		State = LoadoutState.Loading;
 
-		if ( Client.IsBot )
+		if ( Client == -1 )
 		{
 			// This client is a bot, don't bother requesting loadout...
 			State = LoadoutState.Unavailable;
 		}
 		else
 		{
-			if ( Game.IsClient )
+			if ( !Game.InGame || Game.IsClient )
 			{
 				// if we're on the client, load data from disk.
 				LoadDataFromDisk();

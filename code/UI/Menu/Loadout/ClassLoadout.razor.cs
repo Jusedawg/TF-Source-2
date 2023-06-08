@@ -1,6 +1,7 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace TFS2.Menu;
@@ -12,7 +13,14 @@ public partial class ClassLoadout : MenuOverlay
 
 	public ClassLoadout()
 	{
-		PlayerClass = Sandbox.Game.LocalClient.GetPlayerClass();
+		if(Game.InGame)
+		{
+			PlayerClass = Game.LocalClient.GetPlayerClass();
+		}
+		else
+		{
+			PlayerClass = PlayerClass.All.Values.First();
+		}
 	}
 
 	public ClassLoadout( PlayerClass playerClass )

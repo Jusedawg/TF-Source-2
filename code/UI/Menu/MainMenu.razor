@@ -26,13 +26,13 @@
         AddDestination("/lobby/maps", typeof(LobbyMapPage));
         AddDestination("/lobby/settings", typeof(LobbyConfigurationPage));
         AddDestination("/lobby/addons", typeof(LobbyAddonPage));
+        AddDestination("/loadout", typeof(LoadoutSelection));
 
         /*
         AddDestination("/load", typeof(LoadGamePage));
         AddDestination("/active", typeof(ActivePage));
         AddDestination("/active/map", typeof(ActiveMapPage));
         AddDestination("/servers", typeof(ServerListPage));
-        AddDestination("/settings", typeof(SettingsPage));
          */
 
         if (Game.InGame) Navigate("/");

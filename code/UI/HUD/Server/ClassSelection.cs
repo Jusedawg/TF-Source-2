@@ -19,8 +19,6 @@ public partial class ClassSelection : HudOverlay
 	{
 		if ( Sandbox.Game.LocalPawn is not TFPlayer player ) return;
 
-		// TODO: Convert to HTML
-		StyleSheet.Load( "/UI/HUD/Server/ClassSelection.scss" );
 		BackgroundScene = AddChild<ClassSelectionBackgroundScene>();
 		BackgroundMusic = Audio.Play( "music.class_menu.background" );
 

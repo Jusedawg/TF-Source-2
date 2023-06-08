@@ -22,7 +22,7 @@ public partial class ItemSelection : MenuOverlay
 
 	public void OnClickBack()
 	{
-		Open( new ClassLoadout() );
+		Open( new ClassLoadout(PlayerClass) );
 	}
 
 	public void OnClickEquip(WeaponData weapon)

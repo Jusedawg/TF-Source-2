@@ -47,14 +47,7 @@
 				<text>#GameMenu.Title.Customize</text>
             </div>
             <div class="content">
-                @if(Game.InGame)
-                {
-                    <button class="button-gradient" @onclick=@OnClickLoadout>#GameMenu.Loadout</button>
-                }
-                else
-                {
-                    <button class="button-gradient disabled" @onclick=@OnClickLoadout>#GameMenu.Loadout</button>
-                }
+                <button class="button-gradient" @onclick=@OnClickLoadout>#GameMenu.Loadout</button>
                 <button class="button-gradient" style="box-shadow: 0px 0px 10px 3px #a95821;" @onclick=@OnClickSettings>
 					#GameMenu.Settings
 				</button>

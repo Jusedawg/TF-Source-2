@@ -1,6 +1,7 @@
+@using Sandbox;
 @using Sandbox.UI;
 
-@attribute [StyleSheet("/UI/Menu/Items/ItemPage.scss")]
+@attribute [StyleSheet]
 
 @namespace TFS2.Menu
 @inherits MenuOverlay
@@ -46,7 +47,7 @@
     </div>
     <div class="footer">
         <button class="button-dark" icon="undo" @onclick=@OnClickBack>Back</button>
-        <text class="playername">@Sandbox.Game.LocalClient.Name</text>
-        <image class="playeravatar" Texture="avatarbig:@Sandbox.Game.LocalClient.SteamId" />
+        <text class="playername">@Game.UserName</text>
+        <image class="playeravatar" Texture="avatarbig:@Game.SteamId" />
     </div>
 </root>

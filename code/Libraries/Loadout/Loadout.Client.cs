@@ -43,7 +43,7 @@ partial class Loadout
 
 	public bool LoadDataFromDisk()
 	{
-		Game.AssertClient();
+		TFAssert.ClientOrGameMenu();
 
 		// Get data from disk.
 		Data = GetDataFromDisk();
@@ -56,7 +56,7 @@ partial class Loadout
 
 	public LoadoutData GetDataFromDisk()
 	{
-		Game.AssertClient();
+		TFAssert.ClientOrGameMenu();
 
 		if ( FileSystem.Data.FileExists( "loadout.json" ) )
 		{
@@ -76,7 +76,7 @@ partial class Loadout
 
 	public bool SetLoadoutItem( PlayerClass pclass, TFWeaponSlot slot, WeaponData weapon )
 	{
-		Game.AssertClient();
+		TFAssert.ClientOrGameMenu();
 
 		if ( !IsDataValid() )
 			return false;
@@ -101,13 +101,14 @@ partial class Loadout
 		classData[(int)slot] = weapon.ResourceName;
 
 		WriteDataToDisk();
-		SendDataToServer();
+		if(Game.InGame)
+			SendDataToServer();
 		return true;
 	}
 
 	public void WriteDataToDisk()
 	{
-		Game.AssertClient();
+		TFAssert.ClientOrGameMenu();
 
 		if ( Data == null )
 			return;

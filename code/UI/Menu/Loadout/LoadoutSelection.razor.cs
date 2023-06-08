@@ -4,7 +4,7 @@ using System;
 
 namespace TFS2.Menu;
 
-public partial class ItemsPage : MenuOverlay
+public partial class LoadoutSelection : MenuOverlay
 {
 	public void OnClickBack()
 	{

@@ -17,8 +17,6 @@ public partial class TeamSelection : HudOverlay
 	{
 		if ( Sandbox.Game.LocalPawn is not TFPlayer player ) return;
 
-		// TODO: Convert to HTML
-		StyleSheet.Load( "/UI/HUD/Server/TeamSelection.scss" );
 		BackgroundScene = AddChild<TeamSelectionBackground>();
 		BackgroundScene.Camera.EnablePostProcessing = false;
 

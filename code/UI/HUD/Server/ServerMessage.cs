@@ -14,9 +14,6 @@ public partial class ServerMessage : HudOverlay
 
 	public ServerMessage()
 	{
-		// TODO: Convert to HTML
-		StyleSheet.Load( "/UI/HUD/Server/ServerMessage.scss" );
-
 		var world = new SceneWorld();
 		var position = new Vector3( 390, 0, -39 );
 		var rotation = Rotation.From( 0, 180, 0 );
