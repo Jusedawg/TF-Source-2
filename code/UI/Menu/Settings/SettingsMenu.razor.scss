@@ -27,7 +27,7 @@ SettingsMenu {
     }
 }
 
-.container {
+.nav {
     position: absolute;
     padding: 0 50px;
     max-width: 900px;
@@ -85,7 +85,6 @@ SettingsMenu {
         font-family: big_noodle_titling;
         color: $tan-light;
         font-size: 70px;
-        color: $tan-light;
         text-align: center;
         align-items: center;
         background-color: $tan-darkest;
@@ -94,9 +93,10 @@ SettingsMenu {
 
 .body {
     overflow: scroll;
-    height: 95%;
+    height: 55%;
     flex-grow: 1;
     flex-shrink: 1;
+    margin: 0 5% 4% 5%;
     justify-content: space-between;
     flex-direction: column;
     background: linear-gradient(to right, #231f1c, #3e352f, #231f1c);

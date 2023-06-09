@@ -25,18 +25,7 @@
         Music = new();
 
         AddDestination("/", typeof(MainPage));
-        AddDestination("/lobby", typeof(LobbyPage));
-        AddDestination("/lobby/maps", typeof(LobbyMapPage));
-        AddDestination("/lobby/settings", typeof(LobbyConfigurationPage));
-        AddDestination("/lobby/addons", typeof(LobbyAddonPage));
         AddDestination("/loadout", typeof(LoadoutSelection));
-
-        /*
-        AddDestination("/load", typeof(LoadGamePage));
-        AddDestination("/active", typeof(ActivePage));
-        AddDestination("/active/map", typeof(ActiveMapPage));
-        AddDestination("/servers", typeof(ServerListPage));
-         */
 
         if (Game.InGame) Navigate("/");
 

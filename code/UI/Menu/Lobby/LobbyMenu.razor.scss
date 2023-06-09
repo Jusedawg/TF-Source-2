@@ -1,51 +1,63 @@
-﻿@import "/UI/styles/buttons.scss";
+﻿@import "/UI/styles/assets.scss";
+@import "/UI/styles/buttons.scss";
 @import "/UI/styles/colors.scss";
 @import "/UI/styles/checkbox.scss";
+@import "/UI/styles/footer.scss";
+
+.layout {
+    &.ingame {
+        backdrop-filter: blur(5px);
+        background-color: #100a0194;
+    }
+
+    &:not(.ingame) {
+        background: linear-gradient(to right, #100a01d4, #100a01a4, #100a0134, #100a0100);
+        background-size: 100%;
+    }
+}
 
 .hidden {
     display: none;
 }
 
-.layout {
-    flex-direction: column;
-    margin: 5%;
-    background-color: #3C352Daa;
-
-    * {
-        flex-shrink: 0;
-    }
+* {
+    flex-shrink: 0;
 }
 
-.header {
-    height: 20%;
+.nav {
+    position: absolute;
+    padding: 0 50px;
+    max-width: 900px;
+    width: 100%;
+    height: 100%;
     flex-direction: column;
 
-    .title {
-        height: 40%;
-        padding-top: 2%;
-        padding-left: 2%;
-        font-family: TF2_Build;
-        font-size: 40px;
-        color: $tan-light;
-    }
+    .block {
+        flex-direction: column;
+        width: 60%;
+        background: linear-gradient(to right, #231f1c, #3e352f, #231f1c);
+        backdrop-filter: blur(50px);
+        border-radius: 6px;
+        margin-bottom: 15px;
 
-    .nav {
-        height: 80%;
-        justify-content: space-evenly;
-        align-items: center;
-
-        .tab {
-            padding: 1%;
-            font-family: TF2_Secondary;
+        .header {
+            width: 100%;
+            padding: 5px 20px;
+            background-color: $tan-darkest;
+            border-radius: 6px;
+            font-family: big_noodle_titling;
             font-size: 40px;
-            background-color: $tan-darker;
-            border-radius: 25px 25px 0 0;
-            width: 20%;
+            color: $tan-light;
+        }
 
-            label {
-                text-align: center;
-                width: 100%;
-            }
+        .content {
+            flex-direction: column;
+            padding-top: 15px;
+        }
+
+        .button-gradient {
+            font-size: 32px;
+            margin: 0 15px 15px 15px;
 
             &:hover {
                 background-color: $tan-dark;
@@ -54,24 +66,53 @@
             &.active {
                 background-color: $tan-darkest;
             }
-
         }
     }
 }
 
 .body {
-    border-top: 6px solid $tan-light;
-    height: 65%;
-    flex-direction: row;
+    height: 55%;
+    flex-direction: column;
     flex-grow: 1;
     flex-shrink: 1;
-    margin: 0px 50px;
+    margin: 11% 5%;
     justify-content: space-between;
+    right: 0;
+    width: 50%;
+    position: absolute;
+    background-color: $tan-darkest;
+    overflow: hidden;
+    border-radius: 6px;
+
+    .header {
+        width: 100%;
+        padding: 30px 20px;
+        border-radius: 25px;
+        font-family: big_noodle_titling;
+        color: $tan-light;
+        font-size: 70px;
+        justify-content: center;
+        border-radius: 6px;
+    }
+
+
+    .container {
+        flex-grow: 1;
+        gap: 10%;
+        overflow: hidden;
+    }
+
+    .other {
+        background-color: $bg-darkest;
+        height: 80%;
+    }
 
     .players {
+        background-color: $bg-darkest;
         flex-direction: column;
         width: 60%;
         gap: 5px;
+        margin: 1%;
 
         LobbyMember {
             background-color: $bg-darker;
@@ -107,7 +148,7 @@
     }
 
     .server {
-        width: 30%;
+        width: 35%;
         flex-direction: column;
 
         MapInfo {
@@ -119,7 +160,7 @@
 
             .title {
                 font-family: TF2_Build;
-                font-size: 28px;
+                font-size: 32px;
                 color: $tan-light;
             }
 
@@ -135,22 +176,21 @@
             flex-grow: 1;
             flex-direction: column;
             background-color: $bg-darker;
-            border-radius: 10px;
+            border-radius: 5px;
             width: 100%;
             align-items: center;
 
             .title {
                 margin-top: 5%;
                 height: 15%;
-                font-family: TF2_Secondary;
+                font-family: TF2_Build;
                 font-size: 30px;
                 color: $tan-light;
-                border-bottom: 3px solid $tan-light;
             }
 
             .description {
                 flex-grow: 1;
-                font-family: TF2_Primary;
+                font-family: TF2_Secondary;
                 font-size: 24px;
                 padding-top: 2%;
                 color: $tan-light;
@@ -165,32 +205,42 @@ $form-row-height: 48px;
     flex-direction: column;
     flex-shrink: 0;
     flex-grow: 0;
-    gap: 2px;
-    padding-left: 64px;
     margin-bottom: 50px;
     overflow: scroll;
     margin-top: 50px;
 
     &.basic {
-        width: 50%;
+        width: 40%;
+
+        .form-group .form-label {
+            width: 40%;
+        }
     }
 
     &.convars {
-        width: 50%;
+        width: 55%;
     }
 
     font-family: TF2_Secondary;
     font-size: 32px;
     color: $tan-light;
 
+    h2 {
+        text-align: center;
+        justify-content: center;
+        font-size: 30px;
+        font-family: TF2_Build;
+    }
+
     > .form-group {
         flex-direction: row;
         flex-shrink: 0;
-        gap: 16px;
+        gap: 8px;
         min-height: $form-row-height;
+        margin-bottom: 2%;
 
         > .form-label {
-            width: 30%;
+            width: 60%;
             opacity: 0.5;
             height: $form-row-height;
             align-items: center;
@@ -199,6 +249,19 @@ $form-row-height: 48px;
             white-space: nowrap;
             font-size: 24px;
             font-weight: bold;
+            text-align: left;
+        }
+
+        .wrap {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            font-size: 16px;
+            flex-direction: column;
+            white-space: break-spaces;
+            padding-right: 10%;
+            width: 76%;
+            height: 100%;
+            flex-grow: 0;
         }
     }
 }

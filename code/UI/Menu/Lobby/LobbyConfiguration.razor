@@ -1,0 +1,82 @@
+﻿@using System
+@using System.Linq
+@using Sandbox;
+@using Sandbox.MenuSystem;
+@using Sandbox.UI;
+@inherits Panel;
+@namespace TFS2.Menu
+
+@if (Game.Menu.Lobby == null)
+    return;
+
+<root>
+    <div class="form basic">
+        <h2>Server Settings</h2>
+
+        <FormGroup>
+            <Label>Name</Label>
+            <Control>
+                <TextEntry class="wrap" Value:bind=@Game.Menu.Lobby.Title Tooltip="Server Title"> </TextEntry>
+            </Control>
+        </FormGroup>
+
+        <FormGroup>
+            <Label>Description</Label>
+            <Control>
+                <TextEntry class="wrap" Value:bind=@Game.Menu.Lobby.Description Tooltip="Server Description"> </TextEntry>
+            </Control>
+        </FormGroup>
+
+        @if (MaxPlayersSupported > 1)
+        {
+            <FormGroup class="form-group">
+                <Label>Max Players</Label>
+                <Control>
+                    <SliderControl ShowTextEntry="@true" ShowRange="@true" Min=@(1.0f) Max=@(MaxPlayersSupported) Value:bind=@Game.Menu.Lobby.MaxMembers> </SliderControl>
+                </Control>
+            </FormGroup>
+        }
+
+    </div>
+    <div class="form convars">
+        @foreach (var group in Game.Menu.Package.PackageSettings.GroupBy(x => x.Group))
+	    {
+            var title = group.Key;
+            if (string.IsNullOrWhiteSpace(title)) title = "Game Settings";
+
+            <h2>@title</h2>
+
+		    @foreach (var setting in group)
+		    {
+                Game.Menu.Lobby.ConVars.TryGetValue(setting.ConVarName, out var value);
+
+			    if (string.IsNullOrEmpty(value)) value = setting.DefaultValue;
+
+                <FormGroup>
+
+                    <Label>@setting.DisplayName</Label>
+
+                    <Control>
+                        <LobbyGameSetting Value=@value Setting=@setting OnChange="@OnLobbySettingChanged"></LobbyGameSetting>
+                    </Control>
+
+			    </FormGroup>
+		    }
+
+            <div style="height: 40px; flex-shrink: 0;"></div>
+	    }
+    </div>
+</div>
+
+@code {
+    int MaxPlayersSupported = 1;
+
+    protected override void OnParametersSet()
+    {
+        MaxPlayersSupported = Game.Menu.Package.GetMeta<int>("MaxPlayers", 1);
+    }
+    void OnLobbySettingChanged(string key, string value)
+    {
+        Game.Menu.Lobby.ConVars = Game.Menu.Lobby.ConVars.SetItem(key, value);
+    }
+}
