@@ -3,7 +3,7 @@ using Amper.FPS;
 
 namespace TFS2;
 
-public partial class StickyBomb : TFProjectile
+public partial class StickyBomb : TFProjectile, IAcceptsExtendedDamageInfo
 {
 	[Net] public bool IsDeployed { get; set; }
 
@@ -15,6 +15,9 @@ public partial class StickyBomb : TFProjectile
 	/// </summary>
 	[ConVar.Replicated] public static float tf_grenade_force_sleeptime { get; set; } = 1.0f;
 	[ConVar.Replicated] public static float tf_pipebomb_deflect_reset_time { get; set; } = 10.0f;
+	[ConVar.Replicated] public static float tf_pipebomb_force_to_move { get; set; } = 1500.0f;
+
+	private const int BlastScale = 30;
 
 	public override bool ShouldChangeTeamOnDeflect => false;
 	public override bool ShouldApplyBoostOnDeflect => false;
@@ -26,10 +29,16 @@ public partial class StickyBomb : TFProjectile
 		Health = 1;
 
 		MoveType = ProjectileMoveType.Physics;
-		DamageInfo = DamageInfo.WithTag( TFDamageTags.Blast );
+		DamageInfo.WithTag( TFDamageTags.Blast );
 		FaceVelocity = false;
 		AutoDestroyTime = null;
 		EnableShadowCasting = false;
+	}
+
+	public override void OnInitialized()
+	{
+		base.OnInitialized();
+		Tags.Add( TeamManager.GetProjectileTag( TeamNumber ) );
 	}
 
 	protected override void OnPhysicsCollision( CollisionEventData eventData )
@@ -37,7 +46,13 @@ public partial class StickyBomb : TFProjectile
 		if ( !CanStickOnEntity( eventData.Other.Entity ) )
 			return;
 
+		Tags.Add( CollisionTags.BulletClip );
+		Tags.Remove( CollisionTags.Projectile );
+		Tags.Remove( CollisionTags.Solid );
+
 		MoveType = ProjectileMoveType.None;
+		EnableSolidCollisions = false;
+
 		SetParent( eventData.This.Entity );
 	}
 
@@ -45,6 +60,18 @@ public partial class StickyBomb : TFProjectile
 	{
 		// Only allow sticking to walls for now.
 		return entity.IsWorld && NextRestickTime < Time.Now;
+	}
+
+	public void Unstick()
+	{
+		Tags.Add( CollisionTags.Solid );
+		Tags.Add( CollisionTags.Projectile );
+		Tags.Remove( CollisionTags.BulletClip );
+
+		MoveType = ProjectileMoveType.Physics;
+		EnableSolidCollisions = true;
+
+		NextRestickTime = Time.Now + tf_grenade_force_sleeptime;
 	}
 
 	public override void Deflected( TFWeaponBase weapon, TFPlayer who )
@@ -56,14 +83,12 @@ public partial class StickyBomb : TFProjectile
 
 		if ( MoveType == ProjectileMoveType.None || NextRestickTime != 0 )
 		{
-			// The sticky bomb has touched a surface at least once, let's apply velocity manually
-			MoveType = ProjectileMoveType.Physics;
+			Unstick();
 
+			// The sticky bomb has touched a surface at least once, let's apply velocity manually
 			var vecDir = WorldSpaceBounds.Center - who.WorldSpaceBounds.Center;
 			vecDir = vecDir.Normal;
 			PhysicsBody.Velocity = vecDir * DeflectionForce;
-
-			NextRestickTime = Time.Now + tf_grenade_force_sleeptime;
 		}
 
 		NextDeflectResetTime = Time.Now + tf_pipebomb_deflect_reset_time;
@@ -71,13 +96,31 @@ public partial class StickyBomb : TFProjectile
 		base.Deflected( weapon, who );
 	}
 
-	public override void TakeDamage( DamageInfo info )
+	public void TakeDamage( ExtendedDamageInfo info )
 	{
-		// Bombs can only be destroyed by bullets.
-		if ( !info.HasTag( TFDamageTags.Bullet ) )
+		if ( ITeam.IsSame( this, info.Attacker ) )
+		{
 			return;
+		}
 
-		base.TakeDamage( info );
+		// Bombs can only be destroyed by bullets, melee weapons, and syringes.
+		if ( info.HasTag( TFDamageTags.Bullet ) )
+		{
+			Delete();
+			return;
+		}
+
+		if ( info.HasTag( TFDamageTags.Blast ) )
+		{
+			var vec = (info.HitPosition - info.Inflictor.WorldSpaceBounds.Center).Normal;
+			vec *= info.Damage * BlastScale;
+
+			if ( vec.LengthSquared > tf_pipebomb_force_to_move * tf_pipebomb_force_to_move )
+			{
+				Unstick();
+				ApplyAbsoluteImpulse( vec );
+			}
+		}
 	}
 
 	public override void Tick()

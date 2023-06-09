@@ -10,7 +10,7 @@ public partial class Syringe : TFProjectile
 		base.Spawn();
 		SetModel( "models/weapons/w_models/w_syringe_proj.vmdl" );
 		
-		DamageInfo = DamageInfo.WithTag(TFDamageTags.PreventPhysicsForce);
+		DamageInfo.WithTags( TFDamageTags.PreventPhysicsForce, TFDamageTags.Bullet );
 		MoveType = ProjectileMoveType.Fly;
 		Gravity = .3f;
 		EnableShadowCasting = false;
@@ -100,6 +100,12 @@ public partial class Syringe : TFProjectile
 			.Run();
 
 		return tr;
+	}
+
+	public override Trace SetupCollisionTrace( Vector3 start, Vector3 end, Vector3 mins, Vector3 maxs )
+	{
+		return base.SetupCollisionTrace( start, end, mins, maxs )
+			.WithAnyTags( CollisionTags.BulletClip );
 	}
 
 	public override string TrailParticleName => $"particles/nailtrails/nailtrails_medic_{Team.GetName()}.vpcf";
