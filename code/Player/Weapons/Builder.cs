@@ -139,7 +139,7 @@ public partial class Builder : TFWeaponBase
 			CarriedBuilding = null;
 			ResetForcedWeapon();
 			if(switchWeapon)
-				TFOwner.SwitchToLastWeapon(this);
+				TFOwner.SwitchToLastWeapon(TFOwner.Weapons.OfType<EngineerPDA>().FirstOrDefault());
 		}
 	}
 
@@ -165,17 +165,19 @@ public partial class Builder : TFWeaponBase
 
 		var lerped = Rotation.Slerp( rotation, target, Time.Delta * RotationSpeed );
 		CurrentBuildRotation = lerped.Yaw();
-		
-		if(Game.IsClient)
-		{
-			if ( Blueprint == null ) return;
+	
+	}
 
-			var result = CalculateBuildingPlacement();
-			Blueprint.Position = result.Origin;
-			Blueprint.Rotation = result.Rotation;
-			bool success = result.Status == BuildingDeployResponse.CanBuild && CanBuildAt( BuildingData, new( result.Origin, result.Rotation ) ) && CanAfford(BuildingData);
-			Blueprint.SetAnimParameter( "reject", !success );
-		}
+	public override void FrameSimulate( IClient cl )
+	{
+		base.FrameSimulate( cl );
+		if ( Blueprint == null ) return;
+
+		var result = CalculateBuildingPlacement();
+		Blueprint.Position = result.Origin;
+		Blueprint.Rotation = result.Rotation;
+		bool success = result.Status == BuildingDeployResponse.CanBuild && CanBuildAt( BuildingData, new( result.Origin, result.Rotation ) ) && CanAfford( BuildingData );
+		Blueprint.SetAnimParameter( "reject", !success );
 	}
 
 	/// <summary>
@@ -184,7 +186,7 @@ public partial class Builder : TFWeaponBase
 	/// <param name="data"></param>
 	/// <param name="location">Location it should be placed at</param>
 	/// <returns></returns>
-	public static bool CanBuildAt( BuildingData data, Transform location )
+	public bool CanBuildAt( BuildingData data, Transform location )
 	{
 		if(NoBuildZone.InNoBuild(location.Position))
 			return false;
@@ -193,6 +195,9 @@ public partial class Builder : TFWeaponBase
 			return false;
 
 		if ( CheckStuck( data, location ) )
+			return false;
+
+		if ( CheckLOS( location.Position ) )
 			return false;
 
 		return true;
@@ -216,9 +221,19 @@ public partial class Builder : TFWeaponBase
 						.WithTag( CollisionTags.Solid )
 						.Run();
 
-		if ( tr.Hit ) return true;
+		return tr.Hit;
+	}
 
-		return false;
+	private bool CheckLOS(Vector3 pos)
+	{
+		var tr = Trace.Ray( TFOwner.EyePosition, pos )
+						.WorldAndEntities()
+						.Ignore(this)
+						.Ignore(Owner)
+						.WithAnyTags( CollisionTags.Solid, CollisionTags.PlayerClip)
+						.Run();
+
+		return tr.Hit;
 	}
 
 	/// <summary>
