@@ -88,9 +88,10 @@
 
     public void SetDefaults()
     {
+        Game.Menu.InputSettings.InitDefault();
         TFClientSettings.Reset();
 
-        Editor.SetTarget( TFClientSettings.Current );
+        Editor?.SetTarget( TFClientSettings.Current );
     }
 
     public void OnClickClose()
