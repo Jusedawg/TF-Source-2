@@ -26,6 +26,7 @@ public partial class Dispenser : TFBuilding
 		Trigger.SetParent(this);
 		Trigger.StoredMetal = StartingMetal;
 		Trigger.SetupPhysicsFromOBB( PhysicsMotionType.Keyframed, TriggerMins, TriggerMaxs );
+		Trigger.Disable();
 	}
 	public override void SetOwner( TFPlayer owner )
 	{
