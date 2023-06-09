@@ -33,7 +33,7 @@ public partial class MainPage : Panel
 
 	public void OnClickSettings()
 	{
-		MenuOverlay.Open<SettingsMenu>();
+		this.Navigate( "/settings" );
 	}
 
 

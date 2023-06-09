@@ -42,17 +42,13 @@
             </div>
         </div>
 
-		<image class="new" />
-
         <div class="menublock">
             <div class="header">
 				<text>#GameMenu.Title.Customize</text>
             </div>
             <div class="content">
                 <button class="button-gradient" @onclick=@OnClickLoadout>#GameMenu.Loadout</button>
-                <button class="button-gradient" style="box-shadow: 0px 0px 10px 3px #a95821;" @onclick=@OnClickSettings>
-					#GameMenu.Settings
-				</button>
+                <button class="button-gradient" @onclick=@OnClickSettings>#GameMenu.Settings</button>
             </div>
         </div>
 
@@ -87,10 +83,5 @@
         
         <text class="playername">@Game.UserName</text>
         <image style="background-image: url( avatar:@Game.SteamId )" class="playeravatar" />
-        <!--
-        <div class="inputnotice">
-            Change class & teams are now bound to <div class="glyph"><InputGlyph Button="Class" /></div> and <div class="glyph"><InputGlyph Button="Team" /></div> just like in TF2!
-        </div>
-        -->
     </div>
 </root>

@@ -1,13 +1,14 @@
-@import "/UI/styles/colors.scss";
+@import "/UI/styles/assets.scss";
 @import "/UI/styles/buttons.scss";
+@import "/UI/styles/colors.scss";
 @import "/UI/styles/footer.scss";
 
 MainPage {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    z-index: 5;
     flex-direction: column;
+
+    &.hidden {
+        display: none;
+    }
 
     &.ingame {
         backdrop-filter: blur(5px);
@@ -19,39 +20,12 @@ MainPage {
         background-size: 100%;
     }
 
-    &.hidden {
-        display: none;
-    }
-
     .container {
         padding: 0 50px;
         max-width: 900px;
         width: 100%;
         height: 100%;
         flex-direction: column;
-
-        .logotype {
-            background-size: contain;
-            background-repeat: no-repeat;
-            background: url(/ui/menu/tfs2_logotype.png);
-            height: 150px;
-            width: 100%;
-            margin-top: 25px;
-            margin-bottom: 35px;
-        }
-
-        .new {
-            background-size: contain;
-            background-repeat: no-repeat;
-            background: url(/ui/menu/new_large.png);
-            height: 124px;
-            width: 124px;
-            position: absolute;
-            bottom: 0;
-            margin-bottom: 435px;
-            margin-left: 435px;
-            z-index: 3;
-        }
 
         .menublock {
             flex-direction: column;
@@ -157,60 +131,6 @@ MainPage {
                     padding: 5px 5px 5px 15px;
                 }
             }
-        }
-    }
-
-    .disclaimer {
-        flex-direction: column;
-        width: 35%;
-        background: linear-gradient(to right, #231f1ee2, #3e352f90, #231f1ee2);
-        backdrop-filter: blur(50px);
-        border-radius: 6px;
-        margin-bottom: 15px;
-        position: absolute;
-        left: 64%;
-        top: 1%;
-
-        .dev_container {
-            padding: 0px 20px;
-            margin: 3px;
-
-            .dev_text {
-                font-family: TF2_Build;
-                font-size: 21px;
-                color: $tan-light;
-                padding-top: 18px;
-            }
-
-            .dev_logo {
-                width: 75px;
-                height: 75px;
-                background-image: url(ui/menu/indev.png);
-                background-size: cover;
-                background-repeat: no-repeat;
-                background-image-tint: $tan-light;
-            }
-        }
-
-        .build {
-            position: absolute;
-            left: 84%;
-            top: 107%;
-
-            .build_number {
-                font-family: TF2_Secondary;
-                font-size: 20px;
-                color: $tan-light;
-            }
-        }
-    }
-
-    .button-dark {
-        font-size: 24px;
-        margin-right: 10px;
-
-        &:first-child {
-            margin-right: 50px;
         }
     }
 }
