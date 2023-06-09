@@ -140,17 +140,21 @@ public partial class SentryGun
 		//If our target leaves range or dies, remove them as our target
 		if ( HasTarget )
 		{
-			if( Position.Distance( Target.Position ) > Range || Target.LifeState != LifeState.Alive )
+			if ( Position.Distance( Target.Position ) > Range || Target.LifeState != LifeState.Alive )
+			{ 
 				Target = null;
-
-			var tr = Trace.Ray( AimRay.Position, Target.Position )
-						.Ignore( this )
-						.WorldAndEntities()
-						.WithTag( CollisionTags.Solid )
-						.WithoutTags(CollisionTags.Player)
-						.Run();
-			if ( tr.Hit )
-				Target = null;
+			}
+			else
+			{
+				var tr = Trace.Ray( AimRay.Position, Target.Position )
+										.Ignore( this )
+										.WorldAndEntities()
+										.WithTag( CollisionTags.Solid )
+										.WithoutTags( CollisionTags.Player )
+										.Run();
+				if ( tr.Hit )
+					Target = null;
+			}
 		}
 
 		if ( Target != null )

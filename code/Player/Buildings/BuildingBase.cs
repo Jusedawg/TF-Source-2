@@ -145,7 +145,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 	[GameEvent.Tick.Server]
 	public virtual void Tick()
 	{
-		if ( IsCarried ) return;
+		if ( IsCarried || !IsInitialized ) return;
 
 		CheckState();
 		if ( IsConstructing )
@@ -176,6 +176,11 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 		{
 			AppliedMetal -= Data.UpgradeCost;
 			StartUpgrade( Level + 1, setRequested: true );
+		}
+		else if(!Owner.IsValid())
+		{
+			ManualDestroy();
+			return;
 		}
 	}
 

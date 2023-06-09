@@ -83,7 +83,7 @@ public partial class DispenserZone : BaseTrigger
 	}
 	void GiveAmmo(TFPlayer ply)
 	{
-		Sound.FromEntity( To.Single( ply ), AMMO_SOUND, ply );
+		Sound.FromScreen( To.Single( ply ), AMMO_SOUND );
 
 		foreach ( var wpn in ply.Weapons.OfType<TFWeaponBase>() )
 		{

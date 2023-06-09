@@ -47,19 +47,22 @@ public partial class Builder : TFWeaponBase
 		var placementResult = CalculateBuildingPlacement();
 		if ( placementResult.Status != BuildingDeployResponse.CanBuild )
 		{
-			Log.Info( $"Tried to build even though we cant, ignoring" );
+			if(TFBuilding.tf_debug_buildings)
+				Log.Info( $"Tried to build even though we cant, ignoring" );
 			return;
 		}
 
 		if(!CanBuildAt(BuildingData, new(placementResult.Origin, placementResult.Rotation)))
 		{
-			Log.Info( "Tried to build at invalid position, ignoring" );
+			if ( TFBuilding.tf_debug_buildings )
+				Log.Info( "Tried to build at invalid position, ignoring" );
 			return;
 		}
 
 		if ( !IsCarryingBuilding && !CanAfford( BuildingData ) )
 		{
-			Log.Info( "Tried to build without the required metal amount, ignoring" );
+			if ( TFBuilding.tf_debug_buildings )
+				Log.Info( "Tried to build without the required metal amount, ignoring" );
 			return;
 		}
 
@@ -176,7 +179,7 @@ public partial class Builder : TFWeaponBase
 		var result = CalculateBuildingPlacement();
 		Blueprint.Position = result.Origin;
 		Blueprint.Rotation = result.Rotation;
-		bool success = result.Status == BuildingDeployResponse.CanBuild && CanBuildAt( BuildingData, new( result.Origin, result.Rotation ) ) && CanAfford( BuildingData );
+		bool success = result.Status == BuildingDeployResponse.CanBuild && CanBuildAt( BuildingData, new( result.Origin, result.Rotation ) ) && (IsCarryingBuilding || CanAfford( BuildingData ));
 		Blueprint.SetAnimParameter( "reject", !success );
 	}
 
