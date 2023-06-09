@@ -9,6 +9,7 @@ namespace TFS2.Menu;
 
 public partial class MainPage : Panel
 {
+	ServerList List;
 	public MainPage()
 	{
 		BindClass( "ingame", () => Game.InGame );
@@ -28,7 +29,7 @@ public partial class MainPage : Panel
 	}
 	public void OnClickJoinGame()
 	{
-		MenuOverlay.Open<JoinGameDialog>();
+		List.SetClass( "visible", !List.HasClass( "visible" ) );
 	}
 
 	public void OnClickSettings()

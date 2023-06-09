@@ -1,0 +1,77 @@
+﻿@import "/UI/styles/buttons.scss";
+@import "/UI/styles/colors.scss";
+
+ServerList {
+    //background-color: $bg-darkest;
+    padding: 2%;
+    flex-direction: column;
+    display: none;
+
+    &.visible {
+        display: flex;
+    }
+
+    .window_title {
+        padding-top: 8px;
+        font-family: big_noodle_titling;
+        color: $tan-light;
+        font-size: 48px;
+        padding-bottom: 2%;
+        background-color: $tan-darkest;
+        border-radius: 5px 0 0 0 0;
+        text-align: center;
+    }
+
+    .loading-status {
+        display: none;
+    }
+
+    .server-list {
+        background: linear-gradient(to right, #231f1c, #3e352f, #231f1c);
+        backdrop-filter: blur(50px);
+        padding: 2%;
+        flex-direction: column;
+        height: 80%;
+        font-family: TF2_Secondary;
+
+        .header {
+            margin-bottom: 1%;
+
+            .title {
+                font-size: 28px;
+            }
+        }
+
+        ServerRow {
+            background-color: $bg-dark;
+            flex-grow: 0;
+            font-size: 24px;
+            overflow: scroll;
+
+            .title {
+                font-family: TF2_Build;
+                font-size: 18px;
+            }
+
+            .map .title {
+                min-width: 120px;
+            }
+
+            .org {
+                display: none;
+            }
+
+            .icon {
+                display: none;
+            }
+        }
+    }
+
+    .navbar {
+        flex-grow: 0;
+        background-color: $tan-darker;
+        padding: 2% 0;
+        justify-content: space-around;
+        height: 25%;
+    }
+}

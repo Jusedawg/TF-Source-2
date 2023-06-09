@@ -31,7 +31,7 @@
             <div class="content">
                 @if(Game.InGame)
                 {
-                    <button class="button-gradient" @onclick=@OnClickResumeGame>#GameMenu.ResumeeGame</button>
+                    <button class="button-gradient" @onclick=@OnClickResumeGame>#GameMenu.ResumeGame</button>
                     <button class="button-gradient" @onclick=@OnClickJoinGame>#GameMenu.JoinGame</button>
                 }
                 else
@@ -72,6 +72,8 @@
 			</div>
         </div>
     </div>
+
+    <ServerList @ref=List></ServerList>
 
     <div class="footer">
         <button class="button-dark" icon="highlight_off" @onclick=@OnClickQuit>#Generic.Quit</button>

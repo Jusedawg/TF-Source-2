@@ -1,0 +1,27 @@
+﻿@using System
+@using Sandbox;
+@using Sandbox.MenuSystem;
+@using Sandbox.UI;
+@attribute [StyleSheet]
+@namespace TFS2.Menu
+@inherits Panel
+
+
+<root>
+    <label class="window_title">Servers</label>
+
+    <ServerListPanel @ref="List" ShowGame=@false FilterByGame=@Game.Menu.Package.FullIdent></ServerListPanel>
+
+    <div class="navbar">
+        <div class="button-dark" onclick=@(() => RemoveClass("visible"))>Close</div>
+        <div class="button-dark" onclick="@(() => MenuOverlay.Open<JoinGameDialog>())">Direct Connect</div>
+        <div class="button-dark" onclick="@(() => List.Refresh())"> Refresh </div>
+    </div>
+
+</root>
+
+
+@code
+{
+    ServerListPanel List;
+}

@@ -79,11 +79,12 @@ SettingsMenu {
     flex-direction: column;
 
     .title {
-        width: 100%;
-        padding: 50px 20px;
         border-radius: 6px;
-        font-family: TF2_Build;
-        font-size: 52px;
+        width: 100%;
+        padding: 30px 20px;
+        font-family: big_noodle_titling;
+        color: $tan-light;
+        font-size: 70px;
         color: $tan-light;
         text-align: center;
         align-items: center;
@@ -98,6 +99,9 @@ SettingsMenu {
     flex-shrink: 1;
     justify-content: space-between;
     flex-direction: column;
+    background: linear-gradient(to right, #231f1c, #3e352f, #231f1c);
+    backdrop-filter: blur(50px);
+    border-radius: 6px;
 
     .group {
         margin: 0 5%;
@@ -105,8 +109,6 @@ SettingsMenu {
         flex-shrink: 0;
         flex-direction: column;
         overflow: hidden;
-        background: linear-gradient(to right, #231f1c, #3e352f, #231f1c);
-        backdrop-filter: blur(50px);
         margin-bottom: 3%;
         justify-content: space-around;
         flex-direction: column;
@@ -121,6 +123,10 @@ SettingsMenu {
         align-items: center;
         text-align: center;
     }
+}
+
+.editor {
+    overflow: scroll;
 }
 
 .item {
@@ -139,12 +145,13 @@ SettingsMenu {
         width: 60%;
         color: #e6d9bc;
         font-family: TF2_Secondary;
-        font-size: 24px;
+        font-size: 22px;
         flex-direction: column;
         height: 100%;
         align-items: center;
-        text-align: center;
+        text-align: left;
         padding-left: 24px;
+        flex-wrap: wrap;
     }
 
     TextEntry {
@@ -215,4 +222,8 @@ SettingsMenu {
             }
         }
     }
+}
+
+.footer {
+    justify-content: flex-start;
 }

@@ -63,11 +63,8 @@ public partial class Loadout : BaseNetworkable
 	/// <returns></returns>
 	public static Loadout ForClient( IClient client )
 	{
-		Log.Info( 0 );
-
 		if ( client == default )
 			return null;
-		Log.Info( 1 );
 		return ForClient( client.SteamId );
 	}
 
