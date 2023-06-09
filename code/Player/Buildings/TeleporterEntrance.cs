@@ -30,6 +30,7 @@ public partial class TeleporterEntrance : Teleporter
 	/// Max velocity a player is allowed to have to be able to enter this teleporter.
 	/// </summary>
 	protected virtual float TeleportMaxVelocity => 5f;
+	protected virtual float TeleporterWaitTIme => 1f;
 	protected virtual float TeleporterFadeInTime => 0.25f;
 	protected virtual float TeleporterFadeOutTime => 0.25f; // TODO: Implement
 
@@ -75,7 +76,7 @@ public partial class TeleporterEntrance : Teleporter
 
 		base.Tick();
 
-		if( IsPaired && IsReady )
+		if( IsPaired )
 		{
 			// Rotation between this and the other teleporter
 			var direction = Rotation.LookAt( LinkedTeleporter.Position - Position );
@@ -98,12 +99,12 @@ public partial class TeleporterEntrance : Teleporter
 			DoTeleport( currentTarget );
 			currentTarget = null;
 		}
-		else if ( teleporterQueue.Any() )
+		else if ( currentTarget == null && teleporterQueue.Any() )
 		{
 			currentTarget = teleporterQueue[0];
 			teleporterQueue.RemoveAt( 0 );
 
-			timeUntilTeleport = TeleporterFadeInTime;
+			timeUntilTeleport = TeleporterWaitTIme;
 		}
 	}
 
@@ -238,7 +239,10 @@ public partial class TeleporterEntrance : Teleporter
 		DebugOverlay.Box( teleportZone, Color.Yellow.Darken( 0.2f ) );
 		Vector3 pos = Position + Vector3.Up * CollisionBounds.Maxs.z;
 		DebugOverlay.Text( $"[TELEPORTER ENTRANCE]", pos, 19, Color.White );
-		DebugOverlay.Text( $"= Teleporter Queue: {teleporterQueue.Count}", pos, 20, Color.Yellow );
-		DebugOverlay.Text( $"= Cooldown Time: {GetCooldownTime()}", pos, 21, Color.Yellow );
+		DebugOverlay.Text( $"= Current Target: {currentTarget}", pos, 20, Color.Yellow );
+		DebugOverlay.Text( $"= Time Until Teleport: {timeUntilTeleport}", pos, 21, Color.Yellow );
+		DebugOverlay.Text( $"= Teleporter Queue: {teleporterQueue.Count}", pos, 22, Color.Yellow );
+		DebugOverlay.Text( $"= Cooldown Time: {GetCooldownTime()}", pos, 23, Color.Yellow );
+
 	}
 }

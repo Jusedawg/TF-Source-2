@@ -133,7 +133,6 @@ public partial class Teleporter : TFBuilding
 	{
 		if(LevelParticle != default)
 			LevelParticle.EnableDrawing = true;
-		//SetBodyGroup( "direction", IsPaired ? 1 : 0 );
 		SetBodyGroup( "blur", 1 );
 		SetAnimParameter( "f_spin_speed", 1 );
 	}
@@ -151,9 +150,6 @@ public partial class Teleporter : TFBuilding
 
 	public virtual void UnReadyEffects()
 	{
-		if(LevelParticle != default)
-			LevelParticle.EnableDrawing = false;
-		SetBodyGroup( "teleporter_blur", 0 );
 		SetAnimParameter( "f_spin_speed", 0 );
 	}
 
@@ -198,6 +194,10 @@ public partial class Teleporter : TFBuilding
 	{
 		base.StartUpgrade( level, time, setRequested );
 		UnReady( time );
+
+		if ( LevelParticle != default )
+			LevelParticle.EnableDrawing = false;
+		SetBodyGroup( "teleporter_blur", 0 );
 	}
 	public override void FinishUpgrade()
 	{
@@ -212,6 +212,10 @@ public partial class Teleporter : TFBuilding
 		IsPaired = false;
 		timeSinceLinkedInactive = 0;
 		UnReady( 0 );
+
+		if ( LevelParticle != default )
+			LevelParticle.EnableDrawing = false;
+		SetBodyGroup( "teleporter_blur", 0 );
 	}
 
 	public override void StopCarrying( Transform deployTransform )
