@@ -14,7 +14,9 @@ public abstract class EngineerPDA : TFWeaponBase
 	public override bool CanSecondaryAttack() => false;
 	public override void BuildInput()
 	{
-		if ( Input.Pressed( "Slot1" ) )
+		if ( Input.Pressed( "Menu" ) )
+			Cancel();
+		else if ( Input.Pressed( "Slot1" ) )
 			OnInput( 0 );
 		else if ( Input.Pressed( "Slot2" ) )
 			OnInput( 1 );
@@ -26,6 +28,12 @@ public abstract class EngineerPDA : TFWeaponBase
 	public virtual void OnInput( int slot ) 
 	{
 		Input.ReleaseAction( $"Slot{slot + 1}" );
+	}
+
+	public virtual void Cancel()
+	{
+		TFOwner.RequestedActiveWeapon = TFOwner.GetWeaponInSlot(TFWeaponSlot.Primary); // TODO: Switch to last weapon
+		Input.ReleaseAction( "Menu" );
 	}
 	public string GetBuilding( int slot )
 	{
