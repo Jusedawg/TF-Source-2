@@ -1,4 +1,6 @@
-﻿using Sandbox;
+﻿//#define DISABLE_ADMIN_COMMANDS
+
+using Sandbox;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,31 +15,7 @@ partial class SDKGame
 			player.SwitchToNextBestWeapon();
 	}
 
-	[ConCmd.Admin("noclip", Help ="Disable electromagnetic energies to be able to pass through walls")]
-	public static void Command_Noclip()
-	{
-		var client = ConsoleSystem.Caller;
-		if ( !client.IsValid() )
-			return;
-
-		var player = client.Pawn as SDKPlayer;
-		if ( !player.IsValid() ) 
-			return;
-
-		// If player is not in noclip, enable it.
-		if ( player.MoveType != MoveType.NoClip )
-		{
-			player.SetParent( null );
-			player.MoveType = MoveType.NoClip;
-			Log.Info( $"noclip ON for {client.Name}" );
-			return;
-		}
-
-		player.MoveType = MoveType.Walk;
-		Log.Info( $"noclip OFF for {client.Name}" );
-	}
-
-	[ConCmd.Server("kill", Help = "On-Demand Heart Attack")]
+	[ConCmd.Server( "kill", Help = "On-Demand Heart Attack" )]
 	public static void Command_Suicide()
 	{
 		var client = ConsoleSystem.Caller;
@@ -63,6 +41,32 @@ partial class SDKGame
 			return;
 
 		player.CommitSuicide( explode: true );
+	}
+
+#if !DISABLE_ADMIN_COMMANDS
+
+	[ConCmd.Admin("noclip", Help ="Disable electromagnetic energies to be able to pass through walls")]
+	public static void Command_Noclip()
+	{
+		var client = ConsoleSystem.Caller;
+		if ( !client.IsValid() )
+			return;
+
+		var player = client.Pawn as SDKPlayer;
+		if ( !player.IsValid() ) 
+			return;
+
+		// If player is not in noclip, enable it.
+		if ( player.MoveType != MoveType.NoClip )
+		{
+			player.SetParent( null );
+			player.MoveType = MoveType.NoClip;
+			Log.Info( $"noclip ON for {client.Name}" );
+			return;
+		}
+
+		player.MoveType = MoveType.Walk;
+		Log.Info( $"noclip OFF for {client.Name}" );
 	}
 
 	[ConCmd.Admin( "god" )]
@@ -133,6 +137,7 @@ partial class SDKGame
 
 		ent.Position = tr.EndPosition + Vector3.Up * 10;
 	}
+#endif
 
 	private readonly static Dictionary<ModelEntity, int> _entitiesMaterialGroups = new();
 

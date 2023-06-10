@@ -167,6 +167,11 @@ public partial class TFGameRules : SDKGame
 		return base.SetupSpawnTrace( player, from, to, mins, maxs )
 			.WithoutTags( TFCollisionTags.TeamBarrier );
 	}
+
+	public override void DoPlayerDevCam( IClient client )
+	{
+		// We dont have a dev cam right now
+	}
 }
 
 public enum TFWinReason
