@@ -160,20 +160,20 @@ PS
 
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-        ShadingModelLegacy sm;
-        sm.config.DoDiffuse = true;
-        sm.config.HalfLambert = true;
-        sm.config.DoAmbientOcclusion = /*S_AMBIENT_OCCLUSION ? */true /*: false*/;
-        sm.config.DoLightingWarp = S_LIGHTWARPTEXTURE ? true : false;
-        sm.config.DoRimLighting = S_RIMLIGHT ? true : false;
-        sm.config.DoSpecularWarp = S_PHONGWARPTEXTURE ? true : false;
-        sm.config.DoSpecular = true;
+        ShadingLegacyConfig config = ShadingLegacyConfig::GetDefault();
+        config.DoDiffuse = true;
+        config.HalfLambert = true;
+        config.DoAmbientOcclusion = /*S_AMBIENT_OCCLUSION ? */true /*: false*/;
+        config.DoLightingWarp = S_LIGHTWARPTEXTURE ? true : false;
+        config.DoRimLighting = S_RIMLIGHT ? true : false;
+        config.DoSpecularWarp = S_PHONGWARPTEXTURE ? true : false;
+        config.DoSpecular = true;
 
-        sm.config.SelfIllum = S_SELFILLUM ? true : false;
-        sm.config.SelfIllumFresnel = S_SELFILLUMFRESNEL ? true : false;
+        config.SelfIllum = S_SELFILLUM ? true : false;
+        config.SelfIllumFresnel = S_SELFILLUMFRESNEL ? true : false;
 
-        sm.config.StaticLight = false;
-        sm.config.AmbientLight = true;
+        config.StaticLight = false;
+        config.AmbientLight = true;
 
         #if S_WRINKLEMAP
             float fWrinkleWeight = i.vNormalWs.w;
@@ -184,23 +184,23 @@ PS
         #endif // S_WRINKLEMAP
 
         float2 vUV = i.vTextureCoords.xy;
-        float4 baseColor = CONVERT_COLOR(Tex2D( g_tColor, vUV ));
+        float4 baseColor = CONVERT_COLOR(Tex2DS( g_tColor, TextureFiltering, vUV ));
         #if S_WRINKLEMAP
-            float4 wrinkleColor = Tex2D( g_tWrinkle, vUV );
-            float4 stretchColor = Tex2D( g_tStretch, vUV );
+            float4 wrinkleColor = Tex2DS( g_tWrinkle, TextureFiltering, vUV );
+            float4 stretchColor = Tex2DS( g_tStretch, TextureFiltering, vUV );
 
             // Apply wrinkle blend to only RGB.  Alpha comes from the base texture
             baseColor.rgb = flTextureAmount * baseColor.rgb + flWrinkleAmount * wrinkleColor.rgb + flStretchAmount * stretchColor.rgb;
         #endif // S_WRINKLEMAP
 
         // #if S_AMBIENT_OCCLUSION
-        float flAmbientOcclusion = Tex2D( g_tAmbientOcclusionTexture, vUV ).r;
+        float flAmbientOcclusion = Tex2DS( g_tAmbientOcclusionTexture, TextureFiltering, vUV ).r;
         // #endif // S_AMBIENT_OCCLUSION
 
         #if S_DETAILTEXTURE
             // float4 detailColor = Tex2D( g_tDetailTexture, i.vTextureCoords.zw );
             // packed in SDK
-            float4 detailColor = CONVERT_DETAIL(Tex2D( g_tDetailTexture, i.vDetailTextureCoords.xy ));
+            float4 detailColor = CONVERT_DETAIL(Tex2DS( g_tDetailTexture, TextureFiltering, i.vDetailTextureCoords.xy ));
             baseColor = TextureCombine( baseColor, detailColor, DETAIL_BLEND_MODE, g_flDetailBlendFactor );
         #endif // S_DETAILTEXTURE
 
@@ -211,13 +211,13 @@ PS
 
         float3 worldSpaceNormal, tangentSpaceNormal;
         float fSpecMask = 1.0f;
-        float4 normalTexel = Tex2D( g_tNormal, vUV );
+        float4 normalTexel = Tex2DS( g_tNormal, TextureFiltering, vUV );
         // inverted normals
 		normalTexel.y = 1 - normalTexel.y;
 
         #if S_WRINKLEMAP
-            float4 wrinkleNormal = Tex2D( g_tWrinkleNormal,	vUV );
-            float4 stretchNormal = Tex2D( g_tWrinkleStretchNormal, vUV );
+            float4 wrinkleNormal = Tex2DS( g_tWrinkleNormal, TextureFiltering,	vUV );
+            float4 stretchNormal = Tex2DS( g_tWrinkleStretchNormal, TextureFiltering, vUV );
             // inverted normals
 		    wrinkleNormal.y = 1 - wrinkleNormal.y;
 		    stretchNormal.y = 1 - stretchNormal.y;
@@ -250,7 +250,7 @@ PS
         float fRimMask = 0;
         float fSpecExp = 1;
 
-        float4 vSpecExpMap = Tex2D( g_tSpecularExponentTexture, vUV );
+        float4 vSpecExpMap = Tex2DS( g_tSpecularExponentTexture, TextureFiltering, vUV );
 	
         // if ( !bFlashlight )
         // {
@@ -300,7 +300,7 @@ PS
             m.SelfIllumMask = baseColor.a;
         #else
             // whereas this samples a mask
-            float3 vSelfIllumMask = Tex2D( g_tSelfIllumMaskTexture, vUV ).rgb;
+            float3 vSelfIllumMask = Tex2DS( g_tSelfIllumMaskTexture, TextureFiltering, vUV ).rgb;
             vSelfIllumMask = g_bSelfIllumMaskControl ? vSelfIllumMask : baseColor.aaa;
             m.SelfIllumMask = vSelfIllumMask;
         #endif
@@ -311,6 +311,6 @@ PS
         #endif // ( !S_SELFILLUM && !S_BLENDTINTBYBASEALPHA )
         m.Opacity = alpha;
         
-        return FinalizeLegacyOutput(FinalizePixelMaterial( i, m, sm ));
+        return FinalizeLegacyOutput(ShadingModelLegacy::Shade( i, m, config ));
 	}
 }

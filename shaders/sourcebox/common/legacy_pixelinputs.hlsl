@@ -7,7 +7,11 @@
 
 // addressing mode is per-texture now
 #define CUSTOM_TEXTURE_FILTERING
-
+#ifdef F_TEXTURE_FILTERING
+    SamplerState TextureFiltering < Filter((F_TEXTURE_FILTERING == 0 ? ANISOTROPIC : (F_TEXTURE_FILTERING == 1 ? BILINEAR : (F_TEXTURE_FILTERING == 2 ? TRILINEAR : (F_TEXTURE_FILTERING == 3 ? POINT : NEAREST))))); MaxAniso(8); > ;
+#else
+    SamplerState TextureFiltering < Filter(ANISOTROPIC); MaxAniso(8); > ;
+#endif
 
 CreateInputTexture2D( Color,            Srgb,   8, "",                  "_color",   "Material,10/10",   Default3( 1.0, 1.0, 1.0 ) );
 CreateInputTexture2D( Translucency,     Linear, 8, "",                  "_trans",   "Material,10/11",   Default( 1.0 ) );
@@ -91,10 +95,10 @@ CreateInputTexture2D( DistAlphaMask, Linear, 8, "", "_dist", "Distance Alpha,80/
 
 // determine the base color alpha behavior
 #ifdef BASE_COLOR_ALPHA_NAME
-    CreateTexture2D( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); Channel( A, Box( BASE_COLOR_ALPHA_NAME ), Linear ); OutputFormat( BC7 ); SrgbRead( true ); >;
+    CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGB, Box( Color ), Srgb ); Channel( A, Box( BASE_COLOR_ALPHA_NAME ), Linear ); OutputFormat( BC7 ); SrgbRead( true ); >;
 #else
     // otherwise, assume packed data
-    CreateTexture2D( g_tColor ) < Channel( RGBA, Box( Color ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >;
+    CreateTexture2DWithoutSampler( g_tColor ) < Channel( RGBA, Box( Color ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >;
 #endif // BASE_COLOR_ALPHA_NAME
 
 
@@ -102,10 +106,10 @@ CreateInputTexture2D( DistAlphaMask, Linear, 8, "", "_dist", "Distance Alpha,80/
 float4 CONVERT_COLOR(float4 s) { return s; }
 
 #ifdef NORMAL_ALPHA_NAME
-    CreateTexture2D( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); Channel( A, Box( NORMAL_ALPHA_NAME ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
+    CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGB, Box( Normal ), Linear ); Channel( A, Box( NORMAL_ALPHA_NAME ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
 #else
     // otherwise, assume packed data
-    CreateTexture2D( g_tNormal ) < Channel( RGBA, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
+    CreateTexture2DWithoutSampler( g_tNormal ) < Channel( RGBA, Box( Normal ), Linear ); OutputFormat( DXT5 ); SrgbRead( false ); >;
 #endif
 
 // To support HDR envmaps, we need linear reading and a fp output format
@@ -116,9 +120,9 @@ float4 CONVERT_ENVMAP(float4 s) { return s; }
 
 #if S_ENVMAPMASK
     #if S_SELFILLUM_ENVMAPMASK_ALPHA
-        CreateTexture2D( g_tEnvMapMask ) < Channel( RGBA, Box( EnvmapMask ), Linear ); OutputFormat( DXT1 ); SrgbRead( false ); >;
+        CreateTexture2DWithoutSampler( g_tEnvMapMask ) < Channel( RGBA, Box( EnvmapMask ), Linear ); OutputFormat( DXT1 ); SrgbRead( false ); >;
     #else // !S_SELFILLUM_ENVMAPMASK_ALPHA
-        CreateTexture2D( g_tEnvMapMask ) < Channel( RGB, Box( EnvmapMask ), Linear ); OutputFormat( DXT1 ); SrgbRead( false ); >;
+        CreateTexture2DWithoutSampler( g_tEnvMapMask ) < Channel( RGB, Box( EnvmapMask ), Linear ); OutputFormat( DXT1 ); SrgbRead( false ); >;
     #endif // !S_SELFILLUM_ENVMAPMASK_ALPHA
 #endif // S_ENVMAPMASK
 
@@ -129,9 +133,9 @@ CreateTexture2D( g_tLightWarpTexture ) < Channel( RGB, Box( LightWarpTexture ), 
 
 // phongwarp
 CreateTexture2D( g_tSpecularWarpTexture ) < Channel( RGB, Box( SpecularWarpTexture ), Linear ); OutputFormat( RGB323232F ); AddressU( CLAMP ); AddressV( CLAMP ); SrgbRead( false ); >;
-CreateTexture2D( g_tSpecularExponentTexture ) < Channel( R, Box( SpecularExponentTexture ), Linear ); Channel( G, Box( SpecularTintTexture ), Linear ); Channel( A, Box( RimMaskTexture ), Linear ); OutputFormat( RGBA8888 ); SrgbRead( false ); >;
+CreateTexture2DWithoutSampler( g_tSpecularExponentTexture ) < Channel( R, Box( SpecularExponentTexture ), Linear ); Channel( G, Box( SpecularTintTexture ), Linear ); Channel( A, Box( RimMaskTexture ), Linear ); OutputFormat( RGBA8888 ); SrgbRead( false ); >;
 
-CreateTexture2D( g_tSelfIllumMaskTexture ) < Channel( RGB, Box( SelfIllumMaskTexture ), Linear ); OutputFormat( RGBA8888 ); SrgbRead( false ); >;
+CreateTexture2DWithoutSampler( g_tSelfIllumMaskTexture ) < Channel( RGB, Box( SelfIllumMaskTexture ), Linear ); OutputFormat( RGBA8888 ); SrgbRead( false ); >;
 
 #ifdef S_DETAILTEXTURE
     #if (S_DETAIL_BLEND_MODE == 0)
@@ -148,7 +152,7 @@ CreateTexture2D( g_tSelfIllumMaskTexture ) < Channel( RGB, Box( SelfIllumMaskTex
         #define DETAIL_CHANNELS Channel( RGBA, Box( DetailTexture ), DETAIL_SRGB_ENUM )
     #endif // !(S_DISTANCEALPHA && (S_DISTANCEALPHAFROMDETAIL == 1))
 
-    CreateTexture2D( g_tDetailTexture ) < DETAIL_CHANNELS; DETAIL_SRGB; OutputFormat( BC7 ); >;
+    CreateTexture2DWithoutSampler( g_tDetailTexture ) < DETAIL_CHANNELS; DETAIL_SRGB; OutputFormat( BC7 ); >;
 
     // int g_nDetailHDR	< UiGroup( "Attributes,11/2" ); Default(0); >;
     // float4 CONVERT_DETAIL(float4 s) { return float4(g_nDetailHDR ? s.rgb : pow(s.rgb, 2.2f), s.a); }
@@ -162,17 +166,17 @@ CreateTexture2D( g_tSelfIllumMaskTexture ) < Channel( RGB, Box( SelfIllumMaskTex
     CreateInputTexture2D( WrinkleNormal, Linear, 8, "NormalizeNormals", "_wrinklenormal", "Material,10/102", Default3( 0.5, 0.5, 1.0 ) );
     CreateInputTexture2D( WrinkleStretchNormal, Linear, 8, "NormalizeNormals", "_wrinklestretchnormal", "Material,10/103", Default3( 0.5, 0.5, 1.0 ) );
 
-    CreateTexture2D( g_tWrinkle ) < Channel( RGB, Box( Wrinkle ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >;
-    CreateTexture2D( g_tStretch ) < Channel( RGB, Box( Stretch ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >;
-    CreateTexture2D( g_tWrinkleNormal ) < Channel( RGBA, Box( WrinkleNormal ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
-    CreateTexture2D( g_tWrinkleStretchNormal ) < Channel( RGBA, Box( WrinkleStretchNormal ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+    CreateTexture2DWithoutSampler( g_tWrinkle ) < Channel( RGB, Box( Wrinkle ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >;
+    CreateTexture2DWithoutSampler( g_tStretch ) < Channel( RGB, Box( Stretch ), Srgb ); OutputFormat( BC7 ); SrgbRead( true ); >;
+    CreateTexture2DWithoutSampler( g_tWrinkleNormal ) < Channel( RGBA, Box( WrinkleNormal ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
+    CreateTexture2DWithoutSampler( g_tWrinkleStretchNormal ) < Channel( RGBA, Box( WrinkleStretchNormal ), Linear ); OutputFormat( BC7 ); SrgbRead( false ); >;
 #endif // S_WRINKLEMAP
 
 // for some ungodly reason, the EyeRefract AO texture is set up as SRGB in the SDK
 #if AO_TEXTURE_IS_SRGB
-    CreateTexture2D( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Srgb ); OutputFormat( RGBA8888 ); AddressU( CLAMP ); AddressV( CLAMP ); SrgbRead( true ); >;
+    CreateTexture2DWithoutSampler( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Srgb ); OutputFormat( RGBA8888 ); SrgbRead( true ); >;
 #else // AO_TEXTURE_IS_SRGB
-    CreateTexture2D( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Linear ); OutputFormat( RGBA8888 ); SrgbRead( false ); >;
+    CreateTexture2DWithoutSampler( g_tAmbientOcclusionTexture ) < Channel( RGBA, Box( AmbientOcclusion ), Linear ); OutputFormat( RGBA8888 ); SrgbRead( false ); >;
 #endif // AO_TEXTURE_IS_SRGB
 
 #endif // SOURCEBOX_LEGACY_PIXELINPUTS_H

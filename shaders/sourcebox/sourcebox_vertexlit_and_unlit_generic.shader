@@ -261,11 +261,11 @@ PS
         float4 baseColor = float4( 1.0f, 1.0f, 1.0f, 1.0f );
         #if S_SEAMLESS_BASE
             baseColor =
-                i.vSeamlessWeights.x * CONVERT_COLOR(Tex2D( g_tColor, i.vTextureCoords.yz ))+
-                i.vSeamlessWeights.y * CONVERT_COLOR(Tex2D( g_tColor, i.vTextureCoords.zx ))+
-                i.vSeamlessWeights.z * CONVERT_COLOR(Tex2D( g_tColor, i.vTextureCoords.xy ));
+                i.vSeamlessWeights.x * CONVERT_COLOR(Tex2DS( g_tColor, TextureFiltering, i.vTextureCoords.yz ))+
+                i.vSeamlessWeights.y * CONVERT_COLOR(Tex2DS( g_tColor, TextureFiltering, i.vTextureCoords.zx ))+
+                i.vSeamlessWeights.z * CONVERT_COLOR(Tex2DS( g_tColor, TextureFiltering, i.vTextureCoords.xy ));
         #else // !S_SEAMLESS_BASE
-            baseColor = CONVERT_COLOR(Tex2D( g_tColor, i.vTextureCoords.xy ));
+            baseColor = CONVERT_COLOR(Tex2DS( g_tColor, TextureFiltering, i.vTextureCoords.xy ));
 
         // #if S_SRGB_INPUT_ADAPTER
         //     baseColor.rgb = GammaToLinear( baseColor.rgb );
@@ -274,7 +274,7 @@ PS
         #endif // !S_SEAMLESS_BASE
 
         // #if S_AMBIENT_OCCLUSION
-        float flAmbientOcclusion = Tex2D( g_tAmbientOcclusionTexture, i.vTextureCoords.xy ).r;
+        float flAmbientOcclusion = Tex2DS( g_tAmbientOcclusionTexture, TextureFiltering, i.vTextureCoords.xy ).r;
         // #endif // S_AMBIENT_OCCLUSION
 
         #if S_DISTANCEALPHA && (S_DISTANCEALPHAFROMDETAIL == 0)
@@ -284,11 +284,11 @@ PS
         #if S_DETAILTEXTURE
             #if S_SEAMLESS_DETAIL
                 float4 detailColor = 
-                        i.vSeamlessWeights.x * CONVERT_DETAIL(Tex2D( g_tDetailTexture, i.vDetailTextureCoords.yz ))+
-                        i.vSeamlessWeights.y * CONVERT_DETAIL(Tex2D( g_tDetailTexture, i.vDetailTextureCoords.zx ))+
-                        i.vSeamlessWeights.z * CONVERT_DETAIL(Tex2D( g_tDetailTexture, i.vDetailTextureCoords.xy ));
+                        i.vSeamlessWeights.x * CONVERT_DETAIL(Tex2DS( g_tDetailTexture, TextureFiltering, i.vDetailTextureCoords.yz ))+
+                        i.vSeamlessWeights.y * CONVERT_DETAIL(Tex2DS( g_tDetailTexture, TextureFiltering, i.vDetailTextureCoords.zx ))+
+                        i.vSeamlessWeights.z * CONVERT_DETAIL(Tex2DS( g_tDetailTexture, TextureFiltering, i.vDetailTextureCoords.xy ));
             #else
-                float4 detailColor = CONVERT_DETAIL(Tex2D( g_tDetailTexture, i.vDetailTextureCoords.xy ));
+                float4 detailColor = CONVERT_DETAIL(Tex2DS( g_tDetailTexture, TextureFiltering, i.vDetailTextureCoords.xy ));
             #endif
             detailColor.rgb *= g_vDetailTint;
 
@@ -327,9 +327,9 @@ PS
 
             #if ( S_OUTER_GLOW )
                 #if S_DISTANCEALPHAFROMDETAIL
-                    float4 glowTexel = 	CONVERT_DETAIL(Tex2D( g_tDetailTexture, i.vDetailTextureCoords.xy+g_vGlowUVOffset ));
+                    float4 glowTexel = 	CONVERT_DETAIL(Tex2DS( g_tDetailTexture, TextureFiltering, i.vDetailTextureCoords.xy+g_vGlowUVOffset ));
                 #else
-                    float4 glowTexel = 	CONVERT_COLOR(Tex2D( g_tColor, i.vDetailTextureCoords.xy+g_vGlowUVOffset ));
+                    float4 glowTexel = 	CONVERT_COLOR(Tex2DS( g_tColor, TextureFiltering, i.vDetailTextureCoords.xy+g_vGlowUVOffset ));
                 #endif
                 float4 glowc = g_vGlowColor*smoothstep( g_flOuterGlowMinDValue, g_flOuterGlowMaxDValue, glowTexel.a );
                 baseColor = lerp( glowc, baseColor, mskUsed );
@@ -341,7 +341,7 @@ PS
         float4 envmapMaskTexel;
 
         #if S_ENVMAPMASK
-            envmapMaskTexel = Tex2D( g_tEnvMapMask, i.vTextureCoords.xy );
+            envmapMaskTexel = Tex2DS( g_tEnvMapMask, TextureFiltering, i.vTextureCoords.xy );
             specularFactor *= envmapMaskTexel.xyz;	
         #endif // S_ENVMAPMASK
 
@@ -394,26 +394,26 @@ PS
         #else
             if ( bSelfIllum )
             {
-                vSelfIllumMask = Tex2D( g_tSelfIllumMaskTexture, i.vTextureCoords.xy ).rgb;
+                vSelfIllumMask = Tex2DS( g_tSelfIllumMaskTexture, TextureFiltering, i.vTextureCoords.xy ).rgb;
                 vSelfIllumMask = g_bSelfIllumMaskControl ? vSelfIllumMask : baseColor.aaa;
             }
         #endif
 
-        ShadingModelLegacy sm;
-        sm.config.DoDiffuse = S_DIFFUSELIGHTING ? true : false;
-        sm.config.HalfLambert = false;
-        sm.config.DoAmbientOcclusion = true;
-        sm.config.DoLightingWarp = false;
-        sm.config.DoRimLighting = false;
-        sm.config.DoSpecularWarp = false;
-        sm.config.DoSpecular = false;
+        ShadingLegacyConfig config = ShadingLegacyConfig::GetDefault();
+        config.DoDiffuse = S_DIFFUSELIGHTING ? true : false;
+        config.HalfLambert = false;
+        config.DoAmbientOcclusion = true;
+        config.DoLightingWarp = false;
+        config.DoRimLighting = false;
+        config.DoSpecularWarp = false;
+        config.DoSpecular = false;
 
         // we're doing selfillum ourselves, because of the envmap mask option
-        sm.config.SelfIllum = false;
-        sm.config.SelfIllumFresnel = false;
+        config.SelfIllum = false;
+        config.SelfIllumFresnel = false;
 
-        sm.config.StaticLight = false;
-        sm.config.AmbientLight = true;
+        config.StaticLight = false;
+        config.AmbientLight = true;
 
         float2 vUV = i.vTextureCoords.xy;
         Material m = GetDefaultLegacyMaterial();
@@ -435,7 +435,7 @@ PS
             m.DiffuseModControls = detailColor;
         #endif
 
-        float4 output = FinalizePixelMaterial( i, m, sm );
+        float4 output = ShadingModelLegacy::Shade( i, m, config );
         output.a = alpha;
 
         // shadingmodel hack, from above - replace diffuse lighting with albedo for UnlitGeneric.

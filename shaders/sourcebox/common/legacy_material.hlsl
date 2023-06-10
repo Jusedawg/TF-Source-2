@@ -1,13 +1,14 @@
 #ifndef SOURCEBOX_LEGACY_MATERIAL_H
 #define SOURCEBOX_LEGACY_MATERIAL_H
 
-#ifdef COMMON_PIXEL_MATERIAL_MINIMAL_H
+#ifdef COMMON_PIXEL_MATERIAL_H
 #error legacy_material.hlsl must come before base s&box includes!
-#endif // COMMON_PIXEL_MATERIAL_MINIMAL_H
+#endif // COMMON_PIXEL_MATERIAL_H
 
 // Sam's shading model API uses Material as input
 // that doesn't really work for our use case, so here we add some helpers to bridge the gap
-#define COMMON_PIXEL_MATERIAL_MINIMAL_H
+#define COMMON_PIXEL_MATERIAL_H
+#define CUSTOM_MATERIAL_INPUTS 1
 struct Material {
     float3  Albedo;
     float   Opacity;

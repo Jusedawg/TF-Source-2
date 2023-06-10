@@ -8,13 +8,7 @@
 #include "sourcebox/common/legacy_material.hlsl"
 #include "sourcebox/common/legacy_pixelinputs.hlsl"
 
-#include "common/pixel.config.hlsl"
-#include "common/pixel.lighting.hlsl"
-#include "common/pixel.shading.hlsl"
-
-
-// needed for shading
-#include "common/pixel.material.helpers.hlsl"
+#include "common/pixel.hlsl"
 
 #include "sourcebox/common/legacy_lighting.hlsl"
 #include "sourcebox/common/texcombine.hlsl"

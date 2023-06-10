@@ -161,36 +161,36 @@ PS
 
 	float4 MainPs( PixelInput i ) : SV_Target0
 	{
-        ShadingModelLegacy sm;
-        sm.config.DoDiffuse = S_DIFFUSELIGHTING ? true : false;
-        sm.config.HalfLambert = S_HALFLAMBERT ? true : false;
-        sm.config.DoAmbientOcclusion = true;
-        sm.config.DoLightingWarp = S_LIGHTWARPTEXTURE ? true : false;
-        sm.config.DoRimLighting = false;
-        sm.config.DoSpecularWarp = false;
-        sm.config.DoSpecular = false;
+        ShadingLegacyConfig config = ShadingLegacyConfig::GetDefault();
+        config.DoDiffuse = S_DIFFUSELIGHTING ? true : false;
+        config.HalfLambert = S_HALFLAMBERT ? true : false;
+        config.DoAmbientOcclusion = true;
+        config.DoLightingWarp = S_LIGHTWARPTEXTURE ? true : false;
+        config.DoRimLighting = false;
+        config.DoSpecularWarp = false;
+        config.DoSpecular = false;
 
-        sm.config.SelfIllum = S_SELFILLUM ? true : false;
-        sm.config.SelfIllumFresnel = S_SELFILLUMFRESNEL ? true : false;
+        config.SelfIllum = S_SELFILLUM ? true : false;
+        config.SelfIllumFresnel = S_SELFILLUMFRESNEL ? true : false;
 
-        sm.config.StaticLight = false;
-        sm.config.AmbientLight = D_AMBIENT_LIGHT ? true : false;
+        config.StaticLight = false;
+        config.AmbientLight = D_AMBIENT_LIGHT ? true : false;
 
         float2 vUV = i.vTextureCoords.xy;
         Material m = GetDefaultLegacyMaterial();
-        float4 baseColor = CONVERT_COLOR(Tex2D( g_tColor, vUV ));
+        float4 baseColor = CONVERT_COLOR(Tex2DS( g_tColor, TextureFiltering, vUV ));
         #if S_DETAILTEXTURE
             // was packed into a vec4 in the sdk
             // float4 detailColor = Tex2D( g_tDetailTexture, i.vTextureCoords.zw );
-            float4 detailColor = CONVERT_DETAIL(Tex2D( g_tDetailTexture, i.vDetailTextureCoords.xy ));
+            float4 detailColor = CONVERT_DETAIL(Tex2DS( g_tDetailTexture, TextureFiltering, i.vDetailTextureCoords.xy ));
             baseColor = TextureCombine( baseColor, detailColor, DETAIL_BLEND_MODE, g_flDetailBlendFactor );
         #endif // S_DETAILTEXTURE
         
         // #if S_AMBIENT_OCCLUSION
-        float flAmbientOcclusion = Tex2D( g_tAmbientOcclusionTexture, vUV ).r;
+        float flAmbientOcclusion = Tex2DS( g_tAmbientOcclusionTexture, TextureFiltering, vUV ).r;
         // #endif // S_AMBIENT_OCCLUSION
         
-        float4 normalTexel = Tex2D( g_tNormal, vUV );
+        float4 normalTexel = Tex2DS( g_tNormal, TextureFiltering, vUV );
         // inverted normals
 		normalTexel.y = 1 - normalTexel.y;
 
@@ -229,8 +229,7 @@ PS
         m.Opacity = alpha;
         m.SelfIllumMask = baseColor.aaa;
         m.EnvmapMask = float3(specularFactor, specularFactor, specularFactor);
-
-        // PixelInput, Material, Shading Model
-        return FinalizeLegacyOutput(FinalizePixelMaterial( i, m, sm ));
+        
+        return FinalizeLegacyOutput(ShadingModelLegacy::Shade( i, m, config ));
 	}
 }

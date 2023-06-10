@@ -8,6 +8,34 @@
 #error Material struct must be overriden first!
 #endif // SOURCEBOX_LEGACY_MATERIAL_H
 
+struct LegacyLightResult
+{
+    float3 Diffuse;
+    float3 Specular;
+    float3 Iris;
+    float3 Rim;
+
+    static LegacyLightResult Init()
+    {
+        LegacyLightResult result;
+        result.Diffuse = float3(0,0,0);
+        result.Specular = float3(0,0,0);
+        result.Iris = float3(0,0,0);
+        result.Rim = float3(0,0,0);
+        return result;
+    }
+
+    static LegacyLightResult Sum( const LegacyLightResult a, const LegacyLightResult b )
+    {
+        LegacyLightResult result;
+        result.Diffuse = a.Diffuse + b.Diffuse;
+        result.Specular = a.Specular + b.Specular;
+        result.Iris = a.Iris + b.Iris;
+        result.Rim = a.Rim + b.Rim;
+        return result;
+    }
+};
+
 // Use SourceBox code-controlled lighting instead of s&box builtin
 // #define USE_MANUAL_AMBIENT
 // #define USE_MANUAL_CUBEMAP
@@ -59,8 +87,7 @@ float Fresnel( const float3 vNormal, const float3 vEyeDir, float3 vRanges )
 	return vRanges.y + (f >= 0.0 ? vRanges.z : vRanges.x) * f;
 }
 
-
-class ShadingLegacyConfig {
+struct ShadingLegacyConfig {
     bool DoDiffuse;
 
     bool SelfIllum;
@@ -94,6 +121,29 @@ class ShadingLegacyConfig {
 
     #define cOverbright 2.0f
     #define cOOOverbright 0.5f
+
+    static ShadingLegacyConfig GetDefault()
+    {
+        ShadingLegacyConfig config;
+
+        config.DoDiffuse = true;
+
+        config.SelfIllum = false;
+        config.SelfIllumFresnel = false;
+
+        config.HalfLambert = false;
+        config.DoAmbientOcclusion = false;
+        config.DoLightingWarp = false;
+        config.DoRimLighting = false;
+        config.DoSpecularWarp = false;
+        config.DoSpecular = false;
+        config.DoIrisLighting = false;
+
+        config.StaticLight = false;
+        config.AmbientLight = true;
+
+        return config;
+    }
 };
 
 // S&box glue
@@ -302,39 +352,15 @@ class LegacyShadeParams {
 
 class ShadingModelLegacy : ShadingModel
 {
-    LegacyShadeParams shadeParams;
-    ShadingLegacyConfig config;
-	
-    // Some things operate on the final sums of these values (modulate, iris lighting, envmap multiplier),
-    // and PostProcess() doesn't give us separate diffuse/specular. So we add them up internally, and apply them
-    // to the result manually within PostProcess()
-	float3 m_sumDiffuseLighting;
-	float3 m_sumSpecularLighting;
-	float3 m_sumRimLighting;
-	float3 m_sumIrisLighting;
-	
-    //
-    // Consumes a material and converts it to the internal shading parameters,
-    // That is more easily consumed by the shader.
-    //
-    void Init( const PixelInput pixelInput, const Material material )
-    {
-        shadeParams = LegacyShadeParams::ProcessMaterial( pixelInput, material );
-		m_sumRimLighting = float3( 0.0, 0.0, 0.0 );
-		m_sumDiffuseLighting = float3( 0.0, 0.0, 0.0 );
-		m_sumSpecularLighting = float3( 0.0, 0.0, 0.0 );
-		m_sumIrisLighting = float3( 0.0, 0.0, 0.0 );
-    }
-    
     //-----------------------------------------------------------------------------
     // Purpose: Compute scalar diffuse term with various optional tweaks such as
     //          Half Lambert and ambient occlusion
     //-----------------------------------------------------------------------------
-    float3 DiffuseTerm( const LightData light )
+    static float3 DiffuseTerm( const LegacyShadeParams shadeParams, const ShadingLegacyConfig config, const Light light )
     {
         float fResult;
 
-        float NDotL = dot( shadeParams.inputs.NormalWs, light.LightDir );				// Unsaturated dot (-1 to 1 range)
+        float NDotL = dot( shadeParams.inputs.NormalWs, light.Direction );				// Unsaturated dot (-1 to 1 range)
         // builtin NDotL is already saturated
         // TODO: ognik fixed this
         //float NDotL = light.NdotL;
@@ -382,12 +408,12 @@ class ShadingModelLegacy : ShadingModel
         return fOut;
     }
 
-    float3 PixelShaderDoGeneralDiffuseLight( const LightData light )
+    static float3 PixelShaderDoGeneralDiffuseLight( const LegacyShadeParams shadeParams, const ShadingLegacyConfig config, const Light light )
     {
-        return light.Color * light.Attenuation * light.Visibility * DiffuseTerm( light );
+        return light.Color * light.Attenuation * light.Visibility * DiffuseTerm( shadeParams, config, light );
     }
 
-    void SpecularAndRimTerms( const LightData light, const float3 color, out float3 specularLighting, out float3 rimLighting )
+    static void SpecularAndRimTerms( const LegacyShadeParams shadeParams, const ShadingLegacyConfig config, const Light light, const float3 color, out float3 specularLighting, out float3 rimLighting )
     {
         rimLighting = float3(0.0f, 0.0f, 0.0f);
 
@@ -395,15 +421,14 @@ class ShadingModelLegacy : ShadingModel
         //float3 vReflect = 2 * vWorldNormal * dot( vWorldNormal , vEyeDir ) - vEyeDir; // Reflect view through normal
         float3 vReflect = shadeParams.inputs.ReflectRayWs;
 
-        float LdotR = saturate(dot( vReflect, light.LightDir ));					// L.R	(use half-angle instead?)
+        float LdotR = saturate(dot( vReflect, light.Direction ));					// L.R	(use half-angle instead?)
         specularLighting = pow( LdotR, shadeParams.SpecularExponent );					// Raise to specular exponent
 
         // Optionally warp as function of scalar specular and fresnel
         if ( config.DoSpecularWarp )
             specularLighting *= Tex2DLevel( g_tSpecularWarpTexture, float2(specularLighting.x, shadeParams.Fresnel), 0 ).rgb; // Sample at { (L.R)^k, fresnel }
 
-        // specularLighting *= saturate(dot( vWorldNormal, vLightDir ));		// Mask with N.L
-        specularLighting *= saturate(light.NdotL);		                            // Mask with N.L
+        specularLighting *= saturate(dot( shadeParams.inputs.NormalWs, light.Direction ));		// Mask with N.L
         specularLighting *= color;											// Modulate with light color
         
         if ( config.DoAmbientOcclusion && !config.DoIrisLighting )			// Optionally modulate with ambient occlusion
@@ -415,8 +440,7 @@ class ShadingModelLegacy : ShadingModel
         if ( config.DoRimLighting )											// Optionally do rim lighting
         {
             rimLighting  = pow( LdotR, shadeParams.RimExponent );			// Raise to rim exponent
-            // rimLighting *= saturate(dot( vWorldNormal, vLightDir ));		// Mask with N.L
-            rimLighting *= saturate(light.NdotL);		                    // Mask with N.L
+            rimLighting *= saturate(dot( shadeParams.inputs.NormalWs, light.Direction )); // Mask with N.L
             rimLighting *= color;											// Modulate with light color
         }
 
@@ -426,13 +450,13 @@ class ShadingModelLegacy : ShadingModel
         // rimLighting *= light.Visibility;
     }
 
-    void PixelShaderDoSpecularLight( const LightData light, out float3 specularLighting, out float3 rimLighting )
+    static void PixelShaderDoSpecularLight( const LegacyShadeParams shadeParams, const ShadingLegacyConfig config, const Light light, out float3 specularLighting, out float3 rimLighting )
     {
         // Compute Specular and rim terms
-        SpecularAndRimTerms( light, light.Color * light.Attenuation, specularLighting, rimLighting );
+        SpecularAndRimTerms( shadeParams, config, light, light.Color * light.Attenuation, specularLighting, rimLighting );
     }
 
-    float3 DiffuseModulate( float3 diffuse )
+    static float3 DiffuseModulate( const LegacyShadeParams shadeParams, const ShadingLegacyConfig config, float3 diffuse )
     {
         float3 albedo = shadeParams.Albedo.rgb;
         float3 diffuseComponent = albedo * diffuse;
@@ -458,12 +482,12 @@ class ShadingModelLegacy : ShadingModel
         return diffuseComponent;
     }
 
-    float3 SpecularModulate( float3 specular )
+    static float3 SpecularModulate( const LegacyShadeParams shadeParams, const ShadingLegacyConfig config, float3 specular )
     {
         return specular * shadeParams.SpecularTint;
     }
 
-    float3 DoIrisCausticLighting( const LightData light )
+    static float3 DoIrisCausticLighting( const LegacyShadeParams shadeParams, const ShadingLegacyConfig config, const Light light )
     {
         float3 vIrisTangentNormal = shadeParams.inputs.CorneaNormalTs.xyz;
         vIrisTangentNormal.xy *= -2.5f; // I'm not normalizing on purpose
@@ -471,7 +495,7 @@ class ShadingModelLegacy : ShadingModel
         // for ( int j=0; j < nNumLights; j++ )
         // {
             // World light vector
-            float3 vWorldLightVector = light.LightDir;
+            float3 vWorldLightVector = light.Direction;
 
             // Tangent light vector
             float3 vTangentLightVector;
@@ -507,31 +531,33 @@ class ShadingModelLegacy : ShadingModel
     //
     // Executed for every direct light
     //
-    LightShade Direct( const LightData light )
+    static LegacyLightResult Direct( const LegacyShadeParams shadeParams, const ShadingLegacyConfig config, const Light light )
     {
-        LightShade lightShade;
+        LegacyLightResult lightShade;
         
         lightShade.Diffuse = float3( 0.0, 0.0, 0.0 );
         if ( config.DoDiffuse )
         {
             // Don't add it in, we need this data for EyeRefract cornea stuff
             // lightShade.Diffuse = DiffuseModulate( PixelShaderDoGeneralDiffuseLight( light ) );
-            m_sumDiffuseLighting += PixelShaderDoGeneralDiffuseLight( light );
+            lightShade.Diffuse = PixelShaderDoGeneralDiffuseLight( shadeParams, config, light );
         }
 
+        lightShade.Iris = float3( 0.0, 0.0, 0.0 );
         if ( config.DoIrisLighting )
         {
-            m_sumIrisLighting += DoIrisCausticLighting( light );
+            lightShade.Iris = DoIrisCausticLighting( shadeParams, config, light );
         }
 
         lightShade.Specular = float3( 0.0, 0.0, 0.0 );
+        lightShade.Rim = float3( 0.0, 0.0, 0.0 );
 
         if ( config.DoSpecular )
         {
             float3 specularLighting = float3( 0.0f, 0.0f, 0.0f );
 	        float3 rimLighting = float3( 0.0f, 0.0f, 0.0f );
 
-            PixelShaderDoSpecularLight( light, specularLighting, rimLighting );
+            PixelShaderDoSpecularLight( shadeParams, config, light, specularLighting, rimLighting );
 
             // Modulate with spec mask, boost and tint
             specularLighting *= shadeParams.SpecularMask * g_flSpecularBoost;
@@ -549,51 +575,65 @@ class ShadingModelLegacy : ShadingModel
                 // specularLighting = max( specularLighting, rimLighting );
 				
 				// HACK: sum up the rim lighting here, add later in ambient, to avoid the issues outlined above
-				m_sumRimLighting += rimLighting;
+				lightShade.Rim = rimLighting;
 				
                 // Add in view-ray lookup from ambient cube (moved to Indirect)
             }
-            
-            // lightShade.Specular = SpecularModulate( specularLighting );
-			m_sumSpecularLighting += specularLighting;
+
+			lightShade.Specular = specularLighting;
         }
 
         // Giant iris specular highlights
         if ( config.DoIrisLighting )
         {
-			m_sumSpecularLighting += pow( saturate( dot( shadeParams.inputs.CorneaReflectionWs.xyz, light.LightDir ) ), 128.0f ) * light.Attenuation * light.Color;
+			lightShade.Specular += pow( saturate( dot( shadeParams.inputs.CorneaReflectionWs.xyz, light.Direction ) ), 128.0f ) * light.Attenuation * light.Color;
         }
 
         return lightShade;
     }
     
-    float3 PixelShaderAmbientLight( const float3 worldNormal, const float3 cAmbientCube[6] )
+    #ifndef USE_MANUAL_AMBIENT
+        static void GetAmbientCube( const LegacyShadeParams shadeParams, out float3 ambientCube[6] )
+        {
+            AmbientLight light;
+
+            //
+            // Position
+            //
+            light.Position = shadeParams.inputs.PositionWithOffsetWs + g_vHighPrecisionLightingOffsetWs.xyz;
+
+            SampleLightProbeVolume( ambientCube, light.Position );
+        }
+    #endif // USE_MANUAL_AMBIENT
+
+    static float3 PixelShaderAmbientLight( const LegacyShadeParams shadeParams, const ShadingLegacyConfig config )
     {
-        float3 linearColor, nSquared = worldNormal * worldNormal;
-        float3 isNegative = ( worldNormal >= 0.0 ) ? 0 : nSquared;
-        float3 isPositive = ( worldNormal >= 0.0 ) ? nSquared : 0;
-        linearColor = isPositive.x * cAmbientCube[0] + isNegative.x * cAmbientCube[1] +
-                    isPositive.y * cAmbientCube[2] + isNegative.y * cAmbientCube[3] +
-                    isPositive.z * cAmbientCube[4] + isNegative.z * cAmbientCube[5];
-        return linearColor;
+        // #ifdef USE_MANUAL_AMBIENT
+            const float3 worldNormal = shadeParams.inputs.NormalWs;
+            float3 cAmbientCube[6];
+            GetAmbientCube( shadeParams, cAmbientCube );
+
+            float3 linearColor, nSquared = worldNormal * worldNormal;
+            float3 isNegative = ( worldNormal >= 0.0 ) ? 0 : nSquared;
+            float3 isPositive = ( worldNormal >= 0.0 ) ? nSquared : 0;
+            linearColor = isPositive.x * cAmbientCube[0] + isNegative.x * cAmbientCube[1] +
+                        isPositive.y * cAmbientCube[2] + isNegative.y * cAmbientCube[3] +
+                        isPositive.z * cAmbientCube[4] + isNegative.z * cAmbientCube[5];
+            return linearColor;
+        // #else // !USE_MANUAL_AMBIENT
+        //     return AmbientLight::From( i, m ).Color
+        //     return SampleLightProbeVolume( shadeParams.inputs.PositionWs, shadeParams.inputs.NormalWs );
+        // #endif // !USE_MANUAL_AMBIENT
     }
 
     //
     // Executed for indirect lighting, combine ambient occlusion, etc.
     //
-    LightShade Indirect()
+    static LegacyLightResult Indirect( const LegacyShadeParams shadeParams, const ShadingLegacyConfig config )
     {
-        LightShade lightShade;
+        LegacyLightResult lightShade;
 
-        // float3 ambient = PixelShaderAmbientLight( shadeParams.inputs.NormalWs, shadeParams.AmbientCube );
-        #ifdef USE_MANUAL_AMBIENT
-            float3 ambientCube[6];
-            // shadeParams.GetAmbientCube( ambientCube );
-            GetAmbientCube( shadeParams.inputs.PositionWs, ambientCube );
-            float3 ambient = PixelShaderAmbientLight( shadeParams.inputs.NormalWs, ambientCube );
-        #else // !USE_MANUAL_AMBIENT
-            float3 ambient = SampleLightProbeVolume( shadeParams.inputs.PositionWs, shadeParams.inputs.NormalWs );
-        #endif // !USE_MANUAL_AMBIENT
+        float3 ambient = PixelShaderAmbientLight( shadeParams, config );
 
         lightShade.Diffuse = float3( 0.0, 0.0, 0.0 );
         if ( config.DoDiffuse )
@@ -619,155 +659,52 @@ class ShadingModelLegacy : ShadingModel
                 linearColor += diffAmbient;
             }
 
-            m_sumDiffuseLighting += linearColor;
+            lightShade.Diffuse = linearColor;
         }
 
+        lightShade.Specular = float3(0.0, 0.0, 0.0);
+
         // finalize the lighting
-        float3 irisLighting = float3(0.0, 0.0, 0.0);
+        lightShade.Iris = float3(0.0, 0.0, 0.0);
         if ( config.DoIrisLighting )
         {
             float3 vIrisTangentNormal = shadeParams.inputs.CorneaNormalTs.xyz;
             vIrisTangentNormal.xy *= -2.5f; // I'm not normalizing on purpose
         
             // Add slight view dependent iris lighting based on ambient light intensity to enhance situations with no local lights (0.5f is to help keep it subtle)
-            // m_sumIrisLighting.rgb += saturate( dot( vIrisTangentNormal, -shadeParams.inputs.ViewRayTs.xyz ) ) * shadeParams.AverageAmbient * shadeParams.IrisHighlightMask * 0.5f;
-            m_sumIrisLighting.rgb += saturate( dot( vIrisTangentNormal, -shadeParams.inputs.ViewRayTs.xyz ) ) * ambient * shadeParams.IrisHighlightMask * 0.5f;
-            
-            irisLighting = m_sumIrisLighting;
+            // lightShade.Iris = saturate( dot( vIrisTangentNormal, -shadeParams.inputs.ViewRayTs.xyz ) ) * shadeParams.AverageAmbient * shadeParams.IrisHighlightMask * 0.5f;
+            lightShade.Iris = saturate( dot( vIrisTangentNormal, -shadeParams.inputs.ViewRayTs.xyz ) ) * ambient * shadeParams.IrisHighlightMask * 0.5f;
         }
 
-        // iris lighting is added to final diffuse, before it gets modulated by iris/pupil/sclera color (material.Albedo)
-        lightShade.Diffuse = DiffuseModulate( m_sumDiffuseLighting + irisLighting );
+        lightShade.Rim = float3(0.0, 0.0, 0.0);
 
-        // PixelShaderDoSpecularLighting does nothing for ambient. Individual shaders (VertexLitGeneric, skin, etc) should add their own ambient envmapping.
-        lightShade.Specular = SpecularModulate( m_sumSpecularLighting );
-
-        #ifdef CUSTOM_DIFFUSE_MODULATE
-            lightShade.Diffuse = CustomDiffuseModulate(lightShade.Diffuse, shadeParams.Albedo, shadeParams.SelfIllumMask, shadeParams.DiffuseModControls);
-        #endif // CUSTOM_DIFFUSE_MODULATE
-        
-        if ( config.DoSpecular && config.DoRimLighting )
-        {
-            float fRimMultiply = shadeParams.RimMask * shadeParams.RimFresnel; // both unit range: [0, 1]
- 
-			// Add in rim light modulated with tint, mask and traditional Fresnel (not using Fresnel ranges)
-            m_sumRimLighting *= fRimMultiply;
-
-            lightShade.Specular = max( lightShade.Specular, m_sumRimLighting );
-			
-            // not in SDK
-            float3 specAmbient = ambient;
-            if ( config.DoAmbientOcclusion )
-            {
-                float3 vAmbientOcclusion = specularAO( shadeParams, GetAmbientOcclusion(shadeParams) );
-                if( shadeParams.config.AmbientOcclusionModel >= AMBIENT_OCCLUSION_MULTIBOUNCE )
-                    vAmbientOcclusion = gtaoMultiBounce( vAmbientOcclusion.x, shadeParams.Albedo.rgb ).xxx;
-                
-                specAmbient *= lerp(float3(1.0f, 1.0f, 1.0f), vAmbientOcclusion, g_flAmbientOcclusionDirectAmbient);
-            }
-
-			// Add in view-ray lookup from ambient cube
-            lightShade.Specular += (specAmbient * g_flRimBoost) * saturate(fRimMultiply * shadeParams.inputs.NormalWs.z);
-        }
-        
         return lightShade;
     }
 
-    // copied from pixel.shading.standard.indirect.hlsl
-    // Keep these in sync if Sam changes anything (but make sure to delete roughness LOD stuff since we aren't PBR)
-    float4 GetCubemap( LegacyShadeParams input, uint nCubeIndex, float2 vAnisotropy = 0.0f, float flRetroReflectivity = 0.0f )
+    static float3 PixelShaderCubemap( PixelInput i, Material m, const LegacyShadeParams shadeParams, const ShadingLegacyConfig config )
     {
-        const float3 vPositionWs = input.inputs.PositionWs;
-        const float3 vNormalWs = config.DoIrisLighting ? input.inputs.CorneaNormalWs : input.inputs.NormalWs;
-        
-        // Todo: fixme these
-        const float3 vTangentUWs = 0.0f;
-        const float3 vTangentVWs = 0.0f;
-        const uint nView = 0;
-
-        float3 vCubePos = mul( float4( vPositionWs.xyz, 1.0 ), EnvMapWorldToLocal( nCubeIndex ) ).xyz;
-
-        const float3 vEnvMapMin = EnvMapBoxMins( nCubeIndex );
-        const float3 vEnvMapMax = EnvMapBoxMaxs( nCubeIndex );
-
-        float3 vIntersectA = min( ( vCubePos - vEnvMapMin ), ( vEnvMapMax - vCubePos ) ) ;
-        float3 vIntersectB = min( ( vCubePos - vEnvMapMax ), ( vEnvMapMin - vCubePos ) ) ;
-
-        float flDistance = min(
-            min( vIntersectA.x, min( vIntersectA.y, vIntersectA.z ) ),
-            min( -vIntersectB.x, -min( vIntersectB.y, vIntersectB.z ) )
-        );
-
-        //
-        // Normalize cubemaps to maintain appropriate specular/diffuse balance
-        //
-        
-        float3 vParallaxReflectionCubemapLocal = CalcParallaxReflectionCubemapLocal( vPositionWs, vNormalWs, vAnisotropy, flRetroReflectivity, vTangentUWs, vTangentVWs, nView, nCubeIndex );
-        float3 vCubeMapTexel = SampleEnvironmentMapLevel( vParallaxReflectionCubemapLocal.xyz, 0, nCubeIndex, g_vEnvCubeMapArrayIndices[nCubeIndex] );
-
-        return float4( vCubeMapTexel, flDistance );
-    }
-
-    float3 GetAllCubemaps( LegacyShadeParams input, uint nCubeIndex )
-    {
-        const float fSmoothRatio = 0.02;
-
-        uint2 vTile = GetTileForScreenPosition( input.inputs.PositionSs );
-
-        const uint nNumEnvMaps = GetNumEnvMaps( vTile );
-
-        float3 vEnvmapColor = 0;
-        float flDistAccumulated = 0;
-
-        for(uint i=0;i<=nNumEnvMaps; i++)
-        {
-            uint nCubeIndex = TranslateEnvMapIndex( nNumEnvMaps - i, vTile );
-            float4 vSampledCube = GetCubemap( input, nCubeIndex );
-
-            vEnvmapColor.xyz = lerp( vEnvmapColor, vSampledCube.xyz, 1.0 - flDistAccumulated );
-            flDistAccumulated += clamp( vSampledCube.w * fSmoothRatio, 0.0, 1.0);
-
-            if( flDistAccumulated >= 1.0 )
-                break;
-        }
-
-        return vEnvmapColor.xyz;
-    }
-
-    float4 PostProcess( float4 vColor )
-    {
-        float3 vReflect = config.DoIrisLighting ? shadeParams.inputs.CorneaReflectionWs : shadeParams.inputs.ReflectRayWs;
-        
         #if USE_MANUAL_CUBEMAP
             // TODO: CUBEMAP_SPHERE_LEGACY?
+            float3 vReflect = config.DoIrisLighting ? shadeParams.inputs.CorneaReflectionWs : shadeParams.inputs.ReflectRayWs;
             float3 envmapBase = CONVERT_ENVMAP(Tex3D( g_tEnvMap, vReflect )).rgb;
         #else // !USE_MANUAL_CUBEMAP
-            float3 envmapBase = GetAllCubemaps(shadeParams, 0);
+            float flAccumulatedWeight = 0.0;
+            float3 envmapBase = float3(0.0, 0.0, 0.0);
+            
+            [unroll(NUM_CUBES)]
+            for ( uint index = 0; index < 1; index++ )
+            {
+                Light light = EnvironmentMapLight::From( i, m, index );
+                
+                flAccumulatedWeight += light.Attenuation;
+                if( flAccumulatedWeight >= 1.0 )
+                    break;
+
+                envmapBase = lerp( envmapBase, light.Color, 1.0 - flAccumulatedWeight );
+            }
         #endif // !USE_MANUAL_CUBEMAP
 
-        float3 envMapColor = GetEnvmapColor(envmapBase, shadeParams.EnvmapMask, shadeParams.Fresnel);
-
-        if ( config.DoIrisLighting )
-        {
-            // for eyes, the reflection is multiplied by the diffuse term (without albedo color or iris lighting)
-            envMapColor *= m_sumDiffuseLighting;
-        }
-
-        // Not in SDK:
-        // cubemaps also count as indirect specular lighting, so multiply by specular AO here aswell
-        if ( config.DoAmbientOcclusion )
-        {
-            float3 vAmbientOcclusion = specularAO( shadeParams, GetAmbientOcclusion(shadeParams) );
-            if( shadeParams.config.AmbientOcclusionModel >= AMBIENT_OCCLUSION_MULTIBOUNCE )
-                vAmbientOcclusion = gtaoMultiBounce( vAmbientOcclusion.x, shadeParams.Albedo.rgb ).xxx;
-            
-            envMapColor *= vAmbientOcclusion;
-        }
-
-        // TODO fog
-        float3 result = vColor.rgb + envMapColor;
-
-        return float4( result, shadeParams.Opacity );
+        return GetEnvmapColor(envmapBase, shadeParams.EnvmapMask, shadeParams.Fresnel);
     }
 
     // TODO: copied from pixel.shading.standard.indirect.hlsl
@@ -861,6 +798,109 @@ class ShadingModelLegacy : ShadingModel
         #endif
 
         return 1.0f;
+    }
+
+
+    static float4 Shade( PixelInput i, Material m, ShadingLegacyConfig config )
+    {
+        LegacyShadeParams shadeParams = LegacyShadeParams::ProcessMaterial( i, m );
+
+        LegacyLightResult vLightResult = LegacyLightResult::Init();
+
+
+        //
+        // Shade direct lighting for dynamic and static lights
+        //
+        uint index;
+        for ( index = 0; index < DynamicLight::Count( i ); index++ )
+        {
+            Light light = DynamicLight::From( i, index );
+            vLightResult = LegacyLightResult::Sum( vLightResult, Direct( shadeParams, config, light ) );
+        }
+
+        [unroll]
+        for ( index = 0; index < StaticLight::Count( i ); index++ )
+        {
+            Light light = StaticLight::From( i, index );
+            if( light.Visibility > 0.0f )
+                vLightResult = LegacyLightResult::Sum( vLightResult, Direct( shadeParams, config, light ) );
+        }
+
+        //
+        // Shade indirect lighting
+        //
+        vLightResult = LegacyLightResult::Sum( vLightResult, Indirect( shadeParams, config ) );
+
+        // modulate the final results
+
+        // Apply Iris lighting
+        // iris lighting is added to final diffuse, before it gets modulated by iris/pupil/sclera color (material.Albedo)
+        float3 finalDiffuse = DiffuseModulate( shadeParams, config, vLightResult.Diffuse + vLightResult.Iris );
+
+        #ifdef CUSTOM_DIFFUSE_MODULATE
+            finalDiffuse = CustomDiffuseModulate(finalDiffuse, shadeParams.Albedo, shadeParams.SelfIllumMask, shadeParams.DiffuseModControls);
+        #endif // CUSTOM_DIFFUSE_MODULATE
+
+        // PixelShaderDoSpecularLighting does nothing for ambient. Individual shaders (VertexLitGeneric, skin, etc) should add their own ambient envmapping.
+        float3 finalSpecular = SpecularModulate( shadeParams, config, vLightResult.Specular );
+
+        
+        // Apply Rim lighting
+        if ( config.DoSpecular && config.DoRimLighting )
+        {
+            float3 ambient = PixelShaderAmbientLight( shadeParams, config );
+
+            float fRimMultiply = shadeParams.RimMask * shadeParams.RimFresnel; // both unit range: [0, 1]
+ 
+			// Add in rim light modulated with tint, mask and traditional Fresnel (not using Fresnel ranges)
+            vLightResult.Rim *= fRimMultiply;
+
+            finalSpecular = max( finalSpecular, vLightResult.Rim );
+			
+            // not in SDK
+            float3 specAmbient = ambient;
+            if ( config.DoAmbientOcclusion )
+            {
+                float3 vAmbientOcclusion = specularAO( shadeParams, GetAmbientOcclusion(shadeParams) );
+                /*
+                if( shadeParams.config.AmbientOcclusionModel >= AMBIENT_OCCLUSION_MULTIBOUNCE )
+                    vAmbientOcclusion = gtaoMultiBounce( vAmbientOcclusion.x, shadeParams.Albedo.rgb ).xxx;
+                */
+
+                specAmbient *= lerp(float3(1.0f, 1.0f, 1.0f), vAmbientOcclusion, g_flAmbientOcclusionDirectAmbient);
+            }
+
+			// Add in view-ray lookup from ambient cube
+            finalSpecular += (specAmbient * g_flRimBoost) * saturate(fRimMultiply * shadeParams.inputs.NormalWs.z);
+        }
+
+        float4 result = float4( finalDiffuse + finalSpecular, m.Opacity );
+
+        // Apply Envmap
+        float3 envMapColor = PixelShaderCubemap( i, m, shadeParams, config );
+
+        if ( config.DoIrisLighting )
+        {
+            // for eyes, the reflection is multiplied by the diffuse term (without albedo color or iris lighting)
+            envMapColor *= vLightResult.Diffuse;
+        }
+
+        // Not in SDK:
+        // cubemaps also count as indirect specular lighting, so multiply by specular AO here aswell
+        if ( config.DoAmbientOcclusion )
+        {
+            float3 vAmbientOcclusion = specularAO( shadeParams, GetAmbientOcclusion(shadeParams) );
+            /*
+            if( shadeParams.config.AmbientOcclusionModel >= AMBIENT_OCCLUSION_MULTIBOUNCE )
+                vAmbientOcclusion = gtaoMultiBounce( vAmbientOcclusion.x, shadeParams.Albedo.rgb ).xxx;
+            */
+
+            envMapColor *= vAmbientOcclusion;
+        }
+
+        result.rgb += envMapColor;
+
+        return ShadingModel::Finalize( i, m, result );
     }
 };
 

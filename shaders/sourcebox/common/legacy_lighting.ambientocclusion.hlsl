@@ -5,6 +5,7 @@
 // would be great if we didn't have to do that, but specularAO takes in ShadeParams
 // and was included somewhere earlier, so we can't replace it with a macro
 
+/*
 float specularAO( LegacyShadeParams i, float ambientOcclusion ) 
 {
     float specularAO = 1.0;
@@ -47,6 +48,12 @@ float specularAO( LegacyShadeParams i, float ambientOcclusion )
     return SpecularAO_Cones(i.inputs.NormalWs, ambientOcclusion, roughness, NrV);
 
     return specularAO;
+}
+*/
+
+float specularAO( LegacyShadeParams i, float ambientOcclusion )
+{
+    return ambientOcclusion;
 }
 
 #endif // SOURCEBOX_LEGACY_LIGHTING_AMBIENTOCCLUSION_H
