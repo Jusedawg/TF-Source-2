@@ -119,7 +119,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 		healAmount = MathF.Min( healAmount, MaxHealth - Health );
 
 		var newHealth = MathF.Min( MaxHealth, Health + healAmount );
-		int cost = MathX.CeilToInt((newHealth - Health) * metalToRepair);
+		int cost = MathX.FloorToInt((newHealth - Health) * metalToRepair);
 
 		Health = newHealth;
 		return cost;

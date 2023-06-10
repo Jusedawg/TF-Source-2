@@ -31,6 +31,8 @@ public partial class Builder : TFWeaponBase
 	[Net] public float TargetBuildRotation { get; set; }
 	[Net] public float CurrentBuildRotation { get; set; }
 	public override bool NeedsAmmo() => false;
+	public override bool ShouldDrawCrosshair() => false;
+	public override bool ShowAmmoOnHud() => false;
 	public override void Attack()
 	{
 		Build();

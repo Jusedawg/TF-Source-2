@@ -12,6 +12,8 @@ public abstract class EngineerPDA : TFWeaponBase
 	public override bool NeedsAmmo() => false;
 	public override bool CanAttack() => false;
 	public override bool CanSecondaryAttack() => false;
+	public override bool ShouldDrawCrosshair() => false;
+	public override bool ShowAmmoOnHud() => false;
 	public override void BuildInput()
 	{
 		if ( Input.Pressed( "Menu" ) )
