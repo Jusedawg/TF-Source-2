@@ -205,7 +205,7 @@ public partial class TeleporterEntrance : Teleporter
 	protected override void InitializeUI( BuildingData data )
 	{
 		base.InitializeUI( data );
-		TeleporterStatsProgress = new( "0", "/UI/HUD/Buildings/hud_obj_status_teleport_64.png" );
+		TeleporterStatsProgress = new( "0", "/UI/HUD/Buildings/hud_obj_status_teleport_64.png" ) { MaxValue = 1 };
 	}
 
 	public override void TickUI()
@@ -221,7 +221,6 @@ public partial class TeleporterEntrance : Teleporter
 		else
 		{
 			TeleporterStatsProgress.Value = ReadyProgress;
-			TeleporterStatsProgress.MaxValue = ReadyTime;
 			TeleporterStatsProgress.ShowText = false;
 		}
 	}

@@ -26,6 +26,7 @@ public partial class SentryGun : TFBuilding
 	protected virtual int GetMaxPrimaryAmmo() => LevelMaxPrimaryAmmo.ElementAtOrDefault( Level - 1 );
 	protected virtual int GetMaxSecondaryAmmo() => LevelMaxSecondaryAmmo.ElementAtOrDefault( Level - 1 );
 	protected virtual Vector3 GetAimOffset() => LevelAimOffsets.ElementAtOrDefault( Level - 1 );
+	protected override float RedeploySpeedMultiplier => 3f;
 	public SentryGun()
 	{
 		EventDispatcher.Subscribe<PlayerDeathEvent>( OnPlayerDeath, this );

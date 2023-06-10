@@ -25,6 +25,7 @@ public partial class TFBuilding
 	/// </summary>
 	[Net] public float ConstructionProgress { get; protected set; }
 	[Net] public float ConstructionTime { get; protected set; }
+	protected virtual float RedeploySpeedMultiplier => 4f;
 	protected bool ConstructionCompleted => ConstructionProgress >= ConstructionTime;
 	protected float healthToGain;
 	protected Dictionary<Entity, TimeUntil> constructionBoostTimers = new();
@@ -57,7 +58,7 @@ public partial class TFBuilding
 		}
 
 		if ( HasFirstConstructed )
-			multiplier *= 2;
+			multiplier *= RedeploySpeedMultiplier;
 
 		return multiplier;
 	}

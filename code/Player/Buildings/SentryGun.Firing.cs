@@ -21,8 +21,11 @@ public partial class SentryGun : IFalloffProvider
 	protected TimeSince timeSinceFireRockets;
 	protected virtual void TickFire()
 	{
+		if ( !CanHitTarget(out var tr) )
+			return;
+
 		if ( CanFire() )
-			Fire();
+			Fire(tr);
 		else
 			StopFireEffects();
 
@@ -33,17 +36,24 @@ public partial class SentryGun : IFalloffProvider
 	}
 
 	protected const float BULLET_RANGE_INCREASE = 100f;
-	protected virtual void Fire()
+	protected virtual bool CanHitTarget(out TraceResult tr)
 	{
-		var tr = Trace.Ray( AimRay, Range + BULLET_RANGE_INCREASE )
+		tr = default;
+		if ( Target == null ) return false;
+
+		tr = Trace.Ray( AimRay, Range + BULLET_RANGE_INCREASE )
 						.Ignore( this )
+						.UseHitboxes()
 						.WorldAndEntities()
 						.WithTag( CollisionTags.Solid )
+						.WithoutTags( Team.GetTag() )
 						.Run();
 
-		if ( tr.Entity == null ) return;
-		if ( !ITeam.IsSame( tr.Entity, this ) ^ tr.Entity != Owner ) return;
-
+		if ( tr.Entity == null ) return false;
+		return tr.Entity == Target;
+	}
+	protected virtual void Fire(TraceResult tr)
+	{
 		timeSinceFireBullet = 0;
 		if(!HasPrimaryAmmo)
 		{
