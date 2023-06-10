@@ -67,7 +67,7 @@ public partial class TFMeleeBase : TFWeaponBase
 		
 		TraceResult tr = default;
 		
-		if ( SetupFireBulletTrace( origin, target ).Size( 32 ).RunAll() is {} results )
+		if ( SetupFireBulletTrace( origin, target ).UseHitboxes().Size( 32 ).RunAll() is {} results )
 		{
 			// Try to find non teammate hits first.
 			tr = results.FirstOrDefault( x => x.Entity is var entity && ITeam.IsEnemy( entity, TFOwner ),

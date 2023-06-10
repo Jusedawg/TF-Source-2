@@ -89,7 +89,10 @@ public partial class TeleporterEntrance : Teleporter
 			SetBodyGroup( "teleporter_direction", 1 );
 		}
 		else
+		{
+			currentTarget = null;
 			SetBodyGroup( "teleporter_direction", 0 );
+		}
 	}
 
 	protected virtual void TeleportNext()

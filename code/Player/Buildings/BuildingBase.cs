@@ -93,6 +93,8 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 	/// <returns></returns>
 	public virtual int ApplyMetal(int metalCount, float metalToRepair = 3f, float repairPower = 1f)
 	{
+		if ( !IsInitialized || IsConstructing || IsUpgrading ) return 0;
+
 		int repairMetal = ApplyRepairMetal( metalCount, metalToRepair, repairPower );
 		if ( repairMetal != 0 )
 			return repairMetal;
@@ -217,6 +219,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 		base.OnKilled();
 	}
 
+	const string KILLED_EXPLOSION_FX = "particles/explosion/explosioncore_buildings.vpcf";
 	protected virtual void KilledEffects()
 	{
 		PlaySound( Data.DestroyedSound );
@@ -225,7 +228,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 			Owner.PlayResponse( Data.DestroyedVO );
 		}
 
-		// TODO: Explosion Particle
+		Particles.Create( KILLED_EXPLOSION_FX, Position );
 		// TODO: Building parts
 	}
 

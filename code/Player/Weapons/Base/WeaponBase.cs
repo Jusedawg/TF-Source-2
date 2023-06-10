@@ -182,7 +182,7 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse, IFalloffProvider
 	public override void OnHitEntity( Entity entity, TraceResult tr )
 	{
 		// HACK: Don't play surface impact effects on players.
-		if ( entity is TFPlayer )
+		if ( entity is TFPlayer || entity is TFBuilding )
 			return;
 
 		base.OnHitEntity( entity, tr );
