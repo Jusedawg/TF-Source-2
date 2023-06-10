@@ -112,11 +112,11 @@ namespace TFS2
 
 		public List<CartPath> GetPaths()
 		{
-			if ( Path == null ) return null;
+			if ( startingPath == null ) return null;
 
 			List<CartPath> paths = new() { Path };
 
-			var currentPath = Path;
+			var currentPath = startingPath;
 			var nextPath = currentPath.PathNodes?.LastOrDefault()?.GetNextPath();
 
 			while ( nextPath != null)
