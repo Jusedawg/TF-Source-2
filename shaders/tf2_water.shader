@@ -23,6 +23,8 @@ COMMON
 
     #define S_TRANSLUCENT 1
     #define DEPTH_STATE_ALREADY_SET 1
+    #define VS_INPUT_HAS_TANGENT_BASIS 1
+	#define PS_INPUT_HAS_TANGENT_BASIS 1
 }
 
 struct VertexInput
@@ -50,10 +52,13 @@ PS
 {
     #include "common/pixel.hlsl"
 
+    DynamicCombo( D_MULTIVIEW_INSTANCING, 0..1, Sys(PC) );
 	RenderState( DepthEnable, true );
 	RenderState( DepthWriteEnable, false );
 
-    float flRefraction < Default( 6 ); Range(0, 10); UiGroup( "TF:S2,10/,10/1" );>;
+    float flNormalStrength< Default(1.0); Range(1.0, 10.0); UiGroup( "TF:S2,10/,10/1" );>;
+
+    float flRefraction < Default(1.005); Range(0.0, 2.0); UiGroup( "TF:S2,10/,10/1" );>;
     FloatAttribute(flRefraction, flRefraction);
 
     float4 g_FogColorTint < Default4( 0.2f, 0.2f, 0.2f, 0.5f ); UiType( Color ); UiGroup( "TF:S2,10/,10/1" ); >;
@@ -141,17 +146,25 @@ PS
         return g_vCameraPositionWs.xyz + ( vCameraRayWs.xyz / flRayLength );
     }
 
-    float FetchDepth( float2 ssUV, float3 vPositionWs )
+    float3 FetchDepth( float2 ssUV, float3 vPositionWs )
     {
         //float2 mvuv = ScreenspaceCorrectionMultiview( CalculateViewportUvFromInvSize( ssUV - g_vViewportOffset.xy, g_vInvViewportSize.xy ) );
-        float flProjectedDepth = Tex2D(g_tDepthBufferCopyTexture, ssUV).r;
-        float3 d = ReconstructPositionFromDepth(flProjectedDepth, CalculatePositionToCameraDirWs( vPositionWs ));
-        return distance(float3(0, 0, d.z), float3(0, 0, vPositionWs.z));
+        float flProjectedDepth = Tex2D(g_tDepthBufferCopyTexture, ssUV * g_vFrameBufferCopyInvSizeAndUvScale.zw).r;
+        return ReconstructPositionFromDepth(flProjectedDepth, CalculatePositionToCameraDirWs( vPositionWs ));
     }
 
 	float4 MainPs( PS_INPUT i ) : SV_TARGET0
 	{   
-		Material m = GatherMaterial( i );
+        float3 vViewRayWs = normalize(i.vPositionWithOffsetWs.xyz);
+		Material m = Material::From( i );
+
+        //
+        // Multiview instancing
+        //
+        uint nView = uint(0);
+        #if (D_MULTIVIEW_INSTANCING)
+                nView = i.nView;
+        #endif
 
         //Animated Normal
         //float2 scaledWorldPos = ((i.vPositionWithOffsetWs.xy + g_vCameraPositionWs.xy) * g_fScale);
@@ -165,40 +178,49 @@ PS
 		float2 uvStart = float2((currentFrame % g_fAnimatedGrid.x) / g_fAnimatedGrid.x, yRow / g_fAnimatedGrid.y);
 
         //Sample normal with new animated uvs
-        float3 sampledNormal = Tex2DS(g_tNormal, TextureFiltering, clamp(uv + uvStart, float2(0.001, 0.001), float2(0.999, 0.999))).rgb;
-
-        m.Normal = normalize(sampledNormal * 2.0f - 1.0f);
+        float3 sampledNormal = Tex2DS(g_tNormal, TextureFiltering, uv + uvStart).rgb;
+        m.Normal = sampledNormal * 2.0f - 1.0f;
+        m.Normal = Vec3TsToWsNormalized(m.Normal, i.vNormalWs.xyz, i.vTangentUWs, i.vTangentVWs);
 
         //Refraction
         float3 vPositionWs = i.vPositionWithOffsetWs.xyz + g_vCameraPositionWs;
-        float4 vPositionPs = Position3WsToPs( vPositionWs + ((float3(m.Normal.x, m.Normal.y, 0) * 2.0f - 1.0f) * flRefraction) );
-        vPositionPs.xy /= vPositionPs.w;
-        float2 vPositionSs_refracted = PsToSs( vPositionPs );
-        vPositionSs_refracted.x = 1.0f - vPositionSs_refracted.x;
-        //vPositionSs_refracted = ScreenspaceCorrectionMultiview( CalculateViewportUvFromInvSize( vPositionSs_refracted - g_vViewportOffset.xy, g_vInvViewportSize.xy ) );
+
+        float3 vRefractRayWs = refract(vViewRayWs, m.Normal, flRefraction);
+        vRefractRayWs = vRefractRayWs * 4;
+        float3 vRefractWorldPosWs = i.vPositionWithOffsetWs.xyz + vRefractRayWs;
+        
+        float4 vPositionPs = Position4WsToPsMultiview(nView, float4(vRefractWorldPosWs, 0));
+        float2 vPositionSs = vPositionPs.xy / vPositionPs.w;
+        vPositionSs = vPositionSs * 0.5 + 0.5;
+        vPositionSs.y = 1.0 - vPositionSs.y;
+
+        //
+        // Multiview
+        //
+        #if (D_MULTIVIEW_INSTANCING)
+        {
+            vPositionSs.x *= 0.5;
+            vPositionSs.x += nView * 0.5;
+        }
+        #endif
 
         //Getting depth for normal refracted pixel position
         //float water_depth = length(CalculatePositionToCameraDirWs( i.vPositionWithOffsetWs.xyz ));
-        float refracted_scene_depth = FetchDepth(vPositionSs_refracted, vPositionWs);
-        //float real_scene_depth = FetchDepth(i.vPositionSs.xy, vPositionWs);
-
-        //Use the unaltered depth + screen space pos if the refracted one is in front of the water.
-        //bool depthBehindWater = refracted_scene_depth > water_depth;
-        float2 position_ss = vPositionSs_refracted;//depthBehindWater ? vPositionSs_refracted : i.vPositionSs.xy;
-        float scene_depth = refracted_scene_depth;//depthBehindWater ? refracted_scene_depth : real_scene_depth;
-
-        float fogVal = RemapValClamped( scene_depth, g_fDepthScale.x, g_fDepthScale.y, 0.0, 1.0 );
-        float3 frameBuffer = Tex2D(g_tFrameBufferCopyTexture, position_ss);
+        float3 depthPos = FetchDepth(vPositionSs, vPositionWs);
+        float depthFromWaterTop = abs(vPositionWs.z - depthPos.z);
+        float fogVal = RemapValClamped( depthFromWaterTop, g_fDepthScale.x, g_fDepthScale.y, 0.0, 1.0 );
+        float2 vUV = float2(vPositionSs) * g_vFrameBufferCopyInvSizeAndUvScale.zw;
+        float3 frameBuffer = Tex2D(g_tFrameBufferCopyTexture, vUV);
 
         //Set albedo based on the final fog value (depth and alpha)
         fogVal = min(g_FogColorTint.a, fogVal);
-        m.Albedo = lerp(frameBuffer, g_FogColorTint.rgb, fogVal);
+        m.Albedo = lerp(frameBuffer, g_FogColorTint.rgb, fogVal) * m.Albedo;
         //Make the water emissive based on fog amount
         m.Emission = m.Albedo * (1 - fogVal);
-        //Smoothly step into water using alpha. Helps mitigate the harsh transition
-        //float fade = smoothstep(0, flAlphaFade, abs(water_depth - scene_depth));
 
-        float4 finalisedColor = FinalizePixelMaterial( i, m );
+        //Smoothly step into water using alpha. Helps mitigate the harsh transition
+        m.Opacity = smoothstep(0, flAlphaFade, abs(length(i.vPositionWithOffsetWs.xyz) - distance(g_vCameraPositionWs, depthPos)));
+        float4 finalisedColor = ShadingModelStandard::Shade( i, m );
         return finalisedColor;
 	}
 }
