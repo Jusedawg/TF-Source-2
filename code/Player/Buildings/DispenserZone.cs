@@ -123,6 +123,25 @@ public partial class DispenserZone : BaseTrigger
 		return other is TFPlayer ply && ply.Team == Team;
 	}
 
+	protected override void OnDestroy()
+	{
+		if(healParticles.Count != 0)
+		{
+			foreach ( var particle in healParticles.Values )
+			{
+				particle.Destroy();
+			}
+		}
+
+		if(healSounds.Count != 0)
+		{
+			foreach ( var sound in healSounds.Values )
+			{
+				sound.Stop();
+			}
+		}
+	}
+
 	Sound idleSound;
 	Dictionary<TFPlayer, Sound> healSounds = new();
 	Dictionary<TFPlayer, Particles> healParticles = new();

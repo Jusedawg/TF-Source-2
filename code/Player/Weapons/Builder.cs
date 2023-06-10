@@ -216,8 +216,8 @@ public partial class Builder : TFWeaponBase
 	/// <returns>True if the building would get stuck, false otherwise</returns>
 	private static bool CheckStuck( BuildingData data, Transform location )
 	{
-		var mins = location.PointToWorld( data.Mins );
-		var maxs = location.PointToWorld( data.Maxs );
+		var mins = location.PointToWorld( data.PlacementBBox.Mins );
+		var maxs = location.PointToWorld( data.PlacementBBox.Maxs );
 
 		var tr = Trace.Ray( mins, maxs )
 						.WorldAndEntities()
@@ -271,7 +271,7 @@ public partial class Builder : TFWeaponBase
 		float ownerHeight = Owner.WorldSpaceBounds.Size.z;
 		float halfOwnerHeight = ownerHeight * .5f;
 
-		Vector3 objectSize = BuildingData.BBox.Size;
+		Vector3 objectSize = BuildingData.PlacementBBox.Size;
 		var halfObjectSize = objectSize / 2;
 		float objectHeight = objectSize.z;
 

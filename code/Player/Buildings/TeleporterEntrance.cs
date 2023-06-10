@@ -76,7 +76,7 @@ public partial class TeleporterEntrance : Teleporter
 
 		base.Tick();
 
-		if( IsPaired )
+		if( IsPaired && LinkedTeleporter.IsValid() )
 		{
 			// Rotation between this and the other teleporter
 			var direction = Rotation.LookAt( LinkedTeleporter.Position - Position );

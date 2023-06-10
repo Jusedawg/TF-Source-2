@@ -20,6 +20,7 @@ public partial class Teleporter : TFBuilding
 	[Net] protected float ReadyTime { get; set; }
 	protected TimeSince timeSinceLinkedInactive;
 	protected Particles LevelParticle;
+
 	public override void TickActive()
 	{
 		if(IsPaired)
@@ -97,14 +98,14 @@ public partial class Teleporter : TFBuilding
 	}
 	public virtual void SyncState()
 	{
-		if ( LinkedTeleporter == null ) return;
+		if ( !LinkedTeleporter.IsValid() ) return;
 
 		if ( IsReady )
 			LinkedTeleporter.Ready( false );
 		else
 			LinkedTeleporter.UnReady( ReadyTime, false );
 
-		//LinkedTeleporter.RequestedLevel = RequestedLevel;
+		LinkedTeleporter.RequestedLevel = RequestedLevel;
 		LinkedTeleporter.AppliedMetal = AppliedMetal;
 		LinkedTeleporter.ReadyProgress = ReadyProgress;
 		LinkedTeleporter.ReadyTime = ReadyTime;
@@ -113,6 +114,9 @@ public partial class Teleporter : TFBuilding
 	public override void SetOwner( TFPlayer owner )
 	{
 		base.SetOwner( owner );
+		// Everybody can collide with teleporters
+		Tags.Remove( Team.GetTag() );
+
 		var tp = owner.Buildings.OfType<Teleporter>()?.FirstOrDefault();
 		if ( tp != null)
 		{

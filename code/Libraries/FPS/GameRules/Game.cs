@@ -170,7 +170,7 @@ public partial class SDKGame : GameManager
 	/// </summary>
 	public virtual void RespawnPlayers( bool forceRespawn, bool teamonly = false, int team = 0 )
 	{
-		var players = All.OfType<TFS2.TFPlayer>().ToList();
+		var players = All.OfType<SDKPlayer>().ToList();
 
 		foreach ( var player in players )
 		{
@@ -190,7 +190,6 @@ public partial class SDKGame : GameManager
 					continue;
 			}
 
-			player.DestroyBuildings();
 			player.Respawn();
 		}
 	}

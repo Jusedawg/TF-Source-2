@@ -36,9 +36,15 @@ public class BuildingData : GameResource
 	public Vector3 Mins { get; set; } = new( -20, -20, 0 );
 	[Category( "BBox" )]
 	public Vector3 Maxs { get; set; } = new( 20, 20, 55 );
+	[Category( "BBox" )]
+	public Vector3 PlacementMins { get; set; }
+	[Category( "BBox" )]
+	public Vector3 PlacementMaxs { get; set; }
 	[HideInEditor]
 	public BBox BBox => new( Mins, Maxs );
 
+	[HideInEditor]
+	public BBox PlacementBBox => PlacementMins != default ? new( PlacementMins, PlacementMaxs ) : BBox;
 	[Title("UI Name")]
 	[Category("UI")]
 	/// <summary>
