@@ -14,6 +14,7 @@ public partial class WeaponSelection : Panel
 	TimeSince TimeSinceInteraction { get; set; }
 	Dictionary<TFWeaponSlot, WeaponListItem> Items { get; set; } = new();
 	TFWeaponSlot SelectedSlot { get; set; }
+	bool HasSelectedSlot { get; set; }
 	private bool AttackInputHeld { get; set; }
 
 	public WeaponSelection()
@@ -86,7 +87,6 @@ public partial class WeaponSelection : Panel
 
 		// Can't select a slot if player doesn't have weapon of this slot.
 		var weapon = player.GetWeaponInSlot( slot );
-
 		if ( !weapon.IsValid() )
 			return false;
 
@@ -112,6 +112,7 @@ public partial class WeaponSelection : Panel
 			return;
 
 		SelectedSlot = slot;
+		HasSelectedSlot = true;
 
 		if ( !TFClientSettings.Current.FastWeaponSwitch )
 		{
@@ -146,12 +147,6 @@ public partial class WeaponSelection : Panel
 		var player = TFPlayer.LocalPlayer;
 		if ( !player.IsValid() )
 			return;
-
-		if ( TFClientSettings.Current.FastWeaponSwitch )
-		{
-			// If fast weapon switch is enabled, we're always confirming our selection change.
-			SelectSlot( player.GetActiveTFSlot() );
-		}
 
 		//
 		// Mouse Wheel
@@ -246,13 +241,16 @@ public partial class WeaponSelection : Panel
 			}
 		}
 
-		if ( confirmChoice )
+		if ( confirmChoice && HasSelectedSlot )
 		{
 			var weapon = player.GetWeaponInSlot( SelectedSlot );
 			if ( weapon.IsValid() )
 			{
 				if ( weapon != player.ActiveWeapon )
+				{
+					HasSelectedSlot = false;
 					player.RequestedActiveWeapon = weapon;
+				}
 			}
 
 			Close();

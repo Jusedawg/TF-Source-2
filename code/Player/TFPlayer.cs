@@ -32,6 +32,7 @@ public partial class TFPlayer : SDKPlayer
 		{
 			PlayerClass = DesiredPlayerClass;
 			DesiredPlayerClass = null;
+			DestroyBuildings();
 		}
 
 		base.Respawn();
@@ -116,6 +117,9 @@ public partial class TFPlayer : SDKPlayer
 		//
 		// Abilities + Misc stuff
 		//
+
+		if ( UsesMetal )
+			Metal = MaxMetal;
 
 		RemoveCondition( TFCondition.Burning );
 
@@ -249,17 +253,7 @@ public partial class TFPlayer : SDKPlayer
 
 		SimulateCameraLogic();
 		SimulateTaunts();
-	}
-
-	[ClientInput] public bool AutoRezoom { get; set; }
-	[ClientInput] public bool AutoReload { get; set; }
-
-	public override void BuildInput()
-	{
-		AutoRezoom = TFClientSettings.Current.AutoZoomIn;
-		AutoReload = TFClientSettings.Current.AutoReload;
-
-		base.BuildInput();
+		SimulateBuildingPickup();
 	}
 
 	public override void Tick()
@@ -279,13 +273,6 @@ public partial class TFPlayer : SDKPlayer
 		// Check if your weapon is completely empty.
 		// If so, switch off the gun automatically.
 		SwitchOffEmptyWeapon();
-	}
-
-	public override string UseButton => "CallMedic";
-	public override bool AttemptUse()
-	{
-		SpeakConceptIfAllowed( TFResponseConcept.VoiceMedic );
-		return true;
 	}
 
 	public virtual void OnSwitchedViewMode( bool is_first_person )

@@ -6,9 +6,12 @@ namespace TFS2;
 /// <summary>
 /// Base Team Fortress weapon 
 /// </summary>
-public abstract partial class TFWeaponBase : SDKWeapon, IUse
+public abstract partial class TFWeaponBase : SDKWeapon, IUse, IFalloffProvider
 {
 	[Net] public WeaponData Data { get; set; }
+	bool IFalloffProvider.UseFalloff => Data.UseFalloff;
+
+	bool IFalloffProvider.UseRampup => Data.UseRampup;
 
 	//
 	// Owner Data
@@ -179,7 +182,7 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse
 	public override void OnHitEntity( Entity entity, TraceResult tr )
 	{
 		// HACK: Don't play surface impact effects on players.
-		if ( entity is TFPlayer )
+		if ( entity is TFPlayer || entity is TFBuilding )
 			return;
 
 		base.OnHitEntity( entity, tr );

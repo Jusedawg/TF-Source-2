@@ -15,6 +15,9 @@ partial class TFGameRules
 
 		foreach ( var ply in Entity.All.OfType<TFPlayer>() )
 			ply.ResetPoints();
+
+		foreach ( var building in Entity.All.OfType<TFBuilding>().ToArray() )
+			building.ManualDestroy();
 	}
 
 	int LastAnnouncerSeconds { get; set; }

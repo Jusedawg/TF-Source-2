@@ -12,7 +12,13 @@ public partial class TFPlayer
 
 	public bool ChangeTeam( TFTeam team, bool autoTeam, bool silent, bool autoBalance = false )
 	{
-		return ChangeTeam( (int)team, autoTeam, silent, autoBalance );
+		bool result = ChangeTeam( (int)team, autoTeam, silent, autoBalance );
+		if(result)
+		{
+			DestroyBuildings();
+		}
+
+		return result;
 	}
 
 	public TFTeam GetAutoTeam( TFTeam preferredTeam = TFTeam.Unassigned )

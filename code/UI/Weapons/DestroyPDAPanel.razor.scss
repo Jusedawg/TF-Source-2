@@ -1,0 +1,121 @@
+﻿@import "/UI/styles/colors.scss";
+
+DestroyPDAPanel {
+    position: absolute;
+    display: none;
+    top: 30%;
+    left: 20%;
+    width: 60%;
+    height: 40%;
+    z-index: 2;
+    flex-direction: column;
+    background-color: $pda-background;
+    border: 4px solid $tan-light;
+    border-radius: 25px;
+
+    &.visible {
+        display: flex;
+    }
+
+    .header {
+        height: 20%;
+        border-bottom: 4px solid $tan-light;
+        align-items: center;
+        flex-direction: row;
+
+        .icon {
+            top: -40%;
+            margin-left: 2%;
+            height: 200%;
+            aspect-ratio: 1;
+        }
+
+        .title {
+            flex-grow: 1;
+            top: -20%;
+            margin-left: 2%;
+            font-family: TF2_Build;
+            font-weight: bold;
+            color: $tan-light;
+            font-size: 100px;
+        }
+
+        .hint {
+            align-self: flex-end;
+            margin-right: 2%;
+            font-family: TF2_Secondary;
+            color: $tan-light;
+            font-size: 20px;
+        }
+    }
+
+    .options {
+        height: 80%;
+
+        .building {
+            flex-direction: column;
+            flex-grow: 1;
+            flex-basis: 25%;
+            align-items: center;
+
+            .name {
+                height: 10%;
+                width: 100%;
+                margin-left: 2%;
+                margin-top: 2%;
+                font-family: TF2_Primary;
+                color: $tan-light;
+                font-size: 20px;
+                font-weight: bold;
+                align-self: flex-start;
+                margin-left: 9%;
+            }
+
+            .stats {
+                aspect-ratio: 1;
+                flex-grow: 1;
+                height: 20%;
+                border-radius: 5px;
+                border: 2px solid $tan-light;
+
+                &:not(.warning) {
+                    background-color: $bg-dark;
+                }
+
+                .icon {
+                    margin: 15%;
+                    margin-top: 20%;
+                    width: 100%;
+                    aspect-ratio: 1;
+                    z-index: 2;
+                }
+
+                .demolish {
+                    position: absolute;
+                    width: 100%;
+                    aspect-ratio: 1;
+                    z-index: 1;
+                }
+
+                .warning {
+                    padding: 15%;
+                    width: 100%;
+                    align-self: center;
+                    text-align: center;
+                    font-family: TF2_Primary;
+                    color: $tan-light;
+                    font-size: 25px;
+                    font-weight: bold;
+                }
+            }
+
+            InputGlyph {
+                margin: 3%;
+                align-self: center;
+                aspect-ratio: 1;
+                height: 20%;
+                margin-bottom: 2%;
+            }
+        }
+    }
+}

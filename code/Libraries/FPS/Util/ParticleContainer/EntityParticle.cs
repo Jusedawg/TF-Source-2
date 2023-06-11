@@ -65,7 +65,7 @@ public class EntityParticle : IValid
 
 	}
 
-	[Event.Tick.Client]
+	[GameEvent.Tick.Client]
 	void Tick()
 	{
 		// The entity we're attached is no longer valid.

@@ -87,16 +87,13 @@ partial class SDKWeapon
 		// Create particle from the trace.
 		CreateBulletTracer( tr.EndPosition );
 
-		// If we hit some entity, do some effects on hit.
-		if ( tr.Entity.IsValid() )
-			OnHitEntity( tr.Entity, tr );
 
 		return tr;
 	}
 
 	public virtual void OnHitEntity( Entity entity, TraceResult tr )
 	{
-		if ( !Game.IsServer ) return;
+		if ( Game.IsClient ) return;
 
 		// hack to play particle at HitPosition.
 		var endPos = tr.EndPosition;

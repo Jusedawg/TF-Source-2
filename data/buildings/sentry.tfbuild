@@ -1,0 +1,51 @@
+{
+  "Title": "Sentry Gun",
+  "EngineClass": "tf_building_sentry",
+  "BuildCost": 130,
+  "BuildTime": 10,
+  "UpgradeCost": 200,
+  "UpgradeTime": 1.6,
+  "MaxCount": 1,
+  "Levels": [
+    {
+      "MaxHealth": 150,
+      "Model": "models/buildables/sentry/sentry1.vmdl",
+      "DeployModel": "models/buildables/sentry/sentry1_heavy.vmdl",
+      "GameplayIcon": "ui/hud/buildings/hud_obj_status_sentry_1.png"
+    },
+    {
+      "MaxHealth": 180,
+      "Model": "models/buildables/sentry/sentry2.vmdl",
+      "DeployModel": "models/buildables/sentry/sentry2_heavy.vmdl",
+      "GameplayIcon": "ui/hud/buildings/hud_obj_status_sentry_2.png"
+    },
+    {
+      "MaxHealth": 216,
+      "Model": "models/buildables/sentry/sentry3.vmdl",
+      "DeployModel": "models/buildables/sentry/sentry3_heavy.vmdl",
+      "GameplayIcon": "ui/hud/buildings/hud_obj_status_sentry_3.png"
+    }
+  ],
+  "LevelCount": 3,
+  "Mins": "-20,-20,0",
+  "Maxs": "20,20,66",
+  "PlacementMins": "0,0,0",
+  "PlacementMaxs": "0,0,0",
+  "BBox": {
+    "Center": "0,0,33",
+    "Size": "40,40,66"
+  },
+  "PlacementBBox": {
+    "Center": "0,0,33",
+    "Size": "40,40,66"
+  },
+  "UIName": "Sentry Gun",
+  "BigPanel": true,
+  "BlueprintIcon": "ui/hud/buildings/eng_build_sentry_blueprint.png",
+  "BlueprintModel": "models/buildables/sentry/sentry1_blueprint.vmdl",
+  "BlueprintBodyGroup": "sentry1_range",
+  "DestroyedSound": "sounds/buildings/building_sentry.explode.sound",
+  "BuiltVO": "sounds/vo/engineer/vo.engineer.building.sentry.built.sound",
+  "DestroyedVO": "sounds/vo/engineer/vo.engineer.building.sentry.destroyed.sound",
+  "SappedVO": "sounds/vo/engineer/vo.engineer.building.sentry.sapped.sound"
+}

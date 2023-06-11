@@ -94,6 +94,26 @@ partial class TFPlayer : IResponseSpeaker<TFResponseConcept, TFResponseContext>
 		SendResponseChatNotification( response.Concept );
 	}
 
+	/// <summary>
+	/// Manually play a sound as if it was a voiceline
+	/// </summary>
+	/// <param name="sound"></param>
+	public void PlayResponse(string sound)
+	{
+		if ( !Game.IsServer )
+			return;
+
+		// Stop response if we're already playing another one.
+		ResponseSound.Stop();
+
+		using ( Prediction.Off() )
+		{
+			ResponseSound = PlaySound( sound )
+				.SetVolume( 1.5f )
+				.SetPosition( this.GetEyePosition() );
+		}
+	}
+
 	#region GestureTriggerSubstitute
 	// For some reason, AutoReset on b_gesture specifically is broken. Until a fix or even the cause of the problem is found, this will work as an alternative.
 

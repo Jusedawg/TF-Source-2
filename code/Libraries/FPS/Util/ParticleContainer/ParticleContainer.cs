@@ -36,7 +36,7 @@ public class ParticleContainer : IValid
 	public ParticleContainer( ModelEntity entity, string attachment, bool follow = true, Func<bool> enabledDelegate = null )
 		: this( entity, () => attachment, follow, enabledDelegate ) { }
 
-	[Event.Tick.Client]
+	[GameEvent.Tick.Client]
 	void Tick()
 	{
 		if ( !Entity.IsValid() )
