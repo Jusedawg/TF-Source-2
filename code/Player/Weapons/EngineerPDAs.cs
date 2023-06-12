@@ -27,14 +27,14 @@ public abstract class EngineerPDA : TFWeaponBase
 		else if ( Input.Pressed( "Slot4" ) )
 			OnInput( 3 );
 	}
-	public virtual void OnInput( int slot ) 
+	public virtual void OnInput( int slot )
 	{
 		Input.ReleaseAction( $"Slot{slot + 1}" );
 	}
 
 	public virtual void Cancel()
 	{
-		TFOwner.RequestedActiveWeapon = TFOwner.GetWeaponInSlot(TFWeaponSlot.Primary); // TODO: Switch to last weapon
+		TFOwner.RequestedActiveWeapon = TFOwner.GetWeaponInSlot( TFWeaponSlot.Primary ); // TODO: Switch to last weapon
 		Input.ReleaseAction( "Menu" );
 	}
 	public string GetBuilding( int slot )
@@ -47,10 +47,10 @@ public abstract class EngineerPDA : TFWeaponBase
 	}
 }
 
-[Library("tf_weapon_construction_pda")]
+[Library( "tf_weapon_construction_pda" )]
 public class ConstructionPDA : EngineerPDA
 {
-	public override void OnInput( int slot)
+	public override void OnInput( int slot )
 	{
 		string building = GetBuilding( slot );
 		if ( string.IsNullOrEmpty( building ) ) return;

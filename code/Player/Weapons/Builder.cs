@@ -49,12 +49,12 @@ public partial class Builder : TFWeaponBase
 		var placementResult = CalculateBuildingPlacement();
 		if ( placementResult.Status != BuildingDeployResponse.CanBuild )
 		{
-			if(TFBuilding.tf_debug_buildings)
+			if ( TFBuilding.tf_debug_buildings )
 				Log.Info( $"Tried to build even though we cant, ignoring" );
 			return;
 		}
 
-		if(!CanBuildAt(BuildingData, new(placementResult.Origin, placementResult.Rotation)))
+		if ( !CanBuildAt( BuildingData, new( placementResult.Origin, placementResult.Rotation ) ) )
 		{
 			if ( TFBuilding.tf_debug_buildings )
 				Log.Info( "Tried to build at invalid position, ignoring" );
@@ -80,7 +80,8 @@ public partial class Builder : TFWeaponBase
 		PlayDeployVO();
 
 		hasBuilt = true;
-		StopPlacement(true);
+		StopPlacement( true );
+		TFOwner.RequestedActiveWeapon = TFOwner.GetWeaponInSlot( TFWeaponSlot.Melee );
 	}
 
 	const float ROTATE_COOLDOWN = 0.5f;
@@ -94,13 +95,13 @@ public partial class Builder : TFWeaponBase
 
 	public void StartPlacement()
 	{
-		if( BuildingData == null)
+		if ( BuildingData == null )
 		{
 			Log.Error( "Tried to start placement without building data!" );
 			return;
 		}
 
-		if ( Game.IsClient && !string.IsNullOrEmpty( BuildingData.BlueprintModel) )
+		if ( Game.IsClient && !string.IsNullOrEmpty( BuildingData.BlueprintModel ) )
 		{
 
 			// TODO: Add check if player is carying an object.
@@ -109,11 +110,11 @@ public partial class Builder : TFWeaponBase
 				Owner = Owner
 			};
 
-			Blueprint.SetModel( BuildingData.BlueprintModel);
+			Blueprint.SetModel( BuildingData.BlueprintModel );
 			Blueprint.UseAnimGraph = true;
 			Blueprint.SetMaterialGroup( TFOwner.Team == TFTeam.Red ? 0 : 1 );
 
-			if(!string.IsNullOrEmpty(BuildingData.BlueprintBodyGroup ) )
+			if ( !string.IsNullOrEmpty( BuildingData.BlueprintBodyGroup ) )
 			{
 				Blueprint.SetBodyGroup( BuildingData.BlueprintBodyGroup, 1 );
 			}
@@ -125,14 +126,14 @@ public partial class Builder : TFWeaponBase
 
 	private void ResetForcedWeapon()
 	{
-		if( TFOwner.ForcedActiveWeapon == this)
+		if ( TFOwner.ForcedActiveWeapon == this )
 			TFOwner.ForcedActiveWeapon = null;
 	}
 
 	/// <summary>
 	/// Stop placing an object. This removes the blueprint.
 	/// </summary>
-	public void StopPlacement(bool switchWeapon = false)
+	public void StopPlacement( bool switchWeapon = false )
 	{
 		if ( Game.IsClient )
 		{
@@ -143,19 +144,19 @@ public partial class Builder : TFWeaponBase
 		{
 			CarriedBuilding = null;
 			ResetForcedWeapon();
-			if(switchWeapon)
-				TFOwner.SwitchToLastWeapon(TFOwner.Weapons.OfType<EngineerPDA>().FirstOrDefault());
+			if ( switchWeapon )
+				TFOwner.SwitchToLastWeapon( TFOwner.Weapons.OfType<EngineerPDA>().FirstOrDefault() );
 		}
 	}
 
-	public void CarryBuilding(TFBuilding building)
+	public void CarryBuilding( TFBuilding building )
 	{
 		building.StartCarrying();
 		CarriedBuilding = building;
 	}
 	protected virtual void PlayDeployVO()
 	{
-		if(!IsCarryingBuilding)
+		if ( !IsCarryingBuilding )
 			TFOwner.PlayResponse( BuildingData.BuiltVO );
 
 		// TODO: Redeploy VO
@@ -170,7 +171,7 @@ public partial class Builder : TFWeaponBase
 
 		var lerped = Rotation.Slerp( rotation, target, Time.Delta * RotationSpeed );
 		CurrentBuildRotation = lerped.Yaw();
-	
+
 	}
 
 	public override void FrameSimulate( IClient cl )
@@ -193,7 +194,7 @@ public partial class Builder : TFWeaponBase
 	/// <returns></returns>
 	public bool CanBuildAt( BuildingData data, Transform location )
 	{
-		if(NoBuildZone.InNoBuild(location.Position))
+		if ( NoBuildZone.InNoBuild( location.Position ) )
 			return false;
 
 		if ( RespawnRoom.IsInsideRoom( location.Position ) )
@@ -229,13 +230,13 @@ public partial class Builder : TFWeaponBase
 		return tr.Hit;
 	}
 
-	private bool CheckLOS(Vector3 pos)
+	private bool CheckLOS( Vector3 pos )
 	{
 		var tr = Trace.Ray( TFOwner.EyePosition, pos )
 						.WorldAndEntities()
-						.Ignore(this)
-						.Ignore(Owner)
-						.WithAnyTags( CollisionTags.Solid, CollisionTags.PlayerClip)
+						.Ignore( this )
+						.Ignore( Owner )
+						.WithAnyTags( CollisionTags.Solid, CollisionTags.PlayerClip )
 						.Run();
 
 		return tr.Hit;
@@ -326,7 +327,7 @@ public partial class Builder : TFWeaponBase
 		Vector3 end = start + Vector3.Down * clearance;
 
 		var tr = Trace.Ray( start, end )
-			.WithTag(CollisionTags.Solid)
+			.WithTag( CollisionTags.Solid )
 			.WorldAndEntities()
 			.UseHitboxes()
 			.Ignore( Owner )
@@ -350,7 +351,7 @@ public partial class Builder : TFWeaponBase
 	{
 		if ( !IsValid ) return;
 		base.OnHolster( owner );
-		if ( !hasBuilt)
+		if ( !hasBuilt )
 			StopPlacement();
 	}
 
