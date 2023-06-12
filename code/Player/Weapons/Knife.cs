@@ -91,7 +91,10 @@ public partial class Knife : TFMeleeBase
 	public override void ApplyDamageModifications( Entity victim, ref ExtendedDamageInfo info, TraceResult trace )
 	{
 		if ( IsBackstab && victim == BackstabVictim )
+		{
 			info.Damage = victim.Health;
+			info = info.WithTag( TFDamageTags.Critical );
+		}
 
 		base.ApplyDamageModifications( victim, ref info, trace );
 	}

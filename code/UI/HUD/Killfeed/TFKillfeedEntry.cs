@@ -89,7 +89,19 @@ partial class TFKillFeedEntry : Panel
 			Tags.Contains( TFDamageTags.Critical );
 			Tags.Contains( TFDamageTags.MiniCritical );
 		}
-		
+
+		//Checking if the attack was a critical hit.
+		if( Tags.Contains( TFDamageTags.Critical ) ) 
+		{
+			is_crit = true;
+		}
+
+		//Checking if the attack was a mini-critical hit.
+		if ( Tags.Contains( TFDamageTags.MiniCritical ) )
+		{
+			is_mini_crit = true;
+		}
+
 		var killIcon = Icon;
 
 		// Local Player Involved?
@@ -118,6 +130,9 @@ partial class TFKillFeedEntry : Panel
 		else if ( Victim == Attacker && Weapon == null )
 			// attacker has dealt damage to themselves with no weapon, they must have suicided.
 			PostVictimMessage.Text = " bid farewell, cruel world";
+		else if ( Victim == Attacker )
+			// Attacker blew himself up or etc.
+			AttackerName = null;
 		else if ( Attacker.IsValid() )
 		{
 			// someone else killed us.
