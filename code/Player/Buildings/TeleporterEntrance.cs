@@ -17,10 +17,11 @@ public partial class TeleporterEntrance : Teleporter
 	const string RECEIVE_SOUND = "building_teleporter.receive";
 
 	const string GENERIC_FX = "particles/teleported_fx/teleported_flash.vpcf";
-	const string RED_FX = "particles/teleported_fx/teleportedin_red.vpcf";
+	const string RED_FX = "particles/teleported_fx/teleported_red.vpcf";
 	const string BLU_FX = "particles/teleported_fx/teleported_blue.vpcf";
 	const string RED_PLAYER_FX = "particles/teleported_fx/teleportedin_red.vpcf";
 	const string BLU_PLAYER_FX = "particles/teleported_fx/teleportedin_blue.vpcf";
+	const float WISP_TIME = 15f;
 	[Net] public int AmountTeleported { get; protected set; }
 
 	protected virtual List<float> LevelCooldownTimes => new() { 10f, 5f, 3f };
@@ -155,6 +156,9 @@ public partial class TeleporterEntrance : Teleporter
 			// Remove invalid players
 			if ( teleporterQueue.Contains( ply ) )
 				teleporterQueue.Remove( ply );
+
+			if ( currentTarget == ply )
+				currentTarget = null;
 
 			return;
 		}

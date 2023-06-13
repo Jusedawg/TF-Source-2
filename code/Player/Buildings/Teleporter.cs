@@ -19,7 +19,8 @@ public partial class Teleporter : TFBuilding
 	[Net] protected float ReadyProgress { get; set; }
 	[Net] protected float ReadyTime { get; set; }
 	protected TimeSince timeSinceLinkedInactive;
-	protected Particles LevelParticle;
+
+	protected ParticleCollection particles = new();
 
 	public override void TickActive()
 	{
@@ -135,9 +136,9 @@ public partial class Teleporter : TFBuilding
 
 	public virtual void ReadyEffects()
 	{
-		if(LevelParticle != default)
-			LevelParticle.EnableDrawing = true;
-		SetBodyGroup( "blur", 1 );
+		particles.EnableDrawing = true;
+
+		SetBodyGroup( "teleporter_blur", 1 );
 		SetAnimParameter( "f_spin_speed", 1 );
 	}
 
@@ -158,14 +159,21 @@ public partial class Teleporter : TFBuilding
 	}
 
 	const string PARTICLE_ATTACHMENT = "centre_attach2";
+	const string PARTICLE_ATTACHMENT_ARM1 = "arm_attach_L";
+	const string PARTICLE_ATTACHMENT_ARM2 = "arm_attach_R";
 	public override void SetLevel( int level )
 	{
 		base.SetLevel( level );
 
-		if(LevelParticle != default)
-			LevelParticle.Destroy();
-		LevelParticle = Particles.Create( GetLevelParticle(), this, PARTICLE_ATTACHMENT );
-		LevelParticle.EnableDrawing = IsReady && IsPaired && !IsConstructing && !IsUpgrading;
+		particles.Destroy();
+		
+		particles.Add(Particles.Create( GetLevelParticle(), this, PARTICLE_ATTACHMENT ));
+		particles.Add( Particles.Create( GetChargedParticle(), this, PARTICLE_ATTACHMENT ));
+		particles.Add(Particles.Create(GetArmParticle(), this, PARTICLE_ATTACHMENT_ARM1));
+		particles.Add( Particles.Create( GetArmParticle(), this, PARTICLE_ATTACHMENT_ARM2 ) );
+
+
+		particles.EnableDrawing = IsReady && IsPaired && !IsConstructing && !IsUpgrading;
 	}
 	protected virtual string GetLevelParticle()
 	{
@@ -188,10 +196,41 @@ public partial class Teleporter : TFBuilding
 			};
 		}
 	}
+
+	protected virtual string GetChargedParticle()
+	{
+		if ( Team == TFTeam.Blue )
+		{
+			return Level switch
+			{
+				1 => "particles/teleport_status/teleporter_blue_charged_level1.vpcf",
+				2 => "particles/teleport_status/teleporter_blue_charged_level2.vpcf",
+				_ => "particles/teleport_status/teleporter_blue_charged_level3.vpcf"
+			};
+		}
+		else
+		{
+			return Level switch
+			{
+				1 => "particles/teleport_status/teleporter_red_charged_level1.vpcf",
+				2 => "particles/teleport_status/teleporter_red_charged_level2.vpcf",
+				_ => "particles/teleport_status/teleporter_red_charged_level3.vpcf"
+			};
+		}
+	}
+
+	protected virtual string GetArmParticle()
+	{
+		return Team switch
+		{
+			TFTeam.Blue => "particles/teleport_status/teleporter_arms_circle_blue.vpcf",
+			_ => "particles/teleport_status/teleporter_arms_circle_red.vpcf"
+		};
+	}
 	public override void FinishConstruction()
 	{
 		base.FinishConstruction();
-		LevelParticle.EnableDrawing = IsReady && IsPaired;
+		particles.EnableDrawing = IsReady & IsPaired;
 	}
 
 	public override void StartUpgrade( int level, float time = 0, bool setRequested = false )
@@ -199,15 +238,16 @@ public partial class Teleporter : TFBuilding
 		base.StartUpgrade( level, time, setRequested );
 		UnReady( time );
 
-		if ( LevelParticle != default )
-			LevelParticle.EnableDrawing = false;
+		particles.EnableDrawing = false;
+
 		SetBodyGroup( "teleporter_blur", 0 );
 	}
 	public override void FinishUpgrade()
 	{
 		base.FinishUpgrade();
 		Ready();
-		LevelParticle.EnableDrawing = IsReady && IsPaired;
+
+		particles.EnableDrawing = IsReady && IsPaired;
 	}
 	public override void StartCarrying()
 	{
@@ -217,8 +257,7 @@ public partial class Teleporter : TFBuilding
 		timeSinceLinkedInactive = 0;
 		UnReady( 0 );
 
-		if ( LevelParticle != default )
-			LevelParticle.EnableDrawing = false;
+		particles.EnableDrawing = false;
 		SetBodyGroup( "teleporter_blur", 0 );
 	}
 
