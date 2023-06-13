@@ -147,6 +147,9 @@ public partial class Builder : TFWeaponBase
 			if ( switchWeapon )
 				TFOwner.SwitchToLastWeapon( TFOwner.Weapons.OfType<EngineerPDA>().FirstOrDefault() );
 		}
+
+		CurrentBuildRotation = 0;
+		TargetBuildRotation = 0;
 	}
 
 	public void CarryBuilding( TFBuilding building )
