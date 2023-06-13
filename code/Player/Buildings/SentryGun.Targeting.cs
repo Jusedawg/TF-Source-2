@@ -174,7 +174,7 @@ public partial class SentryGun
 				if ( player.InCondition( TFCondition.Cloaked ) || player.LifeState != LifeState.Alive ) continue;
 			}
 
-			if ( ent is ITeam teamEnt && teamEnt.TeamNumber == TeamNumber ) return;
+			if ( ent is ITeam teamEnt && teamEnt.TeamNumber == TeamNumber ) continue;
 
 			//If we have a target, is the queried player closer?
 			if ( Target != null && Position.Distance( ent.Position ) > Position.Distance( Target.Position ) ) continue;
