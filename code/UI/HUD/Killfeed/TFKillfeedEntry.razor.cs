@@ -94,21 +94,18 @@ partial class TFKillFeedEntry : Panel
 
 		if(Tags != default)
 		{
-			Tags.Contains( TFDamageTags.Critical );
-			Tags.Contains( TFDamageTags.MiniCritical );
-		}
+			//Checking if the attack was a critical hit.
+			if ( Tags.Contains( TFDamageTags.Critical ) )
+			{
+				is_crit = true;
+			}
 
-		//Checking if the attack was a critical hit.
-		if( Tags.Contains( TFDamageTags.Critical ) ) 
-		{
-			is_crit = true;
-		}
-
-		//Checking if the attack was a mini-critical hit.
-		if ( Tags.Contains( TFDamageTags.MiniCritical ) )
-		{
-			is_mini_crit = true;
-		}
+			//Checking if the attack was a mini-critical hit.
+			if ( Tags.Contains( TFDamageTags.MiniCritical ) )
+			{
+				is_mini_crit = true;
+			}
+		}	
 
 		var killIcon = Icon;
 
