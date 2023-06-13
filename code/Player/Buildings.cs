@@ -36,11 +36,11 @@ public partial class TFPlayer
 		ConsumeMetal(data.BuildCost);
 	}
 	public void Build( string buildingName, Transform transform ) => Build( BuildingData.Get( buildingName ), transform );
-	public void SimulateBuildingPickup()
+	public void SimulateBuildings()
 	{
 		if(Game.IsServer)
 		{
-			if ( Input.Pressed( "Attack2" ) )
+			if ( Input.Pressed( "Attack2" ) && IsAlive )
 			{
 				TryPickupBuilding();
 			}

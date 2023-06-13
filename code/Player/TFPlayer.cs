@@ -207,6 +207,14 @@ public partial class TFPlayer : SDKPlayer
 			force.z = 0.8f;
 			force *= tf_dropped_weapons_force;
 
+			if(ActiveWeapon is Builder b && b.IsCarryingBuilding)
+			{
+				var building = b.CarriedBuilding;
+				building.TakeDamage( LastDamageInfo );
+				building.OnKilled();
+				Buildings.Remove( building );
+			}
+
 			ActiveWeapon.OnHolster( this );
 			DropWeapon( ActiveWeapon, WorldSpaceBounds.Center, force );
 		}
@@ -253,7 +261,7 @@ public partial class TFPlayer : SDKPlayer
 
 		SimulateCameraLogic();
 		SimulateTaunts();
-		SimulateBuildingPickup();
+		SimulateBuildings();
 	}
 
 	public override void Tick()
