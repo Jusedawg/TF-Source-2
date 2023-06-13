@@ -19,7 +19,7 @@ public partial class Teleporter : TFBuilding
 	[Net] protected float ReadyProgress { get; set; }
 	[Net] protected float ReadyTime { get; set; }
 	protected TimeSince timeSinceLinkedInactive;
-
+	protected bool setNextRequested;
 	protected ParticleCollection particles = new();
 
 	public override void TickActive()
@@ -106,7 +106,11 @@ public partial class Teleporter : TFBuilding
 		else
 			LinkedTeleporter.UnReady( ReadyTime, false );
 
-		LinkedTeleporter.RequestedLevel = RequestedLevel;
+		if(LinkedTeleporter.RequestedLevel != RequestedLevel)
+		{
+			LinkedTeleporter.RequestedLevel = RequestedLevel;
+			LinkedTeleporter.setNextRequested = true;
+		}
 		LinkedTeleporter.AppliedMetal = AppliedMetal;
 		LinkedTeleporter.ReadyProgress = ReadyProgress;
 		LinkedTeleporter.ReadyTime = ReadyTime;
@@ -235,6 +239,11 @@ public partial class Teleporter : TFBuilding
 
 	public override void StartUpgrade( int level, float time = 0, bool setRequested = false )
 	{
+		if(setNextRequested)
+		{
+			setRequested = true;
+			setNextRequested = false;
+		}
 		base.StartUpgrade( level, time, setRequested );
 		UnReady( time );
 
@@ -248,6 +257,7 @@ public partial class Teleporter : TFBuilding
 		Ready();
 
 		particles.EnableDrawing = IsReady && IsPaired;
+
 	}
 	public override void StartCarrying()
 	{

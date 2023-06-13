@@ -71,6 +71,12 @@ public partial class TFPlayer
 	}
 	public bool CanBuild( string name ) => CanBuild( BuildingData.Get( name ) );
 
+	public bool HasMetalFor(BuildingData data)
+	{
+		return Metal >= data.BuildCost;
+	}
+	public bool HasMetalFor( string name ) => HasMetalFor( BuildingData.Get( name ) );
+
 	public string[] GetAvailableBuildings()
 	{
 		var wrench = Weapons.OfType<Wrench>().FirstOrDefault();
@@ -141,7 +147,7 @@ public partial class TFPlayer
 			return;
 		}
 
-		if(ply.Metal < data.BuildCost)
+		if(!ply.HasMetalFor(data) )
 		{
 			if(TFBuilding.tf_debug_buildings)
 				Log.Warning( $"Cant start building if the player doesnt have enough metal" );

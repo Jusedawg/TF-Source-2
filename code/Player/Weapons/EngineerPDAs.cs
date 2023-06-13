@@ -50,13 +50,22 @@ public abstract class EngineerPDA : TFWeaponBase
 [Library( "tf_weapon_construction_pda" )]
 public class ConstructionPDA : EngineerPDA
 {
+	const string CANT_AFFORD_SOUND = "player_use_fail";
+
 	public override void OnInput( int slot )
 	{
 		string building = GetBuilding( slot );
 		if ( string.IsNullOrEmpty( building ) ) return;
 		if ( !TFOwner.CanBuild( building ) ) return;
 
-		TFPlayer.StartBuilding( building );
+		if(!TFOwner.HasMetalFor(building))
+		{
+			PlaySound( CANT_AFFORD_SOUND );
+		}
+		else
+		{
+			TFPlayer.StartBuilding( building );
+		}
 		base.OnInput( slot );
 	}
 }

@@ -179,7 +179,7 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 			AppliedMetal -= Data.UpgradeCost;
 			StartUpgrade( Level + 1, setRequested: true );
 		}
-		else if(!Owner.IsValid())
+		else if(!Owner.IsValid() || !Owner.GetAvailableBuildings().Contains(Data.ResourceName))
 		{
 			ManualDestroy();
 			return;

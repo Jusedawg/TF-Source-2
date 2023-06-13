@@ -23,17 +23,7 @@
         {
             <div class="building">
                 <label class="name">@building.UIName</label>
-                @if (player.CanBuild(building))
-                {
-                    <div class="stats">
-                        <div class="cost">
-                            <img class="metal" src="/ui/HUD/Buildings/ico_metal.png" />
-                            <label class="amount">@building.BuildCost</label>
-                        </div>
-                        <img class="blueprint" src="@building.BlueprintIcon" />
-                    </div>
-                }
-                else 
+                @if (!player.CanBuild(building))
                 {
                     <div class="stats warning">
                         <div class="cost">
@@ -41,6 +31,27 @@
                             <label class="amount">@building.BuildCost</label>
                         </div>
                         <label class="warning">Already Built</label>
+                    </div>
+                    
+                }
+                else if(!player.HasMetalFor(building))
+                {
+                    <div class="stats warning">
+                        <div class="cost">
+                            <img class="metal" src="/ui/HUD/Buildings/ico_metal.png" />
+                            <label class="amount">@building.BuildCost</label>
+                        </div>
+                        <label class="warning red">Cannot Afford</label>
+                    </div>
+                }
+                else 
+                {
+                    <div class="stats">
+                        <div class="cost">
+                            <img class="metal" src="/ui/HUD/Buildings/ico_metal.png" />
+                            <label class="amount">@building.BuildCost</label>
+                        </div>
+                        <img class="blueprint" src="@building.BlueprintIcon" />
                     </div>
                 }
                 <InputGlyph Button="@GetBuildingSlot(building)" Listen=@false/>
