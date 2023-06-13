@@ -1,11 +1,14 @@
 ﻿using Sandbox;
 using System.Linq;
+using TFS2.UI;
 
 namespace TFS2;
 
-partial class TFPlayer : ITargetID, ITargetIDSubtext
+partial class TFPlayer : ITargetID, ITargetIDSubtext, IKillfeedName
 {
-	string ITargetID.Name => Client.Name;
+	private string UIName => Client.Name;
+	string IKillfeedName.Name => UIName;
+	string ITargetID.Name => UIName;
 	string ITargetID.Avatar => $"avatar:{Client.SteamId}";
 
 	string ITargetIDSubtext.Subtext { 

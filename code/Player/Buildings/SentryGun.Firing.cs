@@ -65,7 +65,7 @@ public partial class SentryGun : IFalloffProvider
 							.UsingTraceResult( tr )
 							.WithTag( DamageTags.Bullet )
 							.WithAttacker( Owner )
-							.WithInflictor( this );
+							.WithWeapon( this );
 
 		tr.Entity.TakeDamage( info );
 		PrimaryAmmo--;

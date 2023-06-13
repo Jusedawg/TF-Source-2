@@ -45,11 +45,11 @@ public class BuildingData : GameResource
 
 	[HideInEditor]
 	public BBox PlacementBBox => PlacementMins != default ? new( PlacementMins, PlacementMaxs ) : BBox;
-	[Title("UI Name")]
-	[Category("UI")]
 	/// <summary>
 	/// The name of this building displayed in the UI
 	/// </summary>
+	[Title("UI Name")]
+	[Category("UI")]
 	public string UIName { get; set; }
 	/// <summary>
 	/// Should the UI panel for this building be bigger? (ex: sentry)

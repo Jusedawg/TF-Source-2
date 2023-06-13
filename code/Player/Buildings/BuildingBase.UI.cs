@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Sandbox;
+using TFS2.UI;
 
 namespace TFS2;
 
-public partial class TFBuilding : ITargetID, ITargetIDSubtext
+public partial class TFBuilding : ITargetID, ITargetIDSubtext, IKillfeedName
 {
 	protected virtual void InitializeUI( BuildingData data )
 	{
@@ -32,6 +33,8 @@ public partial class TFBuilding : ITargetID, ITargetIDSubtext
 	{
 		yield return UpgradeMetalLine;
 	}
+
+	string IKillfeedName.Name => $"{Data.Title} ({Owner.Client.Name})";
 	string ITargetID.Name => $"{Data.Title} built by {Owner.Client.Name}";
 	string ITargetID.Avatar => "";
 	string ITargetIDSubtext.Subtext

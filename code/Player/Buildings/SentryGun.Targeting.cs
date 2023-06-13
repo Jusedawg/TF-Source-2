@@ -107,11 +107,8 @@ public partial class SentryGun
 			else
 			{
 				// We are faster while tracking enemies
-				if ( yawdist > 30 )
-				{
-					if ( currentTurnRate < TurnRate * 30 )
-						currentTurnRate += TurnRate * 5;
-				}
+				if ( currentTurnRate < TurnRate * 30 )
+					currentTurnRate += TurnRate * 5;
 			}
 
 			var movedyaw = Time.Delta * currentTurnRate;
@@ -163,29 +160,34 @@ public partial class SentryGun
 		//This can likely be optimized
 		foreach ( var ent in FindInSphere( AimRay.Position, Range )?.OrderBy(ent => ent.Position.DistanceSquared(Position)) )
 		{
+			if ( !CanTarget( ent ) )
+				continue;
+
+			if ( ent is not ModelEntity modelEnt )
+				continue;
+
 			if ( ent is TFPlayer player )
 			{
 				//Can't target our team, cloaked players, or dead players
 				if ( player.Team == Team || player.InCondition( TFCondition.Cloaked ) || player.LifeState != LifeState.Alive ) continue;
-
-				//If we have a target, is the queried player closer?
-				if ( Target != null && Position.Distance( player.Position ) > Position.Distance( Target.Position ) ) continue;
-
-				var targetCenter = player.CollisionWorldSpaceCenter;
-
-				// Is line of sight to target obstructed?
-				var tr = Trace.Ray( AimRay.Position, targetCenter )
-					.Ignore( this )
-					.Run();
-
-				if ( tr.Hit )
-				{
-					if ( tr.Entity is TFPlayer || tr.Entity is TFBuilding ) { }
-					else continue;
-				}
-
-				Target = player;
 			}
+
+			//If we have a target, is the queried player closer?
+			if ( Target != null && Position.Distance( ent.Position ) > Position.Distance( Target.Position ) ) continue;
+
+			var targetCenter = modelEnt.CollisionWorldSpaceCenter;
+
+			// Is line of sight to target obstructed?
+			var tr = Trace.Ray( AimRay.Position, targetCenter )
+				.WithTag( CollisionTags.Solid )
+				.WorldAndEntities()
+				.Ignore( this )
+				.Run();
+
+			if ( !tr.Hit || !CanTarget( tr.Entity ) )
+				continue;
+
+			Target = (ModelEntity)tr.Entity;
 
 			if ( Target != null && Target != lastTarget )
 			{
@@ -193,5 +195,12 @@ public partial class SentryGun
 				break;
 			}
 		}
+	}
+
+	public virtual bool CanTarget(Entity ent)
+	{
+		if ( ent is not ModelEntity ) return false;
+
+		return ent is TFPlayer || ent is TFBuilding;
 	}
 }

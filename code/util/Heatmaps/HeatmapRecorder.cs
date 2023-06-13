@@ -39,7 +39,7 @@ public class HeatmapRecorder
 				// dont count humiliation and pregame kills
 				return;
 
-			recording.AddData( "PlayerDeath", e.Victim.Pawn.Position );
+			recording.AddData( "PlayerDeath", e.Victim.Position );
 		}, this );
 
 		SaveFile = saveFile;

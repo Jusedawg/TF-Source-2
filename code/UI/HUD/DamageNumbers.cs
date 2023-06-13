@@ -24,7 +24,7 @@ public class DamageNumbers : Panel
 		var victim = args.Victim;
 
 		// If we are not the Attacker, ignore.
-		if ( Sandbox.Game.LocalClient != attacker )
+		if ( Game.LocalPawn != attacker )
 			return;
 
 		// If we hit ourselves, ignore.
@@ -49,7 +49,7 @@ public class DamageNumbers : Panel
 		}
 
 		// Add a damage number instance
-		AddDamageNumber( damage, victim.Pawn );
+		AddDamageNumber( damage, victim);
 	}
 
 	public void AddDamageNumber( float damage, IEntity entity )
@@ -76,7 +76,7 @@ public class DamageNumbers : Panel
 	void OnDeath( PlayerDeathEvent args )
 	{
 		// If we're not the damage dealer, ignore.
-		if ( args.Attacker != Sandbox.Game.LocalClient )
+		if ( args.Attacker != Game.LocalPawn )
 			return;
 
 		// If we hit ourselves, ignore.
@@ -137,20 +137,18 @@ public class DamageNumberInstance : Label
 			Delete();
 			return;
 		}
-
-		// Calculate opacity
-		float time = TimeSinceCreated;
-		float opacityLerp = 1 - time.LerpInverse( tf_hud_damage_number_lifetime - tf_hud_damage_number_fade_time, tf_hud_damage_number_lifetime );
-		Style.Opacity = opacityLerp;
-
 		// Position 
 		var screenPos = Position.ToScreen();
 		var panelPos = Container.ScreenPositionToPanelPosition( screenPos );
 		var left = panelPos.x * 100;
 		Style.Left = Length.Percent( left );
-
 		var top = panelPos.y * 100 - TimeSinceCreated * 10;
 		Style.Top = Length.Percent( top );
+
+		// Calculate opacity
+		float time = TimeSinceCreated;
+		float opacityLerp = 1 - time.LerpInverse( tf_hud_damage_number_lifetime - tf_hud_damage_number_fade_time, tf_hud_damage_number_lifetime );
+		Style.Opacity = opacityLerp;
 
 		Style.Dirty();
 	}

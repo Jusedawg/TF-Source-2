@@ -213,6 +213,18 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 
 	public override void OnKilled()
 	{
+		if(LastDamageInfo.Attacker is TFPlayer ply)
+		{
+			EventDispatcher.InvokeEvent( new BuildingDeathEvent()
+			{
+				Victim = this,
+				Owner = Owner,
+				Attacker = ply,
+				Weapon = LastDamageInfo.Weapon,
+				Tags = LastDamageInfo.Tags.ToArray()
+			} );
+			Log.Info( Owner );
+		}
 		Owner.Buildings.Remove( this );
 
 		KilledEffects();
@@ -288,4 +300,3 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 	public int TeamNumber => (int)Team;
 	#endregion
 }
-

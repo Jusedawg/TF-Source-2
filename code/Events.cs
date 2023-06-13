@@ -9,7 +9,7 @@ namespace TFS2;
 [EventDispatcherEvent]
 public class PlayerSpawnEvent : DispatchableEventBase
 {
-	public IClient Client { get; set; }
+	public Entity Client { get; set; }
 	public TFTeam Team { get; set; }
 	public PlayerClass Class { get; set; }
 }
@@ -17,23 +17,24 @@ public class PlayerSpawnEvent : DispatchableEventBase
 [EventDispatcherEvent]
 public class PlayerDeathEvent : DispatchableEventBase
 {
-	public IClient Victim { get; set; }
-	public IClient Attacker { get; set; }
-	public IClient Assister { get; set; }
-	public WeaponData Weapon { get; set; }
+	public Entity Victim { get; set; }
+	public Entity Attacker { get; set; }
+	public Entity Assister { get; set; }
+	public Entity Weapon { get; set; }
+	public Entity Inflictor { get; set; }
 	public string[] Tags { get; set; }
 	public Vector3 Position { get; set; }
 	public float Damage { get; set; }
-	public Entity Inflictor { get; set; }
 }
 
 [EventDispatcherEvent]
 public class PlayerHurtEvent : DispatchableEventBase
 {
-	public IClient Victim { get; set; }
-	public IClient Attacker { get; set; }
-	public IClient Assister { get; set; }
-	public WeaponData Weapon { get; set; }
+	public Entity Victim { get; set; }
+	public Entity Attacker { get; set; }
+	public Entity Assister { get; set; }
+	public Entity Weapon { get; set; }
+	public Entity Inflictor { get; set; }
 	public string[] Tags { get; set; }
 	public Vector3 Position { get; set; }
 	public float Damage { get; set; }
@@ -57,6 +58,16 @@ public class PlayerChangeTeamEvent : DispatchableEventBase
 public class PlayerRegenerateEvent : DispatchableEventBase
 {
 	public IClient Client { get; set; }
+}
+
+[EventDispatcherEvent]
+public class BuildingDeathEvent : DispatchableEventBase
+{
+	public TFBuilding Victim { get; set; }
+	public TFPlayer Owner { get; set; }
+	public Entity Attacker { get; set; }
+	public Entity Weapon { get; set; }
+	public string[] Tags { get; set; }
 }
 
 #endregion

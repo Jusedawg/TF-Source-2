@@ -11,16 +11,12 @@ partial class TFGameRules
 	{
 		base.PlayerHurt( player, info );
 
-		var victim = player.Client;
-		var attacker = info.Attacker?.Client;
-		var weaponData = (info.Weapon as TFWeaponBase)?.Data;
-
 		EventDispatcher.InvokeEvent( new PlayerHurtEvent()
 		{
-			Victim = victim,
-			Attacker = attacker,
+			Victim = player,
+			Attacker = info.Attacker,
 			Assister = null,
-			Weapon = weaponData,
+			Inflictor = info.Weapon,
 			Tags = info.Tags.ToArray(),
 			Position = info.ReportPosition,
 			Damage = info.Damage
@@ -36,7 +32,7 @@ partial class TFGameRules
 
 		EventDispatcher.InvokeEvent( new PlayerSpawnEvent()
 		{
-			Client = player.Client,
+			Client = player,
 			Team = tfPlayer.Team,
 			Class = tfPlayer.PlayerClass
 		} );
@@ -44,24 +40,20 @@ partial class TFGameRules
 
 	public override void PlayerDeath( SDKPlayer player, ExtendedDamageInfo info )
 	{
-		var victim = player.Client;
-		var attacker = info.Attacker?.Client;
-		var weaponData = (info.Weapon as TFWeaponBase)?.Data;
-
 		//
 		// Dispatch event about this.
 		//
 
 		EventDispatcher.InvokeEvent( new PlayerDeathEvent()
 		{
-			Victim = victim,
-			Attacker = attacker,
+			Victim = player,
+			Attacker = info.Attacker,
 			Assister = null,
-			Weapon = weaponData,
+			Weapon = info.Weapon,
+			Inflictor = info.Inflictor,
 			Tags = info.Tags?.ToArray(),
 			Position = info.ReportPosition,
 			Damage = info.Damage,
-			Inflictor = info.Inflictor
 		} );
 
 		if ( ShouldAnnounceFirstBlood() && !FirstBloodAnnounced )

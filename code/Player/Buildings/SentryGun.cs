@@ -5,13 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TFS2.UI;
 
 namespace TFS2;
 
 [Library( "tf_building_sentry" )]
 [Title( "Sentry Gun" )]
 [Category( "Gameplay" )]
-public partial class SentryGun : TFBuilding
+public partial class SentryGun : TFBuilding, IKillfeedIcon
 {
 	public override Ray AimRay => new( Position + GetAimOffset(), AimRotation.Forward);
 	[Net] public int PrimaryAmmo { get; set; }
@@ -175,6 +176,11 @@ public partial class SentryGun : TFBuilding
 		yield return PrimaryAmmoLine;
 		yield return SecondaryAmmoLine;
 		yield return UpgradeMetalLine;
+	}
+
+	string IKillfeedIcon.GetIcon(bool isCrit, string[] tags)
+	{
+		return $"ui/deathnotice/sentry{Level}.png";
 	}
 
 	protected override void Debug()

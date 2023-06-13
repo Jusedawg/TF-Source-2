@@ -3,6 +3,7 @@ using Sandbox.UI;
 using System.IO;
 using System.Linq;
 using Amper.FPS;
+using System;
 
 namespace TFS2.UI;
 
@@ -18,6 +19,7 @@ public partial class TFKillFeed : Panel
 	{
 		EventDispatcher.Subscribe<PlayerDeathEvent>( OnDeath, this );
 		EventDispatcher.Subscribe<ControlPointCapturedEvent>( OnPointCaptured, this );
+		EventDispatcher.Subscribe<BuildingDeathEvent>( OnBuildingDeath, this );
 	}
 
 	[GameEvent.Tick.Server]
@@ -38,7 +40,14 @@ public partial class TFKillFeed : Panel
 	public void OnDeath( PlayerDeathEvent args )
 	{
 		var entry = new TFKillFeedEntry(args.Attacker, args.Victim, args.Assister, args.Weapon, args.Tags, DefaultKillIcon);
+		AddChild( entry );
+	}
+	public void OnBuildingDeath( BuildingDeathEvent args )
+	{
+		if ( args.Tags.Contains( TFBuilding.MANUAL_DESTROY_TAG ) )
+			return;
 
+		var entry = new TFKillFeedEntry( args.Attacker, args.Victim, null, args.Weapon, args.Tags, DefaultKillIcon, args.Owner == Game.LocalPawn );
 		AddChild( entry );
 	}
 }

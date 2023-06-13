@@ -139,7 +139,9 @@ public partial class TeamDeathmatch : GamemodeEntity
 		if ( !TFGameRules.Current.AreObjectivesActive() )
 			return;
 
-		var attacker = args.Attacker;
+		if ( args.Attacker is not ITeam attacker )
+			return;
+
 		var victim = args.Victim;
 
 		if ( attacker == null )
@@ -151,11 +153,11 @@ public partial class TeamDeathmatch : GamemodeEntity
 			return;
 
 		// Check if both attacker and victim are on different teams.
-		if ( attacker.GetTeam() == victim.GetTeam() )
+		if ( victim is ITeam teamVictim && attacker.TeamNumber == teamVictim.TeamNumber )
 			return;
 
 		// Get the attacker's team.
-		var team = attacker.GetTeam();
+		var team = (TFTeam)attacker.TeamNumber;
 
 		// And give them one score.
 		AddTeamFragCount( team, 1 );

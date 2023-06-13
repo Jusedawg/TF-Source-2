@@ -9,10 +9,10 @@ namespace TFS2.UI;
 
 partial class TFKillFeedEntry : Panel
 {
-	public IClient Attacker { get; }
-	public IClient Victim { get; }
-	public IClient Assister { get; }
-	public WeaponData Weapon { get; }
+	public Entity Attacker { get; }
+	public Entity Victim { get; }
+	public Entity Assister { get; }
+	public Entity Weapon { get; }
 	public string[] Tags { get; }
 	public string Icon { get; set; }
 	public string IconRed { get; set; }
@@ -31,7 +31,14 @@ partial class TFKillFeedEntry : Panel
 	protected ControlPointCapturedEvent CaptureArgs { get; set; }
 	public float LifeTimeMultiplier { get; set; } = 1;
 	public float LifeTime => hud_deathnotice_time * LifeTimeMultiplier;
+	bool showAsInvolved = false;
 	TimeSince TimeSinceCreated { get; set; } = 0;
+	Label AttackerName;
+	Label PostAttackerMessage;
+	Label VictimName;
+	Label PostVictimMessage;
+	Label StreakCounter;
+	Image IconElement { get; set; }
 
 	/// <summary>
 	/// Create death entry
@@ -42,7 +49,7 @@ partial class TFKillFeedEntry : Panel
 	/// <param name="weapon"></param>
 	/// <param name="tags"></param>
 	/// <param name="icon"></param>
-	public TFKillFeedEntry( IClient attacker, IClient victim, IClient assister, WeaponData weapon, string[] tags, string icon )
+	public TFKillFeedEntry( Entity attacker, Entity victim, Entity assister, Entity weapon, string[] tags, string icon, bool involved = false )
 	{
 		Attacker = attacker;
 		Victim = victim;
@@ -50,6 +57,7 @@ partial class TFKillFeedEntry : Panel
 		Weapon = weapon;
 		Tags = tags;
 		Icon = icon;
+		showAsInvolved = involved;
 	}
 
 	/// <summary>
@@ -80,7 +88,7 @@ partial class TFKillFeedEntry : Panel
 
 	protected virtual void InitKill()
 	{
-		var local = Sandbox.Game.LocalClient;
+		var local = Game.LocalClient;
 		bool is_crit = false; 
 		bool is_mini_crit = false;
 
@@ -105,7 +113,7 @@ partial class TFKillFeedEntry : Panel
 		var killIcon = Icon;
 
 		// Local Player Involved?
-		var localPlayerInvolved = local == Attacker || local == Victim || local == Assister;
+		var localPlayerInvolved = local == Attacker?.Client || local == Victim.Client || local == Assister?.Client || local.Pawn == Victim.Owner || showAsInvolved;
 		if ( localPlayerInvolved )
 		{
 			SetClass( "is_local_player_involved", true );
@@ -115,8 +123,15 @@ partial class TFKillFeedEntry : Panel
 		//
 		// Victim
 		//
-		VictimName.Text = Victim.Name;
-		var victimTeam = Victim.GetTeam();
+		// someone else killed us.
+		if ( Victim is IKillfeedName killfeedVictim )
+			VictimName.Text = killfeedVictim.Name;
+		else
+			VictimName.Text = Victim.Name;
+
+		var victimTeam = TFTeam.Unassigned;
+		if ( Victim is ITeam teamVictim )
+			victimTeam = (TFTeam)teamVictim.TeamNumber;
 		VictimName.SetClass( "red", victimTeam == TFTeam.Red );
 		VictimName.SetClass( "blue", victimTeam == TFTeam.Blue );
 		SetClass( "has_victim", true );
@@ -136,29 +151,29 @@ partial class TFKillFeedEntry : Panel
 		else if ( Attacker.IsValid() )
 		{
 			// someone else killed us.
-			AttackerName.Text = Attacker.Name;
+			if(Attacker is IKillfeedName killfeedAttacker)
+				AttackerName.Text = killfeedAttacker.Name;
+			else
+				AttackerName.Text = Attacker.Name;
 
-			var attackerTeam = Attacker.GetTeam();
+			var attackerTeam = TFTeam.Unassigned;
+			if ( Attacker is ITeam teamAttacker )
+				attackerTeam = (TFTeam)teamAttacker.TeamNumber;
+
 			AttackerName.SetClass( "red", attackerTeam == TFTeam.Red );
 			AttackerName.SetClass( "blue", attackerTeam == TFTeam.Blue );
+				
 			SetClass( "has_attacker", true );
 		}
 
 		//
 		// Weapon Icon
 		//
-		if ( Weapon != null )
+		if(Weapon is IKillfeedIcon p)
 		{
-			// if we have a weapon, put it's kill icon in the feed.
-			var normalIcon = Weapon.KillFeedIcon;
-			var specialIcon = Weapon.KillFeedIconSpecial;
-			var weaponIcon = normalIcon;
-
-			if ( is_crit && !string.IsNullOrEmpty( specialIcon ) )
-				weaponIcon = specialIcon;
-
-			if ( !string.IsNullOrEmpty( weaponIcon ) )
-				killIcon = weaponIcon;
+			string inflictorIcon = p.GetIcon( is_crit, Tags );
+			if ( !string.IsNullOrEmpty( inflictorIcon ) )
+				killIcon = inflictorIcon;
 		}
 
 		// If local player is involved, we need to switch the image to an inverted variation.
