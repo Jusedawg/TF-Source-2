@@ -137,8 +137,10 @@ public partial class SentryGun
 		//If our target leaves range or dies, remove them as our target
 		if ( HasTarget )
 		{
-			if ( Position.Distance( Target.Position ) > Range || Target.LifeState != LifeState.Alive )
-			{ 
+			if ( !Target.IsValid() )
+				Target = null;
+			else if ( Position.Distance( Target.Position ) > Range || Target.LifeState != LifeState.Alive )
+			{
 				Target = null;
 			}
 			else
@@ -169,8 +171,10 @@ public partial class SentryGun
 			if ( ent is TFPlayer player )
 			{
 				//Can't target our team, cloaked players, or dead players
-				if ( player.Team == Team || player.InCondition( TFCondition.Cloaked ) || player.LifeState != LifeState.Alive ) continue;
+				if ( player.InCondition( TFCondition.Cloaked ) || player.LifeState != LifeState.Alive ) continue;
 			}
+
+			if ( ent is ITeam teamEnt && teamEnt.TeamNumber == TeamNumber ) return;
 
 			//If we have a target, is the queried player closer?
 			if ( Target != null && Position.Distance( ent.Position ) > Position.Distance( Target.Position ) ) continue;
