@@ -92,10 +92,10 @@ FEATURES
 MODES
 {
     Forward();
-    Depth( "depth_only.vfx" );
+    Depth( "depth_only.shader" );
     ToolsVis( S_MODE_TOOLS_VIS );
-    // ToolsWireframe( "tools_wireframe.vfx" );
-	// ToolsShadingComplexity( "tools_shading_complexity.vfx" );
+    // ToolsWireframe( "tools_wireframe.shader" );
+	// ToolsShadingComplexity( "tools_shading_complexity.shader" );
 }
 
 //=========================================================================================================================
