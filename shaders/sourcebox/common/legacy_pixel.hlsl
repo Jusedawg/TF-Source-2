@@ -4,6 +4,21 @@
 
 #include "sbox_pixel.fxc"
 
+//-----------------------------------------------------------------------------
+// Transform a normal from tangent space to world space
+//-----------------------------------------------------------------------------
+
+float3 TransformNormal( const PixelInput i, float3 vNormalTs )
+{
+    float3 vTangentUWs = normalize(i.vTangentUWs.xyz);
+    float3 vTangentVWs = normalize(i.vTangentVWs.xyz);
+
+    vNormalTs.y *= -1.0;
+
+    // Transform from tangent space into world space
+    return Vec3TsToWsNormalized(vNormalTs.xyz, i.vNormalWs.xyz, vTangentUWs.xyz, vTangentVWs.xyz);
+}
+
 // replaces pixel.material.hlsl
 #include "sourcebox/common/legacy_material.hlsl"
 #include "sourcebox/common/legacy_pixelinputs.hlsl"

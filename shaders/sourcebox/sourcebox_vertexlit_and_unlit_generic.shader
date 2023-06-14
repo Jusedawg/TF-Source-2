@@ -91,11 +91,11 @@ FEATURES
 //=========================================================================================================================
 MODES
 {
-    VrForward();													// Indicates this shader will be used for main rendering
-    Depth( "vr_depth_only.vfx" ); 									// Shader that will be used for shadowing and depth prepass
-    ToolsVis( S_MODE_TOOLS_VIS ); 									// Ability to see in the editor
-    // ToolsWireframe( "vr_tools_wireframe.vfx" ); 					// Allows for mat_wireframe to work
-	// ToolsShadingComplexity( "vr_tools_shading_complexity.vfx" ); 	// Shows how expensive drawing is in debug view
+    Forward();
+    Depth( "depth_only.shader" );
+    ToolsVis( S_MODE_TOOLS_VIS );
+    // ToolsWireframe( "tools_wireframe.shader" );
+	// ToolsShadingComplexity( "tools_shading_complexity.shader" );
 }
 
 //=========================================================================================================================

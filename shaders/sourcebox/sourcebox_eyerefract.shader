@@ -27,11 +27,11 @@ FEATURES
 //=========================================================================================================================
 MODES
 {
-    VrForward();													// Indicates this shader will be used for main rendering
-    Depth( "vr_depth_only.vfx" ); 									// Shader that will be used for shadowing and depth prepass
+    Forward();													// Indicates this shader will be used for main rendering
+    Depth( "depth_only.vfx" ); 									// Shader that will be used for shadowing and depth prepass
     ToolsVis( S_MODE_TOOLS_VIS ); 									// Ability to see in the editor
-    // ToolsWireframe( "vr_tools_wireframe.vfx" ); 					// Allows for mat_wireframe to work
-	// ToolsShadingComplexity( "vr_tools_shading_complexity.vfx" ); 	// Shows how expensive drawing is in debug view
+    // ToolsWireframe( "tools_wireframe.vfx" ); 					// Allows for mat_wireframe to work
+	// ToolsShadingComplexity( "tools_shading_complexity.vfx" ); 	// Shows how expensive drawing is in debug view
 }
 
 //=========================================================================================================================
@@ -296,7 +296,7 @@ PS
         //===================//
         // Ambient occlusion //
         //===================//
-        float3 cAmbientOcclFromTexture = Tex2D( g_tAmbientOcclusionTexture, i.vTextureCoords.xy ).rgb;
+        float3 cAmbientOcclFromTexture = Tex2DS( g_tAmbientOcclusionTexture, TextureFiltering, i.vTextureCoords.xy ).rgb;
         float3 cAmbientOcclColor = lerp( g_vAmbientOcclColor, 1.0f, cAmbientOcclFromTexture.rgb ); // Color the ambient occlusion
         
         //==========================//
@@ -316,21 +316,21 @@ PS
 
 
         // DO LIGHTING (originally in VS)
-        ShadingModelLegacy sm;
-        sm.config.DoDiffuse = true;
-        sm.config.HalfLambert = S_HALFLAMBERT ? true : false;
-        sm.config.DoAmbientOcclusion = true;
-        sm.config.DoLightingWarp = S_LIGHTWARPTEXTURE ? true : false;
-        sm.config.DoRimLighting = false;
-        sm.config.DoSpecularWarp = false;
-        sm.config.DoSpecular = false;
-        sm.config.DoIrisLighting = true;
+        ShadingLegacyConfig config = ShadingLegacyConfig::GetDefault();
+        config.DoDiffuse = true;
+        config.HalfLambert = S_HALFLAMBERT ? true : false;
+        config.DoAmbientOcclusion = true;
+        config.DoLightingWarp = S_LIGHTWARPTEXTURE ? true : false;
+        config.DoRimLighting = false;
+        config.DoSpecularWarp = false;
+        config.DoSpecular = false;
+        config.DoIrisLighting = true;
 
-        sm.config.SelfIllum = false;
-        sm.config.SelfIllumFresnel = false;
+        config.SelfIllum = false;
+        config.SelfIllumFresnel = false;
 
-        sm.config.StaticLight = false;
-        sm.config.AmbientLight = true;
+        config.StaticLight = false;
+        config.AmbientLight = true;
 
         // Diffuse = cIrisColor + fCorneaNoise * 0.1f
         // Normal = vBentWorldNormal
@@ -347,6 +347,6 @@ PS
         // m.AverageAmbient = g_flAverageAmbient;
 
         // PixelInput, Material, Shading Model
-        return FinalizeLegacyOutput(FinalizePixelMaterial( i, m, sm ));
+        return FinalizeLegacyOutput(ShadingModelLegacy::Shade( i, m, config ));
 	}
 }
