@@ -138,7 +138,13 @@ public partial class SentryGun
 		if ( HasTarget )
 		{
 			if ( !Target.IsValid() )
+			{
 				Target = null;
+			}
+			else if(ITeam.IsSame(Target, this))
+			{
+				Target = null;
+			}
 			else if ( Position.Distance( Target.Position ) > Range || Target.LifeState != LifeState.Alive )
 			{
 				Target = null;
@@ -174,7 +180,7 @@ public partial class SentryGun
 				if ( player.InCondition( TFCondition.Cloaked ) || player.LifeState != LifeState.Alive ) continue;
 			}
 
-			if ( ent is ITeam teamEnt && teamEnt.TeamNumber == TeamNumber ) continue;
+			if ( ITeam.IsSame( ent, this ) ) continue;
 
 			//If we have a target, is the queried player closer?
 			if ( Target != null && Position.Distance( ent.Position ) > Position.Distance( Target.Position ) ) continue;
