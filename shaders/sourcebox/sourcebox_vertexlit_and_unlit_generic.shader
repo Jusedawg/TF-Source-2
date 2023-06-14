@@ -91,7 +91,7 @@ FEATURES
 //=========================================================================================================================
 MODES
 {
-    Forward();
+    VrForward();
     Depth( "depth_only.shader" );
     ToolsVis( S_MODE_TOOLS_VIS );
     // ToolsWireframe( "tools_wireframe.shader" );

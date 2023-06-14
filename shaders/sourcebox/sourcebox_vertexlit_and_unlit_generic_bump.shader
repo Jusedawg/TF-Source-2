@@ -49,7 +49,7 @@ FEATURES
 //=========================================================================================================================
 MODES
 {
-    Forward();													// Indicates this shader will be used for main rendering
+    VrForward();													// Indicates this shader will be used for main rendering
     Depth( "depth_only.shader" ); 									// Shader that will be used for shadowing and depth prepass
     ToolsVis( S_MODE_TOOLS_VIS ); 									// Ability to see in the editor
     // ToolsWireframe( "tools_wireframe.shader" ); 					// Allows for mat_wireframe to work
