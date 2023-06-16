@@ -49,8 +49,6 @@ public class Wrench : TFMeleeBase
 	}
 	public override void OnHitEntity( Entity entity, TraceResult tr )
 	{
-		base.OnHitEntity( entity, tr );
-
 		if(entity is TFBuilding building)
 		{
 			wasSuccess = false;
@@ -67,20 +65,18 @@ public class Wrench : TFMeleeBase
 					wasSuccess = true;
 			}
 		}
+		
+		base.OnHitEntity( entity, tr );
 	}
 
 	public override void PlayImpactSound( Entity entity )
 	{
-		if(entity is TFBuilding)
+		if ( entity is TFBuilding ) 
 		{
-			if ( wasSuccess )
-				PlaySound( BUILDING_HIT_SUCCESS );
-			else
-				PlaySound( BUILDING_HIT_FAIL );
-
+			PlaySound( wasSuccess ? BUILDING_HIT_SUCCESS : BUILDING_HIT_FAIL );
 			return;
 		}
-		else
-			base.PlayImpactSound( entity );
+		
+		base.PlayImpactSound( entity );
 	}
 }
