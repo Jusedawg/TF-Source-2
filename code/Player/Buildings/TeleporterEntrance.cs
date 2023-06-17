@@ -1,11 +1,7 @@
 ﻿using Amper.FPS;
-using Editor;
 using Sandbox;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TFS2;
 
@@ -81,12 +77,11 @@ public partial class TeleporterEntrance : Teleporter
 		{
 			// Rotation between this and the other teleporter
 			var direction = Rotation.LookAt( LinkedTeleporter.Position - Position );
-			// Rotation of the teleporter direction arrow. This should be the amount of yaw rotation needed from our initial rotation.
-			float arrowRotation = MathF.Abs(direction.Yaw())- MathF.Abs(Rotation.Yaw());
-			if ( arrowRotation < 0 )
-				arrowRotation += 360;
-			SetAnimParameter( "f_direction", arrowRotation );
 
+			// Rotation of the teleporter direction arrow. This should be the amount of yaw rotation needed from our initial rotation.
+			float arrowRotation = MathX.UnsignedMod( Rotation.Yaw() - direction.Yaw(), 360 );
+
+			SetAnimParameter( "f_direction", arrowRotation );
 			SetBodyGroup( "teleporter_direction", 1 );
 		}
 		else
