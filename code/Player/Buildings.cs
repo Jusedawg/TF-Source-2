@@ -112,9 +112,9 @@ public partial class TFPlayer
 	{
 		if(Buildings.Count > 0)
 		{
-			for ( int i = 0; i < Buildings.Count; i++ )
+			foreach ( var tfBuilding in Buildings.ToArray() )
 			{
-				Buildings[i].ManualDestroy();
+				tfBuilding.ManualDestroy();
 			}
 
 			Buildings.Clear();

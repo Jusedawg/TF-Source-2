@@ -1,13 +1,12 @@
 ﻿using Amper.FPS;
 using Sandbox;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TFS2;
 
+[Category( "Gameplay" )]
+[Title( "Building" ), Icon( "build_circle" )]
 public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 {
 	[Net] public bool IsInitialized { get; protected set; }

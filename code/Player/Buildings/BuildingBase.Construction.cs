@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Sandbox;
 
 namespace TFS2;
@@ -113,9 +111,9 @@ public partial class TFBuilding
 
 		if( !HasFirstConstructed )
 		{
-			// Only heal on first construction
-			float gainFraction = gain / ConstructionTime;
-			Health += healthToGain * gainFraction;
+			// Only heal on first construction.
+			float healAmount = healthToGain * (gain / ConstructionTime);
+			Health = MathF.Min( MaxHealth, Health + healAmount );
 		}
 	}
 
