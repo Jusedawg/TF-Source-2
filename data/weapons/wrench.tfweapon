@@ -3,13 +3,14 @@
   "EngineClass": "tf_weapon_wrench",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_wrench/c_wrench.vmdl",
-  "Owners": {
-    "data/playerclass/engineer.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/engineer.tfclass",
       "Slot": "Melee",
       "HoldPose": "Melee",
       "ViewModel": "models/weapons/v_models/v_wrench_engineer.vmdl"
     }
-  },
+  ],
   "Damage": 65,
   "Range": 0,
   "ClipSize": 0,

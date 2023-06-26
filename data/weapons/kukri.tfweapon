@@ -3,13 +3,14 @@
   "EngineClass": "tf_weapon_kukri",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_machete/c_machete.vmdl",
-  "Owners": {
-    "data/playerclass/sniper.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/sniper.tfclass",
       "Slot": "Melee",
       "HoldPose": "Melee",
       "ViewModel": "models/weapons/v_models/v_machete_sniper.vmdl"
     }
-  },
+  ],
   "Damage": 65,
   "Range": 0,
   "ClipSize": 0,

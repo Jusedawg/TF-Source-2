@@ -3,13 +3,14 @@
   "EngineClass": "tf_weapon_knife",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_knife/c_knife.vmdl",
-  "Owners": {
-    "data/playerclass/spy.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/spy.tfclass",
       "Slot": "Melee",
       "HoldPose": "Melee",
       "ViewModel": "models/weapons/v_models/v_knife_spy.vmdl"
     }
-  },
+  ],
   "Damage": 40,
   "Range": 0,
   "ClipSize": 0,

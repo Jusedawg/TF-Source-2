@@ -3,12 +3,13 @@
   "EngineClass": "tf_weapon_revolver",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_revolver/c_revolver.vmdl",
-  "Owners": {
-    "data/playerclass/spy.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/spy.tfclass",
       "Reserve": 24,
       "ViewModel": "models/weapons/v_models/v_revolver_spy.vmdl"
     }
-  },
+  ],
   "Damage": 40,
   "Range": 4096,
   "ClipSize": 6,

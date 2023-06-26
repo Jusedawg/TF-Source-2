@@ -3,30 +3,34 @@
   "EngineClass": "tf_weapon_shotgun",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_shotgun/c_shotgun.vmdl",
-  "Owners": {
-    "data/playerclass/soldier.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/soldier.tfclass",
       "Slot": "Secondary",
       "HoldPose": "Secondary",
       "Reserve": 32,
       "ViewModel": "models/weapons/v_models/v_shotgun_soldier.vmdl"
     },
-    "data/playerclass/pyro.tfclass": {
+    {
+      "OwnerResource": "data/playerclass/pyro.tfclass",
       "Slot": "Secondary",
       "HoldPose": "Secondary",
       "Reserve": 32,
       "ViewModel": "models/weapons/v_models/v_shotgun_pyro.vmdl"
     },
-    "data/playerclass/heavy.tfclass": {
+    {
+      "OwnerResource": "data/playerclass/heavy.tfclass",
       "Slot": "Secondary",
       "HoldPose": "Secondary",
       "Reserve": 32,
       "ViewModel": "models/weapons/v_models/v_shotgun_heavy.vmdl"
     },
-    "data/playerclass/engineer.tfclass": {
+    {
+      "OwnerResource": "data/playerclass/engineer.tfclass",
       "Reserve": 32,
       "ViewModel": "models/weapons/v_models/v_shotgun_engineer.vmdl"
     }
-  },
+  ],
   "Damage": 6,
   "Range": 4096,
   "ClipSize": 6,

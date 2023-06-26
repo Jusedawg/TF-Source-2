@@ -3,13 +3,14 @@
   "EngineClass": "tf_weapon_medigun",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_medigun/c_medigun.vmdl",
-  "Owners": {
-    "data/playerclass/medic.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/medic.tfclass",
       "Slot": "Secondary",
       "HoldPose": "Secondary",
       "ViewModel": "models/weapons/v_models/v_medigun_medic.vmdl"
     }
-  },
+  ],
   "Damage": 24,
   "Range": 450,
   "ClipSize": 0,

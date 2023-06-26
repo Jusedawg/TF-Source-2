@@ -3,11 +3,12 @@
   "EngineClass": "tf_weapon_minigun",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_minigun/c_minigun.vmdl",
-  "Owners": {
-    "data/playerclass/heavy.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/heavy.tfclass",
       "ViewModel": "models/weapons/v_models/v_minigun_heavy.vmdl"
     }
-  },
+  ],
   "Damage": 9,
   "Range": 4096,
   "ClipSize": 200,

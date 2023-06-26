@@ -3,14 +3,15 @@
   "EngineClass": "tf_weapon_inviswatch",
   "Hidden": true,
   "WorldModel": "models/weapons/c_models/c_sapper/c_sapper.vmdl",
-  "Owners": {
-    "data/playerclass/spy.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/spy.tfclass",
       "Slot": "Secondary",
       "HoldPose": "Secondary",
       "AttachToHands": true,
       "ViewModel": "models/weapons/arms/c_spy_arms/watch_spy.vmdl"
     }
-  },
+  ],
   "Damage": 0,
   "Range": 0,
   "ClipSize": 0,

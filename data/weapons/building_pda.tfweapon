@@ -3,13 +3,14 @@
   "EngineClass": "tf_weapon_construction_pda",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_builder/c_builder.vmdl",
-  "Owners": {
-    "data/playerclass/engineer.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/engineer.tfclass",
       "Slot": "PDA",
       "HoldPose": "PDA",
       "ViewModel": "models/weapons/v_models/v_builder_engineer.vmdl"
     }
-  },
+  ],
   "Damage": 0,
   "Range": 4096,
   "ClipSize": 0,

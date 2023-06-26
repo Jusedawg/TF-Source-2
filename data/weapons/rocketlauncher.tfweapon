@@ -3,12 +3,13 @@
   "EngineClass": "tf_weapon_rocketlauncher",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_rocketlauncher/c_rocketlauncher.vmdl",
-  "Owners": {
-    "data/playerclass/soldier.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/soldier.tfclass",
       "Reserve": 20,
       "ViewModel": "models/weapons/v_models/v_rocketlauncher_soldier.vmdl"
     }
-  },
+  ],
   "Damage": 90,
   "Range": 4096,
   "ClipSize": 4,

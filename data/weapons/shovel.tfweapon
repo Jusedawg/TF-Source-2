@@ -3,13 +3,14 @@
   "EngineClass": "tf_weapon_shovel",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_shovel/c_shovel.vmdl",
-  "Owners": {
-    "data/playerclass/soldier.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/soldier.tfclass",
       "Slot": "Melee",
       "HoldPose": "Melee",
       "ViewModel": "models/weapons/v_models/v_shovel_soldier.vmdl"
     }
-  },
+  ],
   "Damage": 65,
   "Range": 0,
   "ClipSize": 0,

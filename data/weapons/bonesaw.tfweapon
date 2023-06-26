@@ -3,13 +3,14 @@
   "EngineClass": "tf_weapon_bonesaw",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_bonesaw/c_bonesaw.vmdl",
-  "Owners": {
-    "data/playerclass/medic.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/medic.tfclass",
       "Slot": "Melee",
       "HoldPose": "Melee",
       "ViewModel": "models/weapons/v_models/v_bonesaw_medic.vmdl"
     }
-  },
+  ],
   "Damage": 65,
   "Range": 0,
   "ClipSize": 0,

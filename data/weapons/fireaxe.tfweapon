@@ -3,13 +3,14 @@
   "EngineClass": "tf_weapon_fireaxe",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_fireaxe_pyro/c_fireaxe_pyro.vmdl",
-  "Owners": {
-    "data/playerclass/pyro.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/pyro.tfclass",
       "Slot": "Melee",
       "HoldPose": "Melee",
       "ViewModel": "models/weapons/v_models/v_fireaxe_pyro.vmdl"
     }
-  },
+  ],
   "Damage": 65,
   "Range": 0,
   "ClipSize": 0,

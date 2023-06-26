@@ -3,14 +3,15 @@
   "EngineClass": "tf_weapon_stickybomblauncher",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_stickybomb_launcher/c_stickybomb_launcher.vmdl",
-  "Owners": {
-    "data/playerclass/demoman.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/demoman.tfclass",
       "Slot": "Secondary",
       "HoldPose": "Secondary",
       "Reserve": 24,
       "ViewModel": "models/weapons/v_models/v_stickybomb_launcher_demo.vmdl"
     }
-  },
+  ],
   "Damage": 120,
   "Range": 4096,
   "ClipSize": 8,

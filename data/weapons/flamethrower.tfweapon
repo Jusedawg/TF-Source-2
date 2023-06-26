@@ -3,11 +3,12 @@
   "EngineClass": "tf_weapon_flamethrower",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_flamethrower/c_flamethrower.vmdl",
-  "Owners": {
-    "data/playerclass/pyro.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/pyro.tfclass",
       "ViewModel": "models/weapons/v_models/v_flamethrower_pyro.vmdl"
     }
-  },
+  ],
   "Damage": 170,
   "Range": 4096,
   "ClipSize": 200,

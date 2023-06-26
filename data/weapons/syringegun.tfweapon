@@ -3,12 +3,13 @@
   "EngineClass": "tf_weapon_syringegun",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_syringegun/c_syringegun.vmdl",
-  "Owners": {
-    "data/playerclass/medic.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/medic.tfclass",
       "Reserve": 150,
       "ViewModel": "models/weapons/v_models/v_syringegun_medic.vmdl"
     }
-  },
+  ],
   "Damage": 10,
   "Range": 4096,
   "ClipSize": 40,

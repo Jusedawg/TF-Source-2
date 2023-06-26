@@ -3,14 +3,15 @@
   "EngineClass": "tf_weapon_smg",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_smg/c_smg.vmdl",
-  "Owners": {
-    "data/playerclass/sniper.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/sniper.tfclass",
       "Slot": "Secondary",
       "HoldPose": "Secondary",
       "Reserve": 75,
       "ViewModel": "models/weapons/v_models/v_smg_sniper.vmdl"
     }
-  },
+  ],
   "Damage": 8,
   "Range": 4096,
   "ClipSize": 25,

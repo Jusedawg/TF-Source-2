@@ -36,9 +36,8 @@ public class WeaponData : GameResource
 	[ResourceType( "vmdl" )]
 	public string WorldModel { get; set; }
 
-	[ResourceType( "tfclass" )]
-	public Dictionary<string, WeaponOwnerData> Owners { get; set; }
-
+	private Dictionary<string, WeaponOwnerData> ownerDictionary;
+	public List<WeaponOwnerData> Owners { get; set; }
 
 	//
 	// Properties
@@ -248,9 +247,15 @@ public class WeaponData : GameResource
 	protected override void PostLoad()
 	{
 		Precache.Add( WorldModel );
+		ownerDictionary = Owners?.ToDictionary(g => g.OwnerResource);
 
 		// Add this asset to the registry.
 		All.Add( this );
+	}
+
+	protected override void PostReload()
+	{
+		ownerDictionary = Owners?.ToDictionary( g => g.OwnerResource );
 	}
 
 	/// <summary>
@@ -274,13 +279,13 @@ public class WeaponData : GameResource
 
 	public bool CanBeOwnedByPlayerClass( PlayerClass pclass )
 	{
-		return Owners?.ContainsKey( pclass.ResourcePath ) ?? false;
+		return ownerDictionary?.ContainsKey( pclass.ResourcePath ) ?? false;
 	}
 
 	public bool TryGetOwnerDataForPlayerClass( PlayerClass pclass, out WeaponOwnerData data )
 	{
 		data = default;
-		return Owners?.TryGetValue( pclass.ResourcePath, out data ) ?? false;
+		return ownerDictionary?.TryGetValue( pclass.ResourcePath, out data ) ?? false;
 	}
 
 	/// <summary>
@@ -312,8 +317,10 @@ public enum ViewModelModeChoices
 	WeaponOnly
 }
 
-public struct WeaponOwnerData
+public class WeaponOwnerData
 {
+	[ResourceType( "tfclass" ), Title("Owning Class")]
+	public string OwnerResource { get; set; }
 	/// <summary>
 	/// Slot to assign this weapon to.
 	/// </summary>

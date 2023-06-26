@@ -3,12 +3,13 @@
   "EngineClass": "tf_weapon_grenadelauncher",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_grenadelauncher/c_grenadelauncher.vmdl",
-  "Owners": {
-    "data/playerclass/demoman.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/demoman.tfclass",
       "Reserve": 16,
       "ViewModel": "models/weapons/v_models/v_grenadelauncher_demo.vmdl"
     }
-  },
+  ],
   "Damage": 100,
   "Range": 4096,
   "ClipSize": 4,

@@ -3,13 +3,14 @@
   "EngineClass": "tf_weapon_bottle",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_bottle/c_bottle.vmdl",
-  "Owners": {
-    "data/playerclass/demoman.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/demoman.tfclass",
       "Slot": "Melee",
       "HoldPose": "Melee",
       "ViewModel": "models/weapons/v_models/v_bottle_demoman.vmdl"
     }
-  },
+  ],
   "Damage": 65,
   "Range": 0,
   "ClipSize": 0,

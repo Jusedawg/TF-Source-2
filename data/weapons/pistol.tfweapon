@@ -3,20 +3,22 @@
   "EngineClass": "tf_weapon_pistol",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_pistol/c_pistol.vmdl",
-  "Owners": {
-    "data/playerclass/scout.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/scout.tfclass",
       "Slot": "Secondary",
       "HoldPose": "Secondary",
       "Reserve": 36,
       "ViewModel": "models/weapons/v_models/v_pistol_scout.vmdl"
     },
-    "data/playerclass/engineer.tfclass": {
+    {
+      "OwnerResource": "data/playerclass/engineer.tfclass",
       "Slot": "Secondary",
       "HoldPose": "Secondary",
       "Reserve": 200,
       "ViewModel": "models/weapons/v_models/v_pistol_engineer.vmdl"
     }
-  },
+  ],
   "Damage": 15,
   "Range": 4096,
   "ClipSize": 12,

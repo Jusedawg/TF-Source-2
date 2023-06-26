@@ -3,13 +3,14 @@
   "EngineClass": "tf_weapon_bat",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_bat/c_bat.vmdl",
-  "Owners": {
-    "data/playerclass/scout.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/scout.tfclass",
       "Slot": "Melee",
       "HoldPose": "Melee",
       "ViewModel": "models/weapons/v_models/v_bat_scout.vmdl"
     }
-  },
+  ],
   "Damage": 35,
   "Range": 4096,
   "ClipSize": 1,

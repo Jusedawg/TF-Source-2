@@ -3,14 +3,15 @@
   "EngineClass": "tf_weapon_builder",
   "Hidden": true,
   "WorldModel": "models/weapons/c_models/c_toolbox/c_toolbox.vmdl",
-  "Owners": {
-    "data/playerclass/engineer.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/engineer.tfclass",
       "Slot": "Action",
       "HoldPose": "Action",
       "ViewModel": "models/weapons/c_models/c_toolbox/c_toolbox.vmdl",
       "AttachToHands": true
     }
-  },
+  ],
   "Damage": 0,
   "Range": 4096,
   "ClipSize": 1,

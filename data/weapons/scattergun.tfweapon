@@ -3,12 +3,13 @@
   "EngineClass": "tf_weapon_scattergun",
   "Hidden": false,
   "WorldModel": "models/weapons/c_models/c_scattergun/c_scattergun.vmdl",
-  "Owners": {
-    "data/playerclass/scout.tfclass": {
+  "Owners": [
+    {
+      "OwnerResource": "data/playerclass/scout.tfclass",
       "Reserve": 32,
       "ViewModel": "models/weapons/v_models/v_scattergun_scout.vmdl"
     }
-  },
+  ],
   "Damage": 6,
   "Range": 4096,
   "ClipSize": 6,
