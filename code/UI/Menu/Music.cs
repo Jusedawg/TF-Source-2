@@ -9,7 +9,7 @@ namespace TFS2.Menu;
 
 internal class Music
 {
-	public struct Track
+	public class Track
 	{
 		public string SoundName { get; set; }
 		public int MinPlays { get; set; }
@@ -34,10 +34,8 @@ internal class Music
 	static List<Track> _tracks = new()
 	{
 		new("music.main_menu.1", 0, 0.7f),
-		new("music.main_menu.2", 0, 0.45f),
+		new("music.main_menu.2", 1, 0.2f),
 		new("music.main_menu.4", 1, 0.2f),
-		new("music.main_menu.7", 1, 0.2f),
-		new("music.main_menu.8", 1, 0.2f),
 		new("music.main_menu.6", 1, 0.2f),
 		new("music.main_menu.3", 2, 0.05f),
 		new("music.main_menu.5", 3, 0.01f)
@@ -74,7 +72,7 @@ internal class Music
 			var pick = Game.Random.FromList( _tracks.Where(t => playedTracks.Count >= t.MinPlays).ToList() );
 			//Log.Info( $"Music play attempt: picked {pick}" );
 
-			if ( Game.Random.NextSingle() < pick.Chance )
+			if ( Game.Random.NextSingle() < pick.Chance && playedTracks.LastOrDefault() != pick )
 			{
 				//Log.Info( "Play sucess!" );
 				PlayTrack( pick );
