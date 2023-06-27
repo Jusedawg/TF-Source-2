@@ -14,12 +14,12 @@
 	{
 		case GameSetting.GameSettingType.Choice:
 						
-			<DropDown value=@Value @ref=Combobox ValueChanged=@Set></DropDown>
+			<DropDown value=@Value @ref=ChoiceDropdown ValueChanged=@Set></DropDown>
 			break;
 
 		case GameSetting.GameSettingType.Boolean:
-						
-			<SwitchControl value=@Value OnValueChanged=@( ( bool b ) => Set( b ? "true" : "false"  ) )></SwitchControl>
+
+            <checkbox @onvaluechanged=@((bool b) => Set(b ? "true" : "false")) />
 			break;
 
 		case GameSetting.GameSettingType.Integer:
@@ -48,33 +48,38 @@
 
 @code
 {
-	public Action<string, string> OnChange { get; set; }
+    public Action<string, string> OnChange { get; set; }
 
-	public string Value { get; set; }
-	public GameSetting Setting { get; set; }
+    public string Value { get; set; }
+    public GameSetting Setting { get; set; }
 
-	DropDown Combobox;
+    DropDown ChoiceDropdown;
+    Checkbox BooleanCheckbox;
 
-	void Set( string newvalue)
-	{
-		OnChange?.Invoke( Setting.ConVarName, newvalue );
-		//Log.Info($"{Setting.ConVarName} -> {newvalue}");
-	}
+    void Set( string newvalue)
+    {
+        OnChange?.Invoke( Setting.ConVarName, newvalue );
+        //Log.Info($"{Setting.ConVarName} -> {newvalue}");
+    }
 
-	protected override void OnAfterTreeRender(bool firstTime)
-	{
-		base.OnAfterTreeRender(firstTime);
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
 
-		if ( Combobox != null )
-		{
-			Combobox.Options.Clear();
+        if (ChoiceDropdown != null)
+        {
+            ChoiceDropdown.Options.Clear();
 
-			foreach (var choice in Setting.Choices )
-			{
-				Combobox.Options.Add(new Option(choice.Name, choice.Value));
-			}
+            foreach (var choice in Setting.Choices )
+            {
+                ChoiceDropdown.Options.Add(new Option(choice.Name, choice.Value));
+            }
 
-			Combobox.Value = Value;
-		}
-	}
+            ChoiceDropdown.Value = Value;
+        }
+        else if (BooleanCheckbox != null)
+        {
+            BooleanCheckbox.Checked = Value == "true";
+        }
+    }
 }

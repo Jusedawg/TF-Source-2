@@ -29,7 +29,7 @@ public partial class LobbyMenu
 	protected override int BuildHash()
 	{
 		var lobby = Game.Menu.Lobby;
-
+		
 		return HashCode.Combine( lobby?.Title, lobby?.Owner.Id, lobby?.MemberCount, lobby?.MaxMembers, Game.Menu.Package?.PackageSettings?.Count() );
 	}
 
@@ -64,5 +64,10 @@ public partial class LobbyMenu
 	void OnClickAddons()
 	{
 		Mode = LobbyPage.Addons;
+	}
+
+	bool CanStartLobby()
+	{
+		return !string.IsNullOrWhiteSpace( Game.Menu.Lobby.Map );
 	}
 }

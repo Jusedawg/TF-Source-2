@@ -81,7 +81,14 @@
         <div class="right">
             @if (Game.Menu.Lobby.Owner.IsMe)
             {
-                <span class="button-dark" onclick=@StartGame>Start Game</span>
+                @if (CanStartLobby())
+                {
+                    <span class="button-dark" onclick=@StartGame>Start Game</span>
+                }
+                else
+                {
+                    <span class="button-dark disabled">Start Game</span>
+                }
             }
         </div>
 
