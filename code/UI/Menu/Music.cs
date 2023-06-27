@@ -28,17 +28,17 @@ internal class Music
 		}
 	}
 
-	const float MIN_TRACK_PAUSE = 60f;
-	const float TRACK_CHANCE_INTERVAL = 10f;
+	const float MIN_TRACK_PAUSE = 120f;
+	const float TRACK_CHANCE_INTERVAL = 15f;
 
 	static List<Track> _tracks = new()
 	{
-		new("music.main_menu.1", 0, 0.7f),
-		new("music.main_menu.2", 1, 0.2f),
-		new("music.main_menu.4", 1, 0.2f),
-		new("music.main_menu.6", 1, 0.2f),
-		new("music.main_menu.3", 2, 0.05f),
-		new("music.main_menu.5", 3, 0.01f)
+		new("music.main_menu.1", 0, 0.3f),
+		new("music.main_menu.2", 1, 0.1f),
+		new("music.main_menu.4", 1, 0.1f),
+		new("music.main_menu.6", 1, 0.1f),
+		new("music.main_menu.3", 2, 0.03f),
+		new("music.main_menu.5", 3, 0.005f)
 	};
 
 	public bool Enabled { get; set; } = true;
