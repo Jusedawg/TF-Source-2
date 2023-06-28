@@ -36,7 +36,14 @@
                 }
                 else
                 {
-                    <button class="button-gradient" @onclick=@OnClickCreateGame>#GameMenu.CreateGame</button>
+                    @if (Game.Menu.Lobby == null)
+                    {
+                        <button class="button-gradient" @onclick=@OnClickCreateGame>#GameMenu.CreateGame</button>
+                    }
+                    else
+                    {
+                        <button class="button-gradient" @onclick=@OnClickViewLobby>#GameMenu.ViewLobby</button>
+                    }
                     <button class="button-gradient" @onclick=@OnClickJoinGame>#GameMenu.JoinGame</button>
                 }
             </div>

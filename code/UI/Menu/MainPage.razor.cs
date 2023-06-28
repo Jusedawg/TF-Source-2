@@ -22,10 +22,13 @@ public partial class MainPage : Panel
 	{
 		await Game.Menu.CreateLobbyAsync();
 	}
+	public void OnClickViewLobby()
+	{
+		this.Navigate( "/lobby" );
+	}
 	public void OnClickLoadout()
 	{
 		this.Navigate( "/loadout" );
-		//MenuOverlay.Open<ClassLoadout>();
 	}
 	public void OnClickJoinGame()
 	{
@@ -36,7 +39,6 @@ public partial class MainPage : Panel
 	{
 		this.Navigate( "/settings" );
 	}
-
 
 	public void OnClickQuit()
 	{
