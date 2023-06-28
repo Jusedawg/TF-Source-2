@@ -70,7 +70,7 @@
 
     public ObjectEditor Editor;
     SettingsPage Mode;
-    bool needsRefresh = false;
+    bool needsRefresh = true;
 
     public SettingsMenu()
     {
@@ -113,10 +113,12 @@
     {
         Mode = SettingsPage.Inputs;
         needsRefresh = true;
+        StateHasChanged();
     }
 
     private void SelectClientSettings()
     {
         Mode = SettingsPage.Client;
+        StateHasChanged();
     }
 }
