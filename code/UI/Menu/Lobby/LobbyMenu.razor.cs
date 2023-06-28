@@ -46,24 +46,34 @@ public partial class LobbyMenu
 		}
 	}
 
+	void OnClickLeaveLobby()
+	{
+		Game.Menu.Lobby?.Leave();
+		this.Navigate( "/" );
+	}
+
 	void OnClickLobby()
 	{
 		Mode = LobbyPage.Players;
+		StateHasChanged();
 	}
 
 	void OnClickMap()
 	{
 		Mode = LobbyPage.Maps;
+		StateHasChanged();
 	}
 
 	void OnClickSettings()
 	{
 		Mode = LobbyPage.Settings;
+		StateHasChanged();
 	}
 
 	void OnClickAddons()
 	{
 		Mode = LobbyPage.Addons;
+		StateHasChanged();
 	}
 
 	bool CanStartLobby()

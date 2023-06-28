@@ -270,59 +270,28 @@ $form-row-height: 48px;
 .form .form-control {
     flex-grow: 1;
 
-    SliderControl, > DropDown, > textentry, SliderControl textentry {
-        flex-grow: 1;
-        font-size: 20px;
-        height: $form-row-height;
-    }
-
     > textentry, SliderControl textentry {
         flex-grow: 1;
-        background-color: #ffffff05;
+        background-color: $tan-darker;
         height: $form-row-height;
-        color: #aaa;
+        color: #fff;
         width: 600px;
         border-radius: 0;
         padding: 5px;
 
         &:hover {
-            background-color: #ffffff11;
+            background-color: $bg-dark;
         }
 
         &:focus {
-            background-color: #ffffff22;
-            color: #fff;
+            background-color: $tan-dark;
         }
     }
 
-    SliderControl {
-        gap: 2px;
-
-        > .inner {
-            > .values {
-                position: absolute;
-                padding: 16px;
-                color: #fffa;
-            }
-
-            > .track {
-                height: 100%;
-                margin: 2px 0px;
-                border-radius: 0;
-                background-color: #ffffff05;
-
-                > .track-active {
-                    background-color: #ffffff11;
-                    border-radius: 0;
-                }
-
-                > .thumb {
-                    width: 4px;
-                    height: 100%;
-                    background-color: #fff8;
-                }
-            }
-        }
+    SliderControl, > DropDown, > textentry, SliderControl textentry {
+        flex-grow: 1;
+        font-size: 20px;
+        height: $form-row-height;
     }
 }
 

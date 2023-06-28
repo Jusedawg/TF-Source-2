@@ -32,7 +32,7 @@
             <FormGroup class="form-group">
                 <Label>Max Players</Label>
                 <Control>
-                    <SliderControl ShowTextEntry="@true" ShowRange="@true" Min=@(1.0f) Max=@(MaxPlayersSupported) Value:bind=@Game.Menu.Lobby.MaxMembers> </SliderControl>
+                    <SliderControl ShowTextEntry="@false" ShowRange="@true" Min=@(1.0f) Max=@(MaxPlayersSupported) Value:bind=@Game.Menu.Lobby.MaxMembers> </SliderControl>
                 </Control>
             </FormGroup>
         }
@@ -42,7 +42,7 @@
         @foreach (var group in Game.Menu.Package.PackageSettings.GroupBy(x => x.Group))
 	    {
             var title = group.Key;
-            if (string.IsNullOrWhiteSpace(title)) title = "Game Settings";
+            if (string.IsNullOrWhiteSpace(title)) title = "Other";
 
             <h2>@title</h2>
 
@@ -57,7 +57,7 @@
                     <Label>@setting.DisplayName</Label>
 
                     <Control>
-                        <LobbyGameSetting Value=@value Setting=@setting OnChange="@OnLobbySettingChanged"></LobbyGameSetting>
+                        <LobbyGameSetting Value=@value Setting=@setting OnChange=@OnLobbySettingChanged></LobbyGameSetting>
                     </Control>
 
 			    </FormGroup>
@@ -66,7 +66,7 @@
             <div style="height: 40px; flex-shrink: 0;"></div>
 	    }
     </div>
-</div>
+</root>
 
 @code {
     int MaxPlayersSupported = 1;
@@ -75,6 +75,7 @@
     {
         MaxPlayersSupported = Game.Menu.Package.GetMeta<int>("MaxPlayers", 1);
     }
+
     void OnLobbySettingChanged(string key, string value)
     {
         Game.Menu.Lobby.ConVars = Game.Menu.Lobby.ConVars.SetItem(key, value);

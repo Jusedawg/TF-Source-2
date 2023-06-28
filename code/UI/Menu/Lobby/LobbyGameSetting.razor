@@ -8,33 +8,36 @@
 @if (Setting == null)
 	return;
 
+@if(string.IsNullOrEmpty(Value))
+    return;
+
 <root class="control">
 
 	@switch (Setting.DisplayType)
 	{
 		case GameSetting.GameSettingType.Choice:
 						
-			<DropDown value=@Value @ref=ChoiceDropdown ValueChanged=@Set></DropDown>
+			<DropDown value=@Value @ref=Editor ValueChanged=@Set></DropDown>
 			break;
 
 		case GameSetting.GameSettingType.Boolean:
 
-            <checkbox @onvaluechanged=@((bool b) => Set(b ? "true" : "false")) />
+            <checkbox @ref=Editor value=@Value />
 			break;
 
 		case GameSetting.GameSettingType.Integer:
 
-			<SliderControl ShowTextEntry="@true" ShowRange="@true" Step=@(1.0f) Min=@Setting.Minimum Max=@Setting.Maximum value=@Value OnValueChanged=@( ( float f ) => Set( f.ToString() ))></SliderControl>
+			<SliderControl @ref=Editor ShowTextEntry="@false" ShowRange="@true" Step=@(1.0f) Min=@Setting.Minimum Max=@Setting.Maximum value=@Value OnValueChanged=@( ( float f ) => Set( f.ToString() ))></SliderControl>
 			break;
 
 		case GameSetting.GameSettingType.Float:
 
-			<SliderControl ShowTextEntry="@true" ShowRange="@true" Step=@Setting.Step Min=@Setting.Minimum Max=@Setting.Maximum value=@Value OnValueChanged=@( ( float f ) => Set( f.ToString() ))></SliderControl>
+			<SliderControl @ref=Editor ShowTextEntry="@false" ShowRange="@true" Step=@Setting.Step Min=@Setting.Minimum Max=@Setting.Maximum value=@Value OnValueChanged=@( ( float f ) => Set( f.ToString() ))></SliderControl>
 			break;
 
 		case GameSetting.GameSettingType.String:
 						
-			<TextEntry value=@Value OnTextEdited=@Set></TextEntry>
+			<TextEntry @ref=Editor value=@Value OnTextEdited=@Set></TextEntry>
 			break;
 
 		default:
@@ -53,33 +56,41 @@
     public string Value { get; set; }
     public GameSetting Setting { get; set; }
 
-    DropDown ChoiceDropdown;
-    Checkbox BooleanCheckbox;
+    Panel Editor;
 
     void Set( string newvalue)
     {
         OnChange?.Invoke( Setting.ConVarName, newvalue );
-        //Log.Info($"{Setting.ConVarName} -> {newvalue}");
     }
 
     protected override void OnAfterTreeRender(bool firstTime)
     {
         base.OnAfterTreeRender(firstTime);
 
-        if (ChoiceDropdown != null)
+        if (Editor is DropDown ChoiceDropdown)
         {
             ChoiceDropdown.Options.Clear();
 
             foreach (var choice in Setting.Choices )
             {
-                ChoiceDropdown.Options.Add(new Option(choice.Name, choice.Value));
+                ChoiceDropdown.Options.Add(new(choice.Name, choice.Value));
             }
 
             ChoiceDropdown.Value = Value;
         }
-        else if (BooleanCheckbox != null)
+        else if(Editor is Checkbox BoolCheckbox)
         {
-            BooleanCheckbox.Checked = Value == "true";
+            BoolCheckbox.Checked = bool.Parse(Value);
+            BoolCheckbox.ValueChanged += OnChecked;
         }
+        else if(Editor is SliderControl NumberSlider)
+        {
+            NumberSlider.Value = float.Parse(Value);
+        }
+    }
+
+    void OnChecked(bool c)
+    {
+        Set(c ? "true" : "false");
     }
 }
