@@ -3,13 +3,20 @@
 @using Sandbox.UI;
 @inherits Panel;
 @namespace TFS2.Menu
-@attribute [StyleSheet]
 
 @if (Setting == null)
 	return;
 
 @if(string.IsNullOrEmpty(Value))
     return;
+
+<style>
+    LobbyGameSetting
+    {
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+</style>
 
 <root class="control">
 
@@ -45,52 +52,4 @@
 			<div>Unhandled LobbyGameSetting @Setting.DisplayType</div>
 			break;	
 	}
-
 </root>
-
-
-@code
-{
-    public Action<string, string> OnChange { get; set; }
-
-    public string Value { get; set; }
-    public GameSetting Setting { get; set; }
-
-    Panel Editor;
-
-    void Set( string newvalue)
-    {
-        OnChange?.Invoke( Setting.ConVarName, newvalue );
-    }
-
-    protected override void OnAfterTreeRender(bool firstTime)
-    {
-        base.OnAfterTreeRender(firstTime);
-
-        if (Editor is DropDown ChoiceDropdown)
-        {
-            ChoiceDropdown.Options.Clear();
-
-            foreach (var choice in Setting.Choices )
-            {
-                ChoiceDropdown.Options.Add(new(choice.Name, choice.Value));
-            }
-
-            ChoiceDropdown.Value = Value;
-        }
-        else if(Editor is Checkbox BoolCheckbox)
-        {
-            BoolCheckbox.Checked = bool.Parse(Value);
-            BoolCheckbox.ValueChanged += OnChecked;
-        }
-        else if(Editor is SliderControl NumberSlider)
-        {
-            NumberSlider.Value = float.Parse(Value);
-        }
-    }
-
-    void OnChecked(bool c)
-    {
-        Set(c ? "true" : "false");
-    }
-}

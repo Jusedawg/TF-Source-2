@@ -8,6 +8,11 @@
 @attribute [StyleSheet]
 @namespace TFS2.Menu
 
+@if(Game.Menu.Lobby == null)
+{
+    this.Navigate("/");
+    return;
+}
 
 <root class="layout">
 
