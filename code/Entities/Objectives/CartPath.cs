@@ -253,6 +253,8 @@ namespace TFS2
 
 		public CartPath GetNextPath()
 		{
+			if ( string.IsNullOrEmpty( NextPath ) ) return null;
+
 			if ( NextPath.StartsWith( "[PR#]" ) )
 				NextPath = NextPath.Substring( 5 );
 

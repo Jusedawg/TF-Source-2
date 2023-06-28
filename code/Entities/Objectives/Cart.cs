@@ -66,7 +66,7 @@ namespace TFS2
 
 		[Net] public TFTeam Team { get; set; }
 		[Net] public CartPath Path { get; set; }
-		private CartPath startingPath;
+		[Net] public CartPath StartingPath { get; set; }
 		public bool IsLoaded => Path != null;
 		public IReadOnlyList<TFPlayer> Pushers => pushers.AsReadOnly();
 		public IReadOnlyList<TFPlayer> Blockers => blockers.AsReadOnly();
@@ -112,11 +112,10 @@ namespace TFS2
 
 		public List<CartPath> GetPaths()
 		{
-			if ( startingPath == null ) return null;
+			if ( StartingPath == null ) return null;
+			List<CartPath> paths = new() { StartingPath };
 
-			List<CartPath> paths = new() { Path };
-
-			var currentPath = startingPath;
+			var currentPath = StartingPath;
 			var nextPath = currentPath.PathNodes?.LastOrDefault()?.GetNextPath();
 
 			while ( nextPath != null)
@@ -143,9 +142,9 @@ namespace TFS2
 		[GameEvent.Entity.PostSpawn]
 		public void PostLevelSetup()
 		{
-			startingPath = FindByName( LinkedCartPath ) as CartPath;
+			StartingPath = FindByName( LinkedCartPath ) as CartPath;
 
-			if ( startingPath == null )
+			if ( StartingPath == null )
 				throw new ArgumentNullException( "Cart HAS to have a cart path set!" );
 
 			Reset();
@@ -158,7 +157,7 @@ namespace TFS2
 				DisablePhysics();
 			}
 
-			Path = startingPath;
+			Path = StartingPath;
 			ResetPath();
 
 			pushers.Clear();

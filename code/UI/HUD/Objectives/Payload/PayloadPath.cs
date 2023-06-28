@@ -204,7 +204,7 @@ public partial class PayloadPath : Panel
 		return distance / PathLength;
 	}
 
-	private float PathOffset( CartPath path ) => _pathLengths.GetValueOrDefault( path )?.Distance ?? 0f;
+	private float PathOffset( CartPath path ) => _pathLengths?.GetValueOrDefault( path )?.Distance ?? 0f;
 	private float ControlPointFraction(CartPath.ControlPointInfo info)
 	{
 		if ( info.Distance == -1 ) return 1;
