@@ -33,12 +33,12 @@ internal class Music
 
 	static List<Track> _tracks = new()
 	{
-		new("music.main_menu.1", 0, 0.3f),
-		new("music.main_menu.2", 1, 0.1f),
-		new("music.main_menu.4", 1, 0.1f),
-		new("music.main_menu.6", 1, 0.1f),
-		new("music.main_menu.3", 2, 0.03f),
-		new("music.main_menu.5", 3, 0.005f)
+		new("music.main_menu.1", 0, 0.1f),
+		new("music.main_menu.2", 0, 0.1f),
+		new("music.main_menu.4", 1, 0.05f),
+		new("music.main_menu.6", 1, 0.05f),
+		new("music.main_menu.3", 2, 0.01f),
+		new("music.main_menu.5", 3, 0.003f)
 	};
 
 	public bool Enabled { get; set; } = true;
@@ -67,7 +67,7 @@ internal class Music
 		}
 
 		timeSinceLastTrack += Time.Delta;
-		if((timeSinceLastTrack >= MIN_TRACK_PAUSE || playedTracks.Count == 0) && (timeSinceLastTrack % TRACK_CHANCE_INTERVAL).AlmostEqual( 0, Game.TickInterval + 0.01f ) )
+		if(timeSinceLastTrack >= MIN_TRACK_PAUSE && (timeSinceLastTrack % TRACK_CHANCE_INTERVAL).AlmostEqual( 0, Game.TickInterval + 0.01f ) )
 		{
 			var pick = Game.Random.FromList( _tracks.Where(t => playedTracks.Count >= t.MinPlays).ToList() );
 			//Log.Info( $"Music play attempt: picked {pick}" );
