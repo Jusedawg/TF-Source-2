@@ -11,7 +11,7 @@
 
     @if (!string.IsNullOrEmpty(Game.Menu.Lobby?.Map))
     {
-        <div class="description">You're on your way to...</div>
+        <div class="description">You are on your way to...</div>
         <div class="title">@GetMapNameOnly()</div>
         <div class="subtitle">@GetGamemode()</div>
     }
@@ -46,7 +46,12 @@
 
     private string GetMapNameOnly()
     {
-        return string.Join(' ', GetMapName().Split('_').Skip(1));
+        var parts = GetMapName().Split('_');
+
+        if (parts.Length == 0) return string.Empty;
+        else if (parts.Length == 1) return parts[0];
+
+        return string.Join(' ', parts.Skip(1));
     }
 
     private string GetGamemode()
@@ -71,6 +76,6 @@
         if (mapName.StartsWith("tdm_"))
             return "Team Deathmatch";
 
-        return "";
+        return string.Empty;
     }
 }
