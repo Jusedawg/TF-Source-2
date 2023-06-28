@@ -1,0 +1,229 @@
+@import "/UI/styles/assets.scss";
+@import "/UI/styles/colors.scss";
+@import "/UI/styles/buttons.scss";
+@import "/UI/styles/checkbox.scss";
+@import "/UI/styles/footer.scss";
+
+SettingsMenu {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 6;
+    transition: opacity .1s ease, transform .1s ease;
+    pointer-events: all;
+
+    &.hidden {
+        display: none;
+    }
+
+    &.ingame {
+        backdrop-filter: blur(5px);
+        background-color: #100a0194;
+    }
+
+    &:not(.ingame) {
+        background: linear-gradient(to right, #100a01d4, #100a01a4, #100a0134, #100a0100);
+        background-size: 100%;
+    }
+}
+
+.nav {
+    position: absolute;
+    padding: 0 50px;
+    max-width: 900px;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+
+    .block {
+        flex-direction: column;
+        width: 60%;
+        background: linear-gradient(to right, #231f1c, #3e352f, #231f1c);
+        backdrop-filter: blur(50px);
+        border-radius: 6px;
+        margin-bottom: 15px;
+
+        .header {
+            width: 100%;
+            padding: 5px 20px;
+            background-color: $tan-darkest;
+            border-radius: 6px;
+            font-family: big_noodle_titling;
+            font-size: 40px;
+            color: $tan-light;
+        }
+
+        .content {
+            flex-direction: column;
+            padding-top: 15px;
+        }
+
+        .button-gradient {
+            font-size: 32px;
+            margin: 0 15px 15px 15px;
+        }
+    }
+}
+
+.settings {
+    position: absolute;
+    right: 0;
+    width: 40%;
+    height: 60%;
+    background-color: $tan-darkest;
+    border-radius: 6px;
+    transition: transform .2s ease;
+    flex-direction: column;
+    margin-right: 15%;
+    margin-top: 11%;
+    flex-direction: column;
+
+    .title {
+        border-radius: 6px;
+        width: 100%;
+        padding: 30px 20px;
+        font-family: big_noodle_titling;
+        color: $tan-light;
+        font-size: 70px;
+        text-align: center;
+        align-items: center;
+        background-color: $tan-darkest;
+    }
+}
+
+.body {
+    overflow: scroll;
+    height: 55%;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: 0 5% 4% 5%;
+    justify-content: space-between;
+    flex-direction: column;
+    background: linear-gradient(to right, #231f1c, #3e352f, #231f1c);
+    backdrop-filter: blur(50px);
+    border-radius: 6px;
+
+    .group {
+        margin: 0 5%;
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-direction: column;
+        overflow: hidden;
+        margin-bottom: 3%;
+        justify-content: space-around;
+        flex-direction: column;
+        //min-height: 300px;
+    }
+
+    .header {
+        color: #e6d9bc;
+        font-family: TF2_Build;
+        font-size: 32px;
+        margin: 12px;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+.editor {
+    overflow: scroll;
+}
+
+.item {
+    color: #e6d9bc;
+    margin-bottom: 8px;
+    align-items: center;
+    font-size: 24px;
+    font-family: TF2_Build;
+    min-height: 3vh;
+
+    &:hover {
+        background-color: rgba(black .4);
+    }
+
+    > Label {
+        width: 60%;
+        color: #e6d9bc;
+        font-family: TF2_Secondary;
+        font-size: 22px;
+        flex-direction: column;
+        height: 100%;
+        align-items: center;
+        text-align: left;
+        padding-left: 24px;
+        flex-wrap: wrap;
+    }
+
+    TextEntry {
+        cursor: text;
+        height: 100%;
+        width: 60%;
+        padding: 20px;
+    }
+
+    Keybind {
+        flex-grow: 1;
+        align-self: flex-end;
+        text-align: center;
+    }
+
+    .value-area {
+        width: 80%;
+        padding-left: 120px;
+    }
+
+    Button.toggle {
+        aspect-ratio: 1;
+    }
+
+    .slidercontrol {
+        flex-grow: 1;
+        cursor: pointer;
+        min-height: 28px;
+        align-items: center;
+        padding-right: 28px;
+        width: 90%;
+
+        > .thumb {
+            background-color: $tan-dark;
+            position: relative;
+            width: 28px;
+            height: 28px;
+            border-radius: 1000px;
+            box-shadow: 2px 2px 10px black;
+            transition: all 0.2s ease-out;
+
+            &:hover {
+                background-color: $button-hover;
+            }
+        }
+
+        &:active {
+            > .thumb {
+                background-color: $tan-light;
+            }
+        }
+
+        > .track {
+            position: absolute;
+            left: 14px; // This has to be half of the thumb's width :S
+            right: 14px;
+            height: 10px;
+            width: 90%;
+            background: linear-gradient(to right, $tan-darker, $tan-dark);
+            border-radius: 5px;
+
+            > .inner {
+                border-radius: 4px;
+                background-color: $tan-light;
+                width: 90%;
+                height: 10px;
+                transition: all 0.2s ease-out;
+            }
+        }
+    }
+}
+
+.footer {
+    justify-content: flex-start;
+}

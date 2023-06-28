@@ -1,0 +1,51 @@
+﻿.tfs2menu {
+    padding: 0 170px;
+    opacity: 1;
+    flex-direction: column;
+    font-size: 25px;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transition: all 0.3s ease-out;
+    color: white;
+
+    &:intro {
+        opacity: 0;
+        transform: scaleX( 1.1 );
+    }
+
+    &:not(.ingame) {
+        &.bg_1 {
+            background-image: url(https://media.discordapp.net/attachments/998352460693372998/1114194149302878268/sbox_0228.png);
+        }
+
+        &.bg_2 {
+            background-image: url(https://cdn.discordapp.com/attachments/853037820075442276/903283892667174932/sbox_0215.png);
+        }
+
+        &.bg_3 {
+            background-image: url(https://media.discordapp.net/attachments/853037820075442276/1006297639484141649/sbox_0014.png);
+        }
+
+        &.bg_4 {
+            background-image: url(https://media.discordapp.net/attachments/1116470514479796235/1116470633438654525/GorgeSource2004334.png);
+        }
+
+        &.bg_5 {
+            background-image: url(https://media.discordapp.net/attachments/902540604246990898/1114643006264447089/image.png);
+        }
+
+        background-size: 100%;
+    }
+}
+
+.navigator-body {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    flex-direction: column;
+    //padding: 100px 0px;
+}
+

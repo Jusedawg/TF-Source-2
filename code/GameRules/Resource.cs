@@ -48,7 +48,19 @@ public static class ClientExtensions
 	public static float GetHealth( this IClient client ) => client.GetValue<float>( "f_health" );
 	public static bool IsAlive( this IClient client ) => client.GetValue<bool>( "b_alive" );
 	public static TFTeam GetTeam( this IClient client ) => (TFTeam)client.GetValue<int>( "n_teamnumber" );
-	public static PlayerClass GetPlayerClass( this IClient client ) => ResourceLibrary.Get<PlayerClass>( client.GetValue<string>( "s_playerclass" ) );
+	public static PlayerClass GetPlayerClass( this IClient client )
+	{
+		if ( client == null ) return default;
+
+		var result = ResourceLibrary?.Get<PlayerClass>( client?.GetValue<string>( "s_playerclass" ) );
+		if ( result != null )
+			return result;
+
+		if ( client.Pawn is TFPlayer ply )
+			return ply.PlayerClass;
+
+		return null;
+	}
 
 	#region Stats
 	public static int GetPoints( this IClient client ) => client.GetInt( "i_points" );

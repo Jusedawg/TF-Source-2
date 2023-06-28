@@ -6,9 +6,16 @@
     position: absolute;
     bottom: 0;
     padding: 15px 50px;
+    height: 8%;
+    justify-content: space-between;
 
-    &.menu {
-        justify-content: space-between;
+    .button-dark {
+        font-size: 30px;
+        margin-right: 10px;
+
+        &:first-child {
+            margin-right: 50px;
+        }
     }
 
     .playername {
@@ -29,6 +36,7 @@
         top: 15px;
         right: 20px;
         border-radius: 12px;
+        background-size: 100%;
     }
 
     .title {

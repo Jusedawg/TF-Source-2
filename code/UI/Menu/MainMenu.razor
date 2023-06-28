@@ -1,0 +1,89 @@
+﻿@using System
+@using Sandbox;
+@using Sandbox.MenuSystem;
+@using Sandbox.UI;
+@using Sandbox.Menu;
+
+@attribute [StyleSheet]
+@namespace TFS2.Menu
+@implements IGameMenuPanel
+@inherits NavHostPanel
+
+<root class="tfs2menu">
+
+</root>
+
+@code
+{
+    public static MainMenu Current { get; private set; }
+    internal Music Music { get; set; }
+
+    public MainMenu()
+    {
+        Current = this;
+        DefaultUrl = "/";
+        Music = new();
+
+        AddDestination("/", typeof(MainPage));
+        AddDestination("/loadout", typeof(LoadoutSelection));
+
+        if (Game.InGame) Navigate("/");
+
+        BindClass("ingame", () => Game.InGame);
+        BindClass("inlobby", () => Game.Menu.Lobby != null);   
+
+        PickBackground();
+    }
+
+    public override void Tick()
+    {
+        Music.Tick();
+    }
+
+    private void PickBackground()
+    {
+        // Initialize with semi-random seed to avoid the same menu background showing up all the time
+        Game.SetRandomSeed(HashCode.Combine(Game.SteamId, Game.UserName, DateTime.Now));
+
+        const int BACKGROUND_NUM = 5;
+        for (int i = 1; i <= BACKGROUND_NUM; i++)
+        {
+            RemoveClass($"bg_{i}");
+        }
+
+        int background = Game.Random.Next(1, BACKGROUND_NUM);
+        AddClass($"bg_{background}");
+    }
+
+    protected override void OnEvent(PanelEvent e)
+    {
+        if (e.Name == "package.changed")
+        {
+            StateHasChanged();
+            return;
+        }
+
+        base.OnEvent(e);
+    }
+
+    [GameEvent.Menu.ServerJoined]
+    public void OnServerJoined()
+    {
+        Music.Stop();
+        Music.Enabled = false;
+        //Navigate("/active");
+    }
+    [GameEvent.Menu.ServerLeave]
+    public void OnServerLeave()
+    {
+        PickBackground();
+        Music.Enabled = true;
+        Navigate("/");
+    }
+
+    [GameEvent.Menu.LobbyJoined]
+    public void OnLobbyJoined() => Navigate("/lobby");
+
+    [GameEvent.Menu.LobbyLeave]
+    public void OnLobbyLeave() => Navigate("/");
+}

@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 internal class SliderStepAttribute : Attribute
 {

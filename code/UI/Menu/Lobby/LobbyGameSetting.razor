@@ -1,0 +1,55 @@
+@using System;
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel;
+@namespace TFS2.Menu
+
+@if (Setting == null)
+	return;
+
+@if(string.IsNullOrEmpty(Value))
+    return;
+
+<style>
+    LobbyGameSetting
+    {
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+</style>
+
+<root class="control">
+
+	@switch (Setting.DisplayType)
+	{
+		case GameSetting.GameSettingType.Choice:
+						
+			<DropDown value=@Value @ref=Editor ValueChanged=@Set></DropDown>
+			break;
+
+		case GameSetting.GameSettingType.Boolean:
+
+            <checkbox @ref=Editor value=@Value />
+			break;
+
+		case GameSetting.GameSettingType.Integer:
+
+			<SliderControl @ref=Editor ShowTextEntry="@false" ShowRange="@true" Step=@(1.0f) Min=@Setting.Minimum Max=@Setting.Maximum value=@Value OnValueChanged=@( ( float f ) => Set( f.ToString() ))></SliderControl>
+			break;
+
+		case GameSetting.GameSettingType.Float:
+
+			<SliderControl @ref=Editor ShowTextEntry="@false" ShowRange="@true" Step=@Setting.Step Min=@Setting.Minimum Max=@Setting.Maximum value=@Value OnValueChanged=@( ( float f ) => Set( f.ToString() ))></SliderControl>
+			break;
+
+		case GameSetting.GameSettingType.String:
+						
+			<TextEntry @ref=Editor value=@Value OnTextEdited=@Set></TextEntry>
+			break;
+
+		default:
+
+			<div>Unhandled LobbyGameSetting @Setting.DisplayType</div>
+			break;	
+	}
+</root>

@@ -1,15 +1,28 @@
 using Sandbox;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace TFS2;
 
 public partial class Loadout : BaseNetworkable
 {
-	public static Loadout LocalLoadout => ForClient( Game.LocalClient );
-	static Dictionary<IClient, Loadout> All { get; set; } = new();
+	const string LOADOUT_COOKIE = "tfs2_loadout";
+	public static Loadout LocalLoadout 
+	{ 
+		get
+		{
+			return ForClient( Game.SteamId );
+		}
+	}
+	static Dictionary<long, Loadout> All { get; set; } = new();
 
-	public IClient Client { get; set; }
+	/// <summary>
+	/// The steamid of the client this loadout belongs to.
+	/// Will be -1 for bots
+	/// </summary>
+	public long Client { get; set; }
 	public LoadoutState State { get; set; }
 
 	LoadoutData Data { get; set; }
@@ -50,22 +63,29 @@ public partial class Loadout : BaseNetworkable
 	/// <returns></returns>
 	public static Loadout ForClient( IClient client )
 	{
-		if ( client == null )
+		if ( client == default )
+			return null;
+		return ForClient( client.SteamId );
+	}
+
+	public static Loadout ForClient( long steamid)
+	{
+		if ( steamid == default )
 			return null;
 
-		if ( All.TryGetValue( client, out var loadout ) )
+		if ( All.TryGetValue( steamid, out var loadout ) )
 			return loadout;
 
-		var el = new Loadout( client );
-		All[client] = el;
+		var el = new Loadout( steamid );
+		All[steamid] = el;
 
 		return el;
 	}
 
-	private Loadout( IClient client )
+	private Loadout( long steamid )
 	{
 		State = LoadoutState.Invalid;
-		Client = client;
+		Client = steamid;
 	}
 
 	// Invalidates the loadout, we will request it again next time we need it.
@@ -82,22 +102,27 @@ public partial class Loadout : BaseNetworkable
 
 		State = LoadoutState.Loading;
 
-		if ( Client.IsBot )
+		if ( Client == -1 )
 		{
 			// This client is a bot, don't bother requesting loadout...
 			State = LoadoutState.Unavailable;
 		}
 		else
 		{
-			if ( Game.IsClient )
+			if ( !Game.InGame || Game.IsClient )
 			{
-				// if we're on the client, load data from disk.
-				LoadDataFromDisk();
+				LoadData();
 			}
 			else
 			{
 				// if we're on server, request data from client.
-				RequestDataFromClient();
+				var cl = Game.Clients.FirstOrDefault( c => c.SteamId == Client );
+				if(cl == null)
+					State = LoadoutState.Unavailable;
+				else
+				{
+					RequestData( To.Single( cl ) );
+				}
 			}
 
 			if ( Data == null ) State = LoadoutState.Failed;
@@ -129,14 +154,6 @@ public partial class Loadout : BaseNetworkable
 			return TimeSinceDataUpdated < mp_loadout_max_outdated_time;
 
 		return false;
-	}
-
-	/// <summary>
-	/// Called when loadout is available.
-	/// </summary>
-	public virtual void OnAvailable()
-	{
-
 	}
 
 	/// <summary>
@@ -188,6 +205,61 @@ public partial class Loadout : BaseNetworkable
 			return defaultItem;
 
 		return weapondata;
+	}
+
+	public bool SetLoadoutItem( PlayerClass pclass, TFWeaponSlot slot, WeaponData weapon )
+	{
+		TFAssert.ClientOrGameMenu();
+
+		if ( !IsDataValid() )
+			return false;
+		
+		if ( weapon == null )
+			return false;
+
+		if ( pclass == null )
+			return false;
+
+		// Check if whatever we have in the loadout is something we can actually wear.
+		if ( !weapon.CanBeOwnedByPlayerClass( pclass ) )
+			return false;
+
+		// loadout data doesn't contain anything for this class.
+		if ( !Data.Classes.TryGetValue( pclass.ResourceName, out var classData ) )
+		{
+			classData = new();
+			Data.Classes.Add( pclass.ResourceName, classData );
+		}
+
+		classData[(int)slot] = weapon.ResourceName;
+		Data.Classes[pclass.ResourceName] = classData;
+		Cookie.Set( LOADOUT_COOKIE, Data );
+
+		return true;
+	}
+
+	private void LoadData()
+	{
+		TFAssert.ClientOrGameMenu();
+
+		// if we're on the client, load data from disk.
+		Data = Cookie.Get<LoadoutData>( LOADOUT_COOKIE, new() );
+	}
+
+	[ClientRpc]
+	public static void RequestData()
+	{
+		LocalLoadout.LoadData();
+		TransmitToServer( JsonSerializer.Serialize( LocalLoadout.Data ) );
+	}
+
+	[ConCmd.Server]
+	public static void TransmitToServer(string data)
+	{
+		if ( ConsoleSystem.Caller == null ) return;
+
+		var loadout = ForClient( ConsoleSystem.Caller );
+		loadout.Data = JsonSerializer.Deserialize<LoadoutData>( data );
 	}
 
 	/// <summary>

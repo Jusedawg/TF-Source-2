@@ -1,0 +1,42 @@
+@using System
+@using Sandbox;
+@using Sandbox.MenuSystem;
+@using Sandbox.UI;
+@using System.Threading.Tasks;
+
+@inherits Panel
+@namespace TFS2.Menu
+@attribute [StyleSheet]
+
+<root>
+
+    @if ( MapPackage == null )
+    {
+        <label class="warning">No map selected!</label>
+    }
+    else
+    {
+        <label class="title">@MapTitle</label>
+        <image class="thumbnail" style="background-image: url( @MapPackage.Thumb )"></image>
+    }
+
+</root>
+
+@code
+{
+    public string Map { get; set; }
+
+    public Package MapPackage { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        MapPackage = await Package.FetchAsync( Map, true );
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine( MapPackage, Map );
+    }
+
+    string MapTitle => MapPackage?.Title ?? Map;
+}

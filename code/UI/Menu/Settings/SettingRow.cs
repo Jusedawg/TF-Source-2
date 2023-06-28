@@ -4,7 +4,7 @@ using Sandbox.UI;
 using Sandbox.UI.Construct;
 using System;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 internal class SettingRow : Panel
 {
@@ -20,20 +20,15 @@ internal class SettingRow : Panel
 
 		if ( property.PropertyType == typeof( bool ) )
 		{
-			var button = ValueArea.Add.Button( string.Empty, "toggle" );
-			button.SetClass( "active", (bool)currentValue );
-			if ( button.HasClass( "active" ) ) button.SetText( "done" );
-			button.AddEventListener( "onmousedown", () =>
+			var checkbox = new Checkbox { Parent = ValueArea };
+			checkbox.ValueChanged += ( bool c ) =>
 			{
-				button.SetClass( "active", !button.HasClass( "active" ) );
-				button.SetText( "done" );
-				property.SetValue( target, button.HasClass( "active" ) );
+				property.SetValue( target, c );
 				CreateEvent( "save" );
-				if ( !button.HasClass( "active" ) ) button.SetText( string.Empty );
-			} );
+			};
+			
 		}
-
-		if ( property.PropertyType == typeof( string ) )
+		else if ( property.PropertyType == typeof( string ) )
 		{
 			var textentry = ValueArea.Add.TextEntry( (string)currentValue );
 			textentry.AddEventListener( "value.changed", () =>
@@ -47,15 +42,14 @@ internal class SettingRow : Panel
 		{
 			var dropdown = new DropDown( ValueArea );
 			dropdown.SetPropertyObject( "value", currentValue );
-			dropdown.AddEventListener( "value.changed", () =>
+			dropdown.ValueChanged += (string value) =>
 			{
-				Enum.TryParse( property.PropertyType, $"{dropdown.Value}", out var newval );
+				Enum.TryParse( property.PropertyType, value, out var newval );
 				property.SetValue( target, newval );
 				CreateEvent( "save" );
-			} );
+			};
 		}
-
-		if ( property.PropertyType == typeof( float ) )
+		else if ( property.PropertyType == typeof( float ) )
 		{
 			var minmax = property.GetCustomAttribute<MinMaxAttribute>();
 			var min = minmax?.MinValue ?? 0f;
@@ -65,13 +59,9 @@ internal class SettingRow : Panel
 			var slider = new SliderControl( min, max, step );
 			slider.Parent = ValueArea;
 			slider.Bind( "value", target, property.Name );
-			slider.AddEventListener( "value.changed", () =>
-			{
-				CreateEvent( "save" );
-			} );
+			slider.OnValueChanged += (float _) =>CreateEvent( "save" );
 		}
-
-		if ( property.PropertyType == typeof( int ) )
+		else if ( property.PropertyType == typeof( int ) )
 		{
 			var minmax = property.GetCustomAttribute<MinMaxAttribute>();
 			var min = minmax?.MinValue ?? 0;
@@ -80,10 +70,7 @@ internal class SettingRow : Panel
 			var slider = new SliderControl( min, max, step );
 			slider.Parent = ValueArea;
 			slider.Bind( "value", target, property.Name );
-			slider.AddEventListener( "value.changed", () =>
-			{
-				CreateEvent( "save" );
-			} );
+			slider.OnValueChanged += ( float _ ) => CreateEvent( "save" );
 		}
 	}
 

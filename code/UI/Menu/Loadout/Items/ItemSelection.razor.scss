@@ -1,0 +1,94 @@
+@import "/UI/styles/colors.scss";
+@import "/UI/styles/buttons.scss";
+@import "/UI/styles/footer.scss";
+
+.hidden {
+    display:none;
+}
+
+ItemSelection {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $bg-darkest;
+    z-index: 6;
+    pointer-events: all;
+    flex-direction: column;
+
+    .content {
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+
+        .loadout_wrapper {
+            max-width: 1400px;
+            width: 100%;
+            height: 100%;
+            padding-top: 50px;
+            align-items: baseline;
+            flex-direction: column;
+
+            .loadout_header {
+                flex-direction: column;
+                width: 100%;
+                border-bottom: 5px solid $tan-darker;
+                padding-bottom: 20px;
+                flex-shrink: 0;
+
+                .loadout_title {
+                    font-family: TF2_Build;
+                    color: $tan-light;
+                    font-size: 64px;
+
+                    .marker {
+                        color: $text-highlight;
+                        margin-right: 10px;
+                        font-size: 32px;
+                        margin-top: 16px;
+                        flex-shrink: 0;
+                    }
+
+                    .class_name {
+                        flex-shrink: 0;
+                    }
+
+                    .slot_name {
+                        width: 100%;
+                        text-align: right;
+                    }
+                }
+
+                .loadout_subtitle {
+                    font-family: TF2_Secondary;
+                    font-size: 24px;
+                    padding-left: 40px;
+                    color: $tan-light;
+                }
+            }
+
+            .items {
+                width: 100%;
+                height: 100%;
+                padding: 30px 0;
+
+                ItemPickerElement {
+                    width: 350px;
+                    height: 100%;
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+
+    .button-dark {
+        font-size: 24px;
+        margin-right: 10px;
+
+        &:first-child {
+            margin-right: 50px;
+        }
+    }
+}

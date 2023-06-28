@@ -1,0 +1,41 @@
+@using System.Linq
+@using Sandbox;
+@using Sandbox.UI
+
+@page "/loadout/class/{ClassName}/slot/{Slot}"
+@attribute [StyleSheet]
+
+@namespace TFS2.Menu
+@inherits MenuOverlay
+
+@if (PlayerClass == null)
+    return;
+
+<root>
+    <div class="content">
+        <div class="loadout_wrapper">
+            <div class="loadout_header">
+                <div class="loadout_title">
+                    <text class="marker">>></text>
+                    <text class="class_name">@PlayerClass.Title</text>
+                    <text class="slot_name">@Slot</text>
+                </div>
+                <text class="loadout_subtitle">Select an item:</text>
+            </div>
+            <div class="loadout_content">
+                <div class="items">
+                    @foreach(var weapon in WeaponData.FindAllForClassAndSlot(PlayerClass, Slot))
+                    {
+                        <ItemPicker PlayerClass=@PlayerClass Slot=@Slot Data=@weapon @onclick=@((PanelEvent e) => {OnClickEquip(weapon);}) />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <button class="button-dark" icon="undo" @onclick=@OnClickBack>Back</button>
+        <text class="playername">@Game.UserName</text>
+        <image class="playeravatar" Texture="avatarbig:@Game.SteamId" />
+    </div>
+</root>

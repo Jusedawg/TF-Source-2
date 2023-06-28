@@ -1,72 +1,124 @@
-﻿
-@using TFS2.UI;
-@using Amper.FPS;
+﻿@using System.Linq;
+@using Sandbox;
 @using Sandbox.UI;
+@using Sandbox.MenuSystem;
+@using Sandbox.UI.GameMenu
+@using Amper.FPS;
 
-@namespace TFS2
-@attribute [StyleSheet("/ui/Menu/Settings/SettingsMenu.scss")]
-@inherits MenuOverlay
+@page "/settings"
+@namespace TFS2.Menu
+@attribute [StyleSheet]
+@inherits Panel
 
 <root>
-    <div class="container">
+    <div class="nav">
+        <image class="logotype" />
 
-		<text class="header">#GameSettings.Title.Settings</text>
+        <div class="block">
+            <text class="header">#GameSettings.Title.Settings</text>
+            <div class="content">
+                <button class="button-gradient" onclick=@SelectInput>#GameSettings.Inputs</button>
+                <button class="button-gradient" onclick=@SelectClientSettings>#GameSettings.ClientSettings</button>
+            </div>
+        </div>
+    </div>
 
-        <div class="content">
+    <div class="settings">
+        @if(Mode == SettingsPage.Client)
+        {
+            <label class="title">#GameSettings.ClientSettings</label>
             <div class="body">
-				<ObjectEditor @ref=Editor/>
-			</div>
-		</div>
+			    <ObjectEditor class="editor" @ref=Editor/>
+            </div>
+        }
+        else
+        {
+            <label class="title">#GameSettings.Inputs</label>
+            <div class="body">
+			    @foreach ( var group in Game.Menu.InputSettings.Actions.GroupBy( x => x.GroupName ) )
+                {
+                    <div class="group">
+                        <text class="header">@group.Key</text>
+                        @foreach ( InputAction action in group )
+                        {
+                            <div class="item">
+                                <label>@action.Name</label>
+                                <KeyBind Game="@Game.Menu" Action=@action class="button-dark"></KeyBind>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
 
-		<div class="footer">
-			<button onclick=@(SetDefaults) class="reset-defaults">#GameSettings.Reset</button>
-			<button onclick=@(Close) class="exit">#Generic.Close</button>
-		</div>
+    <div class="footer">
+        <button class="button-dark" icon="highlight_off" onclick=@OnClickClose>#Generic.Back</button>
+        <button class="button-dark" icon="highlight_off" onclick=@SetDefaults>#GameSettings.Reset</button>
+
+        <text class="playername">@Game.UserName</text>
+        <image style="background-image: url( avatar:@Game.SteamId )" class="playeravatar" />
     </div>
 </root>
 
 @code {
-	public ObjectEditor Editor;
+    enum SettingsPage
+    {
+        Inputs,
+        Client
+    }
 
-	public SettingsMenu()
-	{
-		Current = this;
-	}
+    public ObjectEditor Editor;
+    SettingsPage Mode;
+    bool needsRefresh = true;
 
-	public override void OnHotloaded()
-	{
-		base.OnHotloaded();
+    public SettingsMenu()
+    {
+        BindClass("ingame", () => Game.InGame);
+    }
 
-		Editor.SetTarget( TFClientSettings.Current );
-	}
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        if ( Editor != null && needsRefresh )
+        {
+            needsRefresh = false;
+            Editor.SetTarget( TFClientSettings.Current );
+        }
+    }
 
-	protected override void OnAfterTreeRender(bool firstTime)
-	{
-		if ( firstTime )
-			Editor.SetTarget( TFClientSettings.Current );
-	}
+    public void SetDefaults()
+    {
+        Game.Menu.InputSettings.InitDefault();
+        TFClientSettings.Reset();
 
-	public void SetDefaults()
-	{
-		TFClientSettings.Reset();
+        Editor?.SetTarget( TFClientSettings.Current );
+    }
 
-		Editor.SetTarget( TFClientSettings.Current );
-	}
+    public void OnClickClose()
+    {
+        this.Navigate("/");
+    }
 
-	public void OnClickClose()
-	{
-		Close();
-	}
+    protected override void OnEvent( PanelEvent e )
+    {
+        base.OnEvent( e );
 
-	private static SettingsMenu Current;
+        if ( e.Name == "save" )
+        {
+            TFClientSettings.Current.Save();
+        }
+    }
 
-	protected override void OnEvent( PanelEvent e )
-	{
-		base.OnEvent( e );
+    private void SelectInput()
+    {
+        Mode = SettingsPage.Inputs;
+        needsRefresh = true;
+        StateHasChanged();
+    }
 
-		if ( e.Name == "save" )
-		{
-			TFClientSettings.Current.Save();
-		}
-	}
+    private void SelectClientSettings()
+    {
+        Mode = SettingsPage.Client;
+        StateHasChanged();
+    }
 }

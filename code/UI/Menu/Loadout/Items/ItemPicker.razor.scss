@@ -1,0 +1,57 @@
+@import "/UI/styles/colors.scss";
+@import "/UI/styles/buttons.scss";
+
+.hidden {
+    display: none;
+}
+
+ItemPicker {
+    position: relative;
+    width: 350px;
+    height: 160px;
+    background-color: #292526;
+    margin-bottom: 20px;
+    border: 2px solid $tan-dark;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+
+    .image {
+        width: 160px;
+        height: 160px;
+        left: 95px;
+        top: -20px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .item_name {
+        font-family: TF2_Build;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+        padding: 6px;
+        font-size: 22px;
+        color: $quality-normal;
+    }
+
+    &:hover {
+        background-color: #40393b;
+    }
+
+    &:active {
+        background-color: #363031;
+        sound-in: ui.button.click;
+        sound-out: ui.button.release;
+    }
+
+    &.q_unique {
+        border-color: $quality-unique;
+
+        .item_name {
+            color: $quality-unique;
+        }
+    }
+}

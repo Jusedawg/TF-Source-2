@@ -1,0 +1,101 @@
+﻿@using System
+@using System.Linq;
+@using Sandbox;
+@using Sandbox.MenuSystem;
+@using Sandbox.UI;
+
+@page "/lobby"
+@attribute [StyleSheet]
+@namespace TFS2.Menu
+
+@if(Game.Menu.Lobby == null)
+{
+    this.Navigate("/");
+    return;
+}
+
+<root class="layout">
+
+    <div class="nav">
+        <image class="logotype" />
+
+        <div class="block">
+            <text class="header">Create A Game</text>
+            <div class="content">
+                <button class="button-gradient active" onclick=@OnClickLobby>Lobby</button>
+                @if(Game.Menu.Lobby.Owner.IsMe)
+                {
+                    <button class="button-gradient" onclick=@OnClickMap>Map</button>
+                    <button class="button-gradient" onclick=@OnClickSettings>Settings</button>
+                    <button class="button-gradient" onclick=@OnClickAddons>Addons</button>
+                }
+                else
+                {
+                    <button class="button-gradient disabled">Map</button>
+                    <button class="button-gradient disabled">Settings</button>
+                    <button class="button-gradient disabled">Addons</button>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="body">
+        <div class="header">@Mode.ToString()</div>
+        @if(Mode == LobbyPage.Maps)
+        {
+            <LobbyMaps class="container other"></LobbyMaps>
+        }
+        else if (Mode == LobbyPage.Settings)
+        {
+            <LobbyConfiguration class="container other"></LobbyConfiguration>
+        }
+        else if (Mode == LobbyPage.Addons)
+        {
+            <LobbyAddons class="container other"></LobbyAddons>
+        }
+        else
+        {
+            <div class="container">
+                <div class="players">
+                @foreach (var member in Game.Menu.Lobby.Members)
+                {
+                    // todo right click to view profile, mute, kick, whatever we can do
+
+                    <LobbyMember Member=@member></LobbyMember>
+                }
+                </div>
+                <div class="server">
+                    <MapInfo Map=@Game.Menu.Lobby.Map />
+                    <div class="info">
+                        <label class="title">@Game.Menu.Lobby.Title</label>
+                        <label class="description">@Game.Menu.Lobby.Description</label>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    
+    <div class="footer">
+    
+        <div class="left">
+            <a class="button-dark" href="/" title="Go To Main Menu">#Generic.Back</a>
+
+            <button class="button-dark" onclick=@OnClickLeaveLobby>Exit Lobby</button>
+        </div>
+
+        <div class="right">
+            @if (Game.Menu.Lobby.Owner.IsMe)
+            {
+                @if (CanStartLobby())
+                {
+                    <span class="button-dark" onclick=@StartGame>Start Game</span>
+                }
+                else
+                {
+                    <span class="button-dark disabled">Start Game</span>
+                }
+            }
+        </div>
+
+    </div>
+</root>

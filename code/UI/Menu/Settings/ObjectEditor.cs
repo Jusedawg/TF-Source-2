@@ -5,8 +5,9 @@ using System.Collections.Generic;
 using System.Net;
 using System.Reflection;
 using Amper.FPS;
+using Sandbox.UI.Construct;
 
-namespace TFS2.UI;
+namespace TFS2.Menu;
 
 public class ObjectEditor : Panel
 {
@@ -57,18 +58,16 @@ public class ObjectEditor : Panel
 		//Loop over all groups
 		foreach ( var propertyGroup in groups )
 		{
+			Panel group = Add.Panel( "group" );
 			//Make heading
-			Label header = new Label();
+			Label header = group.Add.Label(classname: "header");
 
-			header.SetClass( "group", true);
 			header.SetContent(propertyGroup.Key);
-
-			AddChild(header);
 
 			//Add settings row for properties
 			foreach(var groupProperty in propertyGroup.Value)
 			{
-                AddChild(new SettingRow(target, groupProperty));
+                group.AddChild(new SettingRow(target, groupProperty) { Classes = "item" } );
             }
         }
 	}
