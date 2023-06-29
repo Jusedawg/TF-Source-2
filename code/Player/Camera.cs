@@ -57,7 +57,7 @@ partial class TFPlayer
 
 			var tr = Trace.Ray( pos, targetPos )
 				.WithAnyTags( "solid" )
-				.WorldOnly()
+				.StaticOnly()
 				.Radius( 8 )
 				.Run();
 
@@ -93,7 +93,7 @@ partial class TFPlayer
 
 		var killer = LastAttacker;
 
-		if ( killer == null )
+		if ( killer == null || this == killer )
 			return;
 
 		// get time for death animation
