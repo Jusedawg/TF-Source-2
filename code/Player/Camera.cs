@@ -8,6 +8,7 @@ namespace TFS2;
 
 partial class TFPlayer
 {
+	public static bool tf_enable_thirdperson_input { get; set; } = false;
 	bool WasFirstPerson { get; set; }
 
 	[Net, Predicted]
@@ -22,14 +23,13 @@ partial class TFPlayer
 	/// </summary>
 	public void SimulateCameraLogic()
 	{
-
 		if ( InCondition( TFCondition.Humiliated ) || InCondition( TFCondition.Taunting ) )
 		{
-			if ( !IsThirdpersonTF ) ThirdpersonSet( true );
+			ThirdpersonSet( true );
 			return;
 		}
 
-		else if ( Input.Pressed( "SwapCameraView" ) )
+		else if ( Input.Pressed( "SwapCameraView" ) && tf_enable_thirdperson_input )
 		{
 			SwapCamera();
 			StayThirdperson = IsThirdpersonTF;
