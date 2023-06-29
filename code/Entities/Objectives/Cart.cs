@@ -86,23 +86,22 @@ namespace TFS2
 		/// <summary>
 		/// How far away we are from the current node (in percentage from 0 to 1)
 		/// </summary>
-		[Net]
-		public float CurrentFraction { get; set; }
+		[Net] public float CurrentFraction { get; set; }
 
 		/// <summary>
 		/// The time since this cart was last pushed.
 		/// </summary>
-		[Net]
-		public TimeSince TimeSincePush { get; protected set; } = 0;
+		[Net] public TimeSince TimeSincePush { get; protected set; } = 0;
+
+		/// <summary>
+		/// The speed the cart is currently travelling at.
+		/// </summary>
+		[Net] public float CurrentSpeed { get; protected set; }
 
 		/// <summary>
 		/// Distance from the current node to the next node
 		/// </summary>
 		protected float NodeDistance => nodeDistances.ElementAtOrDefault( CurrentIndex );
-		/// <summary>
-		/// The speed the cart is currently travelling at.
-		/// </summary>
-		protected float CurrentSpeed;
 		protected bool IsAtEnd = false;
 		protected bool IsPhysics = false;
 
@@ -390,7 +389,7 @@ namespace TFS2
 		}
 
 		const float PUSH_OVERTIME_GRACEPERIOD = 5f;
-		public bool ShouldBlock()
+		bool IRoundTimerBlocker.ShouldBlock()
 		{
 			return pushers.Any() || TimeSincePush < PUSH_OVERTIME_GRACEPERIOD;
 		}

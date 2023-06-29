@@ -79,10 +79,25 @@ public partial class PayloadPath : Panel
 			HomePanel.SetClass( "red", true );
 		}
 
+		const float IDLE_COUNTDOWN_LENGTH = 5f;
+
+		StatusLabel.SetClass( "blocked", Cart.Pushers.Any() && Cart.Blockers.Any() );
+		StatusLabel.SetClass( "rollback", Cart.CurrentSpeed <= -Cart.BackwardsSpeed );
+		StatusLabel.SetClass( "rollforward", Cart.CanRollforward() );
+
 		if ( Cart.Pushers.Any() )
+		{
 			StatusLabel.Text = $"x{Cart.GetCapRate()}";
+		}
+		else if(Cart.TimeSincePush >= Cart.IdleTime - IDLE_COUNTDOWN_LENGTH && Cart.TimeSincePush < Cart.IdleTime && Cart.CanMove() && !(Cart.CurrentIndex == 0 && Cart.CurrentFraction == 0f) )
+		{
+			// Countdown to rollback
+			StatusLabel.Text = MathF.Ceiling( Cart.IdleTime - Cart.TimeSincePush ).ToString();
+		}
 		else
+		{
 			StatusLabel.Text = "";
+		}
 
 		foreach((CartPath.ControlPointInfo info, Panel panel) in ControlPoints)
 		{

@@ -124,6 +124,30 @@ PayloadDisplay {
                     font-size: 38px;
                     color: $white;
                     margin-top: 5px;
+
+                    &.blocked {
+                        color: #0000;
+                        background-image: url("/UI/Hud/Objectives/Payload/blocked.png");
+                        background-size: 38px;
+                        background-repeat: no-repeat;
+                        background-position-x: center;
+                    }
+
+                    &.rollback {
+                        color: #0000;
+                        background-image: url("/UI/Hud/Objectives/Payload/arrow_left.png");
+                        background-size: 38px;
+                        background-repeat: no-repeat;
+                        background-position-x: center;
+                    }
+
+                    &.rollforward {
+                        color: #0000;
+                        background-image: url("/UI/Hud/Objectives/Payload/arrow_right.png");
+                        background-size: 38px;
+                        background-repeat: no-repeat;
+                        background-position-x: center;
+                    }
                 }
             }
 
@@ -140,7 +164,7 @@ PayloadDisplay {
                 z-index: 4;
 
                 &.visible {
-                    opacity:1;
+                    opacity: 1;
                 }
             }
         }
