@@ -91,6 +91,8 @@ public partial class TFPlayer : SDKPlayer
 
 		using var _ = Prediction.Off();
 
+		IsThirdpersonTF = false;
+
 		// If we are not alive or we don't have
 		if ( !CanRegenerate() )
 			return;
