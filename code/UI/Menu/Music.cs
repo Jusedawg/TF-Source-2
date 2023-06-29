@@ -28,7 +28,7 @@ internal class Music
 		}
 	}
 
-	const float MIN_TRACK_PAUSE = 120f;
+	const float MIN_TRACK_PAUSE = 180f;
 	const float TRACK_CHANCE_INTERVAL = 15f;
 
 	static List<Track> _tracks = new()
