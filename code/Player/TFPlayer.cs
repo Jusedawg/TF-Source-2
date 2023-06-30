@@ -297,6 +297,7 @@ public partial class TFPlayer : SDKPlayer
 
 		DropPickedItem();
 		DeleteAllWeapons();
+		DestroyBuildings();
 	}
 
 	/// <summary>

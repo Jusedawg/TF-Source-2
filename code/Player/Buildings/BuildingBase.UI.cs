@@ -34,8 +34,8 @@ public partial class TFBuilding : ITargetID, ITargetIDSubtext, IKillfeedName
 		yield return UpgradeMetalLine;
 	}
 
-	string IKillfeedName.Name => $"{Data.Title} ({Owner.Client.Name})";
-	string ITargetID.Name => $"{Data.Title} built by {Owner.Client.Name}";
+	string IKillfeedName.Name => $"{Data.Title} ({Owner.Client?.Name})";
+	string ITargetID.Name => $"{Data.Title} built by {Owner.Client?.Name}";
 	string ITargetID.Avatar => "";
 	string ITargetIDSubtext.Subtext
 	{
