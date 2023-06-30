@@ -33,6 +33,7 @@ ServerList {
         flex-direction: column;
         height: 80%;
         font-family: TF2_Secondary;
+        overflow:scroll;
 
         .header {
             margin-bottom: 1%;
@@ -46,7 +47,7 @@ ServerList {
             background-color: $bg-dark;
             flex-grow: 0;
             font-size: 24px;
-            overflow: scroll;
+            overflow: hidden;
 
             .title {
                 font-family: TF2_Build;

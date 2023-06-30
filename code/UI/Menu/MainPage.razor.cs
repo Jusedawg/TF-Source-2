@@ -20,7 +20,8 @@ public partial class MainPage : Panel
 	}
 	public async Task OnClickCreateGame()
 	{
-		await Game.Menu.CreateLobbyAsync();
+		var maxPlayers = Game.Menu.Package.GetMeta<int>( "MaxPlayers", 1 ); ;
+		await Game.Menu.CreateLobbyAsync( maxPlayers);
 	}
 	public void OnClickViewLobby()
 	{
