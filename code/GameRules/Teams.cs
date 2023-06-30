@@ -7,6 +7,8 @@ namespace TFS2;
 
 partial class TFGameRules
 {
+	[ConVar.Replicated]
+	public static bool tf_balanceteams { get; set; } = true;
 	[Net] public IDictionary<TFTeam, TFTeamRole> TeamRole { get; set; }
 	[Net] public IDictionary<TFTeam, string> TeamGoal { get; set; }
 
@@ -53,6 +55,19 @@ partial class TFGameRules
             }
         }
     }
+
+	public override bool CanChangeTeamTo( int newTeam )
+	{
+		var team = (TFTeam)newTeam;
+		var players = Entity.All.OfType<TFPlayer>();
+		var teamCount = players.Where( x => x.Team == team ).Count();
+		var enemyCount = players.Where( x => x.Team == team.GetEnemy() ).Count();
+
+		if ( tf_balanceteams && teamCount > enemyCount )
+			return false;
+
+		return base.CanChangeTeamTo( newTeam );
+	}
 }
 
 public enum TFTeam 

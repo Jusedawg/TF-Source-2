@@ -185,8 +185,11 @@ public class TeamSelectionBackground : ScenePanel
 	{
 		base.Tick();
 
-		// RedTeamCount.Text = $"{TFTeam.Red.GetPlayers().Count}";
-		// BlueTeamCount.Text = $"{TFTeam.Blue.GetPlayers().Count}";
+		var players = Entity.All.OfType<TFPlayer>();
+		int redPlayersCount = players.Where( x => x.Team == TFTeam.Red ).Count();
+		int bluePlayersCount = players.Where( x => x.Team == TFTeam.Blue ).Count();
+		RedTeamCount.Text = $"{redPlayersCount}";
+		BlueTeamCount.Text = $"{bluePlayersCount}";
 	}
 }
 
@@ -215,11 +218,30 @@ public class TeamSelectionButton : Label
 	{
 		base.Tick();
 		Prop?.Update( RealTime.Delta );
+
+		SetClass( "blocked", !CanUse());
+	}
+
+	private bool CanUse()
+	{
+		if ( !Team.IsPlayable() ) return true;
+		if ( Game.LocalPawn is TFPlayer ply )
+			return TFGameRules.Current.CanPlayerChangeTeamTo( ply, (int)Team );
+
+		return false;
 	}
 
 	public void HandleClick()
 	{
-		Sound.FromScreen( "ui.button.click" );
+		if ( !CanUse() )
+		{
+			Sound.FromScreen( "weapon_medigun.notarget" );
+			return;
+		}
+		else
+		{
+			Sound.FromScreen( "ui.button.click" );
+		}
 
 		ConsoleSystem.Run( $"tf_join_team", Team );
 		HudOverlay.CloseActive();
