@@ -23,6 +23,11 @@ public partial class LobbyGameSetting : Panel
 	{
 		base.OnAfterTreeRender( firstTime );
 
+		if(firstTime)
+		{
+			ResetValue();
+		}
+
 		if ( Editor is DropDown ChoiceDropdown )
 		{
 			ChoiceDropdown.Options.Clear();
@@ -38,6 +43,26 @@ public partial class LobbyGameSetting : Panel
 		{
 			// For some reason this cant be set in razor so we do it here instead
 			BoolCheckbox.ValueChanged = OnChecked;
+		}
+	}
+
+	public void ResetValue()
+	{
+		if(Editor is SliderControl NumberSlider)
+		{
+			NumberSlider.Value = float.Parse( Value );
+		}
+		else if (Editor is Checkbox BoolCheckbox)
+		{
+			BoolCheckbox.Checked = bool.Parse( Value );
+		}
+		else if(Editor is DropDown ChoiceDropdown)
+		{
+			ChoiceDropdown.Value = Value;
+		}
+		else if (Editor is TextEntry StringEntry)
+		{
+			StringEntry.Value = Value;
 		}
 	}
 
