@@ -26,7 +26,7 @@ partial class ControlPointDisplayEntry : Panel
 			if ( team == Point.OwnerTeam )
 				continue;
 
-			if ( TFGameRules.Current.TeamMayCapturePoint( team, Point ) )
+			if ( TFGameRules.Current.TeamMayCapturePoint( team, Point ) && Point.CanTeamCapture(team) )
 				return false;
 		}
 

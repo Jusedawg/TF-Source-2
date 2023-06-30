@@ -41,10 +41,10 @@ public partial class ControlPoint : BaseTrigger, IResettable, IRoundTimerBlocker
 	[Property, FGDType( "target_destination" )]
 	public string PreviousBluePointNames { get; set; }
 
-	[Property] public bool CanRedCapture { get; set; } = true;
-	[Property] public bool CanBlueCapture { get; set; } = true;
-	[Property] public int NumberOfRedToCapture { get; set; } = 1;
-	[Property] public int NumberOfBlueToCapture { get; set; } = 1;
+	[Property, Net] public bool CanRedCapture { get; set; } = true;
+	[Property, Net] public bool CanBlueCapture { get; set; } = true;
+	[Property, Net] public int NumberOfRedToCapture { get; set; } = 1;
+	[Property, Net] public int NumberOfBlueToCapture { get; set; } = 1;
 
 	[Property] public float RedSpawnAdjust { get; set; }
 	[Property] public float BlueSpawnAdjust { get; set; }
