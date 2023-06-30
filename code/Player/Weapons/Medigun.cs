@@ -250,11 +250,11 @@ public partial class Medigun : TFHoldWeaponBase //, IPassiveChild
 
 		StopHealing( true );
 
-		HealSound?.Stop(true);
-		HealSound = null;
+		HealSound.Stop();
+		HealSound = default;
 
-		MuzzleSound?.Stop(true);
-		MuzzleSound = null;
+		MuzzleSound.Stop();
+		MuzzleSound = default;
 	}
 
 	public override Trace SetupFireBulletTrace( Vector3 Origin, Vector3 Target )

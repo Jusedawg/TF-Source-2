@@ -437,8 +437,8 @@ public partial class FlameThrower : TFHoldWeaponBase
 
 	bool firingCritSound;
 
-	SoundHandle? FireLoopSound;
-	SoundHandle? FireHitLoopSound;
+	Sound FireLoopSound;
+	Sound FireHitLoopSound;
 
 	public override void ClientTick()
 	{
@@ -448,14 +448,14 @@ public partial class FlameThrower : TFHoldWeaponBase
 		if ( IsHolding )
 		{
 			// Check if we need to change our sounds.
-			if ( FireLoopSound == null || IsCurrentAttackCritical != firingCritSound )
+			if ( !FireLoopSound.IsPlaying || IsCurrentAttackCritical != firingCritSound )
 			{
 				var sound = IsCurrentAttackCritical
 					? FlameLoopCritSoundName
 					: FlameLoopSoundName;
 
-				FireLoopSound?.Stop(true);
-				FireLoopSound = Audio.Play( sound );
+				FireLoopSound.Stop();
+				FireLoopSound = PlaySound(sound);
 
 				firingCritSound = IsCurrentAttackCritical;
 			}
@@ -466,32 +466,32 @@ public partial class FlameThrower : TFHoldWeaponBase
 				// Hitting target means we dealt damage in the past 0.2s
 				var isHittingTarget = Time.Now - LastFlameContactTime < 0.2f;
 
-				if ( FireHitLoopSound.HasValue != isHittingTarget )
+				if ( FireHitLoopSound.IsPlaying != isHittingTarget )
 				{
-					FireHitLoopSound?.Stop(true);
-					FireHitLoopSound = null;
+					FireHitLoopSound.Stop();
+					FireHitLoopSound = default;
 
 					if ( isHittingTarget )
 					{
-						FireHitLoopSound?.Stop(true);
-						FireHitLoopSound = Audio.Play( FlameLoopHitSoundName );
+						FireHitLoopSound.Stop();
+						FireHitLoopSound = PlaySound( FlameLoopHitSoundName );
 					}
 				}
 			}
 		}
 		else
 		{
-			if ( FireLoopSound != null )
+			if ( FireLoopSound.IsPlaying )
 			{
 				// Play flame loop end sound name.
 				PlaySound( FlameLoopEndSoundName );
 
-				FireLoopSound?.Stop(true);
-				FireLoopSound = null;
+				FireLoopSound.Stop();
+				FireLoopSound = default;
 			}
 
-			FireHitLoopSound?.Stop(true);
-			FireHitLoopSound = null;
+			FireHitLoopSound.Stop();
+			FireHitLoopSound = default;
 		}
 	}
 
@@ -499,11 +499,11 @@ public partial class FlameThrower : TFHoldWeaponBase
 	{
 		base.OnHolster( owner );
 
-		FireHitLoopSound?.Stop(true);
-		FireHitLoopSound = null;
+		FireHitLoopSound.Stop();
+		FireHitLoopSound = default;
 
-		FireLoopSound?.Stop(true);
-		FireLoopSound = null;
+		FireLoopSound.Stop();
+		FireLoopSound = default;
 	}
 }
 

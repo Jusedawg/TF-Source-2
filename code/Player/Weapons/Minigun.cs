@@ -88,7 +88,7 @@ public partial class Minigun : TFHoldWeaponBase
 	// Effects
 	//
 
-	SoundHandle? SpinSound { get; set; }
+	Sound SpinSound { get; set; }
 	SpinSoundType LastSpinSound { get; set; }
 
 	public const string SpinDrySound = "weapon_minigun.empty";
@@ -105,7 +105,7 @@ public partial class Minigun : TFHoldWeaponBase
 		var soundType = GetSpinSoundType();
 		if ( soundType != SpinSoundType.None )
 		{
-			if ( SpinSound == null || soundType != LastSpinSound )
+			if ( !SpinSound.IsPlaying || soundType != LastSpinSound )
 			{
 				var sound = soundType switch
 				{
@@ -120,8 +120,8 @@ public partial class Minigun : TFHoldWeaponBase
 
 				LastSpinSound = soundType;
 
-				SpinSound?.Stop(true);
-				SpinSound = Audio.Play( sound, this );
+				SpinSound.Stop();
+				SpinSound = PlaySound( sound);
 			}
 		}
 		else
@@ -131,8 +131,8 @@ public partial class Minigun : TFHoldWeaponBase
 			{
 				return;
 			}
-			SpinSound?.Stop(true);
-			SpinSound = null;
+			SpinSound.Stop();
+			SpinSound = default;
 		}
 	}
 
@@ -140,8 +140,8 @@ public partial class Minigun : TFHoldWeaponBase
 	{
 		base.OnHolster( owner );
 		
-		SpinSound?.Stop(true);
-		SpinSound = null;
+		SpinSound.Stop();
+		SpinSound = default;
 	}
 
 	public override void ModifyOwnerMaxSpeed( ref float speed )
