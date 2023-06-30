@@ -38,6 +38,11 @@
     public override void Tick()
     {
         Music.Tick();
+
+        if(Game.Menu.IsLoading && Music.Enabled)
+        {
+            StopMusic();
+        }
     }
 
     private void PickBackground()
@@ -65,20 +70,27 @@
 
         base.OnEvent(e);
     }
-
     [GameEvent.Menu.ServerJoined]
     public void OnServerJoined()
     {
-        Music.Stop();
-        Music.Enabled = false;
-        //Navigate("/active");
+        StopMusic();
     }
     [GameEvent.Menu.ServerLeave]
     public void OnServerLeave()
     {
         PickBackground();
-        Music.Enabled = true;
+        StartMusic();
         Navigate("/");
+    }
+
+    private void StartMusic()
+    {
+        Music.Enabled = true;
+    }
+    private void StopMusic()
+    {
+        Music.Stop();
+        Music.Enabled = false;
     }
 
     [GameEvent.Menu.LobbyJoined]
