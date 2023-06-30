@@ -57,6 +57,8 @@ public partial class FlameEntity : TFProjectile
 		{
 			DebugOverlay.Box( Position, Mins, Maxs, Color.Green );
 		}
+
+		Position += Velocity * Time.Delta;
 	}
 
 	public override void OnTraceTouch( Entity other, TraceResult result )

@@ -26,8 +26,6 @@ public partial class FlameThrower : TFHoldWeaponBase
 		var origin = GetAttackOrigin();
 
 		var forward = eyeRot.Forward;
-		var right = eyeRot.Right;
-		var up = eyeRot.Up;
 
 		// Flame appears in front of our eyes and go forward.
 		origin += forward * tf_flamethrower_forward_distance;
