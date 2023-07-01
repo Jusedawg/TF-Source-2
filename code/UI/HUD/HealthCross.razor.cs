@@ -2,16 +2,25 @@
 using Amper.FPS;
 using Sandbox.UI;
 using System;
+using static TFS2.TFPlayer;
 
 namespace TFS2.UI;
 
 public partial class HealthCross : Panel
 {
 	const float DangerHealthFractionThreshold = 0.5f;
-	public IHasMaxHealth DesiredTarget { get; set; }
+	public float HealthAmount { get; set; }
+	public float MaxHealthAmount { get; set; }
 	public float FlashScale { get; set; }
+	public IHasMaxHealth DesiredTarget { get; set; }
 	public bool ShowMaxHealth { get; set; }
-	IHasMaxHealth Target => DesiredTarget ?? TFPlayer.LocalPlayer;
+	public bool Local { get; set; } = false;
+
+	Panel ProgressBar;
+	Label HealthLabel;
+	Label MaxHealthLabel;
+	Panel DangerFlash;
+	Panel OverhealFlash;
 	public HealthCross() : this( null ) { }
 
 	public HealthCross( IHasMaxHealth target = null, float flashScale = 1, bool showMaxHealth = true )
@@ -23,11 +32,8 @@ public partial class HealthCross : Panel
 
 	public override void Tick()
 	{
-		if ( !Target.IsValid() )
-			return;
-
-		var health = Target.Health;
-		var maxHealth = Target.MaxHealth;
+		float health = GetHealth();
+		float maxHealth = GetMaxHealth();
 		var fraction = Math.Clamp( health / maxHealth, 0, 1 );
 
 		ProgressBar.Style.Height = Length.Fraction( fraction );
@@ -37,8 +43,29 @@ public partial class HealthCross : Panel
 		SetClass( "show_maxhealth", fraction < .95f && ShowMaxHealth );
 		SetClass( "is_danger", fraction < DangerHealthFractionThreshold );
 
+		if ( FlashScale <= 0 ) return;
+
 		SimulateDangerFlash();
 		SimulateOverhealFlash();
+	}
+
+	public float GetHealth()
+	{
+		if ( DesiredTarget != default )
+			return DesiredTarget.Health;
+		else if ( Local )
+			return Game.LocalPawn.Health;
+
+		return HealthAmount;
+	}
+	public float GetMaxHealth()
+	{
+		if ( DesiredTarget != default )
+			return DesiredTarget.MaxHealth;
+		else if ( Local )
+			return (Game.LocalPawn is IHasMaxHealth maxHealthPawn) ? maxHealthPawn.MaxHealth : Game.LocalPawn.Health;
+
+		return MaxHealthAmount;
 	}
 
 	const float DangerFlashTime = .25f;
@@ -59,8 +86,8 @@ public partial class HealthCross : Panel
 		//
 		// Scale
 		//
-		var health = Target.Health;
-		var maxHealth = Target.MaxHealth;
+		var health = GetHealth();
+		var maxHealth = GetMaxHealth();
 		var scale = 0f;
 		var maxDangerHealth = maxHealth * DangerHealthFractionThreshold;
 
@@ -87,8 +114,8 @@ public partial class HealthCross : Panel
 		//
 		// Scale
 		//
-		var health = Target.Health;
-		var maxHealth = Target.MaxHealth;
+		var health = GetHealth();
+		var maxHealth = GetMaxHealth();
 		var maxOverheal = maxHealth * TFPlayer.tf_max_overheal;
 
 		var scale = 0f;

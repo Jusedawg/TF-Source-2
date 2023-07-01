@@ -45,7 +45,8 @@ public partial class FreezeCameraPanel : Panel
 		// Display killer data on screen
 		if(target is TFPlayer ply)
 		{
-			KillerHealth.DesiredTarget = ply;
+			KillerHealth.HealthAmount = ply.Health;
+			KillerHealth.MaxHealthAmount = ply.MaxHealth;
 			if ( !ply.IsAlive )
 				KillerHeader.Text = KILLER_HEADER_DEAD;
 			else
