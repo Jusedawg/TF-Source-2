@@ -493,7 +493,13 @@ public partial class ControlPoint : BaseTrigger, IResettable, IRoundTimerBlocker
 	}
 
 	public void ReduceCaptureTime( float delta ) { TimeRemaining -= delta; }
-	public void IncreaseCaptureTime( float delta ) { TimeRemaining += delta; }
+	public void IncreaseCaptureTime( float delta ) 
+	{
+		const float OVERTIME_RESET_MULTIPLIER = 6;
+		if ( RoundTimer.AnyInOvertime )
+			delta *= OVERTIME_RESET_MULTIPLIER;
+		TimeRemaining += delta; 
+	}
 
 	public int GetNumberOfTeamPlayersRequiredToCap( TFTeam team )
 	{
@@ -540,7 +546,6 @@ public partial class ControlPoint : BaseTrigger, IResettable, IRoundTimerBlocker
 		NumberTouchers.TryGetValue( team, out var num );
 		return num;
 	}
-
 
 	public void Reset(bool fullRoundReset = true)
 	{

@@ -20,6 +20,7 @@ namespace TFS2;
 public partial class RoundTimer : Entity
 {
 	public new static List<RoundTimer> All { get; set; } = new();
+	public static bool AnyInOvertime => All.Any( timer => timer.InOvertime );
 
 	/// <summary>
 	/// Maximum amount of time this timer can reach.

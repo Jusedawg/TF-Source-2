@@ -38,7 +38,7 @@ public partial class RoundStatusDisplay : Panel
 			value = WAITING_FOR_PLAYERS_TEXT;
 		else if ( TFGameRules.Current.IsInSetup )
 			value = SETUP_TEXT;
-		else if ( Timers.Keys.Any( timer => timer.InOvertime ) )
+		else if ( RoundTimer.AnyInOvertime )
 			value = OVERTIME_TEXT;
 
 		GameStateLabel.Text = value;
