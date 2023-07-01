@@ -83,26 +83,10 @@ public partial class DispenserZone : BaseTrigger
 	}
 	void GiveAmmo(TFPlayer ply)
 	{
+		if ( !ply.GiveAmmo( AmmoPercentagePerSecond ) )
+			return;
+
 		Sound.FromScreen( To.Single( ply ), AMMO_SOUND );
-
-		foreach ( var wpn in ply.Weapons.OfType<TFWeaponBase>() )
-		{
-			if ( !wpn.NeedsAmmo() ) continue;
-
-			int maxAmmo = wpn.GetReserveSize();
-			wpn.Reserve += MathX.CeilToInt( maxAmmo * AmmoPercentagePerSecond );
-			if ( wpn.Reserve > maxAmmo )
-				wpn.Reserve = maxAmmo;
-		}
-
-		if(ply.UsesMetal)
-		{
-			if ( StoredMetal == 0 ) return;
-			int usedMetal = (int)MathF.Min( StoredMetal, MetalPerInterval );
-
-			usedMetal = ply.GiveMetal( usedMetal );
-			StoredMetal -= usedMetal;
-		}
 	}
 
 	void GenerateMetal()
