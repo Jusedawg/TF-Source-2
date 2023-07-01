@@ -36,9 +36,9 @@ public partial class TFBuilding : IInteractableTargetID
 
 	public virtual bool CanCarry(TFPlayer ply)
 	{
-		return ply == Owner && !IsConstructing && !IsUpgrading && !IsCarried && InPickupDistance();
+		return ply?.CanPickupBuildings() == true && !IsConstructing && !IsUpgrading && !IsCarried && InPickupDistance();
 	}
-	public bool CanInteract( TFPlayer user ) => CanCarry( user );
+	bool IInteractableTargetID.CanInteract( TFPlayer ply ) => CanCarry(ply);
 
 	string IInteractableTargetID.InteractText => "Pickup";
 	string IInteractableTargetID.InteractButton => "Attack2";

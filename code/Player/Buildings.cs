@@ -40,7 +40,7 @@ public partial class TFPlayer
 	{
 		if(Game.IsServer)
 		{
-			if ( Input.Pressed( "Attack2" ) && IsAlive )
+			if ( Input.Pressed( "Attack2" ) && CanPickupBuildings() )
 			{
 				TryPickupBuilding();
 			}
@@ -70,6 +70,16 @@ public partial class TFPlayer
 		return Buildings.Count( building => building.Data == data ) < data.MaxCount;
 	}
 	public bool CanBuild( string name ) => CanBuild( BuildingData.Get( name ) );
+
+	public bool CanPickupBuildings()
+	{
+		if ( ActiveWeapon is Builder builder )
+		{
+			return !builder.IsCarryingBuilding;
+		}
+
+		return IsAlive && Weapons.OfType<Builder>().Any();
+	}
 
 	public bool HasMetalFor(BuildingData data)
 	{
