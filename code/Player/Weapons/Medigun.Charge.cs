@@ -80,17 +80,18 @@ public partial class Medigun
 		if ( Patient.Health >= boostMax )
 			chargeModifier *= .5f;
 
-		// Check if we want to force fast buildup regardless of previous conditions.
-		// We can go faster than normal, but we can't go slower.
-		bool forceFastBuildup = SDKGame.Current.State == GameState.PreRound;
-		if ( forceFastBuildup )
-			chargeModifier = Math.Max( chargeModifier, 1 );
-
 		// If entity has multiple healers. Share uber between all of them.
 		if ( Patient.Healers != null && Patient.Healers.Count > 1 )
 			chargeModifier /= Patient.Healers.Count;
 
-		// TODO: More checks?
+		// Check if we want to force fast buildup regardless of previous conditions.
+		// We can go faster than normal, but we can't go slower.
+		bool doPreRoundBoost = SDKGame.Current.State == GameState.PreRound || TFGameRules.Current.IsInSetup;
+		if ( doPreRoundBoost )
+		{
+			const float SETUP_ÜBER_GAIN_MULTIPLIER = 3;
+			chargeModifier *= SETUP_ÜBER_GAIN_MULTIPLIER;
+		}
 
 		chargeAmount *= chargeModifier;
 

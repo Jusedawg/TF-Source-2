@@ -8,7 +8,6 @@ namespace TFS2;
 public partial class Medigun : TFHoldWeaponBase //, IPassiveChild
 {
 	public override bool NeedsAmmo() => false;
-
 	[Net, Predicted] public bool IsHealing { get; set; }
 	[Net, Predicted] public TFPlayer Patient { get; set; }
 	public bool HasPatient => Patient != null;
@@ -232,7 +231,7 @@ public partial class Medigun : TFHoldWeaponBase //, IPassiveChild
 		return true;
 	}
 
-	public float GetHealRate() => Data.Damage;
+	public float GetHealRate() => Data.Damage; // TODO: Crit heals
 
 	protected override void DebugScreenText( float interval )
 	{
