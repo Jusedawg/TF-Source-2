@@ -1,5 +1,5 @@
 <p align="center">
-	<img src="https://github.com/AmperSoftware/TF-Source-2/blob/578f0c8578c6fb729d926a69d0931bea035bf39d/ui/Menu/tfs2_logotype.png">
+	<img src="https://github.com/AmperSoftware/TF-Source-2/blob/dev/ui/Menu/tfs2_logotype.png">
 </p>
 <hr>
 
@@ -27,7 +27,7 @@ map mapname
 
 In order to update the gamemode all you have to do is just git pull the new changes from the remote repository. Most of the time, the game will succesfully recognize the new changes and hotload them. However if you are doing some major git operations (like checking out another branch or merging it), it is recommended to close the game before you perform them.
 
-Sometimes s&box decides to recompile the assets and change the compiled files, thus putting them in the git change list. This may cause issues when performing branch-related activities, like merging or checkout so it is reccomended to discard any changes of ``*_c`` files, unless you specifically intended for them to appear, in which case just commit them.
+Also, we gitignore most ``*_c`` files so you will need to wait for the gamemode to compile the first time you launch it.
 
 # Contributing
 
@@ -45,4 +45,4 @@ This repository is licensed under the [MIT license](https://github.com/AmperSoft
 
 However, some assets included such as models, sounds, animations, shaders and more were originally created by Valve Corporation and therefore are under Valve's intellectual property.
 
-**[Third Part Licenses](https://github.com/AmperSoftware/TF-Source-2/blob/dev/thirdpartylicenses.md)**
+**[Third Party Licenses](https://github.com/AmperSoftware/TF-Source-2/blob/dev/thirdpartylicenses.md)**
