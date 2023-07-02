@@ -10,7 +10,7 @@ namespace Amper.FPS;
 partial class SDKPlayer
 {
 	public IEnumerable<SDKWeapon> Weapons => Children.OfType<SDKWeapon>();
-	[Net] public SDKWeapon ActiveWeapon { get; set; }
+	[Net, Predicted] public SDKWeapon ActiveWeapon { get; set; }
 	[ClientInput] public SDKWeapon RequestedActiveWeapon { get; set; }
 	[Net] public SDKWeapon ForcedActiveWeapon { get; set; }
 	public bool AutoResetForcedActiveWeapon { get; set; } = true;
