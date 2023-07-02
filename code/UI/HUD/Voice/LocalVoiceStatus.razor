@@ -1,0 +1,28 @@
+﻿@namespace TFS2.UI
+@using Sandbox.UI;
+@using Sandbox;
+@attribute [StyleSheet]
+
+<root class="voicestatus">
+    <img src="/UI/HUD/Voice.png" class="indicator" />
+</root>
+
+@code {
+    public float MaxScale { get; set; } = 1.1f;
+    private float voiceLevel = 0.0f;
+    const float SCALE_SPEED = 40f;
+
+    public override void Tick()
+    {
+        voiceLevel = voiceLevel.LerpTo(Voice.Level, Time.Delta * SCALE_SPEED);
+        SetClass("active", Voice.IsRecording);
+
+        var team = Game.LocalClient.GetTeam();
+        SetClass("blu", team == TFTeam.Blue);
+        SetClass("red", team == TFTeam.Red);
+
+        var tr = new PanelTransform();
+        tr.AddScale(1f.LerpTo(MaxScale, voiceLevel));
+        Style.Transform = tr;
+    }
+}

@@ -1,0 +1,73 @@
+﻿@import "/UI/styles/colors.scss";
+
+teamvoicelist {
+    position: absolute;
+    bottom: 20%;
+    right: 1%;
+    flex-direction: column;
+    width: 22%;
+    padding: 5px;
+    padding-bottom: 0px;
+    font-family: TF2_Build;
+
+    teamvoiceentry {
+        background-color: rgba( black, 0.8 );
+        flex-direction: row;
+        padding: 2px;
+        margin-bottom: 5px;
+        align-items: center;
+        align-content: center;
+        border-radius: 2px;
+        overflow: hidden;
+        transition: all 0.1s ease-out;
+        left: 0px;
+        text-align: center;
+        height: 5vh;
+
+        &:intro {
+            opacity: 0;
+            margin-left: 20px;
+        }
+
+        &:outro {
+            opacity: 0;
+            margin-left: 20px;
+            transition: all 0.1s ease-out;
+        }
+
+        &.blu {
+            background-color: rgba( $team-blu, 0.9 );
+        }
+
+        &.red {
+            background-color: rgba( $team-red, 0.9 );
+        }
+
+        img {
+            height: 90%;
+            aspect-ratio: 1;
+        }
+
+        .avatar {
+            border-radius: 10%;
+        }
+
+        .name {
+            font-size: 18px;
+            font-weight: 500;
+            margin-left: 10px;
+            flex-grow: 1;
+            color: $white;
+            height: 100%;
+            align-items: center;
+        }
+
+        .dead {
+            opacity: 0;
+
+            &.visible {
+                opacity: 1;
+            }
+        }
+    }
+}

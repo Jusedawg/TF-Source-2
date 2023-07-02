@@ -1,0 +1,9 @@
+﻿@namespace TFS2.UI
+@using TFS2;
+@using Sandbox.UI;
+
+<root>
+    <img @ref=DeadIndicator class="dead" src="/UI/HUD/dead.png" />
+    <img class="avatar" src="avatar:@Client.SteamId" />
+    <label class="name">@Client.Name.ToUpper()</label>
+</root>

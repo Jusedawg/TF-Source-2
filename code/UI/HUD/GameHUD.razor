@@ -37,12 +37,35 @@
     <ArenaWaitingForPlayers></ArenaWaitingForPlayers>
     <FreezeCameraPanel></FreezeCameraPanel>
     <ReadyUp></ReadyUp>
+    <TauntMenu />
 
     <!-- Communications -->
     <VoiceMenu></VoiceMenu>
-    <VoiceWheel></VoiceWheel>
     <Scoreboard></Scoreboard>
-    <VoiceList></VoiceList>
     <TFKillFeed></TFKillFeed>
     <TFChatBox></TFChatBox>
+
+    <TeamVoiceList/>
+    <LocalVoiceStatus/>
+    <!-- 
+        TODO: Reimplement
+        <VoiceWheel></VoiceWheel>
+    -->
 </root>
+
+@code {
+    public static GameHUD Instance { get; set; }
+
+    public static bool Enabled
+    {
+        set
+        {
+            Instance.Style.Set("display", value ? "flex" : "none");
+        }
+    }
+
+    public GameHUD()
+    {
+        Instance = this;
+    }
+}

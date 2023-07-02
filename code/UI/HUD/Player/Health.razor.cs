@@ -57,7 +57,7 @@ public partial class Health : Panel
 				? playerClass.IconBlue
 				: playerClass.IconRed;
 
-			PlayerClassIcon.Style.SetBackgroundImage( Util.JPGToPNG( classIcon ) );
+			PlayerClassIcon?.Style.SetBackgroundImage( Util.JPGToPNG( classIcon ) );
 		}
 	}
 }
