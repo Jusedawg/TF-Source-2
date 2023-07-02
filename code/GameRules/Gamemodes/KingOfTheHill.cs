@@ -3,6 +3,7 @@ using Editor;
 using Amper.FPS;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace TFS2;
 
@@ -52,6 +53,18 @@ public partial class KingOfTheHill : GamemodeEntity
 		// try to find our previous points
 		Point = FindByName( PointName ) as ControlPoint;
 		Reset();
+		Point.AddOutputEvent( "OnUnlocked", OnPointUnlocked );
+	}
+
+	const string POINT_UNLOCK_SOUND = "announcer.point.enabled";
+	private ValueTask OnPointUnlocked( Entity activator, float delay )
+	{
+		if(TFGameRules.Current.AreObjectivesActive())
+		{
+			SDKGame.PlaySoundToAll( POINT_UNLOCK_SOUND, SoundBroadcastChannel.Announcer );
+		}
+
+		return ValueTask.CompletedTask;
 	}
 
 	public override void Reset()

@@ -217,12 +217,11 @@ public partial class RoundTimer : Entity
 			if ( second != lastSecond )
 			{
 				lastSecond = second;
-			}
 
-			if ( PlayAnnouncerVoicelines )
-			{
-				int secondsRemaining = GetRemainingTime().FloorToInt();
-				PlayAnnouncerTimeVoiceLine( secondsRemaining, true );
+				if ( PlayAnnouncerVoicelines )
+				{
+					PlayAnnouncerTimeVoiceLine( second, true );
+				}
 			}
 
 			if ( timeLeft == 0 )

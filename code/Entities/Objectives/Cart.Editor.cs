@@ -6,6 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TFS2;
+
+#if CART_EDITOR
+
 public partial class Cart
 {
 	private static int previewIndex = 0;
@@ -29,3 +32,5 @@ public partial class Cart
 		Gizmo.Draw.Model( model, localTransform );
 	}
 }
+
+#endif

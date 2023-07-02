@@ -133,7 +133,6 @@ public partial class ControlPoint : BaseTrigger, IResettable, IRoundTimerBlocker
 				{
 					LastAnnouncerSecond = seconds;
 					TFGameRules.PlaySoundToAll( $"announcer.begins.{seconds}sec", SoundBroadcastChannel.Soundtrack );
-
 				}
 			}
 			else
@@ -658,12 +657,6 @@ public partial class ControlPoint : BaseTrigger, IResettable, IRoundTimerBlocker
 		if ( Locked )
 		{
 			OnUnlocked.Fire( this );
-
-			if ( TFGameRules.Current.AreObjectivesActive() )
-			{
-				// only play this response if the round is active.
-				SDKGame.PlaySoundToAll( "announcer.point.enabled", SoundBroadcastChannel.Announcer );
-			}
 		}
 
 		UnlockTime = -1;
