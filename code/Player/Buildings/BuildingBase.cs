@@ -193,6 +193,16 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 		}
 
 		LastDamageInfo = info;
+		EventDispatcher.InvokeEvent( new PlayerHurtEvent()
+		{
+			Victim = this,
+			Attacker = info.Attacker,
+			Assister = null,
+			Inflictor = info.Weapon,
+			Tags = info.Tags.ToArray(),
+			Position = info.Position,
+			Damage = info.Damage
+		} );
 		base.TakeDamage( info );
 	}
 
