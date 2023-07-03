@@ -262,17 +262,17 @@ public partial class TFPlayer : SDKPlayer
 		DropPickedItem();
 		CreateDeathEntities( LastDamageInfo );
 
+		var dropforce = Vector3.Random;
+		dropforce.z = 0.8f;
+		dropforce *= tf_dropped_weapons_force;
+
 		//
 		// Drop active weapon
 		//
 
 		if ( ActiveWeapon.IsValid() )
 		{
-			var force = Vector3.Random;
-			force.z = 0.8f;
-			force *= tf_dropped_weapons_force;
-
-			if(ActiveWeapon is Builder b && b.IsCarryingBuilding)
+			if ( ActiveWeapon is Builder b && b.IsCarryingBuilding )
 			{
 				var building = b.CarriedBuilding;
 				building.TakeDamage( LastDamageInfo );
@@ -281,8 +281,10 @@ public partial class TFPlayer : SDKPlayer
 			}
 
 			ActiveWeapon.OnHolster( this );
-			DropWeapon( ActiveWeapon, WorldSpaceBounds.Center, force );
+			DropWeapon( ActiveWeapon, WorldSpaceBounds.Center, dropforce );
 		}
+
+		DropAmmoPack( dropforce );
 
 		if ( InCondition( TFCondition.Taunting ) )
 		{
@@ -494,5 +496,21 @@ public partial class TFPlayer : SDKPlayer
 
 		// Apply spy touched effects.
 		player.OnSpyTouchedWhileCloaked();
+	}
+
+	private void DropAmmoPack( Vector3 force )
+	{
+		var pack = new AmmoPackMedium
+		{
+			Respawns = false,
+			PlaybackRate = 0
+		};
+
+		pack.Position = WorldSpaceBounds.Center;
+		pack.SetupPhysicsFromModel( PhysicsMotionType.Dynamic );
+
+		var velocity = force + Velocity;
+		pack.Rotation = Rotation.LookAt( velocity );
+		pack.ApplyAbsoluteImpulse( velocity );
 	}
 }

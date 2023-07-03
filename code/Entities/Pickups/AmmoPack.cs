@@ -1,14 +1,15 @@
 using Sandbox;
 using Editor;
 using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using Amper.FPS;
 
 namespace TFS2;
 
-public abstract class AmmoPack : PickupItem
+public abstract class AmmoPack : PickupItem, IAcceptsExtendedDamageInfo
 {
+	private const int BlastScale = 41;
+
 	public virtual float AmmoMultiplier => 1f;
 
 	public override void OnPicked( TFPlayer player )
@@ -18,6 +19,17 @@ public abstract class AmmoPack : PickupItem
 
 		Sound.FromEntity( "player.pickupammo", this );
 		base.OnPicked( player );
+	}
+
+	public void TakeDamage( ExtendedDamageInfo info )
+	{
+		if ( PhysicsBody.BodyType != PhysicsBodyType.Dynamic || !info.HasTag( TFDamageTags.Blast ) )
+			return;
+
+		var vec = (info.HitPosition - info.Inflictor.WorldSpaceBounds.Center).Normal;
+		vec *= info.Damage * BlastScale;
+
+		ApplyAbsoluteImpulse( vec );
 	}
 }
 
