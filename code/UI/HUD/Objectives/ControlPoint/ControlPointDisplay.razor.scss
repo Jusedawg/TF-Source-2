@@ -4,9 +4,15 @@ ControlPointDisplay {
     width: 100%;
     z-index: 2;
     display: none;
-    justify-content: center;
+    flex-direction: column-reverse;
+    row-gap: 4%;
 
     &.visible {
         display: flex;
+    }
+
+    .row {
+        width: 100%;
+        justify-content: center;
     }
 }

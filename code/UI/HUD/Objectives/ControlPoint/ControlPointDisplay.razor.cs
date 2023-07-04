@@ -7,7 +7,8 @@ namespace TFS2.UI;
 
 partial class ControlPointDisplay : Panel
 {
-	Dictionary<ControlPoint, ControlPointDisplayEntry> PointEntries { get; set; } = new();
+	Dictionary<ControlPoint, ControlPointDisplayEntry> PointEntries = new();
+	List<Panel> PointRows = new();
 	TimeSince TimeSinceSort { get; set; }
 	IEnumerable<ControlPoint> points;
 	public override void Tick()
@@ -25,10 +26,17 @@ partial class ControlPointDisplay : Panel
 
 	public void AddPoint( ControlPoint point )
 	{
+		int row = UIConfig.Current.GetControlPointRow( point );
+		while(PointRows.Count < row + 1 ) // Add enough panels to fit this control point
+		{
+			PointRows.Add( Add.Panel( "row" ) );
+		}
+
+		Panel rowPanel = PointRows[row];
 		PointEntries[point] = new ControlPointDisplayEntry
 		{
 			Point = point,
-			Parent = this
+			Parent = rowPanel
 		};
 
 		ReorderEntries();
@@ -52,25 +60,13 @@ partial class ControlPointDisplay : Panel
 		var order = TFGameRules.Current.GetControlPointRouteForTeam( TFTeam.Blue );
 		if ( order == null ) return;
 
-		SortChildren( ( x, y ) => {
-			// If either of the panels are null, dont sort this.
-			if ( x is not ControlPointDisplayEntry x1 || y is not ControlPointDisplayEntry y1 )
-				return 0;
+		SortChildren<ControlPointDisplayEntry>( GetEntryOrder );
+	}
 
-			var pointX = x1.Point;
-			var pointY = y1.Point;
+	private int GetEntryOrder(ControlPointDisplayEntry entry)
+	{
+		if ( UIConfig.Current == null ) return 0;
 
-			// If either of the panels dont refer to a valid control point, dont sort this.
-			if ( pointX == null || pointY == null ) 
-				return 0;
-
-			var indexX = order.IndexOf( pointX );
-			var indexY = order.IndexOf( pointY );
-
-			if ( indexX == indexY )
-				return 0;
-
-			return indexX > indexY ? 1 : -1;
-		} );
+		return UIConfig.Current.GetControlPointIndex( entry.Point );
 	}
 }

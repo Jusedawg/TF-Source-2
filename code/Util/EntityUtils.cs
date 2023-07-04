@@ -9,7 +9,8 @@ namespace TFS2;
 
 public static class EntityUtils
 {
-
+	public const char LINE_SPLIT_CHAR = ' ';
+	public const char ELEMENT_SPLIT_CHAR = ',';
 	/// <summary>
 	/// Gets list of entities by target name. Targets are split with space.
 	/// </summary>
@@ -21,7 +22,7 @@ public static class EntityUtils
 		if ( string.IsNullOrWhiteSpace( targetNames ) )
 			yield break;
 
-		foreach ( var part in targetNames.Split( ' ' ) )
+		foreach ( var part in targetNames.Split( LINE_SPLIT_CHAR ) )
 		{
 			var ent = Entity.FindByName( part.Trim() );
 			if ( ent is null )
@@ -53,10 +54,10 @@ public static class EntityUtils
 
 		List<T[]> elements = new();
 		List<T> currentElements = new();
-		foreach ( var list in targetNames.Split( ' ' ) )
+		foreach ( var list in targetNames.Split( LINE_SPLIT_CHAR ) )
 		{
 			currentElements.Clear();
-			foreach ( var part in list.Split( ',' ) )
+			foreach ( var part in list.Split( ELEMENT_SPLIT_CHAR ) )
 			{
 				var ent = Entity.FindByName( part );
 				if ( ent is null )
@@ -75,6 +76,20 @@ public static class EntityUtils
 			}
 			elements.Add( currentElements.ToArray() );
 			currentElements.Clear();
+		}
+
+		return elements.ToArray();
+	}
+
+	public static string[][] SplitTargetNameLists(string targetNames)
+	{
+		if ( string.IsNullOrWhiteSpace( targetNames ) )
+			return default;
+
+		List<string[]> elements = new();
+		foreach ( var part in targetNames.Split( LINE_SPLIT_CHAR ).Select(e => e.Split( ELEMENT_SPLIT_CHAR ) ) )
+		{
+			elements.Add( part );
 		}
 
 		return elements.ToArray();
