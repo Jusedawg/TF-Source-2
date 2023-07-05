@@ -183,8 +183,11 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 			ManualDestroy();
 			return;
 		}
+		else if(!IsUpgrading && !IsConstructing && !IsCarried)
+			CheckDamageLevel();
 	}
 
+	[Net] protected TFBuildingDamageLevel LastDamageLevel { get; set; }
 	public override void TakeDamage( DamageInfo info )
 	{
 		if(ITeam.IsSame(info.Attacker, this))
@@ -205,6 +208,18 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 		} );
 		base.TakeDamage( info );
 	}
+
+	protected void CheckDamageLevel()
+	{
+		var damageLevel = GetDamageLevel();
+		if ( damageLevel != LastDamageLevel )
+		{
+			OnDamageLevelChanged( LastDamageLevel, damageLevel );
+			LastDamageLevel = damageLevel;
+		}
+	}
+
+	protected virtual void OnDamageLevelChanged(TFBuildingDamageLevel from, TFBuildingDamageLevel to) { }
 
 	public const string MANUAL_DESTROY_TAG = "manual_destroy";
 	public virtual void ManualDestroy()
@@ -232,7 +247,6 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 				Weapon = LastDamageInfo.Weapon,
 				Tags = LastDamageInfo.Tags.ToArray()
 			} );
-			Log.Info( Owner );
 		}
 		Owner.Buildings.Remove( this );
 

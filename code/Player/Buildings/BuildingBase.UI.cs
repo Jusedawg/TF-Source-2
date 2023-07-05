@@ -28,6 +28,26 @@ public partial class TFBuilding : ITargetID, ITargetIDSubtext, IKillfeedName
 		UpgradeMetalLine.Value = AppliedMetal;
 		UpgradeMetalLine.Visible = Level != MaxLevel;
 	}
+	public TFBuildingDamageLevel GetDamageLevel()
+	{
+		const float LIGHT_DAMAGE_HEALTH_PERCENTAGE = 0.85f;
+		const float MEDIUM_DAMAGE_HEALTH_PERCENTAGE = 0.65f;
+		const float HEAVY_DAMAGE_HEALTH_PERCENTAGE = 0.45f;
+		const float CRITICAL_DAMAGE_HEALTH_PERCENTAGE = 0.25f;
+
+		float healthPercentage = Health / MaxHealth;
+
+		if ( healthPercentage <= CRITICAL_DAMAGE_HEALTH_PERCENTAGE )
+			return TFBuildingDamageLevel.Critical;
+		else if ( healthPercentage <= HEAVY_DAMAGE_HEALTH_PERCENTAGE )
+			return TFBuildingDamageLevel.Heavy;
+		else if ( healthPercentage <= MEDIUM_DAMAGE_HEALTH_PERCENTAGE )
+			return TFBuildingDamageLevel.Medium;
+		else if ( healthPercentage <= LIGHT_DAMAGE_HEALTH_PERCENTAGE )
+			return TFBuildingDamageLevel.Light;
+
+		return TFBuildingDamageLevel.None;
+	}
 
 	public virtual IEnumerable<BuildingInfoLine> GetUILines()
 	{
@@ -82,4 +102,16 @@ public class BuildingInfoLine
 	{
 
 	}
+}
+
+/// <summary>
+/// Damage level of a building, used to determine if certain effects should be activated 
+/// </summary>
+public enum TFBuildingDamageLevel
+{
+	None,
+	Light,
+	Medium,
+	Heavy,
+	Critical
 }

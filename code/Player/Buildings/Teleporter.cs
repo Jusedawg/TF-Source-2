@@ -292,6 +292,37 @@ public partial class Teleporter : TFBuilding
 		return result;
 	}
 
+	protected Particles damageParticles;
+	protected override void OnDamageLevelChanged( TFBuildingDamageLevel from, TFBuildingDamageLevel to )
+	{
+		const string DAMAGE_LIGHT_FX = "particles/buildingdamage/tpdamage_1.vpcf";
+		const string DAMAGE_MEDIUM_FX = "particles/buildingdamage/tpdamage_2.vpcf";
+		const string DAMAGE_HEAVY_FX = "particles/buildingdamage/tpdamage_3.vpcf";
+		const string DAMAGE_CRITICAL_FX = "particles/buildingdamage/tpdamage_4.vpcf";
+
+		base.OnDamageLevelChanged( from, to );
+
+		if ( damageParticles != default )
+		{
+			damageParticles.Destroy( true );
+			damageParticles = null;
+		}
+
+		string damageParticleName = to switch
+		{
+			TFBuildingDamageLevel.Light => DAMAGE_LIGHT_FX,
+			TFBuildingDamageLevel.Medium => DAMAGE_MEDIUM_FX,
+			TFBuildingDamageLevel.Heavy => DAMAGE_HEAVY_FX,
+			TFBuildingDamageLevel.Critical => DAMAGE_CRITICAL_FX,
+			_ => ""
+		};
+
+		if ( !string.IsNullOrEmpty( damageParticleName ) )
+		{
+			damageParticles = Particles.Create( damageParticleName, this );
+		}
+	}
+
 	protected override void Debug()
 	{
 		base.Debug();

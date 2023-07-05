@@ -14,7 +14,7 @@ namespace TFS2;
 [Category( "Gameplay" )]
 public partial class SentryGun : TFBuilding, IKillfeedIcon
 {
-	public override Ray AimRay => new( Position + GetAimOffset(), AimRotation.Forward);
+	public override Ray AimRay => new( Position + GetAimOffset(), AimRotation.Forward );
 	[Net] public int PrimaryAmmo { get; set; }
 	[Net] public int SecondaryAmmo { get; set; }
 	[Net] public int KillAmount { get; set; }
@@ -58,7 +58,7 @@ public partial class SentryGun : TFBuilding, IKillfeedIcon
 		FindTarget();
 		RotateToTarget();
 
-		if(HasTarget)
+		if ( HasTarget )
 		{
 			TickFire();
 		}
@@ -91,7 +91,7 @@ public partial class SentryGun : TFBuilding, IKillfeedIcon
 
 		int maxPrimary = GetMaxPrimaryAmmo();
 		// If we have metal, try to add primary ammo
-		if( PrimaryAmmo < maxPrimary && metalCount - upgradeMetal > 0)
+		if ( PrimaryAmmo < maxPrimary && metalCount - upgradeMetal > 0 )
 		{
 			int primaryAmmoGain = metalCount / MetalPerPrimaryAmmo; // Maximum possible gain
 			primaryAmmoGain = (int)MathF.Min( primaryAmmoGain, PrimaryAmmoAdded ); // Limit to PrimaryAmmoAdded
@@ -125,12 +125,12 @@ public partial class SentryGun : TFBuilding, IKillfeedIcon
 
 		base.SetLevel( level );
 
-		if(PrimaryAmmo == maxPrimary)
+		if ( PrimaryAmmo == maxPrimary )
 		{
 			PrimaryAmmo = GetMaxPrimaryAmmo();
 		}
-		
-		if(SecondaryAmmo == maxSecondary)
+
+		if ( SecondaryAmmo == maxSecondary )
 		{
 			SecondaryAmmo = GetMaxSecondaryAmmo();
 		}
@@ -156,6 +156,44 @@ public partial class SentryGun : TFBuilding, IKillfeedIcon
 		PrimaryAmmoLine = new( PrimaryAmmo, 0, GetMaxPrimaryAmmo(), "UI/Hud/Buildings/hud_obj_status_ammo_64.png" );
 		SecondaryAmmoLine = new( SecondaryAmmo, 0, GetMaxSecondaryAmmo(), "UI/Hud/Buildings/hud_obj_status_rockets_64.png" );
 	}
+
+	protected Particles damageParticles;
+	protected override void OnDamageLevelChanged( TFBuildingDamageLevel from, TFBuildingDamageLevel to )
+	{
+		const string DAMAGE_LIGHT_FX = "particles/buildingdamage/sentrydamage_1.vpcf";
+		const string DAMAGE_MEDIUM_FX = "particles/buildingdamage/sentrydamage_2.vpcf";
+		const string DAMAGE_HEAVY_FX = "particles/buildingdamage/sentrydamage_3.vpcf";
+		const string DAMAGE_CRITICAL_FX = "particles/buildingdamage/sentrydamage_4.vpcf";
+
+		base.OnDamageLevelChanged( from, to );
+
+		if ( damageParticles != default )
+		{
+			damageParticles.Destroy( true );
+			damageParticles = null;
+		}
+
+		string damageParticleName = to switch
+		{
+			TFBuildingDamageLevel.Light => DAMAGE_LIGHT_FX,
+			TFBuildingDamageLevel.Medium => DAMAGE_MEDIUM_FX,
+			TFBuildingDamageLevel.Heavy => DAMAGE_HEAVY_FX,
+			TFBuildingDamageLevel.Critical => DAMAGE_CRITICAL_FX,
+			_ => ""
+		};
+
+		if(!string.IsNullOrEmpty(damageParticleName))
+		{
+			const string NORMAL_ATTACH_POINT = "build_point_0";
+			const string MAX_LEVEL_ATTACH_POINT = "sentrydamage";
+
+			string attachPoint = NORMAL_ATTACH_POINT;
+			if ( Level == MaxLevel )
+				attachPoint = MAX_LEVEL_ATTACH_POINT;
+
+			damageParticles = Particles.Create( damageParticleName, this, attachPoint );
+		}
+	}
 	public override void TickUI()
 	{
 		base.TickUI();
@@ -178,7 +216,7 @@ public partial class SentryGun : TFBuilding, IKillfeedIcon
 		yield return UpgradeMetalLine;
 	}
 
-	string IKillfeedIcon.GetIcon(bool isCrit, string[] tags)
+	string IKillfeedIcon.GetIcon( bool isCrit, string[] tags )
 	{
 		return $"ui/deathnotice/sentry{Level}.png";
 	}

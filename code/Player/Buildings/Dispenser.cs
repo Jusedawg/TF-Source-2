@@ -71,6 +71,36 @@ public partial class Dispenser : TFBuilding
 		base.InitializeUI( data );
 		StoredMetalLine = new( 0, 0, Trigger.MaxStoredMetal, "UI/Hud/Buildings/hud_obj_status_ammo_64.png" );
 	}
+	protected Particles damageParticles;
+	protected override void OnDamageLevelChanged( TFBuildingDamageLevel from, TFBuildingDamageLevel to )
+	{
+		const string DAMAGE_LIGHT_FX = "particles/buildingdamage/dispenserdamage_1.vpcf";
+		const string DAMAGE_MEDIUM_FX = "particles/buildingdamage/dispenserdamage_2.vpcf";
+		const string DAMAGE_HEAVY_FX = "particles/buildingdamage/dispenserdamage_3.vpcf";
+		const string DAMAGE_CRITICAL_FX = "particles/buildingdamage/dispenserdamage_4.vpcf";
+
+		base.OnDamageLevelChanged( from, to );
+
+		if ( damageParticles != default )
+		{
+			damageParticles.Destroy( true );
+			damageParticles = null;
+		}
+
+		string damageParticleName = to switch
+		{
+			TFBuildingDamageLevel.Light => DAMAGE_LIGHT_FX,
+			TFBuildingDamageLevel.Medium => DAMAGE_MEDIUM_FX,
+			TFBuildingDamageLevel.Heavy => DAMAGE_HEAVY_FX,
+			TFBuildingDamageLevel.Critical => DAMAGE_CRITICAL_FX,
+			_ => ""
+		};
+
+		if ( !string.IsNullOrEmpty( damageParticleName ) )
+		{
+			damageParticles = Particles.Create( damageParticleName, this );
+		}
+	}
 	public override void TickUI()
 	{
 		if (!IsInitialized) return;
