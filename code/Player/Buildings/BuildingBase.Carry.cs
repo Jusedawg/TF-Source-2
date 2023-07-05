@@ -8,6 +8,8 @@ namespace TFS2;
 
 public partial class TFBuilding : IInteractableTargetID
 {
+	const string PICKUP_VO = "vo.engineer.building.pickup";
+	const string DEPLOY_VO = "vo.engineer.building.deploy";
 	public virtual void StartCarrying()
 	{
 		if ( Game.IsClient ) return;
@@ -20,6 +22,7 @@ public partial class TFBuilding : IInteractableTargetID
 		SetLevel( 1 );
 
 		Parent = Owner;
+		Owner.PlayResponse( PICKUP_VO );
 	}
 
 	public virtual void StopCarrying( Transform deployTransform )
@@ -32,6 +35,7 @@ public partial class TFBuilding : IInteractableTargetID
 		Parent = null;
 
 		Transform = deployTransform;
+		Owner.PlayResponse( DEPLOY_VO );
 	}
 
 	public virtual bool CanCarry(TFPlayer ply)
