@@ -41,9 +41,28 @@ RoundStatusDisplay {
                     height: 100%;
                     background-size: cover;
                     background-position: center center;
+                    flex-direction: row;
 
                     &.us {
                         background-color: #fff6;
+                    }
+
+                    &.dead {
+                        background-image-tint: #666;
+                    }
+
+                    .respawntimer {
+                        display: none;
+                        align-self: center;
+                        text-align: center;
+                        font-family: TF2_Secondary;
+                        color: $tan-light;
+                        width: 100%;
+                        font-size: 24px;
+
+                        &.visible {
+                            display:flex;
+                        }
                     }
                 }
             }
@@ -86,14 +105,14 @@ RoundStatusDisplay {
                     width: 100%;
                     text-align: center;
                     transition: color .4s ease;
-                    display:none;
+                    display: none;
 
                     &.active {
                         color: $tan-light;
                     }
 
                     &.visible {
-                        display:flex;
+                        display: flex;
                     }
                 }
             }
