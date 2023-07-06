@@ -8,6 +8,9 @@ namespace TFS2;
 /// </summary>
 public abstract partial class TFWeaponBase : SDKWeapon, IUse, IFalloffProvider
 {
+	[ConVar.Server] public static float tf_dropped_weapon_lifetime { get; set; } = 30;
+	[ConVar.Replicated] public static bool tf_use_fixed_weaponspreads { get; set; } = false;
+
 	[Net] public WeaponData Data { get; set; }
 	bool IFalloffProvider.UseFalloff => Data.UseFalloff;
 
@@ -92,8 +95,6 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse, IFalloffProvider
 	{
 		PlaySound( IsCurrentAttackCritical ? Data.SoundCrit : Data.SoundSingle );
 	}
-
-	[ConVar.Server] public static float tf_dropped_weapon_lifetime { get; set; } = 30;
 
 	public float? DroppedAutoDestroyTime { get; set; }
 
@@ -196,6 +197,14 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse, IFalloffProvider
 		}
 
 		return base.ShouldAutoReload();
+	}
+
+	public override Vector3 GetAttackDirectionWithSpread( float spread )
+	{
+		if ( tf_use_fixed_weaponspreads )
+			return base.GetAttackDirectionWithSpread( Vector3.One * spread );
+
+		return base.GetAttackDirectionWithSpread( spread );
 	}
 
 	#region ViewModel

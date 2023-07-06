@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sandbox;
+using TFS2;
 
 namespace Amper.FPS;
 
@@ -104,11 +105,30 @@ partial class SDKWeapon
 		tr.EndPosition = endPos;
 	}
 
+	protected virtual Vector2[] SpreadGrowPattern => new Vector2[9]
+	{
+		new(0,0),
+		new(-1, 0),
+		new(0, 1),
+		new(1, 0),
+		new(0, -1),
+		new(-1, 1),
+		new(1, 1),
+		new(1, -1),
+		new(-1, -1)
+	};
+	protected virtual Vector2 GetOffsetVector(int seedOffset)
+	{
+		return SpreadGrowPattern[seedOffset % SpreadGrowPattern.Length];
+	}
 	public virtual TraceResult TraceFireBullet( int seedOffset = 0 )
 	{
 		Game.SetRandomSeed( Time.Tick + seedOffset );
 
-		var spread = Vector3.Random.WithZ( 0 ) * GetSpread();
+		Vector2 baseVector = GetOffsetVector(seedOffset);
+		if ( !TFWeaponBase.tf_use_fixed_weaponspreads )
+			baseVector *= Vector2.Random;
+		var spread = baseVector * GetSpread();
 
 		Vector3 origin = GetAttackOrigin();
 		Vector3 direction = GetAttackDirectionWithSpread( spread );
