@@ -13,10 +13,10 @@ public class MenuOverlay : Panel
 
 	public static bool IsActive => CurrentMenu != null;
 
-	public static MenuOverlay Open<T>() where T : MenuOverlay, new()
+	public static T Open<T>() where T : MenuOverlay, new()
 	{
 		var overlay = new T();
-		return Open( overlay );
+		return Open( overlay ) as T;
 	}
 
 	public static MenuOverlay Open( MenuOverlay overlay )

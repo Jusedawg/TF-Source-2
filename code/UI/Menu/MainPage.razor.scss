@@ -60,7 +60,6 @@ MainPage {
             overflow: hidden;
             flex-direction: column;
             width: 75%;
-            background: url(/ui/menu/post_bg.png);
             background-size: cover;
             background-position: center center;
             backdrop-filter: blur(50px);
@@ -119,10 +118,11 @@ MainPage {
                 }
 
                 .text {
-                    color: #a08f82;
+                    color: #c0afa2;
                     font-family: TF2_Secondary;
-                    font-size: 20px;
-                    margin-bottom: 15px;
+                    font-size: 17px;
+                    margin-bottom: 5px;
+                    flex-grow: 1;
                 }
 
                 .button-dark {

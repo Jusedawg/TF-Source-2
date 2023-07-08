@@ -9,18 +9,6 @@
 @inherits Panel
 
 <root>
-    <!--
-    <div class="disclaimer">
-        <div class="dev_container">
-            <div class="dev_text">
-                <text>#GameMenu.DevNotice</text>
-            </div>
-            <div class="dev_logo" />
-        </div>
-       <div class="build"><text class="build_number">(Alpha) 0.1.5</text></div> 
-    </div>
-    -->
-
     <div class="container">
         <image class="logotype" />
         <div class="menublock">
@@ -59,7 +47,7 @@
             </div>
         </div>
 
-        <div class="news">
+        <div class="news" style="background: url(@GetBlogThumbnail());">
             <div class="header">
                 <div>
                     <div class="date">
@@ -67,11 +55,11 @@
 						<text class="date_label">Sunday, Nov 20th, 2022</text>
                     </div>
                 </div>
-				<text class="title">Opening the Source</text>
+				<text class="title">@GetBlogTitle()</text>
             </div>
 
 			<div class="content">
-				<text class="text">An update about the state of the project, what has happened over the past few months, what we have planned for the future and what you should expect.</text>
+				<text class="text">@GetBlogDescription()</text>
 				<button class="button-dark" @onclick=@OnClickBlog>
 					#GameMenu.Blog.ReadMore
 					<text class="link">open_in_new</text>
