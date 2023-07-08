@@ -26,7 +26,7 @@ partial class ControlPointDisplay : Panel
 
 	public void AddPoint( ControlPoint point )
 	{
-		int row = UIConfig.Current.GetControlPointRow( point );
+		int row = UIConfig.Exists ? UIConfig.Current.GetControlPointRow( point ) : 0;
 		while(PointRows.Count < row + 1 ) // Add enough panels to fit this control point
 		{
 			PointRows.Add( Add.Panel( "row" ) );

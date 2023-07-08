@@ -15,6 +15,7 @@ namespace TFS2.UI;
 [Icon( "architecture" )]
 public partial class UIConfig : Entity
 {
+	public static bool Exists => Current != null;
 	public static UIConfig Current { get; set; }
 	/// <summary>
 	/// The order of control point in the UI
