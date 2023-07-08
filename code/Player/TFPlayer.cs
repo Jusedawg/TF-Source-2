@@ -2,7 +2,6 @@
 using System;
 using System.Linq;
 using Amper.FPS;
-using System.Numerics;
 
 namespace TFS2;
 
@@ -306,6 +305,7 @@ public partial class TFPlayer : SDKPlayer
 		if ( info.Attacker is TFPlayer atk && atk != this )
 		{
 			atk.Kills++;
+
 			// Gives defense points to the player which killed us if this player was
 			// the last man standing on a control point or had the intel
 			if ( PickedItem is Flag )
@@ -315,6 +315,11 @@ public partial class TFPlayer : SDKPlayer
 		}
 
 		Deaths++;
+	}
+
+	public bool AllowTracking()
+	{
+		return Client != default && !Client.IsBot;
 	}
 
 	public override void Simulate( IClient cl )

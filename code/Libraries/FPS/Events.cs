@@ -8,7 +8,11 @@ namespace Amper.FPS;
 
 [EventDispatcherEvent] public class RoundRestartEvent : DispatchableEventBase { }
 [EventDispatcherEvent] public class RoundActiveEvent : DispatchableEventBase { }
-[EventDispatcherEvent] public class RoundEndEvent : DispatchableEventBase { }
+[EventDispatcherEvent] public class RoundEndEvent : DispatchableEventBase 
+{
+	public int WinningTeam { get; set; }
+	public int WinReason { get; set; }
+}
 
 //
 // Game

@@ -116,7 +116,7 @@ partial class SDKGame
 
 	public virtual void StartedRoundEnd()
 	{
-		EventDispatcher.InvokeEvent<RoundEndEvent>();
+		EventDispatcher.InvokeEvent( new RoundEndEvent() { WinningTeam = Winner, WinReason = WinReason } );
 	}
 
 	public virtual void EndedRoundEnd() { }

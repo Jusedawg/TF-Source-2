@@ -72,16 +72,6 @@ public class BuildingDeathEvent : DispatchableEventBase
 
 #endregion
 
-#region Game
-
-[EventDispatcherEvent]
-public class GameResetEvent : DispatchableEventBase { }
-
-[EventDispatcherEvent]
-public class GameOverEvent : DispatchableEventBase { }
-
-#endregion
-
 #region Control Points
 
 [EventDispatcherEvent]

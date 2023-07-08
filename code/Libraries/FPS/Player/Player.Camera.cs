@@ -53,7 +53,7 @@ partial class SDKPlayer
 			var tpPos = Position - Rotation.Forward * cl_thirdperson_distance;
 			var tr = Trace.Ray( Position, tpPos )
 				.Size( 5 )
-				.WorldOnly()
+				.StaticOnly()
 				.Run();
 
 			Camera.Position = tr.EndPosition;
