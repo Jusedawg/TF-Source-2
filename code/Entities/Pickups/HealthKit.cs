@@ -15,9 +15,9 @@ public abstract class HealthKit : PickupItem
 			return;
 
 		var health = player.GiveHealth( MathF.Ceiling( player.GetMaxHealth() * HealthMultiplier ) );
-		EventDispatcher.InvokeEvent( To.Single(player), new PlayerHealthKitPickUpEvent { Health = health } );
+		EventDispatcher.InvokeEvent( To.Single( player ), new PlayerHealthKitPickUpEvent { Health = health } );
 
-		Sound.FromEntity( "Player.PickupHealth", this );
+		Sound.FromEntity( To.Single( player ), "Player.PickupHealth", player );
 
 		player.RemoveCondition( TFCondition.Burning );
 
