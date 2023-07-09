@@ -10,7 +10,7 @@ namespace TFS2;
 [Icon( "tour" )]
 [Model(Model = "models/flag/briefcase.vmdl" ), RenderFields]
 [HammerEntity]
-public partial class Flag : Item, ITeam, IResettable, IRoundTimerBlocker
+public partial class Flag : CarriableEntity, ITeam, IResettable, IRoundTimerBlocker
 {
 	[Property] public HammerTFTeamOption DefaultTeam { get; set; }
 	[Property] public bool StartsDisabled { get; set; }
@@ -42,13 +42,6 @@ public partial class Flag : Item, ITeam, IResettable, IRoundTimerBlocker
 	public override void Spawn()
 	{
 		base.Spawn();
-
-		/*
-		GlowActive = true;
-		GlowColor = Team.GetColor().ToColor();
-		GlowDistanceEnd = 4096;
-		GlowState = GlowStates.On;
-		*/
 
 		// Always transmit so that players always know where it is.
 		Transmit = TransmitType.Always;

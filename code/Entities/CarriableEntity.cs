@@ -3,7 +3,7 @@ using Amper.FPS;
 
 namespace TFS2;
 
-public abstract partial class Item : AnimatedEntity
+public abstract partial class CarriableEntity : AnimatedEntity
 {
 	/// <summary>
 	/// How far the flag should be above ground when dropped
@@ -25,6 +25,7 @@ public abstract partial class Item : AnimatedEntity
 	{
 		UsePhysicsCollision = true;
 		Tags.Add( CollisionTags.Interactable );
+		Tags.Add( CollisionTags.NotSolid );
 
 		EnableTouch = true;
 		EnableHideInFirstPerson = true;

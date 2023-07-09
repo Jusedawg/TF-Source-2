@@ -4,7 +4,7 @@ namespace TFS2
 {
 	partial class TFPlayer
 	{
-		[Net] public Item PickedItem { get; set; }
+		[Net] public CarriableEntity PickedItem { get; set; }
 		public bool HasPickedItem => PickedItem != null;
 
 		public virtual bool WishDrop()
@@ -28,7 +28,7 @@ namespace TFS2
 		/// </summary>
 		/// <param name="item"></param>
 		/// <returns></returns>
-		public virtual bool CanPickup( Item item )
+		public virtual bool CanPickup( CarriableEntity item )
 		{
 			return IsAlive && PickedItem == null;
 		}
