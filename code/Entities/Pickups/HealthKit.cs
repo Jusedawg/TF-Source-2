@@ -1,7 +1,7 @@
 ﻿using Sandbox;
 using Editor;
 using System;
-using System.ComponentModel;
+using Amper.FPS;
 
 namespace TFS2;
 
@@ -14,9 +14,12 @@ public abstract class HealthKit : PickupItem
 		if ( player.Health >= player.GetMaxHealth() ) // We dont need to give health to people who are already at max
 			return;
 
-		player.GiveHealth( MathF.Ceiling( player.GetMaxHealth() * HealthMultiplier ) );
-		base.OnPicked( player );
+		var health = player.GiveHealth( MathF.Ceiling( player.GetMaxHealth() * HealthMultiplier ) );
+		EventDispatcher.InvokeEvent( To.Single(player), new PlayerHealthKitPickUpEvent { Health = health } );
+
 		Sound.FromEntity( "Player.PickupHealth", this );
+
+		base.OnPicked( player );
 	}
 
 	protected override void RespawnPickup()
