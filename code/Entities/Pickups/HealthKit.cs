@@ -19,6 +19,8 @@ public abstract class HealthKit : PickupItem
 
 		Sound.FromEntity( "Player.PickupHealth", this );
 
+		player.RemoveCondition( TFCondition.Burning );
+
 		base.OnPicked( player );
 	}
 
