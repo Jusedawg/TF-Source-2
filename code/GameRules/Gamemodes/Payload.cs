@@ -7,6 +7,7 @@ namespace TFS2
 	{
 		public override string Title => "Payload";
 		public override GamemodeProperties Properties => new() { IsAttackDefense = true};
+		public override int Priority => 1;
 		public override bool IsActive() => Entity.All.OfType<Cart>().Any();
         public override bool ShouldSwapTeams(TFTeam winner, TFWinReason winReason)
         {

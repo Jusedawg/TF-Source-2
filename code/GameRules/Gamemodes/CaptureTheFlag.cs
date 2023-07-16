@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace TFS2
 {
-	public partial class CaptureTheFlag : GamemodeNetworkable
+	public partial class CaptureTheFlag : UniversalGamemode
 	{
 		public override string Title => "Capture The Flag";
 

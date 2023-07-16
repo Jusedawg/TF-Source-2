@@ -53,7 +53,7 @@ partial class ControlPointDisplay : Panel
 		ReorderEntries();
 	}
 
-	public bool ShouldDraw() => TFGameRules.Current.IsPlaying<ControlPoints>();
+	public bool ShouldDraw() => ControlPoint.All.Any() && !Cart.All.Any();
 
 	public void ReorderEntries()
 	{

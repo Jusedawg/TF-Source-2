@@ -60,8 +60,6 @@ public partial class Scoreboard : Panel
 		if ( !IsVisible )
 			return;
 
-
-
 		Lists[TFTeam.Blue] = BluePlayerList;
 		Lists[TFTeam.Red] = RedPlayerList;
 
@@ -70,7 +68,7 @@ public partial class Scoreboard : Panel
 			if ( !Players.ContainsKey( team ) )
 				Players[team] = new();
 
-			var teamClients = Sandbox.Game.Clients.Where( x => x.GetTeam() == team );
+			var teamClients = Game.Clients.Where( x => x.GetTeam() == team );
 
 			foreach ( var client in teamClients.Except( Players[team].Keys ) )
 				AddClient( client, team );

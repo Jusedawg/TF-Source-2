@@ -14,7 +14,7 @@ namespace TFS2;
 [EditorSprite( "materials/editor/tf_logic_tdm.vmat" )]
 [HammerEntity]
 
-public partial class TeamDeathmatch : GamemodeEntity
+public partial class TeamDeathmatch : MapGamemode
 {
 	public override string Title => "Team Deathmatch";
 

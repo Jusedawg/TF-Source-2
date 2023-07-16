@@ -13,7 +13,7 @@ namespace TFS2;
 [EditorSprite( "materials/editor/tf_logic_arena.vmat" )]
 [HammerEntity]
 
-public partial class Arena : GamemodeEntity
+public partial class Arena : MapGamemode
 {
 	public override string Title => "Arena";
 

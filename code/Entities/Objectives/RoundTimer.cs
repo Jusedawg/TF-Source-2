@@ -174,8 +174,10 @@ public partial class RoundTimer : Entity
 	public void AddTime( float time )
 	{
 		var addedTime = SetTime( AbsoluteTime + time );
-		Log.Info( $"AddTime {addedTime}" );
 		OnTimeAdded?.Invoke( addedTime );
+
+		if(PlayAnnouncerVoicelines)
+			PlayAnnouncerTimeAddedVoiceline();
 	}
 
 	public float GetRemainingTime()
@@ -259,12 +261,12 @@ public partial class RoundTimer : Entity
 				}
 
 				lastSecond = second;
-			}
 
-			if ( PlayAnnouncerVoicelines )
-			{
-				int secondsRemaining = GetRemainingTime().FloorToInt();
-				PlayAnnouncerTimeVoiceLine( secondsRemaining );
+				if ( PlayAnnouncerVoicelines )
+				{
+					int secondsRemaining = GetRemainingTime().FloorToInt();
+					PlayAnnouncerTimeVoiceLine( secondsRemaining );
+				}
 			}
 
 			if ( timeLeft == 0 )
@@ -282,15 +284,16 @@ public partial class RoundTimer : Entity
 		}
 	}
 
-	const string OVERTIME_SOUND = "announcer.overtime";
 	public void StartOvertime()
 	{
+		const string OVERTIME_SOUND = "announcer.overtime";
+
 		// Dont call Pause() to avoid firing OnPaused output
 		InOvertime = true;
 		AbsoluteTime = GetRemainingTime();
 		Paused = true;
 
-		TFGameRules.PlaySoundToAll( OVERTIME_SOUND, SoundBroadcastChannel.Announcer );
+		SDKGame.PlaySoundToAll( OVERTIME_SOUND, SoundBroadcastChannel.Announcer );
 	}
 	public void StopOvertime()
 	{
@@ -337,6 +340,24 @@ public partial class RoundTimer : Entity
 		SDKGame.PlaySoundToAll( sound, SoundBroadcastChannel.Announcer );
 	}
 
+	public virtual void PlayAnnouncerTimeAddedVoiceline()
+	{
+		const string TIME_ADDED_NEUTRAL = "announcer.time.added";
+		const string TIME_ADDED_ATTACKER = "announcer.time.added.friendly";
+		const string TIME_ADDED_DEFENDER = "announcer.time.added.enemy";
+
+		var gamemode = TFGameRules.Current.GetGamemode();
+
+		if(gamemode.Properties.IsAttackDefense)
+		{
+			TFGameRules.PlaySoundToTeam( TFTeam.Blue, TIME_ADDED_ATTACKER, SoundBroadcastChannel.Announcer );
+			TFGameRules.PlaySoundToTeam( TFTeam.Red, TIME_ADDED_DEFENDER, SoundBroadcastChannel.Announcer );
+		}
+		else
+		{
+			SDKGame.PlaySoundToAll( TIME_ADDED_NEUTRAL, SoundBroadcastChannel.Announcer );
+		}
+	}
 	public virtual void OnRoundStart( RoundActiveEvent args )
 	{
 		if(HasSetup)

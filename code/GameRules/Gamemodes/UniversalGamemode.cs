@@ -2,12 +2,13 @@
 
 namespace TFS2
 {
-	public abstract class GamemodeNetworkable : BaseNetworkable, IGamemode
+	public abstract class UniversalGamemode : BaseNetworkable, IGamemode
 	{
 		public virtual string Title => ToString();
 		public virtual string Icon => IGamemode.DEFAULT_ICON;
 
 		public virtual GamemodeProperties Properties => default;
+		public virtual int Priority => 0;
 
 		public abstract bool HasWon(out TFTeam team, out TFWinReason reason);
 

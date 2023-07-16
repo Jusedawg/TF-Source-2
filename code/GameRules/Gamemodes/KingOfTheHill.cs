@@ -14,7 +14,7 @@ namespace TFS2;
 [EditorSprite( "materials/editor/tf_logic_koth.vmat" )]
 [HammerEntity]
 
-public partial class KingOfTheHill : GamemodeEntity
+public partial class KingOfTheHill : MapGamemode
 {
 	public override string Title => "King of the Hill";
 	public override string Icon => "ui/hud/scoreboard/icon_mode_koth.png";

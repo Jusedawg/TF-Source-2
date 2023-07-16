@@ -4,7 +4,7 @@ using Sandbox;
 
 namespace TFS2
 {
-	public class ControlPoints : GamemodeNetworkable
+	public class ControlPoints : UniversalGamemode
 	{
 		public override string Title => "Control Points";
 
@@ -31,7 +31,7 @@ namespace TFS2
 			return false;
 		}
 
-		public override bool IsActive() => Entity.All.OfType<ControlPoint>().Any() && !Entity.All.OfType<Cart>().Any();
+		public override bool IsActive() => Entity.All.OfType<ControlPoint>().Any();
 
 		public static bool TeamOwnsAllControlPoints( TFTeam team )
 		{

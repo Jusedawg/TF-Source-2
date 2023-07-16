@@ -42,5 +42,5 @@ public partial class PayloadDisplay : Panel
 		}
 	}
 
-	public bool ShouldDraw() => TFGameRules.Current.IsPlaying<Payload>();
+	public bool ShouldDraw() => Cart.All.Any();
 }

@@ -516,6 +516,19 @@
       ]
     },
     "ReplaceTags": "tf2 pvp remake shooter",
-    "HttpAllowList": null
+    "HttpAllowList": null,
+    "TickRate": 50,
+    "LaunchConfigs": [
+      {
+        "Name": "Itemtest Bots",
+        "GameIdent": "amper.tfs2#local",
+        "MapName": "amper.itemtest",
+        "MaxPlayers": 8,
+        "GameSettings": {},
+        "Addons": "",
+        "PreLaunchCommand": "sv_password stfu",
+        "PostLaunchCommand": ""
+      }
+    ]
   }
 }

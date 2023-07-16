@@ -20,8 +20,8 @@ partial class TFGameRules
 
 		return default;
 	}
-	[Net] private GamemodeEntity EntityGamemode { get; set; }
-	[Net] private GamemodeNetworkable ClassGamemode { get; set; }
+	[Net] private MapGamemode EntityGamemode { get; set; }
+	[Net] private UniversalGamemode ClassGamemode { get; set; }
 
 	public bool HasGamemode() => GetGamemode() != default;
 	public bool IsPlaying<T>() where T : IGamemode => GetGamemode()?.GetType() == typeof(T); // Instead of is T to avoid subclasses triggering this, might want to reconsider this later
@@ -95,7 +95,7 @@ partial class TFGameRules
 	public virtual void FindGamemode()
 	{
 		// Check entities first
-		foreach ( var mode in Entity.All.OfType<GamemodeEntity>() )
+		foreach ( var mode in Entity.All.OfType<MapGamemode>().OrderByDescending(e => e.Priority) )
 		{
 			if ( mode.IsActive() )
 			{
@@ -105,14 +105,14 @@ partial class TFGameRules
 		}
 
 		// Check non-entity gamemodes after
-		var gamemodes = TypeLibrary.GetTypes<GamemodeNetworkable>().Where(g => !g.IsAbstract);
+		var gamemodes = TypeLibrary.GetTypes<UniversalGamemode>().Where(g => !g.IsAbstract);
 
 		// Skip gamemodes which require entities to spawn
-		foreach ( var mode in gamemodes.Select( g => TypeLibrary.Create<IGamemode>( g.TargetType ) ) )
+		foreach ( var mode in gamemodes.Select( g => TypeLibrary.Create<UniversalGamemode>( g.TargetType ) ).OrderByDescending( n => n.Priority) )
 		{
 			if ( mode.IsActive() )
 			{
-				ClassGamemode = (GamemodeNetworkable)mode;
+				ClassGamemode = mode;
 				return;
 			}
 		}
