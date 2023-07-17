@@ -1,6 +1,5 @@
 ﻿using Sandbox;
 using Amper.FPS;
-using System.Collections.Generic;
 
 namespace TFS2;
 
@@ -58,6 +57,12 @@ public class PlayerChangeTeamEvent : DispatchableEventBase
 public class PlayerRegenerateEvent : DispatchableEventBase
 {
 	public IClient Client { get; set; }
+}
+
+[EventDispatcherEvent]
+public class PlayerHealthKitPickUpEvent : DispatchableEventBase
+{
+	public float Health { get; set; }
 }
 
 [EventDispatcherEvent]

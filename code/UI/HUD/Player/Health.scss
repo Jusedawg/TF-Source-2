@@ -47,4 +47,32 @@ Health {
         bottom: 1.8%;
         left: 8%;
     }
+
+    .health_update {
+        position: absolute;
+        width: 100%;
+        font-family: TF2_Secondary;
+        font-size: 50px;
+        color: $green;
+        top: -60%;
+        left: 85%;
+        z-index: 1;
+        display: flex;
+        animation-name: health-update;
+    }
+}
+
+@keyframes health-update {
+    0% {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-100%);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-200%);
+    }
 }

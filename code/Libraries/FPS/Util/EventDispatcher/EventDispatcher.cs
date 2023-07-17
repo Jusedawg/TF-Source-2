@@ -210,9 +210,19 @@ public partial class EventDispatcher
 	/// <param name="args">The event object to send</param>
 	public static void InvokeEvent( DispatchableEventBase args )
 	{
+		InvokeEvent( To.Everyone, args );
+	}
+
+	/// <summary>
+	/// Invoke this dispatchable event with the provided data for the specified clients.
+	/// </summary>
+	/// <param name="target">Event receivers</param>
+	/// <param name="args">The event object to send</param>
+	public static void InvokeEvent( To target, DispatchableEventBase args )
+	{
 		Type type = args.GetType();
 		var eventAttribute = TypeLibrary.GetAttribute<EventDispatcherEventAttribute>( type );
-		InvokeEvent( args, eventAttribute.dispatchTypes );
+		InvokeEvent( target, args, eventAttribute.dispatchTypes );
 	}
 
 	public static void InvokeEvent<T>() where T : DispatchableEventBase, new()
@@ -221,11 +231,12 @@ public partial class EventDispatcher
 	}
 
 	/// <summary>
-	/// Invoke this dispatchable event with the provided data, using the provided dispatch types.
+	/// Invoke this dispatchable event with the provided data for the specified clients, using the provided dispatch types.
 	/// </summary>
+	/// <param name="target">Event receivers</param>
 	/// <param name="args">The event object to send</param>
 	/// <param name="dispatchTypes">Dispatch types for this invokation</param>
-	public static void InvokeEvent( DispatchableEventBase args, DispatchType dispatchTypes )
+	public static void InvokeEvent( To target, DispatchableEventBase args, DispatchType dispatchTypes )
 	{
 		Type type = args.GetType();
 		string name = type.Name;
@@ -241,7 +252,7 @@ public partial class EventDispatcher
 			else
 			{
 				string data = JsonSerializer.Serialize( args, type, serializerOptions );
-				RecieveEvent( name, data);
+				RecieveEvent( target, name, data);
 			}
 		}
 

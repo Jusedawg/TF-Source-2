@@ -17,7 +17,7 @@ public abstract class AmmoPack : PickupItem, IAcceptsExtendedDamageInfo
 		if ( !player.GiveAmmo( AmmoMultiplier ) ) 
 			return;
 
-		Sound.FromEntity( "player.pickupammo", this );
+		Sound.FromEntity( To.Single( player ), "player.pickupammo", player );
 		base.OnPicked( player );
 	}
 
