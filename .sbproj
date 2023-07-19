@@ -1,0 +1,521 @@
+{
+  "Title": "Team Fortress: Source 2",
+  "Type": "game",
+  "Org": "amper",
+  "Ident": "tfs2",
+  "Tags": "tf2 pvp remake shooter",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "Resources": "ui/*\nfonts/*\ndata/*\n.localization/*",
+  "MenuResources": "/ui/Menu/*\n/ui/styles/*\n/sounds/UI/*\n/sounds/Music/game_menu/*\n/data/playerclass/*\n/data/weapons/*\n/fonts/*",
+  "HasCode": true,
+  "CodePath": "code",
+  "PackageReferences": [
+    "amper.breaker_lib"
+  ],
+  "EditorReferences": null,
+  "Metadata": {
+    "MapList": [],
+    "MinPlayers": 1,
+    "MaxPlayers": 24,
+    "MapSelect": "Tagged",
+    "PerMapRanking": false,
+    "LeaderboardType": "None",
+    "RankType": "None",
+    "GameNetworkType": "Multiplayer",
+    "Collision": {
+      "Defaults": {
+        "solid": "Collide",
+        "trigger": "Trigger",
+        "ladder": "Ignore",
+        "water": "Trigger",
+        "player": "Unset",
+        "weapon": "Unset",
+        "projectile": "Unset",
+        "debris": "Unset",
+        "interactable": "Unset",
+        "playerclip": "Unset",
+        "sky": "Unset"
+      },
+      "Pairs": [
+        {
+          "a": "solid",
+          "b": "solid",
+          "r": "Collide"
+        },
+        {
+          "a": "trigger",
+          "b": "playerclip",
+          "r": "Ignore"
+        },
+        {
+          "a": "solid",
+          "b": "trigger",
+          "r": "Trigger"
+        },
+        {
+          "a": "playerclip",
+          "b": "solid",
+          "r": "Collide"
+        },
+        {
+          "a": "trigger",
+          "b": "player",
+          "r": "Trigger"
+        },
+        {
+          "a": "ladder",
+          "b": "player"
+        },
+        {
+          "a": "player",
+          "b": "player"
+        },
+        {
+          "a": "solid",
+          "b": "player"
+        },
+        {
+          "a": "debris",
+          "b": "interactable",
+          "r": "Ignore"
+        },
+        {
+          "a": "player",
+          "b": "weapon",
+          "r": "Ignore"
+        },
+        {
+          "a": "player",
+          "b": "projectile",
+          "r": "Ignore"
+        },
+        {
+          "a": "debris",
+          "b": "debris",
+          "r": "Collide"
+        },
+        {
+          "a": "player",
+          "b": "interactable",
+          "r": "Trigger"
+        },
+        {
+          "a": "trigger",
+          "b": "trigger"
+        },
+        {
+          "a": "solid",
+          "b": "interactable",
+          "r": "Collide"
+        },
+        {
+          "a": "solid",
+          "b": "debris",
+          "r": "Collide"
+        },
+        {
+          "a": "trigger",
+          "b": "interactable",
+          "r": "Ignore"
+        },
+        {
+          "a": "trigger",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "ladder",
+          "b": "interactable",
+          "r": "Collide"
+        },
+        {
+          "a": "ladder",
+          "b": "debris",
+          "r": "Collide"
+        },
+        {
+          "a": "water",
+          "b": "debris",
+          "r": "Collide"
+        },
+        {
+          "a": "water",
+          "b": "interactable",
+          "r": "Collide"
+        },
+        {
+          "a": "player",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "weapon",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "projectile",
+          "b": "debris",
+          "r": "Ignore"
+        },
+        {
+          "a": "interactable",
+          "b": "interactable",
+          "r": "Ignore"
+        },
+        {
+          "a": "projectile",
+          "b": "interactable",
+          "r": "Ignore"
+        },
+        {
+          "a": "weapon",
+          "b": "interactable",
+          "r": "Ignore"
+        },
+        {
+          "a": "projectile",
+          "b": "projectile",
+          "r": "Ignore"
+        },
+        {
+          "a": "weapon",
+          "b": "weapon"
+        },
+        {
+          "a": "trigger",
+          "b": "projectile"
+        },
+        {
+          "a": "projectile",
+          "b": "playerclip",
+          "r": "Ignore"
+        },
+        {
+          "a": "ladder",
+          "b": "playerclip",
+          "r": "Collide"
+        },
+        {
+          "a": "water",
+          "b": "playerclip",
+          "r": "Collide"
+        },
+        {
+          "a": "player",
+          "b": "playerclip"
+        },
+        {
+          "a": "projectile",
+          "b": "sky",
+          "r": "Ignore"
+        },
+        {
+          "a": "trigger",
+          "b": "sky",
+          "r": "Ignore"
+        },
+        {
+          "a": "solid",
+          "b": "sky",
+          "r": "Collide"
+        },
+        {
+          "a": "ladder",
+          "b": "sky",
+          "r": "Collide"
+        },
+        {
+          "a": "water",
+          "b": "sky",
+          "r": "Collide"
+        }
+      ]
+    },
+    "Compiler": {
+      "RootNamespace": "TFS2",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;"
+    },
+    "GameCategory": "Shooter",
+    "GameSettings": {},
+    "ControlModes": {
+      "Keyboard": true
+    },
+    "ParentPackage": "",
+    "PackageSettings": [
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "mp_disable_respawn_times",
+        "DisplayName": "Disable Respawn Times",
+        "DefaultValue": "false",
+        "Description": "Disables respawn wave times. Only recommended for very casual games or testing.",
+        "Group": "Gameplay"
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "tf_print_responses",
+        "DisplayName": "Enable Chat Responses",
+        "DefaultValue": "true",
+        "Description": "",
+        "Group": ""
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "tf_avoidteammates_pushaway",
+        "DisplayName": "Avoid Teammates Pushaway",
+        "DefaultValue": "false",
+        "Description": "",
+        "Group": "Gameplay"
+      },
+      {
+        "DisplayType": "Boolean",
+        "Choices": [],
+        "ConVarName": "tf_collide_with_teammates",
+        "DisplayName": "Collide With Teammates",
+        "DefaultValue": "false",
+        "Description": "",
+        "Group": "Gameplay"
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "tf_flag_caps_per_round",
+        "DisplayName": "Flag Captures Per Round",
+        "DefaultValue": "3",
+        "Description": "",
+        "Group": "Capture The Flag",
+        "Minimum": 1,
+        "Maximum": 10
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "tf_tdm_frag_limit_min",
+        "DisplayName": "Min Frag Limit",
+        "DefaultValue": "15",
+        "Description": "",
+        "Group": "Team Deathmatch",
+        "Maximum": 50
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "tf_tdm_frag_limit_max",
+        "DisplayName": "Max Frag Limit",
+        "DefaultValue": "75",
+        "Description": "",
+        "Group": "Team Deathmatch",
+        "Maximum": 100
+      }
+    ],
+    "DefaultLeaderboards": null,
+    "Summary": "Welcome to Team Fortress: Source 2\nBugs are to be expected and essential features may be missing",
+    "Description": "",
+    "Public": true,
+    "CsProjName": "",
+    "InputSettings": {
+      "Actions": [
+        {
+          "Name": "Forward",
+          "KeyboardCode": "W",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Backward",
+          "KeyboardCode": "S",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Left",
+          "KeyboardCode": "A",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Right",
+          "KeyboardCode": "D",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Jump",
+          "KeyboardCode": "space",
+          "GamepadCode": "A",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Run",
+          "KeyboardCode": "shift",
+          "GamepadCode": "LeftJoystickButton",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Walk",
+          "KeyboardCode": "alt",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Duck",
+          "KeyboardCode": "ctrl",
+          "GamepadCode": "B",
+          "GroupName": "Movement"
+        },
+        {
+          "Name": "Attack1",
+          "KeyboardCode": "mouse1",
+          "GamepadCode": "RightTrigger",
+          "GroupName": "Combat"
+        },
+        {
+          "Name": "Attack2",
+          "KeyboardCode": "mouse2",
+          "GamepadCode": "LeftTrigger",
+          "GroupName": "Combat"
+        },
+        {
+          "Name": "Reload",
+          "KeyboardCode": "r",
+          "GamepadCode": "X",
+          "GroupName": "Combat"
+        },
+        {
+          "Name": "Slot1",
+          "KeyboardCode": "1",
+          "GamepadCode": "DpadWest",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot2",
+          "KeyboardCode": "2",
+          "GamepadCode": "DpadEast",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot3",
+          "KeyboardCode": "3",
+          "GamepadCode": "DpadSouth",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot4",
+          "KeyboardCode": "4",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot5",
+          "KeyboardCode": "5",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot6",
+          "KeyboardCode": "6",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot7",
+          "KeyboardCode": "7",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot8",
+          "KeyboardCode": "8",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot9",
+          "KeyboardCode": "9",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Slot10",
+          "KeyboardCode": "0",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Inspect",
+          "KeyboardCode": "f",
+          "GamepadCode": "DpadNorth",
+          "GroupName": "Inventory"
+        },
+        {
+          "Name": "Score",
+          "KeyboardCode": "tab",
+          "GamepadCode": "SwitchLeftMenu",
+          "GroupName": "Info"
+        },
+        {
+          "Name": "Menu",
+          "KeyboardCode": "Q",
+          "GamepadCode": "SwitchRightMenu",
+          "GroupName": "Info"
+        },
+        {
+          "Name": "Team",
+          "KeyboardCode": ".",
+          "GroupName": "Character"
+        },
+        {
+          "Name": "Class",
+          "KeyboardCode": ",",
+          "GroupName": "Character"
+        },
+        {
+          "Name": "Voice",
+          "KeyboardCode": "V",
+          "GroupName": "Communication"
+        },
+        {
+          "Name": "Chat",
+          "KeyboardCode": "enter",
+          "GroupName": "Communication"
+        },
+        {
+          "Name": "CallMedic",
+          "KeyboardCode": "e",
+          "GroupName": "Communication"
+        },
+        {
+          "Name": "VoiceMenu1",
+          "KeyboardCode": "z",
+          "GroupName": "Communication"
+        },
+        {
+          "Name": "VoiceMenu2",
+          "KeyboardCode": "x",
+          "GroupName": "Communication"
+        },
+        {
+          "Name": "VoiceMenu3",
+          "KeyboardCode": "c",
+          "GroupName": "Communication"
+        },
+        {
+          "Name": "DropItem",
+          "KeyboardCode": "l",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Ready",
+          "KeyboardCode": "m",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Taunt",
+          "KeyboardCode": "g",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "SwapCameraView",
+          "KeyboardCode": "K",
+          "GroupName": "Other"
+        }
+      ]
+    },
+    "ReplaceTags": "tf2 pvp remake shooter",
+    "HttpAllowList": null
+  }
+}
