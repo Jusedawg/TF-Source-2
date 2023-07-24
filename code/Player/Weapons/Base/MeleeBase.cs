@@ -67,12 +67,14 @@ public partial class TFMeleeBase : TFWeaponBase
 		
 		TraceResult tr = default;
 		
-		if ( SetupFireBulletTrace( origin, target ).UseHitboxes().Size( 32 ).RunAll() is {} results )
+		if ( SetupFireBulletTrace( origin, target ).UseHitboxes().Size( 32 ).RunAll() is TraceResult[] results && results != default )
 		{
 			// Try to find non teammate hits first.
-			tr = results.FirstOrDefault( x => x.Entity is var entity && ITeam.IsEnemy( entity, TFOwner ),
+			tr = results.FirstOrDefault( 
+				x => ITeam.IsEnemy( x.Entity, TFOwner ),
 				// If we didn't hit an enemy, get the first trace.
-				results.First());
+				results.FirstOrDefault()
+			);
 			
 			/*
 			 * Due to the trace having a size of 32, the decal will be offset from the wall and not render.
