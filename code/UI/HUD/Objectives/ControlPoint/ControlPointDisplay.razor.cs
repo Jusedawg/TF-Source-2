@@ -60,7 +60,10 @@ partial class ControlPointDisplay : Panel
 		var order = TFGameRules.Current.GetControlPointRouteForTeam( TFTeam.Blue );
 		if ( order == null ) return;
 
-		SortChildren<ControlPointDisplayEntry>( GetEntryOrder );
+		foreach ( var row in PointRows )
+		{
+			row.SortChildren<ControlPointDisplayEntry>( GetEntryOrder );
+		}
 	}
 
 	private int GetEntryOrder(ControlPointDisplayEntry entry)
