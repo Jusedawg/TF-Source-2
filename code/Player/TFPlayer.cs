@@ -330,10 +330,10 @@ public partial class TFPlayer : SDKPlayer
 			return;
 
 		SimulateItems();
-
 		SimulateCameraLogic();
 		SimulateTaunts();
 		SimulateBuildings();
+		SimulateVO();
 	}
 
 	public override void Tick()

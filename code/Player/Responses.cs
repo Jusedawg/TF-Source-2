@@ -39,6 +39,15 @@ partial class TFPlayer : IResponseSpeaker<TFResponseConcept, TFResponseContext>
 		NextResponseTime = Time.Now + tf_max_voice_speak_delay;
 	}
 
+	public void SimulateVO()
+	{
+		const string CALL_MEDIC_INPUT = "CallMedic";
+		if ( Input.Pressed( CALL_MEDIC_INPUT ) )
+		{
+			SpeakConceptIfAllowed( TFResponseConcept.VoiceMedic );
+		}
+	}
+
 	[ConVar.Replicated] public static float tf_max_voice_speak_delay { get; set; } = 1.5f;
 
 	[ConCmd.Server( "voicemenu" )]

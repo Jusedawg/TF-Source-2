@@ -12,7 +12,6 @@ public partial class TFPlayer
 	[ClientInput] public bool AutoRezoom { get; set; }
 	[ClientInput] public bool AutoReload { get; set; }
 	public override string UseButton => "Inspect";
-
 	public override void BuildInput()
 	{
 		AutoRezoom = TFClientSettings.Current.AutoZoomIn;
