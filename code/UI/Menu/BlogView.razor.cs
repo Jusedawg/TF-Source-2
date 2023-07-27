@@ -13,28 +13,25 @@ namespace TFS2.Menu;
 public partial class BlogView : MenuOverlay
 {
 	const string UNKNOWN_BLOG_URL = "https://tfsource2.com/news";
-	public string Url
-	{
-		get { return WebPanel?.Surface?.Url ?? ""; }
-		set { if ( WebPanel?.Surface?.Url != null ) WebPanel.Surface.Url = value; }
-	}
+	public string Url { get; set; }
 
 	public WebPanel WebPanel { get; set; }
 
-	protected override void OnAfterTreeRender( bool firstTime )
+	protected override void OnAfterTreeRender(bool firstTime)
 	{
-		base.OnAfterTreeRender( firstTime );
+		if(string.IsNullOrEmpty(Url))
+			Url = UNKNOWN_BLOG_URL;
 
-		if ( firstTime )
+		if(WebPanel?.Surface != null && WebPanel.Surface.Url != Url)
 		{
-			WebPanel.Surface.Url = UNKNOWN_BLOG_URL;
+			WebPanel.Surface.Url = Url;
 		}
 	}
 
 	protected override int BuildHash()
 	{
 		// this will force a rebuild every time the date time string changes
-		return HashCode.Combine( DateTime.Now.ToString() );
+		return HashCode.Combine( DateTime.Now.ToString(), Url );
 	}
 
 	protected void OnClickClose() => Close();
