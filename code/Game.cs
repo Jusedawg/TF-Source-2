@@ -11,7 +11,7 @@ namespace TFS2;
 public partial class TFGameRules : SDKGame
 {
 	public static new TFGameRules Current { get; set; }
-
+	[ConVar.Replicated] public static bool tf_enable_devcam { get; set; } = false;
 	public TFGameRules()
 	{
 		Current = this;
@@ -171,7 +171,8 @@ public partial class TFGameRules : SDKGame
 
 	public override void DoPlayerDevCam( IClient client )
 	{
-		// We dont have a dev cam right now
+		if ( tf_enable_devcam )
+			base.DoPlayerDevCam( client );
 	}
 }
 

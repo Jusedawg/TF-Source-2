@@ -55,7 +55,7 @@ public partial class Scoreboard : Panel
 
 	public override void Tick()
 	{
-		SetClass( "visible", Input.Down( "Score" ) );
+		SetClass( "visible", ShouldDraw() );
 
 		if ( !IsVisible )
 			return;
@@ -105,7 +105,10 @@ public partial class Scoreboard : Panel
 		BluePlayerList.SortChildren<ScoreboardPlayerEntry>( ( entry ) => -entry.Client.GetPoints() );
 		RedPlayerList.SortChildren<ScoreboardPlayerEntry>( ( entry ) => -entry.Client.GetPoints() );
 	}
-
+	public bool ShouldDraw()
+	{
+		return Input.Down( "Score" ) && Game.LocalClient?.Components?.Get<DevCamera>() == null;
+	}
 	public void AddClient( IClient client, TFTeam team )
 	{
 		if ( team.IsPlayable() )

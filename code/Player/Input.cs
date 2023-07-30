@@ -14,6 +14,11 @@ public partial class TFPlayer
 	public override string UseButton => "Inspect";
 	public override void BuildInput()
 	{
+		if(Client?.Components.Get<DevCamera>() != default)
+		{
+			return;
+		}
+
 		AutoRezoom = TFClientSettings.Current.AutoZoomIn;
 		AutoReload = TFClientSettings.Current.AutoReload;
 
