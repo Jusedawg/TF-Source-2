@@ -21,11 +21,12 @@ public partial class TFGameRules : SDKGame
 		{
 			_ = new TFHud();
 		}
-
-		if ( Game.IsClient )
+		else
 		{
 			PostProcessingManager = new TFPostProcessingManager();
 		}
+
+		_ = new TFStats();
 	}
 
 	public override void Tick()
@@ -99,6 +100,7 @@ public partial class TFGameRules : SDKGame
 		EventDispatcher.InvokeEvent( new PlayerChangeClassEvent
 		{
 			Client = player.Client,
+			PreviousClass = player.PlayerClass,
 			Class = pclass
 		} );
 	}

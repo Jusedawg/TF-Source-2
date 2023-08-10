@@ -12,45 +12,76 @@ namespace TFS2;
 public class TFStats
 {
 	public static TFStats Current { get; set; }
-	static TFStats()
-	{
-		Current = new();
-	}
-
+	private TimeSince timeSinceLocalClassChange;
 	public TFStats()
 	{
+		if(Current != null)
+		{
+			throw new InvalidOperationException( "There can only be one TFStats instance!" );
+		}
+		Current = this;
+
+		EventDispatcher.Subscribe<PlayerChangeClassEvent>( OnPlayerChangeClass, this );
 		EventDispatcher.Subscribe<PlayerDeathEvent>( OnPlayerDeath, this );
 		EventDispatcher.Subscribe<RoundEndEvent>( OnRoundEnded, this );
 	}
 
-	private static void OnPlayerDeath( PlayerDeathEvent ev )
+	private void OnPlayerDeath( PlayerDeathEvent ev )
 	{
 		if ( Game.IsServer ) return;
+		var pawn = Game.LocalPawn;
 
-		if(ev.Victim is TFPlayer vic && ev.Attacker is TFPlayer atk && vic != atk)
+		if(ev.Attacker == pawn )
 		{
-			if(vic.AllowTracking() && atk.AllowTracking())
-			{
-				Stats.Increment( atk.Client, "kills", 1.0 );
-				Stats.Increment( vic.Client, "deaths", 1.0 );
-
-				if(ev.Assister is TFPlayer ast && ast.AllowTracking())
-				{
-					Stats.Increment( ast.Client, "assists", 1.0 );
-				}
-			}
+			Stats.Increment( "kills", 1.0 );
 		}
-	}
-	private static void OnRoundEnded( RoundEndEvent ev )
-	{
-		Log.NetInfo( "OnRoundEnded" );
-		if ( Game.IsServer ) return;
-		Log.Info( 1 );
+		else if(ev.Victim == pawn )
+		{
+			Stats.Increment( "deaths", 1.0 );
+		}
+		else if (ev.Assister == pawn )
+		{
+			Stats.Increment( "assists", 1.0 );
+		}
 
+		Stats.Flush();
+	}
+
+	private void OnRoundEnded( RoundEndEvent ev )
+	{
+		if ( Game.IsClient ) return;
+
+		/*
 		var team = (TFTeam)ev.WinningTeam;
 		if ( team == TFTeam.Blue )
 			Stats.Increment( "wins_blu", 1.0 );
 		else if ( team == TFTeam.Red )
 			Stats.Increment( "wins_red", 1.0 );
+		*/
+
+		foreach(var cl in Game.Clients)
+		{
+			Stats.Increment( cl, "points_average", 1.0 );
+		}
+
+		Stats.Flush();
+	}
+	private void OnPlayerChangeClass( PlayerChangeClassEvent ev )
+	{
+		if ( Game.IsServer || ev.Client != Game.LocalClient ) return;
+
+		string stat = GetClassTimeStat( ev.PreviousClass );
+		if(!string.IsNullOrEmpty(stat))
+		{
+			Stats.Increment( stat, timeSinceLocalClassChange );
+			Stats.Flush();
+		}
+		timeSinceLocalClassChange = 0;
+	}
+
+	private static string GetClassTimeStat(PlayerClass playerClass)
+	{
+		if ( playerClass == default ||playerClass.Entry == TFPlayerClass.Undefined ) return "";
+		return $"playtime_{playerClass.ResourceName.ToLower()}";
 	}
 }

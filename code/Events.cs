@@ -43,6 +43,7 @@ public class PlayerHurtEvent : DispatchableEventBase
 public class PlayerChangeClassEvent : DispatchableEventBase
 {
 	public IClient Client { get; set; }
+	public PlayerClass PreviousClass { get; set; }
 	public PlayerClass Class { get; set; }
 }
 
