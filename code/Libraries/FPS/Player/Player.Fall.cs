@@ -53,7 +53,7 @@ partial class SDKPlayer
 	/// <summary>
 	/// Maximum vertical velocity at which we wont take damage when falling down.
 	/// </summary>
-	public virtual float MaxSafeFallSpeed => 580;
+	public virtual float MaxSafeFallSpeed => 650;
 	/// <summary>
 	/// How much damage we should apply per unit of vertical velocity.
 	/// </summary>
@@ -61,7 +61,8 @@ partial class SDKPlayer
 
 	public virtual void LandingEffects( float velocity )
 	{
-		if ( velocity <= 0 )
+		// Don't do any landing effects if we don't fall fast enough to take damage.
+		if ( velocity <= MaxSafeFallSpeed )
 			return;
 
 		var volume = .5f;
@@ -70,12 +71,14 @@ partial class SDKPlayer
 			volume = velocity.RemapClamped( MaxSafeFallSpeed / 2, MaxSafeFallSpeed, .85f, 1 );
 		}
 
-		// Play the landing footstep sound when we land on the groun.
+		// Play the landing footstep sound when we land on the ground.
 		DoLandSound( Position, SurfaceData, volume );
 
 		// If we go past the max safe velocity threshold,
 		// knock the screen around a little bit.
-		if ( velocity >= MaxSafeFallSpeed )
+		// TODO: Double check TF2's threshold for this,
+		// seems to be lower than the damage threshold.
+		if ( velocity > MaxSafeFallSpeed )
 		{
 			ApplyViewPunchImpulse( 0, 0, velocity * 0.013f );
 		}
