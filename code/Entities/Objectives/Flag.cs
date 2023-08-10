@@ -80,23 +80,6 @@ public partial class Flag : CarriableEntity, ITeam, IResettable, IRoundTimerBloc
 		}
 	}
 
-	/*
-	public override void OnNewModel( Model model )
-	{
-		base.OnNewModel( model );
-
-		int skin;
-		switch ( Team )
-		{
-			case TFTeam.Red: skin = 0; break;
-			case TFTeam.Blue: skin = 1; break;
-			default: skin = 2; break;
-		}
-
-		SetMaterialGroup( skin );
-	}
-	*/
-
 	public override void StartTouch( Entity other )
 	{
 		if ( !Game.IsServer )
@@ -165,6 +148,7 @@ public partial class Flag : CarriableEntity, ITeam, IResettable, IRoundTimerBloc
 		base.Drop();
 		Reset();
 		OnCapture.Fire( player );
+		player.Captures += 2;
 
 		EventDispatcher.InvokeEvent( new FlagCapturedEvent() { Flag = this, Capper = player, Zone = zone } );
 	}

@@ -237,20 +237,24 @@ public abstract partial class TFBuilding : AnimatedEntity, IHasMaxHealth, ITeam
 
 	public override void OnKilled()
 	{
-		if(LastDamageInfo.Attacker is TFPlayer ply)
+		TFPlayer attacker = null;
+
+		if (LastDamageInfo.Attacker is TFPlayer ply)
 		{
-			EventDispatcher.InvokeEvent( new BuildingDeathEvent()
-			{
-				Victim = this,
-				Owner = Owner,
-				Attacker = ply,
-				Weapon = LastDamageInfo.Weapon,
-				Tags = LastDamageInfo.Tags.ToArray()
-			} );
+			attacker = ply;
+			ply.Destructions++;
 		}
 		Owner.Buildings.Remove( this );
-
 		KilledEffects();
+
+		EventDispatcher.InvokeEvent( new BuildingDeathEvent()
+		{
+			Victim = this,
+			Owner = Owner,
+			Attacker = attacker,
+			Weapon = LastDamageInfo.Weapon,
+			Tags = LastDamageInfo.Tags.ToArray()
+		} );
 		base.OnKilled();
 	}
 

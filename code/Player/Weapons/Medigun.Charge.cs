@@ -156,7 +156,10 @@ public partial class Medigun
 		DetachTimes.Clear();
 	}
 
-	public void OnReleasedCharge() { }
+	public void OnReleasedCharge() 
+	{
+		TFOwner.Invulns++;
+	}
 
 	public virtual TFCondition GetChargeType() => TFCondition.Invulnerable;
 

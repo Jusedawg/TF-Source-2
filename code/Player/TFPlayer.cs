@@ -306,6 +306,15 @@ public partial class TFPlayer : SDKPlayer
 		{
 			atk.Kills++;
 
+			if ( info.Tags.Contains( TFDamageTags.Backstab ) )
+				atk.Backstabs++;
+
+			var medigun = Weapons.OfType<Medigun>().FirstOrDefault();
+			if (medigun != null && medigun.IsCharged)
+			{
+				atk.Bonus += 2;
+			}
+
 			// Gives defense points to the player which killed us if this player was
 			// the last man standing on a control point or had the intel
 			if ( PickedItem is Flag )

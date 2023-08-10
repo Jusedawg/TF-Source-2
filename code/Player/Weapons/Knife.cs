@@ -93,7 +93,7 @@ public partial class Knife : TFMeleeBase
 		if ( IsBackstab && victim == BackstabVictim )
 		{
 			info.Damage = victim.Health;
-			info = info.WithTag( TFDamageTags.Critical );
+			info = info.WithTag( TFDamageTags.Critical ).WithTag(TFDamageTags.Backstab);
 		}
 
 		base.ApplyDamageModifications( victim, ref info, trace );

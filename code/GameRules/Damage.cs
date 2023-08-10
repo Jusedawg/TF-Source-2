@@ -120,7 +120,7 @@ partial class TFGameRules
 
 /// <summary>
 /// A complete list of damage flags, used by TF:S2.
-/// Some flags are aliases of same flags, as seen in sbox.
+/// Some flags are aliases of same flags as seen in sbox.
 /// Some reuse sbox flags that are not used in TF:S2 as is.
 /// https://wiki.teamfortress.com/wiki/Damage#Damage_types
 /// </summary>
@@ -147,6 +147,7 @@ public static class TFDamageTags
 	// Critical Stuff
 	public const string Critical = "critical";
 	public const string MiniCritical = "mini_critical";
+	public const string Backstab = "backstab";
 
 	// Distance Mod Stuff
 	public const string UseRampup = "rampup";
