@@ -61,7 +61,7 @@ RoundStatusDisplay {
                         font-size: 24px;
 
                         &.visible {
-                            display:flex;
+                            display: flex;
                         }
                     }
                 }
@@ -127,5 +127,35 @@ RoundStatusDisplay {
             text-align: center;
             font-size: 24px;
         }
+    }
+
+    .time_update {
+        position: absolute;
+        width: 100%;
+        font-family: TF2_Secondary;
+        font-size: 50px;
+        color: $green;
+        top: 55%;
+        left: 25%;
+        z-index: 1;
+        display: flex;
+        animation-name: time-update;
+    }
+}
+
+@keyframes time-update {
+    0% {
+        opacity: 1;
+        transform: translateY(25%);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateY(100%);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateY(200%);
     }
 }

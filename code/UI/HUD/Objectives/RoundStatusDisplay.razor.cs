@@ -3,14 +3,23 @@ using Sandbox.UI;
 using Amper.FPS;
 using System.Collections.Generic;
 using System.Linq;
+using System;
+using Sandbox.UI.Construct;
 
 namespace TFS2.UI;
 
 public partial class RoundStatusDisplay : Panel
 {
+	private const float TIME_UPDATE_DURATION = 2.5f;
+	private readonly Queue<(TimeSince time, Label panel)> timeUpdates = new();
 	Dictionary<RoundTimer, RoundStatusTimerEntry> Timers { get; set; } = new();
 	Label GameStateLabel { get; set; }
 	Panel TimersContainer { get; set; }
+	public RoundStatusDisplay()
+	{
+		EventDispatcher.Subscribe<TimeAddedEvent>( OnTimeAdded, this );
+	}
+
 	public override void Tick()
 	{
 		SetClass( "visible", ShouldDraw() );
@@ -51,6 +60,12 @@ public partial class RoundStatusDisplay : Panel
 
 		foreach ( var entry in timers.Except( keys ) ) AddTimer( entry );
 		foreach ( var entry in keys.Except( timers ) ) RemoveTimer( entry );
+		
+		while ( timeUpdates.TryPeek( out var update ) && update.time >= TIME_UPDATE_DURATION )
+		{
+			update.panel.Delete();
+			timeUpdates.Dequeue();
+		}
 	}
 
 	public void AddTimer( RoundTimer timer )
@@ -72,7 +87,6 @@ public partial class RoundStatusDisplay : Panel
 			ReorderTimers();
 		}
 	}
-
 	public void ReorderTimers()
 	{
 		TimersContainer.SortChildren( ( x, y ) =>
@@ -88,6 +102,16 @@ public partial class RoundStatusDisplay : Panel
 			// Sort in DESCENDING order.
 			return timer1.OwnerTeam < timer2.OwnerTeam ? 1 : -1;
 		} );
+	}
+	private void OnTimeAdded( TimeAddedEvent ev )
+	{
+		var label = TimersContainer.Add.Label( $"+{RoundTimer.GetTimeString( ev.TimeAdded )}" );
+
+		label.SetClass( "time_update", true );
+		label.Style.AnimationIterationCount = 1;
+		label.Style.AnimationDuration = TIME_UPDATE_DURATION;
+
+		timeUpdates.Enqueue( ((TimeSince)0, label) );
 	}
 }
 

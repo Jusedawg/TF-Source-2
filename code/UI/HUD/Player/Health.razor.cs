@@ -8,10 +8,9 @@ namespace TFS2.UI;
 
 public partial class Health : Panel
 {
+	private const float HEALTH_UPDATE_DURATION = 1.5f;
 	private Panel PlayerClassIcon { get; set; }
-
-	private const float HealthUpdateDuration = 1.5f;
-	private readonly Queue<(TimeSince time, Label panel)> _healthUpdates = new();
+	private readonly Queue<(TimeSince time, Label panel)> healthUpdates = new();
 
 	public Health()
 	{
@@ -31,10 +30,10 @@ public partial class Health : Panel
 
 		SetClass( "hidden", !ShouldDraw() );
 
-		while (_healthUpdates.TryPeek( out var update ) && update.time >= HealthUpdateDuration )
+		while (healthUpdates.TryPeek( out var update ) && update.time >= HEALTH_UPDATE_DURATION )
 		{
 			update.panel.Delete();
-			_healthUpdates.Dequeue();
+			healthUpdates.Dequeue();
 		}
 	}
 
@@ -55,7 +54,7 @@ public partial class Health : Panel
 		if ( args.Client != Game.LocalClient )
 			return;
 
-		while ( _healthUpdates.TryDequeue( out var update) )
+		while ( healthUpdates.TryDequeue( out var update) )
 		{
 			update.panel.Delete();
 		}
@@ -80,17 +79,17 @@ public partial class Health : Panel
 		}
 	}
 
-	public void OnHealthKitPickUp( PlayerHealthKitPickUpEvent @event )
+	public void OnHealthKitPickUp( PlayerHealthKitPickUpEvent ev )
 	{
-		var health = (int)Math.Floor( @event.Health );
+		var health = (int)Math.Floor( ev.Health );
 		var label = new Label { Text = $"+{health}" };
 
 		label.SetClass( "health_update", true );
 		label.Style.AnimationIterationCount = 1;
-		label.Style.AnimationDuration = HealthUpdateDuration;
+		label.Style.AnimationDuration = HEALTH_UPDATE_DURATION;
 
 		AddChild( label );
 
-		_healthUpdates.Enqueue( ((TimeSince)0, label) );
+		healthUpdates.Enqueue( ((TimeSince)0, label) );
 	}
 }

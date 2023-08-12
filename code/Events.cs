@@ -78,6 +78,16 @@ public class BuildingDeathEvent : DispatchableEventBase
 
 #endregion
 
+#region General
+[EventDispatcherEvent]
+public class TimeAddedEvent : DispatchableEventBase
+{
+	public RoundTimer Timer { get; set; }
+	public float PreviousTime { get; set; }
+	public float TimeAdded { get; set; }
+}
+#endregion
+
 #region Control Points
 
 [EventDispatcherEvent]

@@ -62,6 +62,10 @@ public partial class RoundTimer : Entity
 	public bool HasSetup => SetupTime > 0;
 	public bool InSetup { get; set; }
 	public bool IsVisibleOnHUD => !HideFromHUD;
+	public static string GetTimeString( float time )
+	{
+		return TimeSpan.FromSeconds( time ).ToString( @"mm\:ss" );
+	}
 	public RoundTimer()
 	{
 		All.Add( this );
@@ -173,8 +177,16 @@ public partial class RoundTimer : Entity
 	[Input]
 	public void AddTime( float time )
 	{
+		float previousTime = GetRemainingTime();
 		var addedTime = SetTime( AbsoluteTime + time );
+
 		OnTimeAdded?.Invoke( addedTime );
+		EventDispatcher.InvokeEvent( new TimeAddedEvent()
+		{
+			Timer = this,
+			PreviousTime= previousTime,
+			TimeAdded = time
+		} );
 
 		if(PlayAnnouncerVoicelines)
 			PlayAnnouncerTimeAddedVoiceline();
@@ -188,7 +200,7 @@ public partial class RoundTimer : Entity
 
 	public string GetTimeString()
 	{
-		return TimeSpan.FromSeconds( GetRemainingTime() ).ToString( @"mm\:ss" );
+		return GetTimeString( GetRemainingTime() );
 	}
 
 	public bool IsElapsed()
