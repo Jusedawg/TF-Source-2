@@ -347,7 +347,6 @@ public partial class RoundTimer : Entity
 		const string TIME_ADDED_DEFENDER = "announcer.time.added.enemy";
 
 		var gamemode = TFGameRules.Current.GetGamemode();
-
 		if(gamemode.Properties.IsAttackDefense)
 		{
 			TFGameRules.PlaySoundToTeam( TFTeam.Blue, TIME_ADDED_ATTACKER, SoundBroadcastChannel.Announcer );
