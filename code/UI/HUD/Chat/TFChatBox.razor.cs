@@ -12,16 +12,21 @@ namespace TFS2.UI
 {
 	public partial class TFChatBox : Panel, Logging.ILogger
 	{
+		const float OPEN_SUBMIT_COOLDOWN = 0.15f;
 		public static TFChatBox Instance { get; set; }
 		public bool IsOpen { get; set; }
 		ChatType Type { get; set; }
-		TextEntry TextField { get; set; }
-		Panel MessagesScroll { get; set; }
-		Panel MessagesContainer { get; set; }
-		Label ChannelNameLabel { get; set; }
-		Panel SwitchGlyph { get; set; }
-
-		public TFChatBox() => Instance = this;
+		TextEntry TextField;
+		Panel MessagesScroll;
+		Panel MessagesContainer;
+		Label ChannelNameLabel;
+		Panel SwitchGlyph;
+		TimeSince TimeSinceInteraction;
+		TimeSince TimeSinceOpen;
+		public TFChatBox()
+		{
+			Instance = this;
+		}
 
 		[GameEvent.Client.BuildInput]
 		public void ProcessClientInput()
@@ -33,25 +38,19 @@ namespace TFS2.UI
 				else
 					AddInformation( "Text chat is currently disabled. You can toggle this option in your settings." );
 			}
-		}
-
-		public override void OnButtonEvent( ButtonEvent e )
-		{
-			base.OnButtonEvent( e );
-
-			if ( e.Pressed )
+			else if( Game.IsMainMenuVisible && IsOpen)
 			{
-				if ( TimeSinceInteraction > 0.1f && e.Button == "tab" )
-				{
-					CycleChatType();
-					TimeSinceInteraction = 0;
-				}
+				Close();
 			}
 		}
 
-		TimeSince TimeSinceInteraction { get; set; }
-
-
+		public override void OnButtonTyped( ButtonEvent e )
+		{
+			if(e.Button == "tab")
+			{
+				CycleChatType();
+			}
+		}
 		public void CycleChatType()
 		{
 			Type++;
@@ -71,9 +70,9 @@ namespace TFS2.UI
 
 		public void Open()
 		{
+			TimeSinceOpen = 0;
 			AddClass( "focused" );
 			IsOpen = true;
-			TextField.Focus();
 			MessagesScroll.TryScrollToBottom();
 
 			// This resets all the UI elements to match our type in case we hotloaded the template and it reset.
@@ -82,6 +81,9 @@ namespace TFS2.UI
 
 		public void Close()
 		{
+			if ( !IsOpen || TimeSinceOpen < OPEN_SUBMIT_COOLDOWN ) return;
+			Log.Info( $"Close {TimeSinceOpen}" );
+
 			IsOpen = false;
 			RemoveClass( "focused" );
 			TextField.Blur();
@@ -90,6 +92,8 @@ namespace TFS2.UI
 
 		public void Submit()
 		{
+			if ( !IsOpen || TimeSinceOpen < OPEN_SUBMIT_COOLDOWN ) return;
+
 			Close();
 
 			var msg = TextField.Text.Trim();

@@ -12,7 +12,9 @@ namespace TFS2.UI
 	public partial class TFChatBoxEntry : Panel
 	{
 		public TimeSince TimeSinceCreated { get; set; }
-		ColorFormattedString Text { get; set; }
+		ColorFormattedString Text;
+		Panel Wrapper;
+
 		bool IsFaded => TimeSinceCreated > (TFClientSettings.Current.SayTextTime + TFClientSettings.Current.SayTextFadeTime);
 		bool IsFading => !IsFaded && TimeSinceCreated > TFClientSettings.Current.SayTextTime;
 
