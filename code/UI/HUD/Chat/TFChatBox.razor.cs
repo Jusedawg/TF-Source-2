@@ -31,14 +31,14 @@ namespace TFS2.UI
 		[GameEvent.Client.BuildInput]
 		public void ProcessClientInput()
 		{
-			if ( Input.Pressed( "Chat" ))
+			if ( Input.Pressed( "Chat" ) )
 			{
 				if ( TFClientSettings.Current.ShowTextChat )
 					Open();
 				else
 					AddInformation( "Text chat is currently disabled. You can toggle this option in your settings." );
 			}
-			else if( Game.IsMainMenuVisible && IsOpen)
+			else if ( Game.IsMainMenuVisible && IsOpen )
 			{
 				Close();
 			}
@@ -46,7 +46,7 @@ namespace TFS2.UI
 
 		public override void OnButtonTyped( ButtonEvent e )
 		{
-			if(e.Button == "tab")
+			if ( e.Button == "tab" )
 			{
 				CycleChatType();
 			}
@@ -73,6 +73,7 @@ namespace TFS2.UI
 			TimeSinceOpen = 0;
 			AddClass( "focused" );
 			IsOpen = true;
+			TextField.Focus();
 			MessagesScroll.TryScrollToBottom();
 
 			// This resets all the UI elements to match our type in case we hotloaded the template and it reset.
@@ -249,13 +250,13 @@ namespace TFS2.UI
 			const string ANNOUNCE_COLOR = "#FFBB22";
 
 			ColorFormattedString msg = new();
-			switch(type)
+			switch ( type )
 			{
 				case MessageType.Error:
 					msg.AddColoredText( message, ERROR_COLOR );
 					break;
 				case MessageType.Announcement:
-					msg.AddColoredText("[ANNOUNCEMENT] ", ANNOUNCE_PREFIX_COLOR );
+					msg.AddColoredText( "[ANNOUNCEMENT] ", ANNOUNCE_PREFIX_COLOR );
 					msg.AddColoredText( message, ANNOUNCE_COLOR );
 					break;
 				default:
