@@ -23,6 +23,10 @@ public class DamageNumbers : Panel
 		var attacker = args.Attacker;
 		var victim = args.Victim;
 
+		// Ignore invalid events
+		if ( !victim.IsValid() )
+			return;
+
 		// If we are not the Attacker, ignore.
 		if ( Game.LocalPawn != attacker )
 			return;

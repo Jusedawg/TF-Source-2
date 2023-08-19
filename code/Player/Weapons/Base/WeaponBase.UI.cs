@@ -12,7 +12,7 @@ partial class TFWeaponBase : IInteractableTargetID, ITargetIDSubtext, IKillfeedI
 	bool IInteractableTargetID.CanInteract( TFPlayer user ) => IsUsable( user );
 	string IInteractableTargetID.InteractText => "Pickup";
 	string IInteractableTargetID.InteractButton => "Inspect";
-	string ITargetIDSubtext.Subtext => $"Dropped by: {OriginalOwner.Name}";
+	string ITargetIDSubtext.Subtext => $"Dropped by: {OriginalOwner?.Name ?? "Unknown Player"}";
 	string IKillfeedIcon.GetIcon( bool isCrit, string[] tags )
 	{
 		if ( isCrit && !string.IsNullOrEmpty( Data.KillFeedIconSpecial ) )

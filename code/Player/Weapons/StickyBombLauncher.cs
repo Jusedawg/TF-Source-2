@@ -108,10 +108,8 @@ public partial class StickyBombLauncher : TFWeaponBase, IChargeable, IPassiveChi
 
 		bool failed = false;
 
-		for ( var i = Bombs.Count - 1; i >= 0; i-- )
+		foreach(var bomb in Bombs.ToArray())
 		{
-			var bomb = Bombs[i];
-
 			// Bomb is already null? Delete it from the original list.
 			if ( !bomb.IsValid() )
 			{

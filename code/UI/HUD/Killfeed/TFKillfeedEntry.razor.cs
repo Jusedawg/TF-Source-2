@@ -49,6 +49,7 @@ partial class TFKillFeedEntry : Panel
 	/// <param name="weapon"></param>
 	/// <param name="tags"></param>
 	/// <param name="icon"></param>
+	/// <param name="involved"></param>
 	public TFKillFeedEntry( Entity attacker, Entity victim, Entity assister, Entity weapon, string[] tags, string icon, bool involved = false )
 	{
 		Attacker = attacker;
@@ -88,6 +89,12 @@ partial class TFKillFeedEntry : Panel
 
 	protected virtual void InitKill()
 	{
+		if(!Victim.IsValid())
+		{
+			Delete( true );
+			return;
+		}
+
 		var local = Game.LocalClient;
 		bool is_crit = false; 
 		bool is_mini_crit = false;

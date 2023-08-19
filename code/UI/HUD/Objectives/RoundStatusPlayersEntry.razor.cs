@@ -23,15 +23,18 @@ public partial class RoundStatusPlayersEntry : Panel
 		if ( local == null )
 			return;
 
-		var ply = Client.Pawn as TFPlayer;
-		if(ply == null ) 
-			return;
+		TFPlayer ply = null;
+
+		if(Client.Pawn.IsValid())
+		{
+			ply = (TFPlayer)Client.Pawn;
+		}
 
 		var ourTeam = local.GetTeam();
 		var theirTeam = Client.GetTeam();
 		var anonymous = true;
 
-		if ( ourTeam == theirTeam )
+		if ( ourTeam == theirTeam && ply.IsValid() )
 		{
 			var theirClass = Client.GetPlayerClass();
 			if ( theirClass != null )
@@ -43,7 +46,6 @@ public partial class RoundStatusPlayersEntry : Panel
 
 		if ( anonymous )
 			Portrait.Style.Set( "background-image", $"url(/ui/hud/classportraits/silhouette.png)" );
-
 		else
 		{
 			var rules = TFGameRules.Current;

@@ -33,6 +33,9 @@ partial class TFGameRules
 
 	public static void SendHUDAlertToPlayer( TFPlayer player, string message, string icon, float time = 5, TFTeam team = TFTeam.Unassigned )
 	{
+		if ( player?.Client.IsValid() != true )
+			return;
+
 		Alert.Show( To.Single( player.Client ), message, icon, time, team );
 	}
 }

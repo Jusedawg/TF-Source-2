@@ -24,14 +24,17 @@ partial class TFGameRules
 		if ( point.Locked )
 			return false;
 
-		// we can't set ourselves as previous point, assume null.
-		foreach (var prevPoint in prevPoints)
+		if(prevPoints?.Count > 0 )
 		{
-			if ( prevPoint == point )
-				continue;
+			// we can't set ourselves as previous point, assume null.
+			foreach ( var prevPoint in prevPoints )
+			{
+				if ( prevPoint == point )
+					continue;
 
-			if ( prevPoint != null && prevPoint.OwnerTeam != team )
-				return false;
+				if ( prevPoint != null && prevPoint.OwnerTeam != team )
+					return false;
+			}
 		}
 
 		return true;
@@ -61,7 +64,7 @@ partial class TFGameRules
 	public virtual int GetCaptureValueForPlayer( TFPlayer player )
 	{
 		var val = 1;
-		if ( player.PlayerClass != null )
+		if ( player?.PlayerClass != null )
 		{
 			val = player.PlayerClass.Abilities.CaptureValue;
 		}

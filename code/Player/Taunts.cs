@@ -316,7 +316,8 @@ partial class TFPlayer
 	/// <returns></returns>
 	public bool TryWeaponTaunt()
 	{
-		var weapon = ActiveWeapon as TFWeaponBase;
+		if ( ActiveWeapon is not TFWeaponBase weapon )
+			return false;
 
 		WeaponTauntAvailable = false;
 
@@ -725,6 +726,11 @@ partial class TFPlayer
 	[ClientRpc]
 	public void StartMusic()
 	{
+		if(!ActiveTaunt.IsValid())
+		{
+			return;
+		}
+
 		var tauntMusic = ActiveTaunt.TauntMusic;
 
 		//Lets us assign a UI variant without having to manually do so

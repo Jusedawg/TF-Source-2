@@ -155,7 +155,7 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse, IFalloffProvider
 
 	public bool OnUse( Entity user )
 	{
-		if ( user is TFPlayer player )
+		if ( user is TFPlayer player && Game.IsServer )
 			player.EquipWeapon( this, true );
 
 		return false;
@@ -174,7 +174,7 @@ public abstract partial class TFWeaponBase : SDKWeapon, IUse, IFalloffProvider
 		if ( user is TFPlayer player )
 		{
 			var pclass = player.PlayerClass;
-			return Data.CanBeOwnedByPlayerClass( pclass );
+			return Data.IsValid() && Data.CanBeOwnedByPlayerClass( pclass );
 		}
 
 		return false;

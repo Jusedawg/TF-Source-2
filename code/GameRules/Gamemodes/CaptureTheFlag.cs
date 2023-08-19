@@ -83,12 +83,10 @@ namespace TFS2
 		public virtual void FlagCaptured( FlagCapturedEvent args )
 		{
 			Flag flag = args.Flag;
-			TFPlayer capper = args.Capper;
-			FlagCaptureZone zone = args.Zone;
-			var team = capper.Team;
+			TFTeam team = flag.Team.GetEnemy();
 
-			TFGameRules.SendHUDAlertToTeam( capper.Team, "Your team CAPTURED the ENEMY INTELLIGENCE!", "/ui/icons/ico_flag_home.png", 5, flag.Team );
-			TFGameRules.PlaySoundToTeam( capper.Team, "announcer.intel.teamcaptured", SoundBroadcastChannel.Announcer );
+			TFGameRules.SendHUDAlertToTeam( team, "Your team CAPTURED the ENEMY INTELLIGENCE!", "/ui/icons/ico_flag_home.png", 5, flag.Team );
+			TFGameRules.PlaySoundToTeam( team, "announcer.intel.teamcaptured", SoundBroadcastChannel.Announcer );
 
 			TFGameRules.SendHUDAlertToTeam( flag.Team, "Your INTELLIGENCE was CAPTURED!", "/ui/icons/ico_flag_home.png", 5, flag.Team );
 			TFGameRules.PlaySoundToTeam( flag.Team, "announcer.intel.enemycaptured", SoundBroadcastChannel.Announcer );

@@ -129,7 +129,7 @@ partial class WinPanelPlayer : Panel
 	{
 		PlayerAvatar = Add.Image( $"avatar:{cl.SteamId}", "avatar" );
 		NameLabel = Add.Label( cl.Name, "name text" );
-		ClassLabel = Add.Label( cl.GetPlayerClass().Title, "pclass text" );
+		ClassLabel = Add.Label( cl.GetPlayerClass()?.Title ?? "None", "pclass text" );
 		PointsLabel = Add.Label( cl.GetPoints().ToString(), "points text" );
 
 		// Set the text color to the player's team color.
