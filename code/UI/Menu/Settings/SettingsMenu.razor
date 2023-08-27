@@ -28,7 +28,7 @@
         {
             <label class="title">#GameSettings.ClientSettings</label>
             <div class="body">
-			    <ObjectEditor class="editor" @ref=Editor/>
+			    <ObjectEditor Target=@(TFClientSettings.Current) class="editor" @ref=Editor/>
             </div>
         }
         else
@@ -82,7 +82,6 @@
         if ( Editor != null && needsRefresh )
         {
             needsRefresh = false;
-            Editor.SetTarget( TFClientSettings.Current );
         }
     }
 
@@ -91,7 +90,8 @@
         Game.Menu.InputSettings.InitDefault();
         TFClientSettings.Reset();
 
-        Editor?.SetTarget( TFClientSettings.Current );
+        if(Editor != null)
+            Editor.Target = TFClientSettings.Current;
     }
 
     public void OnClickClose()

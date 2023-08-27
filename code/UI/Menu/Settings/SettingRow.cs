@@ -21,6 +21,7 @@ internal class SettingRow : Panel
 		if ( property.PropertyType == typeof( bool ) )
 		{
 			var checkbox = new Checkbox { Parent = ValueArea };
+			checkbox.SetPropertyObject( "value", currentValue );
 			checkbox.ValueChanged += ( bool c ) =>
 			{
 				property.SetValue( target, c );
@@ -31,6 +32,7 @@ internal class SettingRow : Panel
 		else if ( property.PropertyType == typeof( string ) )
 		{
 			var textentry = ValueArea.Add.TextEntry( (string)currentValue );
+			textentry.SetPropertyObject( "value", currentValue );
 			textentry.AddEventListener( "value.changed", () =>
 			{
 				property.SetValue( target, textentry.Value );
@@ -57,6 +59,7 @@ internal class SettingRow : Panel
 			var step = property.GetCustomAttribute<SliderStepAttribute>()?.Step ?? .1f;
 			
 			var slider = new SliderControl( min, max, step );
+			slider.SetPropertyObject( "value", currentValue );
 			slider.Parent = ValueArea;
 			slider.Bind( "value", target, property.Name );
 			slider.OnValueChanged += (float _) =>CreateEvent( "save" );
@@ -66,8 +69,10 @@ internal class SettingRow : Panel
 			var minmax = property.GetCustomAttribute<MinMaxAttribute>();
 			var min = minmax?.MinValue ?? 0;
 			var max = minmax?.MaxValue ?? 100;
-			var step = property.GetCustomAttribute<SliderStepAttribute>()?.Step ?? 1;
+			var step = property.GetCustomAttribute<SliderStepAttribute>()?.Step.CeilToInt() ?? 1;
+
 			var slider = new SliderControl( min, max, step );
+			slider.SetPropertyObject( "value", currentValue );
 			slider.Parent = ValueArea;
 			slider.Bind( "value", target, property.Name );
 			slider.OnValueChanged += ( float _ ) => CreateEvent( "save" );

@@ -11,14 +11,26 @@ namespace TFS2.Menu;
 
 public class ObjectEditor : Panel
 {
-	private const string EmptyGroupName = TFClientSettings.OtherGroup;
+	private const string EmptyGroupName = TFClientSettings.GROUP_OTHER;
+	public object Target {
+		get => target;
+		set 
+		{
+			if ( value.Equals( target ) )
+				return;
+
+			BuildForTarget( value );
+			target = value;
+		}
+	}
+	private object target;
 
 	public ObjectEditor()
 	{
 		Style.FlexDirection = FlexDirection.Column;
 	}
 
-	public void SetTarget( object target )
+	private void BuildForTarget( object target )
 	{
 		DeleteChildren( true );
 
