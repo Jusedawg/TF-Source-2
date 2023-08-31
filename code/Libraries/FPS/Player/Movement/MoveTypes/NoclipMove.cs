@@ -43,7 +43,7 @@ partial class GameMovement
 
 		// Copy movement amounts
 		float factor = sv_spectator_speed;
-		if ( Input.Down( InputButton.Run ) )
+		if ( Input.Down( "run" ) )
 			factor /= 2.0f;
 
 		float fmove = ForwardMove * factor;
@@ -98,6 +98,8 @@ partial class GameMovement
 		Velocity *= newspeed;
 		CheckVelocity();
 
+		Position += Time.Delta * Velocity;
+
 		TryPlayerMove();
 	}
 
@@ -107,7 +109,7 @@ partial class GameMovement
 		QAngle angles = Player.ViewAngles;
 		angles.AngleVectors( out var forward, out var right, out var up );
 
-		if ( Input.Down( InputButton.Run ) )
+		if ( Input.Down( "run" ) )
 			factor /= 2.0f;
 
 		float fmove = ForwardMove * factor;

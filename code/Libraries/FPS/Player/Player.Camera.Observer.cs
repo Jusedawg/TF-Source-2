@@ -118,5 +118,7 @@ public partial class SDKPlayer
 	public void CalculateRoamingCamView( )
 	{
 		Camera.FirstPersonViewer = null;
+		Camera.Position = Position;
+		Camera.Rotation = Rotation;
 	}
 }

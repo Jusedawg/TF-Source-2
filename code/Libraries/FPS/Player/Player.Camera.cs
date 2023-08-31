@@ -65,19 +65,19 @@ partial class SDKPlayer
 		switch ( ObserverMode )
 		{
 			case ObserverMode.Roaming:
-				CalculateRoamingCamView(  );
+				CalculateRoamingCamView( );
 				break;
 
 			case ObserverMode.InEye:
-				CalculateInEyeCamView(  );
+				CalculateInEyeCamView( );
 				break;
 
 			case ObserverMode.Chase:
-				CalculateChaseCamView(  );
+				CalculateChaseCamView( );
 				break;
 
 			case ObserverMode.Deathcam:
-				CalculateDeathCamView(  );
+				CalculateDeathCamView( );
 				break;
 		}
 	}

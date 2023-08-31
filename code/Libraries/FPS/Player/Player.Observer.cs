@@ -84,9 +84,8 @@ partial class SDKPlayer
 	public void SwitchToNextObserverMode()
 	{
 		var mode = ObserverMode + 1;
-		var count = Enum.GetValues( typeof( ObserverMode ) ).Length;
 
-		if ( (int)mode >= count )
+		if ( mode >= ObserverMode.Roaming )
 			mode = ObserverMode.InEye;
 
 		SetObserverMode( mode );
