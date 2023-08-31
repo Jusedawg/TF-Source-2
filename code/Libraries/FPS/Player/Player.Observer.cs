@@ -85,6 +85,7 @@ partial class SDKPlayer
 	{
 		var mode = ObserverMode + 1;
 
+		// Temporarily disable switching to 
 		if ( mode >= ObserverMode.Roaming )
 			mode = ObserverMode.InEye;
 
