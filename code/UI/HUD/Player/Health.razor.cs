@@ -85,7 +85,6 @@ public partial class Health : Panel
 		var label = new Label { Text = $"+{health}" };
 
 		label.SetClass( "health_update", true );
-		label.Style.AnimationIterationCount = 1;
 		label.Style.AnimationDuration = HEALTH_UPDATE_DURATION;
 
 		AddChild( label );
