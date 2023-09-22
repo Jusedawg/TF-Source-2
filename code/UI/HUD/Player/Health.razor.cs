@@ -2,6 +2,7 @@ using Sandbox;
 using Sandbox.UI;
 using Amper.FPS;
 using System;
+using System.Linq;
 
 namespace TFS2.UI;
 
@@ -44,6 +45,12 @@ public partial class Health : Panel
 	{
 		if ( args.Client != Game.LocalClient )
 			return;
+
+		var healthUpdates = ChildrenOfType<HealthUpdateLabel>().ToList();
+		foreach ( var healthUpdate in healthUpdates )
+		{
+			healthUpdate.Delete();
+		}
 
 		SetupClassPreview();
 	}
