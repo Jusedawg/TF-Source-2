@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/sourcebox/sourcebox_eyerefract.shader_c"
+	shader "shaders/sourcebox/sourcebox_eyerefract.shader"
 
 	//---- Animation ----
 	F_MORPH_SUPPORTED 1
@@ -27,6 +27,9 @@ Layer0
 	g_flParallaxStrength "0.250"
 	g_vAmbientOcclColor "[1.000000 1.000000 1.000000 0.000000]"
 	Iris "materials/models/player/shared/eye-iris-blue.tga"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
 
 	//---- Material ----
 	AmbientOcclusion "materials/models/player/shared/eye-extra.tga"
