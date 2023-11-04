@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/sourcebox/sourcebox_skin.shader_c"
+	shader "shaders/sourcebox/sourcebox_skin.shader"
 
 	//---- Blending ----
 	F_ENABLE_BLEND 1
@@ -15,6 +15,9 @@ Layer0
 	g_bEnvMapShadowTweaks "1"
 	g_flEnvMapScale "1.000"
 	g_vEnvMapTint "[1.000000 0.800000 0.400000 0.000000]"
+
+	//---- Fog ----
+	g_bFogEnabled "1"
 
 	//---- Material ----
 	AmbientOcclusion "materials/default/default_ao.tga"
