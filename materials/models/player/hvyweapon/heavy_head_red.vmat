@@ -2,7 +2,7 @@
 
 Layer0
 {
-	shader "shaders/sourcebox/sourcebox_skin.shader_c"
+	shader "shaders/sourcebox/sourcebox_skin.shader"
 
 	//---- Animation ----
 	F_MORPH_SUPPORTED 1
@@ -13,6 +13,9 @@ Layer0
 
 	//---- Texture Filtering ----
 	F_TEXTURE_FILTERING 4 // Nearest Neighbour
+
+	//---- Fog ----
+	g_bFogEnabled "1"
 
 	//---- Material ----
 	AmbientOcclusion "materials/default/default_ao.tga"
