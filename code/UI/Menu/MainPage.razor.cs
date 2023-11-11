@@ -57,7 +57,6 @@ public partial class MainPage : Panel
 	{
 		List.SetClass( "visible", !List.HasClass( "visible" ) );
 	}
-
 	public void OnClickSettings()
 	{
 		this.Navigate( "/settings" );
@@ -99,6 +98,11 @@ public partial class MainPage : Panel
 	public string GetBlogDescription() => latestBlog?.Description ?? UNKNOWN_BLOG_DESCRIPTION;
 	public string GetBlogURL() => latestBlog?.URL ?? UNKNOWN_BLOG_URL;
 	public string GetBlogThumbnail() => latestBlog?.Thumbnail ?? UNKNOWN_BLOG_IMAGE;
+
+	public void OnClickCredits()
+	{
+		MenuOverlay.Open<CreditsView>();
+	}
 }
 
 public class BlogInfo

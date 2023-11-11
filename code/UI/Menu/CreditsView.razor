@@ -1,0 +1,100 @@
+﻿@using System;
+@using System.Linq;
+@using Sandbox.UI;
+@namespace TFS2.Menu
+@attribute [StyleSheet]
+
+@inherits MenuOverlay
+
+<root>
+    <div class="container">
+        <div class="header">#Credits.Header</div>
+        <div class="entries">
+            <div class="section">Development Team</div>
+            @foreach (var person in creditEntries.OrderBy(e => e.Name))
+            {
+                <div class="person">
+                    <div class="name">@person.Name</div>
+                    <div class="description">@person.Description</div>
+                </div>
+            }
+            <div class="section">Contributors</div>
+            @foreach(var contributor in contributors.OrderBy(c => c.Name))
+            {
+                <div class="person">
+                    <div class="name">@contributor.Name</div>
+                </div>
+            }
+        </div>
+        
+        <button class="button-dark" @onclick=@Close>#Generic.Close</button>
+    </div>
+</root>
+
+@code
+{
+    private struct CreditsEntry
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+
+        public CreditsEntry(string name, string description)
+        {
+            Name = name;
+            Description = description;
+        }
+    }
+
+    // Hardcoding this for now because reasons
+    private static readonly CreditsEntry[] creditEntries = new CreditsEntry[]
+    {
+        new("Moonly Days", "Producer"),
+        new("KAYA", "Producer"),
+        new("qualitykk", "Producer"),
+
+        new("Waugh101", "Artist"),
+        new("Narklos", "Artist"),
+        new("Glitch", "Artist"),
+        new("Nassimo", "Artist"),
+        new("Alex", "Artist"),
+        new("Alaxe", "Artist"),
+        new("Manndarinchik", "Artist"),
+        new("Umklaidet", "Artist"),
+
+        new("AnthonyPython", "Programmer"),
+        new("rob5300", "Programmer"),
+        new("N-Cognito", "Programmer"),
+        new("Retr0", "Programmer"),
+        new("Ivory", "Programmer"),
+        new("dead_thing", "Programmer"),
+        new("mastercoms", "Programmer"),
+        new("Mikusch", "Programmer"),
+        new("Taek", "Programmer"),
+
+        new("Beat Crazey", "Porting"),
+        new("justyn", "Porting"),
+
+        new("Quantum", "Level Designer"),
+        new("Suna", "Level Designer"),
+
+        new("cheddZy", "UI Designer"),
+        new("criticalflaw", "UI Designer"),
+
+        new("rileyzzz", "Shaders"),
+        new("Zarthbenn", "Video Editor"),
+    };
+
+    private static readonly CreditsEntry[] contributors = new CreditsEntry[]
+    {
+        new("badandbest", ""),
+        new("bodolaz146", ""),
+        new("Tyrak03", ""),
+        new("gio3k", ""),
+        new("xhayper", ""),
+        new("AdornedJoker", ""),
+        new("xezno", "Inconvenient Rock"), // 8)
+        new("PedroDressler", ""),
+        new("sbritorodr", ""),
+        new("bitterfq", ""),
+    };
+}
