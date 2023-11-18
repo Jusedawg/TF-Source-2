@@ -1,10 +1,10 @@
 ﻿@import "/UI/styles/colors.scss";
+@import "/UI/styles/footer.scss";
 
 .loadingpanel {
     width: 100%;
     height: 100%;
     color: white;
-    padding: 100px;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -13,103 +13,70 @@
     background: linear-gradient(to top, $bg-light, $bg-darker, $bg-darker, $bg-darkest);
     background-size: 100%;
 
-    .mapthumb {
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
+    .main {
         width: 100%;
         height: 100%;
-        background-size: cover;
-        background-position: center;
+
+        .header {
+            width: 100%;
+            margin-top: 10%;
+            flex-direction: column;
+            align-items: center;
+
+            .description {
+                font-size: 25px;
+                color: $tan-light;
+            }
+
+            .title {
+                font-size: 110px;
+                color: $white;
+                font-weight: bolder;
+                text-align: center;
+            }
+
+            .subtitle {
+                font-size: 40px;
+                color: $tan-light;
+                font-weight: 100;
+            }
+        }
+
+        .mapthumb {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+        }
     }
 
-    > .description {
-        font-size: 25px;
-        color: $tan-light;
-    }
-
-    > .title {
-        font-size: 110px;
-        color: $white;
-        font-weight: bolder;
-        text-align: center;
-    }
-
-    > .subtitle {
-        font-size: 40px;
-        color: $tan-light;
-        font-weight: 100;
-    }
-
-    > .controls {
-        position: absolute;
-        bottom: 5%;
-        right: 5%;
-        height: 20%;
-        width: 30%;
+    .controls {
+        height: 100%;
+        width: 40%;
         background-color: $bg_footer;
-        flex-direction: column;
-        border-radius: 15px;
+        flex-direction: row;
+        border-radius: 5px;
         align-items: center;
-        padding: 2%;
         gap: 1%;
 
         .title {
-            width: 90%;
-            height: 40%;
+            width: 70%;
             font-size: 32px;
             color: $panel-text;
             font-weight: bolder;
             text-align: center;
-            margin-top: 5%;
             font-family: TF2_Secondary;
             align-items: center;
             justify-content: center;
-        }
-
-        .progress {
-            height: 30%;
-            width: 90%;
-            margin: 1%;
-            background-color: $text-regular;
-            border-radius: 5px;
             overflow: hidden;
-
-            .bar {
-                background-color: $text-highlight;
-                position: absolute;
-                height: 100%;
-            }
-
-            .text-left {
-                flex-grow: 1;
-                flex-shrink: 0;
-            }
-
-            .text-right {
-                flex-shrink: 0;
-            }
-
-            .text-left, .text-right {
-                padding: 5px 20px;
-                white-space: nowrap;
-                font-weight: bold;
-                opacity: 0.2;
-                font-size: 20px;
-                align-items: flex-end;
-                color: $tan-darkest;
-
-                .unit {
-                    font-size: 15px;
-                    opacity: 0.5;
-                }
-            }
         }
 
         .button {
-            height: 30%;
-            width: 90%;
+            width: 30%;
             font-size: 25px;
             padding: 1%;
             background-color: $tan-dark;
@@ -124,6 +91,45 @@
 
             &:hover {
                 background-color: $bg-dark;
+            }
+        }
+    }
+
+    .progress {
+        height: 100%;
+        width: 90%;
+        margin-right: 2%;
+        background-color: $text-regular;
+        border-radius: 5px;
+        overflow: hidden;
+
+        .bar {
+            background-color: $text-highlight;
+            position: absolute;
+            height: 100%;
+        }
+
+        .text-left {
+            flex-grow: 1;
+            flex-shrink: 0;
+        }
+
+        .text-right {
+            flex-shrink: 0;
+        }
+
+        .text-left, .text-right {
+            padding: 5px 20px;
+            white-space: nowrap;
+            font-weight: bold;
+            opacity: 0.2;
+            font-size: 20px;
+            align-items: flex-end;
+            color: $tan-darkest;
+
+            .unit {
+                font-size: 15px;
+                opacity: 0.5;
             }
         }
     }

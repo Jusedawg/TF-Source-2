@@ -10,37 +10,42 @@
 
 <root class="loadingpanel">
 
-    @if (!string.IsNullOrEmpty(Game.Menu.Lobby?.Map))
-    {
-        <div class="description">You are on your way to...</div>
-        <div class="title">@GetMapNameOnly()</div>
-        <div class="subtitle">@GetGamemode()</div>
-    }
-    else
-    {
-        <div class="title">LOADING</div>
-    }
-
-    @if (mapScreenshot != null)
-    {
-        <div class="mapthumb" style="background-image: url(@(mapScreenshot.Url));" />
-    }
-
-    <div class="controls">
-        <div class="title">@(Progress.Title)...</div>
-        @if(Progress.Fraction > 0)
+    <div class="main">
+        <div class="header">
+        @if (!string.IsNullOrEmpty(Game.Menu.Lobby?.Map))
         {
-        <div class="progress">
-            <div class="bar" style="width: @(Progress.Percent)%;"></div>
-            <div class="text-left">@(Progress.Percent.ToString("0") )%</div>
-            <div class="text-right"><span>@(Progress.Mbps.ToString("0"))</span><span class="unit">Mbps</span></div>
-        </div>
+            <div class="description">You are on your way to...</div>
+            <div class="title">@GetMapNameOnly()</div>
+            <div class="subtitle">@GetGamemode()</div>
         }
-        <div class="button" onclick="@Game.Menu.CancelLoading">
-            Cancel
+        else
+        {
+            <div class="title">LOADING</div>
+        }
+        </div>
+
+        @if (mapScreenshot != null)
+        {
+            <div class="mapthumb" style="background-image: url(@(mapScreenshot.Url));" />
+        }
+    </div>
+    
+    <div class="footer">
+        <div class="progress">
+        @if (Progress.Fraction > 0)
+        {
+            <div class="bar" style="width: @(Progress.Percent)%;"></div>
+            <div class="text-left">@(Progress.Subtitle)</div>
+            <div class="text-right"><span>@(Progress.Mbps.ToString("0"))</span><span class="unit">Mbps</span></div>
+        }
+        </div>
+        <div class="controls">
+            <div class="title">@(Progress.Title)...</div>
+            <div class="button" onclick="@Game.Menu.CancelLoading">
+                Cancel
+            </div>
         </div>
     </div>
-
 </root>
 
 @code
