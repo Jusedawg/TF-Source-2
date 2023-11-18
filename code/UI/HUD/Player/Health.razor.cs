@@ -1,16 +1,14 @@
 using Sandbox;
 using Sandbox.UI;
 using Amper.FPS;
-using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace TFS2.UI;
 
 public partial class Health : Panel
 {
-	private const float HEALTH_UPDATE_DURATION = 1.5f;
 	private Panel PlayerClassIcon { get; set; }
-	private readonly Queue<(TimeSince time, Label panel)> healthUpdates = new();
 
 	public Health()
 	{
@@ -29,12 +27,6 @@ public partial class Health : Panel
 			return;
 
 		SetClass( "hidden", !ShouldDraw() );
-
-		while (healthUpdates.TryPeek( out var update ) && update.time >= HEALTH_UPDATE_DURATION )
-		{
-			update.panel.Delete();
-			healthUpdates.Dequeue();
-		}
 	}
 
 	public bool ShouldDraw()
@@ -54,9 +46,10 @@ public partial class Health : Panel
 		if ( args.Client != Game.LocalClient )
 			return;
 
-		while ( healthUpdates.TryDequeue( out var update) )
+		var healthUpdates = ChildrenOfType<HealthUpdateLabel>().ToList();
+		foreach ( var healthUpdate in healthUpdates )
 		{
-			update.panel.Delete();
+			healthUpdate.Delete();
 		}
 
 		SetupClassPreview();
@@ -82,14 +75,28 @@ public partial class Health : Panel
 	public void OnHealthKitPickUp( PlayerHealthKitPickUpEvent ev )
 	{
 		var health = (int)Math.Floor( ev.Health );
-		var label = new Label { Text = $"+{health}" };
-
-		label.SetClass( "health_update", true );
-		label.Style.AnimationIterationCount = 1;
-		label.Style.AnimationDuration = HEALTH_UPDATE_DURATION;
+		var label = new HealthUpdateLabel( health );
 
 		AddChild( label );
+	}
+}
 
-		healthUpdates.Enqueue( ((TimeSince)0, label) );
+public class HealthUpdateLabel : Label
+{
+	private const float HEALTH_UPDATE_DURATION = 1.5f;
+
+	public HealthUpdateLabel( int health )
+	{
+		Text = $"+{health}";
+		SetClass( "health_update", true );
+
+		Style.AnimationDuration = HEALTH_UPDATE_DURATION;
+		DeleteAsync();
+	}
+
+	public async void DeleteAsync()
+	{
+		await GameTask.DelaySeconds( HEALTH_UPDATE_DURATION );
+		Delete();
 	}
 }
