@@ -1,8 +1,6 @@
 ﻿@import "/UI/styles/colors.scss";
 
 .loadingpanel {
-    background: linear-gradient(to top, $bg-light, $bg-darker, $bg-darker, $bg-darkest);
-    background-size: 100%;
     width: 100%;
     height: 100%;
     color: white;
@@ -12,6 +10,19 @@
     flex-direction: column;
     font-family: TF2_Build;
     pointer-events: all;
+    background: linear-gradient(to top, $bg-light, $bg-darker, $bg-darker, $bg-darkest);
+    background-size: 100%;
+
+    .mapthumb {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+    }
 
     > .description {
         font-size: 25px;

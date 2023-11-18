@@ -1,4 +1,5 @@
 ﻿@using System;
+@using System.Threading.Tasks;
 @using System.Linq;
 @using Sandbox;
 @using Sandbox.UI;
@@ -18,6 +19,11 @@
     else
     {
         <div class="title">LOADING</div>
+    }
+
+    @if (mapScreenshot != null)
+    {
+        <div class="mapthumb" style="background-image: url(@(mapScreenshot.Url));" />
     }
 
     <div class="controls">
@@ -40,12 +46,36 @@
 @code
 {
     public LoadingProgress Progress;
+    private Package mapPackage;
+    private Package.Screenshot mapScreenshot;
 
     public void OnLoadingProgress(LoadingProgress progress)
     {
         Progress = progress;
         StateHasChanged();
     }
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        if (string.IsNullOrEmpty(Game.Menu.Lobby?.Map)) return;
+
+        if(mapPackage == default || mapPackage.FullIdent != Game.Menu.Lobby.Map)
+        {
+            _ = FetchMap();
+        }
+    }
+
+    private async Task FetchMap()
+    {
+        string mapName = Game.Menu.Lobby.Map;
+        mapPackage = await Package.FetchAsync(mapName, false);
+        if (mapPackage == null) return;
+
+        mapScreenshot = mapPackage.Screenshots.FirstOrDefault();
+    }
+    
 
     private string GetMapName()
     {
