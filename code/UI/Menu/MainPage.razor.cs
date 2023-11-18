@@ -64,14 +64,12 @@ public partial class MainPage : Panel
 
 	public void OnClickQuit()
 	{
-		if(Game.InGame)
-		{
-			MenuOverlay.Open<QuitDialog>();
-		}
-		else
-		{
-			Game.Menu.Close();
-		}
+		Game.Menu.Close();
+	}
+
+	public void OnClickDisconnect()
+	{
+		MenuOverlay.Open<DisconnectDialog>();
 	}
 
 	public void OnClickClassSelection()

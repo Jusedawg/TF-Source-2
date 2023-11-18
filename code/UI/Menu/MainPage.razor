@@ -71,14 +71,18 @@
     <ServerList @ref=List></ServerList>
 
     <div class="footer">
-        <button class="button-dark" icon="highlight_off" @onclick=@OnClickQuit>#Generic.Quit</button>
         @if(Game.InGame)
         {
+            <button class="button-dark" icon="highlight_off" @onclick=@OnClickDisconnect>#GameMenu.Disconnect</button>
             <button class="button-dark" @onclick=@OnClickClassSelection icon="people_alt">#GameMenu.ChangeClass</button>
             <button class="button-dark" @onclick=@OnClickTeamSelection icon="sync_alt">#GameMenu.SwitchTeam</button>
         }
+        else
+        {
+            <button class="button-dark" icon="highlight_off" @onclick=@OnClickQuit>#Generic.Quit</button>
+            <button class="button-dark" icon="engineering" @onclick=@OnClickCredits>#Credits.Button</button>
+        }
         
-        <button class="button-dark" icon="engineering" @onclick=@OnClickCredits>#Credits.Button</button>
         <text class="playername">@Game.UserName</text>
         <image style="background-image: url( avatar:@Game.SteamId )" class="playeravatar" />
     </div>

@@ -17,8 +17,8 @@ ClassSelection {
 
         &.background {
             position: absolute;
-            width: 1920px;
-            height: 1080px;
+            width: 100%;
+            height: 100%;
 
             .class {
                 position: absolute;
@@ -27,7 +27,7 @@ ClassSelection {
                 background-repeat: no-repeat;
                 background-position: center bottom;
                 background-size: 110px 210px;
-                top: 20px;
+                top: -2%;
                 font-family: TF2_Secondary;
                 padding-left: 10px;
                 flex-direction: column-reverse;
@@ -42,7 +42,7 @@ ClassSelection {
 
                 &.random {
                     width: 80px;
-                    left: 1535px;
+                    left: 79.9479%;
                     background-size: 110px 210px;
 
                     &.red {
@@ -55,7 +55,7 @@ ClassSelection {
                 }
 
                 &.scout {
-                    left: 290px;
+                    left: 15.10416%;
 
                     &.red {
                         background-image: url(/ui/Menu/ClassSelection/class_sel_sm_scout_red.png);
@@ -67,7 +67,7 @@ ClassSelection {
                 }
 
                 &.soldier {
-                    left: 395px;
+                    left: 20.57291%;
 
                     &.red {
                         background-image: url(/ui/Menu/ClassSelection/class_sel_sm_soldier_red.png);
@@ -79,7 +79,7 @@ ClassSelection {
                 }
 
                 &.pyro {
-                    left: 500px;
+                    left: 26.04166%;
 
                     &.red {
                         background-image: url(/ui/Menu/ClassSelection/class_sel_sm_pyro_red.png);
@@ -91,7 +91,7 @@ ClassSelection {
                 }
 
                 &.demoman {
-                    left: 715px;
+                    left: 37.2395%;
 
                     &.red {
                         background-image: url(/ui/Menu/ClassSelection/class_sel_sm_demo_red.png);
@@ -103,7 +103,7 @@ ClassSelection {
                 }
 
                 &.heavy {
-                    left: 820px;
+                    left: 42.7083%;
 
                     &.red {
                         background-image: url(/ui/Menu/ClassSelection/class_sel_sm_heavy_red.png);
@@ -115,7 +115,7 @@ ClassSelection {
                 }
 
                 &.engineer {
-                    left: 925px;
+                    left: 48.1770%;
 
                     &.red {
                         background-image: url(/ui/Menu/ClassSelection/class_sel_sm_engineer_red.png);
@@ -127,7 +127,7 @@ ClassSelection {
                 }
 
                 &.medic {
-                    left: 1130px;
+                    left: 58.8541%;
 
                     &.red {
                         background-image: url(/ui/Menu/ClassSelection/class_sel_sm_medic_red.png);
@@ -139,7 +139,7 @@ ClassSelection {
                 }
 
                 &.sniper {
-                    left: 1235px;
+                    left: 64.3229%;
 
                     &.red {
                         background-image: url(/ui/Menu/ClassSelection/class_sel_sm_sniper_red.png);
@@ -151,7 +151,7 @@ ClassSelection {
                 }
 
                 &.spy {
-                    left: 1340px;
+                    left: 69.7916%;
 
                     &.red {
                         background-image: url(/ui/Menu/ClassSelection/class_sel_sm_spy_red.png);
@@ -171,8 +171,8 @@ ClassSelection {
 
         &.player {
             pointer-events: none;
-            width: 1920px;
-            height: 1080px;
+            width: 100%;
+            height: 100%;
         }
     }
 }
