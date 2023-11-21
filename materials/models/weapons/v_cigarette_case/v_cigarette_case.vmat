@@ -2,11 +2,15 @@
 
 Layer0
 {
-	shader "shaders/sourcebox/sourcebox_skin.shader_c"
+	shader "shaders/sourcebox/sourcebox_skin.shader"
 
 	//---- Rendering ----
 	F_LIGHTWARPTEXTURE 1
 	F_RIMLIGHT 1
+	F_SELFILLUM 1
+
+	//---- Fog ----
+	g_bFogEnabled "1"
 
 	//---- Material ----
 	AmbientOcclusion "materials/default/default_ao.tga"
@@ -17,13 +21,17 @@ Layer0
 	g_flAmbientOcclusionDirectSpecular "1.000"
 	LightWarpTexture "materials/models/lightwarps/weapon_lightwarp.tga"
 	Normal "materials/default/default_normal.tga"
-	Translucency "materials/default/default_trans.tga"
 
 	//---- Rimlight ----
 	g_flRimBoost "2.000"
 	g_flRimExponent "4.000"
 	g_flRimMask "0.000"
 	RimMaskTexture "materials/default/default_rimmask.tga"
+
+	//---- Self Illum ----
+	g_bSelfIllumMaskControl "1"
+	g_vSelfIllumTint "[1.000000 1.000000 1.000000 0.000000]"
+	SelfIllumMaskTexture "materials/models/weapons/v_cigarette_case/v_cigarette_case_selfillum.tga"
 
 	//---- Specular ----
 	g_bBaseMapAlphaPhongMask "0"
